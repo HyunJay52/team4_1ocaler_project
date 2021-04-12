@@ -1,0 +1,76 @@
+@charset "UTF-8";
+ 	*{
+        margin: 0px; padding: 0px;
+    }
+    body{
+        width: 100%; height: 100%;
+    }
+    #header{
+        width: 100%;
+        height: 70px;
+        float: left;
+    }
+    #logo{
+        width: 10%; height: 70px;
+        text-align: center;
+        float: left;
+    }
+    #logo>a>img {
+    	width: 70px; height: 70px;
+    	margin-top: 5px;
+    }
+    #navi{
+        width: 82%; height: 70px;
+        text-align: center;
+        float: left;
+        border-bottom: 1px solid #705abf;
+    }
+    #navi>li{
+        width: 10%; height: 70px;
+        margin: 0px; padding: 0px;
+        list-style-type: none;
+        float: left;
+        line-height: 70px;
+        font-size: 1.2em;
+    }
+    #navi>li>ul{
+		display: none;	
+		width: 100%;
+		border: 1px solid #3f1785;
+        position: relative;
+    }
+    #navi ul>li{
+        list-style-type: none;
+        height: 60px; line-height: 60px; text-align: center;
+        font-size: 0.8em;
+        font-family: 'Nanum Gothic', sans-serif;
+    }
+  
+ /* 내 메뉴 버튼 부분 */   
+    #myMenu{
+        width: 8%;
+        height: 70px;
+        overflow: auto;
+    }
+    #myMenu>ul{
+        width: 70%; height: 70px;
+        line-height: 70px;
+/*         border: 1px solid #571fb8; */
+        float: left;
+    }
+    #myMenu>ul>li{
+        line-height: 70px;
+		text-align: center;
+        list-style-type: none;
+    }
+    #myMenu>div{
+        width:30%; height: 70px;
+        line-height: 70px;
+        margin-top: 20px;
+        float: left;
+    }
+    #myMenu img{
+    	width: 30px; height: 30px;
+    }
+
+    
