@@ -5,5 +5,6 @@
 <%@ include file="/inc/header.jspf" %>
 
 <h1>홈 화면</h1>
+
 </body>
 </html>
