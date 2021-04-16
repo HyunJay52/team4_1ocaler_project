@@ -9,7 +9,8 @@
 *.project
 
 ### server setting ###
-
+*.MF
+*.properties
 
 # Log file
 *.log
