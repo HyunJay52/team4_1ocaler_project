@@ -16,15 +16,7 @@
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/inc/**" location="/inc/" />
-	
 	<resources mapping="/common/**" location="/common/" />
-	<resources mapping="/commu/**" location="/commu/" />
-	<resources mapping="/deal/**" location="/deal/" />
-	<resources mapping="/group/**" location="/group/" />
-	<resources mapping="/profile/**" location="/profile/" />
-	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/review/**" location="/review/" />
-	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -42,16 +34,4 @@
 		<beans:property name="password" value="tiger"/>
 	</beans:bean>
 	
-	<!-- create mybatis -->
-<!-- 	<beans:bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> -->
-<!-- 		<beans:property name="dataSource" ref="dataSource"></beans:property> -->
-<!-- 		<beans:property name="mapperLocations"> -->
-<!-- 			<beans:list> -->
-<!-- 				<beans:value>classpath:com/team4/localer/mapper/*.xml</beans:value> -->
-<!-- 			</beans:list> -->
-<!-- 		</beans:property> -->
-<!-- 	</beans:bean> -->
-<!-- 	<beans:bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> -->
-<!-- 		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg> -->
-<!-- 	</beans:bean> -->
 </beans:beans>
