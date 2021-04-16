@@ -3,12 +3,12 @@
 <%@ page session="true" %>
 
 <ul id="sideBar">
-	<li><a href="#"><img src="icons/map_000.png" class="imgSize"></a></li>
-	<li><a href="#"><img src="icons/search_000.png" class="imgSize"></a></li>
-	<li><a href="#"><img src="icons/won_000.png" class="imgSize"></a></li>
+	<li><a href="#"><img src="common/map_000.png" class="imgSize"></a></li>
+	<li><a href="#"><img src="common/search_000.png" class="imgSize"></a></li>
+	<li><a href="#"><img src="common/won_000.png" class="imgSize"></a></li>
 	<li class="textRotate"><a href="#">로그인</a></li>
 	<li class="textRotate"><a href="#">채팅</a></li>
-	<li><a href="#"><img src="icons/top_000.png" class="imgSize"></a></li>
+	<li><a href="#"><img src="common/top_000.png" class="imgSize"></a></li>
 </ul>
 
 </body>

@@ -61,7 +61,7 @@
 </head>
 <body>
 <div id="header">
-	<div id="logo"><a href="#"><img src="<%=request.getContextPath() %>/icons/logo_deep_pur.png" ></a></div>
+	<div id="logo"><a href="#"><img src="common/logo_deep_pur.png" ></a></div>
 	<ul id="navi">
 		<li class="resquick_content"><a href="#">ABOUT</a>
 			<ul>
