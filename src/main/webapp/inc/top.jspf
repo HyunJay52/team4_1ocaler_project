@@ -31,6 +31,12 @@
     	color: #3f1785;
     	font-weight: bold;
     }
+    
+    #myMenu {
+    	font-size: 8px;
+    	text-align: center;
+    	height: 70px;
+    }
 </style>
 <script>
 	//마우스 호버 시, 하위 메뉴 팝업 .. 초기 세팅때 display-none이 안됨, 마우스 이벤트 정리하기
@@ -38,8 +44,6 @@
 		$("#navi>li").hover(
 			function(){ //마우스 인
 				$(this).children('ul').slideDown(100);
-// 				$(this).children('ul').css('display', 'block');
-// 				$(this).children('ul').children('li').css('background-color', '#571fb8');
 				$(this).children('a').css("color", "#fff");
 				$(this).children('ul').children('li').children('a').css("color", "#3f1785");
 				$(this).css("background", "#571fb8");
@@ -57,34 +61,34 @@
 </head>
 <body>
 <div id="header">
-	<div id="logo"><a href="#"><img src="<%=request.getContextPath() %>/icons/logo_deep_pur" ></a></div>
+	<div id="logo"><a href="#"><img src="<%=request.getContextPath() %>/icons/logo_deep_pur.png" ></a></div>
 	<ul id="navi">
-		<li><a href="#">ABOUT</a>
+		<li class="resquick_content"><a href="#">ABOUT</a>
 			<ul>
 				<li><a href="#">?</a></li>
 				<li><a href="#">?</a></li>
 			</ul>
 		</li>
-		<li><a href="#">우리직구</a>
+		<li class="resquick_content"><a href="#">우리직구</a>
 			<ul>
 				<li><a href="#">착한발견</a></li>
 				<li><a href="#">동네직구</a></li>
 			</ul>
 		</li>
-		<li><a href="#">가치가장</a>
+		<li class="resquick_content"><a href="#">가치가장</a>
 			<ul>
 				<li><a href="#">가치가장</a></li>
 				<li><a href="#">한끼미식회</a></li>
 			</ul>
 		</li>
-		<li><a href="#">커뮤니티</a>
+		<li class="resquick_content"><a href="#">커뮤니티</a>
 			<ul>
 				<li><a href="#">우리동네 이야기</a></li>
 				<li><a href="#">쓱싹레시피</a></li>
 				<li><a href="#">자유자게</a></li>
 			</ul>
 		</li>
-		<li><a href="#">고객센터</a>
+		<li class="resquick_content"><a href="#">고객센터</a>
 			<ul>
 				<li><a href="#">자주하는 질문</a></li>
 				<li><a href="#">1:1 문의하기</a></li>
@@ -92,14 +96,17 @@
 			</ul>
 		</li>
 	</ul>
-
 	<div id="myMenu">
 		<ul>
 			<!-- 로그아웃 시 -->
-			<li><a href="#" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="#" class="aLogin">회원가입</a></li>
+<%-- 			<c:if test=""> --%>
+				<li><a href="#" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="#" class="aLogin">회원가입</a></li>
+<%-- 			</c:if> --%>
 			<!-- 로그인 시 -->
-			<li>김자바님 환영합니다</li>
-			<li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li>
+<%-- 			<c:if test=""> --%>
+<!-- 				<li>김자바님 환영합니다</li> -->
+<!-- 				<li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li> -->
+<%-- 			</c:if> --%>
 		</ul>
 		<div style="display:none;"><img src="<%=request.getContextPath()%>/icons/alarm_000.png"/></div>
 	</div>

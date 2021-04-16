@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="true" %>
+
+<ul id="sideBar">
+	<li><a href="#"><img src="icons/map_000.png" class="imgSize"></a></li>
+	<li><a href="#"><img src="icons/search_000.png" class="imgSize"></a></li>
+	<li><a href="#"><img src="icons/won_000.png" class="imgSize"></a></li>
+	<li class="textRotate"><a href="#">로그인</a></li>
+	<li class="textRotate"><a href="#">채팅</a></li>
+	<li><a href="#"><img src="icons/top_000.png" class="imgSize"></a></li>
+</ul>
+
+</body>
+</html>

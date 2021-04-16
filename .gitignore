@@ -8,6 +8,9 @@
 *.settings
 *.project
 
+### server setting ###
+
+
 # Log file
 *.log
 

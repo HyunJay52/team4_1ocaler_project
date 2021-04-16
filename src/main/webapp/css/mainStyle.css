@@ -1,10 +1,12 @@
 @charset "UTF-8";
+/* 기본세팅 */
  	*{
         margin: 0px; padding: 0px;
     }
     body{
         width: 100%; height: 100%;
     }
+/* 헤더 스타일 */    
     #header{
         width: 100%;
         height: 70px;
@@ -20,13 +22,13 @@
     	margin-top: 5px;
     }
     #navi{
-        width: 82%; height: 70px;
+        width: 80%; height: 70px;
         text-align: center;
         float: left;
-        border-bottom: 1px solid #705abf;
+        border-bottom: 1px solid #571fb8;
     }
     #navi>li{
-        width: 10%; height: 70px;
+        width: 150px; height: 70px;
         margin: 0px; padding: 0px;
         list-style-type: none;
         float: left;
@@ -36,7 +38,10 @@
     #navi>li>ul{
 		display: none;	
 		width: 100%;
-		border: 1px solid #3f1785;
+		background-color: #fff;
+		border-bottom: 1px solid #571fb8;
+		border-left: 1px solid #571fb8;
+		border-right: 1px solid #571fb8;
         position: relative;
     }
     #navi ul>li{
@@ -48,7 +53,7 @@
   
  /* 내 메뉴 버튼 부분 */   
     #myMenu{
-        width: 8%;
+        width: 10%;
         height: 70px;
         overflow: auto;
     }
@@ -72,5 +77,77 @@
     #myMenu img{
     	width: 30px; height: 30px;
     }
-
+/* sidebar style */
+	#sideBar{
+		width: 30px;
+		height: 500px;
+		text-align: center;
+		background: aqua;
+		position: absolute; top: 50%; right: 20px;
+	}
+	#sideBar li{
+		margin-bottom: 10px;
+		list-style-type: none;
+		width: 30px;
+		height: 30px;
+	}
+	#sideBar li:nth-of-type(4){
+		margin-top: 70px;
+	}
+	#sideBar li:nth-of-type(4), #sideBar li:nth-of-type(5){
+		width: 60px;
+		height: 30px;
+		padding-top: 8px;
+		line-height: 30px;
+		text-align: center;
+	}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 클래스 */	
+/* navi 슬라이드 클래스 */	
+	.resquick_content{
+/*        border: 1px solid #fff; */
+       padding: 2% 14%;
+       position: relative;
+       z-index: 1;
+       -webkit-transition: all 0.4s;
+       -moz-transition: all 0.4s;
+       -ms-transition: all 0.4s;
+       -o-transition: all 0.4s;
+       transition: all 0.4s;
+   }
+   .resquick_content:after {
+       content: "";
+       width: 0%;
+       height: 100%;
+       top: 0;
+       position: absolute;
+       left: 0;
+       -webkit-transition: all 0.4s;
+       -moz-transition: all 0.4s;
+       -ms-transition: all 0.4s;
+       -o-transition: all 0.4s;
+       transition: all 0.4s;
+       background: #571fb8;
+   }
+   .resquick_content:hover {
+       color: #571fb8;
+   }
+   .resquick_content:hover:after {
+       width: 100%;
+       z-index: -1;
+   }
+   
+/* sideBar class */
+	.imgSize {
+		width: 25px; height: 25px;
+	}
+	.textRotate {
+		-webkit-transform:rotate(90deg);
+		-moz-transform:rotate(90deg);
+		-ms-transform:rotate(90deg);
+		-o-transform:rotate(90deg);
+/* 		width: 50px; */
+/* 		height: 30px; */
+/* 		line-height: 30px; */
+/* 		text-align: center; */
+	}
     
