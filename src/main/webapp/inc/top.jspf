@@ -69,7 +69,7 @@
 				<li><a href="#">?</a></li>
 			</ul>
 		</li>
-		<li class="resquick_content"><a href="#">우리직구</a>
+		<li class="resquick_content"><a href="selBard">우리직구</a>
 			<ul>
 				<li><a href="#">착한발견</a></li>
 				<li><a href="#">동네직구</a></li>
