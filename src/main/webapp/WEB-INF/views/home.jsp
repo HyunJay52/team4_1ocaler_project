@@ -5,7 +5,7 @@
 <%@ include file="/inc/sideBar.jspf" %>
 <h1>홈 화면</h1>
 <div>
-	
+	dfghjkl
 </div>
 </body>
 </html>
