@@ -57,5 +57,4 @@
 			<include-prelude>/inc/top.jspf</include-prelude>
 		</jsp-property-group>
 	</jsp-config>
-	
 </web-app>

@@ -4,13 +4,13 @@
         margin: 0px; padding: 0px;
     }
     body{
-        width: 100%; height: 100%;
+        width: 100%;
     }
 /* 헤더 스타일 */    
     #header{
         width: 100%;
         height: 70px;
-        float: left;
+        overflow: auto;
     }
     #logo{
         width: 10%; height: 70px;
@@ -33,7 +33,7 @@
         list-style-type: none;
         float: left;
         line-height: 70px;
-        font-size: 1.2em;
+        font-size: 19px;
     }
     #navi>li>ul{
 		display: none;	
@@ -47,42 +47,18 @@
     #navi ul>li{
         list-style-type: none;
         height: 60px; line-height: 60px; text-align: center;
-        font-size: 0.8em;
+        font-size: 15px;
         font-family: 'Nanum Gothic', sans-serif;
     }
   
  /* 내 메뉴 버튼 부분 */   
-    #myMenu{
-        width: 10%;
-        height: 70px;
-        overflow: auto;
-    }
-    #myMenu>ul{
-        width: 70%; height: 70px;
-        line-height: 70px;
-/*         border: 1px solid #571fb8; */
-        float: left;
-    }
-    #myMenu>ul>li{
-        line-height: 70px;
-		text-align: center;
-        list-style-type: none;
-    }
-    #myMenu>div{
-        width:30%; height: 70px;
-        line-height: 70px;
-        margin-top: 20px;
-        float: left;
-    }
-    #myMenu img{
-    	width: 30px; height: 30px;
-    }
+    
+    
 /* sidebar style */
 	#sideBar{
 		width: 30px;
 		height: 500px;
 		text-align: center;
-		background: aqua;
 		position: absolute; top: 50%; right: 20px;
 	}
 	#sideBar li{
@@ -91,15 +67,19 @@
 		width: 30px;
 		height: 30px;
 	}
-	#sideBar li:nth-of-type(4){
-		margin-top: 70px;
+	#sideBar li:nth-of-type(3){
+		margin-bottom: 60px;
 	}
-	#sideBar li:nth-of-type(4), #sideBar li:nth-of-type(5){
+	#sideBar li:nth-of-type(4)>a, #sideBar li:nth-of-type(5)>a{
+		display: block;
 		width: 60px;
 		height: 30px;
-		padding-top: 8px;
 		line-height: 30px;
 		text-align: center;
+	}
+	#sideBar li:nth-of-type(5)>a {
+		display: block;
+		margin-right: 50px;	
 	}
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 클래스 */	
 /* navi 슬라이드 클래스 */	
@@ -145,9 +125,7 @@
 		-moz-transform:rotate(90deg);
 		-ms-transform:rotate(90deg);
 		-o-transform:rotate(90deg);
-/* 		width: 50px; */
-/* 		height: 30px; */
-/* 		line-height: 30px; */
-/* 		text-align: center; */
 	}
+/* home bx-slider */
+
     

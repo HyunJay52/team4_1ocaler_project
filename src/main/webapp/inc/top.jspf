@@ -11,12 +11,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>  
 
-<!-- 
-	#3f1785 > #571fb8 > #705abf
- -->
 <style>
+#header{
+        overflow: auto;
+    }
  	a:active, a:link, a:visited{
         color: #000;
         text-decoration: none;
@@ -33,9 +34,8 @@
     }
     
     #myMenu {
-    	font-size: 8px;
-    	text-align: center;
-    	height: 70px;
+    	overflow: visible;
+    
     }
 </style>
 <script>
@@ -99,16 +99,16 @@
 	<div id="myMenu">
 		<ul>
 			<!-- 로그아웃 시 -->
-<%-- 			<c:if test=""> --%>
+			<c:if test="">
 				<li><a href="#" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="#" class="aLogin">회원가입</a></li>
-<%-- 			</c:if> --%>
+			</c:if>
 			<!-- 로그인 시 -->
-<%-- 			<c:if test=""> --%>
-<!-- 				<li>김자바님 환영합니다</li> -->
-<!-- 				<li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li> -->
-<%-- 			</c:if> --%>
+			<c:if test="">
+				<li>김자바님 환영합니다</li>
+				<li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li>
+			</c:if>
 		</ul>
-		<div style="display:none;"><img src="<%=request.getContextPath()%>/icons/alarm_000.png"/></div>
+		<div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
 	</div>
 </div>
 
