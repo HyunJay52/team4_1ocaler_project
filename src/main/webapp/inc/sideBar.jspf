@@ -2,14 +2,46 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 
+<style>
+	.textRotate>a:hover {
+		text-decoration: overline;
+		color: #571fb8; font-weight: bold;
+	}
+</style>
+
+<script>
+	$(function(){
+		//스크롤 이벤트
+		$(window).on("scroll", function(){
+			var scrollTop = $(this).scrollTop();
+			var limitTop = 70;
+			if(scrollTop>limitTop){
+				$("#toTop").css("display", "block");
+			}
+			if(scrollTop<limitTop){
+				$("#toTop").css("display", "none");
+			}
+		});
+		
+		$("#sideBar li a img").hover(
+			function(){//in
+				$(this).attr("src", $(this).attr("src").replace("000.png", "pur.png"));
+			},
+			function(){//out
+				$(this).attr("src", $(this).attr("src").replace("pur.png", "000.png"));
+			}
+		);
+	});
+</script>
+
 <ul id="sideBar">
 	<li><a href="#"><img src="common/map_000.png" class="imgSize"></a></li>
 	<li><a href="#"><img src="common/search_000.png" class="imgSize"></a></li>
 	<li><a href="#"><img src="common/won_000.png" class="imgSize"></a></li>
-	<li class="textRotate"><a href="#">로그인&nbsp;</a></li>
+	<li class="textRotate"><a href="login">로그인&nbsp;</a></li>
 <!-- 	<li class="textRotate"><a href="#">로그아웃</a></li> -->
 	<li class="textRotate"><a href="#">&nbsp;채팅</a></li>
-	<li style="padding-top: 15px;"><a href="#"><img src="common/top_000.png" class="imgSize"></a></li>
+	<li id="toTop" style="padding-top: 15px;"><a href="#"><img src="common/top_000.png" class="imgSize"></a></li>
 </ul>
 
 </body>
