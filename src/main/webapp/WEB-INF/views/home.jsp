@@ -75,6 +75,7 @@
 	<div id="sggSak" class="divWidth">
 		레시피 보여줄 곳
 	</div>
+	<a href="info">내정보페이지</a>
 </div>
 	<div style="font-family: ns1;">글꼴 테스트 합니다.</div>
 
