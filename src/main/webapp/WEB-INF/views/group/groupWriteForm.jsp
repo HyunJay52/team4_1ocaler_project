@@ -5,27 +5,20 @@
 		var inner = window.innerHeight;
 		console.log(inner);
 		$(function(){
-			
-			
-			var localName = ['전체','강서구','양천구','구로구','영등포구','금천구','동작구','관악구','서초구','강남구','송파구','강동구',
-							'마포구','용산구','서대문구','중구','성동구','광진구','종로구','동대문구','성북구','중랑구','은평구','강북구','노원구','도봉구'];
-			var tag = "";
-			localName.map(function(obj, idx){
-				tag = "<li><a href='eatPage?g_loc="+obj+"&up_cate=한끼미식회'>"+obj+"</a></li>";
-				$("#showFrm>ul").append(tag);
-			});
-	
+			//==============================================================================
 			$("#showFrm").css('top',140);
 			$("#fold").css('top',140).css('left',493).css('margin-top','348px');
 			
-			
+	
 			//접기 호버시 화살표 색이 바뀌고 클릭하면 showFrm 없어지고 open 화살표 생김
 			$("#fold").hover(function(){
 				$("#fold>img").attr("src","<%=request.getContextPath()%>/img/groupImg/leftP.png");
 				$("#fold").click(function(){	
 					$("#showFrm").css("display","none");
 					$("#fold").css("display","none");
-					$("#open").css("display","block");
+					$("#open").css("display","block").css("top",140).css("left",30).css('margin-top','348px')
+					.css("background-color","#fff").css("opacity",0.9).css("width","40px")
+					.css("padding","5px").css("border-radius","10px");
 				});
 			},function(){			
 				$("#fold>img").attr("src","<%=request.getContextPath()%>/img/groupImg/left.png");
@@ -45,11 +38,12 @@
 			},function(){
 				$("#open>img").attr("src","<%=request.getContextPath()%>/img/groupImg/right.png");
 			});
-	
+			//===========================================================================
+			
 		})
 </script>
 <style>
-	#header{display:none}
+	#header{display:none;}
 	body{overflow:hidden;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	
@@ -68,19 +62,30 @@
 	#topFrm img{width:40px; margin:9px 0px;}
 	#topFrm li:first-child>a>img{ margin-left:10px;}
 	#topFrm li:last-child>a>img{ margin-right:10px;}
+
+	#showFrm{position:absolute; height:800px; left:30px; z-index:1; width:460px; background-color:#fff;  border-radius:10px;}		
 	
-
-	#showFrm{position:absolute; height:760px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
-	#showFrm li>a{text-decoration:none; color:#000}
-	#showFrm li>a:hover{color:#571fb8; font-weight:bold;}
-	#showFrm li{float:left; width:230px; padding-left:80px; height:50px; line-height:50px; border-bottom:1px solid #e1e1e1;}
-	#showFrm>div:first-child{margin:10px; overflow:auto;}
-	#showFrm>div>span{display:block; width:auto; height:45px; line-height:45px; float:left; font-size:22px; color:#571fb8;} 
-	#showFrm img{display:block; width:45px; float:left; margin-right:7px;}
-	#showFrm img:nth-child(3){float:right} 
+	/* 맨위 셀렉트 박스 부분 */
+	#up_cate{ width:150px; height:30px; padding-left:10px; border:1px solid #d3d3d3; color:#000; border-radius:5px; apperance:none; -webkit-appearance:none;}
+	#down_cate, #g_cnt{ width:150px; height:30px; padding-left:10px; border:1px solid #d3d3d3;
+   background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; color:#000; border-radius:5px; apperance:none; -webkit-appearance:none;}
+	
+	#g_subject{border:0px; border-bottom:1px solid gray;}
+	
+	
+	
+	 
+	/*버튼이벤트*/
+	.commBtn {	width: 90px; color: #3f1785; border: 1px solid #3f1785;}
+	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}
+	.commBtnWrite{width:75px;}
+	
+	
+	
 </style>
-
-<div id="map" style="width:2000px; height:1000px; position:relative; overflow:hidden;"></div>
+</head>
+<body>
+	<div id="map" style="width:2000px; height:1000px; position:relative; overflow:hidden;"></div>
 	
 	<!-- showFrm접기펴기 -->	
 	<div id="fold"><img src="<%=request.getContextPath()%>/img/groupImg/left.png"/></div>
@@ -96,6 +101,7 @@
 		</ul>
 	</div>
 	
+	
 	<!-- 검색 폼 -->
 	<div id="searchFrm">
 		<form id="searchFrmInner" onsubmit="searchPlaces(); return false;">
@@ -105,13 +111,47 @@
 	</div>
 	
 	<!-- showFrm 리스트 -->
-	<div id="showFrm">
-		<div><img src="<%=request.getContextPath() %>/img/groupImg/aimP.png"/><span style="font-weight:bold;">지역선택</span></div>
-		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin-left:15px;">
-		<hr style="margin:0px;">
-		<ul></ul>
+	<div id="showFrm">	
+		<div> 
+			<select name="up_cate" id="up_cate" size="1">
+				<c:if test="${vo.up_cate=='한끼미식회' }">
+					<option value="한끼미식회" selected>한끼미식회</option>
+				</c:if>
+				<c:if test="${vo.up_cate=='가치가장' }">
+					<option value="가치가장" selected>가치가장</option>
+				</c:if>
+			</select>
+			
+			<select name="down_cate" id="down_cate" size="1">
+				<c:if test="${vo.up_cate=='한끼미식회' }">
+					<option value="같이먹어요">같이먹어요</option>
+				</c:if>
+				<c:if test="${vo.up_cate=='가치가장' }">
+					<option value="동네마트">동네마트</option>
+					<option value="창고형마트">창고형마트</option>
+				</c:if>
+			</select><br/>
+		</div>
+		<div>
+			<input type="text" name="g_subject" id="g_subject" placeholder="제목을 입력하세요..">
+			<select name="g_cnt" id="g_cnt" size="1">
+				<option value="1" selected>1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				
+			</select>	 
+		</div>
+		
 	</div>
+	
+	
+	
+	
+	
 	<script>
+		
 			//지도 생성
 			var container = document.getElementById("map"),
 				options = {
@@ -119,9 +159,14 @@
 					level : 7
 				};
 			var map = new kakao.maps.Map(container, options);
+			
+			
+			
 			//센터의 lat,lng값을 가져옴 
 			var maps = map.getCenter();
 			console.log(maps);
+
+			
 			//마커 찍기
 			/* 
 			var marker = new kakao.maps.Marker({
@@ -129,6 +174,7 @@
 				position : maps
 			}).setMap(map);
 			*/
+
 			//마커 찍기를 함수화
 			function displayMarker(place){
 				//미리 띄워진 마커를 삭제한다음에 마커를 새로띄운다
@@ -140,9 +186,17 @@
 					position : new kakao.maps.LatLng(place.y, place.x)
 				});
 			}
+			
+			
+			
+			
+			
+			
+			
 			//지도 검색 키워드 객체 생성
 			var ps = new kakao.maps.services.Places();
-	
+			
+			
 			//검색한 키워드 값을 내가 text에서입력한 값으로 셋팅해주는 작업
 			function searchPlaces(){
 				var keyword = document.getElementById('searchWord').value;
@@ -192,7 +246,9 @@
 	
 			    }
 			}
-
+		
+			
+		
 	</script>
 
 </body>

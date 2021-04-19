@@ -1,6 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
+<style>
+	#header{display:none;}
+	body{overflow:hidden;}
+	ul, li{ margin:0px; padding:0px; list-style-type:none;}
+	
+	#fold, #open{position:absolute; z-index:1;}	
+	#fold{background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
+	#open{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
+	
+	#searchFrm{position:absolute; top:20px; right:0px; z-index:1;}
+	#searchFrm input[type=text]{float:left; height:58px; }
+	#searchFrm input[type=image]{display:block; height:58px;}
+	
+	
+	#topFrm{position:absolute; top:20px; right:50%; z-index:1; transform:translateX(50%) }
+	#topFrm>ul{overflow:auto; border-radius:10px; background-color:#571FB8;}
+	#topFrm li{float:left; background-color:#571FB8; margin:0 10px;}
+	#topFrm img{width:40px; margin:9px 0px;}
+	#topFrm li:first-child>a>img{ margin-left:10px;}
+	#topFrm li:last-child>a>img{ margin-right:10px;}
+
+	#showFrm{position:absolute; height:800px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
+	
+	#showTopMenu{overflow:auto;}
+	#showTopMenu>li{float:left; width:180px; padding: 10px 0px 10px 10px;}
+	#showTopMenu>li:nth-of-type(3){width:100px;}
+	#showTopMenu img{display:block; width:45px; float:left; margin-right:7px;}
+	#showTopMenu img[src*=cartP]{display:none;} 
+	
+	#showTopMenu span{display:block;  height:45px; line-height:45px; float:left; font-size:22px;} 
+	#showTopMenu a{color:#000;}
+	#showTopMenu>li:first-child>a{color:#571fb8; font-weight:700}
+	#showTopMenu>li:nth-child(2)>a>span{margin-left:52px;}
+	
+	#showTopMenu button{height:45px;}
+ 
+	/*버튼이벤트*/
+	.commBtn {	width: 90px; color: #3f1785; border: 1px solid #3f1785;}
+	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}
+	 
+	 .commBtnWrite{width:75px;}
+</style>
+
 <script>	
 		var inner = window.innerHeight;
 		console.log(inner);
@@ -41,7 +84,7 @@
 			//===========================================================================
 			
 			//==========================가치가자 한끼미식회 호버==================================
-			if(${vo.up_cate==1}){
+			if(${vo.up_cate=='한끼미식회'}){
 				$('#showTopMenu>li:nth-child(2)').hover(function(){
 					//1일때 가치가자를 호버하면	
 					//한끼미식회의 이미지가 사라지고 이미지가 사라진 만큼 왼쪽에 margin을 준다
@@ -91,56 +134,13 @@
 	
 			}
 			//==========================가치가자 한끼미식회 호버endddddddd==================================
-			
-			
+				
+			$("#WriteForm").click(function(){
+				location.href="WriteForm?g_loc=${vo.g_loc}&up_cate=가치가장";
+			});
+				
 		})
 </script>
-<style>
-	#header{display:none;}
-	body{overflow:hidden;}
-	ul, li{ margin:0px; padding:0px; list-style-type:none;}
-	
-	#fold, #open{position:absolute; z-index:1;}	
-	#fold{background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	#open{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	
-	#searchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#searchFrm input[type=text]{float:left; height:58px; }
-	#searchFrm input[type=image]{display:block; height:58px;}
-	
-	
-	#topFrm{position:absolute; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#topFrm>ul{overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#topFrm li{float:left; background-color:#571FB8; margin:0 10px;}
-	#topFrm img{width:40px; margin:9px 0px;}
-	#topFrm li:first-child>a>img{ margin-left:10px;}
-	#topFrm li:last-child>a>img{ margin-right:10px;}
-
-	#showFrm{position:absolute; height:800px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
-	
-	#showTopMenu{overflow:auto;}
-	#showTopMenu>li{float:left; width:180px; padding: 10px 0px 10px 10px;}
-	#showTopMenu>li:nth-of-type(3){width:100px;}
-	#showTopMenu img{display:block; width:45px; float:left; margin-right:7px;}
-	#showTopMenu img[src*=cartP]{display:none;} 
-	
-	#showTopMenu span{display:block;  height:45px; line-height:45px; float:left; font-size:22px;} 
-	#showTopMenu a{color:#000;}
-	#showTopMenu>li:first-child>a{color:#571fb8; font-weight:700}
-	#showTopMenu>li:nth-child(2)>a>span{margin-left:52px;}
-	
-	#showTopMenu button{height:45px;}
-	
-	
-	
-	
-	 
-	/*버튼이벤트*/
-	.commBtn {	width: 90px; color: #3f1785; border: 1px solid #3f1785;}
-	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}
-	 
-	 .commBtnWrite{width:75px;}
-</style>
 </head>
 <body>
 	<div id="map" style="width:2000px; height:1000px; position:relative; overflow:hidden;"></div>
@@ -171,8 +171,8 @@
 	<!-- showFrm 리스트 -->
 	<div id="showFrm">	
 		<ul id="showTopMenu">
-			<li><img id="dishImg" src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?g_loc=${vo.g_loc }&up_cate=1"><span id="eat">한끼미식회</span></a></li>
-			<li><img style="display:none" src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?g_loc=${vo.g_loc }&up_cate=2"><span id="with">가치가장</span></a></li>
+			<li><img id="dishImg" src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?g_loc=${vo.g_loc }&up_cate=한끼미식회"><span id="eat">한끼미식회</span></a></li>
+			<li><img style="display:none" src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?g_loc=${vo.g_loc }&up_cate=가치가장"><span id="with">가치가장</span></a></li>
 			<li><button id="WriteForm" class="btn commBtn commBtnWrite">글쓰기</button>
 		</ul>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">

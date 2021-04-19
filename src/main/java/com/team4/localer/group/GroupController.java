@@ -38,4 +38,14 @@ public class GroupController {
 		mav.setViewName("group/withView");
 		return mav;
 	}
+	
+	@RequestMapping("/WriteForm")
+	public ModelAndView GroupWriteForm(GroupVO vo) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.setViewName("group/groupWriteForm");
+		return mav;
+	}
+	
+	
 }
