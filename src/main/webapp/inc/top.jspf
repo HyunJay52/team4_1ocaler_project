@@ -15,9 +15,6 @@
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>  
 
 <style>
-	#header{
-        overflow: auto;
-    }
  	a:active, a:link, a:visited{
         color: #000;
         text-decoration: none;

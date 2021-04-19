@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css" type="text/css">
 
 <style>
-	@import url(https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 	#header {
 		margin-bottom: 30px;
 	}
@@ -76,7 +75,6 @@
 		레시피 보여줄 곳
 	</div>
 </div>
-	<div style="font-family: ns1;">글꼴 테스트 합니다.</div>
 
 <%@ include file="/inc/footer.jspf" %>
 </body>
