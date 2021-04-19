@@ -15,10 +15,12 @@
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>  
 
 <style>
+	* {
+		font-family: nsr;
+	}
  	a:active, a:link, a:visited{
         color: #000;
         text-decoration: none;
-        font-family: 'Nanum Gothic', sans-serif;
     }    
 	a:hover {
         color: #fff;
@@ -31,9 +33,12 @@
     }
     
     #myMenu>ul {
-    	overflow: hidden;
     	list-style-type: none;
     }
+     #myMenu>ul li {
+     	height: 70px; line-height: 70px;
+     	text-align: center;
+     }
 </style>
 <script>
 	//마우스 호버 시, 하위 메뉴 팝업 .. 초기 세팅때 display-none이 안됨, 마우스 이벤트 정리하기
@@ -100,7 +105,7 @@
 			<!-- 로그아웃 시 -->
 				<li><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></li>
 			<!-- 로그인 시 -->
-				<li>김자바님 환영합니다</li>
+<!-- 				<li>김자바님 환영합니다</li> -->
 <!-- 				<li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li> -->
 		</ul>
 		<div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>

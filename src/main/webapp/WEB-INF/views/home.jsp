@@ -57,11 +57,11 @@
 <div id="indexMain">
 	<!-- bx-slider part -->
 	<div>
-	<ul id="slider">
-		<li><img src="<%=request.getContextPath()%>/img/indexImg/bx1.png" title="ad 1"/></li>
-		<li><img src="<%=request.getContextPath()%>/img/indexImg/bx1.png" title="ad 2"/></li>
-		<li><img src="<%=request.getContextPath()%>/img/indexImg/bx1.png" title="ad 3"/></li>
-	</ul>
+		<ul id="slider">
+			<li><img src="<%=request.getContextPath()%>/img/indexImg/bx1.png" title="ad 1"/></li>
+			<li><img src="<%=request.getContextPath()%>/img/indexImg/bx1.png" title="ad 2"/></li>
+			<li><img src="<%=request.getContextPath()%>/img/indexImg/bx1.png" title="ad 3"/></li>
+		</ul>
 	</div>
 	<div id="sell" class="divWidth" style="background: pink">
 		판매 div 보여줄 곳	
