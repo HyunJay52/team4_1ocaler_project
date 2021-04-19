@@ -1,0 +1,37 @@
+@charset "UTF-8";
+	
+	#body{overflow:auto;width:1300px;margin:0 auto;
+	height: 1000px
+	}
+	#selTop{ height: 70px;width:1300px; line-height: 70px;
+	text-align: center; color: #3f1785;border-bottom:1px solid #3f1785;
+	 font-size: 25px; 
+	
+	}
+	#selSearch{width: 320px; margin:0 auto;
+	height: 70px;
+	}
+	
+	ul,li{ margin:0px; padding:0px; list-style-type:none;	float:left;
+	}
+	
+	select{height: 30px ;}
+	
+	#btn{  width:26px; height: 26px ; padding: 2px
+	}
+	
+	img{width: 200px; height: 200px;
+	} 
+	
+	#selBoard{width:1300px; height:500px;
+	}
+	#selList{width:200px;height: 300px; float: left; margin: 20px; 
+	
+	}
+	
+	#pageNum{ padding-left:44%;
+	} 
+	#pageNum a {color:#3f1785;
+	}
+	#pageNum a:hover{text-decoration:none;color:#705abf ;  font-weight: bold;
+	}
