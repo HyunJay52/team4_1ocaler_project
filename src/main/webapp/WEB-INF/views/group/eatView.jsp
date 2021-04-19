@@ -175,7 +175,7 @@
 			<li><img style="display:none" src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?g_loc=${vo.g_loc }&up_cate=2"><span id="with">가치가장</span></a></li>
 			<li><button id="WriteForm" class="btn commBtn commBtnWrite">글쓰기</button>
 		</ul>
-		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9">
+		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
 		<ul></ul>
 	</div>
 	

@@ -107,7 +107,7 @@
 	<!-- showFrm 리스트 -->
 	<div id="showFrm">
 		<div><img src="<%=request.getContextPath() %>/img/groupImg/aimP.png"/><span style="font-weight:bold;">지역선택</span></div>
-		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9">
+		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin-left:15px;">
 		<hr style="margin:0px;">
 		<ul></ul>
 	</div>
