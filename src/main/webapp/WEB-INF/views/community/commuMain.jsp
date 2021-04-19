@@ -9,21 +9,97 @@
 				 <img src="sel_img/seoulMap.jpg" usemap="#seoulMap"/>
 			</div>
 			
+			<hr/>
 			<div id="board">
 				<div id="localBoard">
-					
+					<p>로컬커뮤니티</p>
+					<table class="table2">
+					  <tr>
+					    <th>제목</th>
+					    <th>조회수</th>
+					    <th>작성자</th>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					 
+					</table>
 				</div>
 				
 				<div id="recipeBoard">
-				
+					<p>로컬커뮤니티</p>
+					<table class="table2">
+					  <tr>
+					    <th>제목</th>
+					    <th>조회수</th>
+					    <th>작성자</th>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					 
+					</table>
 				</div>
-				
 				<div id="freeBoard">
-				
+					<p>로컬커뮤니티</p>
+					<table class="table2">
+					  <tr>
+					    <th>제목</th>
+					    <th>조회수</th>
+					    <th>작성자</th>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					  <tr>
+					    <td>내용</td>
+					    <td>내용</td>
+					    <td>내용</td>
+					  </tr>
+					 
+					</table>
 				</div>
 			
 			</div>
 		</div>
+
+
+
+
+
+
+
 
 	<map name="seoulMap">
 <!-- 			<area shape="rect"  coords="235,404,297,444" href="#"  title="양천구"alt="양천구">	
