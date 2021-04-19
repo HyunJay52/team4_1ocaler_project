@@ -67,7 +67,7 @@
 	background: #B8B2F4;
 }
 /*테이블 css  */
-	.table {width:100%;margin:0 auto;padding:0}
+	.table {margin:0 auto;padding:0}
     .table tr{/*테이블 목록*/
     	border-bottom:1px solid rgb(227,227,227); 
     	text-align:center;
@@ -76,13 +76,9 @@
 	.table tr:first-child{/*첫번째 테이블 목차*/
 		text-align:center;
 		background-color:#3f1785;
-		color:#fff; font-weight:bold;
+		color:#fff;
 	}
 	.table tr:last-child{/*마지막 줄 tr 스타일*/
 		border-bottom:2px solid #3f1785;
 	}
-	.table tr>td{width:10%;}/*전체적인 열 폭조정*/
-	.table tr>td:nth-child(1){/*첫번째 열 선택*/}
-	.table tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
-		/* width:50%; *//* text-align:left; */
-	}
+	
