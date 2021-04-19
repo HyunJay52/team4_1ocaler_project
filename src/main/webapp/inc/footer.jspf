@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="true" %>
+
+<style>
+	.footerLine {
+		width: 100%; height: 10px;
+		background-color: #3f1785;
+		border-bottom: 2px solid #fff;
+	}
+	#mainFooter {
+		width: 100%;
+		height: 70px;
+		background-color: #3f1785;
+		color: #fff;
+	}
+	#mainFooter ul {
+		width: 100%; height: 70px;
+	}
+	#mainFooter li{
+		height: 60px; line-height: 65px;
+		padding-left: 10px; padding-right: 10px;
+		list-style-type: none;
+		float: left;
+	}
+</style>
+<div class="footerLine"></div>
+<div id="mainFooter">
+	<ul>
+		<li><a href="#"><img src="common/logo_000.png" style="width:50px"></a>1ocl+er</li>	
+		<li class="smlFnt">Copyright © 2021 Purplic Company B.C. All rights reserved.</li>
+		<li class="smlFnt">서울 마포구 백범로 23 거구빌딩</li>
+	</ul>
+</div>
+</body>
+</html>
