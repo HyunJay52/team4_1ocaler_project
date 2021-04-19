@@ -77,10 +77,10 @@
 				<li><a href="#">동네직구</a></li>
 			</ul>
 		</li>
-		<li class="resquick_content"><a href="#">가치가장</a>
+		<li class="resquick_content"><a href="groupPage">가치가장</a>
 			<ul>
-				<li><a href="#">가치가장</a></li>
-				<li><a href="#">한끼미식회</a></li>
+				<li><a href="groupPage">가치가장</a></li>
+				<li><a href="groupPage">한끼미식회</a></li>
 			</ul>
 		</li>
 		<li class="resquick_content"><a href="#">커뮤니티</a>
