@@ -6,8 +6,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class DealController {
 	
+	//착한발견 (셀러)
 	@RequestMapping("/selBard")
 	public String selBard() {
-		return "sell/localBoard";
+		return "deal/sellBoard";
 	}
+
+	//동네직구(회원)
+	@RequestMapping("/memberBoard")
+	public String memberBoard() {
+		return "deal/memberBoard";
+	}
+
+	@RequestMapping("/selWrite")
+	public String selWrite() {
+		return "deal/sellWrite";
+	}
+	
+	@RequestMapping("memberWrite")
+	public String memberWrite() {
+		 return "deal/memberWrite";
+	}
+
+	
+
+	
 }

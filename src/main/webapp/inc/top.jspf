@@ -81,7 +81,7 @@
 				<li><a href="#">한끼미식회</a></li>
 			</ul>
 		</li>
-		<li class="resquick_content"><a href="#">커뮤니티</a>
+		<li class="resquick_content"><a href="commuMain">커뮤니티</a>
 			<ul>
 				<li><a href="#">우리동네 이야기</a></li>
 				<li><a href="#">쓱싹레시피</a></li>
