@@ -15,7 +15,7 @@
 								<img src="sel_img/div.jfif"/>
 							</div>
 							<a>
-								<span style="float:left">D.I.Y 오르골 </span><span style="float:right">20000</span><br/>
+								<span style="float:left">D.I.Y 오르골fvccvc </span><span style="float:right">20000</span><br/>
 								<span>조녜 오르골상품</span><br/>
 								<span>#오르골, #DIY</span>
 							</a>
@@ -27,12 +27,110 @@
 								<img src="sel_img/div.jfif"/>
 							</div>
 							<a>
-								<span style="float:left">D.I.Y 오르골 </span><span style="float:right">20000</span><br/>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
 								<span>조녜 오르골상품</span><br/>
 								<span>#오르골, #DIY</span>
 							</a>
 						</div>
 					</li>
+					<li id="selList">
+						<div>
+							<div>
+								<img src="sel_img/div.jfif"/>
+							</div>
+							<a>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
+								<span>조녜 오르골상품</span><br/>
+								<span>#오르골, #DIY</span>
+							</a>
+						</div>
+					</li>
+					<li id="selList">
+						<div>
+							<div>
+								<img src="sel_img/div.jfif"/>
+							</div>
+							<a>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
+								<span>조녜 오르골상품</span><br/>
+								<span>#오르골, #DIY</span>
+							</a>
+						</div>
+					</li>
+					<li id="selList">
+						<div>
+							<div>
+								<img src="sel_img/div.jfif"/>
+							</div>
+							<a>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
+								<span>조녜 오르골상품</span><br/>
+								<span>#오르골, #DIY</span>
+							</a>
+						</div>
+					</li>
+					<li id="selList">
+						<div>
+							<div>
+								<img src="sel_img/div.jfif"/>
+							</div>
+							<a>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
+								<span>조녜 오르골상품</span><br/>
+								<span>#오르골, #DIY</span>
+							</a>
+						</div>
+					</li>
+					<li id="selList">
+						<div>
+							<div>
+								<img src="sel_img/div.jfif"/>
+							</div>
+							<a>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
+								<span>조녜 오르골상품</span><br/>
+								<span>#오르골, #DIY</span>
+							</a>
+						</div>
+					</li>
+					<li id="selList">
+						<div>
+							<div>
+								<img src="sel_img/div.jfif"/>
+							</div>
+							<a>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
+								<span>조녜 오르골상품</span><br/>
+								<span>#오르골, #DIY</span>
+							</a>
+						</div>
+					</li>
+					<li id="selList">
+						<div>
+							<div>
+								<img src="sel_img/div.jfif"/>
+							</div>
+							<a>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
+								<span>조녜 오르골상품</span><br/>
+								<span>#오르골, #DIY</span>
+							</a>
+						</div>
+					</li>
+					<li id="selList">
+						<div>
+							<div>
+								<img src="sel_img/div.jfif"/>
+							</div>
+							<a>
+								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
+								<span>조녜 오르골상품</span><br/>
+								<span>#오르골, #DIY</span>
+							</a>
+						</div>
+					</li>
+					
+					
 				</ul>
 			</div>
 			
@@ -48,7 +146,6 @@
 				 	<li class="page-item "><a href="#" class="page-link"> >> </a></li>
 				</ul>
 			</div>
-		</div>	<!-- selMain -->
 	</div> <!-- body -->
 </body>
 </html>

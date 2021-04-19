@@ -31,8 +31,8 @@
 	 			<textarea name="s_content"> 내용을 입력해주세요. </textarea>
 	 			<script>CKEDITOR.replace("s_content");</script>
 	 			
-	 			<input type="image" id="cal" src="sel_img/cal.png"  />
-	 			<input type="text" name="s_date" value=""/> <!-- 날짜 -->
+	 		
+	 			<input type="date" name="s_date" value=""/> <!-- 날짜 -->
 	 			
 	 			<input type="text" name="s_gu" value=""/> <!-- 선호구역은는 vo에서 가져오기 -->
 	 			<input type="text" name="s_loc" placeholder="위치를 입력해주세요"/>

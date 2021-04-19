@@ -31,8 +31,8 @@
 	 			<textarea name="i_content"> 내용을 입력해주세요. </textarea>
 	 			<script>CKEDITOR.replace("i_content");</script>
 	 			
-	 			<input type="image" id="cal" src="sel_img/cal.png"  /> <!-- 달력그거. -->
-	 			<input type="text" name="i_period" value=""/> <!-- 날짜 -->
+	 			
+	 			<input type="date" name="i_period" value=""/> <!-- 날짜 -->
 	 			
 	 			
 	 			
