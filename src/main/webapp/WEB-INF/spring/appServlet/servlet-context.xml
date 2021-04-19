@@ -13,6 +13,8 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/plugin/**" location="/plugin/" />
+	<resources mapping="/img/**" location="/img/" />
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/inc/**" location="/inc/" />
@@ -33,6 +35,27 @@
 		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
 		<beans:property name="username" value="c##scott"/>
 		<beans:property name="password" value="tiger"/>
+	</beans:bean>
+	
+	<!-- setting Commons DBCP 1.4: JdbcpTemplate object 
+		 use dataSource
+	-->
+	<beans:bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:property name="dataSource" ref="dataSource" /> <!-- Di = name is in Jdbcp, ref="DriverManager" -->
+	</beans:bean>
+	
+	<!-- Mybatis 객체 생성 -->
+	<beans:bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<beans:property name="dataSource" ref="dataSource"/>
+	<beans:property name="mapperLocations">
+		<beans:list>
+			<beans:value>classpath:com/team4/localer/mapper/*.xml</beans:value>
+		</beans:list>
+	</beans:property>
+
+	</beans:bean>
+	<beans:bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
 	
 </beans:beans>

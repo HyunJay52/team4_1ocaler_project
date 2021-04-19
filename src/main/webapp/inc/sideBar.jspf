@@ -6,9 +6,10 @@
 	<li><a href="#"><img src="common/map_000.png" class="imgSize"></a></li>
 	<li><a href="#"><img src="common/search_000.png" class="imgSize"></a></li>
 	<li><a href="#"><img src="common/won_000.png" class="imgSize"></a></li>
-	<li class="textRotate"><a href="#">로그인</a></li>
-	<li class="textRotate"><a href="#">채팅</a></li>
-	<li><a href="#"><img src="common/top_000.png" class="imgSize"></a></li>
+	<li class="textRotate"><a href="#">로그인&nbsp;</a></li>
+<!-- 	<li class="textRotate"><a href="#">로그아웃</a></li> -->
+	<li class="textRotate"><a href="#">&nbsp;채팅</a></li>
+	<li style="padding-top: 15px;"><a href="#"><img src="common/top_000.png" class="imgSize"></a></li>
 </ul>
 
 </body>
