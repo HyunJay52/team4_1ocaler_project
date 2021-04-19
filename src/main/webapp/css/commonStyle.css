@@ -3,6 +3,25 @@
 	#3f1785 > #571fb8 > #B8B2F4 */
 
 /* 폰트 사이즈 스타일 클래스 모음 */
+@font-face{
+	font-family:"nsr";
+	src:url("../font/NanumSquareRoundR.ttf") format("truetype");
+}
+@font-face{
+	font-family:"nsrb";
+	src:url("../font/NanumSquareRoundB.ttf") format("truetype");
+}
+@font-face{
+	font-family:"nsreb";
+	src:url("../font/NanumSquareRoundEB.ttf") format("truetype");
+}
+@font-face{
+	font-family:"nsrl";
+	src:url("../font/NanumSquareRoundL.ttf") format("truetype");
+}
+
+
+
 .lgFnt {
 	font-size: 32px;	
 }

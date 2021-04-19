@@ -44,6 +44,9 @@
 	});
 </script>
 <div id="indexMain">
+	<h1>폰트적용 확인</h1>
+	
+	
 
 	<!-- bx-slider part -->
 	<ul id="homeSlider">

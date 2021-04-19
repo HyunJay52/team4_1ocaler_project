@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
 <html>
 <head>
 	<title>Welcome to 1ocaler</title>
@@ -15,8 +15,11 @@
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>  
 
 <style>
+/*font 적용  */
+body{font-family:nsr;}
 #header{
         overflow: auto;
+        font-family:NanumSquareRound;
     }
  	a:active, a:link, a:visited{
         color: #000;
