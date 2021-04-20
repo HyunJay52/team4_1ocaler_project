@@ -12,7 +12,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-<script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>  
 
 <style>
 	* {
@@ -79,7 +78,7 @@
 				<li><a href="#">동네직구</a></li>
 			</ul>
 		</li>
-		<li class="resquick_content"><a href="#">가치가장</a>
+		<li class="resquick_content"><a href="#">같이가치</a>
 			<ul>
 				<li><a href="#">가치가장</a></li>
 				<li><a href="#">한끼미식회</a></li>

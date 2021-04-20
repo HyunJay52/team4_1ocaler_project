@@ -31,6 +31,11 @@
 .smlFnt {
 	font-size: 13px;
 }
+/* 글자 생략 클래스 */
+.wordCut {
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
 /* 버튼 스타일 클래스 모음 */
 .commBtn {
 	width: 90px;
