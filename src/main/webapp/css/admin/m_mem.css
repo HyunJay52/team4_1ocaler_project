@@ -40,7 +40,7 @@ body{font-family:"nsr";}
 		font-family: inherit;/*폰트상속*/
 	}
 	
-	input[type="text"]{/*셀렉트박스, 텍스트 필드 css*/
+	input[type="text"]{/*텍스트 필드 css*/
 		width:300px;/*너비설정*/
 		padding:5px;/*여백설정*/
 		font-family: inherit;/*폰트상속*/

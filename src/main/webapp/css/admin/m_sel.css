@@ -15,10 +15,38 @@ body{font-family:"nsr";font-size:13px;}
 	float:left;
 	border:1px solid gray;
 }
-ul{list-style-type: none;}
-li{padding:10px;}
+ul{
+	list-style-type: none;
+	}
+li{
+	padding:8px;
+	}
 /*첫번째 div*/
-#simply li:first-child{font-faimly:"nsrb";font-size:32px;}
+#simply li:first-child{
+	font-faimly:"nsrb";
+	font-size:32px;
+	}
 /*두번째마다*/
-#simply li:nth-child(2n){font-size:22px;}
+#simply li:nth-child(2n){
+	font-size:22px;
+	}
+	/*공통텍스트박스*/
+input[type="text"]{
+	width:300px;/*너비설정*/
+	padding:5px;/*여백설정*/
+	font-family: inherit;/*폰트상속*/
+}
+input[type="button"]{
+	float:left;
+	width:100px;
+	margin:10px;
+	padding:5px;/*여백설정*/
+	font-family: inherit;/*폰트상속*/
+}
+#simply li:last-child{
+	padding:0px;
+	width:200px;
+	height:200px;
+	border:1px solid #ddd;
+}
 

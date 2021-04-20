@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <div id="main">
 	<div class="one">
-		
 		<ul id="simply">
 			<li>기본정보</li>
 			<li>아이디</li>
@@ -17,10 +16,12 @@
 			<li>사업자 번호</li>
 			<li><input type="text" name="com_num" value="123-12-12345"></li>
 			<li>셀러 설명</li>
-			<li><textarea name="sel_content"></textarea></li>
+			<li><textarea name="sel_content" cols="45" rows="5"></textarea></li>
 			<li>대표이미지</li>
-			<li><img src="<%=request.getContextPath() %>/common/won_000.png" width="100" height="200"></li>
+			<li><img src="<%=request.getContextPath() %>/common/won_000.png" width="200" height="200"></li>
 		</ul>
+		<input type="button" id="modi"value="수정"/>
+		<input type="button" id="repl" value="되돌리기"/>
 	</div>
 	<div class="one">
 	<ul>
@@ -43,7 +44,6 @@
 		<li><input type="text" name="account" value="123-12-1234"/></li>
 	</ul>
 	</div>
-	
 </div>
 </body>
 </html>
