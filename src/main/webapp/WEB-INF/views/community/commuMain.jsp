@@ -1,50 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/communityStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commu/communityStyle.css"/>
 	
 	<div id="body">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	
 			<div id="map">
-				 <img src="sel_img/seoulMap.jpg" usemap="#seoulMap"/>
+				 <img src="img/commu/seoulMap.jpg" usemap="#seoulMap"/>
 			</div>
 			
-			<hr/>
+			<hr style="background-color:#fff;"/>
+			
 			<div id="board">
 				<div id="localBoard">
 					<p>로컬커뮤니티</p>
-					<table class="table2">
+					<table class="table">
 					  <tr>
 					    <th>제목</th>
-					    <th>조회수</th>
 					    <th>작성자</th>
+					    <th>조회수</th>
+					  </tr>
+					 <tr>
+					    <td>신규회원</td>
+					    <td>조장님</td>
+					    <td>90</td>
 					  </tr>
 					  <tr>
-					    <td>내용</td>
-					    <td>내용</td>
-					    <td>내용</td>
+					    <td>조장님 최고!</td>
+					    <td>이민주</td>
+					    <td>39</td>
 					  </tr>
 					  <tr>
-					    <td>내용</td>
-					    <td>내용</td>
-					    <td>내용</td>
-					  </tr>
-					  <tr>
-					    <td>내용</td>
-					    <td>내용</td>
-					    <td>내용</td>
+					    <td>스타워보고싶다</td>
+					    <td>사랑</td>
+					    <td>80</td>
 					  </tr>
 					 
 					</table>
 				</div>
 				
 				<div id="recipeBoard">
-					<p>로컬커뮤니티</p>
-					<table class="table2">
+					<p>쓱싹레시피</p>
+					<table class="table">
 					  <tr>
 					    <th>제목</th>
-					    <th>조회수</th>
 					    <th>작성자</th>
+					    <th>조회수</th>
 					  </tr>
 					  <tr>
 					    <td>내용</td>
@@ -52,9 +53,9 @@
 					    <td>내용</td>
 					  </tr>
 					  <tr>
-					    <td>내용</td>
-					    <td>내용</td>
-					    <td>내용</td>
+					    <td>고구마팝니다</td>
+					    <td>고구마</td>
+					    <td>1</td>
 					  </tr>
 					  <tr>
 					    <td>내용</td>
@@ -65,12 +66,12 @@
 					</table>
 				</div>
 				<div id="freeBoard">
-					<p>로컬커뮤니티</p>
-					<table class="table2">
+					<p>자유게시판</p>
+					<table class="table">
 					  <tr>
 					    <th>제목</th>
-					    <th>조회수</th>
 					    <th>작성자</th>
+					    <th>조회수</th>
 					  </tr>
 					  <tr>
 					    <td>내용</td>

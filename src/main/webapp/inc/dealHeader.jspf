@@ -1,9 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealStyle.css"/>
+
 <%@ page session="true" %>
 
+<script>
+/* 	$(function(){
+		$(window).on("scroll", function(){
+			var scrollTop = $(this).scrollTop();
+			var limitTop = 70;
+			if(scrollTop>limitTop){
+				$("#seltop").css("display", "none");
+				$("#header").css("display", "block");
+			}
+			if(scrollTop<limitTop){
+				$("#seltop").css("display", "block");
+				$("#header").css("display", "none");
+			}
+		});
+		
+		
+	}); */
+	
+</script>
+
+<style>
+
+</style>
+
+
 <div id="selMain">
-			<div id="seltop">
+			<div id="seltop" >
 				<span><a href="selBard">착한발견 &nbsp;</a></span>
 				 &nbsp;|&nbsp;
 				 <span>&nbsp;<a href="memberBoard">우리직구</a></span>
@@ -13,21 +40,21 @@
 
 			<div style="width:1300px; height: 70px; padding:19px" >
 				<%-- <c:if test="">  --%><!-- 로그인을해서 그 뭐냐 멤버 권한이있다면? -->
-					<a href="selWrite" style="float:right"> 글쓰기</a>
+					<a href="selWrite" class="btn commBtn "  style="float:right"> 글쓰기</a>
 				<%-- </c:if> --%>
 				<%-- <c:if test="">  --%><!-- 로그인을해서 그뭐냐 셀러 이있다면? -->
-					<a href="memberWrite" style="float:right"> 글쓰기</a>
+					<a href="memberWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
 				<%-- </c:if> --%>
 				<div id="selSearch">
 					<form method="post" action="" id="searchForm">
-						<select style=" float:left; margin-right: 4px " >
+						<select>
 							<option >카테고리</option>
 							<option value="'">식료품</option>	
 							<option value="'">생필품</option>			
 							<option value="">기타</option>
 						</select>
-							<input type="text"name ="search" placeholder="검색.." id="search" style=" float:left;border:1px solid black;  border-right: none;"/>
-							<input type="image" id="btn" src="sel_img/icons8.png" style="display:block; float:left; border: 1px solid #000;" /> 
+							<input type="text"name ="search" placeholder=" &nbsp;검색.." id="search"/>
+							<input type="image" id="btn" src="img/deal/icons8.png" style="display:block; float:left; border: 1px solid #000;" /> 
 					</form>
 				</div>	
 			</div>
