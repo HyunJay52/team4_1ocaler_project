@@ -62,10 +62,10 @@
 	#searchFrm input[type=image]{display:block; height:58px;}
 	
 	
-	#topFrm{position:absolute; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#topFrm>ul{overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#topFrm li{float:left; background-color:#571FB8; margin:0 10px;}
-	#topFrm img{width:40px; margin:9px 0px;}
+	#topFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
+	#topFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
+	#topFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
+	#topFrm img{width:30px; margin:9px 0px;}
 	#topFrm li:first-child>a>img{ margin-left:10px;}
 	#topFrm li:last-child>a>img{ margin-right:10px;}
 	
@@ -74,9 +74,9 @@
 	#showFrm li>a{text-decoration:none; color:#000}
 	#showFrm li>a:hover{color:#571fb8; font-weight:bold;}
 	#showFrm li{float:left; width:230px; padding-left:80px; height:50px; line-height:50px; border-bottom:1px solid #e1e1e1;}
-	#showFrm>div:first-child{margin:10px; overflow:auto;}
+	#showFrm>div:first-child{margin:10px; overflow:auto; padding-left:15px;}
 	#showFrm>div>span{display:block; width:auto; height:45px; line-height:45px; float:left; font-size:22px; color:#571fb8;} 
-	#showFrm img{display:block; width:45px; float:left; margin-right:7px;}
+	#showFrm img{display:block; width:35px; float:left; margin-right:15px; padding-top:6px;}
 	#showFrm img:nth-child(3){float:right} 
 </style>
 

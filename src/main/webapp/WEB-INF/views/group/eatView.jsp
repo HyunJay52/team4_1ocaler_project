@@ -15,10 +15,10 @@
 	#searchFrm input[type=image]{display:block; height:58px;}
 	
 	
-	#topFrm{position:absolute; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#topFrm>ul{overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#topFrm li{float:left; background-color:#571FB8; margin:0 10px;}
-	#topFrm img{width:40px; margin:9px 0px;}
+	#topFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
+	#topFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
+	#topFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
+	#topFrm img{width:30px; margin:9px 0px;}
 	#topFrm li:first-child>a>img{ margin-left:10px;}
 	#topFrm li:last-child>a>img{ margin-right:10px;}
 
@@ -27,22 +27,26 @@
 	#showTopMenu{overflow:auto;}
 	#showTopMenu>li{float:left; width:180px; padding: 10px 0px 10px 10px;}
 	#showTopMenu>li:nth-of-type(3){width:100px;}
-	#showTopMenu img{display:block; width:45px; float:left; margin-right:7px;}
-	#showTopMenu img[src*=cartP]{display:none;} 
+	#showTopMenu img{display:block; width:25px; float:left; margin-right:7px; padding-top:11px;}
+	#showTopMenu img[src*=cart]{display:none;} 
 	
 	#showTopMenu span{display:block;  height:45px; line-height:45px; float:left; font-size:22px;} 
 	#showTopMenu a{color:#000;}
-	#showTopMenu>li:first-child>a{color:#571fb8; font-weight:700}
-	#showTopMenu>li:nth-child(2)>a>span{margin-left:52px;}
-	
+	#showTopMenu>li:first-child>div>a{color:#571fb8; font-weight:700}
+	#with{margin-left:32px;}
+
+	#showTopMenu>li:first-child>div{overflow:auto; padding-left:15px;}
 	#showTopMenu button{height:45px;}
-	
+
 
 	/*버튼이벤트*/
 	.commBtn {	width: 90px; color: #3f1785; border: 1px solid #3f1785;}
 	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}
-	 
-	 .commBtnWrite{width:75px;}
+	.commBtnWrite{width:75px;}
+	
+	
+	/*ck editor 정렬*/
+	.cke_toolgroup{padding-right:2px;} #cke_32{display:none;} #cke_1_bottom{display:none;}
 </style>
 <script>	
 		var inner = window.innerHeight;
@@ -88,22 +92,22 @@
 				$('#showTopMenu>li:nth-child(2)').hover(function(){
 					//1일때 가치가자를 호버하면	
 					//한끼미식회의 이미지가 사라지고 이미지가 사라진 만큼 왼쪽에 margin을 준다
-					$(this).prev().children("img").css("display","none");
-					$("#eat").css("margin-left","52px");					
+					$(this).prev().children("div").children("img").css("display","none");
+					$("#eat").css("margin-left","32px");					
 					//가치가자의 이미지가 생기니까 가지가자가 margin-left가 0이 된다
 					$(this).children("img").css("display","block");
 					$("#with").css("margin-left","0px");					
 					//호버한 가지가자의 글씨 굵기가 bold가 되고 한끼미식회는 plain이 된다.
 					$(this).children("a").css("color","#571fb8").css("font-weight","700"); 		
-					$(this).prev().children("a").css("color","#000").css("font-weight","400");			
+					$(this).prev().children("div").children("a").css("color","#000").css("font-weight","400");			
 				},function(){
 					//가치가자 호버를 때면
-					$(this).prev().children("img").css("display","block");
+					$(this).prev().children("div").children("img").css("display","block");
 					$("#eat").css("margin-left","0px");			
 					$(this).children("img").css("display","none");
-					$("#with").css("margin-left","52px");					
+					$("#with").css("margin-left","32px");					
 					$(this).children("a").css("color","#000").css("font-weight","400");
-					$(this).prev().children("a").css("color","#571fb8").css("font-weight","700");					
+					$(this).prev().children("div").children("a").css("color","#571fb8").css("font-weight","700");					
 				});
 			}else{
 				$('#showTopMenu>li:nth-child(2)').children("img").css("display","block");
@@ -111,12 +115,12 @@
 				$("#with").css("margin-left","0px");
 				$('#showTopMenu>li:nth-child(1)').children("img").css("display","none");
 				$('#showTopMenu>li:nth-child(1)').children("a").css("font-weight","400").css("color","#000");
-				$("#eat").css("margin-left","52px");		
+				$("#eat").css("margin-left","32px");		
 					$('#showTopMenu>li:nth-child(1)').hover(function(){
 						//2일때 한끼미식회를 호버하면					
 						//가치가자의 이미지가 사라지고 이미지가 사라진 만큼 왼쪽에 margin을 준다
 						$(this).next().children("img").css("display","none");
-						$("#with").css("margin-left","52px");
+						$("#with").css("margin-left","32px");
 						//한끼미식회의 이미지가 생기니까 가지가자가 margin-left가 0이 된다
 						$(this).children("img").css("display","block");
 						$("#eat").css("margin-left","0px");					
@@ -127,7 +131,7 @@
 						$(this).next().children("img").css("display","block");
 						$("#with").css("margin-left","0px");
 						$(this).children("img").css("display","none");
-						$("#eat").css("margin-left","52px");			
+						$("#eat").css("margin-left","32px");			
 						$(this).children("a").css("color","#000").css("font-weight","400"); 		
 						$(this).next().children("a").css("color","#571fb8").css("font-weight","700");	
 					});
@@ -174,7 +178,7 @@
 	<!-- showFrm 리스트 -->
 	<div id="showFrm">	
 		<ul id="showTopMenu">
-			<li><img id="dishImg" src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?g_loc=${vo.g_loc }&up_cate=한끼미식회"><span id="eat">한끼미식회</span></a></li>
+			<li><div><img id="dishImg" src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?g_loc=${vo.g_loc }&up_cate=한끼미식회"><span id="eat">한끼미식회</span></a></div></li>
 			<li><img style="display:none" src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?g_loc=${vo.g_loc }&up_cate=가치가장"><span id="with">가치가장</span></a></li>
 			<li><button id="WriteForm" class="btn commBtn commBtnWrite">글쓰기</button>
 		</ul>

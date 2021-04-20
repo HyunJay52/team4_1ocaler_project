@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
+<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script>	
 		var inner = window.innerHeight;
 		console.log(inner);
 		$(function(){
 			//==============================================================================
-			$("#showFrm").css('top',140);
+			$("#showFrm").css('top',80);
 			$("#fold").css('top',140).css('left',493).css('margin-top','348px');
 			
 	
@@ -40,6 +41,14 @@
 			});
 			//===========================================================================
 			
+				
+			//ck editor
+			CKEDITOR.replace("g_content", {
+				height:300
+			});
+			
+			
+			
 		})
 </script>
 <style>
@@ -56,23 +65,33 @@
 	#searchFrm input[type=image]{display:block; height:58px;}
 	
 	
-	#topFrm{position:absolute; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#topFrm>ul{overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#topFrm li{float:left; background-color:#571FB8; margin:0 10px;}
-	#topFrm img{width:40px; margin:9px 0px;}
+	#topFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
+	#topFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
+	#topFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
+	#topFrm img{width:30px; margin:9px 0px;}
 	#topFrm li:first-child>a>img{ margin-left:10px;}
 	#topFrm li:last-child>a>img{ margin-right:10px;}
 
-	#showFrm{position:absolute; height:800px; left:30px; z-index:1; width:460px; background-color:#fff;  border-radius:10px;}		
-	
+	#showFrm{position:absolute; height:850px; left:30px; z-index:1; width:500px; background-color:#fff;  border-radius:10px;}		
 	/* 맨위 셀렉트 박스 부분 */
-	#up_cate{ width:150px; height:30px; padding-left:10px; border:1px solid #d3d3d3; color:#000; border-radius:5px; apperance:none; -webkit-appearance:none;}
-	#down_cate, #g_cnt{ width:150px; height:30px; padding-left:10px; border:1px solid #d3d3d3;
-   background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; color:#000; border-radius:5px; apperance:none; -webkit-appearance:none;}
+	#up_cate, #down_cate{ width:150px; height:40px; padding-left:10px; border:1px solid #d3d3d3;
+   background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}
+	#up_cate{margin:20px 10px 10px 15px;}
+	#g_cnt{ width:100px; height:40px; padding-left:5px; border:1px solid #d3d3d3;
+   background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}
 	
-	#g_subject{border:0px; border-bottom:1px solid gray;}
 	
 	
+	/*제목라인*/
+	#g_subject{border:1px solid #d9d9d9; border-radius:5px; margin:0 15px; width:470px; height:40px; padding-left:10px;}
+	/*input 박스 클릭시, 호버시 */
+	#g_subject:hover {border:1px solid #571fb8;}  #g_subject:focus{border:1px solid #571fb8; outline: none;}
+	/* check 박스 클릭시, 호버시*/
+	#up_cate:active{border:1px solid #571fb8;} #up_cate:focus{border:1px solid #571fb8; outline: none;}
+	
+	/*CKEDTOR 필요없는거 삭제*/
+	 #cke_32, #cke_30, #cke_44,  #cke_38, #cke_1_bottom{display:none; }
+	 #cke_g_content{ margin:15px;}
 	
 	 
 	/*버튼이벤트*/
@@ -80,9 +99,7 @@
 	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}
 	.commBtnWrite{width:75px;}
 	
-	
-	
-</style>
+</style> 	
 </head>
 <body>
 	<div id="map" style="width:2000px; height:1000px; position:relative; overflow:hidden;"></div>
@@ -111,39 +128,50 @@
 	</div>
 	
 	<!-- showFrm 리스트 -->
-	<div id="showFrm">	
-		<div> 
-			<select name="up_cate" id="up_cate" size="1">
-				<c:if test="${vo.up_cate=='한끼미식회' }">
-					<option value="한끼미식회" selected>한끼미식회</option>
-				</c:if>
-				<c:if test="${vo.up_cate=='가치가장' }">
-					<option value="가치가장" selected>가치가장</option>
-				</c:if>
-			</select>
-			
-			<select name="down_cate" id="down_cate" size="1">
-				<c:if test="${vo.up_cate=='한끼미식회' }">
-					<option value="같이먹어요">같이먹어요</option>
-				</c:if>
-				<c:if test="${vo.up_cate=='가치가장' }">
-					<option value="동네마트">동네마트</option>
-					<option value="창고형마트">창고형마트</option>
-				</c:if>
-			</select><br/>
-		</div>
-		<div>
-			<input type="text" name="g_subject" id="g_subject" placeholder="제목을 입력하세요..">
-			<select name="g_cnt" id="g_cnt" size="1">
-				<option value="1" selected>1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
+	<div id="showFrm">
+		<form id="groupWriteFrm "method="post" action="">
+			<div> 
+				<select name="up_cate" id="up_cate" size="1">
+					<c:if test="${vo.up_cate=='한끼미식회' }">
+						<option value="한끼미식회" selected>한끼미식회</option>
+					</c:if>
+					<c:if test="${vo.up_cate=='가치가장' }">
+						<option value="가치가장" selected>가치가장</option>
+					</c:if>
+				</select>
 				
-			</select>	 
-		</div>
-		
+				<select name="down_cate" id="down_cate" size="1">
+					<c:if test="${vo.up_cate=='한끼미식회' }">
+						<option value="같이먹어요">같이먹어요</option>
+					</c:if>
+					<c:if test="${vo.up_cate=='가치가장' }">
+						<option value="동네마트">동네마트</option>
+						<option value="창고형마트">창고형마트</option>
+					</c:if>
+				</select><br/>
+			</div>
+			<div>
+				<input type="text" name="g_subject" id="g_subject" placeholder="&nbsp;&nbsp;&nbsp;제목을 입력하세요.....">
+			</div>
+			
+			
+			<textarea name="g_content" id="g_content"></textarea>
+			
+			<div>
+			<input type="date" name="" id=""/>
+			<select name="g_cnt" id="g_cnt" size="1" >
+					<option value="" disabled selected hidden>모집인원</option>
+					<option value="1">1명</option>
+					<option value="2">2명</option>
+					<option value="3">3명</option>
+					<option value="4">4명</option>
+					<option value="5">5명</option>
+				</select>	
+				
+			
+			</div>	
+			
+		</form>	
 	</div>
 	
 	
