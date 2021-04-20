@@ -17,11 +17,14 @@
 	#mainFooter ul {
 		width: 100%; height: 70px;
 	}
-	#mainFooter li{
+	#mainFooter li {
 		height: 60px; line-height: 65px;
 		padding-left: 10px; padding-right: 10px;
 		list-style-type: none;
 		float: left;
+	}
+	#mainFooter li:nth-of-type(2), #mainFooter li:nth-of-type(3) {
+		padding-top: 8px;
 	}
 </style>
 <div class="footerLine"></div>
