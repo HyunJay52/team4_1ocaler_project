@@ -1,0 +1,25 @@
+@charset "UTF-8";
+body{
+	font-family:"nsr";
+	}
+#main{
+	margin:0 auto; 
+	padding:0;
+	padding-top:30px;
+	overflow:auto;
+	width:1300px;
+	background-color:#ddd;
+}
+form{
+	text-align:center;
+
+}
+input[type="date"]:first-child{
+	/* margin-left:35%; */
+}
+input[type="date"]{
+	width:150px;/*너비설정*/
+	padding:6px;/*여백설정*/
+	border:1px solid #3f1785;
+	font-family: inherit;/*폰트상속*/
+}

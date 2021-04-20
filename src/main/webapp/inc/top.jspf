@@ -3,10 +3,6 @@
 <%@ page session="true" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<<<<<<< HEAD
-
-=======
->>>>>>> e6d2017c5420e85770ea811b9dd681c223fcf12a
 <html>
 <head>
 	<title>Welcome to 1ocaler</title>
