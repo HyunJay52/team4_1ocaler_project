@@ -87,7 +87,7 @@
 	/*input 박스 클릭시, 호버시 */
 	#g_subject:hover {border:1px solid #571fb8;}  #g_subject:focus{border:1px solid #571fb8; outline: none;}
 	/* check 박스 클릭시, 호버시*/
-	#up_cate:active{border:1px solid #571fb8;} #up_cate:focus{border:1px solid #571fb8; outline: none;}
+	#up_cate:active{border:2px solid #571fb8;} #up_cate:focus{border:2px solid #571fb8; outline: none;}
 	
 	/*CKEDTOR 필요없는거 삭제*/
 	 #cke_32, #cke_30, #cke_44,  #cke_38, #cke_1_bottom{display:none; }
