@@ -1,0 +1,22 @@
+@charset "UTF-8";
+.tablea {margin:0 auto;padding:0;font-size:13px;width:100%;}
+.tablea tr{/*테이블 목록*/
+   border-bottom:1px solid rgb(227,227,227); 
+   text-align:center;
+   height:40px;
+ }
+  .tablea tr:first-child{/*첫번째 테이블 목차*/
+	text-align:center;color:black;
+	border-bottom:2px solid #ddd;
+	background-color:rgb(204,181,242,0.3);
+	}
+	
+.redBtn{
+	background:rgb(183,15,23,0.9);
+	color:#fff;
+	width:90px;
+}
+.redBtn:hover{
+	color:rgb(183,15,23);
+	background:#fff;
+}
