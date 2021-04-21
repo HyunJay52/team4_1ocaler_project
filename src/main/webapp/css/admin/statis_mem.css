@@ -8,7 +8,7 @@ body{
 	padding-top:30px;
 	overflow:auto;
 	width:1300px;
-	background-color:#ddd;
+	
 }
 form{
 	text-align:center;
@@ -23,3 +23,51 @@ input[type="date"]{
 	border:1px solid #3f1785;
 	font-family: inherit;/*폰트상속*/
 }
+/*그래프차트부분*/
+#chart_div{
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:10px;
+	width:1200px;
+	height:400px;
+}
+/*월별회원통계추기*/
+.btitle{
+	font-family:"nsreb";
+	text-align:center;
+	font-size:40px;
+	margin-top:30px;
+	margin-bottom:20px;
+	}
+
+/*도넛 차트1*/
+li{
+	float:left;
+	width:400px;
+	font-size:32px;
+	text-align:center;
+	padding:0;
+	list-style-type:none;
+}
+ul>li:nth-child(3n+1){
+	margin-left:50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

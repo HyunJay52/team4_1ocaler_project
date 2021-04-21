@@ -1,5 +1,7 @@
 package com.team4.localer.admin;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -8,7 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
 	
 	@RequestMapping("/main")//관리자 메인페이지 
-	public ModelAndView main() {
+	public ModelAndView main(HttpSession session) {
+		session.setAttribute("logId", "admin");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/main");
 		return mav;
@@ -47,6 +50,12 @@ public class AdminController {
 	public ModelAndView statis_mem() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/statis_mem");
+		return mav;
+	}
+	@RequestMapping("/statis_board")//판매관리
+	public ModelAndView statis_board() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/statis_board");
 		return mav;
 	}
 	

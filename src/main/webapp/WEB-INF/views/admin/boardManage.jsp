@@ -18,6 +18,16 @@
 			<div>1219</div>
 		</li>
 	</ul>
+	<form>
+		<select name="serchkey" class="selectcomm">
+				<option value="게시글번호">게시글 번호</option>
+				<option value="게시글제목">게시글 제목</option>
+				<option value="게시글내용">게시글 내용</option>
+				<option value="작성자닉네임">작성자 닉네임</option>
+		</select>
+		<input type="text" class="textcomm" name="serchword" />
+		<input type="submit" class="puplebtn" value="검색"/>
+	</form>
 	<div id="btndiv">
 		<input type="button" class="searchbtn" value="가치가장"/>
 		<input type="button" class="searchbtn" value="커뮤니티"/>
