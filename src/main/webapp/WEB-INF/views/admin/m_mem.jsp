@@ -31,7 +31,7 @@
 		</li>
 		<li>
 			탈퇴
-			<div style="border:0;">2500</div>
+			<div>2500</div>
 			<b>4% </b>지난주 대비
 		</li>
 	</ul>
@@ -40,13 +40,13 @@
 	<div style="width:100%;height:30px;"></div>
 	<div class="frmcss">
 		<form >
-			<select name="serchkey">
+			<select name="serchkey" class="selectcomm">
 				<option value="회원아이디">회원아이디</option>
 				<option value="회원번호">회원 번호</option>
 				<option value="회원이름">회원 이름</option>
 			</select>
-			<input type="text" name="serchword"/>
-			<input type="submit" class="commBtn" value="검색"/>
+			<input type="text" class="textcomm" name="serchword"/>
+			<input type="submit" class="searchbtn" value="검색"/>
 		</form>	
 	</div>
 	
@@ -82,10 +82,10 @@
 			<td>남자</td>
 			<td>서울시 강서구</td>
 			<td>010-2222-3333</td>
-			<td><input type="button" class="commBtn"value="Y"></td>
-			<td><input type="button" class="commBtn"value="Y"></td>
-			<td><input type="button" class="commBtn"value="Y"></td>
-			<td><input type="button" class="redBtn redBtn:hover"value="정지"></td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td><input type="button" class="redBtn"value="정지"></td>
 		</tr>
 	</table>
 	<div style="width:100%;height:60px;"></div>

@@ -63,6 +63,17 @@
 	background-color:#fff;
 	color:#3f1785;
 }
+.spuplebtn{
+	width:70px;
+	padding:2px;
+	background-color:#fff;
+	color:#3f1785;
+	border:1px solid #3f1785;
+}
+.spuplebtn:hover{
+	background-color:#3f1785;
+	color:#fff;
+}
 	
 .redBtn{
 	background:rgb(183,15,23,0.9);

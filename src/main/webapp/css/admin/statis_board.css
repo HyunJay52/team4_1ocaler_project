@@ -68,6 +68,12 @@ input[type="date"]{
 	border:1px solid #3f1785;
 	font-family: inherit;/*폰트상속*/
 }
+select{
+	margin-left:20px;
+}
+table{
+	margin-bottom:20px;
+}
 
 
 
