@@ -235,7 +235,10 @@
 			--%>
 			<c:forEach var="i" begin="1" end="5">
 				<li>
-					<div><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>같이먹어요</span><img src="<%=request.getContextPath()%>/img/groupImg/likeE.png"/></div>
+					<div>
+						<img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>같이먹어요</span><img src="<%=request.getContextPath()%>/img/groupImg/likeE.png"/>
+						<input type="checkbox" />	
+					</div>
 					<span>오늘 점심 같이 드실분 있나요 [솥밥]</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>2021-04-21 오후 6시 29분</div><!-- g_date, g_time 값을 가지고 온다. -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소"/>가양역1번출구</div><!-- g_loc1 값을 가져온다. -->
