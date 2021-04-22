@@ -58,8 +58,8 @@
 	#open{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
 	
 	#searchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#searchFrm input[type=text]{float:left; height:58px; }
-	#searchFrm input[type=image]{display:block; height:58px;}
+	#searchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
+	#searchFrm input[type=image]{display:block; height:48px;}
 	
 	
 	#topFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }

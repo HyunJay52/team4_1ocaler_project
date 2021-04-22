@@ -11,8 +11,8 @@
 	#open{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
 	
 	#searchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#searchFrm input[type=text]{float:left; height:58px; }
-	#searchFrm input[type=image]{display:block; height:58px;}
+	#searchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
+	#searchFrm input[type=image]{display:block; height:48px;}
 	
 	
 	#topFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
@@ -22,7 +22,7 @@
 	#topFrm li:first-child>a>img{ margin-left:10px;}
 	#topFrm li:last-child>a>img{ margin-right:10px;}
 
-	#showFrm{position:absolute; height:800px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
+	#showFrm{position:absolute; height:850px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
 	
 	#showTopMenu{overflow:auto;}
 	#showTopMenu>li{float:left; width:180px; padding: 10px 0px 10px 10px;}
@@ -47,11 +47,9 @@
 </style>
 
 <script>	
-		var inner = window.innerHeight;
-		console.log(inner);
 		$(function(){
 			//==============================================================================
-			$("#showFrm").css('top',140);
+			$("#showFrm").css('top',90);
 			$("#fold").css('top',140).css('left',493).css('margin-top','348px');
 			
 	
