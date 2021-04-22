@@ -27,8 +27,16 @@ public class DealController {
 	public String memberWrite() {
 		 return "deal/memberWrite";
 	}
-
 	
+	@RequestMapping("memberView")
+	public String memberView() {
+		return "deal/memberView";
+	}
+
+	@RequestMapping("sellView")
+	public String selView() {
+		return "deal/sellView";
+	}
 
 	
 }

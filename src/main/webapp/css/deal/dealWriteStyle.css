@@ -36,7 +36,6 @@
 	
 	#btn{ width: 1300px; text-align: center;
 	}
-
 	
 	/* 파일 */
 	
@@ -80,4 +79,47 @@
 	.confBtn:hover {
 	color: #fff;
 	background: #B8B2F4;
-}
+	}
+	
+	
+	#subject:active{border-bottom:2px solid #571fb8;}
+	#subject:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#subject:hover{border-bottom:2px solid #571fb8;}
+	
+	#cnt:active{border-bottom:2px solid #571fb8;}
+	#cnt:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#cnt:hover{border-bottom:2px solid #571fb8;}
+	
+	#date:active{border-bottom:2px solid #571fb8;}
+	#date:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#date:hover{border-bottom:2px solid #571fb8;}
+	
+	#price:active{border-bottom:2px solid #571fb8;}
+	#price:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#price:hover{border-bottom:2px solid #571fb8;}
+	
+	#loc:active{border-bottom:2px solid #571fb8;}
+	#loc:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#loc:hover{border-bottom:2px solid #571fb8;}
+	
+	#gu:active{border-bottom:2px solid #571fb8;}
+	#gu:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#gu:hover{border-bottom:2px solid #571fb8;}
+	
+	#tag:active{border-bottom:2px solid #571fb8;}
+	#tag:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#tag:hover{border-bottom:2px solid #571fb8;}
+	
+	#filename1:active{border-bottom:2px solid #571fb8;}
+	#filename1:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#filename1:hover{border-bottom:2px solid #571fb8;}
+	
+	#filename2:active{border-bottom:2px solid #571fb8;}
+	#filename2:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#filename2:hover{border-bottom:2px solid #571fb8;}
+	
+	#filename3:active{border-bottom:2px solid #571fb8;}
+	#filename3:focus{border-bottom:2px solid #571fb8; outline: none;}
+	#filename3:hover{border-bottom:2px solid #571fb8;}
+	
+	
