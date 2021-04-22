@@ -183,7 +183,13 @@
 		});
 		
 		$("#loadFrom").on("submit", function(){
-			$("#myPoint").children().next().text(myMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+			if($("#loadArea>form>select").val() == '결제수단 선택'){
+				alert("결제수단을 선택해주세요");
+				return false;
+			}else{
+				$("#myPoint").children().next().text(myMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");				
+			}
+			
 		});
 		
 	});
@@ -196,20 +202,20 @@
 		<div id="loadArea">
 			<form method="post" action="load" id="loadFrom">
 				<input type="text" id="load" name="load" class="lgFnt"/>
-				<span class="mdFnt">충전 후 잔액 :</span><span class="mdFnt" id="loadMoney"></span>
-				<ul>
-					<li><input type="button" class="btn commBtn mdFnt btn-block" title="10000" value="1 만원"/></li>
-					<li><input type="button" class="btn commBtn mdFnt btn-block" title="50000" value="5 만원"/></li>
-					<li><input type="button" class="btn commBtn mdFnt btn-block" title="100000" value="10 만원"/></li>
-					<li><input type="button" class="btn commBtn mdFnt btn-block" title="200000" value="20 만원"/></li>
-				</ul>
-				<br/>
-				<select class="selectBox" name="결제수단">
-					<option value="결제수단 선택">결제수단 선택</option>
-					<option value="무통장입금">무통장입금</option>
-					<option value="카드결제">카드결제</option>
-				</select>
-				<input type="submit" class="btn commBtn" value="충전하기"/>
+					<span class="mdFnt">충전 후 잔액 :</span><span class="mdFnt" id="loadMoney"></span>
+					<ul>
+						<li><input type="button" class="btn commBtn mdFnt btn-block" title="10000" value="1 만원"/></li>
+						<li><input type="button" class="btn commBtn mdFnt btn-block" title="50000" value="5 만원"/></li>
+						<li><input type="button" class="btn commBtn mdFnt btn-block" title="100000" value="10 만원"/></li>
+						<li><input type="button" class="btn commBtn mdFnt btn-block" title="200000" value="20 만원"/></li>
+					</ul>
+					<br/>
+					<select class="selectBox" name="payWay">
+						<option value="결제수단 선택">결제수단 선택</option>
+						<option value="무통장입금">무통장입금</option>
+						<option value="카드결제">카드결제</option>
+					</select>
+					<input type="submit" class="btn commBtn" value="충전하기"/>
 			</form>
 		</div>
 		<div id="myPoint">

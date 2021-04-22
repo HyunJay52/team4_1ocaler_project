@@ -116,20 +116,21 @@ hr{
 <script>
 	$(function(){
 		$("#basicInfo>form>button").click(function(){
-			$("#container>div>button").attr('disabled', false);
-			$("#container>div>form>input").css('display', 'block');
-			$("#container>div>form>ul>li").css('display', 'block');			
+			$(".mainContainer>div>button").attr('disabled', false);
+			$(".mainContainer>div>form>input").css('display', 'block');
+			$(".mainContainer>div>form>ul>li").css('display', 'block');			
 			$(this).attr('disabled', 'block');
-			$("#container>div>form input").attr('disabled', false).css('border', '1px solid black');
+			$(".mainContainer>div>form input").attr('disabled', false).css('border', '1px solid black');
 			$(".editOn").css('display', 'block');
 			$("#imgFile").css('border', 'none');
-			$("#detailInfo>form>ul>li select").attr('disabled', false);	
+			$("#detailInfo>form>ul>li select").attr('disabled', false);
+	
 		});
 		$("#cancel").click(function(){
-			$("#container>div>button").attr('disabled', 'true');
-			$("#container>div>form>button[value='EDIT']").attr('disabled', false);
+			$(".mainContainer>div>button").attr('disabled', 'true');
+			$(".mainContainer>div>form>button[value='EDIT']").attr('disabled', false);
 			$(".editOn").css('display', 'none');
-			$("#container>div>form input").attr('disabled', true).css('border', 'none');
+			$(".mainContainer>div>form input").attr('disabled', true).css('border', 'none');
 			$("#detailInfo>form>ul>li select").attr('disabled', 'true'); 
 			$("#cancel").css('border', '1px solid'); 
 			

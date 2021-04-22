@@ -172,8 +172,7 @@
 		//리스트 세팅
 		function setList(){
 			var item = ['회원1','회원2','회원3'];
-			
-			
+
 			for(var i = 0; i < 3; i++){
 				var tag = "<tr>"; 
 				tag += "<td>2021.04.21</td>";
@@ -193,6 +192,10 @@
 			
 		}
 		setList();
+		
+		$(".body").click(function(){
+			$('#myDealTbl tr>td>div').attr('class', 'myDealMem collapse');
+		});
 	});
 </script>
 <div class="body">
