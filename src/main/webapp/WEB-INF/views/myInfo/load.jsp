@@ -81,7 +81,7 @@
 	.dateFrm{
 		position:absolute;
 		top:55px;
-  	  	left:64px;
+  	  	left:62px;
   	  	background-color:#fff;
   	 	height:40px;
 		width:110px;
@@ -90,7 +90,7 @@
 		text-align:center;
 	}
 	.date{
-		height:50px; background-color:#fff; padding-left:10px; border-radius:40px; position:relative; margin:0px 50px 10px 50px;
+		 	 	height:50px; background-color:#fff; padding:0 10px; border:none; position:relative; margin:0px 50px 10px 50px;
 	}
 	.line{
 	  	position:absolute; background-color:#3f1785; width:100%; height:4px; top:70px; border-radius:100px;

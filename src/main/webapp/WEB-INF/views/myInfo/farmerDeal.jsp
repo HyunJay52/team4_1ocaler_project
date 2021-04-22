@@ -62,7 +62,7 @@
 		z-index:100;
 		line-height:40px;
 		text-align:center;
-	}
+	} 
 	.date{ 
 		width:170px; height:50px; background-color:#fff; padding:0 10px; position:relative; margin:0px 30px 0px 50px; border:none;
 	}
@@ -163,64 +163,12 @@
 			setMonth(toYear, toMonth);
 		});		
 		
-		
-		//collape in
-		//버튼선택 이벤트
-		$(document).on('click', '#myDealTbl tr>td>button', function(){
-			$('#myDealTbl tr>td>div').attr('class', 'myDealMem collapse');
-			$(this).next().attr('class', 'collape in myDealMem');
-
-		});
-		
-		//드롭박스 이벤트
-		$(document).on('click', '#myDealTbl tr>td>div>ul>li>button', function(){
-			$(this).parent().parent().parent().attr('class', 'collapse');
-			$(this).parent().parent().parent().prev().text($(this).text());
-		});
-
-		//리스트 세팅
-		function setList(){
-			var item = ['회원1','회원2','회원3'];
-
-			for(var i = 0; i < 3; i++){
-				var tag = "<tr>"; 
-				tag += "<td>2021.04.21</td>";
-				tag += "<td>상수역에서 10kg 고구마 소분하실 분?</td>";
-				tag += "<td><button class='btn btn-light btn-outline-dark btn-block myDealBtn' data-toggle='collapse'>선택&nbsp;&nbsp;</button>";
-				
-				tag += "<div class='myDealMem collapse'><ul>";			
-				for(var j = 0; j < 3; j++){
-					tag += "<li><button class='btn btn-light commBtn btn-block' data-target='#myDealMd' data-toggle='modal'>"+item[j]+"</button></li>";
-					
-				}
-				tag += "</ul></div></td>";
-				tag += "<td>리뷰완료</td>";
-				tag += "</tr>";
-				$("#myDealTbl").append(tag);
-			}
-			
-		}
-		setList();
-		
-		//다른곳 클릭시 드롭박스 닫기
-		$(".body").click(function(){
-			$('#myDealTbl tr>td>div').attr('class', 'myDealMem collapse');
-		});
-		
-		$("#myDealToggle>button").click(function(){
-			$("#myDealToggle>button").css('background-color', '#fff').css('color', '#3f1785').attr('value', null);
-			$(this).css('background-color', '#3f1785').css('color', '#fff').attr('value', 'select');
-			
-		});
-		
-		$(".myDealMem>ul>li>button").click()
-		
 	});
 </script>
 <div class="body">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="mainContainer">
-		<h3>회원간거래</h3>
+		<h3>파머 직거래</h3>
 		<div id="myDealTop">
 			<div id="myDealInfo">
 				<img src="img/myInfo/saver.gif"/>
@@ -240,11 +188,7 @@
 				<input type="button" class="btn dealBtn commBtn btn-outline-dark" value="Info"/>
 			</div>
 		</div>
-		<div id="myDealBottom">
-			<div id="myDealToggle">
-				<button class="btn commBtn btn-outline-dark">참여한</button>
-				<button class="btn commBtn btn-outline-dark">개설한</button>
-			</div>
+		   <div id="myDealBottom">
 			<div id="myDealDateForm">
 				<input type="date" id="date" min="2021-01-01" max="2021-05-31" class="date"/>
 				<div class="dateFrm"><button class="dayBtn" id="prev">《</button><button id="setMonth" class="dayBtn mdFnt"></button><button class="dayBtn" id="next">》</button></div>
@@ -256,35 +200,29 @@
 				<tr>
 					<td>날짜</td>
 					<td>제목</td>
-					<td>회원선택</td>
+					<td>판매자</td>
+					<td>금액</td>
+					<td>주문확정</td>
 					<td>리뷰상태</td>
+					
 				</tr>
-			
 				<tr>
-					<td>2021.04.20</td>
-					<td>마포역 3kg 세제2+1 같이 사실 분?</td>
-					<td><a href="#">회원4</a></td>
-					<td>1/3완료</td>
+					<td>2021.04.04</td>
+					<td><a href="#">청년농장 나주 왕크니까 왕맛있는 배</a></td>
+					<td>test</td>
+					<td>20,000원</td>
+					<td>주문확정</td>
+					<td>리뷰작성</td>
+				</tr>
+				<tr>
+					<td>2021.04.04</td>
+					<td><a href="#">청년농장 나주 왕크니까 왕맛있는 배</a></td>
+					<td>test</td>
+					<td>20,000원</td>
+					<td>주문확정</td>
+					<td>리뷰작성</td>
 				</tr>
 			</table>
-		</div>
-	</div>
-		<div class="modal fade" id="myDealMd">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header" id="myDealHeader">
-				<h4 class="modal-title"></h4>
-				
-						
-						 	
-				</div>
-				<div class="modal-body" id="myDealList">
-					
-				</div>
-				<div class="modal-footer">
-					<button data-dismiss="modal" class="btn btn-secondary">Close</button>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

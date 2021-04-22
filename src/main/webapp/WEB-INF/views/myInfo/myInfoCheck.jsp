@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
+	.body{
+		overflow:auto;
+		width:1300px;
+	}
 	#pwdCheck{
 		position:absolute;
 		top:50%;
@@ -32,8 +36,9 @@
 		
 	});
 </script>
-<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-<div id="pwdCheck">
+<div class="body">
+	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
+	<div id="pwdCheck">
 	
 	<form method="post" action="pwdCheck">
 		<ul>
@@ -41,6 +46,7 @@
 			<li><input id="cancel" class="btn cancelBtn" type="button" value="CANCEL"/><input type="submit" class="btn commBtn" value="OK"/></li>
 		</ul>
 	</form>
+	</div>
 </div>
 </body>
 </html>

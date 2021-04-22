@@ -179,7 +179,7 @@
 			</ul>
 		</div>
 	</div>
-		<div class="modal fade" id="deliveryMd">
+	<div class="modal fade" id="deliveryMd">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header" id="deliveryHeader">
@@ -196,7 +196,6 @@
 				</div>
 			</div>
 		</div>
-	
 	</div>
 </div>
 </body>
