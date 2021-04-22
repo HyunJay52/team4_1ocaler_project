@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>  
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealWriteStyle.css"/>
 
+	<script>
+		$(function(){
+		      CKEDITOR.replace("i_content"); //설명글 name 설정 필요
+		      
+		   });
+	
+	</script>
 
 	<div id="body">
 		<div>
@@ -18,10 +26,10 @@
 					<option value="'">판매중</option>			
 				</select>				
 	 			<br/>
-	 			<input type="text" id ="subject" name="i_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
-	 			<input type="text" id ="cnt" name="i_cnt" placeholder="판매수량"/>
-	 			<textarea name="s_content"> 내용을 입력해주세요. </textarea>
-	 			<script>CKEDITOR.replace("s_content");</script>
+	 			<input type="text" id ="subject" class ="boardLine" name="i_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
+	 			<input type="text" id ="cnt" class ="boardLine" name="i_cnt" placeholder="판매수량"/>
+	 			<textarea name="i_content" id ="content" > 내용을 입력해주세요. </textarea>
+	 			<!-- <script>CKEDITOR.replace("i_content");</script> -->
 	 			
 	 		
 	 			

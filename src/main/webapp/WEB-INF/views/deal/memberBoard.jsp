@@ -3,22 +3,33 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealStyle.css"/>
 
 
+
+
 	<div id="body">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<%@ include file="/inc/dealHeader.jspf" %> <!-- 사이드 메뉴 include -->
 						
 			<div id="selBoard" >
-				<ul>
+				<ul id="boardText">
 					<li id="selList">
-						<div>
+						<div OnClick="location.href ='memberView'">
 							<div>
-								<img src="img/deal/div.jfif"/>
+								<img src="img/deal/Karrot.jpeg"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골fvccvc </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">당근 나눔 하실분</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;1</span>
+									/5개
+								</li>
+								<li>1,000원</li>
+								<li class="wordcut">#야채 #당근 #등촌역 #직거래</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -26,11 +37,20 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -38,11 +58,20 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -50,11 +79,20 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -62,11 +100,20 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -74,11 +121,20 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -86,11 +142,20 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -98,11 +163,20 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -110,11 +184,20 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 					<li id="selList">
@@ -122,15 +205,22 @@
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골dfsdfsf </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul >	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
-					
-					
 				</ul>
 			</div>
 			
