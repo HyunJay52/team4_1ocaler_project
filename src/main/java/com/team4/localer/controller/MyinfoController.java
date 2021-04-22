@@ -1,4 +1,4 @@
-package com.team4.localer.myInfo;
+package com.team4.localer.controller;
 
 import javax.servlet.http.HttpSession;
 

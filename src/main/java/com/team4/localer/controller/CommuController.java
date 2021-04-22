@@ -1,4 +1,4 @@
-package com.team4.localer.community;
+package com.team4.localer.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
