@@ -43,4 +43,9 @@ public class MyinfoController {
 	public String myDeal() {
 		return "myInfo/myDeal";
 	}
+	
+	@RequestMapping("/farmerDeal")
+	public String farmerDeal() {
+		return "myInfo/farmerDeal";
+	}
 }

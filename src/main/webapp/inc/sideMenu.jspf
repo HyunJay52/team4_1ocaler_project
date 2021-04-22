@@ -37,7 +37,7 @@ ul li{
 <script>
 	var menuTitle = ['My Info','참여내역','판매관리'];
 	var subMenu = [ ['내 정보','충전하기','배송내역'],
-					['마이딜','참여내역','후기','내가본글'],
+					['회원간 거래','파머 직거래','리뷰관리','나의 활동'],
 					['판매자 정보','상품관리','판매/결제관리','배송관리','통계']		
 				  ]
 	
@@ -89,8 +89,10 @@ ul li{
 				location.href="load";
 			}else if($(this).text() == '배송내역'){
 				location.href="delivery";
-			}else if($(this).text() == '마이딜'){
+			}else if($(this).text() == '회원간 거래'){
 				location.href="myDeal";
+			}else if($(this).text() == '파머 직거래'){
+				location.href="farmerDeal";
 			}
 		});
 		

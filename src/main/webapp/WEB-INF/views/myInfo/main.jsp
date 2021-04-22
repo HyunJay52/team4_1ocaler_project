@@ -203,7 +203,7 @@
 					<td>2021.04.16</td>
 					<td><button class="btn btn-primary btn-block">참여됨</button></td>
 				</tr>
-					<tr>
+				<tr>
 					<td>내글</td>
 					<td>서강대역</td>
 					<td>gamja</td>
@@ -217,7 +217,7 @@
 					<td>2021.04.16</td>
 					<td><button class="btn btn-primary btn-block">참여됨</button></td>
 				</tr>
-					<tr>
+				<tr>
 					<td>내글</td>
 					<td>서강대역</td>
 					<td>gamja</td>
@@ -225,7 +225,6 @@
 					<td><button class="btn btn-danger btn-block">승인하기</button></td>
 				</tr>
 				<tr>
-					<tr>
 					<td>내글</td>
 					<td>서강대역</td>
 					<td>gamja</td>

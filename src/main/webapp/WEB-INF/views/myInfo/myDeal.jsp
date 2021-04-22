@@ -63,8 +63,8 @@
 		line-height:40px;
 		text-align:center;
 	}
-	.date{
-		height:50px; background-color:#fff; padding-left:10px; border-radius:40px; position:relative; margin:0px 50px 10px 50px; border:none;
+	.date{ 
+		height:50px; background-color:#fff; padding-left:10px; border-radius:40px; position:relative; margin:0px 30px 0px 50px; border:none;
 	}
 	#prev{float:left}
 	#next{float:right}
@@ -104,6 +104,9 @@
 		text-align:center;
 		border:2px solid black;
    }
+   #myDealToggle{
+		float:right; margin:10px 40px 0 0;
+   }
 </style>
 <script>
 	$(function(){
@@ -141,6 +144,9 @@
 				toMonth = 12;
 				toYear--;
 			}
+			if(toYear == 2020){
+				toYear = 2021;
+			}
 			setMonth(toYear, toMonth);
 		});
 		
@@ -150,6 +156,9 @@
 			if(toMonth == 13){
 				toMonth = 1;
 				toYear++;
+			}
+			if(toYear == 2022){
+				toYear = 2021;
 			}
 			setMonth(toYear, toMonth);
 		});		
@@ -193,9 +202,17 @@
 		}
 		setList();
 		
+		//다른곳 클릭시 드롭박스 닫기
 		$(".body").click(function(){
 			$('#myDealTbl tr>td>div').attr('class', 'myDealMem collapse');
 		});
+		
+		$("#myDealToggle>button").click(function(){
+			$("#myDealToggle>button").css('background-color', '#fff').css('color', '#3f1785').attr('value', null);
+			$(this).css('background-color', '#3f1785').css('color', '#fff').attr('value', 'select');
+			
+		});
+		
 	});
 </script>
 <div class="body">
@@ -217,13 +234,22 @@
 						<li>좋아요(21)</li>
 					</ul>
 				</div>
-				<input type="button" class="btn dealBtn commBtn" value="Send Message"/>
-				<input type="button" class="btn dealBtn commBtn" value="Info"/>
+				<input type="button" class="btn dealBtn commBtn btn-outline-dark" value="Send Message"/>
+				<input type="button" class="btn dealBtn commBtn btn-outline-dark" value="Info"/>
 			</div>
 		</div>
 		<div id="myDealBottom">
-			<div class="dateFrm"><button class="dayBtn" id="prev">《</button><button id="setMonth" class="dayBtn mdFnt"></button><button class="dayBtn" id="next">》</button></div>
-			<input type="date" id="date" min="2021-01-01" max="2021-05-31" class="date"/>
+			<div id="myDealToggle">
+				<button class="btn commBtn btn-outline-dark">참여한</button>
+				<button class="btn commBtn btn-outline-dark">개설한</button>
+			</div>
+			<div id="myDealDateForm">
+				<input type="date" id="date" min="2021-01-01" max="2021-05-31" class="date"/>
+				<div class="dateFrm"><button class="dayBtn" id="prev">《</button><button id="setMonth" class="dayBtn mdFnt"></button><button class="dayBtn" id="next">》</button></div>
+				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
+				<input type="date" min="2021-01-01" max="2021-05-31"/>
+				
+			</div>
 			<table class="table2" id="myDealTbl">
 				<tr>
 					<td>날짜</td>
