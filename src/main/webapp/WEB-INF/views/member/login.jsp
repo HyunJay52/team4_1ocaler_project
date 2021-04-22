@@ -6,10 +6,17 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
+<%
+	//로그인 세션 저장하기
+
+
+
+%>
 <style>
 	#loginContainer {
 		width: 1300px; height: auto;
 		text-align: center;
+		margin: 0 auto;
 	}
 	#login_section {
 		width: 400px; height: auto;
@@ -18,6 +25,9 @@
 	}
 	#login_section ul li {
 		list-style-type: none;
+	}
+	#userid {
+		margin-bottom: 3px; 
 	}
 	#naverIdLogin img, #kakao-login-btn img {
 		width: 220px; height: 50px;
@@ -28,9 +38,9 @@
 	}
 	.inputSize {
 		width: 320px; height: 50px;
-		margin-top: 10px;
+		padding: 10px;
 		border: 1px solid #ddd;
-		border-radius: 3px;
+		border-radius: 5px;
 	}
 	.cbSize {
 		margin-bottom: 10px;
@@ -62,12 +72,19 @@
 		var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
 		
 		$("#login_section").submit(function(){
+			//로그인 상태 유지 확인
+			if($("checkbox").val()=='stay'){
+				alert("로그인 상태 유지합니다 ~");
+			}
+			
 			if($("#userid").val()===""){
 				alert("아이디를 입력해주세요.");
+				$("#userid").focus();
 				return false;
 			}
 			if($("#userpwd").val()===""){
 				alert("비밀번호를 입력해주세요.");
+				$("#userpwd").focus();
 				return false;
 			}
 			if(!getCheck.test($("#userid").val())){
@@ -76,9 +93,11 @@
 				$("#userid").focus();
 				return false;
 			}
-			
-			
-			return true;
+			//로그인 하게 만들기 
+			if($("#userid").val()==="1234" && $("#userpwd").val()==="1234"){
+				alert("???")
+				return true;
+			}
 		});
 	});
 	
@@ -87,8 +106,8 @@
 
 <div id="loginContainer">
 	<div id="login_section">
-		<span class="mdFnt">로그인</span>
-		<form method="post" action="loginConfrim">
+		<span class="lgFnt" >로그인</span>
+		<form method="post" action="backHome"> <!-- loginConfrim -->
 			<ul>
 				<li><input type="text" name="userid" id="userid" tabindex="1" placeholder=" 아이디를 입력해주세요" class="inputSize"/></li>
 				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호를 입력해주세요" class="inputSize"/></li>

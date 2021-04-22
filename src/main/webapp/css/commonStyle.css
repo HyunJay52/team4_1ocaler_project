@@ -31,6 +31,11 @@
 .smlFnt {
 	font-size: 13px;
 }
+/* 글자 생략 클래스 */
+.wordCut {
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
 /* 버튼 스타일 클래스 모음 */
 .commBtn {
 	width: 90px;
@@ -63,3 +68,19 @@
 	color: #fff;
 	background: #B8B2F4;
 }
+/*테이블 css  */
+	.table {margin:0 auto;padding:0}
+    .table tr{/*테이블 목록*/
+    	border-bottom:1px solid rgb(227,227,227); 
+    	text-align:center;
+    	height:40px;
+    }
+	.table tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color:#3f1785;
+		color:#fff;
+	}
+	.table tr:last-child{/*마지막 줄 tr 스타일*/
+		border-bottom:2px solid #3f1785;
+	}
+	
