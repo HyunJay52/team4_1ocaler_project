@@ -193,7 +193,6 @@
 	#topFrm img{width:30px; margin:9px 0px;}
 	#topFrm li:first-child>a>img{ margin-left:10px;}
 	#topFrm li:last-child>a>img{ margin-right:10px;}
-
 	#showFrm{position:absolute; height:780px; left:30px; z-index:1; width:500px; background-color:#fff;  border-radius:10px;}		
 	/* 맨위 셀렉트 박스 부분 */
 	#up_cate, #down_cate{ width:150px; height:40px; padding-left:10px; border:1px solid #d3d3d3;
@@ -353,7 +352,6 @@
 			//센터의 lat,lng값을 가져옴 
 			var maps = map.getCenter();
 			console.log(maps);
-
 			
 			//마커 찍기
 			/* 
@@ -362,7 +360,6 @@
 				position : maps
 			}).setMap(map);
 			*/
-
 			//마커 찍기를 함수화
 			function displayMarker(place){
 				//미리 띄워진 마커를 삭제한다음에 마커를 새로띄운다
