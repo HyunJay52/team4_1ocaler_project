@@ -87,6 +87,10 @@ ul li{
 				location.href="myInfoCheck";
 			}else if($(this).text() == '충전하기'){
 				location.href="load";
+			}else if($(this).text() == '배송내역'){
+				location.href="delivery";
+			}else if($(this).text() == '마이딜'){
+				location.href="myDeal";
 			}
 		});
 		

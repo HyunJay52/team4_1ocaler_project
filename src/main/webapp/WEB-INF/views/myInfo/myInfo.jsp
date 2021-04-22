@@ -6,13 +6,14 @@
 	overflow:auto;
 	width:1300px;
 }
-#container{
-	width:1000px;
-	margin:20px 185px;
-}
+	.mainContainer{
+		width:1000px;
+		margin:50px 185px;
+		
+	}
 #basicInfo, #detailInfo{
 	background-color:#fff;
-	width:490px;
+	width:480px;
 	height:920px;
 	margin-bottom:20px;
 	padding:20px 30px;
@@ -199,7 +200,7 @@ hr{
 </script>
 <div class="body">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div id="container">
+	<div class="mainContainer">
 	
 		<h2>내 정보</h2>
 		<div id="basicInfo">

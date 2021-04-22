@@ -14,26 +14,27 @@
 	.smlFnt {
 		font-size: 13px;
 	}
-	#container{
+	.mainContainer{
 		width:1000px;
 		margin:50px 185px;
 		
 	}
 	#top{
+		width:970px;
 		overflow:auto;
 		padding:0 40px;
 	}
-	#loadForm{
+	#loadArea{
 		width:500px;
 		height:300px;
 		float:left;
 	}
-	#loadForm>form>ul>li{
+	#loadArea>form>ul>li{
 		float:left;
 		width:25%;
 		margin:20px 0;
 	}
-	#loadForm>form>input:nth-child(1){
+	#loadArea>form>input:nth-child(1){
 		width:100%;
 		height:50px;
 		padding-left:10px;
@@ -156,19 +157,23 @@
 		var nowMoney = 100000;
 		setMoney(nowMoney); //현제 포인트 세팅
 		//충전금액 버튼 선택시
-		var evtMoney = nowMoney;
-		$("#loadForm>form>ul>li input").click(function(){
+		var firstMoney = nowMoney;
+		setMoney(0);
+		$("#load").val(0);
+		$("#loadArea>form>ul>li input").click(function(){
 			var charge = parseInt($(this).attr("title"));
-			evtMoney += charge;
-			$("#load").val(evtMoney);
-			
-			setMoney(evtMoney);
+			var nowCharge = parseInt($("#load").val());
+			nowCharge += charge;
+			$("#load").val(nowCharge);
+			setMoney(nowCharge);
 		});
 		
 		//충전후 잔액 세팅
+		var myMoney = 0;
 		function setMoney(money){
-			var chargeMoney = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			$("#loadMoney").text(chargeMoney+"원");
+			var chargeMoney = money += firstMoney;
+			myMoney = chargeMoney;
+			$("#loadMoney").text(money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 		}
 		
 		//입력 이벤트 세팅
@@ -177,16 +182,20 @@
 			setMoney(charge);
 		});
 		
+		$("#loadFrom").on("submit", function(){
+			$("#myPoint").children().next().text(myMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+		});
+		
 	});
 </script>
 <div class="body">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div id="container">
+	<div class="mainContainer">
 	<h2>충전하기</h2>
 	<div id="top">
-		<div id="loadForm">
-			<form method="post" action="load">
-				<input type="text" id="load" name="load"/>
+		<div id="loadArea">
+			<form method="post" action="load" id="loadFrom">
+				<input type="text" id="load" name="load" class="lgFnt"/>
 				<span class="mdFnt">충전 후 잔액 :</span><span class="mdFnt" id="loadMoney"></span>
 				<ul>
 					<li><input type="button" class="btn commBtn mdFnt btn-block" title="10000" value="1 만원"/></li>
@@ -205,7 +214,7 @@
 		</div>
 		<div id="myPoint">
 			<h2>잔액</h2>
-			<h2 style="float:right">10,000원</h2>
+			<h2 style="float:right">100,000원</h2>
 		</div>
 	</div>	
 		<div id="loadList">

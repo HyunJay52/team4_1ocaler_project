@@ -13,12 +13,11 @@
 	position:relative;
 }
 
-#container{
-	width:1000px;
-	margin:50px 185px;
-	overflow:auto;
-	
-}
+	.mainContainer{
+		width:1000px;
+		margin:50px 185px;
+		
+	}
 #profile{
 	width:200px; height:370px; background-color:#fff; border:1px solid #ddd; float:left;
 }
@@ -148,7 +147,7 @@
 	
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	
-	<div id="container">
+	<div class="mainContainer">
 	
 		<div id="profile">
 			<ul>
@@ -169,7 +168,7 @@
 			</div>
 			<div id="myPoint">
 				<h2>잔액</h2>
-				<h2 style="float:right">10,000원</h2>
+				<h2 style="float:right">100,000원</h2>
 			</div>
 		</div>
 		<div id="waiting">
@@ -225,7 +224,7 @@
 					<td>2021.04.17</td>
 					<td><button class="btn btn-danger btn-block">승인하기</button></td>
 				</tr>
-				</tr>
+				<tr>
 					<tr>
 					<td>내글</td>
 					<td>서강대역</td>

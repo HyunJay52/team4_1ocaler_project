@@ -33,4 +33,14 @@ public class MyinfoController {
 	public String load() {
 		return "myInfo/load";
 	}
+	
+	@RequestMapping("/delivery")
+	public String delivery() {
+		return "myInfo/myDelivery";
+	}
+	
+	@RequestMapping("/myDeal")
+	public String myDeal() {
+		return "myInfo/myDeal";
+	}
 }
