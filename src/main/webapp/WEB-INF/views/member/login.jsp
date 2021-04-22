@@ -9,8 +9,6 @@
 <%
 	//로그인 세션 저장하기
 
-
-
 %>
 <style>
 	#loginContainer {
@@ -68,36 +66,44 @@
 	$(function(){
 		var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/); 
 		var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/); 
+		var regId=/^[a-zA-Z]{1}[a-zA-Z0-9]{5,11}$/;
 		var getName= RegExp(/^[가-힣]+$/); 
 		var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
 		
-		$("#login_section").submit(function(){
-			//로그인 상태 유지 확인
-			if($("checkbox").val()=='stay'){
-				alert("로그인 상태 유지합니다 ~");
-			}
-			
-			if($("#userid").val()===""){
-				alert("아이디를 입력해주세요.");
-				$("#userid").focus();
-				return false;
-			}
-			if($("#userpwd").val()===""){
-				alert("비밀번호를 입력해주세요.");
-				$("#userpwd").focus();
-				return false;
-			}
-			if(!getCheck.test($("#userid").val())){
-				alert("아이디 형식이 올바르지 않습니다.");
-				$("#userid").val("");
-				$("#userid").focus();
-				return false;
-			}
-			//로그인 하게 만들기 
-			if($("#userid").val()==="1234" && $("#userpwd").val()==="1234"){
-				alert("???")
-				return true;
-			}
+		$("#loginBtn").click(function(){
+			$("#login_section").submit(function(){
+				//로그인 상태 유지 확인
+				if($("checkbox").val()=='stay'){
+					alert("로그인 상태 유지합니다 ~");
+				}
+				if($("#userid").val()===""){
+					alert("아이디를 입력해주세요.");
+					$("#userid").focus();
+					return false;
+				}
+				if(!regId.test($("#userid").val())){
+					alert("아이디 형식이 올바르지 않습니다.");
+					$("#userid").val("");
+					$("#userid").focus();
+					return false;
+				}
+				
+				if($("#userpwd").val()===""){
+					alert("비밀번호를 입력해주세요.");
+					$("#userpwd").focus();
+					return false;
+				}
+				
+				//로그인 하게 만들기 
+				if($("#userid").val()==="1234" && $("#userpwd").val()==="1234"){
+					alert("???")
+					return true;
+				}
+			});
+		});
+		
+		$("#signupBtn").click(function(){
+			location.href="joinMember";
 		});
 	});
 	
@@ -109,11 +115,11 @@
 		<span class="lgFnt" >로그인</span>
 		<form method="post" action="backHome"> <!-- loginConfrim -->
 			<ul>
-				<li><input type="text" name="userid" id="userid" tabindex="1" placeholder=" 아이디를 입력해주세요" class="inputSize"/></li>
-				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호를 입력해주세요" class="inputSize"/></li>
+				<li><input type="text" name="userid" id="userid" tabindex="1" placeholder=" 아이디" class="inputSize"/></li>
+				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
 				<li class="cbSize"><input type="checkbox" value="stay" tabindex="3"/>&nbsp;<span class="smlFnt">로그인 상태 유지</span></li>
-				<li><button class="btn commBtn lgBtn" tabindex="4">로그인</button></li>
-				<li><button class="btn commBtn lgBtn" tabindex="5">회원가입</button></li>
+				<li><button id="loginBtn" class="btn commBtn lgBtn" tabindex="4" >로그인</button></li>
+				<li><button type="button" id="signupBtn" class="btn commBtn lgBtn" tabindex="5" >회원가입</button></li>
 				<li><a href="#" class="smlFnt lgA">아이디 | 비밀번호찾기</a></li>
 			</ul>
 		</form>
@@ -129,7 +135,7 @@
 						clientId: "z8OW_3nHBQfN6ohXsT0H",
 						callbackUrl: "http://localhost:9090/1ocaler/loginCallback",
 						isPopup: false, /* 팝업을 통한 연동처리 여부 */
-						loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
+						loginButton: {color: "green", type: 1, height: 60} /* 로그인 버튼의 타입을 지정 */
 					}
 			);
 			/* 설정정보를 초기화하고 연동을 준비 */
