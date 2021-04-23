@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commu/communityStyle.css"/>
+
+<%@ page session="true" %>
+
+<script>
+
+	
+</script>
+
+<style>
+
+</style>
+
+
+<div id="commuMain">
+			<div id="commutop" >
+				<span><a href="#">로컬 커뮤니티 &nbsp;</a></span>
+				 &nbsp;|&nbsp;
+				 <span>&nbsp;<a href="#">쓱삭 레시피&nbsp;</a></span>
+				 &nbsp;|&nbsp;
+				 <span>&nbsp;<a href="#">자유게시판</a></span>
+			</div>
+
+</div>			
