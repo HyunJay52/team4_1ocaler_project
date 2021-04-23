@@ -1,42 +1,63 @@
 @charset "UTF-8";
-.main{
-	font-family:"nsr";
-	margin:0 auto;
-	width:1300px;
-}
-.statis{ /*ul style*/
-	margin:0 auto;
-	width:100%;
-	overflow:auto;
-	list-style-type:none;
-	background-color:rgb(252,252,254);
+body{font-family:"nsr";}
+#main{
+		margin:0 auto;
+		padding-top:30px;
+		width:1300px;
 	}
-.statis>li{
-	margin-top:10px;
-	margin-bottom:10px;
-	float:left;
-	width:20%;
-	color:#3f1785;
-	font-family:"nsrb";
-	font-size:16px;
-	text-align: center;
+	.statis{ /*ul style*/
+		margin:0 auto;padding:0;
+		width:100%;
+		float:left;
+		list-style-type:none;
+		background-color:rgb(252,252,254);
+		}
+	.statis>li{margin-left:6px;margin-top:10px;margin-bottom:10px;
+		padding:0;
+		float:left;
+		width:247px;
+		color:#3f1785;
+		font-weight:bold;
 	}
-.statis div{/*수치*/
-	font-family:"nsreb";
-	font-size:32px;
-	color:#3f1785;
-	border-right:4px solid rgb(219,214,239);
+	.statis div{/*수치*/
+		font-size:40px;
+		color:#3f1785;
+		border-right:4px solid rgb(219,214,239);
 	}
-.statis li:last-child>div{
-	border:none;
-}
-.statis b{/*통계숫자*/}
-/*검색 form*/
-#memFrm{
-	text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
+	.statis li>div:last-child{
+		background-color:yellow;
+	}
+	.statis b{/*통계숫자*/
+	}
+	form{
+		padding:20px 0 20px 0;
+		width:100%;
+		text-align:center;
+		}
+	select{
+		width:150px;/*너비설정*/
+		padding:10px;/*여백설정*/
+		font-family: inherit;/*폰트상속*/
+	}
 	
+	input[type="text"]{/*텍스트 필드 css*/
+		width:300px;/*너비설정*/
+		padding:5px;/*여백설정*/
+		font-family: inherit;/*폰트상속*/
+	}
+	input[type="submit"]{
+		width:150px;/*너비설정*/
+		padding:7px;/*여백설정 */
+		font-family: inherit;/*폰트상속*/
+	}
+	input[type="button"]{
+		padding:3px;
+	}
+	
+	.commBtn {
+		width: 90px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+	}
 	
 	

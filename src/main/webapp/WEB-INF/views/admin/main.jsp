@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/main.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
-<div class="main">
+<div id="main">
 	<div class="title">일일현황</div>
 	<div>
 		<div class="cir1">신규회원<br/><b>25</b></div>

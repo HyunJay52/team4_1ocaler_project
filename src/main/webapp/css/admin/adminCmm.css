@@ -1,17 +1,4 @@
 @charset "UTF-8";
-/*메인 div class*/
-.main{
-	font-family:"nsr";
-	margin:0 auto;
-	width:1300px;
-}
-/*제목 타이틀*/
-.title{
-	font-family:"nsreb";
-	font-size:32px;
-	margin-top:20px;
-	margin-bottom:20px;
-}
 .tablea {margin:0 auto;padding:0;font-size:13px;width:100%;}
 .tablea tr{/*테이블 목록*/
    border-bottom:1px solid rgb(227,227,227); 
