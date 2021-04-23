@@ -65,41 +65,7 @@
 <body>
 <div id="header">
 	<div id="logo"><a href="backHome"><img src="common/logo_deep_pur.png"/></a></div>
-	<ul id="navi">
-		<li class="resquick_content"><a href="#">ABOUT</a>
-			<ul>
-				<li><a href="#">소개</a></li>
-				<li><a href="#">오시는길</a></li>
-			</ul>
-		</li>
-		<li class="resquick_content"><a href="selBard">우리직구</a>
-			<ul>
-				<li><a href="#">착한발견</a></li>
-				<li><a href="#">동네직구</a></li>
-			</ul>
-		</li>
-		<li class="resquick_content"><a href="groupPage">같이가치</a>
-			<ul>
-				<li><a href="groupPage">가치가장</a></li>
-				<li><a href="groupPage">한끼미식회</a></li>
-			</ul>
-		</li>
-		<li class="resquick_content"><a href="commuMain">커뮤니티</a>
-			<ul>
-				<li><a href="#">우리동네 이야기</a></li>
-				<li><a href="#">쓱싹레시피</a></li>
-				<li><a href="#">자유자게</a></li>
-			</ul>
-		</li>
-		<li class="resquick_content"><a href="#">고객센터</a>
-			<ul>
-				<li><a href="#">자주하는 질문</a></li>
-				<li><a href="#">1:1 문의하기</a></li>
-				<li><a href="#">신고하기</a></li>
-			</ul>
-		</li>
-	</ul>
-	<c:if test="${logId!=admin }">
+	<c:if test="${logId==admin }">
 		<ul id="navi">
 			<li class="resquick_content"><a href="main">HOME</a>
 				<ul>
@@ -132,9 +98,7 @@
 			</li>
 		</ul>
 	</c:if>
-	
-	
-	<c:if test="${logId==admin }">
+	<c:if test="${logId!=admin }">
 		<ul id="navi">
 			<li class="resquick_content"><a href="#">ABOUT</a>
 				<ul>
