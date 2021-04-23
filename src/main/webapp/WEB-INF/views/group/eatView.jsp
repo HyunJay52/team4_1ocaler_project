@@ -47,24 +47,22 @@
 	#groupSearchFrm>input:nth-of-type(3){    height: 32px;   width: 270px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 15px 0px;}
     #groupSearchFrm>input:nth-of-type(4){    display: block;  height: 32px;   float: right;   margin: 15px 15px 15px 0px;}
 	/*groupList*/
-/* 	#groupList{overflow:auto; height:640px;}
- 	#groupList>li{float:left; height:35px; line-height:38px; width:100%; padding-left:15px;}
-	#groupList>li:nth-child(6n+1){font-size:22px; margin-top: 5px;}
-	#groupList>li:nth-child(6n+1)>img{height:24px; margin-right:20px;} 
-	#groupList>li:nth-child(6n+1)>img:nth-child(3){height:24px; margin-top: 5.5px; display:block; float:right} 
-	#groupList>li:nth-child(6n+2){padding:0px; text-align:center; font-size:20px;}
-	#groupList>li:nth-child(6n+6){border-bottom:1px solid #d9d9d9; font-size:13px; overflow:hidden;}
-	#groupList>li:not(:nth-child(6n+1))>img{margin:0 25px;}  */
 	#groupList{overflow:auto; height:640px;}
-/* 	#groupList>li{border-bottom:1px solid gray;} */
+	#groupList>li{border:1px solid gray;}
 	#groupList div:first-child{overflow:auto; position:relative;}
- 	#groupList div:first-child>span{display:block; float:left; font-size:16px; margin:15px 0px;}
-	#groupList div:first-child>img:first-child{display:block; float:left; height:16px; margin: 19px 15px;}
-	#groupList div:first-child>img:nth-child(3){position:absolute; right:30px; height:30px; margin: 12px 0;}
-	#groupList span{display:block; text-align:center; font-size:22px;}
+ 	#groupList div:first-child>span{display:block; float:left; font-size:16px; margin:7px 0px;}
+	#groupList div:first-child>img:first-child{display:block; float:left; height:16px; margin: 10px 15px;}
+	#groupList span{display:block; text-align:center; font-size:22px; margin-bottom: 5px;}
 	#groupList div:not(:first-child)>img{margin:5px 40px;}
 	#groupList div:nth-child(6){font-size: 13px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px; padding-right: 15px; margin-top:3px; margin-bottom:5px;}
+
+	/*groupList-like btn*/
+	input[type=checkbox]{ display:none; }
+ 	#groupList div>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
+	#groupList div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
+	#groupList div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
 	
+	#groupList a:hover{color:#000; text-decoration:none;}
 	
 	
 	/*paging*/
@@ -74,8 +72,6 @@
 	#page>li:last-child{width:50px; border-top-right-radius:8px; border-bottom-right-radius:8px}
 </style>
 <script>	
-		var inner = window.innerHeight;
-		console.log(inner);
 		$(function(){
 			//==============================================================================
 			$("#showFrm").css('top',90);
@@ -173,14 +169,28 @@
 			//글쓰기폼end=====================================================================================	
 			
 			//검색=====================================================================================
-				$("#groupSearchFrm").submit(()=>{
-					if($("#searchWord").val()==null || $("#searchWord").val()=='' ){
-						alert('검색어를 입력해주세요');
-						return false;
-					}
-					return ture;
-				});
-			//
+			$("#groupSearchFrm").submit(()=>{
+				if($("#searchWord").val()==null || $("#searchWord").val()=='' ){
+					alert('검색어를 입력해주세요');
+					return false;
+				}
+				return ture;
+			});
+			//================================================================================================
+				
+			//좋아요=================================================================================================
+				
+		
+			$("#groupList div:first-child>input[name=num]").on('click',function(){
+				if($(this).is(':checked')){
+					console.log($(this).val());
+				}else{
+					console.log($(this).val());
+				}
+			});
+			
+				
+			//=================================================================================================
 		})
 </script>
 
@@ -231,13 +241,11 @@
 		
 
 		<ul id="groupList">
-	   		<%-- <li><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>같이먹어요(up_cate)</span><img src="<%=request.getContextPath()%>/img/groupImg/likeE.png"/></li>
-			--%>
 			<c:forEach var="i" begin="1" end="5">
-				<li>
+				<a href=""><li>
 					<div>
-						<img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>같이먹어요</span><img src="<%=request.getContextPath()%>/img/groupImg/likeE.png"/>
-						<input type="checkbox" />	
+						<img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>같이먹어요</span>
+						<input type="checkbox" name="num" id="like${i }" value="${i }"/><label for="like${i }"></label>
 					</div>
 					<span>오늘 점심 같이 드실분 있나요 [솥밥]</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>2021-04-21 오후 6시 29분</div><!-- g_date, g_time 값을 가지고 온다. -->
@@ -245,9 +253,8 @@
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>1 / 3명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
 					<div>#아 #하기 #시르다 #아 #하기 #시르다 #아 #하기 #시르다 #아 #하기 #시르다 </div><!-- 태그값을 가지고온다. -->
 					<hr/>
-				</li>
-			</c:forEach>	
-			
+				</li></a>
+			</c:forEach>		
 		</ul>
 		
 		
