@@ -13,8 +13,6 @@ import com.team4.localer.vo.GroupVO;
 @Controller
 public class GroupController {
 
-	@Autowired
-	SqlSession sqlSession;
 	
 	GroupVO vo = new GroupVO();
 	

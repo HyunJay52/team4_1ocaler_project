@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CommuController {
-	@RequestMapping("/commuMain")
-	public String commuMain() {
-		return "community/commuMain";
-	}
+//	@RequestMapping("/commuMain")
+//	public String commuMain() {
+//		return "community/commuMain";
+//	}
 }
