@@ -19,6 +19,7 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/inc/**" location="/inc/" />
 	<resources mapping="/common/**" location="/common/" />
+	<resources mapping="/sel_img/**" location="/sel_img/" />
 	<resources mapping="/font/**" location="/font/"/>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -28,34 +29,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.team4.localer" />
-	
-	<!-- setting oralcle server loaction, id, pwd, driver etc -->
-	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<beans:property name="username" value="c##scott"/>
-		<beans:property name="password" value="tiger"/>
-	</beans:bean>
-	
-	<!-- setting Commons DBCP 1.4: JdbcpTemplate object 
-		 use dataSource
-	-->
-	<beans:bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<beans:property name="dataSource" ref="dataSource" /> <!-- Di = name is in Jdbcp, ref="DriverManager" -->
-	</beans:bean>
-	
-	<!-- Mybatis 객체 생성 -->
-	<beans:bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-	<beans:property name="dataSource" ref="dataSource"/>
-	<beans:property name="mapperLocations">
-		<beans:list>
-			<beans:value>classpath:com/team4/localer/mapper/*.xml</beans:value>
-		</beans:list>
-	</beans:property>
-
-	</beans:bean>
-	<beans:bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
-	</beans:bean>
 	
 </beans:beans>
