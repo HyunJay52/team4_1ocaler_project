@@ -9,4 +9,8 @@ public class CommuController {
 	public String commuMain() {
 		return "community/commuMain";
 	}
+	@RequestMapping("/commuBoard")
+	public String commuBoard() {
+		return "community/commuBoard";
+	}
 }
