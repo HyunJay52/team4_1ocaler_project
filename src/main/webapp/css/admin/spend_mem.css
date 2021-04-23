@@ -1,0 +1,67 @@
+@charset "UTF-8";
+body{
+	font-family:"nsr";
+	}
+#main{
+	margin:0 auto; 
+	padding:0;
+	padding-top:30px;
+	overflow:auto;
+	width:1300px;
+	
+}
+.t_spend{
+	width:48%;
+	margin-left:0;
+	margin-right:0;
+	margin-top:20px;
+	margin-bottom:20px;
+	float:left;
+	font-size:22px;
+}
+.t_spend tr{
+	text-align:center;
+    height:80px;
+    border:1px solid #ddd;
+}
+.t_spend td{
+	border-right:1px solid #ddd;
+}
+.t_spend tr:nth-child(2n+1){
+	background-color:rgb(204,181,242,0.3);
+}
+.t_spend tr:last-child{
+	background-color:#fff;
+	text-align:right;
+	font-family:"nsrb";
+	padding-right:20px;
+}
+/*차트 부분*/
+#chart_div{
+	float:left;
+	margin-left:0;
+	margin-right:0;
+	margin-top:20px;
+	margin-bottom:20px;
+	width:48%;
+	height:400px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

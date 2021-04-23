@@ -272,6 +272,7 @@
 			<li><a href="#"><img src="img/indexImg/food5.jpeg"/></a></li>
 		</ul>
 	</div>
+	<a href="info">내정보페이지</a>
 </div>
 
 <%@ include file="/inc/footer.jspf" %>
