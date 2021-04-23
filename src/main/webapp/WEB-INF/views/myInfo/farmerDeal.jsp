@@ -18,28 +18,28 @@
 	.smlFnt {
 		font-size: 13px;
 	}
-	#myDealInfo{
-		width:702px;
+	.dealInfo{
+		width:704px;
 		height:202px;
 		border:1px solid #ddd;
 	}
-	#myDealTop{
+	.dealTop{
 		padding:50px;
 	}
-	#myDealBottom{position:relative;}
-	#myDealTop, #myDealBottom{
+	.dealBottom{position:relative;}
+	.dealTop, .dealBottom{
 		width:900px;
 	}
-	#infoList>ul>li{
+	.infoList>ul>li{
 		float:left; width:20%; height:40px;
 	}
 
-	#myDealInfo img{
+	.dealInfo img{
 		width:200px;
 		height:200px;
 		float:left;
 	}
-	#infoList{
+	.infoList{
 		width:460px;
 		height:150px;
 		float:left;
@@ -66,8 +66,8 @@
 	.date{ 
 		width:170px; height:50px; background-color:#fff; padding:0 10px; position:relative; margin:0px 30px 0px 50px; border:none;
 	}
-	#prev{float:left}
-	#next{float:right}
+	.prev{float:left}
+	.next{float:right}
 	.dayBtn{font-weight:bold; font-size:26px; margin:0 2px; border:none; background-color:#fff;}
 	#load{
 		margin:10px 0;	
@@ -104,9 +104,6 @@
 		text-align:center;
 		border:2px solid black;
    }
-   #myDealToggle{
-		float:right; margin:10px 40px 0 0;
-   }
 </style>
 <script>
 	$(function(){
@@ -115,10 +112,10 @@
 		var toYear = date.getFullYear();
 		var toMonth = date.getMonth()+1;
 		
-		$("#setMonth").text(toMonth+"월");
+		$(".setMonth").text(toMonth+"월");
 		
 		//달력 날짜 선택시 이벤트
-		$("#date").on('change', function(){
+		$(".date").on('change', function(){
 			var monthArr = $(this).val().split("-");
 			
 			toYear = monthArr[0];
@@ -129,7 +126,7 @@
 		
 		//월 세팅
 		function setMonth(toYear, toMonth){
-			$("#setMonth").text(toMonth+"월");
+			$(".setMonth").text(toMonth+"월");
 			
 			console.log(toYear);
 			console.log(toMonth);
@@ -138,7 +135,7 @@
 		}
 		
 		//이전날짜
-		$("#prev").click(function(){
+		$(".prev").click(function(){
 			toMonth--;
 			if(toMonth == 0){
 				toMonth = 12;
@@ -151,7 +148,7 @@
 		});
 		
 		//다음날짜
-		$("#next").click(function(){
+		$(".next").click(function(){
 			toMonth++;
 			if(toMonth == 13){
 				toMonth = 1;
@@ -169,10 +166,10 @@
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="mainContainer">
 		<h3>파머 직거래</h3>
-		<div id="myDealTop">
-			<div id="myDealInfo">
+		<div class="dealTop">
+			<div class="dealInfo">
 				<img src="img/myInfo/saver.gif"/>
-				<div id="infoList">
+				<div class="infoList">
 					<h3>김자바</h3>
 					<ul>
 						<li>참여(10)</li>
@@ -188,15 +185,15 @@
 				<input type="button" class="btn dealBtn commBtn btn-outline-dark" value="Info"/>
 			</div>
 		</div>
-		   <div id="myDealBottom">
-			<div id="myDealDateForm">
-				<input type="date" id="date" min="2021-01-01" max="2021-05-31" class="date"/>
-				<div class="dateFrm"><button class="dayBtn" id="prev">《</button><button id="setMonth" class="dayBtn mdFnt"></button><button class="dayBtn" id="next">》</button></div>
+		   <div class="dealBottom">
+			<div class="dealDateForm">
+				<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
+				<div class="dateFrm"><button class="dayBtn prev">《</button><button class="setMonth" class="dayBtn mdFnt"></button><button class="dayBtn next">》</button></div>
 				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
 				<input type="date" min="2021-01-01" max="2021-05-31"/>
 				
 			</div>
-			<table class="table2" id="myDealTbl">
+			<table class="table2" id="farmerDealTbl">
 				<tr>
 					<td>날짜</td>
 					<td>제목</td>
@@ -223,6 +220,31 @@
 					<td>리뷰작성</td>
 				</tr>
 			</table>
+		</div>
+	</div>
+	<div class="modal fade" id="farmerDealMd">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header" id="farmerDealHeader">
+				<h4 class="modal-title"></h4>
+
+				</div>
+				<div class="modal-body" id="farmerDealList">
+					<ul>
+						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
+						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>
+						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn">또 참여할래요</button></li>
+						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn">음, 글쎄요</button></li>
+						<li>
+							<textarea class="dealTextarea mdFnt" name="review" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
+						</li>
+						<li><input type="file" name="file"/></li>
+						<li><button class="btn btn-outline-dark btn-lg" data-dismiss="modal">다음에 할게요</button>
+							<button class="btn btn-outline-dark btn-lg">작성완료</button>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

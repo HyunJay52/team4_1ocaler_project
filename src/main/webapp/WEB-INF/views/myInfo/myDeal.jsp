@@ -19,7 +19,7 @@
 		font-size: 13px;
 	}
 	#myDealInfo{
-		width:702px;
+		width:704px;
 		height:202px;
 		border:1px solid #ddd;
 	}
@@ -107,6 +107,56 @@
    #myDealToggle{
 		float:right; margin:10px 40px 0 0;
    }
+   #myDealHeader{
+		text-align:center;
+   }
+  .modal-dialog{
+		margin-top:20%;
+	}
+	.modal-content{
+		height:240px;
+	}
+	.modal-body{
+		text-align:center;
+		padding:40px;
+	}
+	#myDealList>ul>li{
+		float:left; width:50%; position:relative;
+	}
+	#myDealList>ul>li:nth-child(3), #myDealList>ul>li:nth-child(4){
+		position:absolute;	
+		color:#fff;
+		top:82px;
+		text-align:center;
+		font-weight:bold;
+		width:45%;
+	}
+	#myDealList>ul>li:nth-child(4){
+		left:380px; 
+		width:50%;
+		color:#3f1785;
+	}
+	#myDealList>ul>li:nth-child(5), #myDealList>ul>li:last-child{
+		width:100%;
+	}
+	#myDealList>ul>li:nth-child(6){
+		width:100%; text-align:left;
+	}
+	#myDealList>ul>li:last-child{
+		text-align:right;
+	}
+	.modal-title{
+		margin:0 auto;
+	}
+	.modal-body{
+		background-color:#fff;
+	}
+	.dealTextarea{
+		width:100%; height:300px; margin:20px 0;
+	}
+	.imgBtn{
+		color:black;
+	}
 </style>
 <script>
 	$(function(){
@@ -180,7 +230,7 @@
 
 		//리스트 세팅
 		function setList(){
-			var item = ['회원1','회원2','회원3'];
+			var item = ['김회원','박회원','최회원'];
 
 			for(var i = 0; i < 3; i++){
 				var tag = "<tr>"; 
@@ -213,7 +263,23 @@
 			
 		});
 		
-		$(".myDealMem>ul>li>button").click()
+		$(".myDealMem>ul>li>button").click(function(){
+			var title = $(this).text()+"님과의 거래가 어떠셨나요 ?";
+			$(".modal-title").text(title);
+			console.log($(this).text());
+			
+		});
+		
+		//모달 닫힘 이벤트
+		$("#myDealMd").on('hidden.bs.modal', function(e){
+			$("#myDealList textarea").val("");
+		});
+		
+		//리뷰 클릭이벤트
+		$(".imgBtn").click(function(){
+			$(".imgBtn").attr('value' , null);
+			$(this).attr('value', '1');
+		});
 		
 	});
 </script>
@@ -259,11 +325,10 @@
 					<td>회원선택</td>
 					<td>리뷰상태</td>
 				</tr>
-			
 				<tr>
 					<td>2021.04.20</td>
 					<td>마포역 3kg 세제2+1 같이 사실 분?</td>
-					<td><a href="#">회원4</a></td>
+					<td><button class="btn commBtn btn-block">회원4</button></td>
 					<td>1/3완료</td>
 				</tr>
 			</table>
@@ -274,15 +339,22 @@
 			<div class="modal-content">
 				<div class="modal-header" id="myDealHeader">
 				<h4 class="modal-title"></h4>
-				
-						
-						 	
+
 				</div>
 				<div class="modal-body" id="myDealList">
-					
-				</div>
-				<div class="modal-footer">
-					<button data-dismiss="modal" class="btn btn-secondary">Close</button>
+					<ul>
+						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
+						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>
+						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn">또 참여할래요</button></li>
+						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn">음, 글쎄요</button></li>
+						<li>
+							<textarea class="dealTextarea mdFnt" name="review" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
+						</li>
+						<li><input type="file" name="file"/></li>
+						<li><button class="btn btn-outline-dark btn-lg" data-dismiss="modal">다음에 할게요</button>
+							<button class="btn btn-outline-dark btn-lg">작성완료</button>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
