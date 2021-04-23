@@ -1,0 +1,104 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+#sideMenu{
+	padding:10px; 
+	float:left;
+	width:150px;
+	height:100%;
+	background-color:#705abf;
+	text-align:center;
+
+}
+#sideMenu>h1{
+	color:#fff;
+}
+.btnul{
+	background-color:#fff;
+	overflow:auto;
+	border:1px solid black;
+}
+ul li{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+#sideMenu a:active, #sideMenu a:link, #sideMenu a:visited{
+	text-decoration: none;
+	font-family: 'Nanum Gothic', sans-serif;
+}    
+#sideMenu a:hover {
+	font-weight: normal;
+}
+.btn-outline-dark{border:1px solid #571fb8;}
+.btn-outline-dark:hover{border:1px solid #fff; background-color:#571fb8;}
+
+</style>
+<script>
+	var menuTitle = ['My Info','참여내역','판매관리'];
+	var subMenu = [ ['내 정보','충전하기','배송내역'],
+					['회원간 거래','파머 직거래','리뷰관리','나의 활동'],
+					['판매자 정보','상품관리','판매/결제관리','배송관리','통계']		
+				  ]
+	
+	$(function(){
+		
+		//메뉴 세팅 function
+		function setMenu(){
+			var tag = "<h2><a href='info'>My Page</a></h2>";
+			menuTitle.map(function(value, index){
+				tag += "<button id='menuBtn"+index+"' class='btn btn-light btn-outline-dark btn-block' data-toggle='collapse' data-target='#menu"+index+"'>"+value+"</button>";
+				tag += "<div id='menu"+index+"' class='collape in'>";
+				tag += "<ul class='btnul'>";
+				subMenu[index].map(function(value2, index2){
+					tag += "<li><button class='btn btn-light btn-block'>"+value2+"</button></li>";	
+	
+				});
+				tag+= "</ul></div>";
+				
+			});
+			$("#sideMenu").html(tag);
+		}	
+		
+		//토글 버튼 이벤트(보류함)
+		var menuOpen = true;
+		$("#toggle").click(function(){
+			if(menuOpen == true){
+				$("#sideMenu").css('left', '-150px');
+				$("#toggle").css('left', '-150px');
+				
+				menuOpen = false;
+			}else{
+				$("#sideMenu").css('left', '0px');
+				$("#toggle").css('left', '0px');
+				
+				menuOpen = true;
+			}
+			
+		});
+		
+		//사이드 메뉴 클릭 이벤트처리
+		$(document).on('click', '#sideMenu>div>ul>li>button', function(){
+			$("#sideMenu>div>ul>li>button").css('font-weight', 'normal');
+			$(this).css('font-weight','bold');
+			console.log($(this).text());
+			
+			if($(this).text() == '내 정보'){
+				location.href="myInfoCheck";
+			}else if($(this).text() == '충전하기'){
+				location.href="load";
+			}else if($(this).text() == '배송내역'){
+				location.href="delivery";
+			}else if($(this).text() == '회원간 거래'){
+				location.href="myDeal";
+			}else if($(this).text() == '파머 직거래'){
+				location.href="farmerDeal";
+			}
+		});
+		
+		
+		//메뉴 세팅
+		setMenu();
+	});
+</script>
+	<div id="sideMenu"></div>

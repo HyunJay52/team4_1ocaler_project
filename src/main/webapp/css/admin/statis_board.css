@@ -1,0 +1,91 @@
+@charset "UTF-8";
+body{
+	font-family:"nsr";
+	}
+#main{
+	margin:0 auto; 
+	padding:0;
+	padding-top:30px;
+	overflow:auto;
+	width:1300px;
+	
+}
+.btitle{
+	font-family:"nsreb";
+	text-align:center;
+	font-size:40px;
+	margin-top:30px;
+	margin-bottom:20px;
+	}
+
+.statis{ /*ul style*/
+		margin:10 auto;
+		padding:0;
+		width:100%;
+		list-style-type:none;
+		background-color:rgb(252,252,254);
+		font-family:"nsrb";
+		font-size:32px;
+		margin-bottom:30px;
+		overflow:auto;
+		}
+.statis>li{
+	margin:10px auto;
+	padding:0;
+	width:25%;
+	color:#3f1785;
+	float:left;
+	text-align:center;
+}
+.statis>li:nth-child(1){
+	margin-left:25%;
+}
+.statis>li:nth-child(2){/*중간선긋기*/
+	border-left:3px solid rgb(63,23,133,0.7);
+	
+}
+.statis div{
+	font-family:"nsreb";
+	font-size:50px;
+}
+/*그래프 부분*/
+#chart_div{
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	margin-bottom:20px;
+	width:1200px;
+	height:400px;
+}
+
+input[type="button"],
+input[type="date"]{
+	margin:20px;
+}
+input[type="date"]{
+	width:150px;/*너비설정*/
+	padding:6px;/*여백설정*/
+	border:1px solid #3f1785;
+	font-family: inherit;/*폰트상속*/
+}
+select{
+	margin-left:20px;
+}
+table{
+	margin-bottom:20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
