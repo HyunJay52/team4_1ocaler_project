@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AdminController {
-	//주석달아보추가 주석
+	//주석달아보기
 	@RequestMapping("/main")//관리자 메인페이지 
 	public ModelAndView main(HttpSession session) {
 		session.setAttribute("logId", "admin");
