@@ -45,6 +45,32 @@
 	#groupSearchFrm>select{height: 32px; width: 100px; margin: 15px 10px 15px 15px; border: 1px solid #d9d9d9; border-radius: 5px;}	    
 	#groupSearchFrm>input:nth-of-type(3){    height: 32px;   width: 270px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 15px 0px;}
     #groupSearchFrm>input:nth-of-type(4){    display: block;  height: 32px;   float: right;   margin: 15px 15px 15px 0px;}
+	/*groupList*/
+	#groupList{overflow:auto; height:640px;}
+	#groupList>li{border:1px solid gray;}
+	#groupList div:first-child{overflow:auto; position:relative;}
+ 	#groupList div:first-child>span{display:block; float:left; font-size:16px; margin:7px 0px;}
+	#groupList div:first-child>img:first-child{display:block; float:left; height:16px; margin: 10px 15px;}
+	#groupList span{display:block; text-align:center; font-size:22px; margin-bottom: 5px;}
+	#groupList div:not(:first-child)>img{margin:5px 40px;}
+	#groupList div:nth-child(6){font-size: 13px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px; padding-right: 15px; margin-top:3px; margin-bottom:5px;}
+
+	/*groupList-like btn*/
+	input[type=checkbox]{ display:none; }
+ 	#groupList div>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
+	#groupList div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
+	#groupList div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
+	
+	#groupList a:hover{color:#000; text-decoration:none;}
+
+	/*paging*/
+	#page{text-align:center}
+	#page>li{display:inline-block; border:1px solid #d9d9d9; width:35px; height:40px; line-height:40px; margin:19px auto;}
+	#page>li:first-child{width:50px; border-top-left-radius:8px; border-bottom-left-radius:8px }
+	#page>li:last-child{width:50px; border-top-right-radius:8px; border-bottom-right-radius:8px}
+
+
+
 </style>
 
 <script>	
@@ -136,10 +162,35 @@
 			}
 			//==========================가치가자 한끼미식회 호버endddddddd==================================
 				
+						//글쓰기폼=====================================================================================
 			$("#WriteForm").click(function(){
-				location.href="WriteForm?g_loc=${vo.g_loc}&up_cate=가치가장";
+				location.href="WriteForm?g_loc=${vo.g_loc}&up_cate=한끼미식회";
 			});
+			//글쓰기폼end=====================================================================================	
+			
+			//검색=====================================================================================
+			$("#groupSearchFrm").submit(()=>{
+				if($("#searchWord").val()==null || $("#searchWord").val()=='' ){
+					alert('검색어를 입력해주세요');
+					return false;
+				}
+				return ture;
+			});
+			//================================================================================================
 				
+			//좋아요=================================================================================================
+				
+		
+			$("#groupList div:first-child>input[name=num]").on('click',function(){
+				if($(this).is(':checked')){
+					console.log($(this).val());
+				}else{
+					console.log($(this).val());
+				}
+			});
+			
+				
+			//=================================================================================================
 		})
 </script>
 </head>
@@ -192,16 +243,16 @@
 
 		<ul id="groupList">
 			<c:forEach var="i" begin="1" end="5">
-				<a href=""><li>
+				<a href="withPageView"><li>
 					<div>
-						<img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>같이먹어요</span>
+						<img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span>동네마트</span>
 						<input type="checkbox" name="num" id="like${i }" value="${i }"/><label for="like${i }"></label>
 					</div>
-					<span>오늘 점심 같이 드실분 있나요 [솥밥]</span>
+					<span>이마트 같이 토마토 사러가요</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>2021-04-21 오후 6시 29분</div><!-- g_date, g_time 값을 가지고 온다. -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소"/>가양역1번출구</div><!-- g_loc1 값을 가져온다. -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>1 / 3명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
-					<div>#아 #하기 #시르다 #아 #하기 #시르다 #아 #하기 #시르다 #아 #하기 #시르다 </div><!-- 태그값을 가지고온다. -->
+					<div>#토맛 #토마토 #토마토맛 #토</div><!-- 태그값을 가지고온다. -->
 					<hr/>
 				</li></a>
 			</c:forEach>		

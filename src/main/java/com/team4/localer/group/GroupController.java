@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class GroupController {
 
-	@Autowired
-	SqlSession sqlSession;
+//	@Autowired
+//	SqlSession sqlSession;
 	
 	@RequestMapping("/groupPage")
 	public String groupOpen() {
@@ -46,6 +46,27 @@ public class GroupController {
 		mav.setViewName("group/groupWriteForm");
 		return mav;
 	}
+	
+	@RequestMapping("/eatPageView")
+	public ModelAndView eatPageView(int no, String searchKey, String searchWord) {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		mav.setViewName("group/eatPageView");
+		return mav;
+	}
+	
+	
+	
+	@RequestMapping("/withPageView")
+	public ModelAndView withPageView(int no, String searchKey, String searchWord) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("group/withPageView");
+		return mav;
+	}
+	
+	
 	
 	
 }
