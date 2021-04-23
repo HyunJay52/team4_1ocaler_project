@@ -106,7 +106,7 @@
 <!-- 			<area shape="rect"  coords="235,404,297,444" href="#"  title="양천구"alt="양천구">	
 			<area shape="rect"  coords="292,531,356,562" href="#"  title="양천구"alt="양천구">  -->
 	
-		<area shape="rect"  coords="185,305,260,345" href="#"  title="강서구"alt="강서구"/>
+		<area shape="rect"  coords="185,305,260,345" href="commuBoard"  title="강서구"alt="강서구"/>
 		<area shape="rect"  coords="235,400,310,440" href="#"  title="양천구"alt="양천구"/>	
 		<area shape="rect"  coords="330,408,405,448" href="#"  title="영등포구"alt="영등포구"/>
 		<area shape="rect"  coords="412,445,487,485" href="#"  title="동작구"alt="동작구"/>	

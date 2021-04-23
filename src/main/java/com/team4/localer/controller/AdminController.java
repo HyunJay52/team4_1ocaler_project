@@ -65,7 +65,7 @@ public class AdminController {
 		return mav;
 	}
 	
-	
+		////////////여기는 지워야한다,,,ㅎ
 	@RequestMapping("/spend_sel")//판매관리
 	public ModelAndView spend_sel() {
 		ModelAndView mav = new ModelAndView();

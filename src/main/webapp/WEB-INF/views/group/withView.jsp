@@ -2,48 +2,75 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <style>
-	#header{display:none;}
-	body{overflow:hidden;}
-	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	
+	/*기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능*/
+	/*열고 닫기*/
 	#fold, #open{position:absolute; z-index:1;}	
 	#fold{background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
 	#open{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
+	/*버튼이벤트*/
+	.commBtn {	width: 90px; color: #3f1785; border: 1px solid #3f1785;}
+	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}	 
+	.commBtnWrite{width:75px;}
 	
+	/*폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼*/
+	#header{display:none;}
+	body{overflow:hidden;}
+	ul, li{ margin:0px; padding:0px; list-style-type:none;}
+	/*searchFrm*/
 	#searchFrm{position:absolute; top:20px; right:0px; z-index:1;}
 	#searchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
 	#searchFrm input[type=image]{display:block; height:48px;}
-	
-	
+	/*topFrm*/
 	#topFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
 	#topFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
 	#topFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
 	#topFrm img{width:30px; margin:9px 0px;}
 	#topFrm li:first-child>a>img{ margin-left:10px;}
 	#topFrm li:last-child>a>img{ margin-right:10px;}
-
+	/*showFrm*/
 	#showFrm{position:absolute; height:850px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
-	
 	#showTopMenu{overflow:auto;}
 	#showTopMenu>li{float:left; width:180px; padding: 10px 0px 10px 10px;}
 	#showTopMenu>li:nth-of-type(3){width:100px;}
 	#showTopMenu img{display:block; width:25px; float:left; margin-right:7px; padding-top:11px;}
 	#showTopMenu img[src*=dish]{display:none;} 
-	
 	#showTopMenu span{display:block;  height:45px; line-height:45px; float:left; font-size:22px;} 
 	#showTopMenu a{color:#000;}
 	#showTopMenu>li:first-child>div>a{color:#571fb8; font-weight:700}
 	#with{margin-left:32px;}
-	
 	#showTopMenu>li:first-child>div{overflow:auto; padding-left:15px;}
-	
 	#showTopMenu button{height:45px;}
- 
-	/*버튼이벤트*/
-	.commBtn {	width: 90px; color: #3f1785; border: 1px solid #3f1785;}
-	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}
-	 
-	 .commBtnWrite{width:75px;}
+ 	/*group검색폼*/
+	#groupSearchFrm>select{height: 32px; width: 100px; margin: 15px 10px 15px 15px; border: 1px solid #d9d9d9; border-radius: 5px;}	    
+	#groupSearchFrm>input:nth-of-type(3){    height: 32px;   width: 270px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 15px 0px;}
+    #groupSearchFrm>input:nth-of-type(4){    display: block;  height: 32px;   float: right;   margin: 15px 15px 15px 0px;}
+	/*groupList*/
+	#groupList{overflow:auto; height:640px;}
+	#groupList>li{border:1px solid gray;}
+	#groupList div:first-child{overflow:auto; position:relative;}
+ 	#groupList div:first-child>span{display:block; float:left; font-size:16px; margin:7px 0px;}
+	#groupList div:first-child>img:first-child{display:block; float:left; height:16px; margin: 10px 15px;}
+	#groupList span{display:block; text-align:center; font-size:22px; margin-bottom: 5px;}
+	#groupList div:not(:first-child)>img{margin:5px 40px;}
+	#groupList div:nth-child(6){font-size: 13px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px; padding-right: 15px; margin-top:3px; margin-bottom:5px;}
+
+	/*groupList-like btn*/
+	input[type=checkbox]{ display:none; }
+ 	#groupList div>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
+	#groupList div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
+	#groupList div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
+	
+	#groupList a:hover{color:#000; text-decoration:none;}
+
+	/*paging*/
+	#page{text-align:center}
+	#page>li{display:inline-block; border:1px solid #d9d9d9; width:35px; height:40px; line-height:40px; margin:19px auto;}
+	#page>li:first-child{width:50px; border-top-left-radius:8px; border-bottom-left-radius:8px }
+	#page>li:last-child{width:50px; border-top-right-radius:8px; border-bottom-right-radius:8px}
+
+
+
 </style>
 
 <script>	
@@ -135,10 +162,35 @@
 			}
 			//==========================가치가자 한끼미식회 호버endddddddd==================================
 				
+						//글쓰기폼=====================================================================================
 			$("#WriteForm").click(function(){
-				location.href="WriteForm?g_loc=${vo.g_loc}&up_cate=가치가장";
+				location.href="WriteForm?g_loc=${vo.g_loc}&up_cate=한끼미식회";
 			});
+			//글쓰기폼end=====================================================================================	
+			
+			//검색=====================================================================================
+			$("#groupSearchFrm").submit(()=>{
+				if($("#searchWord").val()==null || $("#searchWord").val()=='' ){
+					alert('검색어를 입력해주세요');
+					return false;
+				}
+				return ture;
+			});
+			//================================================================================================
 				
+			//좋아요=================================================================================================
+				
+		
+			$("#groupList div:first-child>input[name=num]").on('click',function(){
+				if($(this).is(':checked')){
+					console.log($(this).val());
+				}else{
+					console.log($(this).val());
+				}
+			});
+			
+				
+			//=================================================================================================
 		})
 </script>
 </head>
@@ -176,10 +228,51 @@
 			<li><button id="WriteForm" class="btn commBtn commBtnWrite">글쓰기</button>
 		</ul>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
-		<ul></ul>
+		<form id="groupSearchFrm" method="get" action="eatPage">
+			<input type="hidden" name="g_loc" value="강서구"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
+			<input type="hidden" name="up_cate" value="한끼미식회"/>
+			<select name="searchKey">
+				<option value="g_subject">제목</option>
+				<option value="userid">작성자</option>
+				<option value="g_content">내용</option>
+			</select>
+			<input type="text" name="searchWord"/>
+			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
+		</form>
+		
+
+		<ul id="groupList">
+			<c:forEach var="i" begin="1" end="5">
+				<a href="withPageView"><li>
+					<div>
+						<img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span>동네마트</span>
+						<input type="checkbox" name="num" id="like${i }" value="${i }"/><label for="like${i }"></label>
+					</div>
+					<span>이마트 같이 토마토 사러가요</span>
+					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>2021-04-21 오후 6시 29분</div><!-- g_date, g_time 값을 가지고 온다. -->
+					<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소"/>가양역1번출구</div><!-- g_loc1 값을 가져온다. -->
+					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>1 / 3명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
+					<div>#토맛 #토마토 #토마토맛 #토</div><!-- 태그값을 가지고온다. -->
+					<hr/>
+				</li></a>
+			</c:forEach>		
+		</ul>
+		
+		
+		
+		
+		<div>
+			<ul id="page">
+				<li>이전</li>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+				<li>다음</li>
+			</ul>
+		</div>
 	</div>
-	
-	
 	
 	
 	
