@@ -1,30 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
+
 <style>
-	.body{
-		overflow:auto;
-		width:1300px;
-	}
-	.lgFnt {
-		font-size: 32px;	
-	}
-	.mdFnt {
-		font-size: 22px;
-	}
-	.smlFnt {
-		font-size: 13px;
-	}
-	.mainContainer{
-		width:1000px;
-		margin:50px 185px;
-		
-	}
-	#top{
-		width:970px;
-		overflow:auto;
-		padding:0 40px;
-	}
+
 	#loadArea{
 		width:500px;
 		height:300px;
@@ -59,21 +39,7 @@
 		width:1000px; position:relative; padding:20px 0;
 		
 	}
-	.table2 {width:90%;margin:0 auto;padding:0}
-    .table2 tr{/*테이블 목록*/
-       border-bottom:1px solid rgb(227,227,227); 
-       text-align:center;
-       height:40px;
-    }
-   .table2 tr:first-child{/*첫번째 테이블 목차*/
-      text-align:center;
-      
-      background-color:#3f1785;
-      color:#fff; font-weight:bold;
-   }
-   .table2 tr:last-child{/*마지막 줄 tr 스타일*/
-      border-bottom:2px solid #3f1785;
-   }
+
    .table2 tr>td{}/*전체적인 열 폭조정*/
    .table2 tr>td:nth-child(1){/*첫번째 열 선택*/}
    .table2 tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
@@ -83,15 +49,12 @@
 		position:absolute;
 		top:55px;
   	  	left:62px;
-  	  	background-color:#fff;
   	 	height:40px;
 		width:110px;
-		z-index:100;
 		line-height:40px;
-		text-align:center;
 	}
 	.date{
-		height:50px; background-color:#fff; padding:0 10px; border:none; position:relative; margin:0px 50px 10px 50px;
+		margin:0px 50px 10px 50px;
 	}
 	.line{
 	  	position:absolute; background-color:#3f1785; width:100%; height:4px; top:70px; border-radius:100px;
@@ -99,9 +62,6 @@
 	#sel{
 		width:100px; height:30px; float:right; margin:0 50px 0px 790px
 	}
-	.prev{float:left}
-	.next{float:right}
-	.dayBtn{font-weight:bold; font-size:26px; margin:0 2px; border:none; background-color:#fff;}
 	.load{
 		margin:10px 0;	
 	}
@@ -203,7 +163,7 @@
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="mainContainer">
 	<h2>충전하기</h2>
-	<div id="top">
+	<div class="loadTop">
 		<div id="loadArea">
 			<form method="post" action="load" id="loadFrom">
 				<input type="text" name="load" class="lgFnt load"/>

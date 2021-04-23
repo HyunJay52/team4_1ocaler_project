@@ -1,92 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
 <style>
-	.body{
-		overflow:auto;
-		width:1300px;
-	}
-	.mainContainer{
-		width:1000px;
-		margin:50px 185px;	
-	}
-	.lgFnt {
-		font-size: 32px;	
-	}
-	.mdFnt {
-		font-size: 22px;
-	}
-	.smlFnt {
-		font-size: 13px;
-	}
-	.dealInfo{
-		width:704px;
-		height:202px;
-		border:1px solid #ddd;
-	}
-	.dealTop{
-		padding:50px;
-	}
-	.dealBottom{position:relative;}
-	.dealTop, .dealBottom{
-		width:900px;
-	}
-	.infoList>ul>li{
-		float:left; width:20%; height:40px;
-	}
-
-	.dealInfo img{
-		width:200px;
-		height:200px;
-		float:left;
-	}
-	.infoList{
-		width:460px;
-		height:150px;
-		float:left;
-		padding:20px;
-		
-	}
-	.mainContainer ul, .mainContainer li{
-		margin:0; padding:0;
-	}
-	.dealBtn{
-		 width:250px; height:50px; float:right;
-	}
 	.dateFrm{
 		position:absolute;
 		top:5px;
   	  	left:62px;
-  	  	background-color:#fff;
   	 	height:40px;
 		width:110px;
-		z-index:100;
 		line-height:40px;
-		text-align:center;
 	}
-	.date{ 
-		width:170px; height:50px; background-color:#fff; padding:0 10px; position:relative; margin:0px 30px 0px 50px; border:none;
-	}
-	.prev{float:left}
-	.next{float:right}
-	.dayBtn{font-weight:bold; font-size:26px; margin:0 2px; border:none; background-color:#fff;}
-
-	.table2 {width:90%;margin:0 auto;padding:0}
-    .table2 tr{/*테이블 목록*/
-       border-bottom:1px solid rgb(227,227,227); 
-       text-align:center;
-       height:40px;
-    }
-   .table2 tr:first-child{/*첫번째 테이블 목차*/
-      text-align:center;
-      
-      background-color:#3f1785;
-      color:#fff; font-weight:bold;
-   }
-   .table2 tr:last-child{/*마지막 줄 tr 스타일*/
-      border-bottom:2px solid #3f1785;
-   }
    .table2 tr>td{width:15%; position:relative;}/*전체적인 열 폭조정*/
    .table2 tr>td:nth-child(1){width:15%;/*첫번째 열 선택*/}
    .table2 tr>td:nth-child(2){width:55%;/*세번째 열 선택 : 제목부분*/
@@ -324,8 +248,8 @@
 						<li>좋아요(21)</li>
 					</ul>
 				</div>
-				<input type="button" class="btn dealBtn commBtn btn-outline-dark" value="Send Message"/>
-				<input type="button" class="btn dealBtn commBtn btn-outline-dark" value="Info"/>
+				<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
+				<input type="button" class="btn dealBtn btn-outline-dark" value="Info"/>
 			</div>
 		</div>
 		<div class="dealBottom">

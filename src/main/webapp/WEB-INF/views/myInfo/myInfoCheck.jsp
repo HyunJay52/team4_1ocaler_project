@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
 <style>
-	.body{
-		overflow:auto;
-		width:1300px;
-	}
 	#pwdCheck{
 		position:absolute;
 		top:50%;

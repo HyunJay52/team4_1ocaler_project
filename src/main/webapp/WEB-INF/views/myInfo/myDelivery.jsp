@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
 <style>
-	.body{
-		overflow:auto;
-		width:1300px;
-	}
-	.mainContainer{
-		width:1000px;
-		margin:50px 185px;
-		
-	}
 	#deliveryTop, #deliveryBottom{
 		padding:30px 50px;
 		overflow:auto;
@@ -77,42 +69,24 @@
 		text-align:right;
 		float:right;
 	}
-	.table2 {width:90%;margin:0 auto;padding:0}
-    .table2 tr{/*테이블 목록*/
-       border-bottom:1px solid rgb(227,227,227); 
-       text-align:center;
-       height:40px;
-    }
-   .table2 tr:first-child{/*첫번째 테이블 목차*/
-      text-align:center;
-      
-      background-color:#3f1785;
-      color:#fff; font-weight:bold;
-   }
-   .table2 tr:last-child{/*마지막 줄 tr 스타일*/
-      border-bottom:2px solid #3f1785;
-   }
    .table2 tr>td{width:20%}/*전체적인 열 폭조정*/
    .table2 tr>td:nth-child(1){width:10%;/*첫번째 열 선택*/}
    .table2 tr>td:nth-child(2){width:30%;/*세번째 열 선택 : 제목부분*/
       /* text-align:left; */
    }
-	.prev{float:left}
-	.next{float:right}
-	.dayBtn{font-weight:bold; font-size:26px; margin:0 2px; border:none; background-color:#fff;}
+	.dayBtn{height:36px; border-radius:100px;}
 	.dateFrm{
-		position:absolute;
-		top:0px;
-  	  	left:62px;
-  	  	background-color:#fff;
-  	 	height:40px;
-		width:110px;
-		z-index:100;
-		line-height:40px;
-		text-align:center;
+		position:relative;
+		margin:10px auto;
+  	 	height:60px;
+		width:120px;
+		line-height:50px;
+		border:2px solid #3f1785;
+		border-radius:100px;
+		padding:5px 10px;
 	}
 	.line{
-	  	position:absolute; background-color:#3f1785; width:100%; height:4px; top:70px; border-radius:100px;
+	  	position:absolute; background-color:#3f1785; width:90%; height:4px; top:70px; border-radius:100px;
 	}
 </style>
 <script>
@@ -239,7 +213,7 @@ var date = new Date();
 				<li><p class="lgFnt">취소</p><span class="lgFnt fntBold">0</span></li>
 			</ul>
 		</div>
-		<hr/>
+		
 		<div id="deliveryBottom">
 			<div class="line"></div>
 			<div class="dateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
