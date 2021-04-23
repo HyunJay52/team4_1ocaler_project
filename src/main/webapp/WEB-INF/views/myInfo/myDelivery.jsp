@@ -15,6 +15,9 @@
 		padding:30px 50px;
 		overflow:auto;
 	}
+	#deliveryBottom{
+		position:relative;
+	}
 	#deliveryTop>ul, #deliveryTop>ul>li{
 		float:left; text-align:center; margin:10px 5px;
 	}
@@ -74,12 +77,85 @@
 		text-align:right;
 		float:right;
 	}
+	.table2 {width:90%;margin:0 auto;padding:0}
+    .table2 tr{/*테이블 목록*/
+       border-bottom:1px solid rgb(227,227,227); 
+       text-align:center;
+       height:40px;
+    }
+   .table2 tr:first-child{/*첫번째 테이블 목차*/
+      text-align:center;
+      
+      background-color:#3f1785;
+      color:#fff; font-weight:bold;
+   }
+   .table2 tr:last-child{/*마지막 줄 tr 스타일*/
+      border-bottom:2px solid #3f1785;
+   }
+   .table2 tr>td{width:20%}/*전체적인 열 폭조정*/
+   .table2 tr>td:nth-child(1){width:10%;/*첫번째 열 선택*/}
+   .table2 tr>td:nth-child(2){width:30%;/*세번째 열 선택 : 제목부분*/
+      /* text-align:left; */
+   }
+	.prev{float:left}
+	.next{float:right}
+	.dayBtn{font-weight:bold; font-size:26px; margin:0 2px; border:none; background-color:#fff;}
+	.dateFrm{
+		position:absolute;
+		top:0px;
+  	  	left:62px;
+  	  	background-color:#fff;
+  	 	height:40px;
+		width:110px;
+		z-index:100;
+		line-height:40px;
+		text-align:center;
+	}
+	.line{
+	  	position:absolute; background-color:#3f1785; width:100%; height:4px; top:70px; border-radius:100px;
+	}
 </style>
 <script>
 	$(function(){
+var date = new Date();
 		
-		var deliveryNo = "1111111111111";
-		function test(){  
+		var toYear = date.getFullYear();
+		var toMonth = date.getMonth()+1;
+		
+		$(".setMonth").text(toMonth+"월");
+		
+		//월 세팅
+		function setMonth(toYear, toMonth){
+			$(".setMonth").text(toMonth+"월");
+			
+			console.log(toYear);
+			console.log(toMonth);
+			console.log($("#sel").val());
+
+		}
+		
+		//이전날짜
+		$(".prev").click(function(){
+			toMonth--;
+			if(toMonth == 0){
+				toMonth = 12;
+				toYear--;
+			}
+			setMonth(toYear, toMonth);
+		});
+		
+		//다음날짜
+		$(".next").click(function(){
+			toMonth++;
+			if(toMonth == 13){
+				toMonth = 1;
+				toYear++;
+			}
+			setMonth(toYear, toMonth);
+		});
+		
+		//ajax 배송조회 실행
+		function test(deliveryNo){  
 			$.ajax({
 				url : "https://apis.tracker.delivery/carriers/kr.epost/tracks/"+deliveryNo,
 				dataType : 'json',
@@ -117,15 +193,29 @@
 				
 			});
 		}
-		
-		$("#btn").click(function(){
-			test();
-		})
-		
-		function set(no){
-			deliveryNo = no;
-			test();
+
+		//데이터 세팅
+		function setList(){
+			for(var i = 0; i < 3; i++){
+				var tag = "<tr>";
+				tag += "<td><img src='img/myInfo/saver.gif' class='deliveryImg'/></td>";
+				tag += "<td><a href='' data-target='#deliveryMd' data-toggle='modal'>나주 배 팝니다</a>";
+				tag += "<input type='hidden' value='1111111111111'/></td>";
+				tag += "<td>김농부</td>";
+				tag += "<td>24,000원</td>";
+				tag += "<td>배송준비</td>";
+				tag += "</tr>";
+				
+				$("#myDeliveryTbl").append(tag);		
+			}			
 		}
+		setList();
+		
+		//배송조회 번호 세팅
+		$("#myDeliveryTbl a").click(function(){
+			var no = $(this).next().val();
+			test(no);
+		});
 	});
 </script>
 <div class="body">
@@ -150,40 +240,26 @@
 			</ul>
 		</div>
 		<hr/>
-		<input type="button" id="btn" value="버튼" data-target="#deliveryMd" data-toggle="modal"/>
 		<div id="deliveryBottom">
-			<ul>
-				<li><img src="img/myInfo/saver.gif" class="deliveryImg"/></li>
-				<li><a href="">고가팜나주배</a></li>
-				<li>판매자</li>
-				<li>24,000원</li>
-				<li>배송준비</li>
+			<div class="line"></div>
+			<div class="dateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
+			<table class="table2" id="myDeliveryTbl">
+				<tr>
+					<td>이미지</td>
+					<td>제목</td>
+					<td>판매자</td>
+					<td>금액</td>
+					<td>배송상태</td> 
+				</tr>
 				
-				<li><img src="img/myInfo/saver.gif" class="deliveryImg"/></li>
-				<li><a href="">고가팜나주배</a></li>
-				<li>판매자</li>
-				<li>24,000원</li>
-				<li>배송준비</li>
-				
-				<li><img src="img/myInfo/saver.gif" class="deliveryImg"/></li>
-				<li><a href="">고가팜나주배</a></li>
-				<li>판매자</li>
-				<li>24,000원</li>
-				<li>배송준비</li>
-				
-				<li><img src="img/myInfo/saver.gif" class="deliveryImg"/></li>
-				<li><a href="">고가팜나주배</a></li>
-				<li>판매자</li>
-				<li>24,000원</li>
-				<li>배송준비</li>
-			</ul>
+			</table>
 		</div>
 	</div>
 	<div class="modal fade" id="deliveryMd">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header" id="deliveryHeader">
-				<h4 class="modal-title">배 송 조 회<button class="close" data-dismiss="modal">&times</button></h4>
+				<h4 class="modal-title">배 송 조 회<button class="close" data-dismiss="modal">&times;</button></h4>
 				
 						
 						

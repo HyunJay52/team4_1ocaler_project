@@ -181,7 +181,7 @@
 		
 		<div class="mdFnt" style="font-family: nsr; padding-bottom: 5px"><img src="common/map_000.png" style="width: 25px; margin-right: 5px;">동네직구</div>
 		<ul class="listNone">
-			<li>아이템1</li>
+			<li><a href="info">아이템1</a></li>
 			<li>아이템2</li>
 			<li>아이템3</li>
 			<li>아이템3</li>

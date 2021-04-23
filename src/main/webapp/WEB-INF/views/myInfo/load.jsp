@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
 <style>
 	.body{
 		overflow:auto;
@@ -90,7 +91,7 @@
 		text-align:center;
 	}
 	.date{
-		 	 	height:50px; background-color:#fff; padding:0 10px; border:none; position:relative; margin:0px 50px 10px 50px;
+		height:50px; background-color:#fff; padding:0 10px; border:none; position:relative; margin:0px 50px 10px 50px;
 	}
 	.line{
 	  	position:absolute; background-color:#3f1785; width:100%; height:4px; top:70px; border-radius:100px;
@@ -98,10 +99,10 @@
 	#sel{
 		width:100px; height:30px; float:right; margin:0 50px 0px 790px
 	}
-	#prev{float:left}
-	#next{float:right}
+	.prev{float:left}
+	.next{float:right}
 	.dayBtn{font-weight:bold; font-size:26px; margin:0 2px; border:none; background-color:#fff;}
-	#load{
+	.load{
 		margin:10px 0;	
 	}
 </style>
@@ -112,10 +113,10 @@
 		var toYear = date.getFullYear();
 		var toMonth = date.getMonth()+1;
 		
-		$("#setMonth").text(toMonth+"월");
+		$(".setMonth").text(toMonth+"월");
 		
 		//달력 날짜 선택시 이벤트
-		$("#date").on('change', function(){
+		$(".date").on('change', function(){
 			var monthArr = $(this).val().split("-");
 			
 			toYear = monthArr[0];
@@ -126,7 +127,7 @@
 		
 		//월 세팅
 		function setMonth(toYear, toMonth){
-			$("#setMonth").text(toMonth+"월");
+			$(".setMonth").text(toMonth+"월");
 			
 			console.log(toYear);
 			console.log(toMonth);
@@ -135,7 +136,7 @@
 		}
 		
 		//이전날짜
-		$("#prev").click(function(){
+		$(".prev").click(function(){
 			toMonth--;
 			if(toMonth == 0){
 				toMonth = 12;
@@ -145,7 +146,7 @@
 		});
 		
 		//다음날짜
-		$("#next").click(function(){
+		$(".next").click(function(){
 			toMonth++;
 			if(toMonth == 13){
 				toMonth = 1;
@@ -159,12 +160,12 @@
 		//충전금액 버튼 선택시
 		var firstMoney = nowMoney;
 		setMoney(0);
-		$("#load").val(0);
+		$(".load").val(0);
 		$("#loadArea>form>ul>li input").click(function(){
 			var charge = parseInt($(this).attr("title"));
-			var nowCharge = parseInt($("#load").val());
+			var nowCharge = parseInt($(".load").val());
 			nowCharge += charge;
-			$("#load").val(nowCharge);
+			$(".load").val(nowCharge);
 			setMoney(nowCharge);
 		});
 		
@@ -177,11 +178,15 @@
 		}
 		
 		//입력 이벤트 세팅
-		$("#load").on("keyup", function(){
-			var charge = parseInt($("#load").val());
+		$(".load").on("keyup", function(){
+			if($(this).val()== "" || $(this).val() < 0){
+				$(this).val("0");
+			}
+			var charge = parseInt($(".load").val());
 			setMoney(charge);
 		});
 		
+		//결제수단 이벤트
 		$("#loadFrom").on("submit", function(){
 			if($("#loadArea>form>select").val() == '결제수단 선택'){
 				alert("결제수단을 선택해주세요");
@@ -201,7 +206,7 @@
 	<div id="top">
 		<div id="loadArea">
 			<form method="post" action="load" id="loadFrom">
-				<input type="text" id="load" name="load" class="lgFnt"/>
+				<input type="text" name="load" class="lgFnt load"/>
 					<span class="mdFnt">충전 후 잔액 :</span><span class="mdFnt" id="loadMoney"></span>
 					<ul>
 						<li><input type="button" class="btn commBtn mdFnt btn-block" title="10000" value="1 만원"/></li>
@@ -230,8 +235,8 @@
 					<option value="사용내역">사용내역</option>
 				</select>
 				<div class="line"></div>
-				<div class="dateFrm"><button class="dayBtn" id="prev">《</button><button id="setMonth" class="dayBtn mdFnt"></button><button class="dayBtn" id="next">》</button></div>
-				<input type="date" id="date" min="2021-01-01" max="2021-05-31" class="date"/>
+				<div class="dateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
+				<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
 				
 			<table class="table2">
 				<tr>

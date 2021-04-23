@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
+
 <style>
 	.body{
 		overflow:auto;
@@ -18,28 +20,28 @@
 	.smlFnt {
 		font-size: 13px;
 	}
-	#myDealInfo{
+	.dealInfo{
 		width:704px;
 		height:202px;
 		border:1px solid #ddd;
 	}
-	#myDealTop{
+	.dealTop{
 		padding:50px;
 	}
-	#myDealBottom{position:relative;}
-	#myDealTop, #myDealBottom{
+	.dealBottom{position:relative;}
+	.dealTop, .dealBottom{
 		width:900px;
 	}
-	#infoList>ul>li{
+	.infoList>ul>li{
 		float:left; width:20%; height:40px;
 	}
 
-	#myDealInfo img{
+	.dealInfo img{
 		width:200px;
 		height:200px;
 		float:left;
 	}
-	#infoList{
+	.infoList{
 		width:460px;
 		height:150px;
 		float:left;
@@ -66,12 +68,10 @@
 	.date{ 
 		width:170px; height:50px; background-color:#fff; padding:0 10px; position:relative; margin:0px 30px 0px 50px; border:none;
 	}
-	#prev{float:left}
-	#next{float:right}
+	.prev{float:left}
+	.next{float:right}
 	.dayBtn{font-weight:bold; font-size:26px; margin:0 2px; border:none; background-color:#fff;}
-	#load{
-		margin:10px 0;	
-	}
+
 	.table2 {width:90%;margin:0 auto;padding:0}
     .table2 tr{/*테이블 목록*/
        border-bottom:1px solid rgb(227,227,227); 
@@ -87,10 +87,10 @@
    .table2 tr:last-child{/*마지막 줄 tr 스타일*/
       border-bottom:2px solid #3f1785;
    }
-   .table2 tr>td{}/*전체적인 열 폭조정*/
-   .table2 tr>td:nth-child(1){/*첫번째 열 선택*/}
-   .table2 tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
-      position:relative;/* text-align:left; */
+   .table2 tr>td{width:15%; position:relative;}/*전체적인 열 폭조정*/
+   .table2 tr>td:nth-child(1){width:15%;/*첫번째 열 선택*/}
+   .table2 tr>td:nth-child(2){width:55%;/*세번째 열 선택 : 제목부분*/
+      /* text-align:left; */
    }
    .myDealBtn{
 		position:relative;
@@ -99,7 +99,7 @@
    		width:114px;
 		position:absolute;
 		top:0;
-		left:116px;
+		left:122px;
 		z-index:100;
 		text-align:center;
 		border:2px solid black;
@@ -107,10 +107,10 @@
    #myDealToggle{
 		float:right; margin:10px 40px 0 0;
    }
-   #myDealHeader{
+   .reviewHeader{
 		text-align:center;
    }
-  .modal-dialog{
+   .modal-dialog{
 		margin-top:20%;
 	}
 	.modal-content{
@@ -119,11 +119,12 @@
 	.modal-body{
 		text-align:center;
 		padding:40px;
+		background-color:#fff;
 	}
-	#myDealList>ul>li{
+	.reviewBody>ul>li{
 		float:left; width:50%; position:relative;
 	}
-	#myDealList>ul>li:nth-child(3), #myDealList>ul>li:nth-child(4){
+	.reviewBody>ul>li:nth-child(3), .reviewBody>ul>li:nth-child(4){
 		position:absolute;	
 		color:#fff;
 		top:82px;
@@ -131,31 +132,46 @@
 		font-weight:bold;
 		width:45%;
 	}
-	#myDealList>ul>li:nth-child(4){
+	.reviewBody>ul>li:nth-child(4){
 		left:380px; 
 		width:50%;
 		color:#3f1785;
 	}
-	#myDealList>ul>li:nth-child(5), #myDealList>ul>li:last-child{
+	.reviewBody>ul>li:nth-child(5), .reviewBody>ul>li:last-child{
 		width:100%;
 	}
-	#myDealList>ul>li:nth-child(6){
+	.reviewBody>ul>li:nth-child(6){
 		width:100%; text-align:left;
 	}
-	#myDealList>ul>li:last-child{
+	.reviewBody>ul>li:last-child{
 		text-align:right;
 	}
 	.modal-title{
 		margin:0 auto;
-	}
-	.modal-body{
-		background-color:#fff;
 	}
 	.dealTextarea{
 		width:100%; height:300px; margin:20px 0;
 	}
 	.imgBtn{
 		color:black;
+	}
+	.modal-dialog {
+		margin-top:10%;
+	}
+	.searchArea{
+		text-align:center;
+		margin-top:10px;
+	}
+	.searchArea>input[type=text]{
+		padding-left:8px;
+		height:30px;
+	}
+	.searchArea>input[type=button]{
+		height:30px;
+		width:60px;
+		background-color:#3f1785;
+		color:#fff;
+
 	}
 </style>
 <script>
@@ -165,10 +181,10 @@
 		var toYear = date.getFullYear();
 		var toMonth = date.getMonth()+1;
 		
-		$("#setMonth").text(toMonth+"월");
+		$(".setMonth").text(toMonth+"월");
 		
 		//달력 날짜 선택시 이벤트
-		$("#date").on('change', function(){
+		$(".date").on('change', function(){
 			var monthArr = $(this).val().split("-");
 			
 			toYear = monthArr[0];
@@ -179,16 +195,15 @@
 		
 		//월 세팅
 		function setMonth(toYear, toMonth){
-			$("#setMonth").text(toMonth+"월");
+			$(".setMonth").text(toMonth+"월");
 			
 			console.log(toYear);
 			console.log(toMonth);
-			console.log($("#sel").val());
 
 		}
 		
 		//이전날짜
-		$("#prev").click(function(){
+		$(".prev").click(function(){
 			toMonth--;
 			if(toMonth == 0){
 				toMonth = 12;
@@ -201,7 +216,7 @@
 		});
 		
 		//다음날짜
-		$("#next").click(function(){
+		$(".next").click(function(){
 			toMonth++;
 			if(toMonth == 13){
 				toMonth = 1;
@@ -240,7 +255,7 @@
 				
 				tag += "<div class='myDealMem collapse'><ul>";			
 				for(var j = 0; j < 3; j++){
-					tag += "<li><button class='btn btn-light commBtn btn-block' data-target='#myDealMd' data-toggle='modal'>"+item[j]+"</button></li>";
+					tag += "<li><button class='btn btn-light btn-block' data-target='#myDealMd' data-toggle='modal'>"+item[j]+"</button></li>";
 					
 				}
 				tag += "</ul></div></td>";
@@ -263,7 +278,8 @@
 			
 		});
 		
-		$(".myDealMem>ul>li>button").click(function(){
+		//리뷰버튼 클릭이벤트
+		$("#myDealTbl button").click(function(){
 			var title = $(this).text()+"님과의 거래가 어떠셨나요 ?";
 			$(".modal-title").text(title);
 			console.log($(this).text());
@@ -272,7 +288,7 @@
 		
 		//모달 닫힘 이벤트
 		$("#myDealMd").on('hidden.bs.modal', function(e){
-			$("#myDealList textarea").val("");
+			$(".reviewBody textarea").val("");
 		});
 		
 		//리뷰 클릭이벤트
@@ -281,16 +297,22 @@
 			$(this).attr('value', '1');
 		});
 		
+		//검색 이벤트 
+		$(".searchArea>input[type=button]").click(function(){
+			var searchWord = $(this).prev().val();
+			$(this).prev().val("");
+			console.log(searchWord);
+		});
 	});
 </script>
 <div class="body">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="mainContainer">
 		<h3>회원간거래</h3>
-		<div id="myDealTop">
-			<div id="myDealInfo">
+		<div class="dealTop">
+			<div class="dealInfo">
 				<img src="img/myInfo/saver.gif"/>
-				<div id="infoList">
+				<div class="infoList">
 					<h3>김자바</h3>
 					<ul>
 						<li>참여(10)</li>
@@ -306,14 +328,14 @@
 				<input type="button" class="btn dealBtn commBtn btn-outline-dark" value="Info"/>
 			</div>
 		</div>
-		<div id="myDealBottom">
+		<div class="dealBottom">
 			<div id="myDealToggle">
 				<button class="btn commBtn btn-outline-dark">참여한</button>
 				<button class="btn commBtn btn-outline-dark">개설한</button>
 			</div>
-			<div id="myDealDateForm">
-				<input type="date" id="date" min="2021-01-01" max="2021-05-31" class="date"/>
-				<div class="dateFrm"><button class="dayBtn" id="prev">《</button><button id="setMonth" class="dayBtn mdFnt"></button><button class="dayBtn" id="next">》</button></div>
+			<div class="dealDateForm">
+				<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
+				<div class="dateFrm"><button class="dayBtn prev">《</button><button class="dayBtn setMonth mdFnt"></button><button class="dayBtn next">》</button></div>
 				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
 				<input type="date" min="2021-01-01" max="2021-05-31"/>
 				
@@ -328,20 +350,24 @@
 				<tr>
 					<td>2021.04.20</td>
 					<td>마포역 3kg 세제2+1 같이 사실 분?</td>
-					<td><button class="btn commBtn btn-block">회원4</button></td>
+					<td><button class="btn btn-block btn-outline-dark" data-target='#myDealMd' data-toggle='modal'>회원4</button></td>
 					<td>1/3완료</td>
 				</tr>
 			</table>
+			<div class="searchArea">
+				<input type="text" name="searchWord"/>
+				<input type="button" value="검색"/>
+			</div>
 		</div>
 	</div>
 		<div class="modal fade" id="myDealMd">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="modal-header" id="myDealHeader">
+				<div class="modal-header reviewHeader">
 				<h4 class="modal-title"></h4>
 
 				</div>
-				<div class="modal-body" id="myDealList">
+				<div class="modal-body reviewBody">
 					<ul>
 						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
 						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>
