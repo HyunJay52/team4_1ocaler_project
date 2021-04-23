@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AdminController {
-	
+	//주석달아보추가 주석
 	@RequestMapping("/main")//관리자 메인페이지 
 	public ModelAndView main(HttpSession session) {
 		session.setAttribute("logId", "admin");
@@ -65,4 +65,32 @@ public class AdminController {
 		return mav;
 	}
 	
+	
+	////////////여기는 지워야한다,,,ㅎ
+	@RequestMapping("/spend_sel")//판매관리
+	public ModelAndView spend_sel() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/spend_sel");
+		return mav;
+	}
+	@RequestMapping("/cspage")//판매관리
+	public ModelAndView cspage() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/cspage");
+		return mav;
+	}
+	@RequestMapping("/persnal")//판매관리
+	public ModelAndView persnal() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/persnal");
+		return mav;
+	}
+	@RequestMapping("/question")//판매관리
+	public ModelAndView question() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/question");
+		return mav;
+	}
+	
 }
+
