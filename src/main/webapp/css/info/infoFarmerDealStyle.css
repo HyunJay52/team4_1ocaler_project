@@ -1,0 +1,18 @@
+@charset "UTF-8";
+	.table2 tr>td{/*전체적인 열 폭조정*/
+	
+	}
+	.table2 tr>td:nth-child(1){/*첫번째 열 선택*/
+	
+	}
+	.table2 tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
+		position:relative;
+	}
+	.dateFrm{
+		position:absolute;
+		top:5px;
+  	  	left:62px;
+  	 	height:40px;
+		width:110px;
+		line-height:40px;
+	}

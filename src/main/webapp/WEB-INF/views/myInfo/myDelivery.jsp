@@ -19,9 +19,6 @@
 	#deliveryTop>ul>li:nth-child(2n+2){
 		width:130px;
 	}
-	.fntBold{
-		font-weight:bold;
-	}
 	#deliveryTop>ul:nth-child(2)>li:nth-child(1){
 		margin-left:150px;
 	}
@@ -91,7 +88,7 @@
 </style>
 <script>
 	$(function(){
-var date = new Date();
+	var date = new Date();
 		
 		var toYear = date.getFullYear();
 		var toMonth = date.getMonth()+1;
@@ -200,17 +197,17 @@ var date = new Date();
 		<div id="deliveryTop">
 			<ul>
 				<li><img src="img/myInfo/delivery/box.png"/></li>
-				<li><p class="lgFnt">배송준비</p><span class="lgFnt fntBold">1</span></li>
+				<li><p class="lgFnt">배송준비</p><span class="lgFnt header">1</span></li>
 				<li><img src="img/myInfo/delivery/delivery.png"/></li>
-				<li><p class="lgFnt">배송 중</p><span class="lgFnt fntBold">1</span></li>
+				<li><p class="lgFnt">배송 중</p><span class="lgFnt header">1</span></li>
 				<li><img src="img/myInfo/delivery/home.png"/></li>
-				<li><p class="lgFnt">배송완료</p><span class="lgFnt fntBold">0</span></li>
+				<li><p class="lgFnt">배송완료</p><span class="lgFnt header">0</span></li>
 			</ul>
 			<ul>				
 				<li><img src="img/myInfo/delivery/return.png"/></li>
-				<li><p class="lgFnt">반품</p><span class="lgFnt fntBold">1</span></li>
+				<li><p class="lgFnt">반품</p><span class="lgFnt header">1</span></li>
 				<li><img src="img/myInfo/delivery/cancel.png"/></li>
-				<li><p class="lgFnt">취소</p><span class="lgFnt fntBold">0</span></li>
+				<li><p class="lgFnt">취소</p><span class="lgFnt header">0</span></li>
 			</ul>
 		</div>
 		

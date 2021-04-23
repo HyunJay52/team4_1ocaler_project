@@ -1,0 +1,44 @@
+@charset "UTF-8";
+	.dateFrm{
+		position:absolute;
+		top:5px;
+  	  	left:62px;
+  	 	height:40px;
+		width:110px;
+		line-height:40px;
+	}
+	.table2 tr>td{/*전체적인 열 폭조정*/
+		width:15%; 
+		position:relative;
+	}
+	.table2 tr>td:nth-child(1){/*첫번째 열 선택*/
+		width:15%;
+	}
+	.table2 tr>td:nth-child(2){/*세번째 열 선택 : 제목부분*/
+		width:55%;
+	}
+	.myDealBtn{
+		position:relative;
+	}
+	.myDealMem{
+   		width:114px;
+		position:absolute;
+		top:0;
+		left:122px;
+		z-index:100;
+		text-align:center;
+		border:2px solid black;
+	}
+	#myDealToggle{
+		float:right;
+		margin:10px 40px 0 0;
+	}
+	.modal-dialog{
+		margin-top:20%;
+	}
+	.modal-content{
+		height:240px;
+	}
+	.modal-dialog {
+		margin-top:10%;
+	}
