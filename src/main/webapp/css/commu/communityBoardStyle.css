@@ -15,98 +15,35 @@
 	#center{ width:1100px; 
 			 margin : 0 auto; 
 	}
-	#boardList li:nth-child(1){
-		width: 900px;
-		float: left;
-	}
-	#boardList li:nth-child(2){
-		width: 200px;
+	#boardList li {
+		width: 1100px;
 		float: left;
 	}
 	
-	#nameDate img{
+	#boardList>li>div:nth-child(1){
+		width: 550px;
+		height: 50px;
+		font-size: 18px;
+		float: left;
+		line-height: 50px;
+		
+	}
+	#boardList>li>div img{
 		width: 50px;
 		height:50px;
 		float: left;
+		margin-right: 10px;
 	}
-	
-	
-	#boardList>li>ul li:nth-child(1){ 
-		width: 900px;
-		float: left;
-	}
-	#nameDate{ 
-		width: 150px; 
+
+	#boardList>li>div:nth-child(2){
+		width: 550px;
+		height: 50px;
+		font-size: 18px;
+		text-align: right;
 		float: left;
 		
 	}
-	#nameDate div:nth-child(1){
-		text-align: center;
-		 
-		
-	}
-	#nameDate div:nth-child(2){
-		text-align: center;
-		color: gray; 
-		font-size: 14px;
-		line-height: 14px;
-	}
-	#like{ 
-		width: 450px;
-		float:left;
-		text-align: left;
-	}
-	#boardList>li>ul li:nth-child(2){ 
-		width: 900px;
-		float: left;
-	}
-	#title{ 
-		width: 450px;
-		float:left;
-		width: 750px;
-		height:48px;
-		float: left;
-		line-height: 48px;
-		color: #3f1785;  
-		font-weight: bold;  
-		font-size:22px ;
-	}
-	#name{
-		width: 750px;
-		height:48px;
-		float: left;
-		line-height: 48px;
-		color: #3f1785;  
-		font-weight: bold;  
-		font-size:22px ;
 
-	}
-	#boardList>li>ul li:nth-child(3){ 
-		width: 900px;
-		float: left;
-		color: gray; 
-		font-size: 13px;		
-	}
-	
-
-
-/* 	#center{ margin-bottom:8px; 
-	}	
-	#center,#boardList{margin : 0 auto; background-color:rgb(234, 231, 245) ;width:100%;
-	} 
-	#center>ul,#center li{ margin:0 ; padding:0; list-style-type:none; background-color:rgb(245, 245, 245);font-family : 'Hanna';
-	}
-	li,#boardList>#point,#page{text-align:center;
-	}
-	#boardList>li{ float : left;  width:10%;height:40px; line-height:40px ;
-				border-bottom:1px solid white;
-	}
-	#boardList>li:nth-child(5n+1){width:13% ;
-	}
-	#boardList>li:nth-child(5n+1){width:13% ;
-	}
-	#boardList>li:nth-child(5n+2){width:55% ;text-overflow:ellipsis; text-align:left;
-	} */
 	
 	
 	/* 검색어 */	

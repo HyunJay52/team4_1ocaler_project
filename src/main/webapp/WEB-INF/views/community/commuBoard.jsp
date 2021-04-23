@@ -16,34 +16,19 @@
 		<div id="center">
 			<ul id ="boardList">
 				<li>
-					<ul>
-						<li>
-							<div id="nameDate">
-								<div>
-									<img src="common/user.png"/>
-								</div>
-								<div>							
-									<div>서쪽마녀</div>
-									<div>2021.04.25</div>
-								</div>	
-							</div>
-							<div id="like">
-								<span>조회수 : </span> 192 &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> 40 개 
-							</div>
-						</li>
-						<li>
-							<div id="title">
-								서대문구 혼밥하기 좋은곳 아시나요??
-							</div>
-						</li>
-						<li>
-							#서대문구 #혼밥 #식당 #음식 #맛있는거 #추천 #동네맛집
-						</li>
-					</ul>
+					<div><img src="common/user.png"/> 서쪽마녀</div>
+					<div>2021.04.25</div>
 				</li>
 				<li>
-					
+					<div>서대문구 혼밥하기 좋은 곳 아시나요?</div>
+					<div>
+						<span>조회수 : </span> 192 &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> 40 개 
+					</div>
 				</li>
+				<li>
+					#서대문구 #혼밥 #식당 #음식 #맛있는거 #추천 #동네맛집	
+				</li>
+				
 			</ul>
 
 		
