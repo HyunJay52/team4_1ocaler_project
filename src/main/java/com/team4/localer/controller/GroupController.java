@@ -9,10 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.vo.GroupVO;
 
 @Controller
-public class GroupController {
-
-//	@Autowired
-//	SqlSession sqlSession;
+public class GroupController {	
+	GroupVO vo = new GroupVO();
 	
 	@RequestMapping("/groupPage")
 	public String groupOpen() {
