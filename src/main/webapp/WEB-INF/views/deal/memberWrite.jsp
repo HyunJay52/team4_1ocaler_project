@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealWriteStyle.css"/>
-
+<script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> 
 
 	<div id="body">
 		<div>
@@ -20,7 +20,7 @@
 	 			<br/>
 	 			<input type="text" id ="subject" name="s_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
 	 			<input type="text" id ="cnt" name="s_cnt" placeholder="모집인원"/>
-	 			<textarea name="s_content"> 내용을 입력해주세요. </textarea>
+	 			<textarea name="s_content" id ="content" > 내용을 입력해주세요. </textarea>
 	 			<script>CKEDITOR.replace("s_content");</script>
 	 			
 	 		

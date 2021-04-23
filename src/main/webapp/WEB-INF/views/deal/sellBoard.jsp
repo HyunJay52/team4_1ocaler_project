@@ -8,29 +8,26 @@
 		<%@ include file="/inc/dealHeader.jspf" %> <!-- 사이드 메뉴 include -->
 						
 			<div id="selBoard" >
-				<ul>
+				<ul id="boardText">
 					<li id="selList">
-						<div>
+						<div  OnClick="location.href ='sellView'">
 							<div>
 								<img src="img/deal/div.jfif"/>
 							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골 </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<a>
-								<span style="float:left">D.I.Y 오르골 </span><span style="float:right">20000</span><br/>
-								<span>조녜 오르골상품</span><br/>
-								<span>#오르골, #DIY</span>
-							</a>
+							<ul>	
+								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+								
+								<li>
+									<span class="cntJoin">&nbsp;&nbsp;5</span>
+									/160개
+								</li>
+								<li>20,000원</li>
+								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+								<li>
+									goguma1234 &nbsp;
+									<img src="common/user.png">&nbsp;&nbsp;
+								</li>
+							</ul>
 						</div>
 					</li>
 				</ul>
