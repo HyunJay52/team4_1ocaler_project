@@ -3,11 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/m_mem.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
-<!-- 
-	#3f1785 > #571fb8 > #705abf
- -->
-<div id="main">
-	<div style="width:100%;height:30px;"></div>
+<script>
+	$(function(){
+		$('.memid').click(function(){
+			alert("클릭이벤트 발생");
+		});
+	});
+</script>
+<div class="main">
+	<div class="title">일반회원관리</div>
 	<ul class="statis">
 		<li>
 			총회원수
@@ -25,7 +29,7 @@
 			<b>4% </b>지난주 대비
 		</li>
 		<li>
-			휴먼계정
+			휴면계정
 			<div>2500</div>
 			<b>4% </b>지난주 대비
 		</li>
@@ -35,21 +39,16 @@
 			<b>4% </b>지난주 대비
 		</li>
 	</ul>
-	<br/><br/><br/><br/><br/>
-
-	<div style="width:100%;height:30px;"></div>
-	<div class="frmcss">
-		<form >
-			<select name="serchkey" class="selectcomm">
-				<option value="회원아이디">회원아이디</option>
-				<option value="회원번호">회원 번호</option>
-				<option value="회원이름">회원 이름</option>
-			</select>
-			<input type="text" class="textcomm" name="serchword"/>
-			<input type="submit" class="searchbtn" value="검색"/>
-		</form>	
-	</div>
 	
+	<form id="memFrm">
+		<select name="serchkey" class="selectcomm">
+			<option value="회원아이디">회원아이디</option>
+			<option value="회원번호">회원 번호</option>
+			<option value="회원이름">회원 이름</option>
+		</select>
+		<input type="text" class="textcomm" name="serchword"/>
+		<input type="submit" class="searchbtn" value="검색"/>
+	</form>	
 	<table class="tablea" >
 		 <colgroup>
                <col width="5%" />
@@ -77,7 +76,7 @@
 		</tr>
 		<tr>
 			<td>1</td>
-			<td>goguma</td>
+			<td class="memid">goguma</td>
 			<td>김길동</td>
 			<td>남자</td>
 			<td>서울시 강서구</td>

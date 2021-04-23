@@ -31,9 +31,7 @@
 	
 	select{height: 30px ; border:1px solid black;float:left; margin-right: 4px }
 	
-	#btn{  width:30px; height: 30px ; padding: 2px
-	}
-	
+
 	img{width: 218px; height: 218px;
 	} 
 	
@@ -81,15 +79,12 @@
 	}
 	#selList>div>ul>li:nth-child(5) img{width: 30px;height: 30px;text-align: right;
 	}
-	
-	
-	
 	#selList:hover{border: 1px solid #571fb8;
 	
 	}
 	
 	
-	
+	 
 	/* 버튼 스타일 클래스 모음 */
 
 	a:active, a:link, a:visited {

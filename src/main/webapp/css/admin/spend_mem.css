@@ -10,13 +10,16 @@ body{
 	width:1300px;
 	
 }
+#doublediv{
+	overflow:auto;
+}
 .t_spend{
-	width:48%;
+	float:left;
+	width:40%;
 	margin-left:0;
 	margin-right:0;
 	margin-top:20px;
 	margin-bottom:20px;
-	float:left;
 	font-size:22px;
 }
 .t_spend tr{
@@ -43,12 +46,62 @@ body{
 	margin-right:0;
 	margin-top:20px;
 	margin-bottom:20px;
-	width:48%;
+	width:60%;
 	height:400px;
 }
 
-
-
+#nodiv{
+	margin:20px;
+}
+/*이전월 다음달 버튼*/
+.pnBtn{
+	float:left;
+	width:30px;
+	height:30px;
+	border-radius:10px;
+	border:1px solid #3f1785;
+	background-color:#fff;
+	color:#3f1785;
+	font-size:22px;
+	font-family: inherit;
+}
+.pnBtn:hover{
+	background-color:#3f1785;
+	color:#fff;
+}
+.alignright{
+	float:right;
+	margin-left:30px;
+}
+#month{
+	margin-left:10px;
+	margin-right:10px;
+	float:left;
+	width:40px;
+	height:30px;
+	text-align:center;
+	border-radius:10px;
+	background-color:rgb(204,181,242,0.3);
+}
+/*모달부분*/
+b{
+	font-family:"nsreb";
+	font-size:32px;
+}
+.modaldiv{
+	padding:15px 5px 0 5px;
+	border:1px solid #ddd;
+	width:500px;
+	height:380px;
+}
+.exit{
+	float:right;
+	font-size:16px;
+	border:none; background-color:#fff;
+}
+.modaldiv>table{
+	margin-top:20px;
+}
 
 
 
