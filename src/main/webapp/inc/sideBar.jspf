@@ -7,11 +7,69 @@
 		text-decoration: overline;
 		color: #571fb8; font-weight: bold;
 	}
+	#recommTag>ul {
+	}
+	/*pop up 스타일*/
+	#searchDiv{
+		width: 100%; height: 100%;
+		background-color: lightblue;
+		position: absolute; /*좌표 설정을 위해서*/
+		top: 0px;
+		opacity: 95%;
+	}
+	#searchArea {
+		position: relative; top:40%; text-align: center;
+	}
+	#searchKey {
+		width: 160px;
+	    height: 40px;
+	    border-top-left-radius: 5px;
+	    border-bottom-left-radius: 5px;
+	    padding-left: 10px;
+	}
+	#searchWord {
+		width: 400px;
+    	height: 40px;
+    	padding-left: 10px;
+   		margin-left: -1px;
+	}
+	#goSearch {
+		width: 100px;
+	    height: 40px;
+	    color: #fff;
+	    background-color: #571fb8;
+	    border: none;
+	    border-top-right-radius: 5px;
+	    border-bottom-right-radius: 5px;
+	}
+	table td{
+		padding-right: 20px;
+	}
+	table td:last-child{
+		padding-right: 0px;
+	}
+	
 </style>
 
 <script>
 	$(function(){
-		//스크롤 이벤트
+		//검색창 팝업 이벤트
+		$("#showSearch").click(function(){
+			$("#searchDiv").css('display', 'block');
+			$('html, body').css({'overflow': 'hidden', 'height': '100%'}); //스크롤 이동 막기
+// 			$("body").on('scroll touchmove mousewheel', function(event) {
+// 				  event.preventDefault();
+// 				  event.stopPropagation();
+// 				  return false;
+// 				});
+		});
+    	$("#close").on('click', function(){
+        	$("#searchDiv").css('display', 'none');
+        	$('html, body').css({'overflow': 'auto', 'height': 'auto'});
+//         	$("body").off('scroll touchmove mousewheel')
+    	})
+
+		//맨 위로 가기 스크롤 이벤트
 		$(window).on("scroll", function(){
 			var scrollTop = $(this).scrollTop();
 			var limitTop = 70;
@@ -22,7 +80,7 @@
 				$("#toTop").css("display", "none");
 			}
 		});
-		
+		//사이드바 색깔변경
 		$("#sideBar li a img").hover(
 			function(){//in
 				$(this).attr("src", $(this).attr("src").replace("000.png", "pur.png"));
@@ -31,18 +89,54 @@
 				$(this).attr("src", $(this).attr("src").replace("pur.png", "000.png"));
 			}
 		);
+		
 	});
+
 </script>
 
 <ul id="sideBar">
-	<li><a href="#"><img src="common/map_000.png" class="imgSize"></a></li>
-	<li><a href="#"><img src="common/search_000.png" class="imgSize"></a></li>
-	<li><a href="#"><img src="common/won_000.png" class="imgSize"></a></li>
+	<li><a href="#"><img src="common/map_000.png" class="imgSize"/></a></li>
+	<li id="showSearch"><a><img src="common/search_000.png" class="imgSize"></a></li>
+	<li><a href="#"><img src="common/won_000.png" class="imgSize"/></a></li>
 	<li class="textRotate"><a href="login">로그인&nbsp;</a></li>
 <!-- 	<li class="textRotate"><a href="#">로그아웃</a></li> -->
 	<li class="textRotate"><a href="#">&nbsp;채팅</a></li>
-	<li id="toTop" style="padding-top: 15px;"><a href="#"><img src="common/top_000.png" class="imgSize"></a></li>
+	<li id="toTop" style="padding-top: 15px;"><a href="#"><img src="common/top_000.png" class="imgSize"/></a></li>
 </ul>
+
+
+<div id="searchDiv" style="z-index: 100;">
+	<div id="searchArea">
+		<form>
+			<select id="searchKey">
+				<option>통합검색</option>
+				<option>착한발견</option>
+				<option>동네직구</option>
+				<option>가치가장</option>
+				<option>한끼미식회</option>
+				<option>우리동네 이야기</option>
+				<option>쓱싹레시피</option>
+				<option>자유자게</option>
+			</select><input type="text" id="searchWord" name="searchWord" placeholder="검색어를 입력해주세요"/><input type="submit" id="goSearch" value="검색"/><span id="close">닫기</span>
+		</form>
+		<div style="margin-top: 20px">
+			<span style="line-height: 40px;">이런 키워드는 어떠세요?</span>
+			<table border="0" style="width:auto; margin: 0 auto;">
+				<tbody>
+					<tr>
+						<td><a href="#">#레이아웃지겹</a></td>
+						<td><a href="#">#비건</a></td>
+						<td><a href="#">#플로깅</a></td>
+						<td><a href="#">#시간순삭</a></td>
+						<td><a href="#">#졸리다</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
 
 </body>
 </html>
