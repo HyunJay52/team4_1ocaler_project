@@ -1,0 +1,86 @@
+@charset "UTF-8";
+.tablea {margin:0 auto;padding:0;font-size:13px;width:100%;}
+.tablea tr{/*테이블 목록*/
+   border-bottom:1px solid rgb(227,227,227); 
+   text-align:center;
+   height:40px;
+ }
+.tablea tr:first-child{/*첫번째 테이블 목차*/
+	text-align:center;color:black;
+	border-bottom:2px solid #ddd;
+	background-color:rgb(204,181,242,0.3);
+	}
+
+/*텍스트 필드 공통*/
+.textcomm{
+	width:400px;
+	margin:10px;
+	padding:3px;
+	border:none;
+	border-bottom:1px solid gray;
+	font-family: inherit;/*폰트상속*/
+}
+/*검색 버튼 공통*/
+.searchbtn{
+	width:150px;/*너비설정*/
+	padding:7px;/*여백설정 */
+	font-family: inherit;/*폰트상속*/
+	background:#fff;
+	border: 1px solid #3f1785;
+	color: #3f1785;
+}
+.searchbtn:hover{
+	background-color: #3f1785;
+	border: 1px solid #3f1785;
+	color:#fff;
+}
+.puplebtn{
+	width:150px;/*너비설정*/
+	padding:7px;/*여백설정 */
+	font-family: inherit;/*폰트상속*/
+	background:#3f1785;
+	border: 1px solid #3f1785;
+	color: #fff;
+}
+.puplebtn:hover{
+	background-color: #fff;
+	border: 1px solid #3f1785;
+	color:#3f1785;
+}
+.selectcomm{
+	width:150px;/*너비설정*/
+	padding:10px;/*여백설정*/
+	font-family: inherit;/*폰트상속*/
+}
+.smallbtn{
+	width:70px;
+	padding:2px;
+	background-color:#3f1785;
+	color:#fff;
+	border:1px solid #3f1785;
+}
+.smallbtn:hover{
+	background-color:#fff;
+	color:#3f1785;
+}
+.spuplebtn{
+	width:70px;
+	padding:2px;
+	background-color:#fff;
+	color:#3f1785;
+	border:1px solid #3f1785;
+}
+.spuplebtn:hover{
+	background-color:#3f1785;
+	color:#fff;
+}
+	
+.redBtn{
+	background:rgb(183,15,23,0.9);
+	color:#fff;
+	width:90px;
+}
+.redBtn:hover{
+	color:rgb(183,15,23);
+	background:#fff;
+}

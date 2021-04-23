@@ -97,7 +97,13 @@
 	.cntJoin {
 		font-size: 22px; font-weight:bold; color: #3f1785;
 	}
-
+	.test1 img, .test1 div {
+		margin-top: 10px;
+		float: left;
+	}
+	.test1 img {
+		margin-left: 35px;
+	}
 </style>
 
 <script>
@@ -195,7 +201,7 @@
 		<ul class="listNone">
 			<li>
 				<ul class="innerUl">
-					<li><img src="img/indexImg/dinner.png" style="width:30px;"/><span style="font-size: 18px; font-weight: bold;">&nbsp;한끼미식회</span></li>
+					<li class="test1"><img src="img/indexImg/dinner.png" style="width:30px;"/><div style="height:30px; line-height:30px; font-size: 18px; font-weight: bold;">&nbsp;한끼미식회</div></li>
 					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" style="width: 15px; margin-bottom: 5px;"> 마포구청역 3번 출구</li>
