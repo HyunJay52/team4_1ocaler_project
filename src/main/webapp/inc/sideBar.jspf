@@ -16,7 +16,7 @@
 		position: absolute; /*좌표 설정을 위해서*/
 		top: 0px;
 		opacity: 95%;
-		display: none;
+		display: none; /*검색화면 초기 세팅*/
 	}
 	#searchArea {
 		position: relative; top:40%; text-align: center;
