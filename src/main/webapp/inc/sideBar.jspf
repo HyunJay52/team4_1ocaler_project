@@ -16,6 +16,7 @@
 		position: absolute; /*좌표 설정을 위해서*/
 		top: 0px;
 		opacity: 95%;
+		display: none;
 	}
 	#searchArea {
 		position: relative; top:40%; text-align: center;
@@ -42,6 +43,7 @@
 	    border-top-right-radius: 5px;
 	    border-bottom-right-radius: 5px;
 	}
+	
 	#close {
 	    line-height: 38px;
 	    margin-left: 10px;
