@@ -19,6 +19,7 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/inc/**" location="/inc/" />
 	<resources mapping="/common/**" location="/common/" />
+	<resources mapping="/sel_img/**" location="/sel_img/" />
 	<resources mapping="/font/**" location="/font/"/>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

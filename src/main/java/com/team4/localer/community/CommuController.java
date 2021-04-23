@@ -1,5 +1,12 @@
 package com.team4.localer.community;
 
-public class CommuController {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
+public class CommuController {
+	@RequestMapping("/commuMain")
+	public String commuMain() {
+		return "community/commuMain";
+	}
 }

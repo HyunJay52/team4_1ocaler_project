@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/main.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <div  id="main">
 	<div style="width:100%;height:30px;"></div>
 	<div >일일현황</div>
@@ -12,10 +13,19 @@
 		<div class="cir1">셀러신청<br/><b>1</b></div>
 	</div>
 	<div style="width:100%;height:40px;"></div>
-	<div>문의사항</div>
+	<div style="padding-top:30px;">문의사항</div>
 	<input type="button" id="more"class="confBtn confBtn:hover" value="더보기"/><br/>
-	<table class="table">
+	<table class="tablea">
 		<tr>
+			<colgroup>
+               <col width="5%" />
+               <col width="5%" />
+               <col />
+               <col width="5%" />
+               <col width="10%" />
+               <col width="10%" />
+            </colgroup>
+            
 			<td>번호</td>
 			<td>분류</td>
 			<td>제목</td>
@@ -29,7 +39,7 @@
 			<td>거래가 안되요</td>
 			<td>사람1</td>
 			<td>2021-01-01</td>
-			<td><input type="button" value="처리완료" class="commBtn commBtn:hover"/></td>
+			<td><input type="button" value="처리완료" class="confBtn cancelBtn:hover"/></td>
 		</tr>
 		<tr>
 			<td>1</td>
