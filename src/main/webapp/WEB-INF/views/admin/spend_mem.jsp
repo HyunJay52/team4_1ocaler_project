@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/spend_mem.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -30,8 +32,40 @@
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+      $(function(){
+    	  //======modal1======
+    	  //사용금액 클릭시 모달1 창 띄우기
+    	  $(".spend").click(function(){
+    		 var num=$(this).prev().prev().prev().text();
+    		 modalOne(num);//모달창 띄우는
+    	  });
+    	  function modalOne(num){//모달 1 창 띄우는 함수 
+    		  $("#moOne").css("display", "block");
+    		  $("#moOne").draggable({'cancel':'.tbl', containment:'parent', scroll:false});
+    	  }
+    	  
+    	  
+    	  //======modal2======
+    	  //회원거래 클릭시 모달2 창 띄우기
+    	  $(".add").click(function(){
+    		 var num=$(this).prev().prev().prev().text();
+    		 modalTwo(num);//모달창 띄우는
+    	  });
+    	  
+    	  function modalTwo(num){//모달 2 창 띄우는 함수 
+    		  $("#moTwo").css("display", "block");
+    		  $("#moTwo").draggable({'cancel':'.tbl', containment:'parent', scroll:false});
+    	  }
+    	  
+    	  $(".exit").click(function(){
+    		  //부모의 부모 ->모달 div 
+    		  $(this).parent().parent().css("display","none");
+    	  });
+      
+      });
 </script>
 <div id="main">
+<div class="title">회원 정산</div>
 <div id="doublediv">
 	<table class="t_spend" >
 	    <colgroup>
@@ -81,8 +115,8 @@
 			<td>12</td>
 			<td>user</td>
 			<td>10000</td>
-			<td>0</td>
-			<td></td>
+			<td class="spend" >사용금액부분</td>
+			<td class="add">받을 포인트 창띄워주기</td>
 			<td>20000</td>
 		</tr>
 		<tr>
@@ -120,7 +154,7 @@
 	</table>
 	
 	<div id="moOne"class="modaldiv">
-		<b>사용금액 참여 <a href="#" class="exit" id="exit1">X</a></b>
+		<div>사용금액 참여 <b class="exit">X</b></div>
 		<br/>게시글 수 (10)
 		<table class="tablea" >
 		<colgroup>
@@ -176,58 +210,58 @@
 	
 	</div>
 	<div id="moTwo" class="modaldiv">
-		<b>받을 포인트 <a href="#" class="exit" id="exit2">X</a></b>
+		<div>받을 포인트 <b class="exit" >X</b></div>
 		<br/>참여자수 (10)
 		<table class="tablea" >
-		<colgroup>
-        	<col width="15%" />
-            <col />
-            <col width="15%" />
-            <col width="15%" />
-            <col width="15%" />
-        </colgroup>
-		<tr>
-			<td>번호</td>
-			<td class="wordcut">글제목</td>
-			<td>회원명</td>
-			<td>사용금액</td>
-			<td>거래일</td>
-		</tr>
-		<tr>
-			<td>101</td>
-			<td class="wordcut">등촌역...</td>
-			<td>user1234</td>
-			<td>30,000</td>
-			<td>2021.04.02</td>
-		</tr>
-		<tr>
-			<td>101</td>
-			<td class="wordcut">등촌역...</td>
-			<td>user1234</td>
-			<td>30,000</td>
-			<td>2021.04.02</td>
-		</tr>
-		<tr>
-			<td>101</td>
-			<td class="wordcut">등촌역...</td>
-			<td>user1234</td>
-			<td>30,000</td>
-			<td>2021.04.02</td>
-		</tr>
-		<tr>
-			<td>101</td>
-			<td class="wordcut">등촌역...</td>
-			<td>user1234</td>
-			<td>30,000</td>
-			<td>2021.04.02</td>
-		</tr>
-		<tr>
-			<td>101</td>
-			<td class="wordcut">등촌역...</td>
-			<td>user1234</td>
-			<td>30,000</td>
-			<td>2021.04.02</td>
-		</tr>
+			<colgroup>
+	        	<col width="15%" />
+	            <col />
+	            <col width="15%" />
+	            <col width="15%" />
+	            <col width="15%" />
+	        </colgroup>
+			<tr>
+				<td>번호</td>
+				<td class="wordcut">글제목</td>
+				<td>회원명</td>
+				<td>사용금액</td>
+				<td>거래일</td>
+			</tr>
+			<tr>
+				<td>101</td>
+				<td class="wordcut">등촌역...</td>
+				<td>user1234</td>
+				<td>30,000</td>
+				<td>2021.04.02</td>
+			</tr>
+			<tr>
+				<td>101</td>
+				<td class="wordcut">등촌역...</td>
+				<td>user1234</td>
+				<td>30,000</td>
+				<td>2021.04.02</td>
+			</tr>
+			<tr>
+				<td>101</td>
+				<td class="wordcut">등촌역...</td>
+				<td>user1234</td>
+				<td>30,000</td>
+				<td>2021.04.02</td>
+			</tr>
+			<tr>
+				<td>101</td>
+				<td class="wordcut">등촌역...</td>
+				<td>user1234</td>
+				<td>30,000</td>
+				<td>2021.04.02</td>
+			</tr>
+			<tr>
+				<td>101</td>
+				<td class="wordcut">등촌역...</td>
+				<td>user1234</td>
+				<td>30,000</td>
+				<td>2021.04.02</td>
+			</tr>
 		</table>
 	
 	</div>

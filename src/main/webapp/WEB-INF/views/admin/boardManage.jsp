@@ -12,6 +12,7 @@
 	});
 </script>
 <div id="main">
+<div class="title">게시글 관리</div>
 	<ul class="statis">
 		<li>
 			우리직구

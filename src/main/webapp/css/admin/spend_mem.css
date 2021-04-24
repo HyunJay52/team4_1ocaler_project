@@ -3,6 +3,7 @@ body{
 	font-family:"nsr";
 	}
 #main{
+	position:relative;
 	margin:0 auto; 
 	padding:0;
 	padding-top:30px;
@@ -83,24 +84,15 @@ body{
 	border-radius:10px;
 	background-color:rgb(204,181,242,0.3);
 }
-/*모달부분*/
-b{
-	font-family:"nsreb";
-	font-size:32px;
+#moOne{
+	position:absolute;
+	left:100px;
+	top:100px;
 }
-.modaldiv{
-	padding:15px 5px 0 5px;
-	border:1px solid #ddd;
-	width:500px;
-	height:380px;
-}
-.exit{
-	float:right;
-	font-size:16px;
-	border:none; background-color:#fff;
-}
-.modaldiv>table{
-	margin-top:20px;
+#moTwo{
+	position:absolute;
+	right:100px;
+	top:100px;
 }
 
 
