@@ -1,22 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/m_mem.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/m_sel.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <script>
 	$(function(){
 		$('.memid').click(function(){
+			alert("클릭이벤트 발생");
 			var text = $(this).prev().text();
 			meminfo(text);
+			selinfo(text);
 		});
 		
 		function meminfo(num){
 			$("#meminfo").css("display", "block");
 		}
+		function selinfo(num){
+			$("#selinfo").css("display", "block");
+		}
 	});
 </script>
 <div class="main">
-	<div class="title">일반회원관리</div>
+	<div class="title">셀러회원관리</div>
 	<ul class="statis">
 		<li>
 			총회원수
@@ -116,5 +121,33 @@
 			<td>88</td>
 		</tr>
 	</table>
+	<!-- 셀러정보 테이블 -->
+	<table id="selinfo" class="tablea">
+		<colgroup>
+              <col width="200" />
+              <col width="300" />
+              <col width="300" />
+              <col width="200" />
+              <col width="300" />
+              <col width="300" />
+         </colgroup> 
+		<tr>
+			<td>번호</td>
+			<td>제목</td>
+			<td>판매 횟수/환불횟수</td>
+			<td>작성자</td>
+			<td>작성날짜</td>
+			<td>판매금액</td>
+		</tr>
+		<tr>
+			<td>101</td>
+			<td>감자</td>
+			<td>130/10</td>
+			<td>goguma</td>
+			<td>2021.01.20</td>
+			<td>10000</td>
+		</tr>
+	</table>
 
+		
 </div>
