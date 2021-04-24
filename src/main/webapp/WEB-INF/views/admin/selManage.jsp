@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/selManage.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <div id="main">
+<div class="title">판매관리</div>
 	<ul class="statis">
 		<li>
 			총게시글
