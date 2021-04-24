@@ -6,7 +6,6 @@
 <script>
 	$(function(){
 		$('.memid').click(function(){
-			alert("클릭이벤트 발생");
 			var text = $(this).prev().text();
 			meminfo(text);
 			selinfo(text);
@@ -71,6 +70,7 @@
                <col width="8%" />
                <col width="9%" />
                <col width="9%" />
+               <col width="5%"/>
             </colgroup>
 		<tr>
 			<td>번호</td>
@@ -81,8 +81,9 @@
 			<td>연락처</td>
 			<td>글쓰기 권한</td>
 			<td>휴면상태</td>
-			<td>판매자 권한</td>
-			<td>블랙리스트</td>
+			<td>셀러권한삭제</td>
+			<td>쌓인신고</td>
+			<td>수정</td>
 		</tr>
 		<tr>
 			<td>1</td>
@@ -94,7 +95,8 @@
 			<td><input type="button" class="spuplebtn"value="Y"></td>
 			<td><input type="button" class="spuplebtn"value="Y"></td>
 			<td><input type="button" class="spuplebtn"value="Y"></td>
-			<td><input type="button" class="redBtn"value="정지"></td>
+			<td>10</td>
+			<td><input type="button" class="spuplebtn"value="수정"></td>
 		</tr>
 	</table>
 	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->
