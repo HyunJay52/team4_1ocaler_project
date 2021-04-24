@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.team4.localer.dao.GroupDAO">
+  	<insert id="groupInsert" parameterType="com.team4.localer.vo.GroupVO">
+  		insert into grouplocal(num, userid, up_cate, down_cate, g_gu, g_subject, g_content, g_cnt, g_date, g_time,
+  		g_loc1, g_tag)
+  		values(boardsq.nextval, #{userid}, #{up_cate}, #{down_cate}, #{g_gu}, #{g_subject}, #{g_content}, #{g_cnt}, to_date(#{g_date}, 'YYYY-MM-DD'), to_date(#{g_time},'HH24:MI'), #{g_loc1}, #{g_tag} )
+  	<!-- date type을 insert 할떄 to_date로 변경해서 보내야함 -->
+  	</insert>
+  	
+  	<insert id="groupBigMartInsert" parameterType="com.team4.localer.vo.GroupVO">
+  		insert into grouplocal(num, userid, up_cate, down_cate, g_gu, g_subject, g_content, g_cnt, g_date, g_time,
+  		g_loc1, g_loc2, g_tag)
+  		values(boardsq.nextval, #{userid}, #{up_cate}, #{down_cate}, #{g_gu}, #{g_subject}, #{g_content}, #{g_cnt}, to_date(#{g_date}, 'YYYY-MM-DD'), to_date(#{g_time},'HH24:MI'), #{g_loc1}, #{g_loc2}, #{g_tag} )
+  	<!-- date type을 insert 할떄 to_date로 변경해서 보내야함 -->
+  	</insert>
+  
+  </mapper>

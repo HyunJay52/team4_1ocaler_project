@@ -33,19 +33,20 @@
 	#showFrm{position:absolute; height:850px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
 	#showTopMenu{overflow:auto;}
 	#showTopMenu>li{float:left; width:180px; padding: 10px 0px 10px 10px;}
+	#showTopMenu>li:first-child>div>a{color:#571fb8; font-weight:700}
+	#showTopMenu>li:first-child>div{padding-left:15px;}
 	#showTopMenu>li:nth-of-type(3){width:100px;}
 	#showTopMenu img{display:block; width:25px; float:left; margin-right:7px; padding-top:11px;}
 	#showTopMenu img[src*=cart]{display:none;} 
 	#showTopMenu span{display:block;  height:45px; line-height:45px; float:left; font-size:22px;} 
 	#showTopMenu a{color:#000;}
-	#showTopMenu>li:first-child>div>a{color:#571fb8; font-weight:700}
+	
 	#with{margin-left:32px;}
-	#showTopMenu>li:first-child>div{overflow:auto; padding-left:15px;}
 	#showTopMenu button{height:45px;}
 	/*group검색폼*/
 	#groupSearchFrm>select{height: 32px; width: 100px; margin: 15px 10px 15px 15px; border: 1px solid #d9d9d9; border-radius: 5px;}	    
-	#groupSearchFrm>input:nth-of-type(3){    height: 32px;   width: 270px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 15px 0px;}
-    #groupSearchFrm>input:nth-of-type(4){    display: block;  height: 32px;   float: right;   margin: 15px 15px 15px 0px;}
+	#groupSearchFrm>input:nth-of-type(2){    height: 32px;   width: 270px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 15px 0px;}
+    #groupSearchFrm>input:nth-of-type(3){    display: block;  height: 32px;   float: right;   margin: 15px 15px 15px 0px;}
 	/*groupList*/
 	#groupList{overflow:auto; height:640px;}
 	#groupList>li{border:1px solid gray;}
@@ -107,64 +108,28 @@
 				$("#open>img").attr("src","<%=request.getContextPath()%>/img/groupImg/right.png");
 			});
 			//===========================================================================
+				
+			//가치가자 한끼미식회 호버기눙==================================================================
 			
-			//==========================가치가자 한끼미식회 호버==================================
-			if(${vo.up_cate=='한끼미식회'}){
-				$('#showTopMenu>li:nth-child(2)').hover(function(){
-					//1일때 가치가자를 호버하면	
-					//한끼미식회의 이미지가 사라지고 이미지가 사라진 만큼 왼쪽에 margin을 준다
-					$(this).prev().children("div").children("img").css("display","none");
-					$("#eat").css("margin-left","32px");					
-					//가치가자의 이미지가 생기니까 가지가자가 margin-left가 0이 된다
-					$(this).children("img").css("display","block");
-					$("#with").css("margin-left","0px");					
-					//호버한 가지가자의 글씨 굵기가 bold가 되고 한끼미식회는 plain이 된다.
-					$(this).children("a").css("color","#571fb8").css("font-weight","700"); 		
-					$(this).prev().children("div").children("a").css("color","#000").css("font-weight","400");			
-				},function(){
-					//가치가자 호버를 때면
-					$(this).prev().children("div").children("img").css("display","block");
-					$("#eat").css("margin-left","0px");			
-					$(this).children("img").css("display","none");
-					$("#with").css("margin-left","32px");					
-					$(this).children("a").css("color","#000").css("font-weight","400");
-					$(this).prev().children("div").children("a").css("color","#571fb8").css("font-weight","700");					
-				});
-			}else{
-				$('#showTopMenu>li:nth-child(2)').children("img").css("display","block");
-				$('#showTopMenu>li:nth-child(2)').children("a").css("font-weight","700").css("color","#571fb8");
-				$("#with").css("margin-left","0px");
-				$('#showTopMenu>li:nth-child(1)').children("img").css("display","none");
-				$('#showTopMenu>li:nth-child(1)').children("a").css("font-weight","400").css("color","#000");
-				$("#eat").css("margin-left","32px");		
-					$('#showTopMenu>li:nth-child(1)').hover(function(){
-						//2일때 한끼미식회를 호버하면					
-						//가치가자의 이미지가 사라지고 이미지가 사라진 만큼 왼쪽에 margin을 준다
-						$(this).next().children("img").css("display","none");
-						$("#with").css("margin-left","32px");
-						//한끼미식회의 이미지가 생기니까 가지가자가 margin-left가 0이 된다
-						$(this).children("img").css("display","block");
-						$("#eat").css("margin-left","0px");					
-						//호버한 가지가자의 글씨 굵기가 bold가 되고 가치가자는 plain이 된다.
-						$(this).children("a").css("color","#571fb8").css("font-weight","700"); 		
-						$(this).next().children("a").css("color","#000").css("font-weight","400");		
-					},function(){
-						$(this).next().children("img").css("display","block");
-						$("#with").css("margin-left","0px");
-						$(this).children("img").css("display","none");
-						$("#eat").css("margin-left","32px");			
-						$(this).children("a").css("color","#000").css("font-weight","400"); 		
-						$(this).next().children("a").css("color","#571fb8").css("font-weight","700");	
-					});
-	
-			}
+			$('#showTopMenu>li:nth-child(2)').hover(function(){
+				$(this).prev().children('div').children('img').css('display','none');
+				$("#eat").css("margin-left","32px").css("color","#000").css("font-weight","400");
+				$(this).children('img').css('display','block');
+				$("#with").css("margin-left","0px").css("color","#571fb8").css("font-weight","700");
+			},function(){
+				$(this).prev().children('div').children('img').css('display','block');
+				$("#eat").css("margin-left","0px").css("color","#571fb8").css("font-weight","700");
+				$(this).children('img').css('display','none');
+				$("#with").css("margin-left","32px").css("color","#000").css("font-weight","400");
+				
+			});		
 			//==========================가치가자 한끼미식회 호버endddddddd==================================
 			
 			
 				
-			//글쓰기폼=====================================================================================
+			//글쓰기폼======================================================================================
 			$("#WriteForm").click(function(){
-				location.href="WriteForm?g_loc=${vo.g_loc}&up_cate=한끼미식회";
+				location.href="writeForm?loc_gu=${vo.loc_gu}&category=한끼미식회";
 			});
 			//글쓰기폼end=====================================================================================	
 			
@@ -178,18 +143,14 @@
 			});
 			//================================================================================================
 				
-			//좋아요=================================================================================================
-				
-		
+			//좋아요=================================================================================================	
 			$("#groupList div:first-child>input[name=num]").on('click',function(){
 				if($(this).is(':checked')){
 					console.log($(this).val());
 				}else{
 					console.log($(this).val());
 				}
-			});
-			
-				
+			});		
 			//=================================================================================================
 		})
 </script>
@@ -214,7 +175,7 @@
 	<!-- 검색 폼 -->
 	<div id="searchFrm">
 		<form id="searchFrmInner" onsubmit="searchPlaces(); return false;">
-			<input type="text" name="searchWord" id="searchWord" value="${vo.g_loc }" size=40; />
+			<input type="text" name="searchWord" id="searchWord" value="${pageVO.loc_gu }" size=40; />
 			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
 		</form>
 	</div>
@@ -222,14 +183,13 @@
 	<!-- showFrm 리스트 -->
 	<div id="showFrm">	
 		<ul id="showTopMenu">
-			<li><div><img id="dishImg" src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?g_loc=${vo.g_loc }&up_cate=한끼미식회"><span id="eat">한끼미식회</span></a></div></li>
-			<li><img style="display:none" src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?g_loc=${vo.g_loc }&up_cate=가치가장"><span id="with">가치가장</span></a></li>
+			<li><div><img id="dishImg" src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?loc_gu=${pageVO.loc_gu }"><span id="eat">한끼미식회</span></a></div></li>
+			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?loc_gu=${pageVO.loc_gu }"><span id="with">가치가장</span></a></li>
 			<li><button id="WriteForm" class="btn commBtn commBtnWrite">글쓰기</button>
 		</ul>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
 		<form id="groupSearchFrm" method="get" action="eatPage">
-			<input type="hidden" name="g_loc" value="강서구"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
-			<input type="hidden" name="up_cate" value="한끼미식회"/>
+			<input type="hidden" name="loc_gu" value="강서구"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
 			<select name="searchKey">
 				<option value="g_subject">제목</option>
 				<option value="userid">작성자</option>
@@ -242,7 +202,7 @@
 
 		<ul id="groupList">
 			<c:forEach var="i" begin="1" end="5">
-				<a href=""><li>
+				<a href="eatPageView"><li>
 					<div>
 						<img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>같이먹어요</span>
 						<input type="checkbox" name="num" id="like${i }" value="${i }"/><label for="like${i }"></label>

@@ -15,8 +15,7 @@ public class GroupPageVO {
 	private String searchWord;//검색어
 	
 	private String loc_gu; //지역구
-	private String up_cate; //한끼미식회, 가치가자
-	
+	private String category;
 	
 	
 	
@@ -107,12 +106,13 @@ public class GroupPageVO {
 	public void setLoc_gu(String loc_gu) {
 		this.loc_gu = loc_gu;
 	}
-	public String getUp_cate() {
-		return up_cate;
+	public String getCategory() {
+		return category;
 	}
-	public void setUp_cate(String up_cate) {
-		this.up_cate = up_cate;
+	public void setCategory(String category) {
+		this.category = category;
 	}
+
 	
 	
 	

@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <script>	
-		var inner = window.innerHeight;
-		console.log(inner);
 		$(function(){
 			
 			
@@ -11,7 +9,7 @@
 							'마포구','용산구','서대문구','중구','성동구','광진구','종로구','동대문구','성북구','중랑구','은평구','강북구','노원구','도봉구'];
 			var tag = "";
 			localName.map(function(obj, idx){
-				tag = "<li><a href='eatPage?g_loc="+obj+"&up_cate=한끼미식회'>"+obj+"</a></li>";
+				tag = "<li><a href='eatPage?loc_gu="+obj+"&category=한끼미식회'>"+obj+"</a></li>";
 				$("#showFrm>ul").append(tag);
 			});
 	
