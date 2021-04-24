@@ -3,6 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/boardManage.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
+<script>
+	$(function(){
+		$("#publicwrite").click(function(){
+			//공지 작성 버튼 클릭시
+			location.href="publicwrite";
+		});
+	});
+</script>
 <div id="main">
 	<ul class="statis">
 		<li>
@@ -31,7 +39,7 @@
 	<div id="btndiv">
 		<input type="button" class="searchbtn" value="가치가장"/>
 		<input type="button" class="searchbtn" value="커뮤니티"/>
-		<input type="button" class="searchbtn" value="공지작성"/>
+		<input type="button" id="publicwrite" class="searchbtn" value="공지작성"/>
 	</div>
 	
 	<table class="tablea">
@@ -58,7 +66,7 @@
 		</tr>
 		<tr>
 			<td>1</td>
-			<td>우리직구</td>
+			<td>가치가장</td>
 			<td>회원간</td>
 			<td><a href="#">트레이더스 가실분 구해요</a></td>
 			<td>1/3</td>
