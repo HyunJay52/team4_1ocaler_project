@@ -28,5 +28,9 @@ public class MemberController {
 	public String joinMember() {
 		return "member/joinMember";
 	}
-// 	
+// 셀러회원가입
+	@RequestMapping("/joinSeller")
+	public String joinSeller() {
+		return "member/joinSeller";
+	}
 }
