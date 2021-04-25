@@ -75,7 +75,7 @@
          <li class="resquick_content"><a href="m_mem">회원관리</a>
             <ul>
                <li><a href="m_mem">일반회원</a></li>
-               <li><a href="m_mem">셀러회원</a></li>
+               <li><a href="m_sel">셀러회원</a></li>
             </ul>
          </li>
          <li class="resquick_content"><a href="#">게시글 관리</a>
