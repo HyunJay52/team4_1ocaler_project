@@ -6,18 +6,18 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
-	#joinMem {
+	#joinSeller {
 		width: 1300px; height: auto;
 		margin: 100px auto;
 	}
-	#joinMem div:nth-child(odd) {
+	#joinSeller div:nth-child(odd) {
 		width: 700px; height: 50px; line-height: 50px;
 		margin-top: 10px;
 		font-size: 25px;
 		text-align: center;
 		border-bottom: 3px solid #3f1785;
 	}
-	#joinMem>form ul {
+	#joinSeller>form ul {
 		width: 700px; height: 600px;
 		margin: 0;
 	}
@@ -44,17 +44,17 @@
 		width: 320px; display: block; argin: 0 auto;    font-size: 20px;
 	}
 	
-	#joinMem>form>div>ul>li {
+	#joinSeller>form>div>ul>li {
 		float: left;
 		list-style-type: none;
 		width: 27%; height: 75px;
 	}
 	
-	#joinMem>form>div>ul>li:nth-child(odd) {
+	#joinSeller>form>div>ul>li:nth-child(odd) {
 		font-family: nsreb; font-size: 18px; padding-left: 70px; line-height: 50px;
 		
 	}
-	#joinMem>form>div>ul>li:nth-child(even) {
+	#joinSeller>form>div>ul>li:nth-child(even) {
 		width: 72%;
 	}
 	
@@ -70,7 +70,7 @@
 		float:left;
 	}
 
-	#setProfile, #joinMem div:nth-child(3) {
+	#setProfile, #joinSeller div:nth-child(3) {
 		display: none;
 	}
 	/*      button     class       */
@@ -108,33 +108,38 @@
 	}
 </style>
 
-<div id="joinMem">
+<div id="joinSeller">
 	<form method="post" action="backHome" id="memJoinFrm">
-		<div>회원 가입</div>
+		<div>셀러 가입</div>
 		<div id="basicInfo">
 			<ul>
 				<li>아이디</li>
-				<li><input type="text" name="userid" id="userid" tabindex="1" placeholder="아이디를 입력해주세요"/><button type="button" class="btn commBtn lgBtn" tabindex="2">중복검사</button><span id="idOverlap">N</span>
+				<li><input type="text" name="userid" id="userid" tabindex="1" value="abcd1234" readonly="readonly"/><button type="button" class="btn commBtn lgBtn" tabindex="2">중복검사</button><span id="idOverlap">N</span>
 					<br/><span id="checkid"></span>
 				</li>
 			
-				<li>비밀번호</li>
-				<li><input type="password" name="userpwd" id="userpwd1" tabindex="3" placeholder="영문, 숫자, 특수문자 1개 필수 포함"/>
+				<li>비밀번호</li><!-- 현재 로그인한 회원의 비밀번호와 동일 -->
+				<li><input type="text" name="userpwd" id="userpwd" tabindex="3" placeholder="비밀번호를 재입력해주세요"/>
 					<br/><span id="checkpwd"></span>
 				</li>
 				
-				<li>비밀번호 확인</li>
-				<li><input type="password" name="userpwd2" id="userpwd2" tabindex="4" placeholder="비밀번호를 재입력 입력해주세요"/> 
+				<li>사업자명</li>
+				<li><input type="text" name="company" id="company" tabindex="4" placeholder="등록된 사업자명 입력"/> 
 					<br/><span id="checkpwd2"></span>
 				</li>
 				
-				<li>이름</li>
+				<li>회사명</li>
 				<li><input type="text" name="mem_name" id="mem_name" tabindex="5" placeholder="이름을 입력해주세요"/> 
 					<br/><span id="checkname"></span>
 				</li>
 				
-				<li>연락처</li>
-				<li><input type="text" name="mem_tel" id="mem_tel" tabindex="6" placeholder="예) 01012341234"/><button type="button" class="btn commBtn lgBtn">번호인증</button>
+				<li>사업자번호</li>
+				<li><input type="text" name="com_num" id="com_num" tabindex="6" placeholder="사업자등록번호를 입력해주세요"/><button type="button" class="btn commBtn lgBtn">번호인증</button>
+					<br/><span id="checktel"></span>
+				</li>
+				
+				<li>대표번호</li>
+				<li><input type="text" name="sel_tel" id="sel_tel" tabindex="6" placeholder="예) 01012341234"/><button type="button" class="btn commBtn lgBtn">번호인증</button>
 					<br/><span id="checktel"></span>
 				</li>
 				
@@ -147,13 +152,13 @@
 				<li>
 					<button type="button" tabindex="8" class="btn commBtn lgBtn findAddr"><img src="common/search_fff.png" style="width: 15px; height:15px;">우리동네 찾기</button>
 					<ul id="addrInput">
-						<li><input type="text" name="mem_zip" id="mem_zip" tabindex="9"/><button type="button" class="btn commBtn lgBtn">재검색</button></li>
-						<li><input type="text" name="mem_addr" id="mem_addr" tabindex="10"/></li>
-						<li><input type="text" name="loc_gu" id="loc_gu" tabindex="11"/></li>
+						<li><input type="text" name="sel_zip" id="sel_zip" tabindex="9"/><button type="button" class="btn commBtn lgBtn">재검색</button></li>
+						<li><input type="text" name="sel_addr" id="sel_addr" tabindex="10"/></li>
+						<li><input type="text" name="sel_detail" id="sel_detail" tabindex="11"/></li>
 					</ul>
 				</li>
-				<li>활동지역</li>
-				<li><input type="text" name="mem_detail" id="mem_detail" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요"/><img src="img/indexImg/bo_pin.png" style="width: 40px; padding-left: 10px;"></li>
+				<li>계좌등록</li>
+				<li><input type="text" name="mem_detail" id="mem_detail" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요"/></li>
 			</ul>
 			<button type="button" id="seeMore" class="btn commBtn lgBtn" style="width: 700px; height: 40px; display: block; margin: 0 auto;">더보기</button>
 		</div>
@@ -168,14 +173,14 @@
 					<label class="input-file-button" for="mem_prof">
 					  사진추가
 					</label>
-					<input type="file" name="mem_prof" accept="image/*" id="mem_prof" style="display:none; margin-top: 70px; border: none;"/>
+					<input type="file" name="sel_content" accept="image/*" id="sel_content" style="display:none; margin-top: 70px; border: none;"/>
 				</li>
 			
 				<li>닉네임</li>
-				<li><input type="text" name="mem_nick" id="mem_nick" placeholder="별명을 입력해주세요"/><button type="button" class="btn commBtn lgBtn">중복검사</button> </li>
+				<li><input type="text" name="mem_nick" id="mem_nick" placeholder="별명을 입력해주세요"/><button type="button" class="btn commBtn lgBtn">중복검사</button><span id="nickOverlap">N</span> </li>
 				
 				<li>인사말</li>
-				<li><textarea name="mem_content" id="mem_content" maxlength="200" placeholder="최대 200자"></textarea>
+				<li><textarea name="sel_content" id="sel_content" maxlength="200" placeholder="최대 200자"></textarea>
 <!-- 					<input type="text" name="mem_content" id="mem_content" maxlength="100" placeholder="최대 100자"/> </li> -->
 			</ul>
 			<button class="btn commBtn lgBtn" style="width: 320px; display:block; margin: 0 auto;" >가입하기</button>
@@ -188,7 +193,7 @@
 </html>
 
 <script>
-	document.title="회원가입";
+	document.title="셀러가입";
 	
 	$(function(){
 //////////////////////////////////////////화면전환 이벤트		
