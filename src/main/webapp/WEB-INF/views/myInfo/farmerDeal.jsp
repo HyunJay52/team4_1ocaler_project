@@ -6,6 +6,7 @@
 <script src="<%=request.getContextPath()%>/js/myInfo/myInfoScript.js"></script>
 <script>
 	$(function(){
+
 		//리스트 세팅
 		function setList(){
 
@@ -110,8 +111,8 @@
 					<ul>
 						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
 						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>
-						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn">또 참여할래요</button></li>
-						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn">음, 글쎄요</button></li>
+						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn" title="like">또 참여할래요</button></li>
+						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn" title="hate">음, 글쎄요</button></li>
 						<li>
 							<textarea class="dealTextarea mdFnt" name="review" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
 						</li>

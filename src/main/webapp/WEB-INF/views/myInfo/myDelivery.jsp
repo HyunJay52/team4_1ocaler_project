@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
+<script src="<%=request.getContextPath()%>/js/myInfo/myInfoScript.js"></script>
 <style>
 	#deliveryTop, #deliveryBottom{
 		padding:30px 50px;
@@ -88,43 +89,6 @@
 </style>
 <script>
 	$(function(){
-	var date = new Date();
-		
-		var toYear = date.getFullYear();
-		var toMonth = date.getMonth()+1;
-		
-		$(".setMonth").text(toMonth+"월");
-		
-		//월 세팅
-		function setMonth(toYear, toMonth){
-			$(".setMonth").text(toMonth+"월");
-			
-			console.log(toYear);
-			console.log(toMonth);
-			console.log($("#sel").val());
-
-		}
-		
-		//이전날짜
-		$(".prev").click(function(){
-			toMonth--;
-			if(toMonth == 0){
-				toMonth = 12;
-				toYear--;
-			}
-			setMonth(toYear, toMonth);
-		});
-		
-		//다음날짜
-		$(".next").click(function(){
-			toMonth++;
-			if(toMonth == 13){
-				toMonth = 1;
-				toYear++;
-			}
-			setMonth(toYear, toMonth);
-		});
-		
 		//ajax 배송조회 실행
 		function test(deliveryNo){  
 			$.ajax({

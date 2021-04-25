@@ -21,10 +21,17 @@ $(function(){
 		function setMonth(toYear, toMonth){
 			$(".setMonth").text(toMonth+"월");
 			
+			if($("#sel").val() != null){// 충전하기 페이지(load)의 셀렉트박스 체크
+				console.log($("#sel").val());			
+			}
+			if($("#myDealToggle button").attr('value') != null){
+				var select = $("#myDealToggle button[value='select']").text();
+				console.log("event="+select);			
+			}
 			console.log(toYear);
 			console.log(toMonth);
 
-		}
+		}	
 		
 		//이전날짜
 		$(".prev").click(function(){
@@ -51,4 +58,10 @@ $(function(){
 			}
 			setMonth(toYear, toMonth);
 		});	
+		
+		
+		
+		
+		
+		
 });

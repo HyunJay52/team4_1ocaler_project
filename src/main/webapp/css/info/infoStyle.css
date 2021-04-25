@@ -8,6 +8,8 @@
 	.mainContainer{
 		width:1000px;
 		margin:50px 185px;
+		overflow:auto;
+		
 	}
 	ul, li{
 		margin:0;
