@@ -13,7 +13,6 @@ public class HomeController {
 		System.out.println("서비스 문제 해결 ^^ 행벅");
 		return "home";
 	}
-	
 	@RequestMapping("/backHome")
 	public String backHome() {
 		return "home";

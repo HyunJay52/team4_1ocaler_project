@@ -18,6 +18,7 @@ public class MemberController {
 		return "member/login";
 	}
 	
+// 일반회원가입
 	@RequestMapping(value="/loginConfrim", method=RequestMethod.POST)
 	public String loginConfirm() {
 		return "member/login";
@@ -27,4 +28,5 @@ public class MemberController {
 	public String joinMember() {
 		return "member/joinMember";
 	}
+// 	
 }

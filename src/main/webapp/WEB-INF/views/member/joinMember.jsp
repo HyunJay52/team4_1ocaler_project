@@ -153,7 +153,7 @@
 					</ul>
 				</li>
 				<li>활동지역</li>
-				<li><input type="text" name="mem_detail" id="mem_detail" tabindex="12"/><img src="img/indexImg/bo_pin.png" style="width: 40px; padding-left: 10px;"></li>
+				<li><input type="text" name="mem_detail" id="mem_detail" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요"/><img src="img/indexImg/bo_pin.png" style="width: 40px; padding-left: 10px;"></li>
 			</ul>
 			<button type="button" id="seeMore" class="btn commBtn lgBtn" style="width: 700px; height: 40px; display: block; margin: 0 auto;">더보기</button>
 		</div>
