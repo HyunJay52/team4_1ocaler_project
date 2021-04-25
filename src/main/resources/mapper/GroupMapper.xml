@@ -9,7 +9,6 @@
   		values(boardsq.nextval, #{userid}, #{up_cate}, #{down_cate}, #{g_gu}, #{g_subject}, #{g_content}, #{g_cnt}, to_date(#{g_date}, 'YYYY-MM-DD'), to_date(#{g_time},'HH24:MI'), #{g_loc1}, #{g_tag} )
   	<!-- date type을 insert 할떄 to_date로 변경해서 보내야함 -->
   	</insert>
-  	
   	<insert id="groupBigMartInsert" parameterType="com.team4.localer.vo.GroupVO">
   		insert into grouplocal(num, userid, up_cate, down_cate, g_gu, g_subject, g_content, g_cnt, g_date, g_time,
   		g_loc1, g_loc2, g_tag)
@@ -17,4 +16,18 @@
   	<!-- date type을 insert 할떄 to_date로 변경해서 보내야함 -->
   	</insert>
   
+  	<select id="GroupEatList" resultType="com.team4.localer.vo.GroupVO">
+  		select num, down_cate, g_subject, g_cnt, to_date(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
+  		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='한끼미식회' order by num desc
+  	</select>
+  	<select id="GroupWithList" resultType="com.team4.localer.vo.GroupVO">
+  		select num, down_cate, g_subject, g_cnt, to_date(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
+  		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='가치가장' order by num desc
+  	</select>
+  
+<!--   	<select id="groupEatOnePage" resultType="com.team4.localer.vo.GroupVO">
+  		select num, up_cate, down_cate, g_cnt, g_writedate, g.userid, mem_prof, mem_nick, g_content, g_date, g_time, g_loc1, g_tag 
+  		from grouplocal g join member2 m on g.userid=m.userid where num=${param1}
+  	</select> -->
+
   </mapper>

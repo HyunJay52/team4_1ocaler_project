@@ -7,11 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.GroupService;
 import com.team4.localer.vo.GroupPageVO;
 import com.team4.localer.vo.GroupVO;
+import com.team4.localer.vo.LikeItVO;
 
 @Controller
 public class GroupController {
@@ -30,9 +32,12 @@ public class GroupController {
 	
 	
 	@RequestMapping("/eatPage")
-	public ModelAndView eatPage(GroupPageVO pageVO, HttpServletRequest req) {
+	public ModelAndView eatPage(GroupPageVO pageVO, GroupVO vo) {
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("eatList",groupService.GroupEatList(pageVO.getLoc_gu()));
 		mav.addObject("pageVO",pageVO);
+		
 		mav.setViewName("group/eatView");
 		return mav;
 	}
@@ -41,6 +46,8 @@ public class GroupController {
 	@RequestMapping("/withPage")
 	public ModelAndView withPage(GroupPageVO pageVO, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("withList",groupService.GroupWithList(pageVO.getLoc_gu()));
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("group/withView");
 		return mav;
@@ -59,7 +66,7 @@ public class GroupController {
 		ModelAndView mav = new ModelAndView();
 		
 		vo.setUserid("goguma1234");
-		vo.setG_gu("강서구");
+		vo.setG_gu("구로구");
 		
 		if(vo.getG_loc2()==null || vo.getG_loc2().equals("")) {
 			if(groupService.groupInsert(vo)>0) {
@@ -97,38 +104,32 @@ public class GroupController {
 		System.out.println("g_loc1===>"+vo.getG_loc1());
 		System.out.println("g_loc2-===>"+vo.getG_loc2());
 		System.out.println("g_tag=====>"+vo.getG_tag());
-		
-		
-		
-		
-		
-		
-		
+			
 		return mav;
 	}
 	
 	
 	
-	@RequestMapping("/eatPageView")
-	public ModelAndView eatPageView(GroupPageVO vo) {
+	@RequestMapping("/eatViewPage")
+	public ModelAndView eatPageView(GroupPageVO pageVO, int num) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo",groupService.groupEatOnePage(num));
+	
+		mav.addObject("pageVO",pageVO); //num,gu, (추가사항=>pageNum,searchKey,searchWord)
+		mav.setViewName("group/eatViewPage");
+		return mav;
+	}
+	
+	
+	
+	@RequestMapping("/withViewPage")
+	public ModelAndView withPageView(GroupPageVO pageVO) {
 		ModelAndView mav = new ModelAndView();
 		
 		
-		mav.setViewName("group/eatPageView");
+		mav.addObject("pageVO", pageVO);
+		mav.setViewName("group/withViewPage");
 		return mav;
 	}
-	
-	
-	
-	@RequestMapping("/withPageView")
-	public ModelAndView withPageView(GroupPageVO vo) {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("group/withPageView");
-		return mav;
-	}
-	
-	
-	
-	
 }

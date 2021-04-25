@@ -65,7 +65,7 @@
 <body>
 <div id="header">
    <div id="logo"><a href="backHome"><img src="common/logo_deep_pur.png"/></a></div>
-   <c:if test="${logId==admin }">
+   <c:if test="${logId!=admin }">
       <ul id="navi">
          <li class="resquick_content"><a href="main">HOME</a>
             <ul>
@@ -98,7 +98,7 @@
          </li>
       </ul>
    </c:if>
-   <c:if test="${logId!=admin }">
+   <c:if test="${logId==admin }">
       <ul id="navi">
          <li class="resquick_content"><a href="#">ABOUT</a>
             <ul>
