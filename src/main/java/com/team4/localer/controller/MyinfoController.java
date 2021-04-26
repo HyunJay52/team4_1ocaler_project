@@ -71,4 +71,8 @@ public class MyinfoController {
 		return "myInfo/myInfoProductManagement";
 		
 	}
+	@RequestMapping("/myInfoShippingManagement")
+	public String myInfoShippingManagement() {
+		return "myInfo/myInfoShippingManagement";
+	}
 }

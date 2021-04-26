@@ -88,11 +88,11 @@
 			}else if($(this).text() == '상품관리'){
 				location.href="myInfoProductManagement";
 			}else if($(this).text() == '판매/결제관리'){
-				
+				location.href="myInfoShippingManagement";
 			}else if($(this).text() == '배송관리'){
-				
+				location.href="";
 			}else if($(this).text() == '통계'){
-				
+				location.href="";
 	
 			}
 		});

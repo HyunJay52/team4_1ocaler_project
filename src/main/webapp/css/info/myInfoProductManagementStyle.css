@@ -6,7 +6,7 @@
 	.productManagementHeaderForm{
 		height:30px;
 		text-align:center;	
-		margin:20px 50px;
+		margin:20px 0 0 90px;
 	}
 	.productManagementHeader>li{
 		float:left;
@@ -94,4 +94,14 @@
 	}
 	.myInfoProductManagementTable2 tr>td{/*전체적인 열 폭조정*/
 		width:14%;
+	}
+	#shipSelectbox{
+		float:right;
+		margin-top:5px;
+		height:30px;
+	}
+	.shippingManagementHeaderForm{
+		height:30px;
+		text-align:center;	
+		margin:20px 0 0 150px;
 	}
