@@ -15,7 +15,7 @@ public class GroupPageVO {
 	private String searchWord;//검색어
 	
 	private String loc_gu; //지역구
-	private String category;
+	private String category;//카테고리
 	
 	
 	
