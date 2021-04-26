@@ -1,80 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <style>
-	
-	/*기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능*/
-	/*열고 닫기*/
-	#withViewfold, #withViewOpen{position:absolute; z-index:1;}	
-	#withViewfold{background-color:#fff; top:140px; left:493; margin-top:348px; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	#withViewOpen{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	/*버튼이벤트*/
-	.commBtn {	width: 90px; color: #3f1785; border: 1px solid #3f1785;}
-	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}	 
-	.commBtnWrite{width:75px;}
-	
-	/*폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼*/
 	#header{display:none;}
-	#withViewBody{overflow:hidden;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
-	
-	/*withViewSearchFrm*/
-	#withViewSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#withViewSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
-	#withViewSearchFrm input[type=image]{display:block; height:48px;}
-	
-	/*withViewTopFrm*/
-	#withViewTopFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#withViewTopFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#withViewTopFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
-	#withViewTopFrm img{width:30px; margin:9px 0px;}
-	#withViewTopFrm li:first-child>a>img{ margin-left:10px;}
-	#withViewTopFrm li:last-child>a>img{ margin-right:10px;}
-	
-	/*withViewShowFrm*/	
-	#withViewShowFrm{position:absolute; height:auto; top:100px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
-	#withViewShowTopMenu{overflow:auto;}
-	#withViewShowTopMenu>li{float:left; width:180px; padding: 10px 0px 10px 10px;}
-	#withViewShowTopMenu>li:nth-of-type(3){width:100px;}	
-	#withViewShowTopMenu img{display:block; width:25px; float:left; margin-right:7px; padding-top:11px;}	
-	#withViewShowTopMenu img[src*=dish]{display:none;}
-	#withViewShowTopMenu span{display:block;  height:45px; line-height:45px; float:left; font-size:22px;} 
-	#withViewShowTopMenu a{color:#000;}
-	#withViewShowTopMenu>li:first-child>div{ padding-left:15px;}
-	#withViewShowTopMenu>li:nth-child(2)>a{color:#571fb8; font-weight:700}
-	#withViewShowTopMenu>li:nth-child(2)>div>span{color:#571fb8; font-weight:700}
-	#withViewEat{margin-left:32px;}
-	#withViewShowTopMenu button{height:45px;}	
-	
- 	/*group검색폼*/
-	#withViewGroupSearchFrm>select{height: 32px; width: 100px; margin: 15px 10px 15px 15px; border: 1px solid #d9d9d9; border-radius: 5px;}	    
-	#withViewGroupSearchFrm>input:nth-of-type(2){    height: 32px;   width: 270px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 15px 0px;}
-    #withViewGroupSearchFrm>input:nth-of-type(3){    display: block;  height: 32px;   float: right;   margin: 15px 15px 15px 0px;}
-	
-	/*withViewGroupList*/
-	#withViewGroupList{overflow:auto; height:640px;}
-	#withViewGroupList>li{border:1px solid gray;}
-	#withViewGroupList div:first-child{overflow:auto; position:relative;}
- 	#withViewGroupList div:first-child>span{display:block; float:left; font-size:16px; margin:7px 0px;}
-	#withViewGroupList div:first-child>img:first-child{display:block; float:left; height:16px; margin: 10px 15px;}
-	#withViewGroupList span{display:block; text-align:center; font-size:22px; margin-bottom: 5px;}
-	#withViewGroupList div:not(:first-child)>img{margin:5px 40px;}
-	#withViewGroupList div:nth-child(6){font-size: 13px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px; padding-right: 15px; margin-top:3px; margin-bottom:5px;}
-
 	/*withViewGroupList-like btn*/
 	.fakeCheckBoxImg[type=checkbox]{ display:none; }
  	#withViewGroupList div>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
 	#withViewGroupList div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
 	#withViewGroupList div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
 	#withViewGroupList a:hover{color:#000; text-decoration:none;}
-
-	/*paging*/
-	#page{text-align:center}
-	#page>li{display:inline-block; border:1px solid #d9d9d9; width:35px; height:40px; line-height:40px; margin:19px auto;}
-	#page>li:first-child{width:50px; border-top-left-radius:8px; border-bottom-left-radius:8px }
-	#page>li:last-child{width:50px; border-top-right-radius:8px; border-bottom-right-radius:8px}
+	
 </style>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <script>	
 		$(function(){
 

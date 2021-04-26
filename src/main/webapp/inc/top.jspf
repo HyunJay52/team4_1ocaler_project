@@ -3,6 +3,8 @@
 <%@ page session="true" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewStyle.css"/>
 <html>
 <head>
    <title>Welcome to 1ocaler</title>
