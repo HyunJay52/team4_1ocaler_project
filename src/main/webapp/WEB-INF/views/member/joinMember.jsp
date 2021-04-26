@@ -96,7 +96,7 @@
 				<li><textarea name="mem_content" id="mem_content"
 						maxlength="200" placeholder="최대 200자"></textarea> <!-- 					<input type="text" name="mem_content" id="mem_content" maxlength="100" placeholder="최대 100자"/> </li> -->
 			</ul>
-			<button class="btn commBtn lgBtn"
+			<button class="btn commBtn Mem_lgBtn"
 				style="width: 320px; display: block; margin: 0 auto;">가입하기</button>
 		</div>
 	</form>
@@ -109,7 +109,7 @@
 	document.title = "회원가입";
 
 	$(function() {
-		//////////////////////////////////////////화면전환 이벤트		
+//////////////////////////////////////////화면전환 이벤트		
 		//주소찾기 눌렀을때 화면 전환
 		$(".findAddr").click(function() {
 			$(".findAddr").css("display", "none");
@@ -151,7 +151,7 @@
 				}
 			}).open();
 		}
-		//////////////////////////////////////////유효성 검사 펑션
+//////////////////////////////////////////유효성 검사
 		$("#userid").on('keyup', function() {
 			var regId = /^[a-zA-Z]{1}[a-zA-Z0-9]{5,12}$/;
 			if (!regId.test($("#userid").val())) {
@@ -170,9 +170,7 @@
 			}
 		});
 		$("#userpwd1")
-				.on(
-						'keyup',
-						function() {
+				.on('keyup', function() {
 							$("#checkid").css("display", "none");
 							var regPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/;
 							if (!regPwd.test($("#userpwd1").val())) {

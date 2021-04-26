@@ -3,14 +3,13 @@
 <%@ page session="true" %>
 
 <!-- 페이지 스타일 링크 -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/member/member.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/aboutBoard.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/csBoard.css"/>
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
 <!-- 카카오 지도 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script>
