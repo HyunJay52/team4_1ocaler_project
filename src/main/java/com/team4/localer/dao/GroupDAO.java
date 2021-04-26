@@ -13,8 +13,8 @@ public interface GroupDAO {
 	public List<GroupVO> GroupWithList(String loc_gu);//해당지역구의 가치가장 총리스트 가져오기
 	
 	
-	public GroupVO eatViewPageResult(int num);//게시글 1개 보는 뷰페이지 해야함
-	
+	public GroupVO eatViewPageResult(int num);//eatView의 1개 개시글선택
+	public GroupVO withViewPageResult(int num);//withView의 1개 게시글선택
 	
 	
 	

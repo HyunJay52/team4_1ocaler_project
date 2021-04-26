@@ -20,7 +20,6 @@ public class GroupController {
 	
 	@Inject
 	GroupService groupService;
-	LikeItService likeItService;
 	
 	@RequestMapping("/groupPage")
 	public String groupOpen(HttpSession session) {//나중에 지워야할값 지금 세션 확인위해 해놓은것
@@ -35,11 +34,6 @@ public class GroupController {
 	@RequestMapping("/eatPage")
 	public ModelAndView eatPage(GroupPageVO pageVO, GroupVO vo) {
 		ModelAndView mav = new ModelAndView();
-		
-		
-		
-		
-		
 		
 		mav.addObject("eatList",groupService.GroupEatList(pageVO.getLoc_gu()));
 		mav.addObject("pageVO",pageVO);
@@ -118,14 +112,9 @@ public class GroupController {
 	
 	@RequestMapping("/eatViewPage")
 	public ModelAndView eatPageView(GroupPageVO pageVO, int num) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(); 
 		
-		
-		GroupVO vo = groupService.eatViewPageResult(num);
-		
-		
-		mav.addObject("vo",vo);
-		
+		mav.addObject("vo",groupService.eatViewPageResult(num));
 		mav.addObject("pageVO",pageVO); //num,gu, (추가사항=>pageNum,searchKey,searchWord)
 		mav.setViewName("group/eatViewPage");
 		return mav;
@@ -134,11 +123,11 @@ public class GroupController {
 	
 	
 	@RequestMapping("/withViewPage")
-	public ModelAndView withPageView(GroupPageVO pageVO) {
+	public ModelAndView withPageView(GroupPageVO pageVO, int num) {
 		ModelAndView mav = new ModelAndView();
-		
-		
-		mav.addObject("pageVO", pageVO);
+	
+		mav.addObject("vo",groupService.withViewPageResult(num));
+		mav.addObject("pageVO", pageVO);//num,gu, (추가사항=>pageNum,searchKey,searchWord)
 		mav.setViewName("group/withViewPage");
 		return mav;
 	}

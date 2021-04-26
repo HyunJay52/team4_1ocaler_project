@@ -13,6 +13,6 @@
   	
   	
   	<select id="LikeItSelectAll" parameterType="com.team4.localer.vo.LikeItVO">
-  		select numLike, userid from likeit
+  		select numLike, userid from likeit where userid=#{param1}
   	</select>
   </mapper>

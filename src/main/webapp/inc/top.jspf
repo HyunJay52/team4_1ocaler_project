@@ -5,8 +5,13 @@
 <!-- 페이지 스타일 링크 -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/groupMapViewStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewPageStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewPageStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/groupWriteFormStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/aboutBoard.css"/>
 
 <!-- 카카오 지도 -->

@@ -40,6 +40,12 @@ public class GroupServiceImpl implements GroupService{
 			return groupDAO.eatViewPageResult(num);
 		}
 
+		@Override
+		public GroupVO withViewPageResult(int num) {
+			return groupDAO.withViewPageResult(num);
+		}
+
+	
 		
 		
 		

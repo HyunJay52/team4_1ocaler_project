@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 	#header{display:none;}
+	#footer{display:none;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*withViewGroupList-like btn*/
 	.fakeCheckBoxImg[type=checkbox]{ display:none; }
