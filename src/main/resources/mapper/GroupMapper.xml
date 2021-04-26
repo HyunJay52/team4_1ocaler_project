@@ -25,9 +25,37 @@
   		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='가치가장' order by num desc
   	</select>
   
-<!--   	<select id="groupEatOnePage" resultType="com.team4.localer.vo.GroupVO">
+  
+  
+  
+  
+  
+  
+  
+  	<resultMap type="com.team4.localer.vo.MemberVO" id="memChoice">
+  		<result column="mem_nick" property="mem_nick"/>
+  		<result column="mem_prof" property="mem_prof"/>		
+  	</resultMap>
+  	
+  	<resultMap type="com.team4.localer.vo.GroupVO" id="groupChoice">
+  		<result column="num" property="num"/>
+  		<result column="up_cate" property="up_cate"/>
+  		<result column="down_cate" property="down_cate"/>
+  		<result column="g_cnt" property="g_cnt"/>
+  		<result column="g_writedate" property="g_writedate"/>
+  		<result column="userid" property="userid"/>
+  		<result column="g_content" property="g_content"/>
+  		<result column="g_date" property="g_date"/>
+  		<result column="g_time" property="g_time"/>
+  		<result column="g_loc1" property="g_loc1"/>
+  		<result column="g_tag" property="g_tag"/>
+  		<collection property="memberVO" resultMap="memChoice" />
+
+  	</resultMap> 
+  	
+  	<select id="eatViewPageResult" resultMap="groupChoice">
   		select num, up_cate, down_cate, g_cnt, g_writedate, g.userid, mem_prof, mem_nick, g_content, g_date, g_time, g_loc1, g_tag 
   		from grouplocal g join member2 m on g.userid=m.userid where num=${param1}
-  	</select> -->
+  	</select> 
 
   </mapper>

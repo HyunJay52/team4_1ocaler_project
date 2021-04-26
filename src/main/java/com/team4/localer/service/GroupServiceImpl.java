@@ -36,8 +36,8 @@ public class GroupServiceImpl implements GroupService{
 		}
 
 		@Override
-		public GroupVO groupEatOnePage(int num) {
-			return groupDAO.groupEatOnePage(num);
+		public GroupVO eatViewPageResult(int num) {
+			return groupDAO.eatViewPageResult(num);
 		}
 
 		

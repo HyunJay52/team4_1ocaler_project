@@ -28,4 +28,9 @@ public class LikeItController {
 		vo.setUserid((String)session.getAttribute("logId"));	
 		return likeItService.likeDelete(vo.getNumLike(), vo.getUserid())+"";
 	}
+	
+	
+	
+	
+	
 }

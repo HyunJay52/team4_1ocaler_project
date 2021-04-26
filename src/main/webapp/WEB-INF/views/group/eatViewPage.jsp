@@ -101,7 +101,7 @@
 			<li><span>조회수 : ${vo.g_cnt } </span></li>
 			<li><span> ${vo.g_subject }</span></li>
 			<li><img src="<%=request.getContextPath()%>/common/user.png"/></li>
-			<li><div>${vo.mem_nick }</div><div>${vo.g_writedate }</div></li>
+			<li><div>${vo.memberVO.mem_nick }</div><div>${vo.g_writedate }</div></li>
 			<li>모집인원 : <span> 2</span> / <span> ${vo.g_cnt } </span></li> <!--  쒯 join 테이블도 join해야되네 -->
 			
 		</ul>
@@ -120,9 +120,9 @@
 			<c:if test="${vo.userid!=logId }"> 
 				<button id="eatViewPageJoinBtn" class="btn confBtn">참여하기</button>
 			</c:if>
-			<%-- <c:if test="${vo.userid==logId }"> <!--이건 작성자일경우 수정하기 버튼  -->
+			<c:if test="${vo.userid==logId }"> <!--이건 작성자일경우 수정하기 버튼  -->
 				<button id="eatViewPageEditBtn" class="btn confBtn">수정하기</button>
-			</c:if>  --%>
+			</c:if>
 		</div>
 		
 		

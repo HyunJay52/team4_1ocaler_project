@@ -7,19 +7,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.GroupService;
+import com.team4.localer.service.LikeItService;
 import com.team4.localer.vo.GroupPageVO;
 import com.team4.localer.vo.GroupVO;
-import com.team4.localer.vo.LikeItVO;
+
 
 @Controller
 public class GroupController {
 	
 	@Inject
 	GroupService groupService;
+	LikeItService likeItService;
 	
 	@RequestMapping("/groupPage")
 	public String groupOpen(HttpSession session) {//나중에 지워야할값 지금 세션 확인위해 해놓은것
@@ -34,6 +35,11 @@ public class GroupController {
 	@RequestMapping("/eatPage")
 	public ModelAndView eatPage(GroupPageVO pageVO, GroupVO vo) {
 		ModelAndView mav = new ModelAndView();
+		
+		
+		
+		
+		
 		
 		mav.addObject("eatList",groupService.GroupEatList(pageVO.getLoc_gu()));
 		mav.addObject("pageVO",pageVO);
@@ -114,8 +120,12 @@ public class GroupController {
 	public ModelAndView eatPageView(GroupPageVO pageVO, int num) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("vo",groupService.groupEatOnePage(num));
-	
+		
+		GroupVO vo = groupService.eatViewPageResult(num);
+		
+		
+		mav.addObject("vo",vo);
+		
 		mav.addObject("pageVO",pageVO); //num,gu, (추가사항=>pageNum,searchKey,searchWord)
 		mav.setViewName("group/eatViewPage");
 		return mav;
