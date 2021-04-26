@@ -1,52 +1,53 @@
 @charset "UTF-8";
-/*32 22 13*/
-body{font-family:"nsr";font-size:13px;}
-#main{margin:0 auto; padding:0;overflow:auto;
-	width:1300px;background-color:#ddd;
+.main{
+	font-family:"nsr";
+	margin:0 auto;
+	width:1300px;
 }
-#center{margin:0 auto;}
-.one{
-	margin-top:40px;margin-bottom:20px;
-	margin-left:20px;
-	background-color:#fff;
-    width:490px;
-    height:920px;
-    padding:20px 30px;
+.statis{ /*ul style*/
+	margin:0 auto;
+	width:100%;
+	overflow:auto;
+	list-style-type:none;
+	background-color:rgb(252,252,254);
+	}
+.statis>li{
+	margin-top:10px;
+	margin-bottom:10px;
 	float:left;
-	border:1px solid gray;
-}
-ul{
-	list-style-type: none;
+	width:20%;
+	color:#3f1785;
+	font-family:"nsrb";
+	font-size:16px;
+	text-align: center;
 	}
-li{
-	padding:8px;
-	}
-/*첫번째 div*/
-#simply li:first-child{
-	font-faimly:"nsrb";
+.statis div{/*수치*/
+	font-family:"nsreb";
 	font-size:32px;
+	color:#3f1785;
+	border-right:4px solid rgb(219,214,239);
 	}
-/*두번째마다*/
-#simply li:nth-child(2n){
-	font-size:22px;
-	}
-	/*공통텍스트박스*/
-input[type="text"]{
-	width:300px;/*너비설정*/
-	padding:5px;/*여백설정*/
-	font-family: inherit;/*폰트상속*/
+.statis li:last-child>div{
+	border:none;
 }
-input[type="button"]{
-	float:left;
-	width:100px;
-	margin:10px;
-	padding:5px;/*여백설정*/
-	font-family: inherit;/*폰트상속*/
+.statis b{/*통계숫자*/}
+/*검색 form*/
+#memFrm{
+	text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-#simply li:last-child{
-	padding:0px;
-	width:200px;
-	height:200px;
-	border:1px solid #ddd;
+/*회원정보 테이블*/
+#meminfo{
+	margin-top:30px;
+	margin-left:175px;
+	display: none;
 }
 
+#selinfo{
+	margin-top:30px;
+	display: none;
+}
+	
+	
+	

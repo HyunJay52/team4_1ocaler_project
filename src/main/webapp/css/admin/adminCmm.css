@@ -97,3 +97,25 @@
 	color:rgb(183,15,23);
 	background:#fff;
 }
+/*모달부분*/
+.modaldiv>div{
+	font-family:"nsreb";
+	font-size:32px;
+}
+.modaldiv{
+	padding:15px 5px 0 5px;
+	border:1px solid #ddd;
+	border-radius:10px;
+	width:500px;
+	height:380px;
+	display:none;
+	background-color:#fff;
+}
+.exit{
+	float:right;
+	font-size:16px;
+	border:none; background-color:#fff;
+}
+.modaldiv>table{
+	margin-top:20px;
+}
