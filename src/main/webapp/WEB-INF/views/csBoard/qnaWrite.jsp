@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/csBoard.css"/>
 <%@ include file="/inc/sideBar.jspf" %>
 
 <div class="cs_main">
@@ -16,7 +15,7 @@
 		<br/>
 		<form method="post" action="cs_qnaOk" id="qnaFrm">
 			<select id="csSearchKey" name="csSearchKey">
-				<option>카테고리</option>
+				<option>카테고리 선택</option>
 				<option value="mem_qna">회원문의</option>
 				<option value="bor_qna">게시판문의</option>
 				<option value="pay_qna">결제/충전문의</option>

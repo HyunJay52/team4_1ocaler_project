@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/aboutBoard.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/csBoard.css"/>
 
 <!-- 카카오 지도 -->
 <script type="text/javascript"

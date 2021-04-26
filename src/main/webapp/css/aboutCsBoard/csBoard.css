@@ -19,6 +19,97 @@
 #csList>li:last-child {
 	border-bottom: 1px solid #ddd;
 }
+/* 자주하는 질문 */
+#oftenCenter #often_searchDiv {
+	margin-bottom: 20px;
+	text-align: center;
+}
+#oftenCenter #oftenSearchKey {
+	width: 150px;
+	height: 40px;
+}
+#oftenCenter #cs_subject {
+	width: 300px;
+	height: 40px;
+}
+#often_searchDiv .often_btn {
+	width: 100px; height: 40px;
+	border-radius: 3px;
+	background-color: #fff;
+}
+#often_searchDiv .often_btn:hover {
+	background: #3f1785;
+} 
+
+/*표*/
+#oftenTbl {
+	width: 850px; height: auto;
+	text-indent: initial;
+}
+
+#oftenTbl th {
+	height: 50px;
+	display: table-cell;
+	vertical-align: inherit;
+	font-weight: bold;
+	text-align: -internal-center;
+	border-bottom: 1.5px solid #3f1785;
+	border-top: 1.5px solid #3f1785;
+	background-color: #fcfcfc;
+	font-size: 16px;
+}
+
+#oftenTbl td {
+	height: 50px;
+	border-bottom: 1px solid lightgray;
+}
+
+#oftenTbl td:nth-child(1), #oftenTbl td:nth-child(2) {
+	text-align: center;
+	width: 100px; padding: 0px;
+}
+
+#oftenTbl td:nth-child(3) {
+	padding-left: 30px;
+}
+
+#oftenTbl td:nth-child(3) a, a {
+	color: black;
+	cursor: pointer;
+}
+
+#oftenTbl th {
+	margin-top: 30px;
+	text-align: center;
+}
+
+/*답변*/
+#oftenList .often_answer {
+	background-color: #f6f6f6;
+	display: none;
+}
+
+#oftenList .answer_status {
+	padding: 20px 10px 20px 30px;
+	font-size: 13px;
+}
+
+#oftenList>.often_answer>.answer_status {
+	color: #571fb8;
+	font-weight: bold;
+}
+
+#oftenList>.often_answer>.answer_content {
+	text-align: inherit;
+	font-size: 15px;
+    padding: 10px 20px;
+}
+.oftenShow {
+	display: block;
+}
+.oftenHide {
+	display: none;
+}
 /* 1:1 문의하기 */
 .qnaSub {
 	width: 700px;
@@ -125,4 +216,7 @@
 	color: gray;
 	font-size: 15px;
 	padding-left: 15px;
+}
+.cs_padding_left {
+	padding-left: 5px;
 }
