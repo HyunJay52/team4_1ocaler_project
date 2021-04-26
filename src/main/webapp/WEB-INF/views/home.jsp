@@ -131,13 +131,9 @@
 	}
 	
 	.boardText {
-		float: left;
+		width: 1200px;
+		margin: 0 auto;
 	}
-	
-/* 	.selList>div>ul li { */
-/*  		margin: 0px;  */
-/* 	} */
-	
 	.selList>div>ul li:nth-child(1) {
 		width: 100%;
 		text-align: center;

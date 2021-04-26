@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="true" %>
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/csBoard/csBoard.css"/>
+
+<div id="csNavi">
+	<div class="lgFnt">고객센터</div>
+	<ul id="csList" class="listNone">
+		<li><a href="oftenQna">자주하는 질문</a></li>
+		<li><a href="qnaWrite">1:1 문의하기</a></li>
+		<li><a href="reportWrite">신고하기</a></li>
+	</ul>
+</div>
+
+<script>
+	$(function(){
+		$("#csList>li").hover(
+			function(){
+				$(this).css('background', '#FAFAFA');
+				$(this).children('a').css({
+					'color':'#3f1785',
+					'fontWeight':'bold',
+					'fontSize':'17px',
+					'textDecoration': 'none'
+				})
+			},
+			function(){
+				$(this).css('background', '#fff');
+				$(this).children('a').css({
+					'color':'#000',
+					'fontWeight':'normal',
+					'fontSize':'16px',
+					'textDecoration': 'none'
+				})	
+			}
+		);
+	});
+
+</script>

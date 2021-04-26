@@ -36,7 +36,7 @@
 	form>#basicInfo input, form>#setProfile input {
 		width: 320px; height: 50px; padding: 0 15px; border-radius: 3px; border: 1px solid #ddd;
 	}
-	form #mem_content {
+	form #sel_content {
 		width: 320px; height: 150px;
 		border-radius: 3px; border: 1px solid #ddd;
 	}
@@ -58,11 +58,11 @@
 		width: 72%;
 	}
 	
-	#addrInput {
+	#addrInput, #bankInput {
 		display: none;
 		width: 100%; height: 200px;
 	}
-	#addrInput>li {
+	#addrInput>li, #bankInput>li {
 		list-style-type: none;
 		margin-bottom: 10px;
 	}
@@ -72,6 +72,14 @@
 
 	#setProfile, #joinSeller div:nth-child(3) {
 		display: none;
+	}
+	#bank {
+		width: 160px;
+	    height: 50px;
+	    border-radius: 5px;
+	    border-bottom-left-radius: 5px;
+	    padding-left: 10px;
+	    border: 1px solid #ddd;
 	}
 	/*      button     class       */
 	.lgBtn {
@@ -89,7 +97,7 @@
 		color: #000;
 		text-decoration: none;
 	}
-	.findAddr {
+	.findAddr,.addBank {
 		width: 320px; margin: 0;
 	}
 	.profImg {
@@ -109,7 +117,7 @@
 </style>
 
 <div id="joinSeller">
-	<form method="post" action="backHome" id="memJoinFrm">
+	<form method="post" action="backHome" id="sellerJoinFrm">
 		<div>셀러 가입</div>
 		<div id="basicInfo">
 			<ul>
@@ -124,17 +132,17 @@
 				</li>
 				
 				<li>사업자명</li>
-				<li><input type="text" name="company" id="company" tabindex="4" placeholder="등록된 사업자명 입력"/> 
+				<li><input type="text" name="sel_name" id="sel_name" tabindex="4" placeholder="등록된 사업자명 입력"/> 
 					<br/><span id="checkpwd2"></span>
 				</li>
 				
 				<li>회사명</li>
-				<li><input type="text" name="mem_name" id="mem_name" tabindex="5" placeholder="이름을 입력해주세요"/> 
+				<li><input type="text" name="company" id="company" tabindex="5" placeholder="이름을 입력해주세요"/> 
 					<br/><span id="checkname"></span>
 				</li>
 				
 				<li>사업자번호</li>
-				<li><input type="text" name="com_num" id="com_num" tabindex="6" placeholder="사업자등록번호를 입력해주세요"/><button type="button" class="btn commBtn lgBtn">번호인증</button>
+				<li><input type="text" name="com_num" id="com_num" tabindex="6" placeholder="사업자등록번호를 입력해주세요"/>
 					<br/><span id="checktel"></span>
 				</li>
 				
@@ -144,7 +152,7 @@
 				</li>
 				
 				<li>이메일</li>
-				<li><input type="text" name="mem_email" id="mem_email" tabindex="7" placeholder="예) 1ocaler@1ocaler.com"/><button type="button" class="btn commBtn lgBtn">이메일 인증</button>
+				<li><input type="text" name="sel_email" id="sel_email" tabindex="7" placeholder="예) 1ocaler@1ocaler.com"/><button type="button" class="btn commBtn lgBtn">이메일 인증</button>
 					<br/><span id="checkemail"></span>
 				</li>
 				
@@ -152,33 +160,46 @@
 				<li>
 					<button type="button" tabindex="8" class="btn commBtn lgBtn findAddr"><img src="common/search_fff.png" style="width: 15px; height:15px;">우리동네 찾기</button>
 					<ul id="addrInput">
-						<li><input type="text" name="sel_zip" id="sel_zip" tabindex="9"/><button type="button" class="btn commBtn lgBtn">재검색</button></li>
-						<li><input type="text" name="sel_addr" id="sel_addr" tabindex="10"/></li>
-						<li><input type="text" name="sel_detail" id="sel_detail" tabindex="11"/></li>
+						<li><input type="text" name="sel_zip" id="sel_zip" tabindex="10"/><button type="button" class="btn commBtn lgBtn">재검색</button></li>
+						<li><input type="text" name="sel_addr" id="sel_addr" tabindex="11"/></li>
+						<li><input type="text" name="sel_detail" id="sel_detail" tabindex="12"/></li>
 					</ul>
 				</li>
+				
 				<li>계좌등록</li>
-				<li><input type="text" name="mem_detail" id="mem_detail" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요"/></li>
+				<li>
+					<button type="button" tabindex="9" class="btn commBtn lgBtn addBank">계좌등록</button>
+					<ul id="bankInput">
+						<li><input type="text" name="acc_name" id="acc_name" tabindex="13" placeholder="예금주명"/></li>
+						<li>
+							<select id="bank" name="bank" tabindex="14">
+								<option value="신한은행">신한은행</option>
+								<option value="기업은행">기업은행</option>
+								<option value="하나은행">하나은행</option>
+								<option value="국민은행">국민은행</option>
+								<option value="카카오뱅크">카카오뱅크</option>
+							</select>
+							<input type="text" name="account" id="account" tabindex="15" placeholder="계좌번호(숫자만 입력해주세요))"/>
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<button type="button" id="seeMore" class="btn commBtn lgBtn" style="width: 700px; height: 40px; display: block; margin: 0 auto;">더보기</button>
 		</div>
 		<div>추가정보</div>		
 		<div id="setProfile">
-			<ul style="height: 360px;">
+			<ul style="height: 300px;">
 				<li>프로필 사진</li>
 				<li style="height: auto">
 					<div style="border:none; width:110px; height: 110px; margin-right: 10px; float:left;">
 						<img src="<%=request.getContextPath() %>/common/user.png" id="previewImg" class="profImg form-control-file border" alt="upload image"/>
 					</div>
-					<label class="input-file-button" for="mem_prof">
+					<label class="input-file-button" for="sel_prof">
 					  사진추가
 					</label>
-					<input type="file" name="sel_content" accept="image/*" id="sel_content" style="display:none; margin-top: 70px; border: none;"/>
+					<input type="file" name="sel_prof" accept="image/*" id="sel_prof" style="display:none; margin-top: 70px; border: none;"/>
 				</li>
 			
-				<li>닉네임</li>
-				<li><input type="text" name="mem_nick" id="mem_nick" placeholder="별명을 입력해주세요"/><button type="button" class="btn commBtn lgBtn">중복검사</button><span id="nickOverlap">N</span> </li>
-				
 				<li>인사말</li>
 				<li><textarea name="sel_content" id="sel_content" maxlength="200" placeholder="최대 200자"></textarea>
 <!-- 					<input type="text" name="mem_content" id="mem_content" maxlength="100" placeholder="최대 100자"/> </li> -->
@@ -197,12 +218,19 @@
 	
 	$(function(){
 //////////////////////////////////////////화면전환 이벤트		
-		//주소찾기 눌렀을때 화면 전환
+		//주소찾기 눌렀을때 화면전환
 		$(".findAddr").click(function(){
 			$(".findAddr").css("display", "none");
 			$("#addrInput").css("display", "block");
 			$("#addrInput").parent().css("height", "190px");
 		});
+		//계좌등록시 화면전환
+		$(".addBank").click(function(){
+			$(".addBank").css("display", "none");
+			$("#bankInput").css("display", "block");
+			$("#bankInput").parent().css("height", "190px");
+		});
+		
 		
 		//더보기 눌렀을때 화면 전환
 		$("#seeMore").on('click', function(){
@@ -212,7 +240,7 @@
 		});
 
 		// 프로필 사진
-	      $("#mem_prof").on('change', function(){
+	      $("#sel_prof").on('change', function(){
 	         readURL(this);
 	      });
 		
@@ -223,7 +251,6 @@
 	             reader.onload = function (e) {
 	                $('#previewImg').attr('src', e.target.result);
 	             }
-
 	             reader.readAsDataURL(input.files[0]);
 	          }
 	      };
@@ -238,33 +265,16 @@
 		    }).open();
 		}
 //////////////////////////////////////////유효성 검사 펑션
-		$("#userid").on('keyup', function(){
-			var regId=/^[a-zA-Z]{1}[a-zA-Z0-9]{5,12}$/;
-			if(!regId.test($("#userid").val())){
-				$("#checkid").text("아이디는 영문과 숫자를 조합한 6~12자리여야 합니다.");
-				$("#checkid").css({
-					"color":"pink",
-					"fontSize":"12"
-				})
-				$("#userid").focus();
-			}else{
-				$("#checkid").text("✔ ︎아이디는 영문과 숫자를 조합한 6~12자리여야 합니다.");
-				$("#checkid").css({
-					"color":"green",
-					"fontSize":"12"
-				})
-			}
-		});
-		$("#userpwd1").on('keyup', function(){
+		$("#userpwd").on('keyup', function(){
 			$("#checkid").css("display", "none");
 			var regPwd=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/;
-			if(!regPwd.test($("#userpwd1").val())){
+			if(!regPwd.test($("#userpwd").val())){
 				$("#checkpwd").text("비밀번호는 영문과 숫자, 특수문자를 조합한 8~15자리여야 합니다.");
 				$("#checkpwd").css({
 					"color":"pink",
 					"fontSize":"12"
 				})
-				$("#userpwd1").focus();
+				$("#userpwd").focus();
 			}else{
 				$("#checkpwd").text("✔ 비밀번호는 영문과 숫자, 특수문자를 조합한 8~15자리여야 합니다.");
 				$("#checkpwd").css({
@@ -273,33 +283,16 @@
 				});
 			}
 		});
-		$("#userpwd2").on('keyup', function(){
-			$("#checkpwd").css("display", "none");
-			if($("#userpwd1").val()!=$("#userpwd2").val()){
-				$("#checkpwd2").text("비밀번호가 일치하지 않습니다.");
-				$("#checkpwd2").css({
-					"color":"pink",
-					"fontSize":"12"
-				})
-				$("#userpwd2").focus();
-			}else{
-				$("#checkpwd2").text("✔ 비밀번호가 일치합니다.");
-				$("#checkpwd2").css({
-					"color":"green",
-					"fontSize":"12"
-				});
-			}
-		});
-		$("#mem_name").on('keyup', function(){
+		$("#sel_name").on('keyup', function(){
 			$("#checkpwd2").css("display", "none");
 			var regName=/^[가-힣]{2, 15}$/;
-			if(!regName.test($("#mem_name").val())){
+			if(!regName.test($("#sel_name").val())){
 				$("#checkname").text("한글 2자리 이상이여야 합니다.");
 				$("#checkname").css({
 					"color":"pink",
 					"fontSize":"12"
 				})
-				$("#mem_name").focus();
+				$("#sel_name").focus();
 			}else{
 				$("#checkname").text("✔ 한글 2자리 이상이여야 합니다.");
 				$("#checkname").css({
@@ -309,11 +302,10 @@
 			}
 		});
 ////////////////////////////////////////////////////////////////////////////// 전화번호이메일유효성검사안됨		
-		$("#mem_tel").on('keyup', function(){
+		$("#sel_tel").on('keyup', function(){
 			$("#checkname").css("display", "none");
 			var regTel=/^[0-9]{9, 11}$/;
-			var x =$("#mem_tel").length;
-			console.log(",,,,", x);
+			var x =$("#sel_tel").length;
 			if(!regTel.test($("#mem_tel").val())){
 				$("#checktel").text("연락처는 9자리 이상이여야 합니다.");
 				$("#checktel").css({
@@ -329,7 +321,7 @@
 				});
 			}
 		});
-		$("#mem_email").on('keyup', function(){
+		$("#sel_email").on('keyup', function(){
 			$("#checktel").css("display", "none");
 			var regEmail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 			if(!regEmail.test($("#mem_tel").val())){
@@ -338,12 +330,11 @@
 					"color":"pink",
 					"fontSize":"12"
 				})
-				$("#mem_email").focus();
+				$("#sel_email").focus();
 			}else{
 				$("#checkemail").text("");
 			}
 		});
-		//////////// 정규식 표현 ////////////
 	    function regExpCheck(){
 	       // 인증 번호
 	//        var regEmailCheck=/[0-9]{6}$/;
