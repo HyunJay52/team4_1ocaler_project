@@ -1,0 +1,104 @@
+@charset "UTF-8";
+	#basicInfo, #detailInfo{
+		background-color:#fff;
+		width:480px;
+		overflow:auto;
+		margin-bottom:20px;
+		padding:20px 30px;
+		border:1px solid gray;
+	}
+	#basicInfo{
+		float:left; 
+	}
+	#detailInfo{
+		float:right;
+	}
+	#basicInfo>form>ul>li, #detailInfo>form>ul>li{	
+		margin-bottom:20px;
+	}
+	#basicInfo>form>ul>li:nth-child(2n+1){
+		font-size:14px; color:gray;
+	}
+	#basicInfo>form>ul>li:nth-child(9){
+		color:black;
+	}
+	#basicInfo>form>ul>li:nth-child(10){
+		padding:0 40px;
+	}
+	#basicInfo>form>ul>li>img{
+		width:370px;
+		height:280px;
+		border-radius:20%;
+	}
+	#basicInfo>form>input{
+		width:100px;	
+	}
+	#detailInfo>form>ul>li:nth-child(4)>input{
+		width:50%;
+	}
+	#detailInfo>form>ul>li:nth-child(7)>input, #detailInfo>input[value='수정']{
+		width:20%;
+	}
+	
+	#basicInfo input, #detailInfo input{
+		border:none; background-color:#fff; border-bottom:1px solid #ddd; height:40px; padding-left:10px; width:100%;
+	}
+	#basicInfo button, #detailInfo button{height:40px;}
+	hr{
+		border:1px solid #f1785;
+	}
+	#imgFile{
+		padding:6px;
+	}
+	.header{font-weight:bold; font-size:24px;}
+	.editOn{display:none;}
+	.commBtn {
+		width: 90px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+	}
+	.commBtn:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785;
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	.cancelBtn {
+		border: 1px solid #ddd;
+		color: #ddd;
+		width: 90px;
+	}
+	.cancelBtn:hover {
+		background-color: #fff;
+		color: gray;
+	}
+		
+	.confBtn {
+		background: #3f1785;
+		color: #fff;
+		width: 90px;
+	}
+	.confBtn:hover {
+		color: #fff;
+		background: #B8B2F4;
+	}
+	.myinfoModal-dialog{
+		margin-top:20%;
+	}
+	.myinfoModal-content{
+		height:240px;
+	}
+	.myinfoModal-body{
+		text-align:center;
+		padding:40px;
+	}
+	.selectBox{
+		width:400px; height:40px; margin-bottom:10px;
+	}
+	.textBox{
+		width:300px; height:30px; margin-bottom:10px; padding-left:5px;
+	}
+	#joinSeller{
+		margin-left:40px;
+	}

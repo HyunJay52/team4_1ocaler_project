@@ -1,161 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<style>
-	.body{
-		overflow:auto;
-		width:1300px;
-	}
-	.mainContainer{
-		width:1000px;
-		margin:50px 185px;
-		
-	}
-	#deliveryTop, #deliveryBottom{
-		padding:30px 50px;
-		overflow:auto;
-	}
-	#deliveryBottom{
-		position:relative;
-	}
-	#deliveryTop>ul, #deliveryTop>ul>li{
-		float:left; text-align:center; margin:10px 5px;
-	}
-	#deliveryTop>ul>li:nth-child(2n+1){
-		width:140px; background-color:lightgray; border-radius:100px;
-	}
-	#deliveryTop>ul>li:nth-child(2n+2){
-		width:130px;
-	}
-	.fntBold{
-		font-weight:bold;
-	}
-	#deliveryTop>ul:nth-child(2)>li:nth-child(1){
-		margin-left:150px;
-	}
-	#deliveryBottom>ul>li{
-		float:left; border-bottom:1px solid gray; height:80px; line-height:80px;
-		width:20%;
-	}
-	.modal-content{
-		overflow:auto; height:800px;
-	}
-	.deliveryImg{
-		width:90px;
-		height:70px;
-	}
-	#deliveryHeader{
-		height:300px; display:block; text-align:center;
-	}
-	#deliveryHeader>ul{width:100%}
-	#deliveryHeader>ul>li{
-		width:100%;
-	}
-	#deliveryHeader>ul>li>span{
-		width:50%;
-	}
-	.deliveryListHead{
-		color:gray; float:left; text-align:left; 
-	}
-	.deliveryName{
-		text-align:right; float:right;
-	}
-	#deliveryList>ul>li{
-		border-bottom:1px solid gray; margin:10px 0; height:80px; padding:5px 0;
-	}
-	#deliveryList>ul>li>span:nth-child(2n+1){
-		width:30%; 
-	}
-	#deliveryList>ul>li>span:nth-child(2n){
-		width:70%; 
-	}
-	.listLeft{
-		text-align:left;
-		float:left;
-	}
-	.listRight{
-		text-align:right;
-		float:right;
-	}
-	.table2 {width:90%;margin:0 auto;padding:0}
-    .table2 tr{/*테이블 목록*/
-       border-bottom:1px solid rgb(227,227,227); 
-       text-align:center;
-       height:40px;
-    }
-   .table2 tr:first-child{/*첫번째 테이블 목차*/
-      text-align:center;
-      
-      background-color:#3f1785;
-      color:#fff; font-weight:bold;
-   }
-   .table2 tr:last-child{/*마지막 줄 tr 스타일*/
-      border-bottom:2px solid #3f1785;
-   }
-   .table2 tr>td{width:20%}/*전체적인 열 폭조정*/
-   .table2 tr>td:nth-child(1){width:10%;/*첫번째 열 선택*/}
-   .table2 tr>td:nth-child(2){width:30%;/*세번째 열 선택 : 제목부분*/
-      /* text-align:left; */
-   }
-	.prev{float:left}
-	.next{float:right}
-	.dayBtn{font-weight:bold; font-size:26px; margin:0 2px; border:none; background-color:#fff;}
-	.dateFrm{
-		position:absolute;
-		top:0px;
-  	  	left:62px;
-  	  	background-color:#fff;
-  	 	height:40px;
-		width:110px;
-		z-index:100;
-		line-height:40px;
-		text-align:center;
-	}
-	.line{
-	  	position:absolute; background-color:#3f1785; width:100%; height:4px; top:70px; border-radius:100px;
-	}
-</style>
+
 <script>
 	$(function(){
-var date = new Date();
-		
-		var toYear = date.getFullYear();
-		var toMonth = date.getMonth()+1;
-		
-		$(".setMonth").text(toMonth+"월");
-		
-		//월 세팅
-		function setMonth(toYear, toMonth){
-			$(".setMonth").text(toMonth+"월");
-			
-			console.log(toYear);
-			console.log(toMonth);
-			console.log($("#sel").val());
-
-		}
-		
-		//이전날짜
-		$(".prev").click(function(){
-			toMonth--;
-			if(toMonth == 0){
-				toMonth = 12;
-				toYear--;
-			}
-			setMonth(toYear, toMonth);
-		});
-		
-		//다음날짜
-		$(".next").click(function(){
-			toMonth++;
-			if(toMonth == 13){
-				toMonth = 1;
-				toYear++;
-			}
-			setMonth(toYear, toMonth);
-		});
-		
 		//ajax 배송조회 실행
-		function test(deliveryNo){  
+		function test(deliveryNo){
+
+			$("#deliveryHeader").html("<h4 class='modal-title'>배 송 조 회<button class='close' data-dismiss='modal'>&times;</button></h4>");
+			$("#deliveryList").html("");
 			$.ajax({
 				url : "https://apis.tracker.delivery/carriers/kr.epost/tracks/"+deliveryNo,
 				dataType : 'json',
@@ -218,32 +70,32 @@ var date = new Date();
 		});
 	});
 </script>
-<div class="body">
+<div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 
-	<div class="mainContainer">
+	<div class="myinfoContainer">
 		<h2>배송내역</h2>
 		<div id="deliveryTop">
 			<ul>
 				<li><img src="img/myInfo/delivery/box.png"/></li>
-				<li><p class="lgFnt">배송준비</p><span class="lgFnt fntBold">1</span></li>
+				<li><p class="lgFnt">배송준비</p><span class="lgFnt header">1</span></li>
 				<li><img src="img/myInfo/delivery/delivery.png"/></li>
-				<li><p class="lgFnt">배송 중</p><span class="lgFnt fntBold">1</span></li>
+				<li><p class="lgFnt">배송 중</p><span class="lgFnt header">1</span></li>
 				<li><img src="img/myInfo/delivery/home.png"/></li>
-				<li><p class="lgFnt">배송완료</p><span class="lgFnt fntBold">0</span></li>
+				<li><p class="lgFnt">배송완료</p><span class="lgFnt header">0</span></li>
 			</ul>
 			<ul>				
 				<li><img src="img/myInfo/delivery/return.png"/></li>
-				<li><p class="lgFnt">반품</p><span class="lgFnt fntBold">1</span></li>
+				<li><p class="lgFnt">반품</p><span class="lgFnt header">1</span></li>
 				<li><img src="img/myInfo/delivery/cancel.png"/></li>
-				<li><p class="lgFnt">취소</p><span class="lgFnt fntBold">0</span></li>
+				<li><p class="lgFnt">취소</p><span class="lgFnt header">0</span></li>
 			</ul>
 		</div>
-		<hr/>
+		
 		<div id="deliveryBottom">
-			<div class="line"></div>
-			<div class="dateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
-			<table class="table2" id="myDeliveryTbl">
+			<div class="deliveryLine"></div>
+			<div class="myDeliveryDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
+			<table class="myinfoTable2" id="myDeliveryTbl">
 				<tr>
 					<td>이미지</td>
 					<td>제목</td>
@@ -274,5 +126,3 @@ var date = new Date();
 		</div>
 	</div>
 </div>
-</body>
-</html>

@@ -1,0 +1,87 @@
+@charset "UTF-8";
+	#deliveryTop, #deliveryBottom{
+		padding:30px 50px;
+		overflow:auto;
+	}
+	#deliveryBottom{
+		position:relative;
+	}
+	#deliveryTop>ul, #deliveryTop>ul>li{
+		float:left; text-align:center; margin:10px 5px;
+	}
+	#deliveryTop>ul>li:nth-child(2n+1){
+		width:140px; background-color:lightgray; border-radius:100px;
+	}
+	#deliveryTop>ul>li:nth-child(2n+2){
+		width:130px;
+	}
+	#deliveryTop>ul:nth-child(2)>li:nth-child(1){
+		margin-left:150px;
+	}
+	#deliveryBottom>ul>li{
+		float:left; border-bottom:1px solid gray; height:80px; line-height:80px;
+		width:20%;
+	}
+	.modal-content{
+		overflow:auto; height:690px;
+	}
+	.deliveryImg{
+		width:90px;
+		height:70px;
+	}
+	#deliveryHeader{
+		height:300px; display:block; text-align:center;
+	}
+	#deliveryHeader>ul{width:100%}
+	#deliveryHeader>ul>li{
+		width:100%;
+	}
+	#deliveryHeader>ul>li>span{
+		width:50%;
+	}
+	.deliveryListHead{
+		color:gray; float:left; text-align:left; 
+	}
+	.deliveryName{
+		text-align:right; float:right;
+	}
+	#deliveryList>ul>li{
+		border-bottom:1px solid gray; margin:10px 0; height:80px; padding:5px 0;
+	}
+	#deliveryList>ul>li>span:nth-child(2n+1){
+		width:30%; 
+	}
+	#deliveryList>ul>li>span:nth-child(2n){
+		width:70%; 
+	}
+	.listLeft{
+		text-align:left;
+		float:left;
+	}
+	.listRight{
+		text-align:right;
+		float:right;
+	}
+   .myinfoTable2 tr>td{width:20%}/*전체적인 열 폭조정*/
+   .myinfoTable2 tr>td:nth-child(1){width:10%;/*첫번째 열 선택*/}
+   .myinfoTable2 tr>td:nth-child(2){width:30%;/*세번째 열 선택 : 제목부분*/
+      /* text-align:left; */
+   }
+	.dayBtn{
+		height:36px; border-radius:100px;
+	}
+	.myDeliveryDateFrm{
+		position:relative;
+	    margin:10px auto;
+	    height:60px;
+	    width:120px;
+	    line-height:50px;
+	    border:2px solid #3f1785;
+	    border-radius:100px;
+	    padding:5px 10px;	
+	    background-color:#fff;
+	    text-align:center;
+	}
+	.deliveryLine{
+	  	position:absolute; background-color:#3f1785; width:90%; height:4px; top:70px; border-radius:100px;
+	}

@@ -1,0 +1,38 @@
+@charset "UTF-8";
+	.activityLeft{
+		float:left;
+		width:110px;
+		border:1px solid #ddd;
+		height:320px;
+		margin-top:50px;
+	}
+	.activityLeft li{
+		height:40px;
+	}
+	.activityRight{
+		float:right;
+		width:790px;
+		padding-right:50px;
+		
+	}
+	.myActivityDateFrm{
+		position:absolute;
+		top:5px;
+  	  	left:170px;
+  	 	height:40px;
+		width:110px;
+		line-height:40px;
+		background-color:#fff;
+	    text-align:center;
+	}
+	#activityTbl{
+	}
+	#activityTbl tr>td{/*전체적인 열 폭조정*/
+		width:15%;
+	}
+	#activityTbl tr>td:nth-child(1){
+		width:5%;/*첫번째 열 선택*/
+	}
+	#activityTbl tr>td:nth-child(4){/*세번째 열 선택 : 제목부분*/
+		width:35%;
+	}

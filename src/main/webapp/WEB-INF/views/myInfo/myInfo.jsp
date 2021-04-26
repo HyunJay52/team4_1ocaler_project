@@ -1,136 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<style>
-	.body{
-		overflow:auto;
-		width:1300px;
-	}
-	.mainContainer{
-		width:1000px;
-		margin:50px 185px;
-		
-	}
-	#basicInfo, #detailInfo{
-		background-color:#fff;
-		width:480px;
-		height:920px;
-		margin-bottom:20px;
-		padding:20px 30px;
-		border:1px solid gray;
-	}
-	#basicInfo{
-		float:left; 
-	}
-	#detailInfo{
-		float:right;
-	}
-	#basicInfo>form>ul>li, #detailInfo>form>ul>li{	
-		margin-bottom:20px;
-	}
-	#basicInfo>form>ul>li:nth-child(2n+1){
-		font-size:14px; color:gray;
-	}
-	#basicInfo>form>ul>li:nth-child(9){
-		color:black;
-	}
-	#basicInfo>form>ul>li:nth-child(10){
-		padding:0 40px;
-	}
-	#basicInfo>form>ul>li>img{
-		width:370px;
-		height:280px;
-		border-radius:20%;
-		
-	}
-	#basicInfo>form>input{
-		width:100px;	
-	}
-	#detailInfo>form>ul>li:nth-child(4)>input{
-		width:50%;
-	}
-	#detailInfo>form>ul>li:nth-child(7)>input, #detailInfo>input[value='수정']{
-		width:20%;
-	}
-	
-	#basicInfo input, #detailInfo input{
-		border:none; background-color:#fff; border-bottom:1px solid #ddd; height:40px; padding-left:10px; width:100%;
-	}
-	#basicInfo button, #detailInfo button{height:40px;}
-	hr{
-		border:1px solid #f1785;
-	}
-	#imgFile{
-		padding:6px;
-	}
-	.header{font-weight:bold; font-size:24px;}
-	.editOn{display:none;}
-	.commBtn {
-		width: 90px;
-		color: #3f1785;
-		border: 1px solid #3f1785;
-	}
-	.commBtn:hover {
-		border: 1px solid #3f1785;
-		background-color: #3f1785;
-		font-weight: bold;
-		color: #fff;
-		font-weight: bold;
-	}
-	.cancelBtn {
-		border: 1px solid #ddd;
-		color: #ddd;
-		width: 90px;
-	}
-	.cancelBtn:hover {
-		background-color: #fff;
-		color: gray;
-	}
-		
-	.confBtn {
-		background: #3f1785;
-		color: #fff;
-		width: 90px;
-	}
-	.confBtn:hover {
-		color: #fff;
-		background: #B8B2F4;
-	}
-	.modal-dialog{
-		margin-top:20%;
-	}
-	.modal-content{
-		height:240px;
-	}
-	.modal-body{
-		text-align:center;
-		padding:40px;
-	}
-	.selectBox{
-		width:400px; height:40px; margin-bottom:10px;
-	}
-	.textBox{
-		width:300px; height:30px; margin-bottom:10px; padding-left:5px;
-	}
-</style>
 <script>
 	$(function(){
 		$("#basicInfo>form>button").click(function(){
-			$(".mainContainer>div>button").attr('disabled', false);
-			$(".mainContainer>div>form>input").css('display', 'block');
-			$(".mainContainer>div>form>ul>li").css('display', 'block');			
+			$(".myinfoContainer>div>button").attr('disabled', false);
+			$(".myinfoContainer>div>form>input").css('display', 'block');
+			$(".myinfoContainer>div>form>ul>li").css('display', 'block');			
 			$(this).attr('disabled', 'block');
-			$(".mainContainer>div>form input").attr('disabled', false).css('border', '1px solid black');
+			$(".myinfoContainer>div>form input").attr('disabled', false).css('border', '1px solid black');
 			$(".editOn").css('display', 'block');
 			$("#imgFile").css('border', 'none');
 			$("#detailInfo>form>ul>li select").attr('disabled', false);
 	
 		});
 		$("#cancel").click(function(){
-			$(".mainContainer>div>button").attr('disabled', 'true');
-			$(".mainContainer>div>form>button[value='EDIT']").attr('disabled', false);
+			$(".myinfoContainer>div>button").attr('disabled', 'true');
+			$(".myinfoContainer>div>form>button[value='EDIT']").attr('disabled', false);
 			$(".editOn").css('display', 'none');
-			$(".mainContainer>div>form input").attr('disabled', true).css('border', 'none');
+			$(".myinfoContainer>div>form input").attr('disabled', true).css('border', 'none');
 			$("#detailInfo>form>ul>li select").attr('disabled', 'true'); 
 			$("#cancel").css('border', '1px solid'); 
 			
@@ -145,10 +32,7 @@
 			});
 		});
 		
-		//모달 닫기
-		$("#modalClose").click(function(){
-			$("#md").modal("hide");
-		});
+		
 		
 		//탈퇴 조사 폼
 		$("input[value='네']").click(function(){			
@@ -158,7 +42,6 @@
 		
 		//탈퇴 조사 취소
 		$("#secession").click(function(){
-			$("#md").modal("hide");
 			$(this).parent().parent().css('display', 'none');
 			$(this).parent().parent().prev().css('display', 'block');
 		
@@ -199,9 +82,9 @@
 	setGu();
 	});
 </script>
-<div class="body">
+<div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div class="mainContainer">
+	<div class="myinfoContainer">
 	
 		<h2>내 정보</h2>
 		<div id="basicInfo">
@@ -218,7 +101,8 @@
 					<li><input type="text" name="#" value="마포구 동대" disabled/><hr/></li>
 					<li><h4>대표 이미지</h4></li>
 					<li><img src="<%=request.getContextPath()%>/img/myInfo/saver.gif"></li>
-					<li><input id="imgFile" name="file" type="file" class="editOn"/></li>
+					<li><label class="btn" for="imgFile">사진 선택</label><input id="imgFile" name="file" type="file" class="editOn" style="display:none; border:none;"/></li>
+					
 				</ul>
 				<hr/>
 				<input id="cancel" type="reset" class="btn cancelBtn" disabled="disabled" style="float:left" value="취소"/>
@@ -259,15 +143,18 @@
 			<hr/>
 			<input type="submit" class="btn commBtn editOn" style="float:right;" value="수정"/>
 			</form>
-			<input type="button" class="btn commBtn btn-sm btn-primary" data-target="#md" data-toggle="modal" value="탈퇴하기"/>
+			<input type="button" class="btn commBtn btn-sm btn-primary" data-target="#myinfoMd" data-toggle="modal" value="탈퇴하기"/>
+		</div>
+		<div >
+			<input type="button" class="btn commBtn" value="샐러등록" id="joinSeller"/>
 		</div>
 	</div>
-	<div class="modal fade" id="md" data-backdrop="static">
-		<div class="modal-dialog" data-backdrop="static">
-			<div class="modal-content" data-backdrop="static">
-				<div class="modal-body" data-backdrop="static">
+	<div class="modal fade" id="myinfoMd" data-backdrop="static">
+		<div class="modal-dialog" data-backdrop="static" style="margin-top:20%">
+			<div class="modal-content" data-backdrop="static" style="height:240px">
+				<div class="modal-body" data-backdrop="static" style="text-align:center; padding:40px;">
 					<p class="mdFnt">탈퇴하시겠습니까?</p><br/>
-					<input id="modalClose" type="button" class="btn commBtn" value="아니오"/><input type="button" class="btn cancelBtn" value="네"/>
+					<input id="modalClose" type="button" class="btn commBtn" data-dismiss="modal" value="아니오"/><input type="button" class="btn cancelBtn" value="네"/>
 				</div>
 				<div class="modal-body" style="display:none" data-backdrop="static">
 					<p class="mdFnt">탈퇴사유 조사</p>

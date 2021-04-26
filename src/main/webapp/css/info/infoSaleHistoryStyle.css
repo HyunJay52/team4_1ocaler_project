@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.saleHistoryCenter{
+	width:800px;
+	margin:0 auto;
+}
+.saleHistoryTop{
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	width:260px;
+	height:140px;
+	float:left;
+	margin-top:10px;
+	padding:10px 0;
+}
+.saleHistorySpan{
+	font-weight:bold;
+	text-align:center;
+	font-size:46px;
+}
+#saleGrade li{
+	float:left;
+	width:30%;
+}
+#saleGrade>img{
+	
+	
+}
