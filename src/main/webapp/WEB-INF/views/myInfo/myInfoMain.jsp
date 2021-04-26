@@ -102,7 +102,7 @@
 	
 		<div id="profile">
 			<ul>
-				<li><img src="<%=request.getContextPath()%>/img/myInfo/saver.gif"/></li>
+				<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png"/></li>
 				<li>자바칩프라푸치노</li>
 				<li>마포구 동대</li>
 				<li><input type="button" value="버튼" class="btn"/></li>

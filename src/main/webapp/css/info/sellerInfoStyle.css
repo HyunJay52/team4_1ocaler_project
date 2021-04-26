@@ -1,0 +1,70 @@
+@charset "UTF-8";
+	.sellerBasicInfo, .sellerDetailInfo, .sellerAccountInfo{
+		background-color:#fff;
+		width:330px;
+		overflow:auto;
+		margin-bottom:20px;
+		padding:20px 10px;
+		border:1px solid gray;
+	}
+	.sellerBasicInfo, .sellerDetailInfo{
+		float:left; 
+	}
+	.sellerDetailInfo{
+		margin-left:5px;
+	}
+	.sellerAccountInfo{
+		float:right;
+	}
+	.sellerInfoImg{
+		width:308px;
+		height:280px;
+		border-radius:20%;
+	}
+	.sellerInfoList>li{
+		margin:20px 0;
+	}
+	.sellerInfoList>li:nth-child(2n+1){
+		color:gray;
+	}
+	.sellerInfoList>li:nth-child(2n+2), .sellerDetailInfo>form>ul>li:nth-child(9), .sellerDetailInfo>form>ul>li:nth-child(11){
+		margin-left:10px;
+		font-size:22px;
+	}
+	.sellerInfoList>li:nth-child(9)>h3{
+		float:left;
+		width:70%;
+	}
+	.sellerBasicInfo>form>ul>li:nth-child(10), .sellerDetailInfo>form>ul>li:nth-child(10){
+		margin-left:0px;
+	}
+	.sellerImgLabel{
+		display:none;
+	}
+	.sellerBasicInfo input, .sellerDetailInfo input, .sellerAccountInfo input{
+		padding-left:6px;
+	}
+	.sellerAccountInfoCenter{
+		margin-top:50px;
+	}
+	.sellerZipcodeForm{
+		width:90px;
+		float:left;
+		margin-right:5px;
+	}
+	.sellerAccountInfoForm{
+		height:40px;
+	}
+	.sellerBtnForm{
+		text-align:center;
+	}
+	.sellerBtn{
+		width:150px;
+	}
+	.sellerBtnDisplay{
+		display:none;
+	}
+	.sellerInputDisplay{
+		border:none;
+		background-color:#fff;
+	}
