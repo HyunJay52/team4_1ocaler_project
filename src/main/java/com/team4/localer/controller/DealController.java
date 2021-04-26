@@ -23,20 +23,34 @@ public class DealController {
 		return "deal/sellWrite";
 	}
 	
-	@RequestMapping("memberWrite")
+	@RequestMapping("/memberWrite")
 	public String memberWrite() {
 		 return "deal/memberWrite";
 	}
 	
-	@RequestMapping("memberView")
+	@RequestMapping("/memberView")
 	public String memberView() {
 		return "deal/memberView";
 	}
 
-	@RequestMapping("sellView")
+	@RequestMapping("/sellView")
 	public String selView() {
 		return "deal/sellView";
 	}
-
+	@RequestMapping("/memberEdit")
+	public String memeberEdit() {
+		return	"deal/memberEdit";
+	}
+	
+	@RequestMapping("/sellBuy")
+	public String sellBuy() {
+		return "deal/sellBuy";
+	}
+	
+	@RequestMapping("/sellerInfo")
+	public String sellerInfo() {
+		return "deal/sellerInfo";
+	}
+	
 	
 }

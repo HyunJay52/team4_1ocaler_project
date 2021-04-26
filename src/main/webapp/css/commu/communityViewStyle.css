@@ -1,0 +1,210 @@
+@charset "UTF-8";
+
+	*{
+		font-family: nsr;
+		text-decoration: none;
+		list-style-type: none;
+		
+	}
+	#body{
+		overflow:auto;
+		width:1300px;
+		margin:60 auto;
+		height: 1000px ;
+	}
+		
+	/* 게시글 */
+	 #center {
+	 	width: 1300px;
+	 }
+	 #center div:nth-child(1){
+	 	width: 1300px;
+	 	text-align: right;
+	 }
+	 
+	 #board{
+	 	width: 1300px;
+	 }
+	 
+	 #board>ul>li {
+	 	width: 1300px;
+	 }
+	 
+	 #board>ul>li:nth-child(2){
+	 	font-size: 26px;
+    	font-weight: bold;
+    	color: #3f1785;
+    	margin: 5 0 ;
+	 } 
+	 #board>ul>li:nth-child(3){
+	 	font-size: 18px; 
+	 	width: 650px;
+	 	float: left;
+	 
+	 }
+	 #board>ul>li:nth-child(3) img{
+	 	width: 30px;
+	 	height: 30px;
+	 
+	 } 
+	 #board>ul>li:nth-child(4){
+	 	width: 650px;
+	 	float: left;
+	 	text-align: right;
+	 } 
+	 
+	 /* 작성글 내용 */
+	 #board>ul>li:nth-child(5){
+	 	width: 1300px;
+	 	height:300px; 
+	 	float: left;
+	 	margin: 40 0;
+	 } 
+	 
+	 /* 댓글 */
+	 #board>ul>li:nth-child(6){
+	 	width: 1300px;
+	 	float: left;
+	 	margin: 40 0;
+	 	color: gray;
+    	font-size: 13px;
+	 } 
+	 #board>ul>li:nth-child(7){
+	 	width: 1300px;
+	 	float: left;
+	 	height: 20px;
+	 }
+	 #board>ul>li:nth-child(8){
+	 	width: 1300px;
+	 	float: left;
+	 	text-align: right;
+	 	padding-right:100px; 
+	 }
+	 
+	 #preBtnnext{
+	 	width: 1300px;
+	 	float: left;
+	 	margin: 25 0 ;
+	 }
+	 #preBtnnext div:nth-child(1){
+	 	width: 1300px;
+	 	float: left;
+	 	margin-bottom:5px; 
+	 } 
+	 #preBtnnext div:nth-child(2){
+	 	width: 1300px;
+	 	float: left;
+	 } 
+	 
+	 
+/* 	 좋아요? 
+	groupList-like btn*/
+ 	input[type=checkbox]{ 
+ 		display:none; 
+ 	}
+    #likeLi input[type=checkbox] + label { 
+    	display: inline-block; 
+    	cursor: pointer; 
+    	line-height: 22px; 
+    	padding-left: 22px; 
+    	background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; 
+    }
+	#likeLi input[type=checkbox]:checked + label { 
+		background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); 
+	}
+	#likeLi label{
+		position: absolute; 
+		height: 30px; 
+		right: 20px; 
+		top: 4px;
+	}
+	 
+	 
+	
+	/* 댓글 */
+	
+	#reply{
+		width:1300px;
+	
+	}
+	
+ 	h4{
+ 		color: #3f1785;
+ 		font-weight: bold;
+ 	}
+ 	
+ 	#reply>form div:nth-child(1){
+ 		width:1200px;
+ 		float: left;
+ 		text-align: center;
+ 		
+ 	}
+ 	#reply>form div:nth-child(2){
+ 		margin-left: 10px;
+ 		margin-top:6px;
+ 		width:1200px;
+ 		float: left;
+ 		text-align: right;
+ 		padding-right: 60px;
+ 		padding-top: 10px;	
+ 	}
+ 	
+ 	#content{
+ 		width:1100px;
+ 		padding-left: 10px;
+ 		float: center;
+ 	}
+ 		
+/* 	input[type="submit"]{
+		text-align: right;
+	}
+ 	 */
+ 	
+	
+	/* 버튼 스타일 클래스 모음 */
+
+	a:active, a:visited {
+    color:#3f1785;
+    text-decoration: none;
+	}
+	 a:link {
+	  color:#000;
+	  text-decoration: none;
+	 }
+
+	.commBtn {
+		width: 90px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+	}
+	.commBtn:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785;
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	.cancelBtn {
+		border: 1px solid #ddd;
+		color: #ddd;
+		width: 90px;
+	}
+	.cancelBtn:hover {
+		background-color: #fff;
+		color: gray;
+	}
+		
+	.confBtn {
+		background: #3f1785;
+		color: #fff;
+		width: 90px;
+	}
+	.confBtn:hover {
+		color: #fff;
+		background: #B8B2F4;
+}
+	
+	
+	
+
+	

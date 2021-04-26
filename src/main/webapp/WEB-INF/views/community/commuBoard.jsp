@@ -9,37 +9,27 @@
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
 						
-
-		
 		<h1>로컬커뮤니티</h1>
 
 		<div id="center">
-			<ul id ="boardList">
-				<li>
-					<div><img src="common/user.png"/> 서쪽마녀</div>
-					<div>2021.04.25</div>
-				</li>
-				<li>
-					<div>서대문구 혼밥하기 좋은 곳 아시나요?</div>
-					<div>
-						<span>조회수 : </span> 192 &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> 40 개 
-					</div>
-				</li>
-				<li>
-					#서대문구 #혼밥 #식당 #음식 #맛있는거 #추천 #동네맛집	
-				</li>
-				
-			</ul>
-
-		
-<!-- 			<ul id ="boardList">
-				<li> 서대문구 </li>
-				<li id ="point">서대문구에 혼밥하기 좋은곳 아시나요?  </li>
-				<li> .JO </li>
-				<li> 작성일 </li>
-				<li> 조회수 </li>
-				
-			</ul> -->
+			<c:forEach var="i" begin="1" end="6">
+				<ul id ="boardList">
+					<li>
+						<div>2021.04.25</div>
+						<div><span>조회수 : </span> 192 &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> 40 개</div>	 
+					</li>
+					<li>
+						<div><a href="commuView">서대문구 혼밥하기 좋은 곳 아시나요?</a></div>
+						<div>
+							<div><img src="common/user.png"/><a href="#"> 서쪽마녀</a></div>
+						</div>
+					</li>
+					<li>
+						#서대문구 #혼밥 #식당 #음식 #맛있는거 #추천 #동네맛집	
+					</li>
+				</ul>
+			</c:forEach>
+			
 		</div>
 			
 			

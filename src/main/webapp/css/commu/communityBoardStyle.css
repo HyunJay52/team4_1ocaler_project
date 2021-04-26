@@ -5,7 +5,7 @@
 	#body{overflow:auto;width:1300px;margin:50 auto;
 	height: 2500px;
 	}
-	h1{ padding: 10px;padding:20 20px;color:#000; font-weight: bold;
+	h1{ padding:20 30px;color:#000; font-weight: bold;
 	margin-top:30px;
 		}
 	span{
@@ -15,37 +15,96 @@
 	#center{ width:1100px; 
 			 margin : 0 auto; 
 	}
+	
+	#boardList {
+		
+	}
 	#boardList li {
 		width: 1100px;
-		float: left;
+		float: left; 
+		background-color: rgb(249 248 252);
+		border-radius: 5px;
 	}
 	
-	#boardList>li>div:nth-child(1){
-		width: 550px;
-		height: 50px;
+	/* 날짜 */
+	#boardList>li:nth-child(1)>div:nth-child(1){
+		width: 300px;
+		height: 35px;
 		font-size: 18px;
 		float: left;
-		line-height: 50px;
+		line-height: 35px;
+		margin-left:20px;
+		padding-top: 5px;
 		
 	}
+	
+	/* 프로필 이미지 */
 	#boardList>li>div img{
-		width: 50px;
-		height:50px;
+		width: 30px;
+		height:30px;
 		float: left;
 		margin-right: 10px;
+		margin: 9px;
 	}
-
-	#boardList>li>div:nth-child(2){
-		width: 550px;
-		height: 50px;
-		font-size: 18px;
+	/* 조회수 */
+	#boardList>li:nth-child(1)>div:nth-child(2){
+		width:780px;
+		height: 35px;
+		font-size: 16px;
 		text-align: right;
 		float: left;
+		line-height: 35px;
+		padding-right:20px; 
+		padding-top: 5px;
+	}
+	#boardList>li:nth-child(2){
+		margin: 
+	}
+	#boardList>li:nth-child(2)>div:nth-child(1){
+		width: 850px;
+		float:left;
+		height:48px;
+		float: left;
+		line-height: 48px;
+		color: #3f1785;  
+		font-weight: bold;  
+		font-size:22px ;
+		padding-left: 50px;
+	
 		
 	}
-
+	#boardList>li:nth-child(2)>div:nth-child(2){
+		width: 250px;
+		height:48px;
+		line-height: 48px;
+		padding-right :10px;
+		float: left;
 	
+		
+	}
+	#boardList>li:nth-child(3){
+		width: 1100px;
+		color: gray; 
+		font-size: 13px;
+		border-bottom: 4px solid #fff;
+		padding-left: 20px;
+		
+	}
 	
+	/* a링크 */
+	#boardList>li:nth-child(2)>div:nth-child(1) a:active,#boardList>li:nth-child(2)>div:nth-child(1) a:link,#boardList>li:nth-child(2)>div:nth-child(1) a:visited {
+    	color: #3f1785; 
+   	}
+   	#boardList>li:nth-child(2)>div:nth-child(1) a:hover{text-decoration: none; 	color: #571fb8 ; 
+   	}
+   	
+   	/* a링크 닉넴 */
+    #boardList>li:nth-child(2)>div:nth-child(2)	a:active,#boardList>li:nth-child(2)>div:nth-child(2) a:link,#boardList>li:nth-child(2)>div:nth-child(2) a:visited {
+    	color: #000; 
+   	}
+   	#boardList>li:nth-child(2)>div:nth-child(2) a:hover{text-decoration: none; 	color: #571fb8 ; 
+   	}
+   	
 	/* 검색어 */	
 	select{ margin-right:5px; height:30px;
 	}
