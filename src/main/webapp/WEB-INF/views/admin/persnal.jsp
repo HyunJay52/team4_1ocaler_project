@@ -4,7 +4,15 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/persnal.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <script>
-	
+	$(function(){
+		$("#perFrm").submit(function(){
+			if($("#peranswer").val()==''){
+				alert('답변내용을 입력하세요,,');
+				return false;
+			}
+			return true;
+		});
+	});
 </script>
 <div class="main">
 	<div class="title">1:1 답변</div>
@@ -23,9 +31,9 @@
 		</li>
 	</ul>
 	<textarea class="persnalarea" readonly>${vo.cs_content }</textarea>
-	<form method="post" action="persnalOk">
+	<form method="post" id="perFrm" action="persnalOk">
 		<input type="hidden" name="cs_num" value="${vo.cs_num }"/>
-		<textarea name="cs_answer" class="persnalarea" placeholder="답변을 입력해주세요">${vo.cs_answer }</textarea>
+		<textarea name="cs_answer" id="peranswer"class="persnalarea" placeholder="답변을 입력해주세요">${vo.cs_answer }</textarea>
 		<input type="submit" class="puplebtn" id="psubmit" value="답변완료"/>
 	</form>
 </div>
