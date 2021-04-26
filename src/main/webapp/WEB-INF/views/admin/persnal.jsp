@@ -3,13 +3,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/persnal.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
-<div id="main">
-	<a>1:1 답변</a>
-	<input type="text" class="persnaltxt"value="[카테고리] 문의드립니다~~" readonly />
-	<textarea class="persnalarea" readonly>문의 드립니다.~~</textarea>
-	<input type="text" class="persnaltxt" name="subject"/>
-	<textarea name="content" class="persnalarea" placeholder="내용을 입력해주세요"></textarea>
-	<input type="submit" class="puplebtn" id="psubmit" value="답변완료"/>
+<script>
+	
+</script>
+<div class="main">
+	<div class="title">1:1 답변</div>
+	<ul class="per_top">
+		<li>${vo.cs_cate }</li>
+		<li>${vo.cs_subject }</li>
+		<li>${vo.userid }</li>
+		<li>${vo.cs_writedate }</li>
+		<li>
+			<c:if test="${vo.cs_status==1 }">
+				미처리
+			</c:if>
+			<c:if test="${vo.cs_status==2 }">
+				처리완료
+			</c:if>
+		</li>
+	</ul>
+	<textarea class="persnalarea" readonly>${vo.cs_content }</textarea>
+	<form method="post" action="persnalOk">
+		<input type="hidden" name="cs_num" value="${vo.cs_num }"/>
+		<textarea name="cs_answer" class="persnalarea" placeholder="답변을 입력해주세요">${vo.cs_answer }</textarea>
+		<input type="submit" class="puplebtn" id="psubmit" value="답변완료"/>
+	</form>
 </div>
 
 
