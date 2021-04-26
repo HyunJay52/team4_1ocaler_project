@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoMyDealStyle.css"/>
-<script src="<%=request.getContextPath()%>/js/myInfo/myInfoScript.js"></script>
 <script>
 	$(function(){
 		//collape in
@@ -45,7 +41,7 @@
 		setList();
 		
 		//다른곳 클릭시 드롭박스 닫기
-		$(".body").click(function(){
+		$("body").click(function(){
 			$('#myDealTbl tr>td>div').attr('class', 'myDealMem collapse');
 		});
 		
@@ -80,11 +76,14 @@
 			$(this).prev().val("");
 			console.log(searchWord);
 		});
+		
+		//////////////////////
+		
 	});
 </script>
-<div class="body">
+<div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div class="mainContainer">
+	<div class="myinfoContainer">
 		<h3>회원간거래</h3>
 		<div class="dealTop">
 			<div class="dealInfo">
@@ -112,12 +111,12 @@
 			</div>
 			<div class="dealDateForm">
 				<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
-				<div class="dateFrm"><button class="dayBtn prev">《</button><button class="dayBtn setMonth mdFnt"></button><button class="dayBtn next">》</button></div>
+				<div class="myDealFrm"><button class="dayBtn prev">《</button><button class="dayBtn setMonth mdFnt"></button><button class="dayBtn next">》</button></div>
 				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
 				<input type="date" min="2021-01-01" max="2021-05-31"/>
 				
 			</div>
-			<table class="table2" id="myDealTbl">
+			<table class="myinfoTable2" id="myDealTbl">
 				<tr>
 					<td>날짜</td>
 					<td>제목</td>
@@ -163,5 +162,3 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>

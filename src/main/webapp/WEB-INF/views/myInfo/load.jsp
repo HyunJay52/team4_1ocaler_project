@@ -1,71 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
-
-<style>
-
-	#loadArea{
-		width:500px;
-		height:300px;
-		float:left;
-	}
-	#loadArea>form>ul>li{
-		float:left;
-		width:25%;
-		margin:20px 0;
-	}
-	#loadArea>form>input:nth-child(1){
-		width:100%;
-		height:50px;
-		padding-left:10px;
-	}
-	#myPoint{
-		border:3px solid #3f1785;
-		color:#3f1785;
-		width:300px;
-		float:right;
-		padding:50px 30px;
-		font-weight:bold;
-		border-radius:5em;
-	}
-	.selectBox{
-		width:140px; height:38px; margin-bottom:10px; position:relative;
-	}
-	.textBox{
-		width:300px; height:30px; margin-bottom:10px; padding-left:5px;
-	}
-	#loadList{
-		width:1000px; position:relative; padding:20px 0;
-		
-	}
-
-   .table2 tr>td{}/*전체적인 열 폭조정*/
-   .table2 tr>td:nth-child(1){/*첫번째 열 선택*/}
-   .table2 tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
-      /* text-align:left; */
-   }
-	.dateFrm{
-		position:absolute;
-		top:55px;
-  	  	left:62px;
-  	 	height:40px;
-		width:110px;
-		line-height:40px;
-	}
-	.date{
-		margin:0px 50px 10px 50px;
-	}
-	.line{
-	  	position:absolute; background-color:#3f1785; width:100%; height:4px; top:70px; border-radius:100px;
-	}
-	#sel{
-		width:100px; height:30px; float:right; margin:0 50px 0px 790px
-	}
-	.load{
-		margin:10px 0;	
-	}
-</style>
 <script>
 	$(function(){
 		var date = new Date();
@@ -159,9 +93,9 @@
 		
 	});
 </script>
-<div class="body">
+<div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div class="mainContainer">
+	<div class="myinfoContainer">
 	<h2>충전하기</h2>
 	<div class="loadTop">
 		<div id="loadArea">
@@ -194,11 +128,11 @@
 					<option value="충전내역">충전내역</option>
 					<option value="사용내역">사용내역</option>
 				</select>
-				<div class="line"></div>
-				<div class="dateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
-				<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
+				<div class="loadLine"></div>
+				<div class="loadDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
+				<input type="date" min="2021-01-01" max="2021-05-31" class="loadDate"/>
 				
-			<table class="table2">
+			<table class="myinfoTable2">
 				<tr>
 					<td>구분</td>
 					<td>날짜</td>
@@ -245,5 +179,3 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>

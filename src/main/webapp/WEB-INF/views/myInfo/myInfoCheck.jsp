@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <%
 	//로그인 세션 저장하기
 
@@ -21,7 +17,7 @@
 	}
 	#login_section ul li {
 		list-style-type: none;
-		float:left;
+		
 	}
 	.btnSize {
 		width: 100px;
@@ -52,6 +48,9 @@
 		color: #000;
 		text-decoration: none;
 	}
+	#mainFooter, .footerLine{
+		display:none;
+	}
 </style>
 <script>
 	$(function(){
@@ -70,21 +69,16 @@
 		});
 	});
 </script>
-<div class="body">
-	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div id="loginContainer">
-		<div id="login_section">
-			<span class="lgFnt" >비밀번호 확인</span>
-			<form method="post" action="backHome"> <!-- loginConfrim -->
-				<ul>
-					<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
-					<li><button id="loginBtn" class="btn commBtn lgBtn" tabindex="4" >확인</button></li>
-					<li><button type="button" id="signupBtn" class="btn commBtn lgBtn" tabindex="5" >취소</button></li>
-					<li><a href="#" class="smlFnt lgA">비밀번호찾기</a></li>
-				</ul>
-			</form>
-		</div>
+<div id="loginContainer">
+	<div id="login_section">
+		<span class="lgFnt" >비밀번호 확인</span>
+		<form method="post" action="myInfo"> <!-- loginConfrim -->
+			<ul>
+				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
+				<li><button id="loginBtn" class="btn commBtn lgBtn" tabindex="4" >확인</button></li>
+				<li><button type="button" id="signupBtn" class="btn commBtn lgBtn" tabindex="5" >취소</button></li>
+				<li><a href="#" class="smlFnt lgA">비밀번호찾기</a></li>
+			</ul>
+		</form>
 	</div>
 </div>
-</body>
-</html>

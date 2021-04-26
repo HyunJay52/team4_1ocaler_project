@@ -48,4 +48,17 @@ public class MyinfoController {
 	public String farmerDeal() {
 		return "myInfo/farmerDeal";
 	}
+	
+	@RequestMapping("/myInfoReview")
+	public String review() {
+		return "myInfo/myInfoReview";
+	}
+	@RequestMapping("/myActivity")
+	public String myActivity() {
+		return "myInfo/myActivity";
+	}
+	@RequestMapping("/myInfoSaleHistory")
+	public String myInfoSaleHistory() {
+		return "myInfo/myInfoSaleHistory";
+	}
 }

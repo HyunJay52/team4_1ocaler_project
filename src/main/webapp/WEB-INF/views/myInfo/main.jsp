@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
-<script src="<%=request.getContextPath() %>/plugin/jquery.easing.1.3.js"></script>
-<script src="<%=request.getContextPath() %>/plugin/jquery.bxslider.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css" type="text/css">
 <style>
 #toggle{
 	position:relative;
@@ -56,13 +51,6 @@
 #QnA{
 	width:530px; float:right; margin-top:20px;
 }
-   .table2 tr>td{}/*전체적인 열 폭조정*/
-   .table2 tr>td:nth-child(1){/*첫번째 열 선택*/}
-   .table2 tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
-      /* text-align:left; */
-   }
-
-
 </style>	
 <script>
 	$(function(){
@@ -105,12 +93,12 @@
 		}
 	});
 </script>
-<div class="body"> 
+<div class="myinfoBody"> 
 	<!-- <button id="toggle" class="btn btn-outline-dark btn-light">||</button> -->
 	
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	
-	<div class="mainContainer">
+	<div class="myinfoContainer">
 	
 		<div id="profile">
 			<ul>
@@ -120,7 +108,7 @@
 				<li><input type="button" value="버튼" class="btn"/></li>
 			</ul>
 		</div>
-		<div class="top">
+		<div class="myinfoTop">
 			<div id="grade">
 				<h2>내 등급</h2>
 				<ul id="slider">
@@ -137,7 +125,7 @@
 		<div id="waiting">
 			<span class="header">참여대기</span>
 			<a href="#" style="float:right">더보기</a>
-			<table class="table2">
+			<table class="myinfoTable2">
 				<tr>
 					<td>구분</td>
 					<td>제목</td>
@@ -206,7 +194,7 @@
 		<div id="QnA">
 		<span class="header">QnA</span>
 		<a href="#" style="float:right">더보기</a>
-		<table class="table2">
+		<table class="myinfoTable2">
 				<tr>
 					<td>제목</td>
 					<td>유저</td>
@@ -241,5 +229,3 @@
 		</div>
 	</div>
 </div>	
-</body>
-</html>

@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoFarmerDealStyle.css"/>
-<script src="<%=request.getContextPath()%>/js/myInfo/myInfoScript.js"></script>
 <script>
 	$(function(){
 
 		//리스트 세팅
 		function setList(){
-
 			for(var i = 0; i < 3; i++){
 				var tag = "<tr>"; 
 				tag += "<td>2021.04.04</td>";
@@ -52,9 +47,9 @@
 		});
 	});
 </script>
-<div class="body">
+<div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div class="mainContainer">
+	<div class="myinfoContainer">
 		<h3>파머 직거래</h3>
 		<div class="dealTop">
 			<div class="dealInfo">
@@ -78,12 +73,11 @@
 		   <div class="dealBottom">
 			<div class="dealDateForm">
 				<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
-				<div class="dateFrm"><button class="dayBtn prev">《</button><button class="setMonth dayBtn mdFnt"></button><button class="dayBtn next">》</button></div>
+				<div class="dateFrm farmerDealFrm"><button class="dayBtn prev">《</button><button class="setMonth dayBtn mdFnt"></button><button class="dayBtn next">》</button></div>
 				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
 				<input type="date" min="2021-01-01" max="2021-05-31"/>
-				
 			</div>
-			<table class="table2" id="farmerDealTbl">
+			<table class="myinfoTable2" id="farmerDealTbl">
 				<tr>
 					<td>날짜</td>
 					<td>제목</td>
@@ -126,5 +120,3 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>

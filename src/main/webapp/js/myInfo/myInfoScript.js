@@ -15,7 +15,7 @@ $(function(){
 			toMonth = monthArr[1].replace(/(^0+)/, "");
 
 			setMonth(toYear, toMonth);
-		});
+		}); 
 		
 		//월 세팅
 		function setMonth(toYear, toMonth){
@@ -24,10 +24,12 @@ $(function(){
 			if($("#sel").val() != null){// 충전하기 페이지(load)의 셀렉트박스 체크
 				console.log($("#sel").val());			
 			}
-			if($("#myDealToggle button").attr('value') != null){
-				var select = $("#myDealToggle button[value='select']").text();
-				console.log("event="+select);			
-			}
+
+			var select = $("#myDealToggle button[value='select']").text();
+			if(select != null && select != '' ){
+				console.log("event="+select);						
+			}	
+			
 			console.log(toYear);
 			console.log(toMonth);
 
@@ -60,7 +62,12 @@ $(function(){
 		});	
 		
 		
-		
+		//myDeal검색 이벤트
+		$(".dealBottom>.searchArea>input[type=button]").click(function(){
+			var searchWord = $(this).prev().val();
+			$(this).prev().val("");
+			console.log(searchWord);
+		});
 		
 		
 		
