@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+/* 팀 소개 */
+.aboutDiv>#introDetail {
+	width: 700px;
+	height: 150px;
+	margin: 0 auto;
+}
+
+.aboutDiv>#introTbl tr td {
+	text-align: center;
+}
+
+.aboutDiv>#introTbl tr td>img {
+	text-align: center;
+	width: 200px;
+	padding: 20px;
+}
+#introTbl {
+	width:1000px; margin: 0 auto;
+}
+.
+/* 오시는 길 */
+#routeDiv {
+	width: 1000px;
+	height: 100%;
+	margin: 0 auto;
+}
+#routeDiv>#routeWay {
+	width: 100%;
+	height: 100px;	
+}
+.routeTitle {
+	font-size: 20px;
+	font-weight: bold;
+}
+.aboutCenter {
+ 	float: left;
+}
+/* 공통 스타일 */
+.aboutDiv {
+	width: 1300px; height: 100%;
+	margin: 0 auto;
+	padding: 50px;
+}
