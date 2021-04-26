@@ -22,21 +22,21 @@
 		margin: 0;
 	}
 	
-	form {
+	#memJoinFrm {
 		width: 700px;
 		margin: 0 auto;
 	}
-	form>#basicInfo {
+	#memJoinFrm>#basicInfo {
 		width: 700px; 
 		margin: 20px auto;
 	}
-	form>#setProfile ul {
+	#memJoinFrm>#setProfile ul {
 		height: 300px;
 	}
-	form>#basicInfo input, form>#setProfile input {
+	#memJoinFrm>#basicInfo input, form>#setProfile input {
 		width: 320px; height: 50px; padding: 0 15px; border-radius: 3px; border: 1px solid #ddd;
 	}
-	form #mem_content {
+	#memJoinFrm #mem_content {
 		width: 320px; height: 150px;
 		border-radius: 3px; border: 1px solid #ddd;
 	}
@@ -172,7 +172,7 @@
 				</li>
 			
 				<li>닉네임</li>
-				<li><input type="text" name="mem_nick" id="mem_nick" placeholder="별명을 입력해주세요"/><button type="button" class="btn commBtn lgBtn">중복검사</button> </li>
+				<li><input type="text" name="mem_nick" id="mem_nick" placeholder="별명을 입력해주세요"/><button type="button" class="btn commBtn lgBtn">중복검사</button><span id="nickOverlap">N</span> </li>
 				
 				<li>인사말</li>
 				<li><textarea name="mem_content" id="mem_content" maxlength="200" placeholder="최대 200자"></textarea>
@@ -181,7 +181,6 @@
 			<button class="btn commBtn lgBtn" style="width: 320px; display:block; margin: 0 auto;" >가입하기</button>
 		</div>
 	</form>
-	
 	
 </div>
 </body>

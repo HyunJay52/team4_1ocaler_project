@@ -164,5 +164,3 @@
     </script>
 	</div>
 </div>
-	
-<%@ include file="/inc/footer.jspf" %>

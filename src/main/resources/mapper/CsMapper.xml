@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team4.localer.dao.CsDAO">
+	<select id="boardAllSelect" resultType="com.team4.localer.vo.CsVO">
+  		select cs_num, userid, cs_cate, cs_subject ,cs_content, cs_status, cs_answer, to_char(cs_writedate, 'MM-DD HH:MI') cs_writedate  
+  		from cs order by cs_num
+  	</select>
+  	<select id="boardSelect" resultType="com.team4.localer.vo.CsVO">
+  		select cs_num, userid, cs_cate, cs_subject, cs_content, cs_status, cs_answer, 
+  		to_char(cs_writedate, 'MM-DD HH:MI') cs_writedate, to_char(cs_date, 'MM-DD HH:MI') cs_date 
+  		from cs where cs_num=#{param1}
+  	</select>
+  	<update id="boardUpdate" parameterType="com.team4.localer.vo.CsVO">
+  		update cs set cs_answer=#{cs_answer}, cs_date=sysdate, cs_status=2 where cs_num=#{cs_num} 
+  	</update>
+</mapper>

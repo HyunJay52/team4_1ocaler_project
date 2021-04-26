@@ -21,14 +21,14 @@
 	#searchArea {
 		position: relative; top:40%; text-align: center;
 	}
-	#searchKey {
+	#sideKey {
 		width: 160px;
 	    height: 40px;
 	    border-top-left-radius: 5px;
 	    border-bottom-left-radius: 5px;
 	    padding-left: 10px;
 	}
-	#searchWord {
+	#sideWord {
 		width: 400px;
     	height: 40px;
     	padding-left: 10px;
@@ -126,7 +126,7 @@
 				쓱싹레시피 : ssgCate
 				자유자게 : freeCate
 			 -->
-			<select id="searchKey">
+			<select id="sideKey">
 				<option value="totalCate">통합검색</option>
 				<option value="findCate">착한발견</option>
 				<option value="townCate">동네직구</option>
@@ -135,7 +135,7 @@
 				<option value="localCate">우리동네 이야기</option>
 				<option value="ssgCate">쓱싹레시피</option>
 				<option value="freeCate">자유자게</option>
-			</select><input type="text" id="searchWord" name="searchWord" placeholder="검색어를 입력해주세요"/><input type="submit" id="goSearch" value="검색"/> <span id="close">✕️</span>
+			</select><input type="text" id="sideWord" name="sideWord" placeholder="검색어를 입력해주세요"/><input type="submit" id="goSearch" value="검색"/> <span id="close">✕️</span>
 		</form>
 		<div style="margin-top: 20px">
 			<span style="line-height: 40px;">이런 키워드는 어떠세요?</span>

@@ -1,0 +1,58 @@
+@charset "UTF-8";
+<style>	
+	/*기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능*/
+	/*열고 닫기*/
+	#eatViewFold, #eatViewOpen{position:absolute; z-index:1;}	
+	#eatViewFold{background-color:#fff; top:140px; left:493px; margin-top:348px; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
+	#eatViewOpen{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
+	/*버튼이벤트*/
+	.commBtn {	width: 90px; color: #3f1785; border: 1px solid #3f1785;}
+	.commBtn:hover { border: 1px solid #3f1785; background-color: #3f1785; font-weight: bold; color: #fff; font-weight: bold;}
+	.commBtnWrite{width:75px;}
+	/*폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼*/
+	#eatViewBody{overflow:hidden;}
+	/*eatViewSearchFrm*/
+	#eatViewSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
+	#eatViewSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
+	#eatViewSearchFrm input[type=image]{display:block; height:48px;}
+	/*eatViewTopFrm*/
+	#eatViewTopFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
+	#eatViewTopFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
+	#eatViewTopFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
+	#eatViewTopFrm img{width:30px; margin:9px 0px;}
+	#eatViewTopFrm li:first-child>a>img{ margin-left:10px;}
+	#eatViewTopFrm li:last-child>a>img{ margin-right:10px;}
+	/*eatViewShowFrm*/
+	#eatViewShowFrm{position:absolute; height:850px; top:100px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
+	#eatViewShowTopMenu{overflow:auto;}
+	#eatViewShowTopMenu>li{float:left; width:180px; padding: 10px 0px 10px 10px;}
+	#eatViewShowTopMenu>li:first-child>div>a{color:#571fb8; font-weight:700}
+	#eatViewShowTopMenu>li:first-child>div{padding-left:15px;}
+	#eatViewShowTopMenu>li:nth-of-type(3){width:100px;}
+	#eatViewShowTopMenu img{display:block; width:25px; float:left; margin-right:7px; padding-top:11px;}
+	#eatViewShowTopMenu img[src*=cart]{display:none;} 
+	#eatViewShowTopMenu span{display:block;  height:45px; line-height:45px; float:left; font-size:22px;} 
+	#eatViewShowTopMenu a{color:#000;}
+	
+	#eatViewWith{margin-left:32px;}
+	#eatViewShowTopMenu button{height:45px;}
+	/*group검색폼*/
+	#eatViewGroupSearchFrm>select{height: 32px; width: 100px; margin: 15px 10px 15px 15px; border: 1px solid #d9d9d9; border-radius: 5px;}	    
+	#eatViewGroupSearchFrm>input:nth-of-type(2){    height: 32px;   width: 270px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 15px 0px;}
+    #eatViewGroupSearchFrm>input:nth-of-type(3){    display: block;  height: 32px;   float: right;   margin: 15px 15px 15px 0px;}
+	/*eatViewGroupList*/
+	#eatViewGroupList{overflow:auto; height:640px;}
+	#eatViewGroupList>li{border:1px solid gray;}
+	#eatViewGroupList div:first-child{overflow:auto; position:relative;}
+ 	#eatViewGroupList div:first-child>span{display:block; float:left; font-size:16px; margin:7px 0px;}
+	#eatViewGroupList div:first-child>img:first-child{display:block; float:left; height:16px; margin: 10px 15px;}
+	#eatViewGroupList span{display:block; text-align:center; font-size:22px; margin-bottom: 5px;}
+	#eatViewGroupList div:not(:first-child)>img{margin:5px 40px;}
+	#eatViewGroupList div:nth-child(6){font-size: 13px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px; padding-right: 15px; margin-top:3px; margin-bottom:5px;}
+
+	/*paging*/
+	#page{text-align:center}
+	#page>li{display:inline-block; border:1px solid #d9d9d9; width:35px; height:40px; line-height:40px; margin:19px auto;}
+	#page>li:first-child{width:50px; border-top-left-radius:8px; border-bottom-left-radius:8px }
+	#page>li:last-child{width:50px; border-top-right-radius:8px; border-bottom-right-radius:8px}
+</style>
