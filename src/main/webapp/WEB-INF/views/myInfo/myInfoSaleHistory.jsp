@@ -7,12 +7,18 @@
 			<h3>판매관리 - 메인</h3>
 			<div id="saleGrade" class="saleHistoryTop">
 				<h6>셀러등급</h6>
+				<ul>
+					<li><img src="img/myInfo/slider/heart60.png"/></li>
+					<li><span class="saleHistorySpan">6/10</span></li>
+				</ul>
 			</div>
 			<div id="settlementAmount" class="saleHistoryTop">
 				<h6>정산금액</h6>
+				<span class="saleHistorySpan">980,100원</span>
 			</div>
 			<div id="newQ&A" class="saleHistoryTop">
 				<h6>신규 Q&A</h6>
+				<span class="saleHistorySpan">12개</span>
 			</div>
 		</div>	
 	

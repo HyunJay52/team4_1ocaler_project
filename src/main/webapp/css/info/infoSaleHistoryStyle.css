@@ -7,7 +7,21 @@
 	border-top:1px solid #ddd;
 	border-bottom:1px solid #ddd;
 	width:260px;
-	height:300px;
+	height:140px;
 	float:left;
-	marggin:
+	margin-top:10px;
+	padding:10px 0;
+}
+.saleHistorySpan{
+	font-weight:bold;
+	text-align:center;
+	font-size:46px;
+}
+#saleGrade li{
+	float:left;
+	width:30%;
+}
+#saleGrade>img{
+	
+	
 }
