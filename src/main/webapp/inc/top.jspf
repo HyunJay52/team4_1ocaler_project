@@ -5,13 +5,14 @@
 <!-- 페이지 스타일 링크 -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/aboutBoard.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/csBoard.css"/>
 
 <!-- 카카오 지도 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script>
-
 <html>
 <head>
    <title>Welcome to 1ocaler</title>
@@ -123,8 +124,8 @@
          </li>
          <li class="resquick_content"><a href="groupPage">같이가치</a>
             <ul>
-               <li><a href="eatPage">가치가장</a></li>
-               <li><a href="withPage">한끼미식회</a></li>
+               <li><a href="withPage">가치가장</a></li>
+               <li><a href="eatPage">한끼미식회</a></li>
             </ul>
          </li>
          <li class="resquick_content"><a href="commuMain">커뮤니티</a>
