@@ -8,9 +8,10 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoMyDealStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoFarmerDealStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoDeliveryStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoSaleHistoryStyle.css?ver=1"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoSaleHistoryStyle.css?ver=3"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/infoMyinfoStyle.css"/>
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/sellerInfoStyle.css?ver=5"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/info/myInfoProductManagementStyle.css?ver=7"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css" type="text/css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="<%=request.getContextPath() %>/plugin/jquery.easing.1.3.js"></script>
@@ -21,7 +22,7 @@
 	var menuTitle = ['My Info','참여내역','판매관리'];
 	var subMenu = [ ['내 정보','충전하기','배송내역'],
 					['회원간 거래','파머 직거래','리뷰 관리','나의 활동'],
-					['판매자 정보','상품관리','판매/결제관리','배송관리','통계']		
+					['판매내역','판매자 정보','상품관리','판매/결제관리','배송관리','통계']		
 				  ]
 	
 	$(function(){
@@ -79,11 +80,13 @@
 			}else if($(this).text() == '리뷰 관리'){
 				location.href="myInfoReview";
 			}else if($(this).text() == '나의 활동'){
-				location.href="myActivity";			
-			}else if($(this).text() == '판매자 정보'){
+				location.href="myActivity";	
+			}else if($(this).text() == '판매내역'){
 				location.href="myInfoSaleHistory";
+			}else if($(this).text() == '판매자 정보'){
+				location.href="sellerInfo";
 			}else if($(this).text() == '상품관리'){
-				
+				location.href="myInfoProductManagement";
 			}else if($(this).text() == '판매/결제관리'){
 				
 			}else if($(this).text() == '배송관리'){

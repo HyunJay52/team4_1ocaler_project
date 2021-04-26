@@ -1,0 +1,97 @@
+@charset "UTF-8";
+	.myInfoProductManagementTop, .myInfoProductManagementBottom{
+		width:900px;
+		overflow:auto;
+	}
+	.productManagementHeaderForm{
+		height:30px;
+		text-align:center;	
+		margin:20px 50px;
+	}
+	.productManagementHeader>li{
+		float:left;
+		width:150px;
+		font-weight:bold;
+	}
+	.productManagementHeader>li:nth-child(2n){
+		border-left:2px solid black;
+		border-right:2px solid black;
+		
+	}
+	.productManagementLabelForm{
+		width:900px;
+		height:170px;
+		padding:20px;
+		border:1px solid #ddd;
+	}
+	.productManagementLabel{
+		width:200px;
+		float:left;
+	}
+	.productManagementLabel>li{
+		border:1px solid #ddd;
+		background-color:lightgray;
+		height:40px;
+		line-height:40px;
+		text-align:center;
+	}
+	.productManagementLabelCenter{
+		float:left;
+		padding-left:10px;
+		height:120px;
+	}
+	.productManagementLabelCenter>ul>li{
+		width:120px;
+		float:left;
+		height:40px;
+		line-height:40px;
+	}
+	.productManagementLabelCenterDiv{
+		width:100%;
+		overflow:auto;
+		padding:6px 0;
+	}
+	.productManagementBtn{
+		width:70px;
+		height:30px;
+		padding:2px 12px;
+	}
+	.myInfoProductManagementBottom{
+		margin:20px 0px;
+		padding:20px;
+		border:1px solid #ddd;
+		
+	}
+	.myInfoProductManagementBottom>ul>li{
+		float:left;
+		margin:0 10px 20px 0;
+	}
+	.myInfoProductManagementBottomBtn{
+		width:100px;
+		height:30px;
+		padding:2px 12px;
+		border-radius:70px;
+	}
+	/* 테이블 스타일 */
+	.myInfoProductManagementTable2 {
+		width:100%;
+		margin:0 auto;
+		padding:0;
+	}
+	.myInfoProductManagementTable2 tr{/*테이블 목록*/
+		border-bottom:1px solid rgb(227,227,227); 
+		text-align:center;
+		height:40px;
+    }
+	.myInfoProductManagementTable2 tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color:#3f1785;
+		color:#fff; 
+		font-weight:bold;
+	}
+	.myInfoProductManagementTable2 tr:last-child{/*마지막 줄 tr 스타일*/
+		border-bottom:2px solid #3f1785;
+	}
+	.myInfoProductManagementTable2 tr>td{/*전체적인 열 폭조정*/
+		width:14%;
+	}
