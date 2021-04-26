@@ -22,9 +22,14 @@ public class MemberController {
 	public String loginConfirm() {
 		return "member/login";
 	}
-	
+// 일반회원가입	
 	@RequestMapping("/joinMember")
 	public String joinMember() {
 		return "member/joinMember";
+	}
+// 셀러회원가입
+	@RequestMapping("/joinSeller")
+	public String joinSeller() {
+		return "member/joinSeller";
 	}
 }

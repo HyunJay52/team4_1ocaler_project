@@ -11,7 +11,6 @@ public class DealController {
 	public String selBard() {
 		return "deal/sellBoard";
 	}
-
 	//동네직구(회원)
 	@RequestMapping("/memberBoard")
 	public String memberBoard() {
