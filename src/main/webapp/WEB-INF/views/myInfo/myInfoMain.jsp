@@ -1,23 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<script src="<%=request.getContextPath() %>/plugin/jquery.easing.1.3.js"></script>
-<script src="<%=request.getContextPath() %>/plugin/jquery.bxslider.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css" type="text/css">
 <style>
-.body{
-	overflow:auto;
-	width:1300px;
-}
 #toggle{
 	position:relative;
 }
-
-	.mainContainer{
-		width:1000px;
-		margin:50px 185px;
-		
-	}
 #profile{
 	width:200px; height:370px; background-color:#fff; border:1px solid #ddd; float:left;
 }
@@ -33,7 +19,7 @@
 #profile>ul>li:nth-child(4){
 	text-align:right;
 }
-#top{
+.top{
 	width:700px; height:370px; border-top:1px solid black; border-bottom:1px solid black; margin:0 50px; float:right; padding:90px 30px;
 }
 #grade{
@@ -49,7 +35,7 @@
 	font-weight:bold;
 	border-radius:5em;
 }
-.header{font-weight:bold; font-size:24px;}
+
 #waiting{
 	width:450px; float:left; margin-top:30px; margin-right:20px;
 }
@@ -65,41 +51,6 @@
 #QnA{
 	width:530px; float:right; margin-top:20px;
 }
-</style>
-<style>
-   .table2 {width:90%;margin:0 auto;padding:0}
-    .table2 tr{/*테이블 목록*/
-       border-bottom:1px solid rgb(227,227,227); 
-       text-align:center;
-       height:40px;
-    }
-   .table2 tr:first-child{/*첫번째 테이블 목차*/
-      text-align:center;
-      
-      background-color:#3f1785;
-      color:#fff; font-weight:bold;
-   }
-   .table2 tr:last-child{/*마지막 줄 tr 스타일*/
-      border-bottom:2px solid #3f1785;
-   }
-   .table2 tr>td{}/*전체적인 열 폭조정*/
-   .table2 tr>td:nth-child(1){/*첫번째 열 선택*/}
-   .table2 tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
-      W/* text-align:left; */
-   }
-.bx-wrapper{
-   	border:none; box-shadow:none; margin-bottom:36px;
-}
-.bx-controls-direction{
-	display:none;
-}
-.bx-pager-link{
-	pointer-events:none; background:lightgray;
-}
-.bx-pager-link active{
-	background:#3f1785;
-}
-
 </style>	
 <script>
 	$(function(){
@@ -142,22 +93,22 @@
 		}
 	});
 </script>
-<div class="body"> 
+<div class="myinfoBody"> 
 	<!-- <button id="toggle" class="btn btn-outline-dark btn-light">||</button> -->
 	
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	
-	<div class="mainContainer">
+	<div class="myinfoContainer">
 	
 		<div id="profile">
 			<ul>
-				<li><img src="<%=request.getContextPath()%>/img/myInfo/saver.gif"/></li>
+				<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png"/></li>
 				<li>자바칩프라푸치노</li>
 				<li>마포구 동대</li>
 				<li><input type="button" value="버튼" class="btn"/></li>
 			</ul>
 		</div>
-		<div id="top">
+		<div class="myinfoTop">
 			<div id="grade">
 				<h2>내 등급</h2>
 				<ul id="slider">
@@ -174,7 +125,7 @@
 		<div id="waiting">
 			<span class="header">참여대기</span>
 			<a href="#" style="float:right">더보기</a>
-			<table class="table2">
+			<table class="myinfoTable2">
 				<tr>
 					<td>구분</td>
 					<td>제목</td>
@@ -243,7 +194,7 @@
 		<div id="QnA">
 		<span class="header">QnA</span>
 		<a href="#" style="float:right">더보기</a>
-		<table class="table2">
+		<table class="myinfoTable2">
 				<tr>
 					<td>제목</td>
 					<td>유저</td>
@@ -278,5 +229,3 @@
 		</div>
 	</div>
 </div>	
-</body>
-</html>

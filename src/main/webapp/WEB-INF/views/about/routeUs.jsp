@@ -21,10 +21,18 @@
 </div>
 
 <script>
-	var container = document.getElementById("routeMap"), options = {
+	var mapContainer = document.getElementById("routeMap"), 
+		options = {
 		center : new kakao.maps.LatLng(37.55250348958828, 126.93769444015136),
 		level : 4
 	};
-	var map = new kakao.maps.Map(container, options);
+	var map = new kakao.maps.Map(mapContainer, options);
+	
+	var markerPosition = new kakao.maps.LatLng(37.55250348958828, 126.93769444015136);
+	var marker = new kakao.maps.Marker({
+		position: markerPosition
+	});
+	marker.setMap(map);
+	
 </script>
 

@@ -3,6 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/main.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
+<script>
+	$(function(){
+		$(".smallbtn").click(function(){
+			var cs_num = $(this).attr('title');
+			location.href="persnal?cs_num="+cs_num;
+		});
+	});
+</script>
 <div class="main">
 	<div class="title">일일현황</div>
 	<div>
@@ -31,37 +39,17 @@
 			<td>등록일</td>
 			<td>게시글관리</td>
 		</tr>
-		<tr>
-			<td>1</td>
-			<td>1:1문의</td>
-			<td>거래가 안되요</td>
-			<td>사람1</td>
-			<td>2021-01-01</td>
-			<td><input type="button" value="처리완료" class="smallbtn"/></td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>1:1문의</td>
-			<td>거래가 안되요</td>
-			<td>사람1</td>
-			<td>2021-01-01</td>
-			<td><input type="button" value="처리완료"/></td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>1:1문의</td>
-			<td>거래가 안되요</td>
-			<td>사람1</td>
-			<td>2021-01-01</td>
-			<td><input type="button" value="처리완료"/></td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>1:1문의</td>
-			<td>거래가 안되요</td>
-			<td>사람1</td>
-			<td>2021-01-01</td>
-			<td><input type="button" value="처리완료"/></td>
-		</tr>
+		<c:forEach var="vo" items="${list }">
+			<c:if test="${vo.cs_status==1 }">
+				<tr>
+					<td>${vo.cs_num }</td>
+					<td>${vo.cs_cate }</td>
+					<td class="wordcut"><a href="persnal?cs_num=${vo.cs_num }">${vo.cs_subject }</a></td>
+					<td>${vo.userid }</td>
+					<td>${vo.cs_writedate }</td>
+					<td><input type="button" value="미처리" title="${vo.cs_num }"class="smallbtn"/></td>
+				</tr>
+			</c:if>
+		</c:forEach>
 	</table>
 </div>

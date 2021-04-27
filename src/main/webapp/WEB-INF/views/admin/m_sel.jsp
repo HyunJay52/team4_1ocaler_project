@@ -3,47 +3,153 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/m_sel.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
-<div id="main">
-	<div class="one">
-		<ul id="simply">
-			<li>기본정보</li>
-			<li>아이디</li>
-			<li><input type="text" name="userid" value="abcd1234"></li>
-			<li>사업자명</li>
-			<li><input type="text" name="sel_name" value="김자바"></li>
-			<li>상호명</li>
-			<li><input type="text" name="company" value="단호박"></li>
-			<li>사업자 번호</li>
-			<li><input type="text" name="com_num" value="123-12-12345"></li>
-			<li>셀러 설명</li>
-			<li><textarea name="sel_content" cols="45" rows="5"></textarea></li>
-			<li>대표이미지</li>
-			<li><img src="<%=request.getContextPath() %>/common/won_000.png" width="200" height="200"></li>
-		</ul>
-		<input type="button" id="modi"value="수정"/>
-		<input type="button" id="repl" value="되돌리기"/>
-	</div>
-	<div class="one">
-	<ul>
-		<li>고객상담번호</li>
-		<li><input type="text"name="sel_tel1" value="031">-
-			<input type="text"name="sel_tel2" value="2222">-
-			<input type="text"name="sel_tel3" value="1111">
-		</li>
-		<li>주소</li>
-		<li><input type="text" name="sel_zip" value="우편번호"><input type="button" value="주소찾기"/></li>
-		<li><input type="text" name="sel_addr" value="서울시 뫄뫄구 뫄뫄로"/></li>
-		<li><input type="text" name="sel_detail" value="뫄뫄동 11호"/></li>
-		<li>은행명</li>
-		<li><select name="bank">
+<script>
+	$(function(){
+		$('.memid').click(function(){
+			var text = $(this).prev().text();
+			meminfo(text);
+			selinfo(text);
+		});
 		
-		</select></li>
-		<li>계좌주</li>
-		<li><input type="text" name="acc_name" value="김자바"/></li>
-		<li>계좌번호</li>
-		<li><input type="text" name="account" value="123-12-1234"/></li>
+		function meminfo(num){
+			$("#meminfo").css("display", "block");
+		}
+		function selinfo(num){
+			$("#selinfo").css("display", "block");
+		}
+	});
+</script>
+<div class="main">
+	<div class="title">셀러회원관리</div>
+	<ul class="statis">
+		<li>
+			총회원수
+			<div>2500</div>
+			<b>▲4% </b>지난주 대비
+		</li>
+		<li>
+			신규회원
+			<div>2500</div>
+			<b>▼4% </b>지난주 대비
+		</li>
+		<li>
+			셀러회원
+			<div>2500</div>
+			<b>4% </b>지난주 대비
+		</li>
+		<li>
+			휴면계정
+			<div>2500</div>
+			<b>4% </b>지난주 대비
+		</li>
+		<li>
+			탈퇴
+			<div>2500</div>
+			<b>4% </b>지난주 대비
+		</li>
 	</ul>
-	</div>
+	
+	<form id="memFrm">
+		<select name="serchkey" class="selectcomm">
+			<option value="회원아이디">회원아이디</option>
+			<option value="회원번호">회원 번호</option>
+			<option value="회원이름">회원 이름</option>
+		</select>
+		<input type="text" class="textcomm" name="serchword"/>
+		<input type="submit" class="searchbtn" value="검색"/>
+	</form>	
+	<table class="tablea" >
+		 <colgroup>
+               <col width="5%" />
+               <col width="5%" />
+               <col width="6%" />
+               <col width="5%" />
+               <col />
+               <col width="13%" />
+               <col width="9%" />
+               <col width="8%" />
+               <col width="9%" />
+               <col width="9%" />
+               <col width="5%"/>
+            </colgroup>
+		<tr>
+			<td>번호</td>
+			<td>아이디</td>
+			<td>이름</td>
+			<td>성별</td>
+			<td>주소</td>
+			<td>연락처</td>
+			<td>글쓰기 권한</td>
+			<td>휴면상태</td>
+			<td>셀러권한삭제</td>
+			<td>쌓인신고</td>
+			<td>수정</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td class="memid">goguma</td>
+			<td>김길동</td>
+			<td>남자</td>
+			<td>서울시 강서구</td>
+			<td>010-2222-3333</td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td>10</td>
+			<td><input type="button" class="spuplebtn"value="수정"></td>
+		</tr>
+	</table>
+	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->
+	<table id="meminfo" class="tablea">
+		<colgroup>
+               <col width="200" />
+               <col width="200" />
+               <col width="100" />
+               <col width="250" />
+               <col width="200" />
+           </colgroup> 
+		<tr>
+			<td>게시물</td>
+			<td>댓글</td>
+			<td>등급</td>
+			<td>가입날짜</td>
+			<td>누적신고</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>40</td>
+			<td>5</td>
+			<td>2021.01.01</td>
+			<td>88</td>
+		</tr>
+	</table>
+	<!-- 셀러정보 테이블 -->
+	<table id="selinfo" class="tablea">
+		<colgroup>
+              <col width="200" />
+              <col width="300" />
+              <col width="300" />
+              <col width="200" />
+              <col width="300" />
+              <col width="300" />
+         </colgroup> 
+		<tr>
+			<td>번호</td>
+			<td>제목</td>
+			<td>판매 횟수/환불횟수</td>
+			<td>작성자</td>
+			<td>작성날짜</td>
+			<td>판매금액</td>
+		</tr>
+		<tr>
+			<td>101</td>
+			<td>감자</td>
+			<td>130/10</td>
+			<td>goguma</td>
+			<td>2021.01.20</td>
+			<td>10000</td>
+		</tr>
+	</table>
+
+		
 </div>
-</body>
-</html>

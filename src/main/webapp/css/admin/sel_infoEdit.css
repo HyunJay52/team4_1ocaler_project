@@ -1,0 +1,52 @@
+@charset "UTF-8";
+/*32 22 13*/
+body{font-family:"nsr";font-size:13px;}
+#main{margin:0 auto; padding:0;overflow:auto;
+	width:1300px;background-color:#ddd;
+}
+#center{margin:0 auto;}
+.one{
+	margin-top:40px;margin-bottom:20px;
+	margin-left:20px;
+	background-color:#fff;
+    width:490px;
+    height:920px;
+    padding:20px 30px;
+	float:left;
+	border:1px solid gray;
+}
+ul{
+	list-style-type: none;
+	}
+li{
+	padding:8px;
+	}
+/*첫번째 div*/
+#simply li:first-child{
+	font-faimly:"nsrb";
+	font-size:32px;
+	}
+/*두번째마다*/
+#simply li:nth-child(2n){
+	font-size:22px;
+	}
+	/*공통텍스트박스*/
+input[type="text"]{
+	width:300px;/*너비설정*/
+	padding:5px;/*여백설정*/
+	font-family: inherit;/*폰트상속*/
+}
+input[type="button"]{
+	float:left;
+	width:100px;
+	margin:10px;
+	padding:5px;/*여백설정*/
+	font-family: inherit;/*폰트상속*/
+}
+#simply li:last-child{
+	padding:0px;
+	width:200px;
+	height:200px;
+	border:1px solid #ddd;
+}
+

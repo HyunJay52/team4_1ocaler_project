@@ -1,0 +1,56 @@
+@charset "UTF-8";
+	.saleHistoryCenter{
+		width:800px;
+		margin:0 auto;
+	}
+	#saleHistoryTop{
+		overflow:auto;
+	}
+	.saleHistoryTop{
+		border-top:1px solid #ddd;
+		border-bottom:1px solid #ddd;
+		width:260px;
+		height:140px;
+		float:left;
+		margin-top:10px;
+		padding:10px 0;
+	}
+	.saleHistoryBottom{
+		margin-top:50px;
+	}
+	.saleHistorySpan{
+		font-weight:bold;
+		font-size:46px;
+		text-align:center;
+		
+	}
+	.saleHistoryHeader{
+		margin:50px 0 5px 40px;
+		font-weight:bold;
+	}
+	#saleGrade li{
+		float:left;
+		width:30%;
+	}
+	.myinfoSaleHistoryTable2 {
+		width:90%;
+		margin:0 auto;
+		padding:0;
+	}
+	.myinfoSaleHistoryTable2 tr{/*테이블 목록*/
+		border-bottom:1px solid rgb(227,227,227); 
+		text-align:center;
+		height:40px;
+    }
+	.myinfoSaleHistoryTable2 tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color:#3f1785;
+		color:#fff; 
+		font-weight:bold;
+	}
+	.myinfoSaleHistoryTable2 tr:last-child{/*마지막 줄 tr 스타일*/
+		border-bottom:2px solid #3f1785;
+	}
+	.myinfoSaleHistoryTable2 tr>td{/*전체적인 열 폭조정*/
+		width:25%;
+	}
