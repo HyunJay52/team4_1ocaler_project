@@ -1,11 +1,15 @@
 package com.team4.localer.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.CsService;
@@ -76,7 +80,6 @@ public class AdminController {
 		return mav;
 	}
 	
-		////////////여기는 지워야한다,,,ㅎ
 	@RequestMapping("/spend_sel")//판매관리
 	public ModelAndView spend_sel() {
 		ModelAndView mav = new ModelAndView();
@@ -86,9 +89,27 @@ public class AdminController {
 	@RequestMapping("/cspage")//판매관리
 	public ModelAndView cspage() {
 		ModelAndView mav = new ModelAndView();
+		//신고글 리스트 select
+		mav.addObject("list",csService.reportSelect());
 		mav.setViewName("admin/cspage");
 		return mav;
 	}
+	@RequestMapping("/oftenAndCs")
+	@ResponseBody
+	public List<CsVO> oftenAndCs(String cate){
+		ModelAndView mav = new ModelAndView();
+		//cate : oftenq(자주하는질문), report(신고),cs(1:1문의)
+		if(cate=="oftenq"||cate.equals("oftenq")) {
+			//자주하는 질문
+			return csService.oftenqSelect();
+		}else if(cate=="report"||cate.equals("report")) {
+			//신고글
+			return csService.reportSelect();
+		}else{//1:1문의
+			return csService.boardAllSelect();
+		}
+	}
+	
 	@RequestMapping("/persnal")//판매관리
 	public ModelAndView persnal(int cs_num) {
 		//csTbl에서 문의글 1개 가져오기 
@@ -103,6 +124,7 @@ public class AdminController {
 		mav.setViewName("admin/question");
 		return mav;
 	}
+	//1:1문의 답변달아주기
 	@RequestMapping(value="/persnalOk", method=RequestMethod.POST)
 	public ModelAndView persnalOk(CsVO vo) {
 		ModelAndView mav = new ModelAndView();
@@ -115,6 +137,13 @@ public class AdminController {
 		}
 		return mav;
 	}
-	
+	//자주하는 질문 수정 
+	@RequestMapping("/oftenQWriteEdit")
+	public ModelAndView oftenQWriteEdit(int num) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("admin/oftenQWrite");
+		return mav;
+	}
 }
 

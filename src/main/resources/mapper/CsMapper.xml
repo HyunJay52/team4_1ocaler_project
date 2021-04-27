@@ -15,4 +15,11 @@
   	<update id="boardUpdate" parameterType="com.team4.localer.vo.CsVO">
   		update cs set cs_answer=#{cs_answer}, cs_date=sysdate, cs_status=2 where cs_num=#{cs_num} 
   	</update>
+  	<select id="oftenqSelect" resultType="com.team4.localer.vo.CsVO">
+  		select of_num cs_num, of_subject cs_subject, of_content sc_content from oftenq order by of_num desc
+  	</select>
+  	<select id="reportSelect" resultType="com.team4.localer.vo.ReportVO">
+  		select rep_num,rep_subject, userid, to_char(rep_writedate,'MM-DD HH:MI') rep_writedate, 
+  		rep_status from report order by rep_num desc
+  	</select>
 </mapper>

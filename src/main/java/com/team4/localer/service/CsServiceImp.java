@@ -29,4 +29,15 @@ public class CsServiceImp implements CsService {
 		return csdao.boardUpdate(vo);
 	}
 
+
+	@Override
+	public List<CsVO> oftenqSelect() {
+		return csdao.oftenqSelect();
+	}
+
+	@Override
+	public List<CsVO> reportSelect() {
+		return csdao.reportSelect();
+	}
+
 }
