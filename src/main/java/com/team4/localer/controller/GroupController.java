@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.GroupService;
+import com.team4.localer.service.JoinUsService;
 import com.team4.localer.service.LikeItService;
 import com.team4.localer.vo.GroupPageVO;
 import com.team4.localer.vo.GroupVO;
@@ -20,11 +21,12 @@ public class GroupController{
 	GroupService groupService;
 	@Inject
 	LikeItService likeItService;
-	
+	@Inject
+	JoinUsService joinUsService;
 	
 	@RequestMapping("/groupPage")
 	public String groupOpen(HttpSession session) {//나중에 지워야할값 지금 세션 확인위해 해놓은것
-		session.setAttribute("logId", "gogogo1234");
+		session.setAttribute("logId", "goguma1234");
 		session.setAttribute("logName", "감자");
 		session.setAttribute("logStatus", "Y");
 		session.setAttribute("logGu", "강서구");
@@ -116,10 +118,11 @@ public class GroupController{
 	
 	
 	@RequestMapping("/eatViewPage")
-	public ModelAndView eatPageView(GroupPageVO pageVO, int num) {
+	public ModelAndView eatPageView(GroupPageVO pageVO, int num, HttpSession session) {
 		ModelAndView mav = new ModelAndView(); 
 		groupService.hitCount(num);
 		
+		mav.addObject("joinList",joinUsService.joinSelect((String)session.getAttribute("logId")));
 		mav.addObject("vo",groupService.eatViewPageResult(num));
 		mav.addObject("pageVO",pageVO); //num,gu, (추가사항=>pageNum,searchKey,searchWord)
 		mav.setViewName("group/eatViewPage");

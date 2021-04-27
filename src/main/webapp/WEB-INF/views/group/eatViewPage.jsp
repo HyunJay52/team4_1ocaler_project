@@ -15,15 +15,28 @@
 			$("#eatViewPageBackBtn").click(()=>{
 				history.back();
 			})	
-				//참여하기
-				
-			$("#eatViewPageJoinBtn").click(()=>{
-				//참여하기 버튼을 누르면 join 테이블에 insert 되야한다. 
-				//다음에 들어왔을떄 이미 신청되어있으면 신청한 거라고 떠야한다.
-				//(신청을 했다면 --> 취소하기 버튼으로 변경?) 버튼도 있어야 한다.[그 좋아요 이미 신청한건 체크되있고 누르면 삭제되는거 비슷할듯]
-				//
-			})
-			//============================================================================================
+		//참여하기================================================================================
+				$("#eatViewPageJoinBtn").click(()=>{
+					var url = "joinInsert";
+					var params ="num="+$("#eatViewPageJoinBtn").val();
+					console.log(params);
+					$.ajax({
+						url : url,
+						data : params,
+						success:function(result){
+							alert('신청이 완료되었습니다. 응답을 기다려 주세요');
+							$(this).children("span").text('신청완료');
+							$(this).attr("disabled",true);
+							
+						},error:function(e){
+							console.log('신청실패')
+						}
+					})
+				});
+
+				//버튼 누르면 join 신청이 들억가고
+				// 누른 해당 버튼만 disabled 되고 신청완료로 바뀌고 이걸해야해
+		//============================================================================================
 		})
 </script>
 
@@ -71,17 +84,14 @@
 		<hr style="width:480px; margin:0 auto;"/>
 		<div>
 			<button id="eatViewPageBackBtn" class="btn cancelBtn">뒤로가기</button>
-			<c:if test="${vo.userid!=logId }"> 
-				<button id="eatViewPageJoinBtn" class="btn confBtn">참여하기</button>		
+			<c:if test="${vo.userid!=logId}"> 
+				<button type="button" id="eatViewPageJoinBtn" class="btn confBtn" value="${vo.num }" <c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>><span id="eatViewPagejoinCheck">참여하기</span></button>
 			</c:if>
 			<c:if test="${vo.userid==logId }"> <!--이건 작성자일경우 수정하기 버튼  -->
 				<button id="eatViewPageEditBtn" class="btn confBtn">삭제</button>
 				<button id="eatViewDeleteBtn" class="btn confBtn">수정</button>
-				
 			</c:if>
 		</div>
-		
-		
 	</div>
 	
 	
