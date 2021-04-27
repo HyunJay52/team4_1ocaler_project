@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.CsService;
 import com.team4.localer.vo.CsVO;
+import com.team4.localer.vo.OftenqVO;
 
 @Controller
 public class AdminController {
@@ -137,12 +138,26 @@ public class AdminController {
 		}
 		return mav;
 	}
-	//자주하는 질문 수정 
+	//자주하는 질문 수정페이지이동
 	@RequestMapping("/oftenQWriteEdit")
 	public ModelAndView oftenQWriteEdit(int num) {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("admin/oftenQWrite");
+		mav.addObject("vo", csService.oftenqOneSelect(num));
+		mav.setViewName("admin/oftenQEdit");
+		return mav;
+	}
+	//자주하는 질문 수정
+	@RequestMapping(value="oftenQWriteEditOk", method=RequestMethod.POST)
+	public ModelAndView oftenQWriteEditOk(OftenqVO vo) {
+		ModelAndView mav = new ModelAndView();
+		if(csService.oftenqUpdate(vo)>0) {//수정성공
+			System.out.println("수정성공");
+			mav.setViewName("redirect:cspage");
+		}else {
+			System.out.println("수정실패");
+			mav.addObject("num",vo.getOf_num());
+			mav.setViewName("redirect:oftenQWriteEdit");
+		}
 		return mav;
 	}
 }

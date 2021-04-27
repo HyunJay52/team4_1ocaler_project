@@ -1,11 +1,11 @@
 @charset "UTF-8";
-body{
-	font-family:"nsr";
-	}
-
+/*제목부분*/
+#oftenqFrm>first-child{
+	color:#595959;
+}
 .main input[type=text]{
 	margin-bottom:20px;
-	width:86%;
+	width:100%;
 	padding:7px;
 	border:1px solid gray;
 	font-family: inherit;/*폰트상속*/

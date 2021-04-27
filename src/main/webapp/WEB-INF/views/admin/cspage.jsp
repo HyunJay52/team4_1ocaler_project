@@ -28,10 +28,11 @@ $(function(){
 				$result.each(function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td>"+vo.cs_subject+"</td>";
+					txt += 		"<td>"+vo.cs_cate+" "+vo.cs_subject+"</td>";
 					txt += 		"<td>관리자</td>";
-					txt += 		"<td>관리자 작성</td>";
-					txt += 		"<td><input type='button' class='smallbtn' name='"+vo.cs_num+"'title='oftenqBtn' value='수정'/></td>";
+					txt += 		"<td></td>";
+					txt += 		"<td><input type='button' class='redBtn' value='삭제'/>";
+					txt +=		"<input type='button' class='smallbtn' name='"+vo.cs_num+"'title='oftenqBtn' value='수정'/></td>";
 					txt += "</tr>";
 				});
 				$("#resultTbl").append(txt);
@@ -138,7 +139,7 @@ $(document).on('click', '.smallbtn', function(){
 
 </script>
 <div id="main">
-	<a>고객센터</a>
+	<div class="title">고객센터</div>
 	<p>
 		<select name="searchkey" class="selectcomm">
 			<option value="게시물번호">게시물 번호</option>

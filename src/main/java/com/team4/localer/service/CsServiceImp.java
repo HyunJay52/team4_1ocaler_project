@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.CsDAO;
 import com.team4.localer.vo.CsVO;
+import com.team4.localer.vo.OftenqVO;
 
 @Service
 public class CsServiceImp implements CsService {
@@ -38,6 +39,16 @@ public class CsServiceImp implements CsService {
 	@Override
 	public List<CsVO> reportSelect() {
 		return csdao.reportSelect();
+	}
+
+	@Override
+	public OftenqVO oftenqOneSelect(int num) {
+		return csdao.oftenqOneSelect(num);
+	}
+
+	@Override
+	public int oftenqUpdate(OftenqVO vo) {
+		return csdao.oftenqUpdate(vo);
 	}
 
 }

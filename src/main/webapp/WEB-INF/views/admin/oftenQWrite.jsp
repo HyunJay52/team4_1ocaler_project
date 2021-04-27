@@ -9,7 +9,7 @@
 		CKEDITOR.replace("content");		
 	});
 </script>
-<div id="main">
+<div class="main">
 <div class="title">자주하는 질문</div>
 	<form>
 		<input type="text" name="subject" value=""placeholder="제목을 입력하세요"/><br/>
