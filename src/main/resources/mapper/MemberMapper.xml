@@ -3,6 +3,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bitcamp.myapp.dao.MemberDAO">
-
+<mapper namespace="com.team4.localer.dao.MemberDAO">
+	<select id="memLogin" resultType="com.team4.localer.vo">
+		select userid, username, loc_gu from member where userid=#{userid} and userpwd=#{userpwd}
+	</select>
+	<insert id="insertMember" parameterMap="com.team4.localer.vo">
+		insert into member 
+		values (memsq.nextval, #{userid}, #{userpwd}, #{mem_name}, #{mem_tel}, #{mem_email}, 
+		#{mem_zip}, #{mem_addr}, #{mem_detail}, #{mem_prof}, #{mem_content})
+	</insert>
 </mapper>

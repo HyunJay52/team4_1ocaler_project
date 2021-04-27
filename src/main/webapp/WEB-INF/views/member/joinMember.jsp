@@ -3,11 +3,10 @@
 <%@ page session="true"%>
 
 <!-- 주소 api -->
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <div id="joinMem">
-	<form method="post" action="backHome" id="memJoinFrm">
+	<form method="post" action="memJoinOk" id="memJoinFrm">
 		<div>회원 가입</div>
 		<div id="basicInfo">
 			<ul>
@@ -47,26 +46,30 @@
 
 				<li>주소</li>
 				<li>
-					<button type="button" tabindex="8"
-						class="btn commBtn Mem_lgBtn findAddr">
-						<img src="common/search_fff.png"
-							style="width: 15px; height: 15px;">우리동네 찾기
+					<button type="button" tabindex="8" class="btn commBtn Mem_lgBtn findAddr" onclick="openKakaoPost()">
+						<img src="common/search_fff.png" id="joinSearchAddrImg">우리동네 찾기
 					</button>
 					<ul id="addrInput">
 						<li><input type="text" name="mem_zip" id="mem_zip"
 							tabindex="9" />
-						<button type="button" class="btn commBtn Mem_lgBtn">재검색</button></li>
+						<button type="button" class="btn commBtn Mem_lgBtn" onclick="openKakaoPost()">재검색</button></li>
 						<li><input type="text" name="mem_addr" id="mem_addr"
 							tabindex="10" /></li>
-						<li><input type="text" name="loc_gu" id="loc_gu"
-							tabindex="11" /></li>
+						<li><input type="text" name="mem_detail" id="mem_detail"
+							tabindex="11" />
+						</li>
+						<li>
+							<div id="joinAddrWrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
+							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+							</div>
+						</li>
 					</ul>
 				</li>
 				<li>활동지역</li>
-				<li><input type="text" name="mem_detail" id="mem_detail"
-					tabindex="12" placeholder="ㅇㅇ구로 입력해주세요" /><img
-					src="img/indexImg/bo_pin.png"
-					style="width: 40px; padding-left: 10px;"></li>
+				<li>
+					<input type="text" name="mem_detail" id="mem_detail" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요" />
+					<img src="img/indexImg/bo_pin.png" id="joinLocImg"/>
+				</li>
 			</ul>
 			<button type="button" id="seeMore" class="btn commBtn Mem_lgBtn"
 				style="width: 700px; height: 40px; display: block; margin: 0 auto;">더보기</button>
@@ -89,12 +92,13 @@
 				<li>닉네임</li>
 				<li><input type="text" name="mem_nick" id="mem_nick"
 					placeholder="별명을 입력해주세요" />
-				<button type="button" class="btn commBtn lgBtn">중복검사</button>
+				<button type="button" class="btn commBtn Mem_lgBtn">중복검사</button>
 					<span id="nickOverlap">N</span></li>
 
 				<li>인사말</li>
 				<li><textarea name="mem_content" id="mem_content"
-						maxlength="200" placeholder="최대 200자"></textarea> <!-- 					<input type="text" name="mem_content" id="mem_content" maxlength="100" placeholder="최대 100자"/> </li> -->
+						maxlength="200" placeholder="최대 200자"></textarea> 
+						<!-- <input type="text" name="mem_content" id="mem_content" maxlength="100" placeholder="최대 100자"/> </li> -->
 			</ul>
 			<button class="btn commBtn Mem_lgBtn"
 				style="width: 320px; display: block; margin: 0 auto;">가입하기</button>
@@ -139,18 +143,8 @@
 
 				reader.readAsDataURL(input.files[0]);
 			}
-		}
-		;
+		};
 
-		//주소찾기 펑션
-		function openKakaoPost() {
-			new daum.Postcode({
-				oncomplete : function(data) {
-					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-					// 예제를 참고하여 다양한 활용법을 확인해 보세요.
-				}
-			}).open();
-		}
 //////////////////////////////////////////유효성 검사
 		$("#userid").on('keyup', function() {
 			var regId = /^[a-zA-Z]{1}[a-zA-Z0-9]{5,12}$/;
@@ -275,4 +269,57 @@
 			//        }
 		}
 	});
+	
+	//주소찾기 펑션
+	var element_wrap = document.getElementById('joinAddrWrap'); //주소 찾기 화면
+	function foldDaumPostcode() {// iframe을 넣은 element를 안보이게 한다.
+        element_wrap.style.display = 'none';
+    }
+
+	function openKakaoPost() {
+		var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+		new daum.Postcode({
+			oncomplete : function(addrData) {
+				
+				var addr = '';
+				var detailAddr = '';
+				
+				//기본주소
+				if(addrData.userSelectedType==='R'){ //도로명 주소일 경우
+					addr = addrData.roadAddress;
+				}else { //지번 일 경우
+					addr = addrData.jibunAddress;
+				}
+				//추가주소
+				if(addrData.userSelectedType==='R'){
+					if(addrData.bname !== '' && /[동|로|가]$/g.test(addrData.bname)){
+						detailAddr += addrData.bname;
+                    }
+					if(addrData.buildingName !== '' && addrData.apartment === 'Y'){
+						detailAddr += (detailAddr !== '' ? ', ' + addrData.buildingName : addrData.buildingName);
+                    }
+					if(detailAddr !== ''){
+						detailAddr = ' (' + detailAddr + ')';
+                    }
+					document.getElementById("mem_detail").value = detailAddr;
+				}else{
+					document.getElementById("mem_detail").value = '';
+				}
+				// 우편번호, 일반주소 입력
+				document.getElementById("mem_zip").value = addrData.zonecode;
+				document.getElementById("mem_addr").value = addr;
+				document.getElementById("mem_detail").focus();
+				element_wrap.style.display = 'none';
+				document.body.scrollTop = currentScroll;
+			},
+			onresize : function(size){
+				element_wrap.style.height = size.height+'px';
+			},
+			width : '100%',
+            height : '100%'
+		}).embed(element_wrap);
+		
+		// iframe을 넣은 element를 보이게 한다.
+        element_wrap.style.display = 'block';
+	};
 </script>

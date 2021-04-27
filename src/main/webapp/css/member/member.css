@@ -94,6 +94,15 @@
 #setProfile, #joinMem div:nth-child(3) {
 	display: none;
 }
+#basicInfo>ul li #joinSearchAddrImg {
+	width: 15px;
+    height: 15px;
+    margin-left: -25px;
+    margin-right: 5px;
+}
+##basicInfo>ul #joinLocImg {
+	"width: 40px; padding-left: 10px;
+}
 /*      button     class       */
 #memJoinFrm .Mem_lgBtn {
 	width: 120px;
@@ -103,12 +112,12 @@
 	color: #3f1785;
 }
 
-.Mem_lgBtn:hover {
+#memJoinFrm .Mem_lgBtn:hover {
 	color: #fff;
 	font-weight: bold;
 }
 
-.lgA:hover {
+#memJoinFrm .lgA:hover {
 	margin-top: 20px;
 	color: #000;
 	text-decoration: none;
