@@ -29,4 +29,7 @@
   	<update id="oftenqUpdate" parameterType="com.team4.localer.vo.OftenqVO">
   		update oftenq set of_subject=#{of_subject}, of_content=#{of_content} where of_num=#{of_num}
   	</update>
+  	<delete id="oftenqDelete">
+  		delete from oftenq where of_num=#{param1}
+  	</delete>
 </mapper>

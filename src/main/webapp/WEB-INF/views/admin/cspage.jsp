@@ -31,7 +31,7 @@ $(function(){
 					txt += 		"<td>"+vo.cs_cate+" "+vo.cs_subject+"</td>";
 					txt += 		"<td>관리자</td>";
 					txt += 		"<td></td>";
-					txt += 		"<td><input type='button' class='redBtn' value='삭제'/>";
+					txt += 		"<td><input type='button' class='redBtn' name='"+vo.cs_num+"' value='삭제'/>";
 					txt +=		"<input type='button' class='smallbtn' name='"+vo.cs_num+"'title='oftenqBtn' value='수정'/></td>";
 					txt += "</tr>";
 				});
@@ -136,6 +136,13 @@ $(document).on('click', '.smallbtn', function(){
 		location.href="oftenQWriteEdit?num="+num;
 	}
 });
+//자주하는 질문 삭제 클릭시
+$(document).on('click', '.redBtn', function(){
+	var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
+	if(confirm("삭제하시겠습니까?")){
+		location.href="oftenQDelete?num="+num;
+	}
+});
 
 </script>
 <div id="main">
@@ -154,7 +161,7 @@ $(document).on('click', '.smallbtn', function(){
 		<input type="button" id="oftenBtn" class="searchbtn" value="자주하는 질문"/>
 		<input type="button" id="csBtn" class="searchbtn" value="1:1 질문"/>
 		<input type="button" id="reportBtn" class="puplebtn" value="사용자 신고"/>
-		<input type="button" class="puplebtn" value="게시글 작성"/>
+		<input type="button" class="puplebtn" value="자주하는 질문작성"/>
 	</p>
 	<table id="resultTbl" class="tablea cstable">
 		<colgroup>

@@ -151,13 +151,23 @@ public class AdminController {
 	public ModelAndView oftenQWriteEditOk(OftenqVO vo) {
 		ModelAndView mav = new ModelAndView();
 		if(csService.oftenqUpdate(vo)>0) {//수정성공
-			System.out.println("수정성공");
 			mav.setViewName("redirect:cspage");
 		}else {
-			System.out.println("수정실패");
 			mav.addObject("num",vo.getOf_num());
 			mav.setViewName("redirect:oftenQWriteEdit");
 		}
+		return mav;
+	}
+	@RequestMapping("/oftenQDelete")
+	public ModelAndView oftenQDelete(int num, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("logId")=="admin" ||session.getAttribute("logId").equals("admin")) {
+			//현재 로그인된 아이디가 관리자이면 삭제를 수행한다. 
+			if(csService.oftenqDelete(num)>0) {//삭제성공
+				System.out.println("자주하는 질문 삭제");
+			}
+		}
+		mav.setViewName("redirect:cspage");
 		return mav;
 	}
 }
