@@ -56,4 +56,9 @@ public class CsServiceImp implements CsService {
 		return csdao.oftenqDelete(num);
 	}
 
+	@Override
+	public int oftenqInsert(OftenqVO vo) {
+		return csdao.oftenqInsert(vo);
+	}
+
 }

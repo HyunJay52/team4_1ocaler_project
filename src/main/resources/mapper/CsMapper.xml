@@ -32,4 +32,8 @@
   	<delete id="oftenqDelete">
   		delete from oftenq where of_num=#{param1}
   	</delete>
+  	<insert id="oftenqInsert" parameterType="com.team4.localer.vo.OftenqVO">
+  		insert into oftenq(of_num,of_subject,of_content,of_cate)
+  		values(boardsq.nextval,#{of_subject},#{of_content},#{of_cate})
+  	</insert>
 </mapper>

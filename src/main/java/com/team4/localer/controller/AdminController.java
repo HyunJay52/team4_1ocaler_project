@@ -1,6 +1,5 @@
 package com.team4.localer.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -119,12 +118,6 @@ public class AdminController {
 		mav.setViewName("admin/persnal");
 		return mav;
 	}
-	@RequestMapping("/question")//판매관리
-	public ModelAndView question() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/question");
-		return mav;
-	}
 	//1:1문의 답변달아주기
 	@RequestMapping(value="/persnalOk", method=RequestMethod.POST)
 	public ModelAndView persnalOk(CsVO vo) {
@@ -166,6 +159,24 @@ public class AdminController {
 			if(csService.oftenqDelete(num)>0) {//삭제성공
 				System.out.println("자주하는 질문 삭제");
 			}
+		}
+		mav.setViewName("redirect:cspage");
+		return mav;
+	}
+	//자주하는 질문 작성페이지이동
+	@RequestMapping("/oftenQWrite")
+	public ModelAndView oftenQWrite(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/oftenQWrite");
+		return mav;
+	}
+	//자주하는 질문 작성
+	@RequestMapping(value="/oftenQWriteOk",method=RequestMethod.POST)
+	public ModelAndView oftenQWriteOk(OftenqVO vo,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("logId")=="admin") {
+			vo.setOf_cate("["+vo.getOf_cate()+"]");
+			csService.oftenqInsert(vo);
 		}
 		mav.setViewName("redirect:cspage");
 		return mav;

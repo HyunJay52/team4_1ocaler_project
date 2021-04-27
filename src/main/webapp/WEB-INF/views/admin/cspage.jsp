@@ -126,6 +126,9 @@ $(function(){
 			}
 		});
 	});
+	$("#oftenqWriteBtn").click(function(){
+		location.href="oftenQWrite";
+	});
 });
 //자주하는 질문 수정버튼 클릭시,
 $(document).on('click', '.smallbtn', function(){
@@ -161,7 +164,7 @@ $(document).on('click', '.redBtn', function(){
 		<input type="button" id="oftenBtn" class="searchbtn" value="자주하는 질문"/>
 		<input type="button" id="csBtn" class="searchbtn" value="1:1 질문"/>
 		<input type="button" id="reportBtn" class="puplebtn" value="사용자 신고"/>
-		<input type="button" class="puplebtn" value="자주하는 질문작성"/>
+		<input type="button" id="oftenqWriteBtn"class="puplebtn" value="자주하는 질문작성"/>
 	</p>
 	<table id="resultTbl" class="tablea cstable">
 		<colgroup>

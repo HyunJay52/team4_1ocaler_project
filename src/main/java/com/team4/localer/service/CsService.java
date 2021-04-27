@@ -22,4 +22,6 @@ public interface CsService {
 	public int oftenqUpdate(OftenqVO vo);
 	//자주하는 질문 삭제
 	public int oftenqDelete(int num);
+	//자주하는 질문 작성
+	public int oftenqInsert(OftenqVO vo);
 }
