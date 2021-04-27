@@ -13,8 +13,8 @@ public class MemberServiceImp implements MemberService {
 	MemberDAO dao;
 	
 	@Override
-	public MemberVO memLogin(MemberVO vo) {
-		return dao.memLogin(vo);
+	public MemberVO memLogin(String userid, String userpwd) {
+		return dao.memLogin(userid, userpwd);
 	}
 	
 	@Override

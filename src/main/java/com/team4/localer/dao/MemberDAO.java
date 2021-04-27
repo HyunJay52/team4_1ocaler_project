@@ -4,7 +4,7 @@ import com.team4.localer.vo.MemberVO;
 
 public interface MemberDAO {
 	//회원로그인
-	public MemberVO memLogin(MemberVO vo);
+	public MemberVO memLogin(String userid, String userpwd);
 	
 	//일반회원 가입
 	public int insertMember(MemberVO vo);

@@ -2,11 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
 
+<!-- 전화인증 api -->
+<script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <div id="joinMem">
-	<form method="post" action="memJoinOk" id="memJoinFrm">
+	<form method="post" action="memJoinOk" id="memJoinFrm" enctype="multipart/form-data">
 		<div>회원 가입</div>
 		<div id="basicInfo">
 			<ul>
@@ -33,9 +36,9 @@
 				<span id="checkname"></span></li>
 
 				<li>연락처</li>
-				<li><input type="text" name="mem_tel" id="mem_tel" tabindex="6"
+				<li><input type="text" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11"
 					placeholder="예) 01012341234" />
-				<button type="button" class="btn commBtn Mem_lgBtn">번호인증</button> <br />
+				<button type="button" class="btn commBtn Mem_lgBtn" onclick="verifyPhoneNumber()">번호인증</button> <br />
 				<span id="checktel"></span></li>
 
 				<li>이메일</li>
@@ -67,7 +70,7 @@
 				</li>
 				<li>활동지역</li>
 				<li>
-					<input type="text" name="mem_detail" id="mem_detail" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요" />
+					<input type="text" name="loc_gu" id="loc_gu" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요" />
 					<img src="img/indexImg/bo_pin.png" id="joinLocImg"/>
 				</li>
 			</ul>
@@ -84,8 +87,8 @@
 						<img src="<%=request.getContextPath()%>/common/user.png"
 							id="previewImg" class="profImg form-control-file border"
 							alt="upload image" />
-					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진추가 </label> <input
-					type="file" name="mem_prof" accept="image/*" id="mem_prof"
+					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진추가 </label> 
+					<input type="file" name="profFile" accept="image/*" id="mem_prof" 
 					style="display: none; margin-top: 70px; border: none;" />
 				</li>
 
@@ -98,10 +101,8 @@
 				<li>인사말</li>
 				<li><textarea name="mem_content" id="mem_content"
 						maxlength="200" placeholder="최대 200자"></textarea> 
-						<!-- <input type="text" name="mem_content" id="mem_content" maxlength="100" placeholder="최대 100자"/> </li> -->
 			</ul>
-			<button class="btn commBtn Mem_lgBtn"
-				style="width: 320px; display: block; margin: 0 auto;">가입하기</button>
+			<input type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;" value="가입하기"/>
 		</div>
 	</form>
 
@@ -203,11 +204,12 @@
 				});
 			}
 		});
+////////////////////////////////////////////////////////////////////////////유효성검사안됨		
 		$("#mem_name").on('keyup', function() {
 			$("#checkpwd2").css("display", "none");
-			var regName = /^[가-힣]{2, 15}$/;
+			var regName = /^[가-힣A-Z]{2,10}$/i;
 			if (!regName.test($("#mem_name").val())) {
-				$("#checkname").text("한글 2자리 이상이여야 합니다.");
+				$("#checkname").text("이름은 2자리 이상이여야 합니다.");
 				$("#checkname").css({
 					"color" : "pink",
 					"fontSize" : "12"
@@ -221,12 +223,10 @@
 				});
 			}
 		});
-		////////////////////////////////////////////////////////////////////////////// 전화번호이메일유효성검사안됨		
 		$("#mem_tel").on('keyup', function() {
 			$("#checkname").css("display", "none");
-			var regTel = /^[0-9]{9, 11}$/;
-			var x = $("#mem_tel").length;
-			console.log(",,,,", x);
+			var regTel = /(010|02)[0-9]{3,4}[0-9]{4}/;
+
 			if (!regTel.test($("#mem_tel").val())) {
 				$("#checktel").text("연락처는 9자리 이상이여야 합니다.");
 				$("#checktel").css({
@@ -242,23 +242,21 @@
 				});
 			}
 		});
-		$("#mem_email")
-				.on(
-						'keyup',
-						function() {
-							$("#checktel").css("display", "none");
-							var regEmail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-							if (!regEmail.test($("#mem_tel").val())) {
-								$("#checkemail").text("이메일을 잘못 입력하셨습니다.");
-								$("#checkemail").css({
-									"color" : "pink",
-									"fontSize" : "12"
-								})
-								$("#mem_email").focus();
-							} else {
-								$("#checkemail").text("");
-							}
-						});
+		$("#mem_email").on('keyup', function() {
+			$("#checktel").css("display", "none");
+			var regEmail = /^\w{8,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+			
+			if (!regEmail.test($("#mem_tel").val())) {
+				$("#checkemail").text("이메일을 잘못 입력하셨습니다.");
+				$("#checkemail").css({
+					"color" : "pink",
+					"fontSize" : "12"
+				});
+				$("#mem_email").focus();
+			} else {
+				$("#checkemail").text("");
+			}
+		});
 		//////////// 정규식 표현 ////////////
 		function regExpCheck() {
 			// 인증 번호
@@ -322,4 +320,27 @@
 		// iframe을 넣은 element를 보이게 한다.
         element_wrap.style.display = 'block';
 	};
+	
+	function verifyPhoneNumber() {
+		// Turn off phone auth app verification.
+		firebase.auth().settings.appVerificationDisabledForTesting = true;
+
+		var phoneNumber = "+16505554567";
+		var testVerificationCode = "123456";
+
+		// This will render a fake reCAPTCHA as appVerificationDisabledForTesting is true.
+		// This will resolve after rendering without app verification.
+		var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+		// signInWithPhoneNumber will call appVerifier.verify() which will resolve with a fake
+		// reCAPTCHA response.
+		firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+		    .then(function (confirmationResult) {
+		      // confirmationResult can resolve with the fictional testVerificationCode above.
+		      return confirmationResult.confirm(testVerificationCode)
+		    }).catch(function (error) {
+		      // Error; SMS not sent
+		      // ...
+		    });
+	
+	}
 </script>
