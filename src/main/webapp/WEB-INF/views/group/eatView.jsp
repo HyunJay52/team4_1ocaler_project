@@ -163,8 +163,9 @@
 			<c:forEach var="vo" items="${eatList }">
 				<a href="eatViewPage?num=${vo.num }&loc_gu=${pageVO.loc_gu}"><li><!-- 나중에 searchkey, searchWord도 달고다녀야함 -->
 					<div>
+					
 						<img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>${vo.down_cate }</span>
-						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }" /><label for="like${vo.num }"></label>
+						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==vo.num && logId==likes.userid }">checked</c:if></c:forEach> /><label for="like${vo.num }"></label>
 					</div>
 					<span>${vo.g_subject }</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->

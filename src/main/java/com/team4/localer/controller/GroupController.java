@@ -1,14 +1,12 @@
 package com.team4.localer.controller;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.team4.localer.service.GroupService;
 import com.team4.localer.service.LikeItService;
 import com.team4.localer.vo.GroupPageVO;
@@ -16,15 +14,18 @@ import com.team4.localer.vo.GroupVO;
 
 
 @Controller
-public class GroupController {
+public class GroupController{
 	
 	@Inject
 	GroupService groupService;
+	@Inject
+	LikeItService likeItService;
+	
 	
 	@RequestMapping("/groupPage")
 	public String groupOpen(HttpSession session) {//나중에 지워야할값 지금 세션 확인위해 해놓은것
-		session.setAttribute("logId", "goguma1234");
-		session.setAttribute("logName", "고구마");
+		session.setAttribute("logId", "gogogo1234");
+		session.setAttribute("logName", "감자");
 		session.setAttribute("logStatus", "Y");
 		session.setAttribute("logGu", "강서구");
 		return "group/groupMapView";
@@ -32,9 +33,10 @@ public class GroupController {
 	
 	
 	@RequestMapping("/eatPage")
-	public ModelAndView eatPage(GroupPageVO pageVO, GroupVO vo) {
+	public ModelAndView eatPage(GroupPageVO pageVO, GroupVO vo, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		mav.addObject("eatList",groupService.GroupEatList(pageVO.getLoc_gu()));
 		mav.addObject("pageVO",pageVO);
 		
@@ -44,12 +46,14 @@ public class GroupController {
 	
 	
 	@RequestMapping("/withPage")
-	public ModelAndView withPage(GroupPageVO pageVO, HttpServletRequest req) {
+	public ModelAndView withPage(GroupPageVO pageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		mav.addObject("withList",groupService.GroupWithList(pageVO.getLoc_gu()));
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("group/withView");
+		
 		return mav;
 	}
 	
@@ -62,11 +66,12 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="/writeFormOk", method=RequestMethod.POST)
-	public ModelAndView writeFormOk(GroupPageVO pageVO, GroupVO vo) {
+	public ModelAndView writeFormOk(GroupPageVO pageVO, GroupVO vo, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
-		vo.setUserid("goguma1234");
-		vo.setG_gu("구로구");
+		vo.setUserid((String)session.getAttribute("logId"));
+		System.out.println(vo.getUserid());
+		vo.setG_gu("강서구");
 		
 		if(vo.getG_loc2()==null || vo.getG_loc2().equals("")) {
 			if(groupService.groupInsert(vo)>0) {
@@ -113,6 +118,7 @@ public class GroupController {
 	@RequestMapping("/eatViewPage")
 	public ModelAndView eatPageView(GroupPageVO pageVO, int num) {
 		ModelAndView mav = new ModelAndView(); 
+		groupService.hitCount(num);
 		
 		mav.addObject("vo",groupService.eatViewPageResult(num));
 		mav.addObject("pageVO",pageVO); //num,gu, (추가사항=>pageNum,searchKey,searchWord)
@@ -124,8 +130,9 @@ public class GroupController {
 	
 	@RequestMapping("/withViewPage")
 	public ModelAndView withPageView(GroupPageVO pageVO, int num) {
-		ModelAndView mav = new ModelAndView();
-	
+		ModelAndView mav = new ModelAndView();	
+		groupService.hitCount(num);
+		
 		mav.addObject("vo",groupService.withViewPageResult(num));
 		mav.addObject("pageVO", pageVO);//num,gu, (추가사항=>pageNum,searchKey,searchWord)
 		mav.setViewName("group/withViewPage");

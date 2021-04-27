@@ -72,10 +72,12 @@
 		<div>
 			<button id="eatViewPageBackBtn" class="btn cancelBtn">뒤로가기</button>
 			<c:if test="${vo.userid!=logId }"> 
-				<button id="eatViewPageJoinBtn" class="btn confBtn">참여하기</button>
+				<button id="eatViewPageJoinBtn" class="btn confBtn">참여하기</button>		
 			</c:if>
 			<c:if test="${vo.userid==logId }"> <!--이건 작성자일경우 수정하기 버튼  -->
-				<button id="eatViewPageEditBtn" class="btn confBtn">수정하기</button>
+				<button id="eatViewPageEditBtn" class="btn confBtn">삭제</button>
+				<button id="eatViewDeleteBtn" class="btn confBtn">수정</button>
+				
 			</c:if>
 		</div>
 		

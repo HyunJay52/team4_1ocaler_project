@@ -25,7 +25,9 @@
   		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='가치가장' order by num desc
   	</select>
   
-  
+  	<update id="hitCount" parameterType="int">
+  		update grouplocal set g_hit = g_hit+1 where num=#{param1}
+  	</update>
   
   
   

@@ -78,6 +78,7 @@
 			<button id="withViewPageJoinBtn" class="btn confBtn">참여하기</button>
 			</c:if>
 			<c:if test="${logId==vo.userid }">
+			<button id="eatViewPageEditBtn" class="btn confBtn">삭제</button>
 			<button id="withViewPageEditBtn" class="btn confBtn">수정하기</button>
 			</c:if>
 		</div>
