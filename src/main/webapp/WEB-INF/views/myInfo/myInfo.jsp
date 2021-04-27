@@ -100,7 +100,7 @@
 					<li>소개</li>
 					<li><input type="text" name="#" value="마포구 동대" disabled/><hr/></li>
 					<li><h4>대표 이미지</h4></li>
-					<li><img src="<%=request.getContextPath()%>/img/myInfo/saver.gif"></li>
+					<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png"></li>
 					<li><label class="btn" for="imgFile">사진 선택</label><input id="imgFile" name="file" type="file" class="editOn" style="display:none; border:none;"/></li>
 					
 				</ul>
