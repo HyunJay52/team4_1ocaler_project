@@ -5,13 +5,13 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealBoardStyle.css"/>
 
 
-	<div id=body>
+	<div id="body">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<div>
 		<div id="dealImg">	
 			이미지들어가는곳 
 		</div>
-		<form action="">
+		<form method="post"  action="sellBuy">
 			<div id="sellInfo">
 				
 				<ul>	
@@ -62,7 +62,7 @@
 						<ul>
 							<li>
 								<img src="common/user.png">&nbsp;&nbsp;
-								<a href="#"> goguma1234</a>
+								<a href="sellerInfo"> goguma1234</a>
 							</li>
 							<li style="font-size: 30px;">
 								20,000원 &nbsp; &nbsp;	
@@ -72,7 +72,7 @@
 					
 					<li class="wordcut">#오르골 #D.I.Y #장식 #인테리어</li>
 					<li><hr/>
-										<input type="submit" value="찜하기" class="btn commBtn" style="margin-left: 100px"/>
+						<input type="submit" value="찜하기" class="btn commBtn" style="margin-left: 100px"/>
 						<input type="submit" value="구매하기" class="btn commBtn"/>
 					</li>
 				</ul>
@@ -80,70 +80,24 @@
 		</form>
 		<div class="sellFont" >리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</div>
 		<div id="sellReview">
-			<div id="oneReview">
-				<ul>
-					<li>
-						<div id="titleinfo">
-							<div style="float: left">아이디</div>
-							<div style="float: right;"> 2022.05.13</div>
-						</div>
-						<div id="info">
-							너무 재밋고 좋앗습니다 .아하핳하ㅏ하하
-						</div>
-					</li>
-					<li id="pic">
-						<img src="img/deal/or.jpg"/>
-					</li>
-				</ul>
-			</div>		
-			<div id="oneReview">
-				<ul>
-					<li>
-						<div id="titleinfo">
-							<div style="float: left">아이디</div>
-							<div style="float: right;"> 2022.05.13</div>
-						</div>
-						<div id="info">
-							너무 재밋고 좋앗습니다 .아하핳하ㅏ하하
-						</div>
-					</li>
-					<li id="pic">
-						<img src="img/deal/or.jpg"/>
-					</li>
-				</ul>
-			</div>	
-			<div id="oneReview">
-				<ul>
-					<li>
-						<div id="titleinfo">
-							<div style="float: left">아이디</div>
-							<div style="float: right;"> 2022.05.13</div>
-						</div>
-						<div id="info">
-							너무 재밋고 좋앗습니다 .아하핳하ㅏ하하
-						</div>
-					</li>
-					<li id="pic">
-						<img src="img/deal/or.jpg"/>
-					</li>
-				</ul>
-			</div>	
-			<div id="oneReview">
-				<ul>
-					<li>
-						<div id="titleinfo">
-							<div style="float: left">아이디</div>
-							<div style="float: right;"> 2022.05.13</div>
-						</div>
-						<div id="info">
-							너무 재밋고 좋앗습니다 .아하핳하ㅏ하하
-						</div>
-					</li>
-					<li id="pic">
-						<img src="img/deal/or.jpg"/>
-					</li>
-				</ul>
-			</div>	
+			<c:forEach var="i" begin="1" end="4">
+				<div id="oneReview">
+					<ul>
+						<li>
+							<div id="titleinfo">
+								<div style="float: left">거미</div>
+								<div style="float: right;"> 2022.05.13</div>
+							</div>
+							<div id="info">
+								너무 재밋고 좋앗습니다 .아하핳하ㅏ하하
+							</div>
+						</li>
+						<li id="pic">
+							<img src="img/deal/or.jpg"/>
+						</li>
+					</ul>
+				</div>		
+			</c:forEach>
 		</div>
 					
 			<div id ="pageNum">
@@ -159,7 +113,7 @@
 			</div>
 		
 		<div id="sellDetail">
-			
+			상품 설명 웅앵ㄴㅇ머림ㄴ어랟ㅁ쟈ㅓ리ㅏ은리ㅓㅈ댜
 		</div>
 		
 		
@@ -168,5 +122,6 @@
 			
 		</div>
 	</div>
+</div>	
 </body>
 </html>
