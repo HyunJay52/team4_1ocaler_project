@@ -1,5 +1,6 @@
 package com.team4.localer.vo;
 
+
 public class GroupVO {
 	private int num;
 	private String userid;
@@ -16,6 +17,23 @@ public class GroupVO {
 	private int g_hit;
 	private String g_writedate;
 	private String g_tag;
+	
+	
+	
+	
+	
+	
+	private MemberVO memberVO;
+	
+	
+	
+	
+	public MemberVO getMemberVO() {
+		return memberVO;
+	}
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
+	}
 	public int getNum() {
 		return num;
 	}
