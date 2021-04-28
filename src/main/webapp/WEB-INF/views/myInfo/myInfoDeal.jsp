@@ -20,7 +20,7 @@
 		function setList(){
 			var item = ['김회원','박회원','최회원'];
 
-			for(var i = 0; i < 3; i++){
+			for(var i = 0; i < 10; i++){
 				var tag = "<tr>"; 
 				tag += "<td>2021.04.21</td>";
 				tag += "<td>상수역에서 10kg 고구마 소분하실 분?</td>";
@@ -83,7 +83,7 @@
 </script>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div class="myinfoContainer">
+	<div class="myinfoContainer noOver">
 		<h3>회원간거래</h3>
 		<div class="dealTop">
 			<div class="dealInfo">

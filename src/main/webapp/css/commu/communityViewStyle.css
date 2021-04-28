@@ -73,12 +73,10 @@
 	 	width: 1300px;
 	 	float: left;
 	 	height: 20px;
-	 }
-	 #board>ul>li:nth-child(8){
-	 	width: 1300px;
-	 	float: left;
 	 	text-align: right;
 	 	padding-right:100px; 
+	 	line-height: 20px;
+	 	
 	 }
 	 
 	 #preBtnnext{
@@ -99,7 +97,7 @@
 	 
 /* 	 좋아요? 
 	groupList-like btn*/
- 	input[type=checkbox]{ 
+/*  	input[type=checkbox]{ 
  		display:none; 
  	}
     #likeLi input[type=checkbox] + label { 
@@ -117,7 +115,7 @@
 		height: 30px; 
 		right: 20px; 
 		top: 4px;
-	}
+	} */
 	 
 	 
 	

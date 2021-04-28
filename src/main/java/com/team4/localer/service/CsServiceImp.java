@@ -67,4 +67,9 @@ public class CsServiceImp implements CsService {
 		return csdao.reportOneSelect(num);
 	}
 
+	@Override
+	public int reportUpdate(ReportVO vo) {
+		return csdao.reportUpdate(vo);
+	}
+
 }

@@ -43,3 +43,6 @@
 	.modal-dialog {
 		margin-top:10%;
 	}
+	.noOver{
+		overflow:none;
+	}

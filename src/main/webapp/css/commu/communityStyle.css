@@ -2,13 +2,13 @@
 
 	*{font-family: nsr;
 	}
-	#body{overflow:auto;width:1300px;margin:0 auto;
+	#main{overflow:auto;width:1300px;margin:0 auto;
 	height: 1000px ;
 	}
  	#map { width: 1300px;height: 650px; text-align: center;
 	} 
 		
-	img{width: 1000px; height: 650px; 
+	#map img{width: 1000px; height: 650px; 
 	}
 	
 	#board{ width:1300px; text-align: center;/*  margin-left: 50px; */

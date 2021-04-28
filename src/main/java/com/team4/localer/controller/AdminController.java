@@ -99,6 +99,7 @@ public class AdminController {
 	@ResponseBody
 	public List<CsVO> oftenAndCs(String cate){
 		ModelAndView mav = new ModelAndView();
+		
 		//cate : oftenq(자주하는질문), report(신고),cs(1:1문의)
 		if(cate=="oftenq"||cate.equals("oftenq")) {
 			//자주하는 질문
@@ -189,6 +190,18 @@ public class AdminController {
 		
 		mav.addObject("vo",csService.reportOneSelect(num));
 		mav.setViewName("admin/reportEdit");
+		return mav;
+	}
+	@RequestMapping(value="/reportEditOk",method=RequestMethod.POST)
+	public ModelAndView reportEditOk(ReportVO vo) {
+		ModelAndView mav = new ModelAndView();
+		//신고글 상태 업데이트 해주는게 필요
+		if(csService.reportUpdate(vo)>0) {//신고처리가 되면
+			mav.setViewName("redirect:cspage");
+		}else {//실패시
+			mav.addObject("num",vo.getRep_num());
+			mav.setViewName("redirect: reportEdit");
+		}
 		return mav;
 	}
 }

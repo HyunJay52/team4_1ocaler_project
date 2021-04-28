@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealStyle.css"/>
 
 
-	<div id="body">
+	<div id="main">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<%@ include file="/inc/dealHeader.jspf" %> <!-- 사이드 메뉴 include -->
 						
@@ -12,7 +12,7 @@
 					<c:forEach var="i" begin="1" end="10">
 						<li id="selList">
 							<div  OnClick="location.href ='sellView'">
-								<div>
+								<div id="sellImgDiv">
 									<img src="img/deal/div.jfif"/>
 								</div>
 								<ul>	

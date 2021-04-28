@@ -21,41 +21,41 @@ public class MyinfoController {
 		
 		return mav;
 	}
-	@RequestMapping("/info")
-	public String main() {
+	@RequestMapping("/myInfoMain")
+	public String myInfoMain() {
 		return "myInfo/myInfoMain";
 	}
 	@RequestMapping("/myInfo")
 	public String myInfo() {
 		return "myInfo/myInfo";
 	}
-	@RequestMapping("/load")
-	public String load() {
+	@RequestMapping("/myInfoLoad")
+	public String myInfoLoad() {
 		return "myInfo/myInfoLoad";
 	}
 	
-	@RequestMapping("/delivery")
-	public String delivery() {
-		return "myInfo/myDelivery";
+	@RequestMapping("/myInfoDelivery")
+	public String myInfoDelivery() {
+		return "myInfo/myInfoDelivery";
 	}
 	
-	@RequestMapping("/myDeal")
-	public String myDeal() {
-		return "myInfo/myDeal";
+	@RequestMapping("/myInfoDeal")
+	public String myInfoDeal() {
+		return "myInfo/myInfoDeal";
 	}
 	
-	@RequestMapping("/farmerDeal")
-	public String farmerDeal() {
-		return "myInfo/farmerDeal";
+	@RequestMapping("/myInfoFarmerDeal")
+	public String myInfoFarmerDeal() {
+		return "myInfo/myInfoFarmerDeal";
 	}
 	
 	@RequestMapping("/myInfoReview")
-	public String review() {
+	public String myInfoReview() {
 		return "myInfo/myInfoReview";
 	}
-	@RequestMapping("/myActivity")
-	public String myActivity() {
-		return "myInfo/myActivity";
+	@RequestMapping("/myInfoActivity")
+	public String myInfoActivity() {
+		return "myInfo/myInfoActivity";
 	}
 	@RequestMapping("/myInfoSaleHistory")
 	public String myInfoSaleHistory() {
@@ -73,5 +73,17 @@ public class MyinfoController {
 	@RequestMapping("/myInfoShippingManagement")
 	public String myInfoShippingManagement() {
 		return "myInfo/myInfoShippingManagement";
+	}
+	@RequestMapping("/myInfoSalesManagement")
+	public String myInfoSalesManagement() {
+		return "myInfo/myInfoSalesManagement";
+	}
+	@RequestMapping("/myInfoStatistics")
+	public String myInfoStatistics() {
+		return "myInfo/myInfoStatistics";
+	}
+	@RequestMapping("/myInfoReviewManagement")
+	public String myInfoReviewManagement() {
+		return "myInfo/myInfoReviewManagement";
 	}
 }
