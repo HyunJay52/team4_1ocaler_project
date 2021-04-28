@@ -37,3 +37,7 @@
 </div>
 </body>
 </html>
+
+<!-- 스크립트 링크 -->
+<script src="<%=request.getContextPath() %>/js/mainScript.js"></script>
+<script src="<%=request.getContextPath() %>/js/member/member.js"></script>

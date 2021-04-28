@@ -8,4 +8,8 @@ public interface MemberDAO {
 	
 	//일반회원 가입
 	public int insertMember(MemberVO vo);
+	//아이디 중복확인
+	public String idDoubleCheck(String userid);
+	//별명 중복확인
+	public String nickNameDoubleCheck(String mem_nick);
 }
