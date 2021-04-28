@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +44,7 @@ public class MemberController {
 		return goPage;
 	}
 // 로그아웃
-	@RequestMapping("/")
+	@RequestMapping("/logOut")
 	public String logOut(HttpSession ses) {
 		ses.invalidate();
 		return "home";
@@ -105,6 +106,35 @@ public class MemberController {
 		}
 		return mav;
 	}
+// 아이디 중복확인
+	@RequestMapping(value="/idOverlapCheck", method=RequestMethod.GET, produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String idOverlapCheck(String userid) {
+		String result = "";
+		String checkId = service.idDoubleCheck(userid);
+		
+		if(userid.equals(checkId)) {
+			result = "N"; //사용불가능
+		}else {
+			result = "Y"; //사용가능
+		}
+		return result;
+	}
+	// 아이디 중복확인
+	@RequestMapping(value="/nickOverlapCheck", method=RequestMethod.GET, produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String nickOverlapCheck(String mem_nick) {
+		String result = "";
+		String checkId = service.nickNameDoubleCheck(mem_nick);
+			
+		if(mem_nick.equals(checkId)) {
+			result = "N"; //사용불가능
+		}else {
+			result = "Y"; //사용가능
+		}
+		return result;
+	}
+	
 // 셀러회원가입
 	@RequestMapping("/joinSeller")
 	public String joinSeller() {
