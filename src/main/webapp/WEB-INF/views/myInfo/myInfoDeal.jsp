@@ -83,7 +83,7 @@
 </script>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div class="myinfoContainer">
+	<div class="myinfoContainer noOver">
 		<h3>회원간거래</h3>
 		<div class="dealTop">
 			<div class="dealInfo">
