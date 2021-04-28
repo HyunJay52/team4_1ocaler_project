@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.team4.localer.vo.CsVO;
 import com.team4.localer.vo.OftenqVO;
+import com.team4.localer.vo.ReportVO;
 
 public interface CsDAO {
 	//고객문의 글 전체목록
@@ -24,4 +25,6 @@ public interface CsDAO {
 	public int oftenqDelete(int num);
 	//자주하는 질문 작성
 	public int oftenqInsert(OftenqVO vo);
+	//신고글 1개 select 
+	public ReportVO reportOneSelect(int num);
 }

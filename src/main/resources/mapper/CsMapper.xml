@@ -20,8 +20,9 @@
   		of_cate cs_cate from oftenq order by of_num desc
   	</select>
   	<select id="reportSelect" resultType="com.team4.localer.vo.ReportVO">
-  		select rep_num,rep_subject, userid, to_char(rep_writedate,'MM-DD HH:MI') rep_writedate, 
-  		rep_status from report order by rep_num desc
+  		select rep_num,rep_subject, userid, 
+  		to_char(rep_writedate,'MM-DD HH:MI') rep_writedate, rep_status 
+  		from report order by rep_num desc
   	</select>
   	<select id="oftenqOneSelect" resultType="com.team4.localer.vo.OftenqVO">
   		select of_num, of_subject, of_content, of_cate from oftenq where of_num=#{param1}
@@ -36,4 +37,8 @@
   		insert into oftenq(of_num,of_subject,of_content,of_cate)
   		values(boardsq.nextval,#{of_subject},#{of_content},#{of_cate})
   	</insert>
+  	<select id="reportOneSelect" resultType="com.team4.localer.vo.ReportVO">
+  		select rep_num, num, userid, rep_content,rep_subject,rep_status,rep_ok,rep_writedate
+  		from report where rep_num=#{param1}
+  	</select>
 </mapper>
