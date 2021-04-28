@@ -41,4 +41,7 @@
   		select rep_num, num, userid, rep_content,rep_subject,rep_status,rep_ok,rep_writedate
   		from report where rep_num=#{param1}
   	</select>
+  	<update id="reportUpdate" parameterType="com.team4.localer.vo.ReportVO">
+  		update report set rep_status=#{rep_status}, rep_ok = sysdate where rep_num=#{rep_num}
+  	</update>
 </mapper>

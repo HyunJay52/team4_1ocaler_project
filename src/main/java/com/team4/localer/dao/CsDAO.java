@@ -27,4 +27,6 @@ public interface CsDAO {
 	public int oftenqInsert(OftenqVO vo);
 	//신고글 1개 select 
 	public ReportVO reportOneSelect(int num);
+	//신고글 Update
+	public int reportUpdate(ReportVO vo);
 }
