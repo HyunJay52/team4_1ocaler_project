@@ -3,6 +3,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <style>
 	#header{display:none;}
+	#footer{display:none;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*eatViewGroupList-like btn*/
 	.fakeCheckBoxImg[type=checkbox]{ display:none; }
@@ -125,8 +126,8 @@
 	<div id="eatViewTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
@@ -147,7 +148,7 @@
 		</ul>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
 		<form id="eatViewGroupSearchFrm" method="get" action="eatPage">
-			<input type="hidden" name="loc_gu" value="강서구"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
+			<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/>
 			<select name="searchKey">
 				<option value="g_subject">제목</option>
 				<option value="userid">작성자</option>
@@ -162,8 +163,9 @@
 			<c:forEach var="vo" items="${eatList }">
 				<a href="eatViewPage?num=${vo.num }&loc_gu=${pageVO.loc_gu}"><li><!-- 나중에 searchkey, searchWord도 달고다녀야함 -->
 					<div>
+					
 						<img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>${vo.down_cate }</span>
-						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }" /><label for="like${vo.num }"></label>
+						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==vo.num && logId==likes.userid }">checked</c:if></c:forEach> /><label for="like${vo.num }"></label>
 					</div>
 					<span>${vo.g_subject }</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->

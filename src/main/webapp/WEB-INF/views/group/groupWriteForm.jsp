@@ -5,53 +5,19 @@
 <link ref="stylesheet" href="<%=request.getContextPath()%>/css/commonStyle.css" type="html/css"/>
 <style>
 	#header{display:none;}
+	#footer{display:none;}
 	#groupWriteFormBody{overflow:hidden;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
-	/*맨위오른쪽검색폼*/
-	#groupWriteFormSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#groupWriteFormSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
-	#groupWriteFormSearchFrm input[type=image]{display:block; height:48px;}
-	/*맨위가운데*/
-	#groupWriteFormTopFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#groupWriteFormTopFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#groupWriteFormTopFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
-	#groupWriteFormTopFrm img{width:30px; margin:9px 0px;}
-	#groupWriteFormTopFrm li:first-child>a>img{ margin-left:10px;}
-	#groupWriteFormTopFrm li:last-child>a>img{ margin-right:10px;}
-	#groupWriteFormShowFrm{position:absolute; height:auto; top:100px; left:30px; z-index:1; width:500px; background-color:#fff;  border-radius:10px;}		
+
 	/* 맨위 셀렉트 박스 부분 */
 	#groupWriteFormUp_cate, #groupWriteFormDown_cate{ width:150px; height:40px; padding-left:10px; border:1px solid #d3d3d3;
-		background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}
+	background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}
 	#groupWriteFormUp_cate{margin:20px 10px 10px 15px;}
 	#groupWriteFormG_cnt{ width:100px; height:40px; padding-left:5px; border:1px solid #d3d3d3;
-		background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}
-	/*제목라인*/
-	#groupWriteFormG_subject{border:1px solid #d9d9d9; border-radius:5px; margin:0 15px; width:470px; height:40px; padding-left:10px;}
-	/*input 박스 클릭시, 호버, 액티브시시 */
-	/*check 박스 클릭시, 호버, 액티브시시*/
-	/*날짜 시간 참여인원 선택 클릭 호버 액티브시*/
-	#groupWriteFormUp_cate:active, #groupWriteFormDown_cate:active, #groupWriteFormG_cnt:active, #groupWriteFormG_date:active, #groupWriteFormG_time:active{border:2px solid #571fb8;}
-	#groupWriteFormUp_cate:focus, #groupWriteFormDown_cate:focus, #groupWriteFormG_cnt:focus, #groupWriteFormG_subject:focus, #groupWriteFormG_date:focus, #groupWriteFormG_time:focus, #groupWriteFormG_loc1:focus, #groupWriteFormG_tag:focus, #groupWriteFormG_loc2:focus {border:2px solid #571fb8; outline: none;}
-	#groupWriteFormUp_cate:hover, #groupWriteFormDown_cate:hover, #groupWriteFormG_cnt:hover, #groupWriteFormG_subject:hover, #groupWriteFormG_date:hover, #groupWriteFormG_time:hover, #groupWriteFormG_loc1:hover, #groupWriteFormG_tag:hover, #groupWriteFormG_loc2:hover {border:2px solid #571fb8;}
-	/*날짜 시간 선택 참여인원 선택*/
-	#groupWriteFormG_date, #groupWriteFormG_time{width:150px; height:40px; border-radius:5px; border:1px solid #d9d9d9}
-	#groupWriteFormG_date{margin-left:15px} #groupWriteFormG_time{margin:0 31px;}
-	/*지역선택 해시태그*/
-	#groupWriteFormG_loc1,#groupWriteFormG_loc2, #groupWriteFormG_tag{margin: 15px 15px 0px 15px;height: 40px;border-radius: 5px; border: 1px solid #d9d9d9; width: 470px; padding-left:5px}
-	/*출발지 도착지 주유비*/
+	background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}
+	/*출발지 도착지*/
 	#groupWriteFormG_loc1{background:url("<%=request.getContextPath()%>/img/groupImg/markerG.png")  no-repeat 98% 50%; background-size:5%; apperance:none; -webkit-appearance:none; }
 	#groupWriteFormG_loc2{background:url("<%=request.getContextPath()%>/img/groupImg/markerP.png")  no-repeat 98% 50%; background-size:5%; apperance:none; -webkit-appearance:none; }
-	/*취소 등록*/
-	#groupWriteFormCcFrm{width:364px; margin:0 auto;}
-	#groupWriteFormCancleBtn, #groupWriteFormConfBtn{margin:30px 15px; width:150px; height:40px;}
-	/*CKEDTOR 필요없는거 삭제*/
- 	  #cke_32, #cke_30, #cke_44,  #cke_38,  #cke_26, #cke_1_bottom{display:none; } 
-	 #cke_groupWriteFormG_content{ margin:15px;}
-	/*버튼이벤트*/
-	.cancelBtn {	border: 1px solid #ddd;	color: #ddd;	width: 90px;}
-	.cancelBtn:hover {	background-color: #fff;	color: gray;}	
-	.confBtn {	background: #3f1785;	color: #fff;	width: 90px;}
-	.confBtn:hover {	color: #fff;	background: #B8B2F4;}
 </style>
 <script>	
 	$(function(){
@@ -193,15 +159,15 @@
 	<div id="groupWriteFormTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
 	
 	
 	<!-- 검색 폼 -->
-	<div id="groupWriteFormSearchFrm">
+	<div id="groupWriteFormSearchFrms">
 		<form onsubmit="searchPlaces(); return false;">
 			<input type="text" name="groupWriteFormSearchWord" id="groupWriteFormSearchWord" value="강서구" size=40; />
 			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>

@@ -61,7 +61,6 @@ public class MyinfoController {
 	public String myInfoSaleHistory() {
 		return "myInfo/myInfoSaleHistory";
 	}
-	
 	@RequestMapping("/myInfoSeller")
 	public String myInfoSeller() {
 		return "myInfo/myInfoSeller";

@@ -13,4 +13,19 @@ public class CommuController {
 	public String commuBoard() {
 		return "community/commuBoard";
 	}
+	@RequestMapping("/commuWrite")
+	public String commuWrite() {
+		return "community/commuWrite";
+	}
+	
+	@RequestMapping("/commuView")
+	public String commuView() {
+		return "community/commuView";
+	}
+	
+	@RequestMapping("/commuEdit")
+	public String commuEdit() {
+		return "community/commuEdit";
+	}
+	
 }

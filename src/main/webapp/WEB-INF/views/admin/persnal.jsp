@@ -33,6 +33,7 @@
 	<textarea class="persnalarea" readonly>${vo.cs_content }</textarea>
 	<form method="post" id="perFrm" action="persnalOk">
 		<input type="hidden" name="cs_num" value="${vo.cs_num }"/>
+		답변등록일 : ${vo.cs_date }
 		<textarea name="cs_answer" id="peranswer"class="persnalarea" placeholder="답변을 입력해주세요">${vo.cs_answer }</textarea>
 		<input type="submit" class="puplebtn" id="psubmit" value="답변완료"/>
 	</form>

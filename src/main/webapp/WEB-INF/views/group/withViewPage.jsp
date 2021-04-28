@@ -2,57 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <style>
-
-	
-	/*기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능기능*/
-	/*버튼이벤트*/
-	.cancelBtn {border: 1px solid #ddd;	color: #ddd;width: 90px;}
-	.cancelBtn:hover {background-color: #fff; color: gray;}	
-	.confBtn {background: #3f1785; color: #fff; width: 90px;}
-	.confBtn:hover {color: #fff; background: #B8B2F4;}
-	
-	/*폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼*/
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	#header{display:none;}
+	#footer{display:none;}
 	#withViewPageBody{overflow:hidden;}
-	/*searchFrm*/
-	#withViewPageSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#withViewPageSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
-	#withViewPageSearchFrm input[type=image]{display:block; height:48px;}
-	/*topFrm*/
-	#withViewPageTopFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#withViewPageTopFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#withViewPageTopFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
-	#withViewPageTopFrm img{width:30px; margin:9px 0px;}
-	#withViewPageTopFrm li:first-child>a>img{ margin-left:10px;}
-	#withViewPageTopFrm li:last-child>a>img{ margin-right:10px;}
-	/*showFrm*/
-	#withViewPageShowFrm{position:absolute; top:100; height:auto; left:30px; z-index:1; width:500px; background-color:#fff; opacity:0.9; border-radius:10px;}
-	#withViewPageShowTopMenu{overflow:auto;}
-	#withViewPageShowTopMenu>li{float:left; width:100%; line-height:30px;}
-	#withViewPageShowTopMenu>li:first-child>img{height:22px; padding-right:10px;}	
-	#withViewPageShowTopMenu>li:first-child{width:70%; padding:10px 0px 10px 10px;}
-	#withViewPageShowTopMenu>li:first-child>span{color:#3f1785; font-weight:bold;}
-	#withViewPageShowTopMenu>li:nth-child(2){width:30%; padding:10px 15px 10px 0px; text-align:right; }
-	#withViewPageShowTopMenu>li:nth-child(3)>span{display:block; margin-bottom:5px; padding: 0 10px; font-size:22px; font-weight:bold;}	
-	#withViewPageShowTopMenu>li:nth-child(4){width:13%; padding-left:10px;}
-	#withViewPageShowTopMenu>li:nth-child(4)>img{width:40px;}
-	#withViewPageShowTopMenu>li:nth-child(5){width:47%}
-	#withViewPageShowTopMenu>li:nth-child(5)>div{font-size:13px; height: 20px; line-height: 20px;}
-	#withViewPageShowTopMenu>li:nth-child(5)>div:first-child{padding-left:30pxx}
-	#withViewPageShowTopMenu>li:nth-child(6){width:40%; height:40px; line-height:40px; text-align:right;}
-	#withViewPageShowTopMenu>li:nth-child(6)>span:nth-of-type(2){padding-right:15px;}
-	#withViewPageShowFrm>div:first-of-type{padding:10px; overflow:auto; height:400px;}
-	#withViewPageShowFrm>span{display: block;font-size: 16px;font-weight: bold;padding: 20px 0px 0px 20px; color: 3f1785;}
-	#withViewPageShowFrm>div:not(:first-of-type){overflow:auto; margin:10px 15px 15px 15px;}
-	#withViewPageShowFrm>div>img{height:20px; margin: 5px 30px 0px 0px; float:left;}
-	#withViewPageShowFrm>div>div{border:1px solid gray; border-radius:5px; float:left; text-align:center; font-size: 16px; line-height: 30px; height: 30px; width: 400px;}
-	#withViewPageShowFrm>div:nth-of-type(4){white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-	#withViewPageShowFrm>div:last-of-type{text-align:center;}
-	#withViewPageShowFrm button{width:120px; height:40px; margin:20px 0px;}
-	#withViewPageShowFrm button:first-child{margin-right:80px;}
-	
-	
 </style>
 <script>	
 		$(function(){	
@@ -61,15 +14,31 @@
 				//뒤로가기	
 			$("#withViewPageBackBtn").click(()=>{
 				history.back();
-			})	
+			});
 				//참여하기
 				
 			$("#withViewPageJoinBtn").click(()=>{
-				//참여하기 버튼을 누르면 join 테이블에 insert 되야한다. 
-				//다음에 들어왔을떄 이미 신청되어있으면 신청한 거라고 떠야한다.
-				//(신청을 했다면 --> 취소하기 버튼으로 변경?) 버튼도 있어야 한다.[그 좋아요 이미 신청한건 체크되있고 누르면 삭제되는거 비슷할듯]
-				//
-			})
+				var url = "joinInsert";
+				var params = "num="+$("#withViewPageJoinBtn").val();
+				console.log(params);
+				$.ajax({
+					url : url,
+					data : params,
+					success:function(result){
+						alert('신청이 완료되었습니다. 응답을 기다려 주세요');
+						$("#withViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
+						$("#withViewPageJoinBtn").attr("disabled",true);
+					},error:function(e){
+						console.log('신청실패')
+					}
+				});
+			});
+			//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
+			var joinCheck = $("#withViewPageJoinBtn").attr("disabled");
+			console.log(joinCheck);
+			if(joinCheck=='disabled'){
+				$("#withViewPageJoinBtn").children("span").text('신청완료');
+			}				
 			//============================================================================================
 		})
 </script>
@@ -82,8 +51,8 @@
 	<div id="withViewPageTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
@@ -98,43 +67,38 @@
 	<!-- showFrm 리스트 -->
 	<div id="withViewPageShowFrm">	
 		<ul id="withViewPageShowTopMenu">
-			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span>up_cate > down_cate</span></li>
-			<li><span>조회수 : g_hit </span></li>
-			<li><span> 이것은 제목이라고 하지 나도 알고 너도 알고 다알고</span></li>
-			<li><img src="<%=request.getContextPath()%>/common/user.png"/></li>
-			<li><div>고구마777</div><div>2021-04-25 16:25</div></li>
-			<li>모집인원 : <span> 2</span> / <span> 5 </span></li>
+			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span> ${vo.up_cate} > ${vo.down_cate }</span></li>
+			<li><span>조회수 : ${vo.g_hit } </span></li>
+			<li><span> ${vo.g_subject }</span></li>
+			<li><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"/></li>
+			<li><div>${vo.memberVO.mem_nick }</div><div>${vo.g_writedate }</div></li>
+			<li>모집인원 : <span> 2</span> / <span> ${vo.g_cnt } </span></li>
 			
 		</ul>
 		<hr style="margin:5px 0px;"/>
 		<div>
-			정말로 같이 밥드실분이 한명도 없는 건가요..? 정말 슬플거 같습니다... 이 홈페이지<br/>
-			사실 아무도 안쓴다는걸 다 알고 잇습니다.정말로 같이 밥드실분이 한명도 없는 건가요..? 정말 슬플거 같습니다... 이 홈페이지<br/>
-			사실 아무도 안쓴다는걸 다 알고 잇습니다.정말로 같이 밥드실분이 한명도 없는 건가요..? 정말 슬플거 같습니다... 이 홈페이지<br/>
-			사실 아무도 안쓴다는걸 다 알고 잇습니다.정말로 같이 밥드실분이 한명도 없는 건가요..? 정말 슬플거 같습니다... 이 홈페이지<br/>
-			사실 아무도 안쓴다는걸 다 알고 잇습니다.정말로 같이 밥드실분이 한명도 없는 건가요..? 정말 슬플거 같습니다... 이 홈페이지<br/>
-			사실 아무도 안쓴다는걸 다 알고 잇습니다.정말로 같이 밥드실분이 한명도 없는 건가요..? 정말 슬플거 같습니다... 이 홈페이지<br/>
-			사실 아무도 안쓴다는걸 다 알고 잇습니다.정말로 같이 밥드실분이 한명도 없는 건가요..? 정말 슬플거 같습니다... 이 홈페이지<br/>
+			${vo.g_content }
 		</div>
 		<hr style="width:480px; margin:0 auto;">
 		<span> 약속정보</span>
-		<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/><div>2021-04-25 20:20</div></div><!-- g_date, g_time 값을 가지고 온다. -->
-		<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소/출발지"/><div> 가양역 2번출구 앞</div></div><!-- g_loc1 값을 가져온다. -->
-		<%-- <c:if test="">	loc2 값이 null 이 아닐경우 띄워주고 null일경우 안띄워주고  --%> 
-			<div><img src="<%=request.getContextPath()%>/img/groupImg/markerP.png" title="도착지"/><div> 가양역 2번출구 앞</div></div><!-- g_loc1 값을 가져온다. -->
-		<%-- </c:if> --%>
-		<div> #하기시르다 정말시르다 ...</div>
+		<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/><div>${vo.g_date } ${vo.g_time}</div></div><!-- g_date, g_time 값을 가지고 온다. -->
+		<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소/출발지"/><div> ${vo.g_loc1 }</div></div><!-- g_loc1 값을 가져온다. -->
+		<c:if test="${vo.g_loc2!=null }">
+			<div><img src="<%=request.getContextPath()%>/img/groupImg/markerP.png" title="도착지"/><div>${vo.g_loc2 }</div></div><!-- g_loc1 값을 가져온다. -->
+		</c:if>
+		<div>${vo.g_tag }</div>
 		<hr style="width:480px; margin:0 auto;"/>
 		<div>
 			<button id="withViewPageBackBtn" class="btn cancelBtn">뒤로가기</button>
-			<%-- <c:if test="${ }">  이건 작성자가 아닌경우 버튼 아닐경우--%> 
-			<button id="withViewPageJoinBtn" class="btn confBtn">참여하기</button>
-			<%-- </c:if>
-			<c:if test="${ }"> 이건 작성자일경우 수정하기 버튼
-			<button id="withViewPageEditBtn" class="btn confBtn">수정하기</button>
-			</c:if> --%>
+			<c:if test="${logId!=vo.userid }">  
+				<button type="button" id="withViewPageJoinBtn" class="btn confBtn" value="${vo.num }" <c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>><span id="withViewPagejoinCheck">참여하기</span></button>
+			</c:if>
+			<c:if test="${logId==vo.userid }">
+				<button id="eatViewPageEditBtn" class="btn confBtn">삭제</button>
+				<button id="withViewPageEditBtn" class="btn confBtn">수정</button>
+			</c:if>
 		</div>
-		
+		 
 		
 	</div>
 	

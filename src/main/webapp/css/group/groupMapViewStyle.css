@@ -1,1 +1,26 @@
 @charset "UTF-8";
+	#groupMapViewFold, #groupMapViewOpen{position:absolute; z-index:1;}	
+	#groupMapViewFold{background-color:#fff; top:140px; left:493px; margin-top:348px; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
+	#groupMapViewOpen{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
+	
+	#groupMapViewSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
+	#groupMapViewSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
+	#groupMapViewSearchFrm input[type=image]{display:block; height:48px;}
+	
+	
+	#groupMapViewTopFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
+	#groupMapViewTopFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
+	#groupMapViewTopFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
+	#groupMapViewTopFrm img{width:30px; margin:9px 0px;}
+	#groupMapViewTopFrm li:first-child>a>img{ margin-left:10px;}
+	#groupMapViewTopFrm li:last-child>a>img{ margin-right:10px;}
+	
+
+	#groupMapViewShowFrm{position:absolute; height:780px; top:100px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
+	#groupMapViewShowFrm li>a{text-decoration:none; color:#000}
+	#groupMapViewShowFrm li>a:hover{color:#571fb8; font-weight:bold;}
+	#groupMapViewShowFrm li{float:left; width:230px; padding-left:80px; height:50px; line-height:50px; border-bottom:1px solid #e1e1e1;}
+	#groupMapViewShowFrm>div:first-child{margin:10px; overflow:auto; padding-left:15px;}
+	#groupMapViewShowFrm>div>span{display:block; width:auto; height:45px; line-height:45px; float:left; font-size:22px; color:#571fb8;} 
+	#groupMapViewShowFrm img{display:block; width:35px; float:left; margin-right:15px; padding-top:6px;}
+	#groupMapViewShowFrm img:nth-child(3){float:right} 

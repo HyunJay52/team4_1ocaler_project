@@ -96,8 +96,10 @@
 	
 .redBtn{
 	background:rgb(183,15,23,0.9);
+	border:1px solid rgb(183,15,23,0.9);
 	color:#fff;
-	width:90px;
+	width:70px;
+	padding:2px;
 }
 .redBtn:hover{
 	color:rgb(183,15,23);
