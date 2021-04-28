@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team4.localer.dao.CsDAO">
+	<select id="boardAllSelect" resultType="com.team4.localer.vo.CsVO">
+  		select cs_num, userid, cs_cate, cs_subject ,cs_content, cs_status, cs_answer, to_char(cs_writedate, 'MM-DD HH:MI') cs_writedate  
+  		from cs order by cs_num
+  	</select>
+  	<select id="boardSelect" resultType="com.team4.localer.vo.CsVO">
+  		select cs_num, userid, cs_cate, cs_subject, cs_content, cs_status, cs_answer, 
+  		to_char(cs_writedate, 'MM-DD HH:MI') cs_writedate, to_char(cs_date, 'MM-DD HH:MI') cs_date 
+  		from cs where cs_num=#{param1}
+  	</select>
+  	<update id="boardUpdate" parameterType="com.team4.localer.vo.CsVO">
+  		update cs set cs_answer=#{cs_answer}, cs_date=sysdate, cs_status=2 where cs_num=#{cs_num} 
+  	</update>
+  	<select id="oftenqSelect" resultType="com.team4.localer.vo.CsVO">
+  		select of_num cs_num, of_subject cs_subject, of_content cs_content,
+  		of_cate cs_cate from oftenq order by of_num desc
+  	</select>
+  	<select id="reportSelect" resultType="com.team4.localer.vo.ReportVO">
+  		select rep_num,rep_subject, userid, 
+  		to_char(rep_writedate,'MM-DD HH:MI') rep_writedate, rep_status 
+  		from report order by rep_num desc
+  	</select>
+  	<select id="oftenqOneSelect" resultType="com.team4.localer.vo.OftenqVO">
+  		select of_num, of_subject, of_content, of_cate from oftenq where of_num=#{param1}
+  	</select>
+  	<update id="oftenqUpdate" parameterType="com.team4.localer.vo.OftenqVO">
+  		update oftenq set of_subject=#{of_subject}, of_content=#{of_content} where of_num=#{of_num}
+  	</update>
+  	<delete id="oftenqDelete">
+  		delete from oftenq where of_num=#{param1}
+  	</delete>
+  	<insert id="oftenqInsert" parameterType="com.team4.localer.vo.OftenqVO">
+  		insert into oftenq(of_num,of_subject,of_content,of_cate)
+  		values(boardsq.nextval,#{of_subject},#{of_content},#{of_cate})
+  	</insert>
+  	<select id="reportOneSelect" resultType="com.team4.localer.vo.ReportVO">
+  		select rep_num, num, userid, rep_content,rep_subject,rep_status,rep_ok,rep_writedate
+  		from report where rep_num=#{param1}
+  	</select>
+</mapper>

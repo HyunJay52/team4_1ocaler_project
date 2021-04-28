@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	#header{display:none}
+	#footer{display:none;}
+	#groupMapViewBody{overflow:hidden;}
+	ul, li{ margin:0px; padding:0px; list-style-type:none;}	
+</style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <script>	
-		var inner = window.innerHeight;
-		console.log(inner);
 		$(function(){
 			
 			
@@ -11,101 +15,66 @@
 							'마포구','용산구','서대문구','중구','성동구','광진구','종로구','동대문구','성북구','중랑구','은평구','강북구','노원구','도봉구'];
 			var tag = "";
 			localName.map(function(obj, idx){
-				tag = "<li><a href='eatPage?g_loc="+obj+"&up_cate=한끼미식회'>"+obj+"</a></li>";
-				$("#showFrm>ul").append(tag);
+				tag = "<li><a href='eatPage?loc_gu="+obj+"'>"+obj+"</a></li>";
+				$("#groupMapViewShowFrm>ul").append(tag);
 			});
-	
-			$("#showFrm").css('top',140);
-			$("#fold").css('top',140).css('left',493).css('margin-top','348px');
-			
-			
+		
 			//접기 호버시 화살표 색이 바뀌고 클릭하면 showFrm 없어지고 open 화살표 생김
-			$("#fold").hover(function(){
-				$("#fold>img").attr("src","<%=request.getContextPath()%>/img/groupImg/leftP.png");
-				$("#fold").click(function(){	
-					$("#showFrm").css("display","none");
-					$("#fold").css("display","none");
-					$("#open").css("display","block");
+			$("#groupMapViewFold").hover(function(){
+				$("#groupMapViewFold>img").attr("src","<%=request.getContextPath()%>/img/groupImg/leftP.png");
+				$("#groupMapViewFold").click(function(){	
+					$("#groupMapViewShowFrm").css("display","none");
+					$("#groupMapViewFold").css("display","none");
+					$("#groupMapViewOpen").css("display","block");
 				});
 			},function(){			
-				$("#fold>img").attr("src","<%=request.getContextPath()%>/img/groupImg/left.png");
+				$("#groupMapViewFold>img").attr("src","<%=request.getContextPath()%>/img/groupImg/left.png");
 	
 			});
 			
 			//open 화살표 오버시 색바뀌고 클릭시 showFrm 과 닫기 화살표 생김
-			$("#open").hover(function(){
-				$("#open>img").attr("src","<%=request.getContextPath()%>/img/groupImg/rightP.png");
+			$("#groupMapViewOpen").hover(function(){
+				$("#groupMapViewOpen>img").attr("src","<%=request.getContextPath()%>/img/groupImg/rightP.png");
 				
-				$("#open").click(function(){	
-					$("#showFrm").css("display","block");
-					$("#fold").css("display","block");
-					$("#open").css("display","none");
+				$("#groupMapViewOpen").click(function(){	
+					$("#groupMapViewShowFrm").css("display","block");
+					$("#groupMapViewFold").css("display","block");
+					$("#groupMapViewOpen").css("display","none");
 				});
 				
 			},function(){
-				$("#open>img").attr("src","<%=request.getContextPath()%>/img/groupImg/right.png");
+				$("#groupMapViewOpen>img").attr("src","<%=request.getContextPath()%>/img/groupImg/right.png");
 			});
 	
 		})
 </script>
-<style>
-	#header{display:none}
-	body{overflow:hidden;}
-	ul, li{ margin:0px; padding:0px; list-style-type:none;}
-	
-	#fold, #open{position:absolute; z-index:1;}	
-	#fold{background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	#open{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	
-	#searchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#searchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
-	#searchFrm input[type=image]{display:block; height:48px;}
-	
-	
-	#topFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#topFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#topFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
-	#topFrm img{width:30px; margin:9px 0px;}
-	#topFrm li:first-child>a>img{ margin-left:10px;}
-	#topFrm li:last-child>a>img{ margin-right:10px;}
-	
-
-	#showFrm{position:absolute; height:760px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
-	#showFrm li>a{text-decoration:none; color:#000}
-	#showFrm li>a:hover{color:#571fb8; font-weight:bold;}
-	#showFrm li{float:left; width:230px; padding-left:80px; height:50px; line-height:50px; border-bottom:1px solid #e1e1e1;}
-	#showFrm>div:first-child{margin:10px; overflow:auto; padding-left:15px;}
-	#showFrm>div>span{display:block; width:auto; height:45px; line-height:45px; float:left; font-size:22px; color:#571fb8;} 
-	#showFrm img{display:block; width:35px; float:left; margin-right:15px; padding-top:6px;}
-	#showFrm img:nth-child(3){float:right} 
-</style>
-
-<div id="map" style="width:2000px; height:1000px; position:relative; overflow:hidden;"></div>
+<body id="groupMapViewBody">
+<div id="groupMapViewMap" style="width:2500px; height:1500px; position:relative; overflow:hidden;"></div>
 	
 	<!-- showFrm접기펴기 -->	
-	<div id="fold"><img src="<%=request.getContextPath()%>/img/groupImg/left.png"/></div>
-	<div id="open"><img src="<%=request.getContextPath()%>/img/groupImg/right.png"/></div>
+	<div id="groupMapViewFold"><img src="<%=request.getContextPath()%>/img/groupImg/left.png"/></div>
+	<div id="groupMapViewOpen"><img src="<%=request.getContextPath()%>/img/groupImg/right.png"/></div>
 	
 	<!-- 맨위 폼 -->
-	<div id="topFrm">
+	<div id="groupMapViewTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=${logLoc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=${logLoc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
 	
 	<!-- 검색 폼 -->
-	<div id="searchFrm">
-		<form id="searchFrmInner" onsubmit="searchPlaces(); return false;">
-			<input type="text" name="searchWord" id="searchWord" value="강서구" size=40; />
+	<div id="groupMapViewSearchFrm">
+		<form onsubmit="searchPlaces(); return false;">
+			<input type="text" name="groupMapViewSearchWord" id="groupMapViewSearchWord" value="${logLoc_gu }" size=40; />
 			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
 		</form>
 	</div>
 	
 	<!-- showFrm 리스트 -->
-	<div id="showFrm">
+	<div id="groupMapViewShowFrm">
 		<div><img src="<%=request.getContextPath() %>/img/groupImg/aimP.png"/><span style="font-weight:bold;">지역선택</span></div>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin-left:15px;">
 		<hr style="margin:0px;">
@@ -113,7 +82,7 @@
 	</div>
 	<script>
 			//지도 생성
-			var container = document.getElementById("map"),
+			var container = document.getElementById("groupMapViewMap"),
 				options = {
 					center : new kakao.maps.LatLng(33.450701,126.570667),
 					level : 7
@@ -145,7 +114,7 @@
 	
 			//검색한 키워드 값을 내가 text에서입력한 값으로 셋팅해주는 작업
 			function searchPlaces(){
-				var keyword = document.getElementById('searchWord').value;
+				var keyword = document.getElementById('groupMapViewSearchWord').value;
 				console.log(keyword);
 				 if (!keyword.replace(/^\s+|\s+$/g, '')) {
 				        alert('키워드를 입력해주세요!');
@@ -163,7 +132,7 @@
 			function callback(data, status, pagination){
 				if(status == kakao.maps.services.Status.OK){
 					console.log(data)
-					document.getElementById('searchWord').value = '';
+					document.getElementById('groupMapViewSearchWord').value = '';
 					
 					//검색된 장소를 기준으로 지도를 재설정하기 위해서 bounds를 통해 위도경도를 추가하기위한 객체를 생성
 					var bounds = new kakao.maps.LatLngBounds();

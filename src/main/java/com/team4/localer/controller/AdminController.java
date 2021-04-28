@@ -1,18 +1,34 @@
 package com.team4.localer.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.team4.localer.service.CsService;
+import com.team4.localer.vo.CsVO;
+import com.team4.localer.vo.OftenqVO;
+import com.team4.localer.vo.ReportVO;
 
 @Controller
 public class AdminController {
-	//주석달아보추가 주석
+	
+	@Inject
+	CsService csService;
+	
+	
 	@RequestMapping("/main")//관리자 메인페이지 
 	public ModelAndView main(HttpSession session) {
 		session.setAttribute("logId", "admin");
 		ModelAndView mav = new ModelAndView();
+		//cstable 전체 list 불러오기 
+		mav.addObject("list",csService.boardAllSelect());
 		mav.setViewName("admin/main");
 		return mav;
 	}
@@ -64,8 +80,7 @@ public class AdminController {
 		mav.setViewName("admin/spend_mem");
 		return mav;
 	}
-
-	////////////여기는 지워야한다,,,ㅎ
+	
 	@RequestMapping("/spend_sel")//판매관리
 	public ModelAndView spend_sel() {
 		ModelAndView mav = new ModelAndView();
@@ -75,21 +90,106 @@ public class AdminController {
 	@RequestMapping("/cspage")//판매관리
 	public ModelAndView cspage() {
 		ModelAndView mav = new ModelAndView();
+		//신고글 리스트 select
+		mav.addObject("list",csService.reportSelect());
 		mav.setViewName("admin/cspage");
 		return mav;
 	}
-	@RequestMapping("/persnal")//판매관리
-	public ModelAndView persnal() {
+	@RequestMapping("/oftenAndCs")
+	@ResponseBody
+	public List<CsVO> oftenAndCs(String cate){
 		ModelAndView mav = new ModelAndView();
+		//cate : oftenq(자주하는질문), report(신고),cs(1:1문의)
+		if(cate=="oftenq"||cate.equals("oftenq")) {
+			//자주하는 질문
+			return csService.oftenqSelect();
+		}else if(cate=="report"||cate.equals("report")) {
+			//신고글
+			return csService.reportSelect();
+		}else{//1:1문의
+			return csService.boardAllSelect();
+		}
+	}
+	
+	@RequestMapping("/persnal")//판매관리
+	public ModelAndView persnal(int cs_num) {
+		//csTbl에서 문의글 1개 가져오기 
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", csService.boardSelect(cs_num));
 		mav.setViewName("admin/persnal");
 		return mav;
 	}
-	@RequestMapping("/question")//판매관리
-	public ModelAndView question() {
+	//1:1문의 답변달아주기
+	@RequestMapping(value="/persnalOk", method=RequestMethod.POST)
+	public ModelAndView persnalOk(CsVO vo) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/question");
+		//csTbl 업데이트문 
+		if(csService.boardUpdate(vo)>0) {//답변달기 성공
+			mav.setViewName("redirect:main");
+		}else {//실패
+			mav.addObject("cs_num",vo.getCs_num());
+			mav.setViewName("redirect:persnal");
+		}
 		return mav;
 	}
-	
+	//자주하는 질문 수정페이지이동
+	@RequestMapping("/oftenQWriteEdit")
+	public ModelAndView oftenQWriteEdit(int num) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", csService.oftenqOneSelect(num));
+		mav.setViewName("admin/oftenQEdit");
+		return mav;
+	}
+	//자주하는 질문 수정
+	@RequestMapping(value="oftenQWriteEditOk", method=RequestMethod.POST)
+	public ModelAndView oftenQWriteEditOk(OftenqVO vo) {
+		ModelAndView mav = new ModelAndView();
+		if(csService.oftenqUpdate(vo)>0) {//수정성공
+			mav.setViewName("redirect:cspage");
+		}else {
+			mav.addObject("num",vo.getOf_num());
+			mav.setViewName("redirect:oftenQWriteEdit");
+		}
+		return mav;
+	}
+	@RequestMapping("/oftenQDelete")
+	public ModelAndView oftenQDelete(int num, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("logId")=="admin" ||session.getAttribute("logId").equals("admin")) {
+			//현재 로그인된 아이디가 관리자이면 삭제를 수행한다. 
+			if(csService.oftenqDelete(num)>0) {//삭제성공
+				System.out.println("자주하는 질문 삭제");
+			}
+		}
+		mav.setViewName("redirect:cspage");
+		return mav;
+	}
+	//자주하는 질문 작성페이지이동
+	@RequestMapping("/oftenQWrite")
+	public ModelAndView oftenQWrite(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/oftenQWrite");
+		return mav;
+	}
+	//자주하는 질문 작성
+	@RequestMapping(value="/oftenQWriteOk",method=RequestMethod.POST)
+	public ModelAndView oftenQWriteOk(OftenqVO vo,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("logId")=="admin") {
+			vo.setOf_cate("["+vo.getOf_cate()+"]");
+			csService.oftenqInsert(vo);
+		}
+		mav.setViewName("redirect:cspage");
+		return mav;
+	}
+	//신고처리 페이지 이동
+	@RequestMapping("/reportEdit")
+	public ModelAndView repoertEdit(int num) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo",csService.reportOneSelect(num));
+		mav.setViewName("admin/reportEdit");
+		return mav;
+	}
 }
 

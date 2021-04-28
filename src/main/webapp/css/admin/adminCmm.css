@@ -12,6 +12,12 @@
 	margin-top:20px;
 	margin-bottom:20px;
 }
+/*글자르기*/
+.wordcut{
+	whilte-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsys;
+}
 .tablea {margin:0 auto;padding:0;font-size:13px;width:100%;}
 .tablea tr{/*테이블 목록*/
    border-bottom:1px solid rgb(227,227,227); 
@@ -90,10 +96,34 @@
 	
 .redBtn{
 	background:rgb(183,15,23,0.9);
+	border:1px solid rgb(183,15,23,0.9);
 	color:#fff;
-	width:90px;
+	width:70px;
+	padding:2px;
 }
 .redBtn:hover{
 	color:rgb(183,15,23);
 	background:#fff;
+}
+/*모달부분*/
+.modaldiv>div{
+	font-family:"nsreb";
+	font-size:32px;
+}
+.modaldiv{
+	padding:15px 5px 0 5px;
+	border:1px solid #ddd;
+	border-radius:10px;
+	width:500px;
+	height:380px;
+	display:none;
+	background-color:#fff;
+}
+.exit{
+	float:right;
+	font-size:16px;
+	border:none; background-color:#fff;
+}
+.modaldiv>table{
+	margin-top:20px;
 }

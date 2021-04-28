@@ -6,8 +6,13 @@
 <script>
 	$(function(){
 		$('.memid').click(function(){
-			alert("클릭이벤트 발생");
+			var text = $(this).prev().text();
+			meminfo(text);
 		});
+		
+		function meminfo(num){
+			$("#meminfo").css("display", "block");
+		}
 	});
 </script>
 <div class="main">
@@ -87,8 +92,8 @@
 			<td><input type="button" class="redBtn"value="정지"></td>
 		</tr>
 	</table>
-	<div style="width:100%;height:60px;"></div>
-	<table class="tablea">
+	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->
+	<table id="meminfo" class="tablea">
 		<colgroup>
                <col width="200" />
                <col width="200" />
@@ -111,33 +116,5 @@
 			<td>88</td>
 		</tr>
 	</table>
-	<div style="width:100%;height:60px;"></div>
-	<table class="tablea">
-		<colgroup>
-              <col width="200" />
-              <col width="300" />
-              <col width="300" />
-              <col width="200" />
-              <col width="300" />
-              <col width="300" />
-         </colgroup> 
-		<tr>
-			<td>번호</td>
-			<td>제목</td>
-			<td>판매 횟수/환불횟수</td>
-			<td>작성자</td>
-			<td>작성날짜</td>
-			<td>판매금액</td>
-		</tr>
-		<tr>
-			<td>101</td>
-			<td>감자</td>
-			<td>130/10</td>
-			<td>goguma</td>
-			<td>2021.01.20</td>
-			<td>10000</td>
-		</tr>
-	</table>
 
-		
 </div>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.team4.localer.dao.GroupDAO">
+  	<insert id="groupInsert" parameterType="com.team4.localer.vo.GroupVO">
+  		insert into grouplocal(num, userid, up_cate, down_cate, g_gu, g_subject, g_content, g_cnt, g_date, g_time,
+  		g_loc1, g_tag)
+  		values(boardsq.nextval, #{userid}, #{up_cate}, #{down_cate}, #{g_gu}, #{g_subject}, #{g_content}, #{g_cnt}, to_date(#{g_date}, 'YYYY-MM-DD'), to_date(#{g_time},'HH24:MI'), #{g_loc1}, #{g_tag} )
+  	<!-- date type을 insert 할떄 to_date로 변경해서 보내야함 -->
+  	</insert>
+  	<insert id="groupBigMartInsert" parameterType="com.team4.localer.vo.GroupVO">
+  		insert into grouplocal(num, userid, up_cate, down_cate, g_gu, g_subject, g_content, g_cnt, g_date, g_time,
+  		g_loc1, g_loc2, g_tag)
+  		values(boardsq.nextval, #{userid}, #{up_cate}, #{down_cate}, #{g_gu}, #{g_subject}, #{g_content}, #{g_cnt}, to_date(#{g_date}, 'YYYY-MM-DD'), to_date(#{g_time},'HH24:MI'), #{g_loc1}, #{g_loc2}, #{g_tag} )
+  	<!-- date type을 insert 할떄 to_date로 변경해서 보내야함 -->
+  	</insert>
+  
+  	<select id="GroupEatList" resultType="com.team4.localer.vo.GroupVO">
+  		select num, down_cate, g_subject, g_cnt, to_date(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
+  		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='한끼미식회' order by num desc
+  	</select>
+  	<select id="GroupWithList" resultType="com.team4.localer.vo.GroupVO">
+  		select num, down_cate, g_subject, g_cnt, to_date(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
+  		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='가치가장' order by num desc
+  	</select>
+  
+  	<update id="hitCount" parameterType="int">
+  		update grouplocal set g_hit = g_hit+1 where num=#{param1}
+  	</update>
+  
+  
+  
+  
+  
+  
+  	<resultMap type="com.team4.localer.vo.MemberVO" id="memChoice">
+  		<result column="mem_nick" property="mem_nick"/>
+  		<result column="mem_prof" property="mem_prof"/>		
+  	</resultMap>
+  	
+  	<resultMap type="com.team4.localer.vo.GroupVO" id="eatChoice">
+  		<result column="num" property="num"/>
+  		<result column="up_cate" property="up_cate"/>
+  		<result column="down_cate" property="down_cate"/>
+  		<result column="g_cnt" property="g_cnt"/>
+  		<result column="g_hit" property="g_hit"/>
+  		<result column="g_writedate" property="g_writedate"/>
+  		<result column="userid" property="userid"/>
+  		<result column="g_subject" property="g_subject"/>
+  		<result column="g_content" property="g_content"/>
+  		<result column="g_date" property="g_date"/>
+  		<result column="g_time" property="g_time"/>
+  		<result column="g_loc1" property="g_loc1"/>
+  		<result column="g_tag" property="g_tag"/>
+  		<collection property="memberVO" resultMap="memChoice" />
+  	</resultMap> 
+  	
+  	<select id="eatViewPageResult" resultMap="eatChoice">
+  		select num, up_cate, down_cate, g_cnt, g_hit, g_writedate, g.userid, mem_prof, mem_nick, g_content, g_subject, to_char(g_date, 'YYYY-MM-DD') g_date,
+  		to_char(g_time, 'HH24:MI') g_time, g_loc1, g_tag from grouplocal g join member m on g.userid=m.userid where num=${param1}
+  	</select> 
+  	
+  	
+  	
+  	<resultMap type="com.team4.localer.vo.MemberVO" id="memChoice2">
+  		<result column="mem_nick" property="mem_nick"/>
+  		<result column="mem_prof" property="mem_prof"/>		
+  	</resultMap>
+  	
+  	<resultMap type="com.team4.localer.vo.GroupVO" id="withChoice">
+  		<result column="num" property="num"/>
+  		<result column="up_cate" property="up_cate"/>
+  		<result column="down_cate" property="down_cate"/>
+  		<result column="g_cnt" property="g_cnt"/>
+  		<result column="g_hit" property="g_hit"/>
+  		<result column="g_writedate" property="g_writedate"/>
+  		<result column="userid" property="userid"/>
+  		<result column="g_subject" property="g_subject"/>
+  		<result column="g_content" property="g_content"/>
+  		<result column="g_date" property="g_date"/>
+  		<result column="g_time" property="g_time"/>
+  		<result column="g_loc1" property="g_loc1"/>
+  		<result column="g_loc2" property="g_loc2"/>
+  		<result column="g_tag" property="g_tag"/>
+  		<collection property="memberVO" resultMap="memChoice2" />
+  	</resultMap> 
+  	
+  	<select id="withViewPageResult" resultMap="withChoice">
+  		select num, up_cate, down_cate, g_cnt, g_hit, g_writedate, g.userid, mem_prof, mem_nick, g_content, g_subject, to_char(g_date, 'YYYY-MM-DD') g_date,
+  		to_char(g_time, 'HH24:MI') g_time, g_loc1, g_loc2, g_tag from grouplocal g join member m on g.userid=m.userid where num=${param1}
+  	</select> 
+
+  </mapper>

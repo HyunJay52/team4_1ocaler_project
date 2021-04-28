@@ -23,7 +23,7 @@ public class MyinfoController {
 	}
 	@RequestMapping("/info")
 	public String main() {
-		return "myInfo/main";
+		return "myInfo/myInfoMain";
 	}
 	@RequestMapping("/myInfo")
 	public String myInfo() {
@@ -31,7 +31,7 @@ public class MyinfoController {
 	}
 	@RequestMapping("/load")
 	public String load() {
-		return "myInfo/load";
+		return "myInfo/myInfoLoad";
 	}
 	
 	@RequestMapping("/delivery")
@@ -47,5 +47,31 @@ public class MyinfoController {
 	@RequestMapping("/farmerDeal")
 	public String farmerDeal() {
 		return "myInfo/farmerDeal";
+	}
+	
+	@RequestMapping("/myInfoReview")
+	public String review() {
+		return "myInfo/myInfoReview";
+	}
+	@RequestMapping("/myActivity")
+	public String myActivity() {
+		return "myInfo/myActivity";
+	}
+	@RequestMapping("/myInfoSaleHistory")
+	public String myInfoSaleHistory() {
+		return "myInfo/myInfoSaleHistory";
+	}
+	@RequestMapping("/myInfoSeller")
+	public String myInfoSeller() {
+		return "myInfo/myInfoSeller";
+	}
+	@RequestMapping("/myInfoProductManagement")
+	public String myInfoProductManagement(){
+		return "myInfo/myInfoProductManagement";
+		
+	}
+	@RequestMapping("/myInfoShippingManagement")
+	public String myInfoShippingManagement() {
+		return "myInfo/myInfoShippingManagement";
 	}
 }
