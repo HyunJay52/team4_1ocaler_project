@@ -237,3 +237,16 @@
 	.imgBtn{
 		color:black;
 	}
+	.managementHeader>li{
+		margin-left:0px;
+		float:left;
+		width:150px;
+		font-weight:bold;
+	}
+	.managementHeader>li:nth-child(2){
+		border-left:2px solid black;
+		border-right:2px solid black;
+	}
+	.managementHeader>li:nth-child(4n){
+		border-left:2px solid black;
+	}

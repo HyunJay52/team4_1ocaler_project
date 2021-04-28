@@ -114,7 +114,6 @@
 				<div class="myDealFrm"><button class="dayBtn prev">《</button><button class="dayBtn setMonth mdFnt"></button><button class="dayBtn next">》</button></div>
 				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
 				<input type="date" min="2021-01-01" max="2021-05-31"/>
-				
 			</div>
 			<table class="myinfoTable2" id="myDealTbl">
 				<tr>
