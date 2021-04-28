@@ -14,15 +14,31 @@
 				//뒤로가기	
 			$("#withViewPageBackBtn").click(()=>{
 				history.back();
-			})	
+			});
 				//참여하기
 				
 			$("#withViewPageJoinBtn").click(()=>{
-				//참여하기 버튼을 누르면 join 테이블에 insert 되야한다. 
-				//다음에 들어왔을떄 이미 신청되어있으면 신청한 거라고 떠야한다.
-				//(신청을 했다면 --> 취소하기 버튼으로 변경?) 버튼도 있어야 한다.[그 좋아요 이미 신청한건 체크되있고 누르면 삭제되는거 비슷할듯]
-				//
-			})
+				var url = "joinInsert";
+				var params = "num="+$("#withViewPageJoinBtn").val();
+				console.log(params);
+				$.ajax({
+					url : url,
+					data : params,
+					success:function(result){
+						alert('신청이 완료되었습니다. 응답을 기다려 주세요');
+						$("#withViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
+						$("#withViewPageJoinBtn").attr("disabled",true);
+					},error:function(e){
+						console.log('신청실패')
+					}
+				});
+			});
+			//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
+			var joinCheck = $("#withViewPageJoinBtn").attr("disabled");
+			console.log(joinCheck);
+			if(joinCheck=='disabled'){
+				$("#withViewPageJoinBtn").children("span").text('신청완료');
+			}				
 			//============================================================================================
 		})
 </script>
@@ -35,8 +51,8 @@
 	<div id="withViewPageTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
@@ -75,11 +91,11 @@
 		<div>
 			<button id="withViewPageBackBtn" class="btn cancelBtn">뒤로가기</button>
 			<c:if test="${logId!=vo.userid }">  
-			<button id="withViewPageJoinBtn" class="btn confBtn">참여하기</button>
+				<button type="button" id="withViewPageJoinBtn" class="btn confBtn" value="${vo.num }" <c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>><span id="withViewPagejoinCheck">참여하기</span></button>
 			</c:if>
 			<c:if test="${logId==vo.userid }">
-			<button id="eatViewPageEditBtn" class="btn confBtn">삭제</button>
-			<button id="withViewPageEditBtn" class="btn confBtn">수정하기</button>
+				<button id="eatViewPageEditBtn" class="btn confBtn">삭제</button>
+				<button id="withViewPageEditBtn" class="btn confBtn">수정</button>
 			</c:if>
 		</div>
 		 

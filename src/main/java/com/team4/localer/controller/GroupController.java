@@ -26,10 +26,6 @@ public class GroupController{
 	
 	@RequestMapping("/groupPage")
 	public String groupOpen(HttpSession session) {//나중에 지워야할값 지금 세션 확인위해 해놓은것
-		session.setAttribute("logId", "goguma1234");
-		session.setAttribute("logName", "감자");
-		session.setAttribute("logStatus", "Y");
-		session.setAttribute("logGu", "강서구");
 		return "group/groupMapView";
 	}
 	

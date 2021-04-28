@@ -15,7 +15,7 @@
 			$("#eatViewPageBackBtn").click(()=>{
 				history.back();
 			})	
-		//참여하기================================================================================
+			//참여하기================================================================================
 				$("#eatViewPageJoinBtn").click(()=>{
 					var url = "joinInsert";
 					var params ="num="+$("#eatViewPageJoinBtn").val();
@@ -25,17 +25,21 @@
 						data : params,
 						success:function(result){
 							alert('신청이 완료되었습니다. 응답을 기다려 주세요');
-							$(this).children("span").text('신청완료');
-							$(this).attr("disabled",true);
+							$("#eatViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
+							$("#eatViewPageJoinBtn").attr("disabled",true);
 							
 						},error:function(e){
 							console.log('신청실패')
 						}
 					})
 				});
-
-				//버튼 누르면 join 신청이 들억가고
-				// 누른 해당 버튼만 disabled 되고 신청완료로 바뀌고 이걸해야해
+			//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
+			var joinCheck = $("#eatViewPageJoinBtn").attr("disabled");
+			console.log(joinCheck);
+			if(joinCheck=='disabled'){
+				$("#eatViewPageJoinBtn").children("span").text('신청완료');
+			}
+			
 		//============================================================================================
 		})
 </script>
@@ -48,8 +52,8 @@
 	<div id="eatViewPageTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
