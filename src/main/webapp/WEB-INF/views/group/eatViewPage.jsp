@@ -16,8 +16,20 @@
 </style>
 <script>	
 		$(function(){	
+			var x = window.innerWidth;
+			var y = window.innerHeight;
+			console.log(x/2);
+			console.log(y/2);
+			//팝업창 띄우기================================================
+			var width =	$("#EVPProfilePopup").width();
+			var height = $("#EVPProfilePopup").height();
+			console.log(width,height)
+			$("#EVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
+			
+			
 			//버튼 클릭시============================================================================
 				//뒤로가기	
+			
 			$("#eatViewPageBackBtn").click(()=>{
 				history.back();
 			})	
@@ -89,7 +101,7 @@
 			<li><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>${vo.up_cate } > ${vo.down_cate }</span></li>
 			<li><span>조회수 : ${vo.g_hit } </span></li>
 			<li><span> ${vo.g_subject }</span></li>
-			<li><img src="<%=request.getContextPath()%>/common/user.png"/></li>
+			<li><img id="EVPprofileView" src="<%=request.getContextPath()%>/common/user.png"/></li>
 			<li><div>${vo.memberVO.mem_nick }</div><div>${vo.g_writedate }</div></li>
 			<li>모집인원 : <span> ${appNum }</span> / <span> ${vo.g_cnt } </span></li> <!--  쒯 join 테이블도 join해야되네 -->
 			
@@ -116,7 +128,20 @@
 		</div>
 	</div>
 	
-	
+	<div id="EVPProfilePopup">
+		<div><span>X</span></div>
+		<div><span>활동정보</span></div>
+		<div><img src="<%=request.getContextPath()%>/common/user.png"></div>
+		<div>
+			<ul>
+				<li><span>goguam1234</span></li>
+				<li><span>가입일 : 2021-08-29 </span></li>
+				<li><span>총 게시물 : 100개</span></li>
+				<li><span>총 댓글수 : 100개</span></li>
+			</ul>
+		</div>
+		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
+	</div>
 	
 	
 	
