@@ -130,7 +130,7 @@
             <li><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></li>
          <!-- 로그인 시 -->
          <c:if test="${logId!=null && logId!=''}">
-            <li>김자바님 환영합니다</li>
+            <li>${logName } 환영합니다</li>
             <li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li>
 		</c:if>
       </ul>
