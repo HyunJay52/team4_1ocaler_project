@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealBoardStyle.css"/>
 
 
-	<div id=body>
+	<div id="main">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<div id="divAll">
 			<div id="dealImg">
