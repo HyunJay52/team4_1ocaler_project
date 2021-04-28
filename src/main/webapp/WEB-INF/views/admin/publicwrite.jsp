@@ -9,8 +9,8 @@
 		CKEDITOR.replace("content");		
 	});
 </script>
-<div id="main">
-
+<div class="main">
+	<div class="title">공지등록</div>
 	<form>
 		<select class="selectcomm"name="serchkey">
 			<option value="우리직구">우리직구</option>

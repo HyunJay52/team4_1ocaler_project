@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 	#header{display:none;}
+	#footer{display:none;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*withViewGroupList-like btn*/
 	.fakeCheckBoxImg[type=checkbox]{ display:none; }
@@ -77,11 +78,33 @@
 			//==========================================================================================
 				
 			//좋아요======================================================================================
-			$("#withViewGroupList div:first-child>input[name=num]").on('click',function(){
+			$("#withViewGroupList div:first-child>input[name=numLike]").on('click',function(){
 				if($(this).is(':checked')){
-					console.log($(this).val());
+					
+					var url = "likeInsert";
+					var params = "numLike="+$(this).val();	
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 추가 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
 				}else{
-					console.log($(this).val());
+					var url = "likeDelete";
+					var params = "numLike="+$(this).val();	
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 삭제 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+					
 				}
 			});		
 			//==========================================================================================
@@ -139,7 +162,7 @@
 				<a href="withViewPage?num=${vo.num }&loc_gu=${pageVO.loc_gu}"><li><!-- 나중에 searchkey, searchWord도 달고다녀야함 -->
 					<div>
 						<img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span>${vo.down_cate }</span>
-						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }"/><label for="like${vo.num }"></label>
+						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==vo.num && logId==likes.userid }">checked</c:if></c:forEach>/><label for="like${vo.num }"></label>
 					</div>
 					<span>${vo.g_subject }</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->

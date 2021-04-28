@@ -26,8 +26,10 @@ public class LikeItServiceImpl implements LikeItService {
 	}
 
 	@Override
-	public List<LikeItVO> LikeItSelectAll() {
-		return likeItDAO.LikeItSelectAll();
+	public List<LikeItVO> LikeItSelectAll(String userid) {
+		return likeItDAO.LikeItSelectAll(userid);
 	}
+
+	
 
 }

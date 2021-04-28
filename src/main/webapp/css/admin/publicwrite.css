@@ -2,21 +2,10 @@
 body{
 	font-family:"nsr";
 	}
-#main{
-	margin:0 auto; 
-	padding:0;
-	padding-top:30px;
-	overflow:auto;
-	width:1300px;
-}
-form{
-	padding:10px;
-}
 
-input[type=text]{
-	/* width:1100px; */
+.main input[type=text]{
+	margin-bottom:20px;
 	width:86%;
-	margin:10px;
 	padding:7px;
 	border:1px solid gray;
 	font-family: inherit;/*폰트상속*/

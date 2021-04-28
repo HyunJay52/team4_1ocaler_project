@@ -11,216 +11,29 @@
 						
 			<div id="selBoard" >
 				<ul id="boardText">
-					<li id="selList">
-						<div OnClick="location.href ='memberView'">
-							<div>
-								<img src="img/deal/Karrot.jpeg"/>
+					<c:forEach var="i" begin="1" end="10">
+						<li id="selList">
+							<div OnClick="location.href ='memberView'">
+								<div>
+									<img src="img/deal/Karrot.jpeg"/>
+								</div>
+								<ul >	
+									<li class="wordcut">당근 나눔 하실분</li>
+									
+									<li>
+										<span class="cntJoin">&nbsp;&nbsp;1</span>
+										/5개
+									</li>
+									<li>1,000원</li>
+									<li class="wordcut">#야채 #당근 #등촌역 #직거래</li>
+									<li>
+										goguma1234 &nbsp;
+										<img src="common/user.png">&nbsp;&nbsp;
+									</li>
+								</ul>
 							</div>
-							<ul >	
-								<li class="wordcut">당근 나눔 하실분</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;1</span>
-									/5개
-								</li>
-								<li>1,000원</li>
-								<li class="wordcut">#야채 #당근 #등촌역 #직거래</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li id="selList">
-						<div>
-							<div>
-								<img src="img/deal/div.jfif"/>
-							</div>
-							<ul >	
-								<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-								
-								<li>
-									<span class="cntJoin">&nbsp;&nbsp;5</span>
-									/160개
-								</li>
-								<li>20,000원</li>
-								<li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
-								<li>
-									goguma1234 &nbsp;
-									<img src="common/user.png">&nbsp;&nbsp;
-								</li>
-							</ul>
-						</div>
-					</li>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 			
