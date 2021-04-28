@@ -87,6 +87,13 @@
             </ul>
          </li>
       </ul>
+      <div id="myMenu">
+      <ul>
+         <!-- 관리자 로그인시 -->
+         <li class="aLogin">관리자님 환영합니다.^^</li>
+      </ul>
+      <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
+   </div>
    </c:if>
    <c:if test="${!logId.equals('admin') }">
       <ul id="navi">
@@ -123,8 +130,7 @@
             </ul>
          </li>
       </ul>
-   </c:if>
-   <div id="myMenu">
+      <div id="myMenu">
       <ul>
          <!-- 로그아웃 시 -->
             <li><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></li>
@@ -136,5 +142,7 @@
       </ul>
       <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
    </div>
+   </c:if>
+   
    
 </div>
