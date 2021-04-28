@@ -15,26 +15,29 @@
 	});
 </script>
 <div class="main">
-	<div class="title">1:1 답변</div>
+	<div class="title">신고처리</div>
 	<ul class="per_top">
-		<li>${vo.cs_cate }</li>
-		<li>${vo.cs_subject }</li>
-		<li>${vo.userid }</li>
-		<li>${vo.cs_writedate }</li>
-		<li>
-			<c:if test="${vo.cs_status==1 }">
+		<li>신고자 : ${vo.userid }</li>
+		<li>${vo.rep_subject }</li>
+		<li>게시글번호 : ${vo.num }</li>
+		<li>신고일 : ${vo.rep_writedate }</li>
+		<li> 상태 : 
+			<c:if test="${vo.rep_status==1 }">
 				미처리
 			</c:if>
-			<c:if test="${vo.cs_status==2 }">
-				처리완료
+			<c:if test="${vo.rep_status==2 }">
+				반려
+			</c:if>
+			<c:if test="${vo.rep_status==3 }">
+				처리
 			</c:if>
 		</li>
 	</ul>
-	<textarea class="persnalarea" readonly>${vo.cs_content }</textarea>
+	<textarea class="persnalarea" readonly>${vo.rep_content }</textarea>
 	<form method="post" id="perFrm" action="persnalOk">
-		<input type="hidden" name="cs_num" value="${vo.cs_num }"/>
-		답변등록일 : ${vo.cs_date }
-		<textarea name="cs_answer" id="peranswer"class="persnalarea" placeholder="답변을 입력해주세요">${vo.cs_answer }</textarea>
+		<input type="hidden" name="rep_num" value="${vo.rep_num }"/>
+		신고처리일 : ${vo.rep_ok }
+		<textarea  id="peranswer"class="persnalarea" placeholder="답변을 입력해주세요"></textarea>
 		<input type="submit" class="puplebtn" id="psubmit" value="답변완료"/>
 	</form>
 </div>
