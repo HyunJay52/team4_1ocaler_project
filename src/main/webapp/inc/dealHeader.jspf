@@ -5,35 +5,36 @@
 <%@ page session="true" %>
 
 <script>
-/* 	$(function(){
-		$(window).on("scroll", function(){
-			var scrollTop = $(this).scrollTop();
-			var limitTop = 70;
-			if(scrollTop>limitTop){
-				$("#seltop").css("display", "none");
-				$("#header").css("display", "block");
-			}
-			if(scrollTop<limitTop){
-				$("#seltop").css("display", "block");
-				$("#header").css("display", "none");
-			}
-		});
-		
-		
-	}); */
+
+	window.onscroll=function(){bannerMove()};
 	
+	function bannerMove(){
+		//현재스크롤바 위치 
+		var scrollY = window.scrollY;
+		console.log(scrollY);
+		
+		//헤더의 높이 구하기
+		var top = 70;
+		
+		var bar = document.getElementById("selMain").style;
+		
+		if(scrollY>top){ // 스크롤 높이가 top보다 내려갔을떄.
+			bar.top = scrollY-top+"px";
+			$("#selMain").css("display","block");
+			
+		}else { // 스크롤 높이가 top보다 내려가지않았을때,
+			bar.top="0px"; // 원래있는 자리에 있으면됨
+			$("#selMain").css("display","none");
+		}
+	}
+		
 </script>
-
-<style>
-
-</style>
-
 
 <div id="selMain">
 			<div id="seltop" >
 				<span><a href="selBard">착한발견 &nbsp;</a></span>
 				 &nbsp;|&nbsp;
-				 <span>&nbsp;<a href="memberBoard">우리직구</a></span>
+				 <span>&nbsp;<a href="memberBoard">동네직구</a></span>
 			</div>
 		
 			<!-- 카테고리 검색창 -->
