@@ -3,14 +3,15 @@
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">
-		<h2>판매관리 - 배송관리</h2>
+		<h2>판매관리 - 결제관리</h2>
 		<div class="myInfoProductManagementTop">
 			<div class="shippingManagementHeaderForm">
-				<ul class="managementHeader" style="margin-left:80px;">
-					<li>배송대기 : 6개</li>
-					<li>배송중 : 3개</li>
-					<li>배송완료 : 20개</li>
-					<li>주문확정 : 14개</li>
+				<ul class="managementHeader"> 
+					<li>판매중 : 3개</li>
+					<li>당일주문 : 20개</li>
+					<li>결제완려 : 14개</li>
+					<li>결제대기 : 6개</li>
+					<li>취소/환불 : 0개</li>
 				</ul>
 			</div>
 			<div class="productManagementLabelForm">
@@ -21,10 +22,10 @@
 				</ul>
 				<div class="productManagementLabelCenter">
 					<ul>
-						<li><input type="checkbox"/>배송대기</li>
-						<li><input type="checkbox"/>배송중</li>
-						<li><input type="checkbox"/>배송완료</li>
-						<li><input type="checkbox"/>주문확정</li>
+						<li><input type="checkbox"/>총주문</li>
+						<li><input type="checkbox"/>결제완료</li>
+						<li><input type="checkbox"/>결제대기</li>
+						<li><input type="checkbox"/>취소/환불</li>
 					</ul>
 					<div class="productManagementLabelCenterDiv">
 						<input type="date"/>~
@@ -58,7 +59,7 @@
 					<td>가격</td>
 					<td>주문일</td>
 					<td>결제상태</td>
-					<td>주문확정</td>
+					<td>결제방법</td>
 					<td>주문인</td>							
 				</tr>
 				<tr>
@@ -67,7 +68,7 @@
 					<td>10,000 원</td>
 					<td>2021.04.11</td>
 					<td>배송중</td>
-					<td>대기중</td>
+					<td>무통장</td>
 					<td>test</td>							
 				</tr>
 				<tr>

@@ -59,8 +59,8 @@
 	<div id="groupMapViewTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=${logLoc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=${logLoc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
@@ -68,7 +68,7 @@
 	<!-- 검색 폼 -->
 	<div id="groupMapViewSearchFrm">
 		<form onsubmit="searchPlaces(); return false;">
-			<input type="text" name="groupMapViewSearchWord" id="groupMapViewSearchWord" value="강서구" size=40; />
+			<input type="text" name="groupMapViewSearchWord" id="groupMapViewSearchWord" value="${logLoc_gu }" size=40; />
 			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
 		</form>
 	</div>

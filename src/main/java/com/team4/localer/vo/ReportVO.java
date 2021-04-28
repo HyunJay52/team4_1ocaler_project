@@ -9,6 +9,7 @@ public class ReportVO {
 	private int rep_status;
 	private String rep_ok;
 	private String rep_writedate;
+	
 	public int getRep_num() {
 		return rep_num;
 	}

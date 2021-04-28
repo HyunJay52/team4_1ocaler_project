@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.CsService;
 import com.team4.localer.vo.CsVO;
 import com.team4.localer.vo.OftenqVO;
+import com.team4.localer.vo.ReportVO;
 
 @Controller
 public class AdminController {
@@ -179,6 +180,15 @@ public class AdminController {
 			csService.oftenqInsert(vo);
 		}
 		mav.setViewName("redirect:cspage");
+		return mav;
+	}
+	//신고처리 페이지 이동
+	@RequestMapping("/reportEdit")
+	public ModelAndView repoertEdit(int num) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo",csService.reportOneSelect(num));
+		mav.setViewName("admin/reportEdit");
 		return mav;
 	}
 }

@@ -55,7 +55,7 @@
 <body>
 <div id="pageTop">
    <div id="logo"><a href="backHome"><img src="common/logo_deep_pur.png"/></a></div>
-   <c:if test="${logId!=admin }">
+   <c:if test="${logId.equals('admin') }">
       <ul id="navi">
          <li class="resquick_content"><a href="main">HOME</a>
             <ul>
@@ -88,7 +88,7 @@
          </li>
       </ul>
    </c:if>
-   <c:if test="${logId==admin }">
+   <c:if test="${!logId.equals('admin') }">
       <ul id="navi">
          <li class="resquick_content"><a href="aboutUs">ABOUT</a>
             <ul>
@@ -104,8 +104,8 @@
          </li>
          <li class="resquick_content"><a href="groupPage">같이가치</a>
             <ul>
-               <li><a href="withPage">가치가장</a></li>
-               <li><a href="eatPage">한끼미식회</a></li>
+               <li><a href="withPage?loc_gu=${logLoc_gu }">가치가장</a></li>
+               <li><a href="eatPage?loc_gu=${logLoc_gu }">한끼미식회</a></li>
             </ul>
          </li>
          <li class="resquick_content"><a href="commuMain">커뮤니티</a>
