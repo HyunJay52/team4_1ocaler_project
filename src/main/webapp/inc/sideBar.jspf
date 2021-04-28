@@ -105,8 +105,12 @@
 	<li><a href="#"><img src="common/map_000.png" class="imgSize"/></a></li>
 	<li id="showSearch"><a><img src="common/search_000.png" class="imgSize"></a></li>
 	<li><a href="#"><img src="common/won_000.png" class="imgSize"/></a></li>
-	<li class="textRotate"><a href="login">로그인&nbsp;</a></li>
-<!-- 	<li class="textRotate"><a href="#">로그아웃</a></li> -->
+	<c:if test="${logName==null || logName=='' }">
+		<li class="textRotate"><a href="login">로그인&nbsp;</a></li>
+	</c:if>
+	<c:if test="${logName!=null || logName!='' }">
+		<li class="textRotate"><a href="logOut">로그아웃</a></li>
+	</c:if>
 	<li class="textRotate"><a href="#">&nbsp;채팅</a></li>
 	<li id="toTop" style="padding-top: 15px;"><a href="#"><img src="common/top_000.png" class="imgSize"/></a></li>
 </ul>

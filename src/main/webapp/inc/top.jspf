@@ -14,8 +14,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/groupWriteFormStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/aboutBoard.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/csBoard.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
 <!-- 카카오 지도 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script>
@@ -28,33 +26,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-
-<script>
-   //마우스 호버 시, 하위 메뉴 팝업 .. 초기 세팅때 display-none이 안됨, 마우스 이벤트 정리하기
-   $(function(){
-      $("#navi>li").hover(
-         function(){ //마우스 인
-            $(this).children('ul').slideDown(100);
-            $(this).children('a').css("color", "#fff");
-            $(this).children('ul').children('li').children('a').css("color", "#3f1785");
-            $(this).css("background", "#3f1785");
-            $(this).css("zIndex", "10");
-         },
-         function(){ //마우스 아웃
-            $(this).children('ul').slideUp(200);
-            $(this).css("background-color", "#fff");
-            $(this).children('a').css("color", "#000");
-            $(this).css("border-bottom", "1px solid #3f1785");
-            $(this).css("zIndex", "10");
-         }
-      );
-   });
-</script>
-
 </head>
 <body>
 <div id="pageTop">
-   <div id="logo"><a href="backHome"><img src="common/logo_deep_pur.png"/></a></div>
+   <div id="logo"><a href="<%=request.getContextPath()%>/"><img src="common/logo_deep_pur.png"/></a></div>
    <c:if test="${logId.equals('admin') }">
       <ul id="navi">
          <li class="resquick_content"><a href="main">HOME</a>
@@ -127,10 +102,12 @@
    <div id="myMenu">
       <ul>
          <!-- 로그아웃 시 -->
+         <c:if test="${logName==null || logName=='' }">
             <li><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></li>
+          </c:if> 
          <!-- 로그인 시 -->
-         <c:if test="${logId!=null && logId!=''}">
-            <li>${logName } 환영합니다</li>
+         <c:if test="${logName!=null && logName!=''}">
+            <li>${logName } 님 환영합니다</li>
             <li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li>
 		</c:if>
       </ul>
