@@ -3,9 +3,16 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <style>
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
-	#header{display:none;}
+	#pageTop{display:none;}
 	#footer{display:none;}
 	#withViewPageBody{overflow:hidden;}
+	/*버튼*/
+	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}
+	.commBtn:hover {border: 1px solid #3f1785;	background-color: #3f1785;	font-weight: bold;	color: #fff;	font-weight: bold;}
+	.cancelBtn {	border: 1px solid #ddd;	color: #ddd;	width: 90px;}
+	.cancelBtn:hover {	background-color: #fff;	color: gray;}	
+	.confBtn {	background: #3f1785;	color: #fff;	width: 90px;}
+	.confBtn:hover {	color: #fff;	background: #B8B2F4;}
 </style>
 <script>	
 		$(function(){	
@@ -15,8 +22,20 @@
 			$("#withViewPageBackBtn").click(()=>{
 				history.back();
 			});
-				//참여하기
+			//수정
+			
+			
+			
+			//삭제
+			$("#withViewPageDeleteBtn").click(()=>{
+				if(confirm('삭제 하시겠습니까?')){
+					location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&up_cate=${vo.up_cate}";
+				}
+			});
 				
+				
+				
+			//참여하기=================================================================	
 			$("#withViewPageJoinBtn").click(()=>{
 				var url = "joinInsert";
 				var params = "num="+$("#withViewPageJoinBtn").val();
@@ -38,6 +57,10 @@
 			console.log(joinCheck);
 			if(joinCheck=='disabled'){
 				$("#withViewPageJoinBtn").children("span").text('신청완료');
+				$("#withViewPageJoinBtn").css('background',"#B8B2F4");
+				$("#withViewPageJoinBtn").css('opacity',1);
+				
+				
 			}				
 			//============================================================================================
 		})
@@ -72,7 +95,7 @@
 			<li><span> ${vo.g_subject }</span></li>
 			<li><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"/></li>
 			<li><div>${vo.memberVO.mem_nick }</div><div>${vo.g_writedate }</div></li>
-			<li>모집인원 : <span> 2</span> / <span> ${vo.g_cnt } </span></li>
+			<li>모집인원 : <span> ${appNum }</span> / <span> ${vo.g_cnt } </span></li>
 			
 		</ul>
 		<hr style="margin:5px 0px;"/>
@@ -94,8 +117,8 @@
 				<button type="button" id="withViewPageJoinBtn" class="btn confBtn" value="${vo.num }" <c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>><span id="withViewPagejoinCheck">참여하기</span></button>
 			</c:if>
 			<c:if test="${logId==vo.userid }">
-				<button id="eatViewPageEditBtn" class="btn confBtn">삭제</button>
-				<button id="withViewPageEditBtn" class="btn confBtn">수정</button>
+				<button id="withViewPageDeleteBtn" class="btn commBtn">삭제</button>
+				<button id="withViewPageEditBtn" class="btn commBtn">수정</button>
 			</c:if>
 		</div>
 		 
