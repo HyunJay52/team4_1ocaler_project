@@ -62,10 +62,10 @@ public class MyinfoController {
 		return "myInfo/myInfoSaleHistory";
 	}
 	
-	@RequestMapping("/sellerInfo")
-	public String sellerInfo() {
-		return "myInfo/sellerInfo";
-	}
+//	@RequestMapping("/sellerInfo")
+//	public String sellerInfo() {
+//		return "myInfo/sellerInfo";
+//	}
 	@RequestMapping("/myInfoProductManagement")
 	public String myInfoProductManagement(){
 		return "myInfo/myInfoProductManagement";
