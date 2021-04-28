@@ -29,7 +29,7 @@
 			//삭제
 			$("#withViewPageDeleteBtn").click(()=>{
 				if(confirm('삭제 하시겠습니까?')){
-					location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&up_cate=${pageVO.up_cate};
+					location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&up_cate=${vo.up_cate}";
 				}
 			});
 				
