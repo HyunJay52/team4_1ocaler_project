@@ -149,8 +149,8 @@
          <!-- 로그아웃 시 -->
             <li><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></li>
          <!-- 로그인 시 -->
-<!--             <li>김자바님 환영합니다</li> -->
-<!--             <li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li> -->
+            <li>김자바님 환영합니다</li>
+            <li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li>
       </ul>
       <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
    </div>
