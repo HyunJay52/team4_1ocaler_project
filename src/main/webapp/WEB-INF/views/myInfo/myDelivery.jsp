@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <script>
 	$(function(){
 		//ajax 배송조회 실행
@@ -68,6 +67,22 @@
 			var no = $(this).next().val();
 			test(no);
 		});
+		
+		$("h2").click(function(){
+			getData();
+		})
+		function getData(){
+			$.ajax({
+				url : 'https://api.iamport.kr/payments/status/paid?limit=20&sorting=-started&_token=61bdb58399c41ac3ecee661db1d892d0526c7852'
+				,dataType : 'json'
+				,success : function(result){
+					console.log("실행");
+			
+				}, error : function(e){
+					console.log("error="+e);
+				}
+			});
+		}
 	});
 </script>
 <div class="myinfoBody">

@@ -6,7 +6,7 @@
 	.productManagementHeaderForm{
 		height:30px;
 		text-align:center;	
-		margin:20px 0 0 90px;
+		margin:20px 0 0 50px;
 	}
 	.productManagementHeader>li{
 		float:left;
@@ -16,7 +16,6 @@
 	.productManagementHeader>li:nth-child(2n){
 		border-left:2px solid black;
 		border-right:2px solid black;
-		
 	}
 	.productManagementLabelForm{
 		width:900px;
@@ -103,5 +102,7 @@
 	.shippingManagementHeaderForm{
 		height:30px;
 		text-align:center;	
-		margin:20px 0 0 150px;
+		margin:20px 0 0 50px;
 	}
+	
+	

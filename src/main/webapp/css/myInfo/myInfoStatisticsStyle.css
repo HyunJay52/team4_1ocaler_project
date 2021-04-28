@@ -1,0 +1,75 @@
+@charset "UTF-8";
+	.myinfoStatisticsTop{
+		overflow:auto;
+		margin-bottom:20px;
+	}
+	.myinfoStatisticsHeader{
+		width:100%;
+		overflow:auto;
+	}
+	.myinfoStatisticsHeader>h3{
+		width:30%;	
+		float:left;
+	}	
+	.myinfoStatisticsHeader>ul>li{
+		float:left;
+		margin-left:10px;
+	}
+	.myinfoStatisticsLeft{
+		width:400px;
+		margin:20px 0px;
+		border:1px solid #ddd;
+		float:left;
+		overflow:auto;
+	}
+	.myinfoStatisticsTable2 {
+		width:100%;
+		margin:0 auto;
+		padding:0;
+	}
+	.myinfoStatisticsTable2 tr{/*테이블 목록*/
+		border-bottom:1px solid rgb(227,227,227); 
+		text-align:center;
+		height:40px;
+    }
+	.myinfoStatisticsTable2 tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color:#3f1785;
+		color:#fff; 
+		font-weight:bold;
+	}
+	.myinfoStatisticsTable2 tr:last-child{/*마지막 줄 tr 스타일*/
+		border-bottom:2px solid #3f1785;
+	}
+	.myinfoStatisticsTable2 tr>td{/*전체적인 열 폭조정*/
+		width:33%;
+	}
+	.myinfoStatisticsTable2 tr>td:nth-child(1){/*첫번째 열 선택*/
+		
+	}
+	.myinfoStatisticsTable2 tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
+		/* text-align:left; */
+	}
+	.tableSet tr>td{
+		width:7.6%;
+	}
+	.myinfoStatisticsLabel{
+		height:40px;
+		width:100%;
+		text-align:right;
+		line-height:50px;
+		padding:0 6px;
+	}
+	.myinfoStatisticsRight{
+		width:600px;
+		float:right;
+		height:320px;
+	}
+/*
+          ['오늘', 1000, '#3f1785'],
+          ['어제', 1170, '#571fb8'],
+          ['최근 7일 평균', 660, '#B8B2F4'],
+*/
+	.myinfoStatisticsBottomHeader{
+		position:relative;
+	}
