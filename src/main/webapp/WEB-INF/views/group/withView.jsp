@@ -122,8 +122,8 @@
 	<div id="withViewTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=${pageVO.loc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
@@ -146,7 +146,7 @@
 		</ul>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
 		<form id="withViewGroupSearchFrm" method="get" action="withPage">
-			<input type="hidden" name="loc_gu" value="강서구"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
+			<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
 			<select name="searchKey">
 				<option value="g_subject">제목</option>
 				<option value="userid">작성자</option>
