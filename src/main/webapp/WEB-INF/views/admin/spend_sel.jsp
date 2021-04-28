@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/spend_mem.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -30,36 +31,53 @@
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+      $(function(){
+    	  $(".popup").click(function(){
+    		  var num = $(this).prev().prev().text();
+    		  modalOne(num);
+    	  });
+    	  
+    	  function modalOne(num){
+    		  $("#moOne").css("display","block");
+    		  $("#moOne").draggable({'cancel':'.tbl', containment:'parent', scroll:false});
+    	  		consol.log("선택한 번호 "+num);
+    	  }
+    	  $(".exit").click(function(){
+    		  //부모의 부모 ->모달 div 
+    		  $(this).parent().parent().css("display","none");
+    	  });
+      })
 </script>
 <div id="main">
-<div id="doublediv">
-	<table class="t_spend" >
-	    <colgroup>
-	       	<col width=33%/>
-	       	<col width=33%/>
-	       	<col width=33%/>
-	    </colgroup>
-		<tr>
-			<td colspan=3>총 누적 수익 : 10,000,000,000원</td>
-		</tr>
-		<tr>
-			<td colspan=3>총 누적 매출 : 34,500,000원</td>
-		</tr>
-		<tr>
-			<td>판매글수</td>
-			<td>정산예정</td>
-			<td>정산완료</td>
-		</tr>
-		<tr>
-			<td>178</td>
-			<td>73</td>
-			<td>55</td>
-		</tr>
-		<tr>
-			<td colspan=3>이번달 수익금 : 4,534,000 원&nbsp;&nbsp;</td>
-		</tr>
-	</table>
-	<div id="chart_div"></div>
+	<div class="title">셀러정산</div>
+	<div id="doublediv">
+		<table class="t_spend" >
+		    <colgroup>
+		       	<col width=33%/>
+		       	<col width=33%/>
+		       	<col width=33%/>
+		    </colgroup>
+			<tr>
+				<td colspan=3>총 누적 수익 : 10,000,000,000원</td>
+			</tr>
+			<tr>
+				<td colspan=3>총 누적 매출 : 34,500,000원</td>
+			</tr>
+			<tr>
+				<td>판매글수</td>
+				<td>정산예정</td>
+				<td>정산완료</td>
+			</tr>
+			<tr>
+				<td>178</td>
+				<td>73</td>
+				<td>55</td>
+			</tr>
+			<tr>
+				<td colspan=3>이번달 수익금 : 4,534,000 원&nbsp;&nbsp;</td>
+			</tr>
+		</table>
+		<div id="chart_div"></div>
 	</div>
 	<div id="nodiv">
 		<input type="button" class="pnBtn" value="◁" id="pre"/> 
@@ -86,7 +104,7 @@
 		<tr>
 			<td>12</td>
 			<td class="wordcut">user</td>
-			<td>제목 블라블라~~</td>
+			<td class="popup">제목 블라블라~~</td>
 			<td>2</td>
 			<td>200000</td>
 			<td>2000</td>
@@ -131,7 +149,7 @@
 	</table>
 	
 	<div id="moOne"class="modaldiv">
-		<b>판매글 제목 <a href="#" class="exit" id="exit1">X</a></b>
+		<div>판매글 제목 <b class="exit">X</b></div>
 		<br/>총판매 수 (10)
 		<table class="tablea" >
 			<colgroup>
@@ -184,8 +202,7 @@
 				<td>2021.04.02</td>
 			</tr>
 		</table>
-	
-	</div>
+	</div><!-- /모달div -->
 	
 </div><!--#main div-->
 

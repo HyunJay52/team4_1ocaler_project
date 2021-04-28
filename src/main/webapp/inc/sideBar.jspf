@@ -16,18 +16,19 @@
 		position: absolute; /*좌표 설정을 위해서*/
 		top: 0px;
 		opacity: 95%;
+		display: none; /*검색화면 초기 세팅*/
 	}
 	#searchArea {
 		position: relative; top:40%; text-align: center;
 	}
-	#searchKey {
+	#sideKey {
 		width: 160px;
 	    height: 40px;
 	    border-top-left-radius: 5px;
 	    border-bottom-left-radius: 5px;
 	    padding-left: 10px;
 	}
-	#searchWord {
+	#sideWord {
 		width: 400px;
     	height: 40px;
     	padding-left: 10px;
@@ -42,6 +43,7 @@
 	    border-top-right-radius: 5px;
 	    border-bottom-right-radius: 5px;
 	}
+	
 	#close {
 	    line-height: 38px;
 	    margin-left: 10px;
@@ -103,8 +105,12 @@
 	<li><a href="#"><img src="common/map_000.png" class="imgSize"/></a></li>
 	<li id="showSearch"><a><img src="common/search_000.png" class="imgSize"></a></li>
 	<li><a href="#"><img src="common/won_000.png" class="imgSize"/></a></li>
-	<li class="textRotate"><a href="login">로그인&nbsp;</a></li>
-<!-- 	<li class="textRotate"><a href="#">로그아웃</a></li> -->
+	<c:if test="${logName==null || logName=='' }">
+		<li class="textRotate"><a href="login">로그인&nbsp;</a></li>
+	</c:if>
+	<c:if test="${logName!=null || logName!='' }">
+		<li class="textRotate"><a href="logOut">로그아웃</a></li>
+	</c:if>
 	<li class="textRotate"><a href="#">&nbsp;채팅</a></li>
 	<li id="toTop" style="padding-top: 15px;"><a href="#"><img src="common/top_000.png" class="imgSize"/></a></li>
 </ul>
@@ -113,16 +119,27 @@
 <div id="searchDiv" style="z-index: 100;">
 	<div id="searchArea">
 		<form>
-			<select id="searchKey">
-				<option>통합검색</option>
-				<option>착한발견</option>
-				<option>동네직구</option>
-				<option>가치가장</option>
-				<option>한끼미식회</option>
-				<option>우리동네 이야기</option>
-				<option>쓱싹레시피</option>
-				<option>자유자게</option>
-			</select><input type="text" id="searchWord" name="searchWord" placeholder="검색어를 입력해주세요"/><input type="submit" id="goSearch" value="검색"/> <span id="close">✕️</span>
+			<!-- 
+				카테고리 변수명 지정
+				통합검색 : totalCate
+				착한발견 : findCate
+				동네직구 : townCate
+				가치가장 : martCate
+				한끼미식회 : eatCate
+				우리동네 이야기 : localCate
+				쓱싹레시피 : ssgCate
+				자유자게 : freeCate
+			 -->
+			<select id="sideKey">
+				<option value="totalCate">통합검색</option>
+				<option value="findCate">착한발견</option>
+				<option value="townCate">동네직구</option>
+				<option value="martCate">가치가장</option>
+				<option value="eatCate">한끼미식회</option>
+				<option value="localCate">우리동네 이야기</option>
+				<option value="ssgCate">쓱싹레시피</option>
+				<option value="freeCate">자유자게</option>
+			</select><input type="text" id="sideWord" name="sideWord" placeholder="검색어를 입력해주세요"/><input type="submit" id="goSearch" value="검색"/> <span id="close">✕️</span>
 		</form>
 		<div style="margin-top: 20px">
 			<span style="line-height: 40px;">이런 키워드는 어떠세요?</span>

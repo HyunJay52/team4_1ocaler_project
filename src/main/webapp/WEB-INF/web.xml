@@ -55,6 +55,7 @@
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
 			<include-prelude>/inc/top.jspf</include-prelude>
+			<include-coda>/inc/footer.jspf</include-coda>
 		</jsp-property-group>
 	</jsp-config>
 </web-app>

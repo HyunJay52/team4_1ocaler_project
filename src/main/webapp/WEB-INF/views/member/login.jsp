@@ -6,10 +6,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<%
-	//로그인 세션 저장하기
-
-%>
 <style>
 	#loginContainer {
 		width: 1300px; height: auto;
@@ -113,7 +109,7 @@
 <div id="loginContainer">
 	<div id="login_section">
 		<span class="lgFnt" >로그인</span>
-		<form method="post" action="backHome"> <!-- loginConfrim -->
+		<form method="post" action="loginConfrim"> <!-- loginConfrim -->
 			<ul>
 				<li><input type="text" name="userid" id="userid" tabindex="1" placeholder=" 아이디" class="inputSize"/></li>
 				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
@@ -164,5 +160,3 @@
     </script>
 	</div>
 </div>
-	
-<%@ include file="/inc/footer.jspf" %>

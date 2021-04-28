@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.team4.localer.dao.JoinUsDAO">
+ 		<insert id="joinInsert">	
+ 			insert into joinus(j_num, numjoin, userid) values(joinsq.nextval, #{param1}, #{param2})
+ 		</insert>
+  	
+  	
+  		<!-- param1은 이함수를 호출할떄 매개변수로 userid입니다. 수정시 말해주세여 
+  		추가해도 param1 이후에 추가해주세요
+  		해당유저가 해당글을 참여 신청 했는지 않했는지 여부를 확인한다.
+  		-->
+  		<select id="joinSelect" resultType="com.team4.localer.vo.JoinUsVO">
+  			select numjoin, userid from joinus where userid=#{param1}
+  		</select>
+  	
+  		<select id="getJCount" resultType="int">
+  			select count(j_status) from joinus where j_status='참여승인' and numjoin=#{param1}
+  		</select>
+  </mapper>

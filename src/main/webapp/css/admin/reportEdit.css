@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.per_top{
+	list-style-type:none;
+	width:100%;
+	height:overflow;
+}
+.per_top>li{
+	float:left;
+	margin-right:5%;
+}
+.per_top>li:first-child{
+	width:100%;
+	font-weight:bold;
+	font-size:32px;
+}
+.main p{
+    float: right;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.persnalarea{
+	width:100%;
+	margin:30px auto;
+	overflow:auto;
+	min-height:150px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

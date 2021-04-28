@@ -1,54 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
+<%
+	//로그인 세션 저장하기
 
+%>
 <style>
-	.body{
-		overflow:auto;
-		width:1300px;
+	#loginContainer {
+		width: 1300px; height: auto;
+		text-align: center;
+		margin: 0 auto;
 	}
-	#pwdCheck{
-		position:absolute;
-		top:50%;
-		left:50%;
-		margin:-90 0 0 -200;
-		width:500px;
-		height:500px;
-		text-align:center;
+	#login_section {
+		width: 400px; height: auto;
+		padding-top: 110px; padding-bottom: 110px;
+		margin: 0 auto;
 	}
-	#pwdCheck>form>ul, #pwdCheck>form>ul>li{
-		list-style-type:none;
+	#login_section ul li {
+		list-style-type: none;
+		
 	}
-	#pwdCheck>form>ul>li:nth-child(1)>input{
-		padding:0 10px;
-		height:50px;
-		width:250px;
-		background-color:rgb(245,245,245);
+	.btnSize {
+		width: 100px;
+		height: 50px;
 	}
-	#pwdCheck>form>ul>li:nth-child(2)>input{
-		width:125px;
-		height:50px;
+	.inputSize {
+		width: 320px; height: 50px;
+		padding: 10px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+	}
+	.cbSize {
+		margin-bottom: 10px;
+		padding-left: 200px;
+	}
+	.lgBtn {
+		width: 320px; height: 50px;
+		margin-top: 5px;
+		border: 1px solid #3f1785;
+		color: #3f1785;
+	}
+	.lgBtn:hover {
+		color: #fff;
+		font-weight: bold;
+	}
+	.lgA:hover{
+		margin-top: 20px;
+		color: #000;
+		text-decoration: none;
+	}
+	#mainFooter, .footerLine{
+		display:none;
 	}
 </style>
 <script>
 	$(function(){
-		$("#cancel").click(function(){
-			location.href="info";
+		$("#loginBtn").click(function(){
+			$("#login_section").submit(function(){
+				if($("#userpwd").val()===""){
+					alert("비밀번호를 입력해주세요.");
+					$("#userpwd").focus();
+					return false;
+				}
+			});
 		});
 		
+		$("#signupBtn").click(function(){
+			location.href="myInfoMain";
+		});
 	});
 </script>
-<div class="body">
-	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div id="pwdCheck">
-	
-	<form method="post" action="pwdCheck">
-		<ul>
-			<li><input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요"/></li>
-			<li><input id="cancel" class="btn cancelBtn" type="button" value="CANCEL"/><input type="submit" class="btn commBtn" value="OK"/></li>
-		</ul>
-	</form>
+<div id="loginContainer">
+	<div id="login_section">
+		<span class="lgFnt" >비밀번호 확인</span>
+		<form method="post" action="myInfo"> <!-- loginConfrim -->
+			<ul>
+				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
+				<li><button id="loginBtn" class="btn commBtn lgBtn" tabindex="4" >확인</button></li>
+				<li><button type="button" id="signupBtn" class="btn commBtn lgBtn" tabindex="5" >취소</button></li>
+				<li><a href="#" class="smlFnt lgA">비밀번호찾기</a></li>
+			</ul>
+		</form>
 	</div>
 </div>
-</body>
-</html>

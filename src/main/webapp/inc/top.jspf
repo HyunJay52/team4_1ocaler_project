@@ -1,8 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
+
+<!-- 페이지 스타일 링크 -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/groupMapViewStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/member/member.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewPageStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewPageStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/groupWriteFormStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/aboutBoard.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/csBoard.css"/>
+<!-- 카카오 지도 -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script>
 <html>
 <head>
    <title>Welcome to 1ocaler</title>
@@ -12,60 +26,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-
-<style>
-   * {
-      font-family: nsr;
-   }
-    a:active, a:link, a:visited{
-        color: #000;
-        text-decoration: none;
-    }    
-   a:hover {
-        color: #fff;
-        font-weight: bold;
-        text-decoration: overline;
-    }
-    .aLogin:hover{
-       color: #3f1785;
-       font-weight: bold;
-    }
-    
-    #myMenu>ul {
-       list-style-type: none;
-    }
-     #myMenu>ul li {
-        height: 70px; line-height: 70px;
-        text-align: center;
-     }
-</style>
-<script>
-   //마우스 호버 시, 하위 메뉴 팝업 .. 초기 세팅때 display-none이 안됨, 마우스 이벤트 정리하기
-   $(function(){
-      $("#navi>li").hover(
-         function(){ //마우스 인
-            $(this).children('ul').slideDown(100);
-            $(this).children('a').css("color", "#fff");
-            $(this).children('ul').children('li').children('a').css("color", "#3f1785");
-            $(this).css("background", "#571fb8");
-            $(this).css("zIndex", "10");
-         },
-         function(){ //마우스 아웃
-            $(this).children('ul').slideUp(200);
-            $(this).css("background-color", "#fff");
-            $(this).children('a').css("color", "#000");
-            $(this).css("border-bottom", "1px solid #571fb8");
-            $(this).css("zIndex", "10");
-         }
-      );
-   });
-</script>
-
 </head>
 <body>
-<div id="header">
-   <div id="logo"><a href="backHome"><img src="common/logo_deep_pur.png"/></a></div>
-   <c:if test="${logId!=admin }">
+<div id="pageTop">
+   <div id="logo"><a href="<%=request.getContextPath()%>/"><img src="common/logo_deep_pur.png"/></a></div>
+   <c:if test="${logId.equals('admin') }">
       <ul id="navi">
          <li class="resquick_content"><a href="main">HOME</a>
             <ul>
@@ -75,7 +40,7 @@
          <li class="resquick_content"><a href="m_mem">회원관리</a>
             <ul>
                <li><a href="m_mem">일반회원</a></li>
-               <li><a href="m_mem">셀러회원</a></li>
+               <li><a href="m_sel">셀러회원</a></li>
             </ul>
          </li>
          <li class="resquick_content"><a href="#">게시글 관리</a>
@@ -97,52 +62,64 @@
             </ul>
          </li>
       </ul>
+      <div id="myMenu">
+      <ul>
+         <!-- 관리자 로그인시 -->
+         <li class="aLogin">관리자님 환영합니다.^^</li>
+      </ul>
+      <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
+   </div>
    </c:if>
-   <c:if test="${logId==admin }">
+   <c:if test="${!logId.equals('admin') }">
       <ul id="navi">
-         <li class="resquick_content"><a href="#">ABOUT</a>
+         <li class="resquick_content"><a href="aboutUs">ABOUT</a>
             <ul>
-               <li><a href="#">소개</a></li>
-               <li><a href="#">오시는길</a></li>
+               <li><a href="aboutUs">소개</a></li>
+               <li><a href="routeUs">오시는길</a></li>
             </ul>
          </li>
-         <li class="resquick_content"><a href="#">우리직구</a>
+         <li class="resquick_content"><a href="memberBoard">우리직구</a>
             <ul>
-               <li><a href="#">착한발견</a></li>
-               <li><a href="#">동네직구</a></li>
+               <li><a href="selBard">착한발견</a></li>
+               <li><a href="memberBoard">동네직구</a></li>
             </ul>
          </li>
-         <li class="resquick_content"><a href="#">같이가치</a>
+         <li class="resquick_content"><a href="groupPage">같이가치</a>
             <ul>
-               <li><a href="#">가치가장</a></li>
-               <li><a href="#">한끼미식회</a></li>
+               <li><a href="withPage?loc_gu=${logLoc_gu }">가치가장</a></li>
+               <li><a href="eatPage?loc_gu=${logLoc_gu }">한끼미식회</a></li>
             </ul>
          </li>
-         <li class="resquick_content"><a href="#">커뮤니티</a>
+         <li class="resquick_content"><a href="commuMain">커뮤니티</a>
             <ul>
-               <li><a href="#">우리동네 이야기</a></li>
+               <li><a href="commuBoard">우리동네 이야기</a></li>
                <li><a href="#">쓱싹레시피</a></li>
                <li><a href="#">자유자게</a></li>
             </ul>
          </li>
-         <li class="resquick_content"><a href="#">고객센터</a>
+         <li class="resquick_content"><a href="oftenQna">고객센터</a>
             <ul>
-               <li><a href="#">자주하는 질문</a></li>
-               <li><a href="#">1:1 문의하기</a></li>
-               <li><a href="#">신고하기</a></li>
+               <li><a href="oftenQna">자주하는 질문</a></li>
+               <li><a href="qnaWrite">1:1 문의하기</a></li>
+               <li><a href="reportWrite">신고하기</a></li>
             </ul>
          </li>
       </ul>
-   </c:if>
-   <div id="myMenu">
+      <div id="myMenu">
       <ul>
          <!-- 로그아웃 시 -->
+         <c:if test="${logName==null || logName=='' }">
             <li><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></li>
+          </c:if> 
          <!-- 로그인 시 -->
-<!--             <li>김자바님 환영합니다</li> -->
-<!--             <li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li> -->
+         <c:if test="${logName!=null && logName!=''}">
+            <li>${logName } 님 환영합니다</li>
+            <li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li>
+		</c:if>
       </ul>
       <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
    </div>
+   </c:if>
+   
    
 </div>
