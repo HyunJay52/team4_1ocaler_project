@@ -20,7 +20,7 @@
 		function setList(){
 			var item = ['김회원','박회원','최회원'];
 
-			for(var i = 0; i < 3; i++){
+			for(var i = 0; i < 10; i++){
 				var tag = "<tr>"; 
 				tag += "<td>2021.04.21</td>";
 				tag += "<td>상수역에서 10kg 고구마 소분하실 분?</td>";

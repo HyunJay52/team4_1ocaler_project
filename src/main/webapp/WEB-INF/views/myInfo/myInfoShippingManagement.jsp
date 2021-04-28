@@ -63,7 +63,7 @@
 				</tr>
 				<tr>
 					<td>14</td>
-					<td>감자</td>
+					<td data-target='#shippingManagementMd' data-toggle='modal'>감자</td>
 					<td>10,000 원</td>
 					<td>2021.04.11</td>
 					<td>배송중</td>
@@ -125,6 +125,35 @@
 					<td></td>
 				</tr>
 			</table>
+		</div>
+	</div>
+	<div class="modal fade mdFnt" id="shippingManagementMd">
+		<div class="modal-dialog">
+			<div class="modal-content shippingManagementContent">
+				<div class="modal-header shippingManagementHeader">
+				<h4 class="modal-title">고구마 10kg</h4>
+
+				</div>
+				<div class="modal-body shippingManagementBody">
+					<ul>
+						<li>주문일 : 2021.03.25</li>
+						<li>받으실 분 : user0909(김자바)</li>
+						<li>
+							<select class="shippingManagementSelectbox">
+								<option value="">한진택배</option>
+								<option value="">로젠택배</option>
+								<option value="">우체국택배</option>					
+							</select>
+						</li>
+						<li>
+							<textarea class="shippingManagementTextarea mdFnt" name="shipNum" placeholder="송장번호를 입력해주세요"></textarea>
+						</li>
+						<li><button class="btn btn-outline-dark btn-lg">작성완료</button>
+							<button class="btn btn-outline-dark btn-lg" data-dismiss="modal">취소</button>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

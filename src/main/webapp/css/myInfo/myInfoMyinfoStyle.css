@@ -23,7 +23,7 @@
 		color:black;
 	}
 	#basicInfo>form>ul>li:nth-child(10){
-		padding:0 40px;
+		padding-left:0px;
 	}
 	#basicInfo>form>ul>li>img{
 		width:370px;
