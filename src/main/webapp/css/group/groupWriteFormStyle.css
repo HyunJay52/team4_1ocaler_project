@@ -1,4 +1,6 @@
 @charset "UTF-8";
+	/*버튼*/
+	
 	/*맨위오른쪽검색폼*/
 	#groupWriteFormSearchFrms{position:absolute; top:20px; right:0px; z-index:1;}
 	#groupWriteFormSearchFrms input[type=text]{float:left; height:48px; border-radius:5px;}

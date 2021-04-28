@@ -16,6 +16,8 @@ public interface GroupDAO {
 	public GroupVO eatViewPageResult(int num);//eatView의 1개 개시글선택
 	public GroupVO withViewPageResult(int num);//withView의 1개 게시글선택
 	
+	public int groupRecordDelete(int num, String userid);
+	
 	public int hitCount(int num); //조회수 늘리기
 	
 

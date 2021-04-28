@@ -29,7 +29,9 @@
   		update grouplocal set g_hit = g_hit+1 where num=#{param1}
   	</update>
   
-  
+  	<delete id="groupRecordDelete">
+  		delete from grouplocal where num=#{param1} and userid=#{param2}
+  	</delete>
   
   
   
@@ -38,7 +40,7 @@
   		<result column="mem_nick" property="mem_nick"/>
   		<result column="mem_prof" property="mem_prof"/>		
   	</resultMap>
-  	
+  	<!-- property ->담길 명DTO의명 -->
   	<resultMap type="com.team4.localer.vo.GroupVO" id="eatChoice">
   		<result column="num" property="num"/>
   		<result column="up_cate" property="up_cate"/>
@@ -60,7 +62,6 @@
   		select num, up_cate, down_cate, g_cnt, g_hit, g_writedate, g.userid, mem_prof, mem_nick, g_content, g_subject, to_char(g_date, 'YYYY-MM-DD') g_date,
   		to_char(g_time, 'HH24:MI') g_time, g_loc1, g_tag from grouplocal g join member m on g.userid=m.userid where num=${param1}
   	</select> 
-  	
   	
   	
   	<resultMap type="com.team4.localer.vo.MemberVO" id="memChoice2">
