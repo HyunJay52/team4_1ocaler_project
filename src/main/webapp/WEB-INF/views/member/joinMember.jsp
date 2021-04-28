@@ -16,7 +16,7 @@
 				<li>아이디</li>
 				<li><input type="text" name="userid" id="userid" tabindex="1"
 					placeholder="아이디를 입력해주세요" />
-				<button type="button" class="btn commBtn Mem_lgBtn" tabindex="2">중복검사</button>
+				<button type="button" class="btn commBtn Mem_lgBtn" tabindex="2" id="overlapBtn">중복검사</button>
 					<span id="idOverlap">N</span> <br />
 				<span id="checkid"></span></li>
 
