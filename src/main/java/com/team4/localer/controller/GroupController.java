@@ -128,10 +128,14 @@ public class GroupController{
 	
 	
 	@RequestMapping("/withViewPage")
-	public ModelAndView withPageView(GroupPageVO pageVO, int num) {
+	public ModelAndView withPageView(GroupPageVO pageVO, int num, HttpSession session) {
 		ModelAndView mav = new ModelAndView();	
 		groupService.hitCount(num);
 		
+		
+		
+		
+		mav.addObject("joinList",joinUsService.joinSelect((String)session.getAttribute("logId")));
 		mav.addObject("vo",groupService.withViewPageResult(num));
 		mav.addObject("pageVO", pageVO);//num,gu, (추가사항=>pageNum,searchKey,searchWord)
 		mav.setViewName("group/withViewPage");
