@@ -13,9 +13,29 @@
 			auto:true,
 			pagerCustom:"#bx-pager"
 		});
+		
+	});
+	var popup;
+	
+	$(function(){
+		//검색창 팝업 이벤트
+		$("#qaBtn").click(function(){
+			$("#popup").css('display', 'block');
+		
+		});
+    	$("#popup").on('click', function(){
+        	$("#searchDiv").css('display', 'none');
+
+    	})
+		
 	});
 	
-	
+	$(()=>{
+		$('.cbBtn').on('change',function(){
+			console.log("들어오는지 체크합니다.");
+			$('.cbBtn').not(this).prop('checked',false);
+		})
+	});
 	
 	</script>
 
@@ -146,30 +166,58 @@
 		</div>
 
 		<div id="sellQnA">
-			<h3>Q&A</h3>
+			<h3>Q&A</h3> 
+				
 			<ul id ="sellQnAList">
 				<li> 답변상태 </li>
 				<li id ="point"> 제목 </li>
 				<li> 작성자 </li>
 				<li> 작성일 </li>
 				
-				<li> 미답변 </li>
-				<li> 볼만하겠네 </li>
-				<li> hqhq </li>
-				<li> 21-03-29 </li>
-								
-				<li> 27 </li>
-				<li> 레이아웃 연습 </li>
-				<li> heyeon </li>
-				<li> 21-03-23 </li>
-								
-				<li> 11 </li>
-				<li> 색은 뭘로할까 </li>
-				<li> yeon </li>
-				<li> 21-03-25 </li>
+				<c:forEach var="i" begin="1" end="5">
+					<li> 미답변 </li>
+					<li> 볼만하겠네 </li>
+					<li> hqhq </li>
+					<li> 21-03-29 </li>
+				</c:forEach>				
+
 										
 			</ul>
+			
+			<div id ="pageNum" style="margin-top: 20px;">
+				<ul class="pagination pagination-sm" >
+				 	<li class="page-item"><a href="#" class="page-link"> << </a></li>
+				 	<li class="page-item"><a href="#" class="page-link">1</a></li>
+				 	<li class="page-item"><a href="#" class="page-link">2</a></li>
+				 	<li class="page-item "><a href="#" class="page-link">3</a></li>
+				 	<li class="page-item"><a href="#" class="page-link">4</a></li>
+				 	<li class="page-item"><a href="#" class="page-link">5</a></li>
+				 	<li class="page-item "><a href="#" class="page-link"> >> </a></li>
+					<button class="btn commBtn_sm" id ="qaBtn">글쓰기</button>
+				</ul>
+			</div>	
 		</div>
+		
+		<div id="popup" style="z-index: 99;">
+			<form method="post" action ="">
+				<div class="checks etrans">
+					<h4 style="color:#000">질문을 등록해주세요.</h4> &emsp;
+					<input type="checkbox" name="q_status" value="1" id="ex_chk3" class="cbBtn">
+					<label for="ex_chk3" > 공개 </label> &emsp;
+	     			<input type="checkbox" name="q_status" value="2" id="ex_chk4" class="cbBtn">
+					<label for="ex_chk4"> 비공개 </label>
+	     		</div>
+				<div>
+					<textarea name="q_content" id="content" placeholder="질문을 등록해주세요."></textarea>
+				</div>
+				<div>	
+					<button class="btn cancelBtn"  id="btnClose">취소</button> &ensp;
+					<input type="submit" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
+				</div>
+			</form>
+		</div>
+		
+		
 	</div>
 </div>	
 </body>
