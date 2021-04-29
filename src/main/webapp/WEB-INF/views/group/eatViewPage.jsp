@@ -21,10 +21,24 @@
 			console.log(x/2);
 			console.log(y/2);
 			//팝업창 띄우기================================================
+			/*위치설정*/
 			var width =	$("#EVPProfilePopup").width();
 			var height = $("#EVPProfilePopup").height();
 			console.log(width,height)
 			$("#EVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
+			/*띄우기*/
+			$("#eatViewPageShowTopMenu>li:nth-child(4)").click(()=>{
+				$("#EVPProfilePopup").css("display","block");
+				
+			});	
+			/*팝업창 닫기*/
+			
+			$('#EVPProfilePopup>div:first-child>span').click(()=>{
+				$("#EVPProfilePopup").css("display","none");
+			});
+			
+			
+			
 			
 			
 			//버튼 클릭시============================================================================

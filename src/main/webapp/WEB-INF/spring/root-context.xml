@@ -27,4 +27,8 @@
 	</bean>
 	<!-- let context know dao location -->
 	<mybatis-spring:scan base-package="com.team4.localer.dao"/>
+	
+	
+	
+	
 </beans>
