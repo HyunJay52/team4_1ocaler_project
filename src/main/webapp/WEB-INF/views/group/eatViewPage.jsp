@@ -36,11 +36,7 @@
 			$('#EVPProfilePopup>div:first-child>span').click(()=>{
 				$("#EVPProfilePopup").css("display","none");
 			});
-			
-			
-			
-			
-			
+
 			//버튼 클릭시============================================================================
 				//뒤로가기	
 			
