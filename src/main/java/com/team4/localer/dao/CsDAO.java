@@ -29,4 +29,7 @@ public interface CsDAO {
 	public ReportVO reportOneSelect(int num);
 	//신고글 Update
 	public int reportUpdate(ReportVO vo);
+	//========검색 select 부분 
+	//신고 검색
+	public List<CsVO> searchReport(String searchkey,String text);
 }

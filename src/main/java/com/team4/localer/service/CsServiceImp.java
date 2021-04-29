@@ -72,4 +72,9 @@ public class CsServiceImp implements CsService {
 		return csdao.reportUpdate(vo);
 	}
 
+	@Override
+	public List<CsVO> searchReport(String searchkey, String text) {
+		return csdao.searchReport(searchkey, text);
+	}
+
 }

@@ -44,4 +44,10 @@
   	<update id="reportUpdate" parameterType="com.team4.localer.vo.ReportVO">
   		update report set rep_status=#{rep_status}, rep_ok = sysdate where rep_num=#{rep_num}
   	</update>
+  	<!--검색부분 -->
+  	<select id="searchReport" resultType="com.team4.localer.vo.CsVO">
+  		select rep_num cs_num,rep_subject cs_subject, userid, 
+  		to_char(rep_writedate,'MM-DD HH:MI') cs_writedate, rep_status cs_status
+  		from report where ${param1} like #{param2} order by rep_num desc
+  	</select>
 </mapper>
