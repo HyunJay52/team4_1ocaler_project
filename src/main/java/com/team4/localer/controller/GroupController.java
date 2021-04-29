@@ -3,7 +3,10 @@ package com.team4.localer.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +26,9 @@ public class GroupController{
 	LikeItService likeItService;
 	@Inject
 	JoinUsService joinUsService;
+	@Inject
+	private DataSourceTransactionManager transactionManager;
+	
 	
 	@RequestMapping("/groupPage")
 	public String groupOpen(HttpSession session) {//나중에 지워야할값 지금 세션 확인위해 해놓은것
@@ -64,6 +70,7 @@ public class GroupController{
 	}
 	
 	@RequestMapping(value="/writeFormOk", method=RequestMethod.POST)
+	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
 	public ModelAndView writeFormOk(GroupPageVO pageVO, GroupVO vo, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -71,30 +78,40 @@ public class GroupController{
 		System.out.println(vo.getUserid());
 		vo.setG_gu("강서구");
 		
-		if(vo.getG_loc2()==null || vo.getG_loc2().equals("")) {
-			if(groupService.groupInsert(vo)>0) {
-				System.out.println("성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-				if(vo.getUp_cate().equals("한끼미식회")) {
-					mav.addObject("loc_gu",pageVO.getLoc_gu());
-					mav.setViewName("redirect:eatPage");
+		
+		
+		
+	
+			if(vo.getG_loc2()==null || vo.getG_loc2().equals("")) {
+				if(groupService.groupInsert(vo)>0) {
+					System.out.println("성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					if(vo.getUp_cate().equals("한끼미식회")) {
+						mav.addObject("loc_gu",pageVO.getLoc_gu());
+						mav.setViewName("redirect:eatPage");
+					}else {
+						mav.addObject("loc_gu",pageVO.getLoc_gu());
+						mav.setViewName("redirect:withPage");
+					}
 				}else {
-					mav.addObject("loc_gu",pageVO.getLoc_gu());
-					mav.setViewName("redirect:withPage");
+					System.out.println("실패했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+						mav.setViewName("group/writeFormOk");
 				}
 			}else {
-				System.out.println("실패했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					mav.setViewName("group/writeFormOk");
+				if(groupService.groupBigMartInsert(vo)>0) {
+					System.out.println("창고형마트 인설트 성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					mav.addObject("loc_gu",pageVO.getLoc_gu());
+					mav.setViewName("redirect:withPage");
+				}else {
+					System.out.println("창고형마트 인설트 실패했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					mav.setViewName("group/historyBack");
+				}
 			}
-		}else {
-			if(groupService.groupBigMartInsert(vo)>0) {
-				System.out.println("창고형마트 인설트 성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-				mav.addObject("loc_gu",pageVO.getLoc_gu());
-				mav.setViewName("redirect:withPage");
-			}else {
-				System.out.println("창고형마트 인설트 실패했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-				mav.setViewName("group/historyBack");
-			}
-		}
+
+		
+		
+		
+		
+		
 		System.out.println("userid-==>"+vo.getUserid());
 		System.out.println("up_cate==>"+vo.getUp_cate());
 		System.out.println("down_cate==>"+vo.getDown_cate());
