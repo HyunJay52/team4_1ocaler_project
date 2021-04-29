@@ -18,4 +18,8 @@
 		VALUES (MEMSQ.nextval, #{userid}, #{userpwd}, #{mem_name}, #{mem_tel}, #{mem_email}, 
 		#{mem_zip}, #{mem_addr}, #{mem_detail}, #{loc_gu}, #{mem_prof}, #{mem_nick}, #{mem_content})
 	</insert>
+	
+	<update id="memPostCount"><!-- 게시글올리면 카운트되는 함수 -->
+		update member set mem_post = mem_post+1 where userid=#{param1}
+	</update>
 </mapper>
