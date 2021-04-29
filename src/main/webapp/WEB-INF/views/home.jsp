@@ -386,9 +386,5 @@
 			<li><a href="#"><img src="img/indexImg/food5.jpeg"/></a></li>
 		</ul>
 	</div>
-	<a href="info">내정보페이지</a>
-	<a href="#">${logName }</a>
-	<a href="logOut">로그아웃하기</a>
+	<a href="myInfoMain">내정보페이지</a>
 </div>
-
-<%-- <%@ include file="/inc/footer.jspf" %> --%>

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+	.myInfoReviewManagementBottom{
+		width:900px;
+		margin:20px 0px;
+		padding:20px;
+		border:1px solid #ddd;
+		overflow:auto;
+	}
+	.myInfoReviewManagementTableHeader, .myInfoReviewManagementTable {
+		width:100%;
+		margin:0 auto;
+		padding:0;
+		overflow:auto;
+	}
+	.myInfoReviewManagementTableHeader>li{
+		width:21.25%;
+		float:left;
+		text-align:center;
+		background-color:#3f1785;
+		color:#fff; 
+		font-weight:bold;
+		line-height:40px;
+		height:40px;
+    }
+    .myInfoReviewManagementTableHeader>li:nth-child(1){
+		width:15%;
+	}
+	.myInfoReviewManagementTable ul>li{
+		text-align:center;
+		line-height:80px;
+		height:80px;
+		border-bottom:1px solid #3f1785;
+	}
+	.myInfoReviewManagementTable{/*마지막 줄 tr 스타일*/
+		border-bottom:2px solid #3f1785;
+	}
+	.myInfoReviewManagementTable>ul li{/*전체적인 열 폭조정*/
+		float:left;
+		width:21.25%;
+		position:relative;
+	}
+	.myInfoReviewManagementTable>ul li:nth-child(5n+1){
+		width:15%;
+	}
+	.myInfoReviewManagementTable img, myInfoReviewManagementTableReview img{
+		width:60px;
+		height:60px;
+	}
+	.myInfoReviewManagementLabel{
+		position:absolute;
+		top:-3px;
+		left:44px;
+		color:#fff;
+	}
+	.myInfoReviewManagementTableReview{
+		display:none;
+
+	}
+	.myInfoReviewManagementTableReview>ul>li{
+		float:left;
+		width:20%;
+		background-color:#f1f3f5;
+	}
+	.myInfoReviewManagementTableReview>ul>li:nth-child(4n+3){
+		width:40%;
+	}

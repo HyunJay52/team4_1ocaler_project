@@ -1,0 +1,27 @@
+@charset "UTF-8";
+	.shippingManagementBody{
+		
+	}
+	.shippingManagementBody>ul>li{
+		text-align:left;
+		
+	}
+	.shippingManagementBody>ul>li>button{
+		float:right;
+	}
+	.shippingManagementTextarea{
+		width:100%;			
+		height:100px; 
+		margin:6px 0;
+		resize:none;
+		overflow:auto;
+
+	}
+	.shippingManagementContent{
+		height:450px;
+	}
+	.shippingManagementSelectbox{
+		height:40px;
+		width:200px;
+		margin-top:10px;
+	}

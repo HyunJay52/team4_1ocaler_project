@@ -92,7 +92,7 @@ public class GroupController{
 				mav.setViewName("redirect:withPage");
 			}else {
 				System.out.println("창고형마트 인설트 실패했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-				mav.setViewName("group/writeFormOk");
+				mav.setViewName("group/historyBack");
 			}
 		}
 		System.out.println("userid-==>"+vo.getUserid());
@@ -117,9 +117,12 @@ public class GroupController{
 	public ModelAndView eatPageView(GroupPageVO pageVO, int num, HttpSession session) {
 		ModelAndView mav = new ModelAndView(); 
 		groupService.hitCount(num);
+		System.out.println(joinUsService.getJCount(num)+"여기요 ");
 		
+		mav.addObject("appNum",joinUsService.getJCount(num));
 		mav.addObject("joinList",joinUsService.joinSelect((String)session.getAttribute("logId")));
 		mav.addObject("vo",groupService.eatViewPageResult(num));
+			
 		mav.addObject("pageVO",pageVO); //num,gu, (추가사항=>pageNum,searchKey,searchWord)
 		mav.setViewName("group/eatViewPage");
 		return mav;
@@ -132,13 +135,44 @@ public class GroupController{
 		ModelAndView mav = new ModelAndView();	
 		groupService.hitCount(num);
 		
-		
-		
-		
+		mav.addObject("appNum",joinUsService.getJCount(num));
 		mav.addObject("joinList",joinUsService.joinSelect((String)session.getAttribute("logId")));
 		mav.addObject("vo",groupService.withViewPageResult(num));
 		mav.addObject("pageVO", pageVO);//num,gu, (추가사항=>pageNum,searchKey,searchWord)
 		mav.setViewName("group/withViewPage");
 		return mav;
 	}
+	
+	
+	@RequestMapping("/eatViewPageDel")
+	public ModelAndView eatViewPageDelete(HttpSession session, GroupVO vo, GroupPageVO pageVO) {
+		ModelAndView mav = new ModelAndView();
+		
+		int result = groupService.groupRecordDelete(vo.getNum(), (String)session.getAttribute("logId"));
+		
+		if(result>0) {
+			mav.addObject("loc_gu",pageVO.getLoc_gu());
+			if(vo.getUp_cate().equals("한끼미식회")) {
+				mav.setViewName("redirect:eatPage");
+			}else {
+				mav.setViewName("redirect:withPage");
+			}
+		
+		}else {
+			mav.setViewName("group/historyBack");
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return mav;
+		
+	}
+	
 }

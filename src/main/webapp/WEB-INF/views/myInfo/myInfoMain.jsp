@@ -63,7 +63,7 @@
 		$("#slider").html(tag);			
 		
 		//시작 페이지 설정 변수
-		var startSlide = 10;
+		var startSlide = 8;
 		
 		//bx슬라이더 셋팅
 		$("#slider").bxSlider({

@@ -16,7 +16,7 @@ $(function(){
 		$(this).removeClass("searchbtn");
 		$(this).addClass("puplebtn");
 		var params ="cate=oftenq";
-		var url = "/localer/oftenAndCs"
+		var url = "oftenAndCs"
 		$.ajax({
 			type : "POST",
 			url : url,
@@ -56,7 +56,7 @@ $(function(){
 		$(this).removeClass("searchbtn");
 		$(this).addClass("puplebtn");
 		var params ="cate=cs";
-		var url = "/localer/oftenAndCs"
+		var url = "oftenAndCs"
 		$.ajax({
 			type : "POST",
 			url : url,
@@ -97,7 +97,7 @@ $(function(){
 		$(this).removeClass("searchbtn");
 		$(this).addClass("puplebtn");
 		var params ="cate=report";
-		var url = "/localer/oftenAndCs"
+		var url = "oftenAndCs"
 		$.ajax({
 			type : "POST",
 			url : url,
@@ -115,6 +115,8 @@ $(function(){
 					txt += 		"<td><input type='button' ";
 					if((vo.rep_status)==1){
 						txt += " class='smallbtn' name='"+vo.rep_num+"' title='reportBtn' value='처리요청'</td></tr>";
+					}else if((vo.rep_status)==2){
+						txt += " class='spuplebtn' name='"+vo.rep_num+"' title='reportBtn' value='반려'</td></tr>";
 					}else{
 						txt += " class='spuplebtn' name='"+vo.rep_num+"' title='reportBtn' value='처리완료'</td></tr>";
 					}
@@ -143,7 +145,6 @@ $(document).on('click', '.smallbtn', function(){
 		location.href="persnal?cs_num="+num;
 	}else if(cate=="reportBtn"){
 		//신고 처리요청 클릭시
-		alert("신고요청 클릭");
 		location.href = "reportEdit?num="+num;
 	}
 });
@@ -155,6 +156,9 @@ $(document).on('click', '.spuplebtn', function(){
 	if(cate=="csBtn"){
 		//1:1질문 처리요청 클릭시 
 		location.href="persnal?cs_num="+num;
+	}else if(cate=="reportBtn"){
+		//신고 반려, 처리완료 클릭시
+		location.href = "reportEdit?num="+num;
 	}
 });
 //자주하는 질문 삭제 클릭시
@@ -166,7 +170,7 @@ $(document).on('click', '.redBtn', function(){
 });
 
 </script>
-<div id="main">
+<div class="main">
 	<div class="title">고객센터</div>
 	<p>
 		<select name="searchkey" class="selectcomm">
@@ -202,7 +206,7 @@ $(document).on('click', '.redBtn', function(){
 		<c:forEach var="vo" items="${list}">
 			<tr class="reset">
 				<td>${vo.rep_num }</td>
-				<td><a href="#">${vo.rep_subject }</a></td>
+				<td>${vo.rep_subject }</td>
 				<td>${vo.userid }</td>
 				<td>${vo.rep_writedate }</td>
 				<td>
@@ -210,6 +214,9 @@ $(document).on('click', '.redBtn', function(){
 						<input type="button" name="${vo.rep_num }" title="reportBtn" class="smallbtn" value="처리요청"/>
 					</c:if>
 					<c:if test="${vo.rep_status==2 }">
+						<input type="button" name="${vo.rep_num }" title="reportBtn" class="spuplebtn" value="반려"/>
+					</c:if>
+					<c:if test="${vo.rep_status==3 }">
 						<input type="button" name="${vo.rep_num }" title="reportBtn" class="spuplebtn" value="처리완료"/>
 					</c:if>
 					

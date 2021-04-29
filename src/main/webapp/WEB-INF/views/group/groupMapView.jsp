@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#header{display:none}
+	#pageTop{display:none}
 	#footer{display:none;}
 	#groupMapViewBody{overflow:hidden;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}	

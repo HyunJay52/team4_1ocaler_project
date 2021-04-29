@@ -14,6 +14,8 @@ public interface GroupService {
 	public GroupVO eatViewPageResult(int num);//게시글 1개 보는 뷰페이지 해야함
 	public GroupVO withViewPageResult(int num);//withView의 1개 게시글선택
 	
+	public int groupRecordDelete(int num, String userid);//글삭제
+	
 	public int hitCount(int num); //조회수 늘리기
 	
 	

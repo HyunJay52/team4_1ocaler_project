@@ -4,8 +4,6 @@
 	#eatViewFold, #eatViewOpen{position:absolute; z-index:1;}	
 	#eatViewFold{background-color:#fff; top:140px; left:493px; margin-top:348px; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
 	#eatViewOpen{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	/*버튼이벤트*/
-	.commBtnWrite{width:75px;}
 	/*폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼*/
 	#eatViewBody{overflow:hidden;}
 	/*eatViewSearchFrm*/
@@ -38,6 +36,9 @@
 	#eatViewGroupSearchFrm>input:nth-of-type(2){    height: 32px;   width: 270px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 15px 0px;}
     #eatViewGroupSearchFrm>input:nth-of-type(3){    display: block;  height: 32px;   float: right;   margin: 15px 15px 15px 0px;}
 	/*eatViewGroupList*/
+	#eatViewGroupList>a{color:#000}
+	#eatViewGroupList>a:hover{font-weight:bold;}
+	
 	#eatViewGroupList{overflow:auto; height:640px;}
 	#eatViewGroupList>li{border:1px solid gray;}
 	#eatViewGroupList div:first-child{overflow:auto; position:relative;}

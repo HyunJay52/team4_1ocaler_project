@@ -7,6 +7,12 @@
 	<select id="memLogin" resultType="com.team4.localer.vo.MemberVO">
 		select userid, mem_name, mem_nick, loc_gu from member where userid=#{param1} and userpwd=#{param2}
 	</select>
+	<select id="idDoubleCheck" resultType="String">
+		select userid from member where userid=#{param1}
+	</select>
+	<select id="nickNameDoubleCheck" resultType="String">
+		select mem_nick from member where mem_nick=#{param1}
+	</select>
 	<insert id="insertMember" parameterType="com.team4.localer.vo.MemberVO">
 		INSERT INTO MEMBER(MEM_NO, userid, userpwd, MEM_NAME, MEM_TEL, MEM_EMAIL, MEM_ZIP, MEM_ADDR, MEM_DETAIL, LOC_GU, MEM_PROF,MEM_NICK, MEM_CONTENT)
 		VALUES (MEMSQ.nextval, #{userid}, #{userpwd}, #{mem_name}, #{mem_tel}, #{mem_email}, 

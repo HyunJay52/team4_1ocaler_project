@@ -18,14 +18,7 @@ public class GroupVO {
 	private String g_writedate;
 	private String g_tag;
 	
-	
-	
-	
-	
-	
 	private MemberVO memberVO;
-	
-	
 	
 	
 	public MemberVO getMemberVO() {

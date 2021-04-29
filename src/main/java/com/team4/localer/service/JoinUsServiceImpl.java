@@ -30,4 +30,9 @@ public class JoinUsServiceImpl implements JoinUsService{
 		return joinUsDAO.joinSelect(userid);
 	}
 
+	@Override
+	public int getJCount(int num) {
+		return joinUsDAO.getJCount(num);
+	}
+
 }

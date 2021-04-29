@@ -52,6 +52,12 @@ public class GroupServiceImpl implements GroupService{
 			return groupDAO.hitCount(num);
 		}
 
+		@Override
+		public int groupRecordDelete(int num, String userid) {
+			return groupDAO.groupRecordDelete(num, userid);
+		}
+
+
 	
 		
 		
