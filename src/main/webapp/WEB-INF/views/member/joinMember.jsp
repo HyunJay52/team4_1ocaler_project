@@ -8,6 +8,9 @@
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<script>
+	document.title = "회원가입";
+</script>
 <div id="joinMem">
 	<form method="post" action="memJoinOk" id="memJoinFrm" enctype="multipart/form-data">
 		<div>회원 가입</div>
