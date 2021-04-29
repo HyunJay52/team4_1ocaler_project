@@ -36,7 +36,14 @@
 			$('#EVPProfilePopup>div:first-child>span').click(()=>{
 				$("#EVPProfilePopup").css("display","none");
 			});
-
+			/*신고하기*/
+			$('#eatViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자 
+				location.href="reportWrite?userid=${vo.userid}"
+			});
+			
+			
+			
+			
 			//버튼 클릭시============================================================================
 				//뒤로가기	
 			
@@ -56,28 +63,38 @@
 				
 				
 			//참여하기================================================================================
-				$("#eatViewPageJoinBtn").click(()=>{
-					var url = "joinInsert";
-					var params ="num="+$("#eatViewPageJoinBtn").val();
-					console.log(params);
-					$.ajax({
-						url : url,
-						data : params,
-						success:function(result){
-							alert('신청이 완료되었습니다. 응답을 기다려 주세요');
-							$("#eatViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
-							$("#eatViewPageJoinBtn").attr("disabled",true);
-							
-						},error:function(e){
-							console.log('신청실패')
-						}
-					})
-				});
+				if(${logId!=null}){
+					$("#eatViewPageJoinBtn").click(()=>{
+						var url = "joinInsert";
+						var params ="num="+$("#eatViewPageJoinBtn").val();
+						console.log(params);
+						$.ajax({
+							url : url,
+							data : params,
+							success:function(result){
+								alert('신청이 완료되었습니다. 응답을 기다려 주세요');
+								$("#eatViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
+								$("#eatViewPageJoinBtn").attr("disabled",true);
+								
+							},error:function(e){
+								console.log('신청실패')
+							}
+						})
+					});
+				}else{
+					$("#eatViewPageJoinBtn").click(()=>{
+						alert('로그인 후 이용해 주세요')
+						location.href="";
+					});
+				}
+				
 			//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
 			var joinCheck = $("#eatViewPageJoinBtn").attr("disabled");
 			console.log(joinCheck);
 			if(joinCheck=='disabled'){
 				$("#eatViewPageJoinBtn").children("span").text('신청완료');
+				$("#withViewPageJoinBtn").css('background',"#B8B2F4");
+				$("#withViewPageJoinBtn").css('opacity',1);
 			}
 			
 		//============================================================================================
@@ -129,7 +146,7 @@
 		<div>
 			<button id="eatViewPageBackBtn" class="btn cancelBtn">뒤로가기</button>
 			<c:if test="${vo.userid!=logId}"> 
-				<button type="button" id="eatViewPageJoinBtn" class="btn confBtn" value="${vo.num }" <c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>><span id="eatViewPagejoinCheck">참여하기</span></button>
+					<button type="button" id="eatViewPageJoinBtn" class="btn confBtn" value="${vo.num }" <c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>><span id="eatViewPagejoinCheck">참여하기</span></button>
 			</c:if>
 			<c:if test="${vo.userid==logId }"> <!--이건 작성자일경우 수정하기 버튼  -->
 				<button id="eatViewDeleteBtn" class="btn commBtn">삭제</button>
@@ -143,14 +160,14 @@
 		<div><span>활동정보</span></div>
 		<div><img src="<%=request.getContextPath()%>/common/user.png"></div>
 		<div>
-			<ul>
+			<ul id="EVPProfilePopupUl">
 				<li><span>goguam1234</span></li>
 				<li><span>가입일 : 2021-08-29 </span></li>
 				<li><span>총 게시물 : 100개</span></li>
 				<li><span>총 댓글수 : 100개</span></li>
 			</ul>
 		</div>
-		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
+		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>
 	</div>
 	
 	

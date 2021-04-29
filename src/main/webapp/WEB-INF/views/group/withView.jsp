@@ -85,35 +85,37 @@
 			//==========================================================================================
 				
 			//좋아요======================================================================================
-			$("#withViewGroupList div:first-child>input[name=numLike]").on('click',function(){
-				if($(this).is(':checked')){
-					
-					var url = "likeInsert";
-					var params = "numLike="+$(this).val();	
-					$.ajax({
-						url : url,
-						data : params,
-						success : function(result){
-							console.log(result,"좋아요 추가 성공");
-						},error :function(request,status,error){
-							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-						}
-					})
-				}else{
-					var url = "likeDelete";
-					var params = "numLike="+$(this).val();	
-					$.ajax({
-						url : url,
-						data : params,
-						success : function(result){
-							console.log(result,"좋아요 삭제 성공");
-						},error :function(request,status,error){
-							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-						}
-					})
-					
-				}
-			});		
+			if(${logId!=null}){
+				$("#withViewGroupList div:first-child>input[name=numLike]").on('click',function(){
+					if($(this).is(':checked')){
+						
+						var url = "likeInsert";
+						var params = "numLike="+$(this).val();	
+						$.ajax({
+							url : url,
+							data : params,
+							success : function(result){
+								console.log(result,"좋아요 추가 성공");
+							},error :function(request,status,error){
+								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							}
+						})
+					}else{
+						var url = "likeDelete";
+						var params = "numLike="+$(this).val();	
+						$.ajax({
+							url : url,
+							data : params,
+							success : function(result){
+								console.log(result,"좋아요 삭제 성공");
+							},error :function(request,status,error){
+								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							}
+						})
+						
+					}
+				});		
+			}
 			//==========================================================================================
 		})
 </script>
@@ -149,9 +151,12 @@
 		<ul id="withViewShowTopMenu">
 			<li><div><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?loc_gu=${pageVO.loc_gu }"><span id="withViewEat">한끼미식회</span></a></div></li>
 			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?loc_gu=${pageVO.loc_gu }"><span id="withViewWith">가치가장</span></a></li>
-			<li><button id="withViewWriteForm" class="btn commBtn commBtnWrite">글쓰기</button>
+			<c:if test="${logId!=null }">
+				<li><button id="withViewWriteForm" class="btn commBtn commBtnWrite">글쓰기</button></li>
+			</c:if>
 		</ul>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
+		<div> 서울틀별시 > <a href="groupPage">${pageVO.loc_gu }</a> > 가치가장  </div>
 		<form id="withViewGroupSearchFrm" method="get" action="withPage">
 			<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
 			<select name="searchKey">
@@ -169,7 +174,9 @@
 				<a href="withViewPage?num=${vo.num }&loc_gu=${pageVO.loc_gu}"><li><!-- 나중에 searchkey, searchWord도 달고다녀야함 -->
 					<div>
 						<img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span>${vo.down_cate }</span>
+						<c:if test="${logId!=null }">
 						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==vo.num && logId==likes.userid }">checked</c:if></c:forEach>/><label for="like${vo.num }"></label>
+						</c:if>
 					</div>
 					<span>${vo.g_subject }</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->
