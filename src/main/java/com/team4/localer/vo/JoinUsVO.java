@@ -6,6 +6,17 @@ public class JoinUsVO {
 	private String userid;
 	private String j_status;
 	private String j_writedate;
+	
+	//j_status의 갯수를 저장하는 변수(디비에 저장되는건 아니고)
+	/*
+	 * private int j_count;
+	 * 
+	 * 
+	 * 
+	 * 
+	 * public int getJ_count() { return j_count; } public void setJ_count(int
+	 * j_count) { this.j_count = j_count; }
+	 */
 	public int getJ_num() {
 		return j_num;
 	}

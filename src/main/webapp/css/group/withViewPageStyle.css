@@ -1,5 +1,7 @@
 @charset "UTF-8";
 	/*폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼*/
+	/*버튼*/
+	
 	/*searchFrm*/
 	#withViewPageSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
 	#withViewPageSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}

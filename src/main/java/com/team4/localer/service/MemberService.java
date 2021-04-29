@@ -7,4 +7,8 @@ public interface MemberService {
 	public MemberVO memLogin(String userid, String userpwd);
 	//회원가입
 	public int insertMember(MemberVO vo);
+	//아이디 중복확인
+	public String idDoubleCheck(String userid);
+	//별명 중복확인
+	public String nickNameDoubleCheck(String mem_nick);
 }

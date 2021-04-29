@@ -3,9 +3,17 @@
 	
 	*{font-family: nsr;
 	}
-	#body{overflow:auto;width:1300px;margin:0 auto;
+	#main{overflow:auto;width:1300px;margin:0 auto;
 	height: 1000px;
 	}
+	
+	#selMain{
+		position:relative; 
+		background-color: white;
+		display: none;
+		
+	}
+	
 	#selTop{ height: 70px;width:1300px; line-height: 70px;
 	text-align: center; border-bottom:1px solid #3f1785;
 	 font-size: 25px; 
@@ -32,7 +40,10 @@
 	select{height: 30px ; border:1px solid black;float:left; margin-right: 4px }
 	
 
-	img{width: 218px; height: 218px;
+	#memImgDiv img{width: 218px; height: 218px;
+	} 
+	
+	#sellImgDiv img{width: 218px; height: 218px;
 	} 
 	
 	#selBoard{width:1300px; height:780px;

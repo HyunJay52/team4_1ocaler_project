@@ -387,8 +387,4 @@
 		</ul>
 	</div>
 	<a href="info">내정보페이지</a>
-	<a href="#">${logName }</a>
-	<a href="logOut">로그아웃하기</a>
 </div>
-
-<%-- <%@ include file="/inc/footer.jspf" %> --%>

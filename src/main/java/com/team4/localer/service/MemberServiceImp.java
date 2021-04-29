@@ -22,4 +22,14 @@ public class MemberServiceImp implements MemberService {
 		return dao.insertMember(vo);
 	}
 
+	@Override
+	public String idDoubleCheck(String userid) {
+		return dao.idDoubleCheck(userid);
+	}
+
+	@Override
+	public String nickNameDoubleCheck(String mem_nick) {
+		return dao.nickNameDoubleCheck(mem_nick);
+	}
+
 }

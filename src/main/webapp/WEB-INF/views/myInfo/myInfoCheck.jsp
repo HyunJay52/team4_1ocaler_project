@@ -65,7 +65,7 @@
 		});
 		
 		$("#signupBtn").click(function(){
-			location.href="info";
+			location.href="myInfoMain";
 		});
 	});
 </script>

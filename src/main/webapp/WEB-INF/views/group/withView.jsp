@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#header{display:none;}
+	#pageTop{display:none;}
 	#footer{display:none;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*withViewGroupList-like btn*/
@@ -10,7 +10,14 @@
 	#withViewGroupList div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
 	#withViewGroupList div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
 	#withViewGroupList a:hover{color:#000; text-decoration:none;}
-	
+	/*버튼*/
+	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}
+	.commBtn:hover {border: 1px solid #3f1785;	background-color: #3f1785;	font-weight: bold;	color: #fff;	font-weight: bold;}
+	.cancelBtn {	border: 1px solid #ddd;	color: #ddd;	width: 90px;}
+	.cancelBtn:hover {	background-color: #fff;	color: gray;}	
+	.confBtn {	background: #3f1785;	color: #fff;	width: 90px;}
+	.confBtn:hover {	color: #fff;	background: #B8B2F4;}
+	.commBtnWrite{width:75px;}
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <script>	
