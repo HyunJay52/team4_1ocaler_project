@@ -169,13 +169,68 @@ $(document).on('click', '#searchCS', function(){
 	var searchTxt = $('.textcomm').val();
 	var cate = $("#selectcate").val();
 	if(cate=='report'){
-		searchReportF("searchCS","searchkey="+searchVal+"&text="+searchTxt)
+		searchReportF("searchCS","searchkey="+searchVal+"&text="+searchTxt);	
 	}else if(cate=='oftenq'){
-		alert("자주하는 질문");
-	}else if(cate=='cs'){
-		alert("cs클릭");
+		searchOftenqF("searchCS","searchkey="+searchVal+"&text="+searchTxt);
+	}else if(cate='cs'){
+		searchCSF("searchCS","searchkey="+searchVal+"&text="+searchTxt);
 	}
+	$(".textcomm").val('');
+	$(".textcomm").focus();
 });
+//1:1 질문검색 ajax 함수
+function searchCSF(url,params){
+	$.ajax({
+		url:url,
+		data:params+"&cate=cs",
+		success:function(result){
+				var $result = $(result);
+				$(".reset").remove();//테이블 내용 지우기 
+				var txt = "";
+				$result.each(function(idx,vo){//테이블 내용 추가
+					txt += "<tr class='reset'>";
+					txt += 		"<td>"+vo.cs_num+"</td>";
+					txt += 		"<td>"+vo.cs_subject+"</a></td>";
+					txt += 		"<td>"+vo.userid+"</td>";
+					txt += 		"<td>"+vo.cs_writedate+"</td>";
+					txt += 		"<td><input type='button' ";
+					if(vo.cs_status==1){
+						txt += " class='smallbtn' name='"+vo.cs_num+"' title='csBtn'value='처리요청'</td></tr>";
+					}else{
+						txt += " class='spuplebtn' name='"+vo.cs_num+"' title='csBtn' value='처리완료'</td></tr>";
+					}
+				});
+				$("#resultTbl").append(txt);
+		},error:function(){
+			alert("검색 실패했다 하,,,");
+		}
+	});
+}
+//자주하는 질문검색 ajax 함수
+function searchOftenqF(url,params){
+	$.ajax({
+		url:url,
+		data:params+"&cate=oftenq",
+		success:function(result){
+				var $result = $(result);
+				$(".reset").remove();//테이블 내용 지우기 
+				var txt = "";
+				$result.each(function(idx,vo){//테이블 내용 추가
+					txt += "<tr class='reset'>";
+					txt += 		"<td>"+vo.cs_num+"</td>";
+					txt += 		"<td>"+vo.cs_cate+" "+vo.cs_subject+"</td>";
+					txt += 		"<td>관리자</td>";
+					txt += 		"<td></td>";
+					txt += 		"<td><input type='button' class='redBtn' name='"+vo.cs_num+"' value='삭제'/>";
+					txt +=		"<input type='button' class='smallbtn' name='"+vo.cs_num+"' title='oftenqBtn' value='수정'/></td>";
+					txt += "</tr>";	
+				});
+				$("#resultTbl").append(txt);
+		},error:function(){
+			alert("검색 실패했다 하,,,");
+		}
+	});
+}
 //신고글 검색 ajax 함수
 function searchReportF(url,params){
 	$.ajax({
@@ -198,10 +253,9 @@ function searchReportF(url,params){
 						txt += " class='spuplebtn' name='"+vo.cs_num+"' title='reportBtn' value='반려'</td></tr>";
 					}else{
 						txt += " class='spuplebtn' name='"+vo.cs_num+"' title='reportBtn' value='처리완료'</td></tr>";
-					}
+					}	
 				});
 				$("#resultTbl").append(txt);
-			
 		},error:function(){
 			alert("검색 실패했다 하,,,");
 		}

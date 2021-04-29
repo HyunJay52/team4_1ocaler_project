@@ -211,23 +211,23 @@ public class AdminController {
 	@RequestMapping("/searchCS")
 	@ResponseBody
 	public List<CsVO> searchCS(String searchkey,String text,String cate){
-		
-		if(cate.equals("1:1 질문")) {
-			System.out.println("asdoifjsd");
-		}else {//사용자 신고 검색
-//			if(!cate.equals("userid")) {
-//				return csService.searchReport("rep_"+searchkey,text);
-//			}else {
-//				return csService.searchReport(searchkey,text);
-//			}
+		if(searchkey=="userid"||searchkey.equals("userid")) {//검색key가 userid일때
+			if(cate.equals("oftenq")) {//자주하는 질문일때
+				return csService.searchOftenq(searchkey,"%"+text+"%");
+			}else if(cate.equals("cs")) {
+				return csService.searchCs(searchkey,"%"+text+"%");
+			}else {
+				return csService.searchReport(searchkey,"%"+text+"%");
+			}
 		}
-//		if(!cate.equals("userid")) {
-//			System.out.println("여기들어와야하는거 알지?");
-//			return csService.searchReport("rep_"+searchkey,text);
-//		}else {
-//			return csService.searchReport(searchkey,text);
-//		}
-		return csService.searchReport("rep_"+searchkey,"%"+text+"%");
+		if(cate.equals("oftenq")) {//자주하는 질문일때
+			return csService.searchOftenq("of_"+searchkey,"%"+text+"%");
+		}else if(cate.equals("cs")) {
+			return csService.searchCs("cs_"+searchkey,"%"+text+"%");
+		}else {
+			return csService.searchReport("rep_"+searchkey,"%"+text+"%");
+			
+		}
 	}
 }
 

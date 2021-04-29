@@ -32,4 +32,8 @@ public interface CsDAO {
 	//========검색 select 부분 
 	//신고 검색
 	public List<CsVO> searchReport(String searchkey,String text);
+	//자주하는 질문 검색
+	public List<CsVO> searchOftenq(String searchkey,String text);
+	//1:1 문의 검색
+	public List<CsVO> searchCs(String searchkey, String text);
 }
