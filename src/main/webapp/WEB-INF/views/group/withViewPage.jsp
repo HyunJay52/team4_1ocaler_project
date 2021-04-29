@@ -16,7 +16,26 @@
 </style>
 <script>	
 		$(function(){	
+			//팝업창 띄우기================================================
+			/*위치설정*/
+			var x = window.innerWidth;
+			var y = window.innerHeight;
+			var width =	$("#WVPProfilePopup").width();
+			var height = $("#WVPProfilePopup").height();
+			console.log(width,height)
+			$("#WVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
+			/*띄우기*/
+			$("#withViewPageShowTopMenu>li:nth-child(4)").click(()=>{
+				$("#WVPProfilePopup").css("display","block");
 				
+			});	
+			/*팝업창 닫기*/
+			
+			$('#WVPProfilePopup>div:first-child>span').click(()=>{
+				$("#WVPProfilePopup").css("display","none");
+			});
+			
+			
 			//버튼 클릭시============================================================================
 				//뒤로가기	
 			$("#withViewPageBackBtn").click(()=>{
@@ -120,11 +139,22 @@
 				<button id="withViewPageDeleteBtn" class="btn commBtn">삭제</button>
 				<button id="withViewPageEditBtn" class="btn commBtn">수정</button>
 			</c:if>
-		</div>
-		 
-		
+		</div>	
 	</div>
-	
+		<div id="WVPProfilePopup">
+		<div><span>X</span></div>
+		<div><span>활동정보</span></div>
+		<div><img src="<%=request.getContextPath()%>/common/user.png"></div>
+		<div>
+			<ul>
+				<li><span>goguam1234</span></li>
+				<li><span>가입일 : 2021-08-29 </span></li>
+				<li><span>총 게시물 : 100개</span></li>
+				<li><span>총 댓글수 : 100개</span></li>
+			</ul>
+		</div>
+		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
+	</div>
 	
 	
 	
