@@ -169,7 +169,8 @@
 				<option value="g_content">내용</option>
 			</select>
 			<input type="text" name="searchWord" id="eatViewSearchWord"/>
-			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
+			<button id="eatViewButton"><img src="<%=request.getContextPath()%>/img/groupImg/search.png"></button>
+			<input type="hidden" name="pageNum" value="${pageVO.pageNum }"/>
 		</form>
 		
 
@@ -197,14 +198,31 @@
 		
 		
 		<div>
-			<ul id="page"><!--이걸 어떻게 처리해야하나고민중 -->
-				<li>이전</li>
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-				<li>5</li>
-				<li>다음</li>
+			<ul id="EVpaging"><!--이걸 어떻게 처리해야하나고민중 -->
+				<c:if test="${pageVO.pageNum>1}">
+					<li><a href='eatPage?loc_gu=${pageVO.loc_gu }&pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>'>이전</a></li>
+				</c:if>
+				<c:if test="${pageVO.pageNum<=1}">
+					<li>이전</li>
+				</c:if>
+				<c:forEach var="p" begin="${pageVO.startPageNum }" end="${pageVO.startPageNum+pageVO.onePageNum-1 }">
+					<c:if test="${p<=pageVO.totalPage }">
+						<c:if test="${p==pageVO.pageNum }">
+						<!-- 현재페이지일떄 -->
+							<li style="background-color:#571fb8"><a href="eatPage?loc_gu=${pageVO.loc_gu}&pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+						<c:if test="${p!=pageVO.pageNum }">
+						<!-- 현재페이지가 아닐때 -->
+							<li><a href="eatPage?loc_gu=${pageVO.loc_gu }&pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+					</c:if>		
+				</c:forEach>			
+				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+					<li><a href="eatPage?loc_gu=${pageVO.loc_gu }&pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">다음</a></li>
+				</c:if>	
+				<c:if test="${pageVO.pageNum==pageVO.totalPage}">
+					<li>다음</li>
+				</c:if>	
 			</ul>
 		</div>
 	</div>

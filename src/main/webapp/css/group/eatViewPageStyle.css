@@ -20,8 +20,8 @@
 	#eatViewPageShowTopMenu>li:first-child>span{color:#3f1785; font-weight:bold;}
 	#eatViewPageShowTopMenu>li:nth-child(2){width:30%; padding:10px 15px 10px 0px; text-align:right; }
 	#eatViewPageShowTopMenu>li:nth-child(3)>span{display:block; margin-bottom:5px; padding: 0 10px; font-size:22px; font-weight:bold;}	
-	#eatViewPageShowTopMenu>li:nth-child(4){width:13%; padding-left:10px;}
-	#eatViewPageShowTopMenu>li:nth-child(4)>img{width:40px;}
+	#eatViewPageShowTopMenu>li:nth-child(4){width:13%; padding-left:10px; height:40px;}
+	#eatViewPageShowTopMenu>li:nth-child(4)>img{width:40px; height:40px; border-radius:10px;}
 	#eatViewPageShowTopMenu>li:nth-child(5){width:47%}
 	#eatViewPageShowTopMenu>li:nth-child(5)>div{font-size:13px; height: 20px; line-height: 20px;}
 	#eatViewPageShowTopMenu>li:nth-child(5)>div:first-child{padding-left:30pxx}
@@ -44,7 +44,7 @@
 	#EVPProfilePopup>div:nth-child(2){width:443px; height:50px; text-align:center;}
 	#EVPProfilePopup>div:nth-child(2)>span{display:inline-block; font-size:28px; font-weight:bold; padding-left:20px}
 	#EVPProfilePopup>div:nth-child(3){width:201px; height:150px;}
-	#EVPProfilePopup>div:nth-child(3)>img{height: 120px; margin-top: 10px; margin-left: 60px; border-radius:10px;}
+	#EVPProfilePopup>div:nth-child(3)>img{height: 120px; width:120px; margin-top: 10px; margin-left: 60px; border-radius:10px;}
 	#EVPProfilePopup ul>li:first-child{height:40px; }
 	#EVPProfilePopup ul>li:first-child>span{font-size:26px; font-weight:700; display:inline-block; padding-left:20px;}
 	#EVPProfilePopup ul>li:not(:first-child)>span{display:inline-block; padding:4px 0px 1px 20px;}

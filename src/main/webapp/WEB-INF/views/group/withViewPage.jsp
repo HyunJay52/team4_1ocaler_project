@@ -118,7 +118,7 @@
 	<div id="withViewPageSearchFrm">
 		<form onsubmit="searchPlaces(); return false;">
 			<input type="text" name="withViewPageSearchWord" id="withViewPageSearchWord" value="${pageVO.loc_gu }" size=40; />
-			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
+			<input type="image" src="<%=request.getContextPath()%>/img/mem_prof/${vo.memberVO.mem_prof}" value="검색"/>
 		</form>
 	</div>
 
@@ -160,7 +160,7 @@
 		<div id="WVPProfilePopup">
 		<div><span>X</span></div>
 		<div><span>활동정보</span></div>
-		<div><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"></div>
+		<div><img src="<%=request.getContextPath()%>/img/mem_prof/${vo.memberVO.mem_prof}"></div>
 		<div>
 			<ul>
 				<li><span>${vo.userid }</span></li>
