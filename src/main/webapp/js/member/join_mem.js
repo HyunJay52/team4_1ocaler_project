@@ -225,9 +225,8 @@
 				});
 			}
 		});
-		//////////// 정규식 표현 ////////////
 		function regExpCheck() {
-			// 인증 번호
+			// 이메일 인증 번호
 			//        var regEmailCheck=/[0-9]{6}$/;
 			//        if(!regEmailCheck.test(document.getElementById("emailCheck").value)){
 			//           alert("인증번호는 숫자 6자리를 입력해야 합니다.");
