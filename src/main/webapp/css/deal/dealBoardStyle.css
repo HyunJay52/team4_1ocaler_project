@@ -104,11 +104,46 @@
 	.commBtn { 
 		font-size:20px;
 		width: 100px; 
+		color: #3f1785;
+		border: 1px solid #3f1785;
+		margin-top:30px;
+		margin-left:100px;
+	}
+	.commBtn:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785; 
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	
+	.commBtnDeal { 
+		font-size:20px;
+		width: 100px; 
 		margin: -5px 60px;
 		color: #3f1785;
 		border: 1px solid #3f1785;
+
 	}
-	.commBtn:hover {
+	.commBtnDeal:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785; 
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+
+	}
+	
+	.commBtn_sm { 
+		float:right;
+		font-size:14px;
+		width: 80px; 
+		margin: 0px 60px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+		margin-left: 410;
+	}
+	.commBtn_sm:hover {
 		border: 1px solid #3f1785;
 		background-color: #3f1785; 
 		font-weight: bold;
@@ -203,10 +238,11 @@
 		text-align: center; 
 		font-size: 14px; 
 		color: gray; 
-		margin-bo: -15px;
 		margin: -10 0; 
 		margin-bottom: -20px;
 	}
+	
+
 	#sellInfo>ul li:nth-child(6){ 
 		color: #3f1785;  
 		font-weight: bold;  
@@ -328,9 +364,10 @@
    		width:1280px;
    		height: 400px;
    		float: left;
-		margin: 80 0;
-		border: 1px solid gray;
+		margin: 80 auto;
 		padding: 20px;
+		
+		
    	
    	}
    	
@@ -339,51 +376,246 @@
  		color: #3f1785;
  		font-weight: bold;
  		margin-bottom:20px;
+ 		display: inline;
  	}
  	
- 	#sellQnA{
-		margin-bottom:8px;
-	}
+ 	h4{
+ 		font-weight: bold;
+ 		display: inline;
+ 	}
  	
- 	#sellQnA{
- 		margin : 0 auto; 
- 		background-color:rgb(234, 231, 245) ;
- 		width:1280px;
-	}
-	 #sellQnAList{
- 		margin : 0 auto; 
- 		background-color:rgb(234, 231, 245) ;
- 		width:1250px;
+ 	
+
+	#sellQnAList{
+ 		margin : 30 auto; 
+ 		width:1200px;
+ 		list-style-type:none; 
+		background-color:rgb(249 248 252); 
 	}  
-	#sellQnA>ul,#sellQnA li{ 
-		margin:0 ; 
+	#sellQnA li{ 
+		margin:0  ; 
 		padding:0; 
 		list-style-type:none; 
-		background-color:rgb(245, 245, 245);
+		background-color:rgb(249 248 252);
 	}
 	#sellQnAList>#point{
 		text-align:center;
 	}
 	#sellQnAList>li{ 
-		float : left;  
-		width:10%;
+		float : left; 
 		height:40px; 
 		line-height:40px ;
 		border-bottom:1px solid white;
-	}
-	#sellQnAList>li:nth-child(5n+1){
-		width:13% ;
-	}
-	#sellQnAList>li:nth-child(5n+1){
-		width:13% ;
-	}
-	#sellQnAList>li:nth-child(5n+2){
-		width:55% ;
-		text-overflow:ellipsis; 
-		text-align:left;
+		text-align: center;
 	}
 	
+	#sellQnAList>li:nth-child(4n+1){
+		width:250 ;
+	}
+	#sellQnAList>li:nth-child(4n+2){
+		width:550 ;
+		text-overflow:ellipsis;
+		text-align: left; 
+	}
+	#sellQnAList>li:nth-child(4n+3){
+		width:200 ;
+		text-overflow:ellipsis; 
+	}
+	#sellQnAList>li:nth-child(4n+4){
+		width:200 ;
+		text-overflow:ellipsis; 
+	}
+	
+	
 
-
-  	
-  	
+  	.commBtn {
+		width: 120px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+	}
+	.commBtn:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785;
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	.cancelBtn {
+		border: 1px solid #ddd;
+		color: #ddd;
+		width: 90px;
+	}
+	.cancelBtn:hover {
+		background-color: #fff;
+		color: gray;
+	}
+		
+	.confBtn {
+		background: #3f1785;
+		color: #fff;
+		width: 90px;
+	}
+	.confBtn:hover {
+		color: #fff;
+		background: #B8B2F4;
+	}
+  	#popup{
+	  	position:absolute;
+	  	top:1500px;
+	  	left:30%;
+  		display: none;
+  		width: 800px;
+  		height: 250px;
+  		background-color: white;
+  		border: 1px solid #000;
+  	}
+  	#popup div{
+  		float:left;
+  		
+  	}
+  	#popup div:nth-child(1) {
+  		padding-left:20px;
+  		padding-top:10px;
+		margin-bottom: 2px;
+		margin-top: 18;
+		margin-left:20;
+		margin-right:20;
+		width: 760px;
+	}
+  	#popup div:nth-child(1) label{
+		vertical-align:2px; 
+	}
+	#popup div:nth-child(2) {
+		text-align: center;
+		margin-bottom: 2px;
+		margin: 10;
+		width: 780px;
+	}
+	
+	#popup div:nth-child(2) textarea {
+		width: 700;
+		height: 90;
+		
+	}
+	#popup div:nth-child(3) {
+		text-align: right;
+		margin: 10;
+		width: 780px;
+	
+	}
+	
+	
+	/* 체크박스 시도 */
+	
+	.where {
+	  display: block;
+	  margin: 25px 15px;
+	  font-size: 11px;
+	  color: #000;
+	  text-decoration: none;
+	  font-family: verdana;
+	  font-style: italic;
+	}
+		
+	.checks {position: relative;}
+	
+	.checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
+	  position: absolute;
+	  width: 1px;
+	  height: 1px;
+	  padding: 0;
+	  margin: -1px;
+	  overflow: hidden;
+	  clip:rect(0,0,0,0);
+	  border: 0
+	}
+	.checks input[type="checkbox"] + label {
+	  display: inline-block;
+	  position: relative;
+	  cursor: pointer;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	}
+	.checks input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+	  content: ' ';
+	  display: inline-block;
+	  width: 21px;  /* 체크박스의 너비를 지정 */
+	  height: 21px;  /* 체크박스의 높이를 지정 */
+	  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+	  margin: -2px 8px 0 0;
+	  text-align: center; 
+	  vertical-align: middle;
+	  background: #fafafa;
+	  border: 1px solid #cacece;
+	  border-radius : 3px;
+	  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	}
+	.checks input[type="checkbox"] + label:active:before,
+	.checks input[type="checkbox"]:checked + label:active:before {
+	  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+	}
+	
+	.checks input[type="checkbox"]:checked + label:before {  /* 체크박스를 체크했을때 */ 
+	  content: '\2714';  /* 체크표시 유니코드 사용 */
+	  color: #99a1a7;
+	  text-shadow: 1px 1px #fff;
+	  background: #e9ecee;
+	  border-color: #adb8c0;
+	  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	}
+	
+	.checks.small input[type="checkbox"] + label {
+	  font-size: 12px;
+	}
+	
+	.checks.small input[type="checkbox"] + label:before {
+	  width: 17px;
+	  height: 17px;
+	  line-height: 17px;
+	  font-size: 11px;
+	}
+	
+	.checks.etrans input[type="checkbox"] + label {
+	  padding-left: 30px;
+	}
+	.checks.etrans input[type="checkbox"] + label:before {
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  margin-top: 0;
+	  opacity: .6;
+	  box-shadow: none;
+	  border-color: #3f17854 ;
+	  -webkit-transition: all .12s, border-color .08s;
+	  transition: all .12s, border-color .08s;
+	}
+	
+	.checks.etrans input[type="checkbox"]:checked + label:before {
+	  position: absolute;
+	  content: "";
+	  width: 10px;
+	  top: -5px;
+	  left: 5px;
+	  border-radius: 0;
+	  opacity:1; 
+	  background: transparent;
+	  border-color:transparent #3f1785 #3f1785 transparent;
+	  border-top-color:transparent;
+	  border-left-color:transparent;
+	  -ms-transform:rotate(45deg);
+	  -webkit-transform:rotate(45deg);
+	  transform:rotate(45deg);
+	}
+	
+	.no-csstransforms .checks.etrans input[type="checkbox"]:checked + label:before {
+	  /*content:"\2713";*/
+	  content: "\2714";
+	  top: 0;
+	  left: 0;
+	  width: 21px;
+	  line-height: 21px;
+	  color: #3f1785;
+	  text-align: center;
+	  border: 1px solid #3f1785;
+}  	

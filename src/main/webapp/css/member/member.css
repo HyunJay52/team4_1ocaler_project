@@ -1,4 +1,4 @@
-@charset "UTF-8"; 
+@charset "UTF-8";
 
 #joinMem {
 	width: 1300px;
@@ -61,9 +61,11 @@
 #setProfile #prof_ul {
 	height: 360px;
 }
+
 #setProfile>#prof_ul>li:nth-of-type(2) {
 	height: auto;
 }
+
 #setProfile>ul #mem_content {
 	padding: 15px;
 	resize: none;
@@ -105,14 +107,17 @@
 #setProfile, #joinMem div:nth-child(3) {
 	display: none;
 }
+
 #basicInfo>ul li #joinSearchAddrImg {
 	width: 15px;
-    height: 15px;
-    margin-left: -25px;
-    margin-right: 5px;
+	height: 15px;
+	margin-left: -25px;
+	margin-right: 5px;
 }
+
 #locImg {
-	width: 45px; padding-left: 5px;
+	width: 45px;
+	padding-left: 5px;
 }
 /*      button     class       */
 #memJoinFrm .Mem_lgBtn {
@@ -138,9 +143,39 @@
 	width: 320px;
 	margin: 0;
 }
+
+#loginContainer {
+	width: 1300px;
+	height: 84%;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#login_section {
+	width: 400px;
+	height: auto;
+	padding-top: 13%;
+	padding-bottom: 110px;
+	margin: 0 auto;
+}
+
+#login_section ul li {
+	list-style-type: none;
+}
+
+#userid {
+	margin-bottom: 3px;
+}
+
+#naverIdLogin img, #kakao-login-btn img {
+	width: 220px;
+	height: 50px;
+}
+
 .memheightAuto {
 	height: auto;
 }
+
 .profImg {
 	width: 100px;
 	height: 100px;
@@ -160,3 +195,46 @@
 	color: white;
 	cursor: pointer;
 }
+
+/* 로그인 페이지 */
+#login_section p {
+	color: gray;
+	font-size: 14px;
+	margin-bottom: 7px;
+}
+#login_section>form>ul>li:last-child>a {
+	color: #212529;
+    margin-left: 190px;
+}
+#socialLogin {
+	display: none;
+}
+#naverIdLogin img {
+	margin-bottom: 5px;
+    border-radius: 5px;
+}
+#login_section .mem_inputSize {
+		width: 320px; height: 50px;
+		padding: 10px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+	}
+#login_section .mem_cbSize {
+		margin-bottom: 10px;
+		padding-left: 200px;
+	}
+#login_section .mem_lgBtn {
+		width: 320px; height: 50px;
+		margin-top: 5px;
+		border: 1px solid #3f1785;
+		color: #3f1785;
+	}
+#login_section .mem_lgBtn:hover {
+		color: #fff;
+		font-weight: bold;
+	}
+#login_section .mem_lgA:hover {
+		margin-top: 20px;
+		color: #000;
+		text-decoration: none;
+	}

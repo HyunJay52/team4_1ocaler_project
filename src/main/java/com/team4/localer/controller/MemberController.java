@@ -32,24 +32,28 @@ public class MemberController {
 		String goPage = "";
 
 		MemberVO logVO = service.memLogin(userid, userpwd);
-		if(logVO.getMem_name()!=null && !logVO.getMem_name().equals("")) {
-			ses.setAttribute("logId", logVO.getUserid());
-			ses.setAttribute("logName", logVO.getMem_name());
-			ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
-			goPage = "home";
-			System.out.println("로그인 성공!");
-		}else {
-			goPage = "member/login";
+		try {
+			if(logVO.getMem_name()!=null && !logVO.getMem_name().equals("")) {
+				ses.setAttribute("logId", logVO.getUserid());
+				ses.setAttribute("logName", logVO.getMem_name());
+				ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
+				goPage = "home";
+				System.out.println("로그인 성공!");
+			}else {
+				goPage = "member/login";
+			}
+			return goPage;
+		}catch (NullPointerException nullpoint) {
+			nullpoint.printStackTrace();
+			return "member/login";
 		}
-		return goPage;
-	}
+	}	
 // 로그아웃
 	@RequestMapping("/logOut")
 	public String logOut(HttpSession ses) {
 		ses.invalidate();
 		return "home";
 	}
-	
 // 일반회원가입	
 	@RequestMapping("/joinMember")
 	public String joinMember() {
@@ -120,7 +124,7 @@ public class MemberController {
 		}
 		return result;
 	}
-	// 아이디 중복확인
+// 닉네임 중복확인
 	@RequestMapping(value="/nickOverlapCheck", method=RequestMethod.GET, produces="application/text;charset=UTF-8")
 	@ResponseBody
 	public String nickOverlapCheck(String mem_nick) {

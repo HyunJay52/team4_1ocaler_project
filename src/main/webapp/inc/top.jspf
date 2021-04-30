@@ -86,8 +86,8 @@
          </li>
          <li class="resquick_content"><a href="groupPage">같이가치</a>
             <ul>
-               <li><a href="withPage?loc_gu=${logLoc_gu }">가치가장</a></li>
-               <li><a href="eatPage?loc_gu=${logLoc_gu }">한끼미식회</a></li>
+               <li><a href="withPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">가치가장</a></li>
+               <li><a href="eatPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">한끼미식회</a></li>
             </ul>
          </li>
          <li class="resquick_content"><a href="commuMain">커뮤니티</a>
@@ -106,19 +106,20 @@
          </li>
       </ul>
       <div id="myMenu">
-      <ul>
-         <!-- 로그아웃 시 -->
-         <c:if test="${logName==null || logName=='' }">
-            <li><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></li>
-          </c:if> 
-         <!-- 로그인 시 -->
-         <c:if test="${logName!=null && logName!=''}">
-            <li>${logName } 님 환영합니다</li>
-            <li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li>
+		<!-- 로그아웃 시 -->
+		<c:if test="${logName==null || logName=='' }">
+			<div id="topLogin"><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></div>
+	    </c:if> 
+	    <!-- 로그인 시 -->
+		<c:if test="${logName!=null && logName!=''}">
+			<div id="afterLogin">
+				<div>${logName } 님 환영합니다<br/>
+					<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원&nbsp;<a href="myInfoMain">내정보</a>
+				</div>
+				<div><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
+			</div>
 		</c:if>
-      </ul>
-      <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
-   </div>
+   	</div>
    </c:if>
    
    

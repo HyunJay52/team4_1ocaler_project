@@ -1,9 +1,8 @@
 /*
- 	멤버관련 페이지 스크립트 모음
+ 	회원가입 페이지 스크립트 모음
  */
  
  $(function() {
-		document.title = "회원가입";
 //////////////////////////////////////////화면전환 이벤트		
 		//주소찾기 눌렀을때 화면 전환
 		$(".findAddr").click(function() {
@@ -55,6 +54,7 @@
 		});
 		$("#nickOverlapBtn").on('click', function(){
 			$("#nickOverlap").text('Y');
+			console.log($('#nickOverlap').text(), "dddd");
 			var url = "nickOverlapCheck";
 			var inputNick = "mem_nick="+$("#mem_nick").val();
 			$.ajax({
@@ -139,29 +139,18 @@
 				})
 			}
 		});
-		$("#userpwd1")
-				.on('keyup', function() {
-							$("#checkid").css("display", "none");
-							var regPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/;
-							if (!regPwd.test($("#userpwd1").val())) {
-								$("#checkpwd")
-										.text(
-												"비밀번호는 영문과 숫자, 특수문자를 조합한 8~15자리여야 합니다.");
-								$("#checkpwd").css({
-									"color" : "pink",
-									"fontSize" : "12"
-								})
-								$("#userpwd1").focus();
-							} else {
-								$("#checkpwd")
-										.text(
-												"✔ 비밀번호는 영문과 숫자, 특수문자를 조합한 8~15자리여야 합니다.");
-								$("#checkpwd").css({
-									"color" : "green",
-									"fontSize" : "12"
-								});
-							}
-						});
+		$("#userpwd1").on('keyup', function() {
+			$("#checkid").css("display", "none");
+			var regPwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/;
+			if (!regPwd.test($("#userpwd1").val())) {
+				$("#checkpwd").text("비밀번호는 영문과 숫자, 특수문자를 조합한 8~15자리여야 합니다.");
+				$("#checkpwd").css({"color" : "pink", "fontSize" : "12"})
+				$("#userpwd1").focus();
+			} else {
+				$("#checkpwd").text("✔ 비밀번호는 영문과 숫자, 특수문자를 조합한 8~15자리여야 합니다.");
+				$("#checkpwd").css({"color" : "green", "fontSize" : "12"});
+			}
+		});
 		$("#userpwd2").on('keyup', function() {
 			$("#checkpwd").css("display", "none");
 			if ($("#userpwd1").val() != $("#userpwd2").val()) {
@@ -219,7 +208,7 @@
 		});
 		$("#mem_email").on('keyup', function() {
 			$("#checktel").css("display", "none");
-			var regEmail = /^\w{8,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+			var regEmail = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
 			
 			if (!regEmail.test($("#mem_email").val())) {
 				$("#checkemail").text("이메일을 잘못 입력하셨습니다.");
@@ -229,7 +218,11 @@
 				});
 				$("#mem_email").focus();
 			} else {
-				$("#checkemail").text("");
+				$("#checkemail").text("✔ 사용가능한 이메일입니다.");
+				$("#checkemail").css({
+					"color" : "green",
+					"fontSize" : "12"
+				});
 			}
 		});
 		//////////// 정규식 표현 ////////////
@@ -245,12 +238,68 @@
 		//submit 이벤트 구현
 		$('#memJoinFrm').submit(function(){
 			if($('#userid').val()==null || $('#userid').val()==''){
-				alert('아이디 입력 필수');
+				alert('아이디를 입력해주세요');
+				$('#userid').focus();
+				return false;
+			}
+			if($("#idOverlap").val()=='N'){
+				alert('아이디 중복확인을 해주세요');
+				return false;
+			}
+			if($('#userpwd1').val()==null || $('#userpwd1').val()==''){
+				alert('비밀번호를 입력해주세요');
+				$('#userpwd1').focus();
+				return false;
+			}
+			if($('#mem_name').val()==null || $('#mem_name').val()==''){
+				alert('이름을 입력해주세요');
+				$('#mem_name').focus();
+				return false;
+			}
+			if($('#mem_tel').val()==null || $('#mem_tel').val()==''){
+				alert('연락처를 입력해주세요');
+				$('#mem_tel').focus();
+				return false;
+			}
+			if($('#mem_email').val()==null || $('#mem_email').val()==''){
+				alert('이메일 주소를 입력해주세요');
+				$('#mem_email').focus();
+				return false;
+			}
+			if($('#mem_zip').val()==null || $('#mem_zip').val()==''){
+				alert('주소입력을 확인해주세요');
+				$('#mem_zip').focus();
+				return false;
+			}
+			if($('#mem_addr').val()==null || $('#mem_addr').val()==''){
+				alert('주소입력을 확인해주세요');
+				$('#mem_addr').focus();
+				return false;
+			}
+			if($('#mem_detail').val()==null || $('#mem_detail').val()==''){
+				alert('주소입력을 확인해주세요');
+				$('#mem_detail').focus();
+				return false;
+			}
+			if($('#loc_gu').val()==null || $('#loc_gu').val()==''){
+				alert('활동지역 입력은 필수입니다');
+				$('#loc_gu').focus();
+				return false;
+			}
+			if($('#mem_nick').val()==null || $('#mem_nick').val()==''){
+				alert('별명을 입력하지 않으시면 아이디로 대체됩니다.');
+				$('#mem_nick').val($('#userid'));
+				$('#mem_nick').focus();
+				return false;
+			}
+			if($("#nickOverlap").val()=='N'){
+				alert('별명을 중복확인을 해주세요');
 				return false;
 			}
 			return true;
 		});
-}); //function 끝		
+}); //function 끝	
+	
 //////////////////////////////////////////주소찾기 펑션
 var element_wrap = document.getElementById('joinAddrWrap'); //주소 찾기 화면
 function foldDaumPostcode() {// iframe을 넣은 element를 안보이게 한다.

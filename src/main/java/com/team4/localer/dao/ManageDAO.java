@@ -1,0 +1,22 @@
+package com.team4.localer.dao;
+
+import java.util.List;
+
+import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.SellerVO;
+
+public interface ManageDAO {
+	//회원 리스트 AllSelect
+	public List<MemberVO> memAllSelect(String searchkey,String searchword);
+	//회원의 신고, 댓글수 count
+	public int memInfoCount(String userid,String table);
+	//회원 1명 정보 select 
+	public MemberVO memOneSelect(String userid);
+	//회원 관리 페이지 회원 정보 수정 
+	public int memberManageUpdate(String userid,String cate,int status);
+	
+	
+	//셀러관리 페이지 
+	//셀러 list Select 
+	public List<SellerVO> sellerAllSelect(String searchkey,String searchword);
+}

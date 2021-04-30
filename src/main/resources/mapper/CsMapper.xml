@@ -44,4 +44,18 @@
   	<update id="reportUpdate" parameterType="com.team4.localer.vo.ReportVO">
   		update report set rep_status=#{rep_status}, rep_ok = sysdate where rep_num=#{rep_num}
   	</update>
+  	<!--검색부분 -->
+  	<select id="searchReport" resultType="com.team4.localer.vo.CsVO">
+  		select rep_num cs_num,rep_subject cs_subject, userid, 
+  		to_char(rep_writedate,'MM-DD HH:MI') cs_writedate, rep_status cs_status
+  		from report where ${param1} like #{param2} order by rep_num desc
+  	</select>
+  	<select id="searchOftenq" resultType="com.team4.localer.vo.CsVO">
+  		select of_num cs_num, of_subject cs_subject, of_content cs_content, 
+  		of_cate cs_cate from oftenq where ${param1} like #{param2} order by of_num desc
+  	</select>
+  	<select id="searchCs" resultType="com.team4.localer.vo.CsVO">
+  		select cs_num, userid, cs_cate, cs_subject ,cs_content, cs_status, cs_answer, to_char(cs_writedate, 'MM-DD HH:MI') cs_writedate  
+  		from cs where ${param1} like #{param2} order by cs_num
+  	</select>
 </mapper>
