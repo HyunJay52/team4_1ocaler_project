@@ -15,18 +15,16 @@
 		<div id="basicInfo">
 			<ul>
 				<li>아이디</li>
-				<li><input type="text" name="userid" id="userid" tabindex="1" value="abcd1234" readonly="readonly"/><button type="button" class="btn commBtn lgBtn" tabindex="2">중복검사</button><span id="idOverlap">N</span>
-					<br/><span id="checkid"></span>
+				<li><input type="text" name="userid" id="userid" tabindex="1" value="abcd1234" readonly="readonly"/>
 				</li>
 			
 				<li>비밀번호</li><!-- 현재 로그인한 회원의 비밀번호와 동일 -->
 				<li><input type="text" name="userpwd" id="userpwd" tabindex="3" placeholder="비밀번호를 재입력해주세요"/>
-					<br/><span id="checkpwd"></span>
 				</li>
 				
 				<li>사업자명</li>
 				<li><input type="text" name="sel_name" id="sel_name" tabindex="4" placeholder="등록된 사업자명 입력"/> 
-					<br/><span id="checkpwd2"></span>
+					<br/><span id="sellNameCheck"></span>
 				</li>
 				
 				<li>회사명</li>

@@ -168,7 +168,6 @@
 				});
 			}
 		});
-//////////////////////////////////////////유효성검사안됨 (이메일 부분 확인)	
 		$("#mem_name").on('keyup', function() {
 			$("#checkpwd2").css("display", "none");
 			var regName = /^[가-힣A-Z]{2,10}$/i;

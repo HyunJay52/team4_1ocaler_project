@@ -20,74 +20,22 @@ $(function(){
 		    }).open();
 		}
 //////////////////////////////////////////유효성 검사 펑션
-		$("#userpwd").on('keyup', function(){
-			$("#checkid").css("display", "none");
-			var regPwd=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/;
-			if(!regPwd.test($("#userpwd").val())){
-				$("#checkpwd").text("비밀번호는 영문과 숫자, 특수문자를 조합한 8~15자리여야 합니다.");
-				$("#checkpwd").css({
-					"color":"pink",
-					"fontSize":"12"
-				})
-				$("#userpwd").focus();
-			}else{
-				$("#checkpwd").text("✔ 비밀번호는 영문과 숫자, 특수문자를 조합한 8~15자리여야 합니다.");
-				$("#checkpwd").css({
-					"color":"green",
-					"fontSize":"12"
-				});
-			}
-		});
-		$("#sel_name").on('keyup', function(){
+		$("#sel_name").on('keyup', function() {
 			$("#checkpwd2").css("display", "none");
-			var regName=/^[가-힣]{2, 15}$/;
-			if(!regName.test($("#sel_name").val())){
-				$("#checkname").text("한글 2자리 이상이여야 합니다.");
-				$("#checkname").css({
-					"color":"pink",
-					"fontSize":"12"
+			var regName = /^[가-힣A-Z]{2}$/i;
+			if (!regName.test($("#mem_name").val())) {
+				$("#sellNameCheck").text("2자리 이상이여야 합니다.");
+				$("#sellNameCheck").css({
+					"color" : "pink",
+					"fontSize" : "12"
 				})
 				$("#sel_name").focus();
-			}else{
-				$("#checkname").text("✔ 한글 2자리 이상이여야 합니다.");
-				$("#checkname").css({
-					"color":"green",
-					"fontSize":"12"
+			} else {
+				$("#sellNameCheck").text("✔ 2자리 이상이여야 합니다.");
+				$("#sellNameCheck").css({
+					"color" : "green",
+					"fontSize" : "12"
 				});
-			}
-		});
-////////////////////////////////////////////////////////////////////////////// 전화번호이메일유효성검사안됨		
-		$("#sel_tel").on('keyup', function(){
-			$("#checkname").css("display", "none");
-			var regTel=/^[0-9]{9, 11}$/;
-			var x =$("#sel_tel").length;
-			if(!regTel.test($("#mem_tel").val())){
-				$("#checktel").text("연락처는 9자리 이상이여야 합니다.");
-				$("#checktel").css({
-					"color":"pink",
-					"fontSize":"12"
-				})
-				$("#mem_tel").focus();
-			}else{
-				$("#checktel").text("✔ 연락처는 9자리 이상이여야 합니다.");
-				$("#checktel").css({
-					"color":"green",
-					"fontSize":"12"
-				});
-			}
-		});
-		$("#sel_email").on('keyup', function(){
-			$("#checktel").css("display", "none");
-			var regEmail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-			if(!regEmail.test($("#mem_tel").val())){
-				$("#checkemail").text("이메일을 잘못 입력하셨습니다.");
-				$("#checkemail").css({
-					"color":"pink",
-					"fontSize":"12"
-				})
-				$("#sel_email").focus();
-			}else{
-				$("#checkemail").text("");
 			}
 		});
 });
