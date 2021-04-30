@@ -1,6 +1,5 @@
 package com.team4.localer.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,12 +30,6 @@ public class AdminController {
 		//cstable 전체 list 불러오기 
 		mav.addObject("list",csService.boardAllSelect());
 		mav.setViewName("admin/main");
-		return mav;
-	}
-	@RequestMapping("/m_mem")//회원관리-일반회원 
-	public ModelAndView m_mem() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/m_mem");
 		return mav;
 	}
 	@RequestMapping("/m_sel")//회원관리-일반회원 
