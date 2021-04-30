@@ -106,19 +106,20 @@
          </li>
       </ul>
       <div id="myMenu">
-      <ul>
-         <!-- 로그아웃 시 -->
-         <c:if test="${logName==null || logName=='' }">
-            <li><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></li>
-          </c:if> 
-         <!-- 로그인 시 -->
-         <c:if test="${logName!=null && logName!=''}">
-            <li>${logName } 님 환영합니다</li>
-            <li>잔여 포인트&nbsp;<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원</li>
+		<!-- 로그아웃 시 -->
+		<c:if test="${logName==null || logName=='' }">
+			<div id="topLogin"><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></div>
+	    </c:if> 
+	    <!-- 로그인 시 -->
+		<c:if test="${logName!=null && logName!=''}">
+			<div id="afterLogin">
+				<div>${logName } 님 환영합니다<br/>
+					<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원&nbsp;<a href="#">로그아웃</a>
+				</div>
+				<div><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
+			</div>
 		</c:if>
-      </ul>
-      <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
-   </div>
+   	</div>
    </c:if>
    
    
