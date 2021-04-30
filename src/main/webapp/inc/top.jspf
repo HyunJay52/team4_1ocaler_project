@@ -114,7 +114,7 @@
 		<c:if test="${logName!=null && logName!=''}">
 			<div id="afterLogin">
 				<div>${logName } 님 환영합니다<br/>
-					<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원&nbsp;<a href="#">로그아웃</a>
+					<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원&nbsp;<a href="myInfoMain">내정보</a>
 				</div>
 				<div><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
 			</div>

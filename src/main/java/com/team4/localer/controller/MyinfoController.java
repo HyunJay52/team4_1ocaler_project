@@ -41,11 +41,6 @@ public class MyinfoController {
 		}
 		return mav;
 	}
-	@RequestMapping("/myInfoMain")
-	public String myInfoMain() {
-		return "myInfo/myInfoMain";
-	}
-	
 	@RequestMapping("/myInfoLoad")
 	public String myInfoLoad() {
 		return "myInfo/myInfoLoad";

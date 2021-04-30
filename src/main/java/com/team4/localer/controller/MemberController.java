@@ -3,7 +3,6 @@ package com.team4.localer.controller;
 import java.io.File;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -33,24 +32,28 @@ public class MemberController {
 		String goPage = "";
 
 		MemberVO logVO = service.memLogin(userid, userpwd);
-		if(logVO.getMem_name()!=null && !logVO.getMem_name().equals("")) {
-			ses.setAttribute("logId", logVO.getUserid());
-			ses.setAttribute("logName", logVO.getMem_name());
-			ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
-			goPage = "home";
-			System.out.println("로그인 성공!");
-		}else {
-			goPage = "member/login";
+		try {
+			if(logVO.getMem_name()!=null && !logVO.getMem_name().equals("")) {
+				ses.setAttribute("logId", logVO.getUserid());
+				ses.setAttribute("logName", logVO.getMem_name());
+				ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
+				goPage = "home";
+				System.out.println("로그인 성공!");
+			}else {
+				goPage = "member/login";
+			}
+			return goPage;
+		}catch (NullPointerException nullpoint) {
+			nullpoint.printStackTrace();
+			return "member/login";
 		}
-		return goPage;
-	}
+	}	
 // 로그아웃
 	@RequestMapping("/logOut")
 	public String logOut(HttpSession ses) {
 		ses.invalidate();
 		return "home";
 	}
-	
 // 일반회원가입	
 	@RequestMapping("/joinMember")
 	public String joinMember() {
