@@ -31,22 +31,42 @@
 			<div id="board">
 				<ul>
 					<li>
-						<span><a href="#">동네정보공유 &nbsp; </a></span>
-						<span> > &nbsp; 할인정보</span>	
+						<span>
+							<a href="commuBoard?b_gu=${logLoc_gu}">
+								<c:if test="${vo.up_cate == 1 }">
+									우리동네이야기
+								</c:if>	
+								<c:if test="${vo.up_cate == 2 }">
+									쓱싹레시피
+								</c:if>
+								<c:if test="${vo.up_cate == 3 }">
+									자유게시판
+								</c:if>
+								 
+							</a>
+						</span>
+						<span>  
+							<c:if test="${vo.down_cate == 1 }">
+								>  &nbsp; 할인정보
+							</c:if>
+							<c:if test="${vo.down_cate == 2 }">
+								>  &nbsp; 도움구해요
+							</c:if>
+						</span>	
 					</li>
-					<li>서대문구 혼밥하기 좋은 곳 아시나요?</li>
+					<li>${vo.b_subject }</li>
 					<li>
 						<img src="common/user.png">
-						<a href=""> 서쪽마녀</a>
+						<a href="">${vo.userid }</a>
 					</li>
 					<li>
-						<span>조회수 : 143 &nbsp; &nbsp; </span>
+						<span>조회수 : ${vo.b_hit } &nbsp; &nbsp; </span>
 						<span>추천수 : 10 </span>					
 					</li>
 					
-					<li> 서대문구에 혼밥하기 좋은 식당있을까요? 추천해주세요</li>
+					<li> ${vo.b_content }</li>
 					
-					<li>#서대문구 #혼밥 #식당 #음식 #맛있는거 #추천 #동네맛집</li>
+					<li>${vo.b_tag }</li>
 					<li id="likeLi">추천 &nbsp;&nbsp;
 						<input type="checkbox" name="num" id="like" value="1"/>
 						<label for="like"></label>&nbsp;&nbsp;&nbsp;댓글 5개
