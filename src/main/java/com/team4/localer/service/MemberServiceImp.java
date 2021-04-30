@@ -42,10 +42,4 @@ public class MemberServiceImp implements MemberService {
 		return dao.memPostCount(userid);
 	}
 
-	@Override
-	public MemberVO goMyinfopage(MemberVO vo) {
-		//내 정보 진입
-		return dao.goMyinfopage(vo);
-	}
-
 }

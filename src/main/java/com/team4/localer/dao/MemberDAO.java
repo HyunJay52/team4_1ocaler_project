@@ -5,8 +5,6 @@ import com.team4.localer.vo.MemberVO;
 public interface MemberDAO {
 	//회원로그인
 	public MemberVO memLogin(String userid, String userpwd);
-	//내 정보 진입 
-	public MemberVO goMyinfopage(MemberVO vo);
 	//일반회원 가입
 	public int insertMember(MemberVO vo);
 	//아이디 중복확인
