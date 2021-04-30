@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team4.localer.dao.ManageDAO">
+	<select id="memAllSelect" resultType="com.team4.localer.vo.MemberVO">
+  		select mem_no, userid, mem_name, mem_addr, mem_tel, mem_status, mem_type
+  		from member 
+  		<!-- <if test="#{param1}==null and #{param1}==''">
+  			where mem_status != 4
+  		</if> -->
+  		<if test="param1 !=null and param1!='' ">
+  			where ${param1} like #{param2} 
+  		</if>
+  	</select>
+  	<select id="memInfoCount" resultType="int">
+  		select count(userid) from ${param2} where userid=#{param1}
+  	</select>
+  	<select id="memOneSelect" resultType="com.team4.localer.vo.MemberVO">
+  		<!-- 게시물수 , 등급, 가입날짜 -->
+  		select userid, mem_post, mem_rev, to_char(mem_sub, 'YYYY.MM.DD') mem_sub from member where userid=#{param1}
+  	</select>
+  	<update id="memberManageUpdate">
+  		update member set ${param2}=${param3} where userid=#{param1}
+  	</update>
+</mapper>
