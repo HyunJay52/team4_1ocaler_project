@@ -15,30 +15,79 @@
   		values(boardsq.nextval, #{userid}, #{up_cate}, #{down_cate}, #{g_gu}, #{g_subject}, #{g_content}, #{g_cnt}, to_date(#{g_date}, 'YYYY-MM-DD'), to_date(#{g_time},'HH24:MI'), #{g_loc1}, #{g_loc2}, #{g_tag} )
   	<!-- date type을 insert 할떄 to_date로 변경해서 보내야함 -->
   	</insert>
-  
+  	
+  	
+  	
+	<!-- 한끼미식회 리스트 뽑기 -->  
   	<select id="GroupEatList" resultType="com.team4.localer.vo.GroupVO">
-  		select num, down_cate, g_subject, g_cnt, to_date(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
-  		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='한끼미식회' order by num desc
+  		select * from (select * from (select num, down_cate, g_subject, g_cnt, to_char(g_date, 'YYYY-MM-DD') g_date, to_char(g_time, 'HH24:MI') g_time,
+  		 g_loc1, g_tag from grouplocal where g_gu=#{loc_gu} and up_cate='한끼미식회' 
+  		
+  		
+  		<!-- 검색어가 있을때 -->
+  		 <if test="searchWord != null and !searchWord.equals('')">
+  		 	and ${searchKey} like '%${searchWord}%' order by g_date desc) 
+  		  <![CDATA[ where rownum <=]]> (${pageNum}*${onePageRecord}) order by g_date)
+  		  <![CDATA[ where rownum <=]]>
+  		  	<if test="pageNum==totalPage">
+  		  		${lastPageRecord} order by g_date desc
+  		  	</if>
+  		  	<if test="pageNum!=totalPage">
+  		  		${onePageRecord} order by g_date desc
+  		  	</if>
+  		  </if>
+
+  		  <!-- 검색어가 없을때 -->
+  		  <if test="searchWord == null or searchWord.equals('')">
+  		  	order by g_date desc)
+  		  <![CDATA[ where rownum <=]]> ${pageNum}*${onePageRecord} order by g_date)
+  		  <![CDATA[ where rownum <=]]>
+  		  <if test="pageNum==totalPage">
+  		  		${lastPageRecord} order by g_date desc
+  		  	</if>
+  		  	<if test="pageNum!=totalPage">
+  		  		${onePageRecord} order by g_date desc
+  		  	</if>
+  		  </if> 
+ 	 
   	</select>
+  	
+  	
+	<!-- 가치가장 리스트 뽑기  -->
   	<select id="GroupWithList" resultType="com.team4.localer.vo.GroupVO">
-  		select num, down_cate, g_subject, g_cnt, to_date(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
+  		select num, down_cate, g_subject, g_cnt, to_char(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
   		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='가치가장' order by num desc
   	</select>
-  
+  	
+  	
+ 	<!-- 조회수 카운트 -->
   	<update id="hitCount" parameterType="int">
   		update grouplocal set g_hit = g_hit+1 where num=#{param1}
   	</update>
+  	<!-- 선택한 레코드 삭제 -->
+  	<delete id="groupRecordDelete">
+  		delete from grouplocal where num=#{param1} and userid=#{param2}
+  	</delete>
+  	<!-- 해당지역구의 한끼미식회 전체레코드수 구하기 -->
+  	<select id="groupEatTotalRecoed" resultType="int">
+  		select count(num) from grouplocal where g_gu=#{loc_gu} and up_cate='한끼미식회' 
+  		<if test="searchWord != null and !searchWord.equals('')">
+  			and ${searchKey} like '%${searchWord}%'
+  		</if>
+  	</select>
   
   
   
-  
-  
-  
+  	<!-- 한끼미식회 한페이지 속내용 보기 -->
   	<resultMap type="com.team4.localer.vo.MemberVO" id="memChoice">
   		<result column="mem_nick" property="mem_nick"/>
-  		<result column="mem_prof" property="mem_prof"/>		
+  		<result column="mem_prof" property="mem_prof"/>
+  		<result column="mem_sub" property="mem_sub"/>
+  		<result column="mem_post" property="mem_post"/>
+  		<result column="mem_rev" property="mem_rev"/>
+  				
   	</resultMap>
-  	
+  	<!-- property ->담길 명DTO의명 -->
   	<resultMap type="com.team4.localer.vo.GroupVO" id="eatChoice">
   		<result column="num" property="num"/>
   		<result column="up_cate" property="up_cate"/>
@@ -58,14 +107,17 @@
   	
   	<select id="eatViewPageResult" resultMap="eatChoice">
   		select num, up_cate, down_cate, g_cnt, g_hit, g_writedate, g.userid, mem_prof, mem_nick, g_content, g_subject, to_char(g_date, 'YYYY-MM-DD') g_date,
-  		to_char(g_time, 'HH24:MI') g_time, g_loc1, g_tag from grouplocal g join member m on g.userid=m.userid where num=${param1}
+  		to_char(g_time, 'HH24:MI') g_time, g_loc1, g_tag, to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev 
+  		from grouplocal g join member m on g.userid=m.userid where num=${param1}
   	</select> 
   	
-  	
-  	
+  	<!-- 가치가장 한페이지 속내용 보기 -->
   	<resultMap type="com.team4.localer.vo.MemberVO" id="memChoice2">
   		<result column="mem_nick" property="mem_nick"/>
   		<result column="mem_prof" property="mem_prof"/>		
+  		<result column="mem_sub" property="mem_sub"/>
+  		<result column="mem_post" property="mem_post"/>
+  		<result column="mem_rev" property="mem_rev"/>
   	</resultMap>
   	
   	<resultMap type="com.team4.localer.vo.GroupVO" id="withChoice">
@@ -88,7 +140,8 @@
   	
   	<select id="withViewPageResult" resultMap="withChoice">
   		select num, up_cate, down_cate, g_cnt, g_hit, g_writedate, g.userid, mem_prof, mem_nick, g_content, g_subject, to_char(g_date, 'YYYY-MM-DD') g_date,
-  		to_char(g_time, 'HH24:MI') g_time, g_loc1, g_loc2, g_tag from grouplocal g join member m on g.userid=m.userid where num=${param1}
+  		to_char(g_time, 'HH24:MI') g_time, g_loc1, g_loc2, g_tag, to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev 
+  		from grouplocal g join member m on g.userid=m.userid where num=${param1}
   	</select> 
 
   </mapper>

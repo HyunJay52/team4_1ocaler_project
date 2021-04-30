@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#header{display:none;}
+	#pageTop{display:none;}
 	#footer{display:none;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*withViewGroupList-like btn*/
@@ -10,7 +10,14 @@
 	#withViewGroupList div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
 	#withViewGroupList div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
 	#withViewGroupList a:hover{color:#000; text-decoration:none;}
-	
+	/*버튼*/
+	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}
+	.commBtn:hover {border: 1px solid #3f1785;	background-color: #3f1785;	font-weight: bold;	color: #fff;	font-weight: bold;}
+	.cancelBtn {	border: 1px solid #ddd;	color: #ddd;	width: 90px;}
+	.cancelBtn:hover {	background-color: #fff;	color: gray;}	
+	.confBtn {	background: #3f1785;	color: #fff;	width: 90px;}
+	.confBtn:hover {	color: #fff;	background: #B8B2F4;}
+	.commBtnWrite{width:75px;}
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <script>	
@@ -78,35 +85,37 @@
 			//==========================================================================================
 				
 			//좋아요======================================================================================
-			$("#withViewGroupList div:first-child>input[name=numLike]").on('click',function(){
-				if($(this).is(':checked')){
-					
-					var url = "likeInsert";
-					var params = "numLike="+$(this).val();	
-					$.ajax({
-						url : url,
-						data : params,
-						success : function(result){
-							console.log(result,"좋아요 추가 성공");
-						},error :function(request,status,error){
-							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-						}
-					})
-				}else{
-					var url = "likeDelete";
-					var params = "numLike="+$(this).val();	
-					$.ajax({
-						url : url,
-						data : params,
-						success : function(result){
-							console.log(result,"좋아요 삭제 성공");
-						},error :function(request,status,error){
-							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-						}
-					})
-					
-				}
-			});		
+			if(${logId!=null}){
+				$("#withViewGroupList div:first-child>input[name=numLike]").on('click',function(){
+					if($(this).is(':checked')){
+						
+						var url = "likeInsert";
+						var params = "numLike="+$(this).val();	
+						$.ajax({
+							url : url,
+							data : params,
+							success : function(result){
+								console.log(result,"좋아요 추가 성공");
+							},error :function(request,status,error){
+								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							}
+						})
+					}else{
+						var url = "likeDelete";
+						var params = "numLike="+$(this).val();	
+						$.ajax({
+							url : url,
+							data : params,
+							success : function(result){
+								console.log(result,"좋아요 삭제 성공");
+							},error :function(request,status,error){
+								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							}
+						})
+						
+					}
+				});		
+			}
 			//==========================================================================================
 		})
 </script>
@@ -142,9 +151,12 @@
 		<ul id="withViewShowTopMenu">
 			<li><div><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?loc_gu=${pageVO.loc_gu }"><span id="withViewEat">한끼미식회</span></a></div></li>
 			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?loc_gu=${pageVO.loc_gu }"><span id="withViewWith">가치가장</span></a></li>
-			<li><button id="withViewWriteForm" class="btn commBtn commBtnWrite">글쓰기</button>
+			<c:if test="${logId!=null }">
+				<li><button id="withViewWriteForm" class="btn commBtn commBtnWrite">글쓰기</button></li>
+			</c:if>
 		</ul>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
+		<div> 서울틀별시 > <a href="groupPage">${pageVO.loc_gu }</a> > 가치가장  </div>
 		<form id="withViewGroupSearchFrm" method="get" action="withPage">
 			<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
 			<select name="searchKey">
@@ -162,7 +174,9 @@
 				<a href="withViewPage?num=${vo.num }&loc_gu=${pageVO.loc_gu}"><li><!-- 나중에 searchkey, searchWord도 달고다녀야함 -->
 					<div>
 						<img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span>${vo.down_cate }</span>
+						<c:if test="${logId!=null }">
 						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==vo.num && logId==likes.userid }">checked</c:if></c:forEach>/><label for="like${vo.num }"></label>
+						</c:if>
 					</div>
 					<span>${vo.g_subject }</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->

@@ -2,9 +2,10 @@
 ===================================*/
 /** RESET AND LAYOUT
 ===================================*/
+ /* 이미지 슬라이더 썸네일 때문에   margin-bottom: 60px; 수정 */
 .bx-wrapper {
   position: relative;
-  margin-bottom: 60px;
+  margin-bottom: 8px;
   padding: 0;
   *zoom: 1;
   -ms-touch-action: pan-y;

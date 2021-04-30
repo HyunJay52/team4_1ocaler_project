@@ -12,4 +12,6 @@ public interface MemberDAO {
 	public String idDoubleCheck(String userid);
 	//별명 중복확인
 	public String nickNameDoubleCheck(String mem_nick);
+	//mem_post 카운트
+	public int memPostCount(String userid);
 }

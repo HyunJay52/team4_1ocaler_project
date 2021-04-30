@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <style>
-	#header{display:none;}
+	#pageTop{display:none;}
 	#footer{display:none;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*eatViewGroupList-like btn*/
@@ -11,6 +11,14 @@
 	#eatViewGroupList div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
 	#eatViewGroupList div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
 	#eatViewGroupList a:hover{color:#000; text-decoration:none;}
+	/*버튼*/
+	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}
+	.commBtn:hover {border: 1px solid #3f1785;	background-color: #3f1785;	font-weight: bold;	color: #fff;	font-weight: bold;}
+	.cancelBtn {	border: 1px solid #ddd;	color: #ddd;	width: 90px;}
+	.cancelBtn:hover {	background-color: #fff;	color: gray;}	
+	.confBtn {	background: #3f1785;	color: #fff;	width: 90px;}
+	.confBtn:hover {	color: #fff;	background: #B8B2F4;}
+	.commBtnWrite{width:75px;}
 </style>
 <script>	
 		$(function(){
@@ -79,35 +87,38 @@
 			//================================================================================================
 				
 			//좋아요=================================================================================================	
-			$("#eatViewGroupList div:first-child>input[name=numLike]").on('click',function(){
-				if($(this).is(':checked')){
-					
-					var url = "likeInsert";
-					var params = "numLike="+$(this).val();	
-					$.ajax({
-						url : url,
-						data : params,
-						success : function(result){
-							console.log(result,"좋아요 추가 성공");
-						},error :function(request,status,error){
-							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-						}
-					})
-				}else{
-					var url = "likeDelete";
-					var params = "numLike="+$(this).val();	
-					$.ajax({
-						url : url,
-						data : params,
-						success : function(result){
-							console.log(result,"좋아요 삭제 성공");
-						},error :function(request,status,error){
-							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-						}
-					})
-					
-				}
-			});	
+			if(${logId!=null}){
+				$("#eatViewGroupList div:first-child>input[name=numLike]").on('click',function(){
+					if($(this).is(':checked')){
+						
+						var url = "likeInsert";
+						var params = "numLike="+$(this).val();	
+						$.ajax({
+							url : url,
+							data : params,
+							success : function(result){
+								console.log(result,"좋아요 추가 성공");
+							},error :function(request,status,error){
+								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							}
+						})
+					}else{
+						var url = "likeDelete";
+						var params = "numLike="+$(this).val();	
+						$.ajax({
+							url : url,
+							data : params,
+							success : function(result){
+								console.log(result,"좋아요 삭제 성공");
+							},error :function(request,status,error){
+								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							}
+						})
+						
+					}
+				});	
+			}
+			
 			//일단 좋아요 추가하고 삭제 하는 기능까지는 했는데 ... forEach문으로돌릴떄 likeit 테이블에서 userid와 numLike 이 있는 checkbox는 checked 할수있게 해야줘야하는데 이걸 어떻게 해야하나
 			// 좋아요 테이블의 모든 vo값을 가져오는 select문을 만들어야 할듯..? DAO/service/serviceimpl/controller/
 			//=================================================================================================
@@ -144,9 +155,12 @@
 		<ul id="eatViewShowTopMenu">
 			<li><div><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?loc_gu=${pageVO.loc_gu }"><span id="eatViewEat">한끼미식회</span></a></div></li>
 			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?loc_gu=${pageVO.loc_gu }"><span id="eatViewWith">가치가장</span></a></li>
-			<li><button id="eatViewWriteForm" class="btn commBtn commBtnWrite">글쓰기</button>
+			<c:if test="${logId!=null }">	
+				<li><button id="eatViewWriteForm" class="btn commBtn commBtnWrite">글쓰기</button></li>
+			</c:if>
 		</ul>
 		<hr style="width:430px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
+		<div> 서울틀별시 > <a href="groupPage">${pageVO.loc_gu }</a> > 한끼미식회  </div>
 		<form id="eatViewGroupSearchFrm" method="get" action="eatPage">
 			<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/>
 			<select name="searchKey">
@@ -155,7 +169,8 @@
 				<option value="g_content">내용</option>
 			</select>
 			<input type="text" name="searchWord" id="eatViewSearchWord"/>
-			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
+			<button id="eatViewButton"><img src="<%=request.getContextPath()%>/img/groupImg/search.png"></button>
+			<input type="hidden" name="pageNum" value="${pageVO.pageNum }"/>
 		</form>
 		
 
@@ -165,7 +180,9 @@
 					<div>
 					
 						<img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>${vo.down_cate }</span>
+						<c:if test="${logId!=null }">
 						<input class="fakeCheckBoxImg" type="checkbox" name="numLike" id="like${vo.num }" value="${vo.num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==vo.num && logId==likes.userid }">checked</c:if></c:forEach> /><label for="like${vo.num }"></label>
+						</c:if>
 					</div>
 					<span>${vo.g_subject }</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->
@@ -181,14 +198,31 @@
 		
 		
 		<div>
-			<ul id="page"><!--이걸 어떻게 처리해야하나고민중 -->
-				<li>이전</li>
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-				<li>5</li>
-				<li>다음</li>
+			<ul id="EVpaging"><!--이걸 어떻게 처리해야하나고민중 -->
+				<c:if test="${pageVO.pageNum>1}">
+					<li><a href='eatPage?loc_gu=${pageVO.loc_gu }&pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>'>이전</a></li>
+				</c:if>
+				<c:if test="${pageVO.pageNum<=1}">
+					<li>이전</li>
+				</c:if>
+				<c:forEach var="p" begin="${pageVO.startPageNum }" end="${pageVO.startPageNum+pageVO.onePageNum-1 }">
+					<c:if test="${p<=pageVO.totalPage }">
+						<c:if test="${p==pageVO.pageNum }">
+						<!-- 현재페이지일떄 -->
+							<li style="background-color:#571fb8"><a href="eatPage?loc_gu=${pageVO.loc_gu}&pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+						<c:if test="${p!=pageVO.pageNum }">
+						<!-- 현재페이지가 아닐때 -->
+							<li><a href="eatPage?loc_gu=${pageVO.loc_gu }&pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+					</c:if>		
+				</c:forEach>			
+				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+					<li><a href="eatPage?loc_gu=${pageVO.loc_gu }&pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">다음</a></li>
+				</c:if>	
+				<c:if test="${pageVO.pageNum==pageVO.totalPage}">
+					<li>다음</li>
+				</c:if>	
 			</ul>
 		</div>
 	</div>

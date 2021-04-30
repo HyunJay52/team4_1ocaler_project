@@ -4,11 +4,17 @@
 <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <link ref="stylesheet" href="<%=request.getContextPath()%>/css/commonStyle.css" type="html/css"/>
 <style>
-	#header{display:none;}
+	#pageTop{display:none;}
 	#footer{display:none;}
 	#groupWriteFormBody{overflow:hidden;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
-
+	/*버튼*/
+	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}
+	.commBtn:hover {border: 1px solid #3f1785;	background-color: #3f1785;	font-weight: bold;	color: #fff;	font-weight: bold;}
+	.cancelBtn {	border: 1px solid #ddd;	color: #ddd;	width: 90px;}
+	.cancelBtn:hover {	background-color: #fff;	color: gray;}	
+	.confBtn {	background: #3f1785;	color: #fff;	width: 90px;}
+	.confBtn:hover {	color: #fff;	background: #B8B2F4;}
 	/* 맨위 셀렉트 박스 부분 */
 	#groupWriteFormUp_cate, #groupWriteFormDown_cate{ width:150px; height:40px; padding-left:10px; border:1px solid #d3d3d3;
 	background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}

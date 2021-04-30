@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#header{display:none}
+	#pageTop{display:none}
 	#footer{display:none;}
 	#groupMapViewBody{overflow:hidden;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}	
@@ -11,7 +11,7 @@
 		$(function(){
 			
 			
-			var localName = ['전체','강서구','양천구','구로구','영등포구','금천구','동작구','관악구','서초구','강남구','송파구','강동구',
+			var localName = ['강서구','양천구','구로구','영등포구','금천구','동작구','관악구','서초구','강남구','송파구','강동구',
 							'마포구','용산구','서대문구','중구','성동구','광진구','종로구','동대문구','성북구','중랑구','은평구','강북구','노원구','도봉구'];
 			var tag = "";
 			localName.map(function(obj, idx){
@@ -59,8 +59,8 @@
 	<div id="groupMapViewTopFrm">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/groupImg/home.png"></a></li>
-			<li><a href="eatPage?loc_gu=${logLoc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
-			<li><a href="withPage?loc_gu=${logLoc_gu }"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
+			<li><a href="eatPage?loc_gu=강서구"><img src="<%=request.getContextPath()%>/img/groupImg/dishW.png"></a></li>
+			<li><a href="withPage?loc_gu=강서구"><img src="<%=request.getContextPath()%>/img/groupImg/cartW.png"></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/img/groupImg/car.png"></a></li>
 		</ul>
 	</div>
@@ -68,7 +68,7 @@
 	<!-- 검색 폼 -->
 	<div id="groupMapViewSearchFrm">
 		<form onsubmit="searchPlaces(); return false;">
-			<input type="text" name="groupMapViewSearchWord" id="groupMapViewSearchWord" value="${logLoc_gu }" size=40; />
+			<input type="text" name="groupMapViewSearchWord" id="groupMapViewSearchWord" value="신촌 비트캠프" size=40; />
 			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
 		</form>
 	</div>
