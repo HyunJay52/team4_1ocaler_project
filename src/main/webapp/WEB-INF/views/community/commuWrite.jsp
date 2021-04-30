@@ -34,7 +34,7 @@
 
 	<div id="body">
 		<div>
-			<form action="" >
+			<form method="post" action="commuWriteOk" >
 				<select id="up_cate" name="up_cate">
 					<option value="0">카테고리</option>
 					<option value="1">동네정보공유</option>	
@@ -47,7 +47,7 @@
 				</select>				
 	 			<br/>
 	 			<input type="text" id ="subject" name="b_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
-	 			<input type="text" id ="cnt" name="b_gu" />
+	 			<input type="text" id ="cnt" name="b_gu" value="${logLoc_gu}" style="text-align: center;" readonly/>
 	 			<textarea name="b_content" id ="content" > 내용을 입력해주세요. </textarea>
 	 			<script>CKEDITOR.replace("b_content");</script>
 	 			

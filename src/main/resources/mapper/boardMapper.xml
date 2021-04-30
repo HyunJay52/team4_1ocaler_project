@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.team4.localer.dao.BoardDAO">
+	<insert id="commuInsert" parameterType="com.team4.localer.vo.BoardVO" >
+		insert into board(num,userid,b_go,up_cate,down_cate,b_subject,b_content,b_writedate,b_tag)
+		value();
+		
+	</insert>
+
+  
+</mapper>
