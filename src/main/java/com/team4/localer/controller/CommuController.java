@@ -21,14 +21,24 @@ public class CommuController {
 	public String commuMain() { //커뮤 메인으로 이동
 		return "community/commuMain";
 	}
+	
+	//커뮤 게시판보기
 	@RequestMapping("/commuBoard")
-	public String commuBoard(BoardVO vo , HttpServletRequest req) {
-		return "community/commuBoard";
+	public ModelAndView commuBoard(BoardVO vo , HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("commuList",boardService.commuSelect(vo));
+		mav.addObject("vo",vo);
+		mav.setViewName("community/commuBoard");
+	//	return "community/commuBoard";
+		return mav;
 	}
 	@RequestMapping("/commuWrite")
 	public String commuWrite() {
 		return "community/commuWrite";
 	}
+	
+	//커뮤 글쓰기...
 	@RequestMapping(value="/commuWriteOk", method=RequestMethod.POST)
 	public ModelAndView commuWriteOk(BoardVO vo , HttpServletRequest req) {
 		ModelAndView mav= new ModelAndView();
@@ -41,14 +51,24 @@ public class CommuController {
 		System.out.println(vo.getB_gu());
 		
 		mav.addObject("vo",vo);
-		
+		if(boardService.commuInsert(vo)>0) {
+			
+			mav.setViewName("redirect:commuView");
+		}else {
+			mav.setViewName("redirect:boardWrite");
+		}
 		return mav;
 	}
 	
-	
+	//커뮤 글 보기
 	@RequestMapping("/commuView")
-	public String commuView() {
-		return "community/commuView";
+	public ModelAndView commuView(int num) {
+		ModelAndView mav= new ModelAndView();
+		
+		mav.addObject("vo",boardService.commuViewSelect(num));
+		
+		mav.setViewName("community/commuView");
+		return mav;
 	}
 	
 	@RequestMapping("/commuEdit")

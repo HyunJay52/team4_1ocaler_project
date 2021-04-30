@@ -5,10 +5,15 @@
  
 <mapper namespace="com.team4.localer.dao.BoardDAO">
 	<insert id="commuInsert" parameterType="com.team4.localer.vo.BoardVO" >
-		insert into board(num,userid,b_go,up_cate,down_cate,b_subject,b_content,b_writedate,b_tag)
-		value();
-		
+		insert into board (num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag)
+		values (boardsq.nextval, #{userid}, #{b_gu}, ${up_cate},${down_cate},#{b_subject},#{b_content}, #{b_tag})
 	</insert>
-
-  
+	<select id ="commuSelect" resultType="com.team4.localer.vo.BoardVO">
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate
+		from board where b_gu=#{b_gu} order by num desc
+	</select>
+  	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
+  		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate
+		from board where num=#{param1}
+  	</select>
 </mapper>

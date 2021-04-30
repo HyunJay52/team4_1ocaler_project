@@ -19,7 +19,7 @@
 				</select>				
 	 			<br/>
 	 			<input type="text" id ="subject" name="s_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
-	 			<input type="text" id ="cnt" name="s_cnt" placeholder="모집인원"/>
+	 			<input type="number" id ="cnt" name="s_cnt" placeholder="모집인원"/>
 	 			<textarea name="s_content" id ="content" > 내용을 입력해주세요. </textarea>
 	 			<script>CKEDITOR.replace("s_content");</script>
 	 			
@@ -28,7 +28,7 @@
 	 			<input type="date"  id ="date" name="s_date" value=""/> <!-- 날짜 -->
 	 			
 	 			
-	 			<input type="text" id ="price"  name="s_price" placeholder="판매가격" style="float: right"/>
+	 			<input type="number" id ="price"  name="s_price" placeholder="판매가격" style="float: right"/>
 	 			<input type="text" id = "loc" name="s_loc" placeholder="위치를 입력해주세요" style="float: right"/>
 	 			<input type="text" id ="gu"  name="s_gu" value="" placeholder="활동구역" style="float: right"/> <!-- 선호구역은는 vo에서 가져오기 -->
 	 			

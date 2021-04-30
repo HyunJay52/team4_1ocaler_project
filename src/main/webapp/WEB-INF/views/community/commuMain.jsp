@@ -13,7 +13,7 @@
 			
 			<div id="board">
 				<div id="localBoard">
-					<p>로컬커뮤니티</p>
+					<p>우리동네이야기</p>
 					<table class="table">
 					  <tr>
 					    <th>제목</th>
@@ -106,7 +106,7 @@
 <!-- 			<area shape="rect"  coords="235,404,297,444" href="#"  title="양천구"alt="양천구">	
 			<area shape="rect"  coords="292,531,356,562" href="#"  title="양천구"alt="양천구">  -->
 	
-		<area shape="rect"  coords="185,305,260,345" href="commuBoard?b_gu=강서구"  title="강서구"alt="강서구"/>
+		<area shape="rect"  coords="185,305,260,345" href="commuBoard?b_gu=강서구 "  title="강서구"alt="강서구"/>
 		<area shape="rect"  coords="235,400,310,440" href="commuBoard?b_gu=양천구"  title="양천구"alt="양천구"/>	
 		<area shape="rect"  coords="330,408,405,448" href="commuBoard?b_gu=영등포구"  title="영등포구"alt="영등포구"/>
 		<area shape="rect"  coords="412,445,487,485" href="commuBoard?b_gu=동작구"  title="동작구"alt="동작구"/>	
