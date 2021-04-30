@@ -53,7 +53,8 @@ public class MyinfoController {
 	public ModelAndView myInfoMain(HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
 		String userid = (String)ses.getAttribute("logId");
-		if(userid.equals("") || userid == null) {
+		System.out.println(userid);
+		if(userid == null) {
 			mav.setViewName("member/login");		
 		}else {
 			mav.addObject("myVO", service.setMyinfo(userid));
