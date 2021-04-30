@@ -3,58 +3,12 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 	$(function(){
-		var date = new Date();
-		
-		var toYear = date.getFullYear();
-		var toMonth = date.getMonth()+1;
-		
-		$(".setMonth").text(toMonth+"월");
-		
-		//달력 날짜 선택시 이벤트
-		$(".date").on('change', function(){
-			var monthArr = $(this).val().split("-");
-			
-			toYear = monthArr[0];
-			toMonth = monthArr[1].replace(/(^0+)/, "");
 
-			setMonth(toYear, toMonth);
-		});
-		
-		//월 세팅
-		function setMonth(toYear, toMonth){
-			$(".setMonth").text(toMonth+"월");
-			
-			console.log(toYear);
-			console.log(toMonth);
-			console.log($("#sel").val());
-
-		}
-		
-		//이전날짜
-		$(".prev").click(function(){
-			toMonth--;
-			if(toMonth == 0){
-				toMonth = 12;
-				toYear--;
-			}
-			setMonth(toYear, toMonth);
-		});
-		
-		//다음날짜
-		$(".next").click(function(){
-			toMonth++;
-			if(toMonth == 13){
-				toMonth = 1;
-				toYear++;
-			}
-			setMonth(toYear, toMonth);
-		});
-		
-		var nowMoney = 100000;
+		var nowMoney = ${myPoint};
 		setMoney(nowMoney); //현제 포인트 세팅
 		//충전금액 버튼 선택시
 		var firstMoney = nowMoney;
-		setMoney(0);
+		setMoney(${myPoint});
 		$(".load").val(0);
 		$("#loadArea>form>ul>li input").click(function(){
 			var charge = parseInt($(this).attr("title"));
@@ -137,7 +91,34 @@
 				        msg += '결제수단 : ' + rsp.pay_method;
 				        msg += '결제상태 : ' + rsp.status;
 				        msg += '결제시간 : ' + rsp.paid_at;
+				        
+				        //post방식 전송을 위해 json데이터로 저장한다 
+				        var data = {			//결제 금액 세팅
+				        		'cha_point' : rsp.paid_amount
+				        		};
+				        $.ajax({
+				        	type : 'POST',				 	//post방식
+				        	url : 'myInfoPointCharge',		//전송할 url
+				        	dataType : 'json', 				// json타입
+				        	data : data,					// 데이터
+				        	success : function(result){
+				        		console.log("충전완료");
+				        	}, error : function(e){
+				        		console.log("충전실패");
+				        	}
+				        });
+				        location.href="";
+				     /*   if(payStatus == 'vbank'){
+				        	msg += '가상계좌 입금계좌번호 : ' + rsp.vbank_num;
+				        	msg += '가상계좌 은행명 : ' + rsp.vbank_name;
+				        	msg += '가상계좌 예금주 : ' + rsp.vbank_holder;
+				        	msg += '가상계좌 입금기한 : ' + rsp.vbank_date;
+				        	
+				        }*/
+				       
 				        alert("결제가 완료되었습니다.");
+				        
+				       
 			    } else {
 			        msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
@@ -167,18 +148,18 @@
 					<br/>
 					<select class="selectBox" id="payStatus" name="payStatus">
 						<option value="결제수단 선택">결제수단 선택</option>
-						<option value="trans">실시간 계좌이체</option>
 						<option value="card">카드결제</option>
+			<!--		<option value="trans">실시간 계좌이체</option>
 						<option value="vbank">가상계좌</option>
 						<option value="phone">휴대폰 소액결제</option>
-						
+			 -->
 					</select>
 					<input type="submit" class="btn commBtn" value="충전하기"/>
 			</form>
 		</div>
 		<div id="myPoint">
 			<h2>잔액</h2>
-			<h2 style="float:right">100,000원</h2>
+			<h2 style="float:right">${myPoint}</h2>
 		</div>
 	</div>	
 		<div id="loadList">

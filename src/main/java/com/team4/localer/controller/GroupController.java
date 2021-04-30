@@ -46,10 +46,29 @@ public class GroupController{
 	public ModelAndView eatPage(GroupPageVO pageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
+		//페이징=================
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		//총레코드구하기
+		pageVO.setTotalRecord(groupService.groupEatTotalRecoed(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
+		//현재 페이지 검색어에 해당하는 레코드를 선택
+		System.out.println(pageVO.getLoc_gu());//들어가는 지역마다 찍혀야합니다.
+		System.out.println(pageVO.getSearchKey()+"<====key"+pageVO.getSearchWord()+"<====word");
+		System.out.println(pageVO.getSearchKey()+"<====key"+pageVO.getSearchWord()+"<====word");
+		System.out.println(groupService.groupEatTotalRecoed(pageVO)+"<==총레코드수");
+		System.out.println(pageVO.getPageNum()+"<==현재 페이지번호");
+		System.out.println(pageVO.getTotalPage()+"마지막페이지");//마지막페이지
+		System.out.println(pageVO.getOnePageRecord()+"한페이지에 보이는수");
+		System.out.println(pageVO.getLastPageRecord()+"마지막 레코드수");
+		
+		
+	
+		//end======================
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
-		mav.addObject("eatList",groupService.GroupEatList(pageVO.getLoc_gu()));
+		mav.addObject("eatList",groupService.GroupEatList(pageVO));
 		mav.addObject("pageVO",pageVO);
 		
 		mav.setViewName("group/eatView");

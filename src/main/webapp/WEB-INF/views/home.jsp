@@ -4,47 +4,6 @@
 
 <script>
 	document.title = "1ocler home";
-	
-	$(function(){
-		//bxslider 넣을 부분
-		
-		//우리직구 게시판 클릭시 이동 이벤트
-		$("#indexMain>#sell").children("#selltitle").click(function(){
-			location.href="memberBoard";
-		});
-		$("#sell>ul li").on('click', function(){
-			alert("우리직구 클릭함");
-			location.href="#";
-		});
-		
-		//가치가장 게시판 클릭시 이동 이벤트
-		$("#indexMain>#gachi").children("#gachititle").click(function(){
-			location.href="groupPage";
-		});
-		$(".indexInnerUl").click(function(){
-			alert("ul 클릭함 ");
-			location.href="#";
-		});
-		
-		//쓱싹레시피 게시판 클릭시 이동 이벤트
-		$("#sggSak li").on('click', function(){
-			alert("쓱싹 레시피 클릭함");
-			location.href="#";
-		});
-		
-		//사이드바 색깔 변경
-		$(window).on("scroll", function(){
-			var scrollTop = $(this).scrollTop();
-			if(scrollTop==0){
-// 				$("#sideBar li a img").attr("src", $("#sideBar li a img").attr("src").replace("000.png", "fff.png"));
-			}
-			if(scrollTop>0){
-// 				$("#sideBar li a img").attr("src", $("#sideBar li a img").attr("src").replace("fff.png", "000.png"));
-			}
-		});
-		
-	});
-	
 </script>
 
 	<!-- bx-slider part -->

@@ -132,7 +132,7 @@
 			<li><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>${vo.up_cate } > ${vo.down_cate }</span></li>
 			<li><span>조회수 : ${vo.g_hit } </span></li>
 			<li><span> ${vo.g_subject }</span></li>
-			<li><img id="EVPprofileView" src="<%=request.getContextPath()%>/common/user.png"/></li>
+			<li><img id="EVPprofileView" src="<%=request.getContextPath()%>/img/mem_prof/${vo.memberVO.mem_prof}"/></li>
 			<li><div>${vo.memberVO.mem_nick }</div><div>${vo.g_writedate }</div></li>
 			<li>모집인원 : <span> ${appNum }</span> / <span> ${vo.g_cnt } </span></li> <!--  쒯 join 테이블도 join해야되네 -->
 			
@@ -162,7 +162,7 @@
 	<div id="EVPProfilePopup">
 		<div><span>X</span></div>
 		<div><span>활동정보</span></div>
-		<div><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"></div>
+		<div><img src="<%=request.getContextPath()%>/img/mem_prof/${vo.memberVO.mem_prof}"></div>
 		<div>
 			<ul id="EVPProfilePopupUl">
 				<li><span>${vo.userid }</span></li>

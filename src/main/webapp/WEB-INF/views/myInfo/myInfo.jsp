@@ -67,19 +67,45 @@
 				$("#secessionForm").submit();
 			}
 		});
-		
+		//이메일 세팅
+		function setEmail(){
+			var emailAll = '${myVO.mem_email}';
+			var email = emailAll.split("@");
+			
+			var domain = ['naver.com','gmail.com','daum.net','nate.com'];
+			var tag = "<input type='text' name='email' value='"+email[0]+"' disabled/>@";
+			tag += "<select name='emaildomain' disabled>";
+			
+			for(var i = 0; i < domain.length; i++){
+				if(domain[i] == email[1]){
+					tag += "<option value='"+domain[i]+"' selected>"+domain[i]+"</option>";
+				}else{
+					tag += "<option value='"+domain[i]+"'>"+domain[i]+"</option>";
+				}	
+			}
+			tag += "</select>";
+			
+			$("#emailForm").html(tag);
+			
+
+		}
+		setEmail();
 		//지역 세팅
 		function setGu(){
 			var gu = ['강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구', 
 				'노원구','도봉구','동대문구','동작구','마포구','서대문구','서초구','성동구','성북구','송파구','양천구','영등포구','용산구','은평구','종로구','중구','중랑구'];
 			var tag = "";
 			gu.map(function(value, index){
-				tag += "<option value="+value+">"+value+"</option>";
+				if(value == '${myVO.loc_gu}'){
+					tag += "<option value="+value+" selected>"+value+"</option>";					
+				}else{
+					tag += "<option value="+value+">"+value+"</option>";					
+				}
 			});
 			$("#addr1").html(tag);
 			$("#addr2").html(tag);
 		}
-	setGu();
+		setGu();
 	});
 </script>
 <div class="myinfoBody">
@@ -92,13 +118,13 @@
 			<form method="post">
 				<ul>
 					<li>아이디</li>
-					<li>test</li>
+					<li>${myVO.userid }</li>
 					<li>회원명</li>
-					<li>테스트</li>
+					<li>${myVO.mem_name }</li>
 					<li>별명</li>
-					<li><input type="text" name="nickname" value="자바칩프라푸치노" disabled/></li>
+					<li><input type="text" name="nickname" value="${myVO.mem_nick }" disabled/></li>
 					<li>소개</li>
-					<li><input type="text" name="#" value="마포구 동대" disabled/><hr/></li>
+					<li><input type="text" name="#" value="${myVO.mem_content }" disabled/><hr/></li>
 					<li><h4>대표 이미지</h4></li>
 					<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png"></li>
 					<li><label class="btn" for="imgFile">사진 선택</label><input id="imgFile" name="file" type="file" class="editOn" style="display:none; border:none;"/></li>
@@ -114,25 +140,20 @@
 			<form id="detailfrm" method="post">
 				<ul>
 					<li>연락처</li>
-					<li><input type="text" name="tel" value="010-0000-0000" disabled/></li>
+					<li><input type="text" name="tel" value="${myVO.mem_tel }" disabled/></li>
 					<li>이메일</li>
-					<li><input type="text" name="email" value="test" disabled/>@
-						<select name="emaildomain" disabled>
-							<option value="naver.com">naver.com</option>
-							<option value="gmail.com">gmail.com</option>
-							<option value="daum.net">daum.net</option>
-							<option value="nate.com">nate.com</option>
-						</select>
+					<li id="emailForm">
+					
 					</li>
 					<li style="overflow:auto; display:none"><input type="button" value="메일변경" class="btn commBtn editOn" style="float:right"/></li>
 					<li>주소</li>
-					<li><input type="text" name="zipcode" value="12345" disabled/><input type="button" style="float:right; margin-right:60%;" value="주소찾기" class="btn commBtn editOn"></li>
+					<li><input type="text" name="zipcode" value="${myVO.mem_zip }" disabled/><input type="button" style="float:right; margin-right:60%;" value="주소찾기" class="btn commBtn editOn"></li>
 					<li><span>서울특별시</span>
 						<select id="addr1" name="addr" disabled>
 
 						</select>
 					</li>
-					<li><input type="text" name="detailaddr" value="특별한13길	13-7 103동 202호" disabled/></li>
+					<li><input type="text" name="detailaddr" value="${myVO.mem_detail }" disabled/></li>
 					<li>선호지역</li>
 					<li><span>서울특별시</span>
 						<select id="addr2" name="#" disabled>
