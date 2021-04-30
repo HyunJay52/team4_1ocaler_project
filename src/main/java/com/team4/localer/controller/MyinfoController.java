@@ -19,26 +19,33 @@ public class MyinfoController {
 	public String myInfoCheck() {
 		return "/myInfo/myInfoCheck";
 	}
-	@RequestMapping("/pwdCheck")
-	public ModelAndView pwdCheck(String userpwd, HttpSession session) {
-		String userid = (String)session.getAttribute("logId");
+
+	@RequestMapping("/myInfo")
+	public ModelAndView checkMyInfo(HttpSession ses, MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myInfo/myInfo");
+		vo.setUserid((String)ses.getAttribute("logId"));
 		
+		MemberVO myInfoVO = service.goMyinfopage(vo);
+		if(myInfoVO != null) {
+			try {
+				mav.addObject("myVO", myInfoVO);
+				mav.setViewName("myInfo/myInfo");
+			}catch(NullPointerException nullep) {
+				nullep.printStackTrace();
+				mav.setViewName("redirect:myInfoCheck");
+				return mav;
+			}
+			
+		}else {
+			mav.setViewName("redirect:myInfoCheck");
+		}
 		return mav;
 	}
 	@RequestMapping("/myInfoMain")
 	public String myInfoMain() {
 		return "myInfo/myInfoMain";
 	}
-	@RequestMapping("/myInfo")
-	public ModelAndView myInfo(MemberVO vo) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myInfo/myInfo");
-		
-		
-		return mav;
-	}
+	
 	@RequestMapping("/myInfoLoad")
 	public String myInfoLoad() {
 		return "myInfo/myInfoLoad";

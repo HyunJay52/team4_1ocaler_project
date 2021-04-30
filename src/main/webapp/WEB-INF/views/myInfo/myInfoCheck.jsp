@@ -56,7 +56,7 @@
 	$(function(){
 		$("#loginBtn").click(function(){
 			$("#passwordCheckForm").submit(function(){
-				if($("#userpwd").val()===""){
+				if($("#userpwd").val()==""){
 					alert("비밀번호를 입력해주세요.");
 					$("#userpwd").focus();
 					return false;
@@ -70,14 +70,15 @@
 	});
 </script>
 <div id="loginContainer">
+	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
+	
 	<div id="login_section">
 		<span class="lgFnt" >비밀번호 확인</span>
 		<form method="post" action="myInfo" id="passwordCheckForm"> <!-- loginConfrim -->
 			<ul>
 				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
-				<li><button id="loginBtn" class="btn commBtn lgBtn" tabindex="4" >확인</button></li>
-				<li><button type="button" id="signupBtn" class="btn commBtn lgBtn" tabindex="5" >취소</button></li>
-				<li><a href="#" class="smlFnt lgA">비밀번호찾기</a></li>
+				<li><button id="loginBtn" class="btn commBtn lgBtn" tabindex="4" style="width:320px">확인</button></li>
+				<li><button type="button" id="signupBtn" class="btn commBtn lgBtn" tabindex="5" style="width:320px">취소</button></li>
 			</ul>
 		</form>
 	</div>

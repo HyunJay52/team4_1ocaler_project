@@ -80,38 +80,50 @@
 			var charge = parseInt($(".load").val());
 			setMoney(charge);
 		});
-		
+
 		//결제수단 이벤트
-		$("#loadArea").click(function(){
-			payment();
-		});
 		$("#loadFrom").on("submit", function(){
 			if($("#loadArea>form>select").val() == '결제수단 선택'){
 				alert("결제수단을 선택해주세요");
 				return false;
+			}else if('${logId}' == '' || '${logId}' == null){
+				alert("로그인 후 이용 가능합니다.");
+				location.href="login";
+				return false;
 			}else{
 				if(payment()){
 					$("#myPoint").children().next().text(myMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");				
-	
+										
 				}else{
-					return false;					
+					return false;
 				}
+	
+				
 	
 			}
 			
 		});
+		
 		var msg ="";
-			var IMP = window.IMP;
-			IMP.init('imp45051525');
+		
+		//결제 api 식별코드 세팅
+		var IMP = window.IMP;
+		IMP.init('imp45051525');
+			
+			
 		function payment(){
+			var userid = '${logId}';
+			var username = '${logName}';
+			var payStatus = $("#payStatus option:selected").val();
+			console.log(payStatus);
 			IMP.request_pay({
 			    pg : 'html5_inicis', // version 1.1.0부터 지원.
-			    pay_method : 'card',
+			    pay_method : payStatus,
 			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '주문명:결제테스트',
+			    name : '포인트 충전',
 			    amount : 100,
 			    buyer_email : 'test@localer.com',
-			    buyer_name : '구매자이름',
+			    buyer_name : username,
 			    buyer_tel : '010-1234-5678',
 			    buyer_addr : '서울특별시 강남구 삼성동',
 			    buyer_postcode : '123-456',
@@ -131,6 +143,7 @@
 			        msg += '에러내용 : ' + rsp.error_msg;
 			    }
 			    alert(msg);
+			    return rsp.success;
 			});
 		};
 		
@@ -152,10 +165,13 @@
 						<li><input type="button" class="btn commBtn mdFnt btn-block" title="200000" value="20 만원"/></li>
 					</ul>
 					<br/>
-					<select class="selectBox" name="payWay">
+					<select class="selectBox" id="payStatus" name="payStatus">
 						<option value="결제수단 선택">결제수단 선택</option>
-						<option value="무통장입금">무통장입금</option>
-						<option value="카드결제">카드결제</option>
+						<option value="trans">실시간 계좌이체</option>
+						<option value="card">카드결제</option>
+						<option value="vbank">가상계좌</option>
+						<option value="phone">휴대폰 소액결제</option>
+						
 					</select>
 					<input type="submit" class="btn commBtn" value="충전하기"/>
 			</form>
