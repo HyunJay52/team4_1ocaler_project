@@ -3,6 +3,7 @@ package com.team4.localer.controller;
 import java.io.File;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
