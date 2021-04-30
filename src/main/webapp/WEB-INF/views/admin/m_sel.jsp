@@ -58,47 +58,7 @@
 		<input type="text" class="textcomm" name="serchword"/>
 		<input type="submit" class="searchbtn" value="검색"/>
 	</form>	
-	<table class="tablea" >
-		 <colgroup>
-               <col width="5%" />
-               <col width="5%" />
-               <col width="6%" />
-               <col width="5%" />
-               <col />
-               <col width="13%" />
-               <col width="9%" />
-               <col width="8%" />
-               <col width="9%" />
-               <col width="9%" />
-               <col width="5%"/>
-            </colgroup>
-		<tr>
-			<td>번호</td>
-			<td>아이디</td>
-			<td>이름</td>
-			<td>성별</td>
-			<td>주소</td>
-			<td>연락처</td>
-			<td>글쓰기 권한</td>
-			<td>휴면상태</td>
-			<td>셀러권한삭제</td>
-			<td>쌓인신고</td>
-			<td>수정</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td class="memid">goguma</td>
-			<td>김길동</td>
-			<td>남자</td>
-			<td>서울시 강서구</td>
-			<td>010-2222-3333</td>
-			<td><input type="button" class="spuplebtn"value="Y"></td>
-			<td><input type="button" class="spuplebtn"value="Y"></td>
-			<td><input type="button" class="spuplebtn"value="Y"></td>
-			<td>10</td>
-			<td><input type="button" class="spuplebtn"value="수정"></td>
-		</tr>
-	</table>
+	
 	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->
 	<table id="meminfo" class="tablea">
 		<colgroup>
@@ -148,6 +108,47 @@
 			<td>goguma</td>
 			<td>2021.01.20</td>
 			<td>10000</td>
+		</tr>
+	</table>
+	<table class="tablea" >
+		 <colgroup>
+               <col width="5%" />
+               <col width="5%" />
+               <col width="6%" />
+               <col width="5%" />
+               <col />
+               <col width="13%" />
+               <col width="9%" />
+               <col width="8%" />
+               <col width="9%" />
+               <col width="9%" />
+               <col width="5%"/>
+            </colgroup>
+		<tr>
+			<td>번호</td>
+			<td>아이디</td>
+			<td>이름</td>
+			<td>성별</td>
+			<td>주소</td>
+			<td>연락처</td>
+			<td>블랙리스트</td>
+			<td>휴면상태</td>
+			<td>셀러권한</td>
+			<td>쌓인신고</td>
+			<td>정보수정</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td class="memid">goguma</td>
+			<td>김길동</td>
+			<td>남자</td>
+			<td>서울시 강서구</td>
+			<td>010-2222-3333</td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td><input type="button" class="spuplebtn"value="Y"></td>
+			<td>10</td>
+			<td><input type="button" class="spuplebtn"value="수정"></td>
 		</tr>
 	</table>
 
