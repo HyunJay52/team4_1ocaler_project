@@ -39,7 +39,7 @@
 
   		  <!-- 검색어가 없을때 -->
   		  <if test="searchWord == null or searchWord.equals('')">
-  		  	order by g_date)
+  		  	order by g_date desc)
   		  <![CDATA[ where rownum <=]]> ${pageNum}*${onePageRecord} order by g_date)
   		  <![CDATA[ where rownum <=]]>
   		  <if test="pageNum==totalPage">
