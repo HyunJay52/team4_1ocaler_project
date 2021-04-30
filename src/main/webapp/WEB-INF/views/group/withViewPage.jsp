@@ -35,6 +35,14 @@
 				$("#WVPProfilePopup").css("display","none");
 			});
 			
+			$('#withViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+				if(${logId!=null}){
+					location.href="reportWrite?userid=${vo.userid}"	
+				}else{
+					alert('로그인후 사용할 수 있습니다.');
+				}
+			});
+			
 			
 			//버튼 클릭시============================================================================
 				//뒤로가기	
@@ -152,13 +160,13 @@
 		<div id="WVPProfilePopup">
 		<div><span>X</span></div>
 		<div><span>활동정보</span></div>
-		<div><img src="<%=request.getContextPath()%>/common/user.png"></div>
+		<div><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"></div>
 		<div>
 			<ul>
-				<li><span>goguam1234</span></li>
-				<li><span>가입일 : 2021-08-29 </span></li>
-				<li><span>총 게시물 : 100개</span></li>
-				<li><span>총 댓글수 : 100개</span></li>
+				<li><span>${vo.userid }</span></li>
+				<li><span>가입일 : ${vo.memberVO.mem_sub } </span></li>
+				<li><span>총 게시물 : ${vo.memberVO.mem_post }개</span></li>
+				<li><span>총 댓글수 : ${vo.memberVO.mem_rev }개</span></li>
 			</ul>
 		</div>
 		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
