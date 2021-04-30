@@ -6,13 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.vo.MemberVO;
+
 @Controller
 public class MyinfoController {
 	
-	@RequestMapping("/myInfoCheck")
-	public String myInfoCheck() {
-		return "/myInfo/myInfoCheck";
-	}
 	@RequestMapping("/pwdCheck")
 	public ModelAndView pwdCheck(String userpwd, HttpSession session) {
 		String userid = (String)session.getAttribute("logId");
@@ -24,10 +22,6 @@ public class MyinfoController {
 	@RequestMapping("/myInfoMain")
 	public String myInfoMain() {
 		return "myInfo/myInfoMain";
-	}
-	@RequestMapping("/myInfo")
-	public String myInfo() {
-		return "myInfo/myInfo";
 	}
 	@RequestMapping("/myInfoLoad")
 	public String myInfoLoad() {
