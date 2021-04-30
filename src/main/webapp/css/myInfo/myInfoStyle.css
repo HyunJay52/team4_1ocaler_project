@@ -4,6 +4,7 @@
 	.myinfoBody{
 		overflow:auto;
 		width:1300px;
+		margin:0 auto;
 	}
 	.myinfoContainer{
 		width:1000px;
@@ -22,7 +23,7 @@
 		float:left;
 		width:150px;
 		height:100%;
-		background-color:#705abf;
+
 		text-align:center;
 	}
 	#sideMenu>h1{
@@ -32,6 +33,7 @@
 		background-color:#fff;
 		overflow:auto;
 		border:1px solid black;
+		margin:0;
 	}
 	#sideMenu a:active, #sideMenu a:link, #sideMenu a:visited{
 		text-decoration:none;
@@ -142,7 +144,10 @@
 	
 /* bxslider 세팅 */
 	.bx-wrapper{
-	   	border:none; box-shadow:none; margin-bottom:36px;
+	   	border:none; 
+	   	box-shadow:none; 
+	   	margin-bottom:36px;
+	   	-webkit-box-shadow:none;
 	}
 	.bx-controls-direction{
 		display:none;

@@ -103,8 +103,8 @@
 		<div id="profile">
 			<ul>
 				<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png"/></li>
-				<li>자바칩프라푸치노</li>
-				<li>마포구 동대</li>
+				<li>${myVO.mem_nick}</li>
+				<li>${myVO.loc_gu }</li>
 				<li><input type="button" value="버튼" class="btn"/></li>
 			</ul>
 		</div>
