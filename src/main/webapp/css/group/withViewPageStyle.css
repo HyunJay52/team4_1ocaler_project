@@ -22,8 +22,8 @@
 	#withViewPageShowTopMenu>li:first-child>span{color:#3f1785; font-weight:bold;}
 	#withViewPageShowTopMenu>li:nth-child(2){width:30%; padding:10px 15px 10px 0px; text-align:right; }
 	#withViewPageShowTopMenu>li:nth-child(3)>span{display:block; margin-bottom:5px; padding: 0 10px; font-size:22px; font-weight:bold;}	
-	#withViewPageShowTopMenu>li:nth-child(4){width:13%; padding-left:10px;}
-	#withViewPageShowTopMenu>li:nth-child(4)>img{width:40px;}
+	#withViewPageShowTopMenu>li:nth-child(4){width:13%; padding-left:10px; height:40px;}
+	#withViewPageShowTopMenu>li:nth-child(4)>img{width:40px; height:40px; border-radius:10px;}
 	#withViewPageShowTopMenu>li:nth-child(5){width:47%}
 	#withViewPageShowTopMenu>li:nth-child(5)>div{font-size:13px; height: 20px; line-height: 20px;}
 	#withViewPageShowTopMenu>li:nth-child(5)>div:first-child{padding-left:30pxx}
