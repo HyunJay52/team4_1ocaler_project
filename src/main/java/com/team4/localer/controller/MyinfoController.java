@@ -1,28 +1,51 @@
 package com.team4.localer.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.MyInfoService;
 import com.team4.localer.vo.MemberVO;
 
 @Controller
 public class MyinfoController {
+	@Inject
+	MyInfoService service;
 	
-	@RequestMapping("/pwdCheck")
-	public ModelAndView pwdCheck(String userpwd, HttpSession session) {
-		String userid = (String)session.getAttribute("logId");
+	@RequestMapping("/myInfoCheck")
+	public String myInfoCheck() {
+		return "/myInfo/myInfoCheck";
+	}
+
+	@RequestMapping("/myInfo")
+	public ModelAndView checkMyInfo(HttpSession ses, MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myInfo/myInfo");
+		vo.setUserid((String)ses.getAttribute("logId"));
 		
+		MemberVO myInfoVO = service.goMyinfopage(vo);
+		if(myInfoVO != null) {
+			try {
+				mav.addObject("myVO", myInfoVO);
+				mav.setViewName("myInfo/myInfo");
+			}catch(NullPointerException nullep) {
+				nullep.printStackTrace();
+				mav.setViewName("redirect:myInfoCheck");
+				return mav;
+			}
+			
+		}else {
+			mav.setViewName("redirect:myInfoCheck");
+		}
 		return mav;
 	}
 	@RequestMapping("/myInfoMain")
 	public String myInfoMain() {
 		return "myInfo/myInfoMain";
 	}
+	
 	@RequestMapping("/myInfoLoad")
 	public String myInfoLoad() {
 		return "myInfo/myInfoLoad";
