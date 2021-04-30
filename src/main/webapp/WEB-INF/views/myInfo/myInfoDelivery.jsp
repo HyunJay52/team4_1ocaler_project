@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!--	cross origin	-->
+<script type="text/javascript" src="<%=request.getContextPath() %>/plugin/jquery.ajax-cross-origin.min.js"></script>
+
 <script>
 	$(function(){
 		//ajax 배송조회 실행
@@ -71,18 +74,28 @@
 		$("h2").click(function(){
 			getData();
 		})
-		function getData(){
-			$.ajax({
-				url : 'https://api.iamport.kr/payments/status/paid?limit=20&sorting=-started&_token=61bdb58399c41ac3ecee661db1d892d0526c7852'
-				,dataType : 'json'
-				,success : function(result){
-					console.log("실행");
+		function getToken(){
+			var key = "4568260847086151";
+			var secret = "x6uPWEOnbqht7jlw1mpFvVQXsSvyrL7YSCNOhCbt2tW9MiGOF5ta0k7tcC2Eo9CgLq532gw4KsexLUlq";
 			
-				}, error : function(e){
-					console.log("error="+e);
+			var access_token;
+			$.ajax({
+				url : 'https://api.iamport.kr/users/getToken'
+				,method : "post"
+				,dataType : 'json'
+				,data : {
+					imp_key : key
+					,imp_secret : secret
+				}
+				,success : function(getToken){
+					 access_token = getToken.data.response;
+				},error : function(){
+					console.log("error");
 				}
 			});
 		}
+		
+
 	});
 </script>
 <div class="myinfoBody">
