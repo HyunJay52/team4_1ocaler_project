@@ -66,9 +66,9 @@
 						}
 						txt += "<td><input type='button' ";
 						if(vo.mem_status==3){//블랙리스트 회원
-							txt +="class='redBtn'value='정지'></td>"
+							txt +="class='redBtn black'value='정지'></td>"
 						}else{//정상회원
-							txt +="class='spuplebtn'value='등록'></td>"
+							txt +="class='spuplebtn black'value='등록'></td>"
 						}
 						txt +="</tr>";
 					});
@@ -79,6 +79,73 @@
 			});
 		});
 	});
+$(function(){
+	//블랙리스트 버튼 클릭시
+	$(document).on('click', '.black', function(){
+		var status = $(this).val();//현재 버튼의 상태
+		var userid = $(this).parent().prev().prev().prev().prev().prev().prev().text();//누른 버튼의 아이디 
+		if(confirm('블랙리스트 '+status+"하시겠습니까?")){
+			if(status=='등록'){//정상회원 -> 블랙리스트
+				memUpdate(userid,'mem_status',3);//mem_status==3 블랙리스트
+				//버튼 클래스 변경해주기
+				$(this).val('정지');
+				$(this).removeClass().addClass('redBtn black');		
+			}else{//블랙리스트 정지시켜주기
+				memUpdate(userid,'mem_status',1);
+				$(this).val('등록');
+				$(this).removeClass().addClass('spuplebtn black');
+			}	
+		}
+	});
+	$(document).on('click', '.seller', function(){
+		var status = $(this).val();//현재 버튼의 상태
+		var userid = $(this).parent().prev().prev().prev().prev().prev().text();//누른 버튼의 아이디 
+		if(status=='일반'){
+			if(confirm("셀러권한을 부여하시겠습니까?")){
+				memUpdate(userid,'mem_type',2);//mem_type 1.일반회원 2.셀러회원 -->
+				$(this).val('셀러');
+				$(this).removeClass().addClass('smallbtn seller');	
+			}
+		}else{
+			if(confirm("셀러권한을 박탈하시겠습니까?")){
+				memUpdate(userid,'mem_type',1);
+				$(this).val('일반');
+				$(this).removeClass().addClass('spuplebtn seller');	
+			}
+		}
+	});
+	$(document).on('click', '.rest', function(){
+		var status = $(this).val();//현재 버튼의 상태
+		var userid = $(this).parent().prev().prev().prev().prev().text();//누른 버튼의 아이디
+		if(status=='휴면회원'){
+			if(confirm('휴면상태를 정지하시겠습니까?')){//1.정상, 2.휴면, 3.블랙,4.탈퇴  -->
+				memUpdate(userid,'mem_type',1);
+				$(this).val('정상회원');
+				$(this).removeClass().addClass('spuplebtn rest');	
+			}
+		}else{
+			if(confirm("휴면처리 하시겠습니까?")){
+				memUpdate(userid,'mem_type',2);
+				$(this).val('휴면회원');
+				$(this).removeClass().addClass('smallbtn rest');	
+			}
+		}
+	});
+	//회원 정보 update function ajax()
+	function memUpdate(userid,cate,status){//누구를, 어느 부분을, 어떻게 update할지
+		var param = "userid="+userid+"&cate="+cate+"&status="+status;
+		$.ajax({
+			type : "POST",
+			url : "memUpdate",
+			data : param,
+			success : function(result){
+				
+			},error : function(){
+				alert("변경 실패,,,개발자와 연락해보세요,,,");
+			}
+		});
+	}
+});
 	
 </script>
 <div class="main">
@@ -176,7 +243,7 @@
 				<td>${vo.mem_tel }</td>
 				<!-- 휴면인지 아닌지 mem_status 1.정상, 2.휴면, 3.블랙,4.탈퇴  -->
 				<c:if test="${vo.mem_status==2 }"><!-- 휴면일때 -->
-					<td><input type="button" class="spuplebtn rest"value="휴면회원"></td>
+					<td><input type="button" class="smallbtn rest"value="휴면회원"></td>
 				</c:if>
 				<c:if test="${vo.mem_status!=2 }">
 					<td><input type="button" class="spuplebtn rest"value="정상회원"></td>
@@ -185,13 +252,13 @@
 					<td><input type="button" class="spuplebtn seller"value="일반"></td>
 				</c:if>
 				<c:if test="${vo.mem_type==2 }"><!-- 1.일반회원 2.셀러회원 -->
-					<td><input type="button" class="spuplebtn seller"value="셀러"></td>
+					<td><input type="button" class="smallbtn seller"value="셀러"></td>
 				</c:if>
 				<c:if test="${vo.mem_status==3 }"><!-- 3.블랙리스트 -->
-					<td><input type="button" class="redBtn"value="정지"></td>
+					<td><input type="button" class="redBtn black"value="정지"></td>
 				</c:if>
 				<c:if test="${vo.mem_status!=3 }"><!-- 블랙리스트가 아닌경우 -->
-					<td><input type="button" class="redBtn"value="등록"></td>
+					<td><input type="button" class="spuplebtn black"value="등록"></td>
 				</c:if>
 			</tr>
 		</c:forEach>

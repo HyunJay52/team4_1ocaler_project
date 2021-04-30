@@ -20,4 +20,7 @@
   		<!-- 게시물수 , 등급, 가입날짜 -->
   		select userid, mem_post, mem_rev, to_char(mem_sub, 'YYYY.MM.DD') mem_sub from member where userid=#{param1}
   	</select>
+  	<update id="memberManageUpdate">
+  		update member set ${param2}=${param3} where userid=#{param1}
+  	</update>
 </mapper>

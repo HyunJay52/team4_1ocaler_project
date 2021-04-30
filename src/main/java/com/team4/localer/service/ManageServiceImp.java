@@ -30,6 +30,11 @@ public class ManageServiceImp implements ManageService {
 		return manadao.memInfoCount(userid, table);
 	}
 
+	@Override
+	public int memberManageUpdate(String userid, String cate, int status) {
+		return manadao.memberManageUpdate(userid, cate, status);
+	}
+
 
 
 	

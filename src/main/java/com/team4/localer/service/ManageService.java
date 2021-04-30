@@ -11,4 +11,6 @@ public interface ManageService {
 	public int memInfoCount(String userid,String table);
 	//회원 1명 정보 select 
 	public MemberVO memOneSelect(String userid);
+	//회원 관리 페이지 회원 정보 수정 
+	public int memberManageUpdate(String userid,String cate,int status);
 }

@@ -48,6 +48,11 @@ public class AdminManageController {
 		
 		return result;
 	};
+	@RequestMapping(value="/memUpdate", method=RequestMethod.POST)
+	@ResponseBody
+	public int memUpdate(String userid, String cate, int status) {
+		return manaService.memberManageUpdate(userid,cate,status);
+	}
 	
 	
 }
