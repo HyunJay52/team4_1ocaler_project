@@ -57,7 +57,7 @@ public class AdminManageController {
 	@RequestMapping("/m_sel")//회원관리-일반회원 
 	public ModelAndView m_sel() {
 		ModelAndView mav = new ModelAndView();
-		manaService.sellerAllSelect("","");
+//		manaService.sellerAllSelect("","");
 		mav.setViewName("admin/m_sel");
 		return mav;
 	}

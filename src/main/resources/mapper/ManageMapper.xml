@@ -24,7 +24,7 @@
   		update member set ${param2}=${param3} where userid=#{param1}
   	</update>
   	<!-- 셀러관리 페이지 부분 -->
-  	<select id="sellerAllSelect" resultType="com.team4.localer.vo.SellerVO">
+  	<!-- <select id="sellerAllSelect" resultType="com.team4.localer.vo.SellerVO">
   		select sel_num,userid,sel_lvl
-  	</select>
+  	</select> -->
 </mapper>
