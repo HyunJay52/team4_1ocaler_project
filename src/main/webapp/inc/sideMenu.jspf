@@ -22,8 +22,6 @@
 <!-- 그래프  -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="<%=request.getContextPath() %>/js/myInfo/myInfoBarScript.js"></script>
-<!--	cross origin	-->
-<script type="text/javascript" src="<%=request.getContextPath() %>/plugin/jquery.ajax-cross-origin.min.js"></script>
 
 <script>
 	var menuTitle = ['My Info','참여내역','판매관리'];

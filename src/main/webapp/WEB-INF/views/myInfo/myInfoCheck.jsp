@@ -55,7 +55,7 @@
 <script>
 	$(function(){
 		$("#loginBtn").click(function(){
-			$("#login_section").submit(function(){
+			$("#passwordCheckForm").submit(function(){
 				if($("#userpwd").val()===""){
 					alert("비밀번호를 입력해주세요.");
 					$("#userpwd").focus();
@@ -72,7 +72,7 @@
 <div id="loginContainer">
 	<div id="login_section">
 		<span class="lgFnt" >비밀번호 확인</span>
-		<form method="post" action="myInfo"> <!-- loginConfrim -->
+		<form method="post" action="myInfo" id="passwordCheckForm"> <!-- loginConfrim -->
 			<ul>
 				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
 				<li><button id="loginBtn" class="btn commBtn lgBtn" tabindex="4" >확인</button></li>

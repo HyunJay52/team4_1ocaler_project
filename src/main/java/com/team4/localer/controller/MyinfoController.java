@@ -1,13 +1,19 @@
 package com.team4.localer.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.MyInfoService;
+import com.team4.localer.vo.MemberVO;
+
 @Controller
 public class MyinfoController {
+	@Inject
+	MyInfoService service;
 	
 	@RequestMapping("/myInfoCheck")
 	public String myInfoCheck() {
@@ -26,8 +32,12 @@ public class MyinfoController {
 		return "myInfo/myInfoMain";
 	}
 	@RequestMapping("/myInfo")
-	public String myInfo() {
-		return "myInfo/myInfo";
+	public ModelAndView myInfo(MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myInfo/myInfo");
+		
+		
+		return mav;
 	}
 	@RequestMapping("/myInfoLoad")
 	public String myInfoLoad() {

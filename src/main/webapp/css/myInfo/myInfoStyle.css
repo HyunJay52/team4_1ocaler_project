@@ -142,7 +142,10 @@
 	
 /* bxslider 세팅 */
 	.bx-wrapper{
-	   	border:none; box-shadow:none; margin-bottom:36px;
+	   	border:none; 
+	   	box-shadow:none; 
+	   	margin-bottom:36px;
+	   	-webkit-box-shadow:none;
 	}
 	.bx-controls-direction{
 		display:none;

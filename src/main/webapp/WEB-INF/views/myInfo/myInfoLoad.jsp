@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script><script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
 	$(function(){
 		var date = new Date();
 		
@@ -81,53 +82,58 @@
 		});
 		
 		//결제수단 이벤트
+		$("#loadArea").click(function(){
+			payment();
+		});
 		$("#loadFrom").on("submit", function(){
 			if($("#loadArea>form>select").val() == '결제수단 선택'){
 				alert("결제수단을 선택해주세요");
 				return false;
 			}else{
-				$("#myPoint").children().next().text(myMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");				
 				if(payment()){
-					
+					$("#myPoint").children().next().text(myMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");				
+	
 				}else{
 					return false;					
 				}
+	
 			}
 			
 		});
-		
-		function payment(){
+		var msg ="";
 			var IMP = window.IMP;
 			IMP.init('imp45051525');
+		function payment(){
 			IMP.request_pay({
-			    pg : 'inicis', // version 1.1.0부터 지원.
+			    pg : 'html5_inicis', // version 1.1.0부터 지원.
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '주문명:결제테스트',
-			    amount : myMoney,
-			    buyer_email : 'iamport@siot.do',
+			    amount : 100,
+			    buyer_email : 'test@localer.com',
 			    buyer_name : '구매자이름',
 			    buyer_tel : '010-1234-5678',
 			    buyer_addr : '서울특별시 강남구 삼성동',
 			    buyer_postcode : '123-456',
-			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+			 	m_redirect_url : 'myInfoLoad'
 			}, function(rsp) {
-			    if( rsp.success ) {
-			        var msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
-			    }else {
-			        var msg = '결제에 실패하였습니다.';
+			    if ( rsp.success ) {
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        msg += '결제수단 : ' + rsp.pay_method;
+				        msg += '결제상태 : ' + rsp.status;
+				        msg += '결제시간 : ' + rsp.paid_at;
+				        alert("결제가 완료되었습니다.");
+			    } else {
+			        msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
 			    }
 			    alert(msg);
-				return rsp.success;
 			});
 		};
-			
-
+		
 	});
 </script>
 <div class="myinfoBody">
@@ -136,7 +142,7 @@
 	<h2>충전하기</h2>
 	<div class="loadTop">
 		<div id="loadArea">
-			<form method="post" action="load" id="loadFrom">
+			<form method="post" action="myInfoLoad" id="loadFrom">
 				<input type="text" name="load" class="lgFnt load"/>
 					<span class="mdFnt">충전 후 잔액 :</span><span class="mdFnt" id="loadMoney"></span>
 					<ul>
