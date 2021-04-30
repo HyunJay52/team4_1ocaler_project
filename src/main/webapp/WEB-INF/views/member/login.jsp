@@ -1,37 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
-
+<%request.setCharacterEncoding("utf-8"); %>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<%request.setCharacterEncoding("utf-8"); %>
-<%
-//로그인 상태 유지를 선택했는지 확인 > 쿠키 저장
-// String stayinLogin = request.getParameter("stay");
-// if(stayinLogin.equals("stay")){
-// 	String userid = request.getParameter("userid");
-// 	Cookie stayCookie = new Cookie("logCookieId", userid);
-// 	response.addCookie(stayCookie);
-// }else{
-// 	Cookie[] cookies = request.getCookies(); //등록된 쿠키삭제 작업
-// 	for(int i=0; i<cookies.length; i++){
-// 		Cookie cookie = cookies[i];
-// 		if(cookie.getName().equals("logCookieId")){
-// 			cookie.setMaxAge(0);
-// 			response.addCookie(cookie);
-// 		}
-// 	}
-// }
-//쿠키 유무 확인해서 페이지 이동
-// if(cookies!=null){ //쿠키가 있음
-// 	for(Cookie userCookie : cookies){
-// 		if(userCookie.getName().equals("logId")){
-// 			response.sendRedirect("home.jsp");
-// 		}
-// 	}
-// }
-%>
 
 <script type="text/javascript">
 	document.title = "로그인";

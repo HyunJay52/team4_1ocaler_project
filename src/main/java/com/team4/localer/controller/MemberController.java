@@ -5,6 +5,7 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -29,16 +30,19 @@ public class MemberController {
 	}
 // 로그인	
 	@RequestMapping(value="/loginConfrim", method=RequestMethod.POST)
-	public String loginConfirm(String userid, String userpwd, String stay, HttpSession ses) {
+	public String loginConfirm(String userid, String userpwd, String stay, HttpSession ses, HttpServletResponse res) {
 		String goPage = "";
-		System.out.println("로그인 상태 유지? > > > > "+stay);
 		MemberVO logVO = service.memLogin(userid, userpwd);
 		try {
 			if(logVO.getMem_name()!=null && !logVO.getMem_name().equals("")) {
-				if(stay.equals("stay")) {
-					Cookie logCookie = new Cookie("userid", logVO.getUserid());
-					logCookie.setMaxAge(100);
-					
+				if(stay!=null && stay.equals("stay")) {
+					Cookie logCookie = new Cookie("logCookie", logVO.getUserid());
+					logCookie.setMaxAge(60*60*24*180);
+					logCookie.setPath("/");
+					res.addCookie(logCookie);
+					ses.setMaxInactiveInterval(60*60*24*180);
+				}else {
+					ses.setMaxInactiveInterval(60*60);
 				}
 				ses.setAttribute("logId", logVO.getUserid());
 				ses.setAttribute("logName", logVO.getMem_name());
@@ -55,8 +59,22 @@ public class MemberController {
 	}	
 // 로그아웃
 	@RequestMapping("/logOut")
-	public String logOut(HttpSession ses) {
-		ses.invalidate();
+	public String logOut(HttpServletRequest req, HttpServletResponse res) {
+		//쿠키 삭제
+		Cookie[] cookies = req.getCookies();
+		if(cookies!=null) {
+			for(Cookie cookie:cookies) {
+				System.out.println("내가 세팅한 쿠키 ? " +cookie.getValue());
+				String delCookie = cookie.getValue();
+				if(cookie.getValue().equals((String)req.getSession().getAttribute("logId"))) {
+					cookie.setMaxAge(0); //쿠키기간 삭제
+					cookie.setPath("/");
+					delCookie = null;
+					res.addCookie(cookie);
+				}
+			}
+		}
+		req.getSession().invalidate(); //쿠키삭제하고 세션 삭제해야함
 		
 		return "home";
 	}
@@ -65,7 +83,7 @@ public class MemberController {
 	public String joinMember() {
 		return "member/joinMember";
 	}
-	@RequestMapping(value="/memJoinOk", method = RequestMethod.POST) //profFile
+	@RequestMapping(value="/memJoinOk", method = RequestMethod.POST) //profFile : 인풋 파일과 이름 다르게 해준다음에 넣어줘야함
 	public ModelAndView memJoinOk(MemberVO vo, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 /////////////////////////////////프로필 사진 업로드부터 실행		
