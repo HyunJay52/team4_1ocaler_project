@@ -1,5 +1,6 @@
 package com.team4.localer.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -176,7 +177,8 @@ public class AdminController {
 	@RequestMapping(value="/oftenQWriteOk",method=RequestMethod.POST)
 	public ModelAndView oftenQWriteOk(OftenqVO vo,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		if(session.getAttribute("logId")=="admin") {
+		String sessionId =(String)session.getAttribute("logId");
+		if(sessionId.equals("admin") || sessionId== "admin") {
 			vo.setOf_cate("["+vo.getOf_cate()+"]");
 			csService.oftenqInsert(vo);
 		}
@@ -192,6 +194,7 @@ public class AdminController {
 		mav.setViewName("admin/reportEdit");
 		return mav;
 	}
+	//신고처리 페이지 결과 update
 	@RequestMapping(value="/reportEditOk",method=RequestMethod.POST)
 	public ModelAndView reportEditOk(ReportVO vo) {
 		ModelAndView mav = new ModelAndView();
@@ -203,6 +206,28 @@ public class AdminController {
 			mav.setViewName("redirect: reportEdit");
 		}
 		return mav;
+	}
+	//고객센터 페이지 검색
+	@RequestMapping("/searchCS")
+	@ResponseBody
+	public List<CsVO> searchCS(String searchkey,String text,String cate){
+		if(searchkey=="userid"||searchkey.equals("userid")) {//검색key가 userid일때
+			if(cate.equals("oftenq")) {//자주하는 질문일때
+				return csService.searchOftenq(searchkey,"%"+text+"%");
+			}else if(cate.equals("cs")) {
+				return csService.searchCs(searchkey,"%"+text+"%");
+			}else {
+				return csService.searchReport(searchkey,"%"+text+"%");
+			}
+		}
+		if(cate.equals("oftenq")) {//자주하는 질문일때
+			return csService.searchOftenq("of_"+searchkey,"%"+text+"%");
+		}else if(cate.equals("cs")) {
+			return csService.searchCs("cs_"+searchkey,"%"+text+"%");
+		}else {
+			return csService.searchReport("rep_"+searchkey,"%"+text+"%");
+			
+		}
 	}
 }
 

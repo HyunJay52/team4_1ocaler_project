@@ -16,8 +16,41 @@
 </style>
 <script>	
 		$(function(){	
+			var x = window.innerWidth;
+			var y = window.innerHeight;
+			console.log(x/2);
+			console.log(y/2);
+			//팝업창 띄우기================================================
+			/*위치설정*/
+			var width =	$("#EVPProfilePopup").width();
+			var height = $("#EVPProfilePopup").height();
+			console.log(width,height)
+			$("#EVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
+			/*띄우기*/
+			$("#eatViewPageShowTopMenu>li:nth-child(4)").click(()=>{
+				$("#EVPProfilePopup").css("display","block");
+				
+			});	
+			/*팝업창 닫기*/
+			
+			$('#EVPProfilePopup>div:first-child>span').click(()=>{
+				$("#EVPProfilePopup").css("display","none");
+			});
+			/*신고하기*/
+			$('#eatViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+				if(${logId!=null}){
+					location.href="reportWrite?userid=${vo.userid}"	
+				}else{
+					alert('로그인후 사용할 수 있습니다.');
+				}
+			});
+			
+			
+			
+			
 			//버튼 클릭시============================================================================
 				//뒤로가기	
+			
 			$("#eatViewPageBackBtn").click(()=>{
 				history.back();
 			})	
@@ -34,28 +67,38 @@
 				
 				
 			//참여하기================================================================================
-				$("#eatViewPageJoinBtn").click(()=>{
-					var url = "joinInsert";
-					var params ="num="+$("#eatViewPageJoinBtn").val();
-					console.log(params);
-					$.ajax({
-						url : url,
-						data : params,
-						success:function(result){
-							alert('신청이 완료되었습니다. 응답을 기다려 주세요');
-							$("#eatViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
-							$("#eatViewPageJoinBtn").attr("disabled",true);
-							
-						},error:function(e){
-							console.log('신청실패')
-						}
-					})
-				});
+				if(${logId!=null}){
+					$("#eatViewPageJoinBtn").click(()=>{
+						var url = "joinInsert";
+						var params ="num="+$("#eatViewPageJoinBtn").val();
+						console.log(params);
+						$.ajax({
+							url : url,
+							data : params,
+							success:function(result){
+								alert('신청이 완료되었습니다. 응답을 기다려 주세요');
+								$("#eatViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
+								$("#eatViewPageJoinBtn").attr("disabled",true);
+								
+							},error:function(e){
+								console.log('신청실패')
+							}
+						})
+					});
+				}else{
+					$("#eatViewPageJoinBtn").click(()=>{
+						alert('로그인 후 이용해 주세요')
+						location.href="";
+					});
+				}
+				
 			//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
 			var joinCheck = $("#eatViewPageJoinBtn").attr("disabled");
 			console.log(joinCheck);
 			if(joinCheck=='disabled'){
 				$("#eatViewPageJoinBtn").children("span").text('신청완료');
+				$("#withViewPageJoinBtn").css('background',"#B8B2F4");
+				$("#withViewPageJoinBtn").css('opacity',1);
 			}
 			
 		//============================================================================================
@@ -89,7 +132,7 @@
 			<li><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><span>${vo.up_cate } > ${vo.down_cate }</span></li>
 			<li><span>조회수 : ${vo.g_hit } </span></li>
 			<li><span> ${vo.g_subject }</span></li>
-			<li><img src="<%=request.getContextPath()%>/common/user.png"/></li>
+			<li><img id="EVPprofileView" src="<%=request.getContextPath()%>/common/user.png"/></li>
 			<li><div>${vo.memberVO.mem_nick }</div><div>${vo.g_writedate }</div></li>
 			<li>모집인원 : <span> ${appNum }</span> / <span> ${vo.g_cnt } </span></li> <!--  쒯 join 테이블도 join해야되네 -->
 			
@@ -107,7 +150,7 @@
 		<div>
 			<button id="eatViewPageBackBtn" class="btn cancelBtn">뒤로가기</button>
 			<c:if test="${vo.userid!=logId}"> 
-				<button type="button" id="eatViewPageJoinBtn" class="btn confBtn" value="${vo.num }" <c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>><span id="eatViewPagejoinCheck">참여하기</span></button>
+					<button type="button" id="eatViewPageJoinBtn" class="btn confBtn" value="${vo.num }" <c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>><span id="eatViewPagejoinCheck">참여하기</span></button>
 			</c:if>
 			<c:if test="${vo.userid==logId }"> <!--이건 작성자일경우 수정하기 버튼  -->
 				<button id="eatViewDeleteBtn" class="btn commBtn">삭제</button>
@@ -116,7 +159,20 @@
 		</div>
 	</div>
 	
-	
+	<div id="EVPProfilePopup">
+		<div><span>X</span></div>
+		<div><span>활동정보</span></div>
+		<div><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"></div>
+		<div>
+			<ul id="EVPProfilePopupUl">
+				<li><span>${vo.userid }</span></li>
+				<li><span>가입일 : ${vo.memberVO.mem_sub } </span></li>
+				<li><span>총 게시물 : ${vo.memberVO.mem_post }개</span></li>
+				<li><span>총 댓글수 : ${vo.memberVO.mem_rev }개</span></li>
+			</ul>
+		</div>
+		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>
+	</div>
 	
 	
 	

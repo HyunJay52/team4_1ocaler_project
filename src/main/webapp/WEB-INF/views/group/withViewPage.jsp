@@ -16,7 +16,34 @@
 </style>
 <script>	
 		$(function(){	
+			//팝업창 띄우기================================================
+			/*위치설정*/
+			var x = window.innerWidth;
+			var y = window.innerHeight;
+			var width =	$("#WVPProfilePopup").width();
+			var height = $("#WVPProfilePopup").height();
+			console.log(width,height)
+			$("#WVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
+			/*띄우기*/
+			$("#withViewPageShowTopMenu>li:nth-child(4)").click(()=>{
+				$("#WVPProfilePopup").css("display","block");
 				
+			});	
+			/*팝업창 닫기*/
+			
+			$('#WVPProfilePopup>div:first-child>span').click(()=>{
+				$("#WVPProfilePopup").css("display","none");
+			});
+			
+			$('#withViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+				if(${logId!=null}){
+					location.href="reportWrite?userid=${vo.userid}"	
+				}else{
+					alert('로그인후 사용할 수 있습니다.');
+				}
+			});
+			
+			
 			//버튼 클릭시============================================================================
 				//뒤로가기	
 			$("#withViewPageBackBtn").click(()=>{
@@ -36,22 +63,30 @@
 				
 				
 			//참여하기=================================================================	
-			$("#withViewPageJoinBtn").click(()=>{
-				var url = "joinInsert";
-				var params = "num="+$("#withViewPageJoinBtn").val();
-				console.log(params);
-				$.ajax({
-					url : url,
-					data : params,
-					success:function(result){
-						alert('신청이 완료되었습니다. 응답을 기다려 주세요');
-						$("#withViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
-						$("#withViewPageJoinBtn").attr("disabled",true);
-					},error:function(e){
-						console.log('신청실패')
-					}
+			if(${logId!=null}){
+				$("#withViewPageJoinBtn").click(()=>{
+					var url = "joinInsert";
+					var params = "num="+$("#withViewPageJoinBtn").val();
+					console.log(params);
+					$.ajax({
+						url : url,
+						data : params,
+						success:function(result){
+							alert('신청이 완료되었습니다. 응답을 기다려 주세요');
+							$("#withViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
+							$("#withViewPageJoinBtn").attr("disabled",true);
+						},error:function(e){
+							console.log('신청실패')
+						}
+					});
 				});
-			});
+			}else{
+				$("#withViewPageJoinBtn").click(()=>{
+					alert('로그인 후 이용해 주세요');
+					location.href="";
+				});
+			}
+			
 			//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
 			var joinCheck = $("#withViewPageJoinBtn").attr("disabled");
 			console.log(joinCheck);
@@ -120,11 +155,22 @@
 				<button id="withViewPageDeleteBtn" class="btn commBtn">삭제</button>
 				<button id="withViewPageEditBtn" class="btn commBtn">수정</button>
 			</c:if>
-		</div>
-		 
-		
+		</div>	
 	</div>
-	
+		<div id="WVPProfilePopup">
+		<div><span>X</span></div>
+		<div><span>활동정보</span></div>
+		<div><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"></div>
+		<div>
+			<ul>
+				<li><span>${vo.userid }</span></li>
+				<li><span>가입일 : ${vo.memberVO.mem_sub } </span></li>
+				<li><span>총 게시물 : ${vo.memberVO.mem_post }개</span></li>
+				<li><span>총 댓글수 : ${vo.memberVO.mem_rev }개</span></li>
+			</ul>
+		</div>
+		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
+	</div>
 	
 	
 	

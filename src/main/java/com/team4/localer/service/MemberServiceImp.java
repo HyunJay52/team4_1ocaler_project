@@ -32,4 +32,9 @@ public class MemberServiceImp implements MemberService {
 		return dao.nickNameDoubleCheck(mem_nick);
 	}
 
+	@Override
+	public int memPostCount(String userid) {
+		return dao.memPostCount(userid);
+	}
+
 }

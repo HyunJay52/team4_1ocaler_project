@@ -3,6 +3,7 @@ package com.team4.localer.controller;
 import java.io.File;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -120,7 +121,7 @@ public class MemberController {
 		}
 		return result;
 	}
-	// 아이디 중복확인
+// 닉네임 중복확인
 	@RequestMapping(value="/nickOverlapCheck", method=RequestMethod.GET, produces="application/text;charset=UTF-8")
 	@ResponseBody
 	public String nickOverlapCheck(String mem_nick) {
