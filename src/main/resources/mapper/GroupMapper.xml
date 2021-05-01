@@ -19,47 +19,41 @@
   	
   	
 	<!-- 한끼미식회 리스트 뽑기 -->  
-  	<select id="GroupEatList" resultType="com.team4.localer.vo.GroupVO">
+  	<select id="GroupListAll" resultType="com.team4.localer.vo.GroupVO">
   		select * from (select * from (select num, down_cate, g_subject, g_cnt, to_char(g_date, 'YYYY-MM-DD') g_date, to_char(g_time, 'HH24:MI') g_time,
-  		 g_loc1, g_tag from grouplocal where g_gu=#{loc_gu} and up_cate='한끼미식회' 
-  		
-  		
+  		 g_loc1, g_tag from grouplocal where g_gu=#{loc_gu}
+  		 
+  		 <if test="category=='한끼미식회'">
+  		 and up_cate=#{category}
+  		 </if>
+  		 <if test="category=='가치가장'">
+  		 and up_cate=#{category}
+  		 </if>
   		<!-- 검색어가 있을때 -->
   		 <if test="searchWord != null and !searchWord.equals('')">
-  		 	and ${searchKey} like '%${searchWord}%' order by g_date desc) 
-  		  <![CDATA[ where rownum <=]]> (${pageNum}*${onePageRecord}) order by g_date)
+  		 	and ${searchKey} like '%${searchWord}%' order by g_date desc, num desc) 
+  		  <![CDATA[ where rownum <=]]> (${pageNum}*${onePageRecord}) order by g_date, num)
   		  <![CDATA[ where rownum <=]]>
   		  	<if test="pageNum==totalPage">
-  		  		${lastPageRecord} order by g_date desc
+  		  		${lastPageRecord} order by g_date desc, num desc
   		  	</if>
   		  	<if test="pageNum!=totalPage">
-  		  		${onePageRecord} order by g_date desc
+  		  		${onePageRecord} order by g_date desc, num desc
   		  	</if>
   		  </if>
-
   		  <!-- 검색어가 없을때 -->
   		  <if test="searchWord == null or searchWord.equals('')">
-  		  	order by g_date desc)
-  		  <![CDATA[ where rownum <=]]> ${pageNum}*${onePageRecord} order by g_date)
+  		  	order by g_date desc, num desc)
+  		  <![CDATA[ where rownum <=]]> ${pageNum}*${onePageRecord} order by g_date, num)
   		  <![CDATA[ where rownum <=]]>
   		  <if test="pageNum==totalPage">
-  		  		${lastPageRecord} order by g_date desc
+  		  		${lastPageRecord} order by g_date desc, num desc
   		  	</if>
   		  	<if test="pageNum!=totalPage">
-  		  		${onePageRecord} order by g_date desc
+  		  		${onePageRecord} order by g_date desc, num desc
   		  	</if>
   		  </if> 
- 	 
   	</select>
-  	
-  	
-	<!-- 가치가장 리스트 뽑기  -->
-  	<select id="GroupWithList" resultType="com.team4.localer.vo.GroupVO">
-  		select num, down_cate, g_subject, g_cnt, to_char(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
-  		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='가치가장' order by num desc
-  	</select>
-  	
-  	
  	<!-- 조회수 카운트 -->
   	<update id="hitCount" parameterType="int">
   		update grouplocal set g_hit = g_hit+1 where num=#{param1}
@@ -68,9 +62,17 @@
   	<delete id="groupRecordDelete">
   		delete from grouplocal where num=#{param1} and userid=#{param2}
   	</delete>
+  	
   	<!-- 해당지역구의 한끼미식회 전체레코드수 구하기 -->
-  	<select id="groupEatTotalRecoed" resultType="int">
-  		select count(num) from grouplocal where g_gu=#{loc_gu} and up_cate='한끼미식회' 
+  	<select id="groupTotalRecoedCount" resultType="int">
+  		select count(num) from grouplocal where g_gu=#{loc_gu} 
+  		<if test="category=='한끼미식회'">
+  			and up_cate=#{category}
+  		</if>
+  		<if test="category=='가치가장'">
+  			and up_cate=#{category}
+  		</if>
+  		 
   		<if test="searchWord != null and !searchWord.equals('')">
   			and ${searchKey} like '%${searchWord}%'
   		</if>

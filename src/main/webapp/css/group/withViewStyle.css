@@ -16,7 +16,7 @@
 	/*withViewSearchFrm*/
 	#withViewSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
 	#withViewSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
-	#withViewSearchFrm input[type=image]{display:block; height:48px;}
+	#withViewButton{display: block; height: 32px; float: right; margin: 5px 15px 15px 0px; border: none; background: #fff;}
 	
 	/*withViewTopFrm*/
 	#withViewTopFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
@@ -61,7 +61,7 @@
 	#withViewGroupList div:nth-child(6){font-size: 13px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px; padding-right: 15px; margin-top:3px; margin-bottom:5px;}
 
 	/*paging*/
-	#page{text-align:center}
-	#page>li{display:inline-block; border:1px solid #d9d9d9; width:35px; height:40px; line-height:40px; margin:19px auto;}
-	#page>li:first-child{width:50px; border-top-left-radius:8px; border-bottom-left-radius:8px }
-	#page>li:last-child{width:50px; border-top-right-radius:8px; border-bottom-right-radius:8px}
+	#WVpaging{text-align:center}
+	#WVpaging>li{display:inline-block; border:1px solid #d9d9d9; width:35px; height:40px; line-height:40px; margin:19px auto;}
+	#WVpaging>li:first-child{width:50px; border-top-left-radius:8px; border-bottom-left-radius:8px }
+	#WVpaging>li:last-child{width:50px; border-top-right-radius:8px; border-bottom-right-radius:8px}
