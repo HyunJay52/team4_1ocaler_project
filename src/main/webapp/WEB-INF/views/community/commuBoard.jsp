@@ -9,23 +9,23 @@
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
 						
-		<h1>로컬커뮤니티</h1>
+		<h1>우리동네이야기</h1>
 
 		<div id="center">
-			<c:forEach var="i" begin="1" end="6">
+			<c:forEach var="vo" items="${commuList }">
 				<ul id ="boardList">
 					<li>
-						<div>2021.04.25</div>
-						<div><span>조회수 : </span> 192 &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> 40 개</div>	 
+						<div>${vo.b_writedate }</div>
+						<div><span>조회수 : </span> ${vo.b_hit} &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> 40 개</div>	 
 					</li>
 					<li>
-						<div><a href="commuView">서대문구 혼밥하기 좋은 곳 아시나요?</a></div>
+						<div><a href="commuView?num=${vo.num}">${vo.b_subject }</a></div>
 						<div>
-							<div><img src="common/user.png"/><a href="#"> 서쪽마녀</a></div>
+							<div><img src="common/user.png"/><a href="#"> ${vo.userid }</a></div>
 						</div>
 					</li>
 					<li>
-						#서대문구 #혼밥 #식당 #음식 #맛있는거 #추천 #동네맛집	
+						${vo.b_tag }
 					</li>
 				</ul>
 			</c:forEach>

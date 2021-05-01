@@ -168,7 +168,6 @@
 				});
 			}
 		});
-//////////////////////////////////////////유효성검사안됨 (이메일 부분 확인)	
 		$("#mem_name").on('keyup', function() {
 			$("#checkpwd2").css("display", "none");
 			var regName = /^[가-힣A-Z]{2,10}$/i;
@@ -225,9 +224,8 @@
 				});
 			}
 		});
-		//////////// 정규식 표현 ////////////
 		function regExpCheck() {
-			// 인증 번호
+			// 이메일 인증 번호
 			//        var regEmailCheck=/[0-9]{6}$/;
 			//        if(!regEmailCheck.test(document.getElementById("emailCheck").value)){
 			//           alert("인증번호는 숫자 6자리를 입력해야 합니다.");

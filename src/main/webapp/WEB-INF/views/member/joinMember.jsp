@@ -10,6 +10,8 @@
 
 <script>
 	document.title = "회원가입";
+	var cookie = document.cookie;
+	console.log("1cookie? ", cookie);
 </script>
 <div id="joinMem">
 	<form method="post" action="memJoinOk" id="memJoinFrm" enctype="multipart/form-data">
@@ -39,7 +41,7 @@
 				<span id="checkname"></span></li>
 
 				<li>연락처</li>
-				<li><input type="text" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11"
+				<li><input type="number" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11"
 					placeholder="예) 01012341234" />
 				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
 				<span id="checktel"></span></li>
