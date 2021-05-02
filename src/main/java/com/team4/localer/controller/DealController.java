@@ -16,7 +16,7 @@ public class DealController {
 	public String memberBoard() {
 		return "deal/memberBoard";
 	}
-
+	
 	@RequestMapping("/selWrite")
 	public String selWrite() {
 		return "deal/sellWrite";
@@ -31,7 +31,7 @@ public class DealController {
 	public String memberView() {
 		return "deal/memberView";
 	}
-
+	
 	@RequestMapping("/sellView")
 	public String selView() {
 		return "deal/sellView";

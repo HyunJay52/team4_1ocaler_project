@@ -17,7 +17,10 @@
 		margin-bottom:20px;
 	}
 	#basicInfo>form>ul>li:nth-child(2n+1){
-		font-size:14px; color:gray;
+		font-size:18px; color:gray;
+	}
+	#basicInfo>form>ul>li:nth-child(2n){
+		padding-left:10px;
 	}
 	#basicInfo>form>ul>li:nth-child(9){
 		color:black;
@@ -50,7 +53,6 @@
 	#imgFile{
 		padding:6px;
 	}
-	.header{font-weight:bold; font-size:24px;}
 	.editOn{display:none;}
 	.commBtn {
 		width: 90px;
@@ -101,4 +103,12 @@
 	}
 	#joinSeller{
 		margin-left:40px;
+	}
+	#basicInfo h4{
+		width:50%;
+		float:left;
+	}
+	.myinfoImgLabel{
+		float:right;
+		display:none;
 	}

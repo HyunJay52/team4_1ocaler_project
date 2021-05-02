@@ -70,7 +70,7 @@
 				
 			//글쓰기폼===================================================================================
 			$("#withViewWriteForm").click(function(){
-				location.href="writeForm?loc_gu=${pageVO.loc_gu}&category=가치가장";
+				location.href="writeForm?loc_gu=${pageVO.loc_gu}&category=${pageVO.category}";
 			});
 			//글쓰기폼end================================================================================	
 			
@@ -149,8 +149,8 @@
 	<!-- withViewShowFrm 리스트 -->
 	<div id="withViewShowFrm">	
 		<ul id="withViewShowTopMenu">
-			<li><div><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?loc_gu=${pageVO.loc_gu }"><span id="withViewEat">한끼미식회</span></a></div></li>
-			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?loc_gu=${pageVO.loc_gu }"><span id="withViewWith">가치가장</span></a></li>
+			<li><div><img src="<%=request.getContextPath()%>/img/groupImg/dish.png"/><a href="eatPage?loc_gu=${pageVO.loc_gu }&category=한끼미식회"><span id="withViewEat">한끼미식회</span></a></div></li>
+			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><a href="withPage?loc_gu=${pageVO.loc_gu }&category=가치가장"><span id="withViewWith">가치가장</span></a></li>
 			<c:if test="${logId!=null }">
 				<li><button id="withViewWriteForm" class="btn commBtn commBtnWrite">글쓰기</button></li>
 			</c:if>
@@ -165,13 +165,13 @@
 				<option value="g_content">내용</option>
 			</select>
 			<input type="text" name="searchWord" id="withViewSearchWord"/>
-			<input type="image" src="<%=request.getContextPath()%>/img/groupImg/search.png"/>
+			<button id="withViewButton"><img src="<%=request.getContextPath()%>/img/groupImg/search.png"></button>
 		</form>
 		
 
 		<ul id="withViewGroupList">
 			<c:forEach var="vo" items="${withList }">
-				<a href="withViewPage?num=${vo.num }&loc_gu=${pageVO.loc_gu}"><li><!-- 나중에 searchkey, searchWord도 달고다녀야함 -->
+				<a href="withViewPage?num=${vo.num }&loc_gu=${pageVO.loc_gu}&pageNum=${pageVO.pageNum}&category=가치가장<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>"><li><!-- 나중에 searchkey, searchWord도 달고다녀야함 -->
 					<div>
 						<img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span>${vo.down_cate }</span>
 						<c:if test="${logId!=null }">
@@ -183,22 +183,46 @@
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소"/>${vo.g_loc1 }</div><!-- g_loc1 값을 가져온다. -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>1 / ${vo.g_cnt }명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
 					<div>${vo.g_tag }</div><!-- 태그값을 가지고온다. -->
+					<input type="hidden" name="num" value="${vo.num }" id="WVnum"/>
 					<hr/>
 				</li></a>
 			</c:forEach>		
 		</ul>
 		
 		<div>
-			<ul id="page"><!--이걸 어떻게 처리해야하나고민중 -->
-				<li>이전</li>
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-				<li>5</li>
-				<li>다음</li>
+			<!-- 페이징 할떄 category 도 가지도 다녀야함  -->
+			<ul id="WVpaging"><!--이걸 어떻게 처리해야하나고민중 -->
+				<c:if test="${pageVO.pageNum>1}">
+					<li><a href='withPage?loc_gu=${pageVO.loc_gu }&pageNum=${pageVO.pageNum-1}&category=가치가장<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>'>이전</a></li>
+				</c:if>
+				<c:if test="${pageVO.pageNum<=1}">
+					<li>이전</li>
+				</c:if>
+				<c:forEach var="p" begin="${pageVO.startPageNum }" end="${pageVO.startPageNum+pageVO.onePageNum-1 }">
+					<c:if test="${p<=pageVO.totalPage }">
+						<c:if test="${p==pageVO.pageNum }">
+						<!-- 현재페이지일떄 -->
+							<li style="background-color:#571fb8"><a href="withPage?loc_gu=${pageVO.loc_gu}&pageNum=${p}&category=가치가장<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+						<c:if test="${p!=pageVO.pageNum }">
+						<!-- 현재페이지가 아닐때 -->
+							<li><a href="withPage?loc_gu=${pageVO.loc_gu }&pageNum=${p}&category=가치가장<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+					</c:if>		
+				</c:forEach>			
+				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+					<li><a href="withPage?loc_gu=${pageVO.loc_gu }&pageNum=${pageVO.pageNum+1}&category=가치가장<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">다음</a></li>
+				</c:if>	
+				<c:if test="${pageVO.pageNum==pageVO.totalPage}">
+					<li>다음</li>
+				</c:if>	
 			</ul>
 		</div>
+		
+		
+		
+		
+		
 	</div>
 	
 	

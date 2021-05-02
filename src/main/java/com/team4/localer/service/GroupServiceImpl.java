@@ -27,15 +27,6 @@ public class GroupServiceImpl implements GroupService{
 			return groupDAO.groupBigMartInsert(vo);
 		}
 
-		@Override
-		public List<GroupVO> GroupEatList(GroupPageVO pageVO) {			
-			return groupDAO.GroupEatList(pageVO);
-		}
-
-		@Override
-		public List<GroupVO> GroupWithList(String loc_gu) {			
-			return groupDAO.GroupWithList(loc_gu);
-		}
 
 		@Override
 		public GroupVO eatViewPageResult(int num) {
@@ -57,9 +48,16 @@ public class GroupServiceImpl implements GroupService{
 			return groupDAO.groupRecordDelete(num, userid);
 		}
 
+	
+
 		@Override
-		public int groupEatTotalRecoed(GroupPageVO pageVO) {
-			return groupDAO.groupEatTotalRecoed(pageVO);
+		public List<GroupVO> GroupListAll(GroupPageVO pageVO) {
+			return groupDAO.GroupListAll(pageVO);
+		}
+
+		@Override
+		public int groupTotalRecoedCount(GroupPageVO pageVO) {
+			return groupDAO.groupTotalRecoedCount(pageVO);
 		}
 
 		
