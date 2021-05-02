@@ -8,15 +8,14 @@
     }
 /* 헤더 스타일 */    
     #pageTop{
-        width: 100%;
-        height: 70px;
+        width: 100%; height: 70px; 
+        background-color: #3f1785;
         font-family: nsb;
-        border-bottom: 2px solid #3f1785;
     }
     #pageTop a:active, #pageTop a:link, #pageTop a:visited, 
     #sideBar a:active, #sideBar a:link, #sideBar a:visited 
     {
-        color: #000;
+        color: #fff;
         text-decoration: none;
     }    
     #pageTop a:hover {
@@ -44,7 +43,7 @@
         margin:0px; 
     }
     #navi>li{
-        width: 150px; height: 70px;
+        width: 170px; height: 70px;
         margin: 0px; padding: 0px;
         list-style-type: none;
         float: left;
@@ -67,15 +66,19 @@
         font-family: 'Nanum Gothic', sans-serif;
     }
   
-/* 내 메뉴 버튼 부분 */ 
+/* mymenu 버튼 부분 */
+#mem_myMenu {
+	width: 100%; height: 50px;
+}
+ 
 	#myMenu {
-		width: 10%; height: 70px; float: left;
+		width: 100%; height: 20px; float: left; background-color: #fff;
 	}  
 	#topLogin {
-		width: 100%; height: 70px; line-height: 70px; text-align: center;
+		width: 100%; height: 20px; line-height: 70px; text-align: center;
 	}
 	#afterLogin {
-		width: 100%; height: 70px;
+		width: 100%; height: 20px;
 		font-size: 14px; padding: 15px;
 	}
 	#afterLogin>div:nth-child(1) {
@@ -85,7 +88,7 @@
 		padding-top: 5px; 
 	}
 	#afterLogin:last-child img {
-		width: 25px; height: 25px;
+		width: d; height: 25px;
 	}
 /* sidebar style */
 	#sideBar{

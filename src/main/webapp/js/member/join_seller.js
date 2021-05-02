@@ -21,9 +21,8 @@ $(function(){
 		}
 //////////////////////////////////////////유효성 검사 펑션
 		$("#sel_name").on('keyup', function() {
-			$("#checkpwd2").css("display", "none");
-			var regName = /^[가-힣A-Z]{2}$/i;
-			if (!regName.test($("#mem_name").val())) {
+			var regName = /^[가-힣A-Z]{2,10}$/i;
+			if (!regName.test($("#sel_name").val())) {
 				$("#sellNameCheck").text("2자리 이상이여야 합니다.");
 				$("#sellNameCheck").css({
 					"color" : "pink",
@@ -38,6 +37,61 @@ $(function(){
 				});
 			}
 		});
+		$("#sel_tel").on('keyup', function() {
+			var regTel = /(010|02)[0-9]{3,4}[0-9]{4}/;
+			if (!regTel.test($("#sel_tel").val())) {
+				$("#checkSellTel").text("2자리 이상이여야 합니다.");
+				$("#checkSellTel").css({
+					"color" : "pink",
+					"fontSize" : "12"
+				})
+				$("#sel_tel").focus();
+			} else {
+				$("#checkSellTel").text("✔ 2자리 이상이여야 합니다.");
+				$("#checkSellTel").css({
+					"color" : "green",
+					"fontSize" : "12"
+				});
+			}
+		});
+		$("#sel_email").on('keyup', function() {
+			var regEmail = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+			if (!regEmail.test($("#mem_email").val())) {
+				$("#checkSellEmail").text("이메일을 잘못 입력하셨습니다.");
+				$("#checkSellEmail").css({
+					"color" : "pink",
+					"fontSize" : "12"
+				});
+				$("#sel_email").focus();
+			} else {
+				$("#checkSellEmail").text("✔ 사용가능한 이메일입니다.");
+				$("#checkSellEmail").css({
+					"color" : "green",
+					"fontSize" : "12"
+				});
+			}
+		});
+		$("#account").on('keyup', function() {
+			var regEmail = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+			if (!regEmail.test($("#mem_email").val())) {
+				$("#checkSellEmail").text("이메일을 잘못 입력하셨습니다.");
+				$("#checkSellEmail").css({
+					"color" : "pink",
+					"fontSize" : "12"
+				});
+				$("#account").focus();
+			} else {
+				$("#checkSellEmail").text("✔ 사용가능한 이메일입니다.");
+				$("#checkSellEmail").css({
+					"color" : "green",
+					"fontSize" : "12"
+				});
+			}
+		});
+		
+		
+		
+		
 });
 //////////////////////////////////////////주소찾기 펑션
 var element_wrap = document.getElementById('joinSellAddrWrap'); //주소 찾기 화면

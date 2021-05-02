@@ -1,20 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
-<%request.setCharacterEncoding("utf-8"); %>
-
-<%
-//쿠키 상태 확인하기
-//쿠키 유무 확인해서 페이지 이동
-// Cookie[] cookies = request.getCookies();
-// if(cookies!=null){ //쿠키가 있음
-// 	for(Cookie userCookie : cookies){
-// 		if(userCookie.getName().equals("logId")){
-// 			response.sendRedirect("home.jsp");
-// 		}
-// 	}
-// }
-%>
 <!-- 페이지 스타일 링크 -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
@@ -41,6 +27,22 @@
 
 </head>
 <body>
+<!-- 회원로그인 시 -->
+    <div id="mem_myMenu">
+		<!-- 로그아웃 시 -->
+		<c:if test="${logName==null || logName=='' }">
+			<div id="topLogin"><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></div>
+	    </c:if> 
+	    <!-- 로그인 시 -->
+		<c:if test="${logName!=null && logName!=''}">
+			<div id="afterLogin">
+				<div>${logName } 님 환영합니다<br/>
+					<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원&nbsp;<a href="myInfoMain">내정보</a>
+				</div>
+				<div><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
+			</div>
+		</c:if>
+   	</div>
 <div id="pageTop">
    <div id="logo"><a href="<%=request.getContextPath()%>/"><img src="common/logo_deep_pur.png"/></a></div>
    <c:if test="${logId.equals('admin') }">
@@ -75,9 +77,10 @@
             </ul>
          </li>
       </ul>
-      <div id="myMenu">
+      
+ <!-- 관리자 로그인시 -->
+  <div id="myMenu">
       <ul>
-         <!-- 관리자 로그인시 -->
          <li class="aLogin">관리자님 환영합니다.^^</li>
       </ul>
       <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
@@ -118,21 +121,6 @@
             </ul>
          </li>
       </ul>
-      <div id="myMenu">
-		<!-- 로그아웃 시 -->
-		<c:if test="${logName==null || logName=='' }">
-			<div id="topLogin"><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></div>
-	    </c:if> 
-	    <!-- 로그인 시 -->
-		<c:if test="${logName!=null && logName!=''}">
-			<div id="afterLogin">
-				<div>${logName } 님 환영합니다<br/>
-					<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원&nbsp;<a href="myInfoMain">내정보</a>
-				</div>
-				<div><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
-			</div>
-		</c:if>
-   	</div>
    </c:if>
    
    
