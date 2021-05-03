@@ -7,6 +7,8 @@ import com.team4.localer.vo.OftenqVO;
 import com.team4.localer.vo.ReportVO;
 
 public interface CsDAO {
+	//고객문의 미답변 글목록
+	public List<CsVO> csTblSelect();
 	//고객문의 글 전체목록
 	public List<CsVO> boardAllSelect();
 	//고객문의 글 1개 출력

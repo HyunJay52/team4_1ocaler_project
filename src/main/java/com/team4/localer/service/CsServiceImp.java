@@ -87,4 +87,9 @@ public class CsServiceImp implements CsService {
 		return csdao.searchCs(searchkey, text);
 	}
 
+	@Override
+	public List<CsVO> csTblSelect() {
+		return csdao.csTblSelect();
+	}
+
 }

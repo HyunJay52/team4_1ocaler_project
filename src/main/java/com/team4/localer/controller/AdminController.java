@@ -27,8 +27,8 @@ public class AdminController {
 	public ModelAndView main(HttpSession session) {
 		session.setAttribute("logId", "admin");
 		ModelAndView mav = new ModelAndView();
-		//cstable 전체 list 불러오기 
-		mav.addObject("list",csService.boardAllSelect());
+		//cstable 미답변 list 불러오기 
+		mav.addObject("list",csService.csTblSelect());
 		mav.setViewName("admin/main");
 		return mav;
 	}

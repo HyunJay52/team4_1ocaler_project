@@ -29,10 +29,11 @@
 	}
 .cir1>b{font-size:120px;}
 /*더보기*/
-#more{
-	width:60px;
-	background-color:#ddd;
+.more{
 	float: right;
+	margin-top: -30px;
     margin-bottom: 10px;
+    text-align: center;
+    margin-right: 30;
 }
 	
