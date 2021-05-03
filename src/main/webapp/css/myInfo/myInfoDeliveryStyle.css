@@ -7,16 +7,28 @@
 		position:relative;
 	}
 	#deliveryTop>ul, #deliveryTop>ul>li{
-		float:left; text-align:center; margin:10px 5px;
+		float:left; 
+		text-align:center; 
+		margin:0 5px;
 	}
 	#deliveryTop>ul>li:nth-child(2n+1){
-		width:140px; background-color:lightgray; border-radius:100px;
+		width:100px; 
+		background-color:lightgray; 
+		border-radius:100px;
 	}
 	#deliveryTop>ul>li:nth-child(2n+2){
-		width:130px;
+		font-size:22px;
+		width:100px;
 	}
+	#deliveryTop>ul>li:nth-child(2n+2) p{
+		margin-bottom:0px;		
+	}			
 	#deliveryTop>ul:nth-child(2)>li:nth-child(1){
 		margin-left:150px;
+	}
+	#deliveryTop img{
+		width:60px;
+		height:60px;
 	}
 	#deliveryBottom>ul>li{
 		float:left; border-bottom:1px solid gray; height:80px; line-height:80px;
@@ -45,28 +57,32 @@
 	.deliveryName{
 		text-align:right; float:right;
 	}
-	#deliveryList>ul>li{
-		border-bottom:1px solid gray; margin:10px 0; height:80px; padding:5px 0;
+
+	.myinfoDeliveryTable {
+		width:100%;
+		margin:0 auto;
+		padding:0;
 	}
-	#deliveryList>ul>li>span:nth-child(2n+1){
-		width:30%; 
+	.myinfoDeliveryTable tr{/*테이블 목록*/
+		border-bottom:1px solid rgb(227,227,227); 
+		text-align:center;
+		height:40px;
+    }
+    .myinfoDeliveryTable tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color:#3f1785;
+		color:#fff; 
+		font-weight:bold;
 	}
-	#deliveryList>ul>li>span:nth-child(2n){
-		width:70%; 
+	.myinfoDeliveryTable tr>td{/*전체적인 열 폭조정*/
+		width:25%;
+		height:60px;
 	}
-	.listLeft{
-		text-align:left;
-		float:left;
+	.myinfoDeliveryTable tr>td:nth-child(1){/*첫번째 열 선택*/
 	}
-	.listRight{
-		text-align:right;
-		float:right;
+	.myinfoDeliveryTable tr>td:nth-child(2){/*세번째 열 선택 : 제목부분*/
+		/* text-align:left; */
 	}
-   .myinfoTable2 tr>td{width:20%}/*전체적인 열 폭조정*/
-   .myinfoTable2 tr>td:nth-child(1){width:10%;/*첫번째 열 선택*/}
-   .myinfoTable2 tr>td:nth-child(2){width:30%;/*세번째 열 선택 : 제목부분*/
-      /* text-align:left; */
-   }
 	.dayBtn{
 		height:36px; border-radius:100px;
 	}
@@ -74,11 +90,10 @@
 		position:relative;
 	    margin:10px auto;
 	    height:60px;
-	    width:120px;
-	    line-height:50px;
-	    border:2px solid #3f1785;
+	    width:300px;
+	    border:4px solid #3f1785;
 	    border-radius:100px;
-	    padding:5px 10px;	
+	    padding:9px 10px;	
 	    background-color:#fff;
 	    text-align:center;
 	}

@@ -1,38 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- 전화인증 api -->
+<script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+<!-- 주소 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
 	$(function(){
-		$("#basicInfo>form>button").click(function(){
-			$(".myinfoContainer>div>button").attr('disabled', false);
-			$(".myinfoContainer>div>form>input").css('display', 'block');
-			$(".myinfoContainer>div>form>ul>li").css('display', 'block');			
-			$(this).attr('disabled', 'block');
-			$(".myinfoContainer>div>form input").attr('disabled', false).css('border', '1px solid black');
-			$(".editOn").css('display', 'block');
-			$("#imgFile").css('border', 'none');
-			$("#detailInfo>form>ul>li select").attr('disabled', false);
-	
+		
+		//myinfo 더보기 이벤트
+		var moreInfoOn = false;
+		$("#moreInfo").click(function(){
+			if(moreInfoOn == false){
+				$(this).css('display', 'none');
+				$(".editOn").css('display', 'block');
+				$(".inputDisabled").attr('disabled', false);
+				moreInfoOn = true;
+			}else{
+				if(confirm("수정을 취소하시겠습니까?")){
+						
+				}else{
+					return false;
+				}
+				
+				$(".editOn").css('display', 'none');	
+				$(".inputDisabled").attr('disabled', true);
+				moreInfoOn = false;								
+			}
 		});
-		$("#cancel").click(function(){
-			$(".myinfoContainer>div>button").attr('disabled', 'true');
-			$(".myinfoContainer>div>form>button[value='EDIT']").attr('disabled', false);
+		
+		//수정버튼 이벤트
+		var editOn = false;
+		$("#myinfoEditBtn").click(function(){
+			if(moreInfoOn == true){
+				$(this).css('display', 'none');
+				$(".editOn").css('display', 'block');
+				$(".inputDisabled").attr('disabled', false);
+				editOn = true;
+			}else{	
+				$(".editOn").css('display', 'none');			
+				editOn = false;	
+			}
+		});
+		
+		//리셋 이벤트
+		$("#myinfoFrm").on('reset', function(){
 			$(".editOn").css('display', 'none');
-			$(".myinfoContainer>div>form input").attr('disabled', true).css('border', 'none');
-			$("#detailInfo>form>ul>li select").attr('disabled', 'true'); 
-			$("#cancel").css('border', '1px solid'); 
-			
+			$("#moreInfo").css('display', 'block');
+			$(".inputDisabled").attr('disabled', true);
+			moreInfoOn = false;
 		});
-		
-		//폼 초기화
-		$(document).ready(function() {
-			$("#cancel").click(function() {
-			$("#basicInfo>form")[0].reset();
-			$("#detailfrm")[0].reset();
-			
-			});
-		});
-		
-		
 		
 		//탈퇴 조사 폼
 		$("input[value='네']").click(function(){			
@@ -89,7 +107,7 @@
 			
 
 		}
-		setEmail();
+		
 		//지역 세팅
 		function setGu(){
 			var gu = ['강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구', 
@@ -105,70 +123,125 @@
 			$("#addr1").html(tag);
 			$("#addr2").html(tag);
 		}
-		setGu();
+		
 	});
 </script>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">
-	
-		<h2>내 정보</h2>
-		<div id="basicInfo">
-			<h3 class="info-font-weight">기본정보</h3>
-			<form method="post">
-				<ul>
-					<li>아이디</li>
-					<li>${myVO.userid }</li>
-					<li>회원명</li>
-					<li>${myVO.mem_name }</li>
-					<li>별명</li>
-					<li><input type="text" name="mem_nick" value="${myVO.mem_nick }" disabled/></li>
-					<li>소개</li>
-					<li><input type="text" name="mem_content" value="${myVO.mem_content }" disabled/><hr/></li>
-					<li><h4>대표 이미지</h4><label class="btn btn-outline-dark myinfoImgLabel" for="imgFile">사진 선택</label></li>
-					<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png"></li>
-					<li><input id="imgFile" name="file" type="file" class="editOn" style="display:none; border:none;"/></li>
-					
-				</ul>
-				<hr/>
-				<input id="cancel" type="reset" class="btn cancelBtn" disabled="disabled" style="float:left" value="취소"/>
-				<button class="btn commBtn" value="EDIT">수정하기</button>
-			</form>
-		</div>
-		<div id="detailInfo">
-			<h3 class="info-font-weight">상세정보</h3>
-			<form id="detailfrm" method="post">
-				<ul>
-					<li>연락처</li>
-					<li><input type="text" name="mem_tel" value="${myVO.mem_tel }" disabled/></li>
-					<li>이메일</li>
-					<li id="emailForm">
-					
-					</li>
-					<li style="overflow:auto; display:none"><input type="button" value="메일변경" class="btn commBtn editOn" style="float:right"/></li>
-					<li>주소</li>
-					<li><input type="text" name="mem_zip" value="${myVO.mem_zip }" disabled/><input type="button" style="float:right; margin-right:60%;" value="주소찾기" class="btn commBtn editOn"></li>
-					<li><span>서울특별시</span>
-						<select id="addr1" name="mem_addr" disabled>
+		<form method="post" action="myinfoOk" id="myinfoFrm" enctype="multipart/form-data">
+		<div class="basicMyinfoHeader">내 정보</div>
+		<div class="basicMyinfo">
+			<ul>
+				<li>프로필 사진</li>
+				<li class="memheightAuto">
+					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
+						<img src="<%=request.getContextPath()%>/common/user.png"
+							id="previewImg" class="profImg form-control-file border"
+							alt="upload image" />
+					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진추가 </label> 
+					<input type="file" name="profFile" accept="image/*" id="mem_prof" 
+					style="display: none; margin-top: 70px; border: none;" />
+				</li>
+				
+				<li>아이디</li>
+				<li><input type="text" name="userid" id="userid" tabindex="1" value="${myVO.userid }" disabled/></li>
+				<li>이름</li>
+				<li><input type="text" name="mem_name" id="mem_name"tabindex="5" value="${myVO.mem_name }" disabled/></li>
+				<li>닉네임</li>
+				<li><input type="text" class="inputDisabled" name="mem_nick" id="mem_nick" value="${myVO.mem_nick }" disabled="disabled"
+					placeholder="별명을 입력해주세요" />
+				<button type="button" class="btn commBtn Mem_lgBtn" id="nickOverlapBtn">중복검사</button>
+					<span id="nickOverlap">N</span><br/>
+					<span id="checkNickname"></span>	
+				</li>
 
-						</select>
-					</li>
-					<li><input type="text" name="mem_detail" value="${myVO.mem_detail }" disabled/></li>
-					<li>선호지역</li>
-					<li><span>서울특별시</span>
-						<select id="addr2" name="log_gu" disabled>
+				<li>인사말</li>
+				<li><textarea name="mem_content" id="mem_content"
+						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.mem_content }</textarea>
+				</li>
+				<li>연락처</li>
+				<li><input type="text" class="inputDisabled" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11" value="${myVO.mem_tel }" disabled="disabled"/>
+				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
+				<span id="checktel"></span></li>
+					
+				<li>이메일</li>
+				<li><input type="text" name="mem_email" id="mem_email" class="inputDisabled"
+					tabindex="7" value="${myVO.mem_email }" disabled="disabled" placeholder="예) 1ocaler@1ocaler.com" />
+				<button type="button" class="btn commBtn Mem_lgBtn">이메일 인증</button> <br />
+				<span id="checkemail"></span></li>
 
-						</select>
-					</li>
-				</ul>
-			<hr/>
-			<input type="submit" class="btn commBtn editOn" style="float:right;" value="수정"/>
-			</form>
-			<input type="button" class="btn commBtn btn-sm btn-primary" data-target="#myinfoMd" data-toggle="modal" value="탈퇴하기"/>
+				<li>주소</li>
+				<li style="height:200px">
+					<ul class="myifoAddrInput">
+						<li><input type="text" class="inputDisabled" name="mem_zip" id="mem_zip" value="${myVO.mem_zip }" disabled="disabled"
+							tabindex="9" />
+						<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:openKakaoPost()">재검색</button></li>
+						<li><input type="text" class="inputDisabled" name="mem_addr" id="mem_addr" value="${myVO.mem_addr }" disabled="disabled"
+							tabindex="10" /></li>
+						<li><input type="text" class="inputDisabled" name="mem_detail" id="mem_detail" value="${myVO.mem_detail }" disabled="disabled"
+							tabindex="11" />
+						</li>
+						<li>
+							<div id="joinAddrWrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:absolute">
+							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>활동지역</li>
+				<li>
+					<input type="text" class="inputDisabled" name="loc_gu" id="loc_gu" tabindex="12" value="${myVO.loc_gu }" disabled="disabled" placeholder="ㅇㅇ구로 입력해주세요" />
+					<img src="img/indexImg/bo_pin.png" id="locImg"/>
+				</li>
+			</ul>
+			
+			<button type="button" id="moreInfo" class="btn commBtn Mem_lgBtn"
+				style="width: 320px; height: 40px; display: block; margin: 0 auto;">수정하기</button>
+			<div class="editOn" id="editOn">
+				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정</button>
+				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
+			</div>
 		</div>
-		<div >
-			<input type="button" class="btn commBtn" value="샐러등록" id="joinSeller"/>
+		<!--  
+		<div class="basicMyinfoHeader">상세정보</div>
+		<div class="detailMyinfo">
+			<ul class="myinfoProf_ul">
+				<li>프로필 사진</li>
+				<li class="memheightAuto">
+					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
+						<img src="<%=request.getContextPath()%>/common/user.png"
+							id="previewImg" class="profImg form-control-file border"
+							alt="upload image" />
+					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진추가 </label> 
+					<input type="file" name="profFile" accept="image/*" id="mem_prof" 
+					style="display: none; margin-top: 70px; border: none;" />
+				</li>
+
+				<li>닉네임</li>
+				<li><input type="text" class="inputDisabled" name="mem_nick" id="mem_nick" value="${myVO.mem_nick }" disabled="disabled"
+					placeholder="별명을 입력해주세요" />
+				<button type="button" class="btn commBtn Mem_lgBtn" id="nickOverlapBtn">중복검사</button>
+					<span id="nickOverlap">N</span><br/>
+					<span id="checkNickname"></span>	
+				</li>
+
+				<li>인사말</li>
+				<li><textarea name="mem_content" id="mem_content"
+						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.mem_content }</textarea> 
+			</ul>
+			<button type="button" id="myinfoEditBtn" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정하기</button>
+			<div class="editOn" id="editOn">
+				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정</button>
+				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
+			</div>
 		</div>
+		-->
+	</form>
+		<div class="myinfoOtherBtn">
+			<button type="button" class="btn commBtn ">셀러등록하기</button>
+		</div>
+		<button style="float:right" type="button" class="btn cancelBtn " data-target="#myinfoMd" data-toggle="modal">탈퇴하기</button>
 	</div>
 	<div class="modal fade" id="myinfoMd" data-backdrop="static">
 		<div class="modal-dialog" data-backdrop="static" style="margin-top:20%">
