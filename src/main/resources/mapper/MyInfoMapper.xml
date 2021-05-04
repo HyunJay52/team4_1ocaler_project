@@ -22,6 +22,20 @@
 		where m.userid = #{param1}
 	</select>
 
-
-
+	<select id="allPointSelect" resultType="com.team4.localer.vo.Cha_pVO">
+		<![CDATA[
+		select * from (
+		select * from (
+		select userid, cha_point, to_char(po_date, 'YYYY-MM-DD HH:MI:SS') po_date, cha_mth from cha_p
+		union all
+		select userid, sp_point, to_char(sp_date, 'YYYY-MM-DD HH:MI:SS') sp_date, sp_item from sp_p )
+		where rownum<=#{param2} order by po_date asc)
+		where userid = #{param1} and rownum<=#{param3} order by po_date desc]]>
+	</select>
+	
+	<select id="pointCount" resultType="String">
+		select count(userid) from 
+		(select * from cha_p union all 
+		select * from sp_p where userid=#{param} )
+	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.team4.localer.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -36,6 +38,19 @@ public class MyInfoServiceImp implements MyInfoService{
 		
 		return dao.pointCharge(vo);
 	}
+
+	@Override
+	public List<Cha_pVO> allPointSelect(String userid, int rownum1, int rownum2){
+
+		return dao.allPointSelect(userid, rownum1, rownum2);
+	}
+
+	@Override
+	public String pointCount(String userid) {
+		
+		return dao.pointCount(userid);
+	}
+
 
 	
 
