@@ -1,16 +1,5 @@
 @charset "UTF-8";
 	/*폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼폼*/
-	/*searchFrm*/
-	#eatViewPageSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#eatViewPageSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
-	#eatViewPageSearchFrm input[type=image]{display:block; height:48px;}
-	/*topFrm*/
-	#eatViewPageTopFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#eatViewPageTopFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#eatViewPageTopFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
-	#eatViewPageTopFrm img{width:30px; margin:9px 0px;}
-	#eatViewPageTopFrm li:first-child>a>img{ margin-left:10px;}
-	#eatViewPageTopFrm li:last-child>a>img{ margin-right:10px;}
 	/*showFrm*/
 	#eatViewPageShowFrm{position:absolute; height:auto; top:100px; left:30px; z-index:1; width:500px; background-color:#fff; opacity:0.9; border-radius:10px;}
 	#eatViewPageShowTopMenu{overflow:auto;}

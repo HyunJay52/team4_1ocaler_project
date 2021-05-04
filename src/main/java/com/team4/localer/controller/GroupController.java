@@ -127,9 +127,11 @@ public class GroupController{
 				if(groupService.groupInsert(vo)>0) {
 					System.out.println("성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					if(vo.getUp_cate().equals("한끼미식회")) {
+						mav.addObject("category",pageVO.getCategory());
 						mav.addObject("loc_gu",pageVO.getLoc_gu());
 						mav.setViewName("redirect:eatPage");
 					}else {
+						mav.addObject("category",pageVO.getCategory());
 						mav.addObject("loc_gu",pageVO.getLoc_gu());
 						mav.setViewName("redirect:withPage");
 					}
@@ -140,6 +142,7 @@ public class GroupController{
 			}else {
 				if(groupService.groupBigMartInsert(vo)>0) {
 					System.out.println("창고형마트 인설트 성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					mav.addObject("category",pageVO.getCategory());
 					mav.addObject("loc_gu",pageVO.getLoc_gu());
 					mav.setViewName("redirect:withPage");
 				}else {
@@ -228,16 +231,7 @@ public class GroupController{
 		}else {
 			mav.setViewName("group/historyBack");
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		return mav;
 		
 	}
