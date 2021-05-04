@@ -9,14 +9,14 @@
 	width:100%;
 	overflow:auto;
 	list-style-type:none;
-	background-color:rgb(255,253,232);
+	background-color:rgb(230,230,230,0.1);
 	}
 .statis>li{
 	margin-top:10px;
 	margin-bottom:10px;
 	float:left;
 	width:20%;
-	color:rgb(248,145,69);
+	color:#024B40;
 	font-family:"nsrb";
 	font-size:16px;
 	text-align: center;
@@ -24,8 +24,8 @@
 .statis div{/*수치*/
 	font-family:"nsreb";
 	font-size:32px;
-	color:rgb(248,145,69);
-	border-right:4px solid rgb(248,145,69,0.6);
+	color:#024B40;
+	border-right:4px solid #024B40;
 	}
 .statis li:last-child>div{
 	border:none;
