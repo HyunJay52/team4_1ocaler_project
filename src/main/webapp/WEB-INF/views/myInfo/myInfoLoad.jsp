@@ -163,7 +163,7 @@
 		</div>
 	</div>	
 		<div id="loadList">
-				<select class="selectBox " name="sel" id="sel">
+				<select class="selectBox " name="selPayment" id="selPayment">
 					<option value="전체">전체</option>
 					<option value="충전내역">충전내역</option>
 					<option value="사용내역">사용내역</option>

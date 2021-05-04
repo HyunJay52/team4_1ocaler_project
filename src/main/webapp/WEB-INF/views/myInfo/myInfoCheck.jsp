@@ -73,7 +73,7 @@
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	
 	<div id="login_section">
-		<span class="lgFnt" >비밀번호 확인</span>
+		<span class="lgFnt">개인정보 보호를 위해<br/>비밀번호를 재확인합니다.</span>
 		<form method="post" action="myInfo" id="passwordCheckForm"> <!-- loginConfrim -->
 			<ul>
 				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>

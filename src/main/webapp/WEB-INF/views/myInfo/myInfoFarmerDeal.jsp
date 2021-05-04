@@ -66,8 +66,10 @@
 						<li>좋아요(21)</li>
 					</ul>
 				</div>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Info"/>
+				<div class="dealBtnForm">
+					<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message" style="float:left"/>
+					<input type="button" class="btn dealBtn btn-outline-dark" value="Info"/>
+				</div>
 			</div>
 		</div>
 		   <div class="dealBottom">

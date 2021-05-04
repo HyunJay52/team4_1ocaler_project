@@ -35,12 +35,18 @@
 	}
 	.reviewSearchArea{
 		float:right;
-		margin-right:50px;
 		margin-top:10px;
 	}
 	.reviewSearchArea input[type=text]{
 		height:30px;
 		padding-left:6px;
+	}
+	#reviewSearchAreaBtn{
+		width:60px;
+		height:30px;
+		line-height:10px;
+    	background-color: #3f1785;
+    	color: #fff;
 	}
 	.reviewList>table tr>td>img{
 		width:50px;

@@ -18,9 +18,11 @@
 	.myinfoStatisticsLeft{
 		width:400px;
 		margin:20px 0px;
-		border:1px solid #ddd;
 		float:left;
 		overflow:auto;
+	}
+	.myinfoStatisticsLeft>table:first-child{
+		margin-bottom:20px;
 	}
 	.myinfoStatisticsTable2 {
 		width:100%;

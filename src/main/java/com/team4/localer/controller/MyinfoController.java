@@ -45,6 +45,7 @@ public class MyinfoController {
 		}else {
 			mav.setViewName("redirect:myInfoCheck");
 		}
+		
 		return mav;
 	}
 	

@@ -37,25 +37,25 @@
 						<li>좋아요(21)</li>
 					</ul>
 				</div>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
+				<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message" style="float:left"/>
 				<input type="button" class="btn dealBtn btn-outline-dark" value="Info"/>
 			</div>
 		</div>
 		<div class="dealBottom">
-			<div class="activityLeft">
-				<ul>
-					<li>나의 작성글</li>
-					<li>나의 댓글</li>
-					<li>나의 Q&A</li>
-				</ul>
-			</div>
 			<div class="activityRight">
-				<input type="button" class="btn btn-outline-danger" value="삭제" style="float:right; margin-right:40px;"/>
-				<div class="dealDateForm">
+				<input type="button" class="btn btn-outline-danger" value="삭제" style="float:right; height:30px; margin-top:10px; line-height:10px"/>
+				<div class="myActivityForm">
 					<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
 					<div class="myActivityDateFrm"><button class="dayBtn prev">《</button><button class="setMonth dayBtn mdFnt"></button><button class="dayBtn next">》</button></div>
 					<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
 					<input type="date" min="2021-01-01" max="2021-05-31"/>
+					<div class="activitySelect">
+						<select id="activitySelectbox">
+							<option value="">나의 작성글</option>
+							<option value="">나의 댓글</option>
+							<option value="">나의 Q&A</option>
+						</select>
+					</div>
 				</div>
 				
 				<table class="myinfoTable2" id="activityTbl">

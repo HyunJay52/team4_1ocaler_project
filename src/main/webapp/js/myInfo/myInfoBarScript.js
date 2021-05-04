@@ -1,3 +1,6 @@
+
+//차트 세팅
+function setStatistic(){
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
@@ -38,3 +41,4 @@
           var chart = new google.visualization.BarChart(document.getElementById("myinfoBar"));
           chart.draw(view, options);
       }
+}
