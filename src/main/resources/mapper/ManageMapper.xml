@@ -24,7 +24,12 @@
   		update member set ${param2}=${param3} where userid=#{param1}
   	</update>
   	<!-- 셀러관리 페이지 부분 -->
-  	<!-- <select id="sellerAllSelect" resultType="com.team4.localer.vo.SellerVO">
-  		select sel_num,userid,sel_lvl
-  	</select> -->
+  	<select id="sellerAllSelect" resultType="com.team4.localer.vo.SellerVO">
+  		select s.sel_num, s.userid ,s.sel_name, s.sel_addr,s.sel_detail, s.sel_tel, 
+			   m.mem_status, m.mem_type 
+			   from seller s join member m on s.userid = m.userid 
+  			   <if test="param1 !=null and param1!='' "><!-- 검색을 고려한 if문 -->
+  					where ${param1} like #{param2} 
+  			   </if>
+  	</select>
 </mapper>

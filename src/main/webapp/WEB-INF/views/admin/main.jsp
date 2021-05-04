@@ -13,7 +13,7 @@
 </script>
 <div class="main">
 	<div class="title">일일현황</div>
-	<div>
+	<div id="cirdiv">
 		<div class="cir1">신규회원<br/><b>25</b></div>
 		<div class="cir1">새 게시물<br/><b>10</b></div>
 		<div class="cir1">방문자수<br/><b>3</b>/총</div>
@@ -21,7 +21,7 @@
 	</div>
 	
 	<div class="title">문의사항</div>
-	<div id="more"><a class="searchbtn" href="cspage">더보기</a></div>
+	<a class="searchbtn more" href="cspage">더보기</a>
 	<table class="tablea">
 		<colgroup>
            <col width="5%" />
@@ -40,16 +40,19 @@
 			<td>게시글관리</td>
 		</tr>
 		<c:forEach var="vo" items="${list }">
-			<c:if test="${vo.cs_status==1 }">
-				<tr>
-					<td>${vo.cs_num }</td>
-					<td>${vo.cs_cate }</td>
-					<td class="wordcut"><a href="persnal?cs_num=${vo.cs_num }">${vo.cs_subject }</a></td>
-					<td>${vo.userid }</td>
-					<td>${vo.cs_writedate }</td>
-					<td><input type="button" value="미처리" title="${vo.cs_num }"class="smallbtn"/></td>
-				</tr>
-			</c:if>
+			<tr>
+				<td>${vo.cs_num }</td>
+				<td>${vo.cs_cate }</td>
+				<td class="wordcut"><a href="persnal?cs_num=${vo.cs_num }">${vo.cs_subject }</a></td>
+				<td>${vo.userid }</td>
+				<td>${vo.cs_writedate }</td>
+				<td><input type="button" value="미처리" title="${vo.cs_num }"class="smallbtn"/></td>
+			</tr>
 		</c:forEach>
+		<c:if test="${empty list }">
+		 	<tr>
+				<td colspan=6>모든 문의 답변완료</td>
+			</tr>
+		</c:if>
 	</table>
 </div>

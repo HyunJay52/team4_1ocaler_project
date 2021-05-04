@@ -1,8 +1,10 @@
 package com.team4.localer.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.CsService;
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.CsVO;
 import com.team4.localer.vo.OftenqVO;
 import com.team4.localer.vo.ReportVO;
@@ -215,6 +218,23 @@ public class AdminController {
 			return csService.searchReport("rep_"+searchkey,"%"+text+"%");
 			
 		}
+	}
+	//신고부분 검색, 아작스 paging
+	@RequestMapping("/pagingCS")
+	@ResponseBody
+	public ModelAndView pagingCSpage(AdminPageVO pageVO, String cate){
+		ModelAndView mav = new ModelAndView();
+		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+		pageVO.setCate(cate);
+		pageVO.setNum("rep_num");
+		if(pageVO.getSearchKey()!="userid" && !pageVO.getSearchKey().equals("userid")) {
+			pageVO.setSearchKey("rep_"+pageVO.getSearchKey());
+		}
+		//총레코드 구하기
+		pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		mav.addObject("list",csService.onePageRecordSelect_rep(pageVO));
+		mav.addObject("pageVO",pageVO);
+		return mav;
 	}
 }
 

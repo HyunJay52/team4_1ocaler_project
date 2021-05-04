@@ -2,11 +2,16 @@ package com.team4.localer.service;
 
 import java.util.List;
 
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.CsVO;
 import com.team4.localer.vo.OftenqVO;
 import com.team4.localer.vo.ReportVO;
 
 public interface CsService {
+	//총레코드 수 구하기 
+	public int totalRecord(AdminPageVO pageVO);
+	//한페이지 레코드 select 하기
+	public List<CsVO> onePageRecordSelect_rep(AdminPageVO pageVO);
 	//고객문의 미답변 글목록
 	public List<CsVO> csTblSelect();
 	//고객문의 글 중 미처리만 모아놓은 전체목록
