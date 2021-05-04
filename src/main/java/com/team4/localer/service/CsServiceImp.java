@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.CsDAO;
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.CsVO;
 import com.team4.localer.vo.OftenqVO;
 import com.team4.localer.vo.ReportVO;
@@ -85,6 +86,21 @@ public class CsServiceImp implements CsService {
 	@Override
 	public List<CsVO> searchCs(String searchkey, String text) {
 		return csdao.searchCs(searchkey, text);
+	}
+
+	@Override
+	public List<CsVO> csTblSelect() {
+		return csdao.csTblSelect();
+	}
+
+	@Override
+	public int totalRecord(AdminPageVO pageVO) {
+		return csdao.totalRecord(pageVO);
+	}
+
+	@Override
+	public List<CsVO> onePageRecordSelect_rep(AdminPageVO pageVO) {
+		return csdao.onePageRecordSelect_rep(pageVO);
 	}
 
 }

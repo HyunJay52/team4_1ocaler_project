@@ -29,7 +29,6 @@
 				
 				<li>회사명</li>
 				<li><input type="text" name="company" id="company" tabindex="5" placeholder="이름을 입력해주세요"/> 
-					<br/><span id="checkname"></span>
 				</li>
 				
 				<li>사업자번호</li>
@@ -39,12 +38,12 @@
 				
 				<li>대표번호</li>
 				<li><input type="number" name="sel_tel" id="sel_tel" tabindex="6" placeholder="예) 01012341234"/><button type="button" class="btn commBtn lgBtn">번호인증</button>
-					<br/><span id="checktel"></span>
+					<br/><span id="checkSellTel"></span>
 				</li>
 				
 				<li>이메일</li>
 				<li><input type="text" name="sel_email" id="sel_email" tabindex="7" placeholder="예) 1ocaler@1ocaler.com"/><button type="button" class="btn commBtn lgBtn">이메일 인증</button>
-					<br/><span id="checkemail"></span>
+					<br/><span id="checkSellEmail"></span>
 				</li>
 				
 				<li>주소</li>
@@ -75,7 +74,8 @@
 								<option value="국민은행">국민은행</option>
 								<option value="카카오뱅크">카카오뱅크</option>
 							</select>
-							<input type="text" name="account" id="account" tabindex="15" placeholder="계좌번호(숫자만 입력해주세요)"/>
+							<input type="number" name="account" id="account" tabindex="15" placeholder="계좌번호(숫자만 입력해주세요)"/>
+							<br/><span id="checkSellEmail"></span>
 						</li>
 					</ul>
 				</li>

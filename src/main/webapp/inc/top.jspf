@@ -1,139 +1,106 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" %>
-<%request.setCharacterEncoding("utf-8"); %>
-
-<%
-//쿠키 상태 확인하기
-//쿠키 유무 확인해서 페이지 이동
-// Cookie[] cookies = request.getCookies();
-// if(cookies!=null){ //쿠키가 있음
-// 	for(Cookie userCookie : cookies){
-// 		if(userCookie.getName().equals("logId")){
-// 			response.sendRedirect("home.jsp");
-// 		}
-// 	}
-// }
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="true"%>
 <!-- 페이지 스타일 링크 -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mainStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/commonStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/groupMapViewStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/member/member.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/eatViewPageStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/withViewPageStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/group/groupWriteFormStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/aboutBoard.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/csBoard.css"/>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/mainStyle.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/commonStyle.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/group/groupMapViewStyle.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/member/member.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/group/eatViewStyle.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/group/eatViewPageStyle.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/group/withViewStyle.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/group/withViewPageStyle.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/group/groupWriteFormStyle.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/aboutCsBoard/aboutBoard.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/aboutCsBoard/csBoard.css" />
 <!-- 카카오 지도 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script>
 <html>
 <head>
-   <title>Welcome to 1ocaler</title>
-   
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<title>1ocaler</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+	crossorigin="anonymous"></script>
 
 </head>
 <body>
-<div id="pageTop">
-   <div id="logo"><a href="<%=request.getContextPath()%>/"><img src="common/logo_deep_pur.png"/></a></div>
-   <c:if test="${logId.equals('admin') }">
-      <ul id="navi">
-         <li class="resquick_content"><a href="main">HOME</a>
-            <ul>
-               <li><a href="cspage">고객센터</a></li>
-            </ul>
-         </li>
-         <li class="resquick_content"><a href="m_mem">회원관리</a>
-            <ul>
-               <li><a href="m_mem">일반회원</a></li>
-               <li><a href="m_sel">셀러회원</a></li>
-            </ul>
-         </li>
-         <li class="resquick_content"><a href="#">게시글 관리</a>
-            <ul>
-               <li><a href="selManage">판매 게시글 관리</a></li>
-               <li><a href="boardManage">게시글 관리</a></li>
-            </ul>
-         </li>
-         <li class="resquick_content"><a href="statis_mem">통계</a>
-            <ul>
-               <li><a href="statis_mem">회원통계</a></li>
-               <li><a href="statis_board">게시글 통계</a></li>
-            </ul>
-         </li>
-         <li class="resquick_content"><a href="spend_mem">정산 관리</a>
-            <ul>
-               <li><a href="spend_mem">회원 정산</a></li>
-               <li><a href="spend_sel">셀러 정산</a></li>
-            </ul>
-         </li>
-      </ul>
-      <div id="myMenu">
-      <ul>
-         <!-- 관리자 로그인시 -->
-         <li class="aLogin">관리자님 환영합니다.^^</li>
-      </ul>
-      <div style="display:none;"><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
-   </div>
-   </c:if>
-   <c:if test="${!logId.equals('admin') }">
-      <ul id="navi">
-         <li class="resquick_content"><a href="aboutUs">ABOUT</a>
-            <ul>
-               <li><a href="aboutUs">소개</a></li>
-               <li><a href="routeUs">오시는길</a></li>
-            </ul>
-         </li>
-         <li class="resquick_content"><a href="memberBoard">우리직구</a>
-            <ul>
-               <li><a href="selBard">착한발견</a></li>
-               <li><a href="memberBoard">동네직구</a></li>
-            </ul>
-         </li>
-         <li class="resquick_content"><a href="groupPage">같이가치</a>
-            <ul>
-               <li><a href="withPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">가치가장</a></li>
-               <li><a href="eatPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">한끼미식회</a></li>
-            </ul>
-         </li>
-         <li class="resquick_content"><a href="commuMain">커뮤니티</a>
-            <ul>
-               <li><a href="commuBoard">우리동네 이야기</a></li>
-               <li><a href="#">쓱싹레시피</a></li>
-               <li><a href="#">자유자게</a></li>
-            </ul>
-         </li>
-         <li class="resquick_content"><a href="oftenQna">고객센터</a>
-            <ul>
-               <li><a href="oftenQna">자주하는 질문</a></li>
-               <li><a href="qnaWrite">1:1 문의하기</a></li>
-               <li><a href="reportWrite">신고하기</a></li>
-            </ul>
-         </li>
-      </ul>
-      <div id="myMenu">
-		<!-- 로그아웃 시 -->
+	<!-- 회원 로그인 부분 -->
+	<div id="mem_login">
 		<c:if test="${logName==null || logName=='' }">
-			<div id="topLogin"><a href="login" class="aLogin">로그인</a>&nbsp;|&nbsp;<a href="joinMember" class="aLogin">회원가입</a></div>
-	    </c:if> 
-	    <!-- 로그인 시 -->
-		<c:if test="${logName!=null && logName!=''}">
-			<div id="afterLogin">
-				<div>${logName } 님 환영합니다<br/>
-					<b><a href="#" class="aLogin">50,000</a></b>&nbsp;원&nbsp;<a href="myInfoMain">내정보</a>
-				</div>
-				<div><img src="<%=request.getContextPath()%>/common/alarm_000.png"/></div>
+			<div id="beforeLogin">
+				<a href="login">로그인</a> <a href="joinMember">회원가입</a>
 			</div>
 		</c:if>
-   	</div>
-   </c:if>
-   
-   
-</div>
+		<c:if test="${logName!=null && logName!='' }">
+			<div id="afterLogin">
+				<a href="myInfoMain">${logName }</a>님 환영합니다. <a href="logOut">로그아웃</a>
+			</div>
+		</c:if>
+	</div>
+
+	<!-- header menu 부분 -->
+	<div id="pageTop">
+		<div id="logo">
+			<a href="<%=request.getContextPath()%>/"><img
+				src="common/logo_deep_pur.png" />1ocal+er</a>
+		</div>
+		<c:if test="${!logId.equals('admin') }">
+			<div id="topNavi">
+				<ul id="navi">
+					<li><a href="aboutUs">ABOUT<span id=line></span></a></li>
+					<li><a href="memberBoard">우리직구</a></li>
+					<li><a href="groupPage">같이가치</a></li>
+					<li><a href="commuMain">커뮤니티</a></li>
+					<li><a href="oftenQna">고객센터</a></li>
+				</ul>
+				<div id="topSubMenu">
+					<ul>
+						<li><a href="aboutUs">소개</a></li>
+						<li><a href="routeUs">오시는길</a></li>
+					</ul>
+					<ul>
+						<li><a href="selBard">착한발견</a></li>
+						<li><a href="memberBoard">동네직구</a></li>
+					</ul>
+					<ul>
+						<li><a
+							href="withPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">가치가장</a></li>
+						<li><a
+							href="eatPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">한끼미식회</a></li>
+					</ul>
+					<ul>
+						<li><a href="commuBoard">우리동네 이야기</a></li>
+						<li><a href="#">쓱싹레시피</a></li>
+						<li><a href="#">자유자게</a></li>
+					</ul>
+					<ul>
+						<li><a href="oftenQna">자주하는 질문</a></li>
+						<li><a href="qnaWrite">1:1 문의하기</a></li>
+						<li><a href="reportWrite">신고하기</a></li>
+					</ul>
+				</div>
+			</div>
+		</c:if>
+	</div>

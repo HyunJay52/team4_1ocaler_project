@@ -1,23 +1,11 @@
 @charset "UTF-8";
-body{
-	font-family:"nsr";
-	}
-#main{
-	margin:0 auto; 
-	padding:0;
-	padding-top:30px;
-	overflow:auto;
-	width:1300px;
-	
-}
-form{
+.dateFrm{
 	text-align:center;
-
 }
-input[type="date"]:first-child{
+.dateFrm input[type="date"]:first-child{
 	/* margin-left:35%; */
 }
-input[type="date"]{
+.dateFrm input[type="date"]{
 	width:150px;/*너비설정*/
 	padding:6px;/*여백설정*/
 	border:1px solid #3f1785;
@@ -41,7 +29,7 @@ input[type="date"]{
 	}
 
 /*도넛 차트1*/
-li{
+.donutUl li{
 	float:left;
 	width:400px;
 	font-size:32px;
@@ -49,7 +37,7 @@ li{
 	padding:0;
 	list-style-type:none;
 }
-ul>li:nth-child(3n+1){
+.donutUl>li:nth-child(3n+1){
 	margin-left:50px;
 }
 

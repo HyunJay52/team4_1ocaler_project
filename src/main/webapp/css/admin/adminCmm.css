@@ -12,12 +12,16 @@
 	font-size:32px;
 	margin-top:20px;
 	margin-bottom:20px;
+	color:rgb(102,102,102);
 }
 /*글자르기*/
 .wordcut{
 	whilte-space:nowrap; 
 	overflow:hidden; 
 	text-overflow:ellipsys;
+}
+.wordcut{
+	text-align:left;
 }
 .tablea {
 	margin-left: auto;
@@ -28,19 +32,17 @@
 	font-size:13px;
 	width:95%;
 	}
-.tablelage{
-	max-height:800px;
-	overflow:scroll;
-}
 .tablea tr{/*테이블 목록*/
    border-bottom:1px solid rgb(227,227,227); 
    text-align:center;
    height:40px;
- }
+ } 
 .tablea tr:first-child{/*첫번째 테이블 목차*/
-	text-align:center;color:black;
-	border-bottom:2px solid #ddd;
-	background-color:rgb(204,181,242,0.3);
+	text-align:center;
+	/* color:#fff; */
+	/* border-bottom:2px solid #ddd; */
+	border-top :1px solid rgb(78,190,154);
+	background-color:rgb(78,190,154,0.2);
 	}
 
 /*텍스트 필드 공통*/
@@ -58,26 +60,26 @@
 	padding:7px;/*여백설정 */
 	font-family: inherit;/*폰트상속*/
 	background:#fff;
-	border: 1px solid #3f1785;
-	color: #3f1785;
+	border: 1px solid rgb(102,102,102);
+	color: rgb(102,102,102);
 }
 .searchbtn:hover{
-	background-color: #3f1785;
-	border: 1px solid #3f1785;
+	background-color: rgb(102,102,102);
+	border: 1px solid rgb(102,102,102);
 	color:#fff;
 }
 .puplebtn{
 	width:150px;/*너비설정*/
 	padding:7px;/*여백설정 */
 	font-family: inherit;/*폰트상속*/
-	background:#3f1785;
-	border: 1px solid #3f1785;
+	background:rgb(102,102,102);
+	border: 1px solid rgb(102,102,102);
 	color: #fff;
 }
 .puplebtn:hover{
 	background-color: #fff;
-	border: 1px solid #3f1785;
-	color:#3f1785;
+	border: 1px solid rgb(102,102,102);
+	color:rgb(102,102,102);
 }
 .selectcomm{
 	width:150px;/*너비설정*/
@@ -87,23 +89,23 @@
 .smallbtn{
 	width:70px;
 	padding:2px;
-	background-color:#3f1785;
+	background-color:rgb(78,190,154);
 	color:#fff;
-	border:1px solid #3f1785;
+	border:1px solid rgb(78,190,154);
 }
 .smallbtn:hover{
 	background-color:#fff;
-	color:#3f1785;
+	color:rgb(78,190,154);
 }
 .spuplebtn{
 	width:70px;
 	padding:2px;
 	background-color:#fff;
-	color:#3f1785;
-	border:1px solid #3f1785;
+	color:rgb(78,190,154);
+	border:1px solid rgb(78,190,154);
 }
 .spuplebtn:hover{
-	background-color:#3f1785;
+	background-color:rgb(78,190,154);
 	color:#fff;
 }
 	
@@ -139,4 +141,19 @@
 }
 .modaldiv>table{
 	margin-top:20px;
+}
+/*페이징 버튼*/
+.link{
+	width: 270px;
+    margin-left: auto;
+    margin-right: auto;
+	margin-bottom:15px;
+	text-align:center;
+	list-style-type:none;
+	text-align:center;
+}
+.link li{
+	padding:10px;
+	border: 1px solid #ddd;
+	float:left;
 }

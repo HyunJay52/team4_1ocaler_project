@@ -21,17 +21,36 @@ $(function(){
 			data : params,
 			success : function(result){
 				var $result = $(result);
+				$(".op1").remove();
+				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
 				var txt = "";
+					txt += "<colgroup class='op1'>";
+					txt += 		"<col width='5%' />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='15%' />";
+					txt += "</colgroup>";
+					txt += "<tr class='op2'>";
+					txt +=		"<td>번호</td>";
+		    		txt += 		"<td>카테고리</td>";
+		    		txt += 		"<td>제목</td>";
+		    		txt += 		"<td>작성자</td>";
+		    		txt += 		"<td>등록일</td>";
+		    		txt += 		"<td>게시글관리</td>";
+		    		txt += "</tr>";
 				$result.each(function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td>"+vo.cs_cate+" "+vo.cs_subject+"</td>";
+					txt += 		"<td>"+vo.cs_cate+"</td>";
+					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</td>";
 					txt += 		"<td>관리자</td>";
 					txt += 		"<td></td>";
 					txt += 		"<td><input type='button' class='redBtn' name='"+vo.cs_num+"' value='삭제'/>";
 					txt +=		"<input type='button' class='smallbtn' name='"+vo.cs_num+"' title='oftenqBtn' value='수정'/></td>";
-					txt += "</tr>";
+					txt += "</tr>";	
 				});
 				$("#resultTbl").append(txt);
 				
@@ -59,12 +78,28 @@ $(function(){
 			data : params,
 			success : function(result){
 				var $result = $(result);
+				$(".op1").remove();
+				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
 				var txt = "";
+				txt += "<colgroup class='op1'>";
+				txt += 		"<col width='5%' />";
+				txt += 		"<col />";
+				txt += 		"<col width='10%' />";
+				txt += 		"<col width='10%' />";
+				txt += 		"<col width='15%' />";
+				txt += "</colgroup>";
+				txt += "<tr class='op2'>";
+				txt +=		"<td>번호</td>";
+	    		txt += 		"<td>제목</td>";
+	    		txt += 		"<td>작성자</td>";
+	    		txt += 		"<td>등록일</td>";
+	    		txt += 		"<td>게시글관리</td>";
+	    		txt += "</tr>";
 				$result.each(function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td>"+vo.cs_subject+"</a></td>";
+					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</a></td>";
 					txt += 		"<td>"+vo.userid+"</td>";
 					txt += 		"<td>"+vo.cs_writedate+"</td>";
 					txt += 		"<td><input type='button' ";
@@ -98,12 +133,28 @@ $(function(){
 			data : params,
 			success : function(result){
 				var $result = $(result);
+				$(".op1").remove();
+				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
 				var txt = "";
+					txt += "<colgroup class='op1'>";
+					txt += 		"<col width='5%' />";
+					txt += 		"<col />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='15%' />";
+					txt += "</colgroup>";
+					txt += "<tr class='op2'>";
+					txt +=		"<td>번호</td>";
+		    		txt += 		"<td>제목</td>";
+		    		txt += 		"<td>작성자</td>";
+		    		txt += 		"<td>등록일</td>";
+		    		txt += 		"<td>게시글관리</td>";
+		    		txt += "</tr>";
 				$result.each(function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.rep_num+"</td>";
-					txt += 		"<td>"+vo.rep_subject+"</td>";
+					txt += 		"<td class='wordcut'>"+vo.rep_subject+"</td>";
 					txt += 		"<td>"+vo.userid+"</td>";
 					txt += 		"<td>"+vo.rep_writedate+"</td>";
 					txt += 		"<td><input type='button' ";
@@ -131,7 +182,6 @@ $(function(){
 $(document).on('click', '.smallbtn', function(){
 	var cate = $(this).attr('title');//버튼 클릭종류 파악 
 	var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
-	alert(cate+"////"+num);
 	if(cate=="oftenqBtn"){
 		//자주하는 질문 수정클릭시
 		location.href="oftenQWriteEdit?num="+num;
@@ -147,7 +197,6 @@ $(document).on('click', '.smallbtn', function(){
 $(document).on('click', '.spuplebtn', function(){
 	var cate = $(this).attr('title');//버튼 클릭종류 파악 
 	var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
-	alert(cate+"////"+num);
 	if(cate=="csBtn"){
 		//1:1질문 처리요청 클릭시 
 		location.href="persnal?cs_num="+num;
@@ -169,7 +218,8 @@ $(document).on('click', '#searchCS', function(){
 	var searchTxt = $('.textcomm').val();
 	var cate = $("#selectcate").val();
 	if(cate=='report'){
-		searchReportF("searchCS","searchkey="+searchVal+"&text="+searchTxt);	
+		searchPage("pagingCS");
+		//searchReportF("searchCS","searchkey="+searchVal+"&text="+searchTxt);	
 	}else if(cate=='oftenq'){
 		searchOftenqF("searchCS","searchkey="+searchVal+"&text="+searchTxt);
 	}else if(cate='cs'){
@@ -178,6 +228,55 @@ $(document).on('click', '#searchCS', function(){
 	$(".textcomm").val('');
 	$(".textcomm").focus();
 });
+//페이징
+function searchPage(url){
+	$.ajax({
+		url:url,
+		data:$("#searchFrm").serialize()+"&cate=report",
+		dataType: "json",
+		success:function(res){
+			var list = res.list;
+			var page = res.pageVO;
+			var $list = $(list);
+			$(".op1").remove();
+			$(".op2").remove();
+			$(".reset").remove();//테이블 내용 지우기 
+			var txt = "";
+				txt += "<colgroup class='op1'>";
+				txt += 		"<col width='5%' />";
+				txt += 		"<col />";
+				txt += 		"<col width='10%' />";
+				txt += 		"<col width='10%' />";
+				txt += 		"<col width='15%' />";
+				txt += "</colgroup>";
+				txt += "<tr class='op2'>";
+				txt +=		"<td>번호</td>";
+	    		txt += 		"<td>제목</td>";
+	    		txt += 		"<td>작성자</td>";
+	    		txt += 		"<td>등록일</td>";
+	    		txt += 		"<td>게시글관리</td>";
+	    		txt += "</tr>";
+			$list.each(function(idx,vo){//테이블 내용 추가
+				txt += "<tr class='reset'>";
+				txt += 		"<td>"+vo.rep_num+"</td>";
+				txt += 		"<td class='wordcut'>"+vo.rep_subject+"</td>";
+				txt += 		"<td>"+vo.userid+"</td>";
+				txt += 		"<td>"+vo.rep_writedate+"</td>";
+				txt += 		"<td><input type='button' ";
+				if((vo.cs_status)==1){
+					txt += " class='smallbtn' name='"+vo.rep_num+"' title='reportBtn' value='처리요청'</td></tr>";
+				}else if((vo.cs_status)==2){
+					txt += " class='spuplebtn' name='"+vo.rep_num+"' title='reportBtn' value='반려'</td></tr>";
+				}else{
+					txt += " class='spuplebtn' name='"+vo.rep_num+"' title='reportBtn' value='처리완료'</td></tr>";
+				}
+			});
+			$("#resultTbl").append(txt);
+		},error:function(){
+			alert("검색 실패했다 하,,,");
+		}
+	});
+}
 //1:1 질문검색 ajax 함수
 function searchCSF(url,params){
 	$.ajax({
@@ -185,12 +284,29 @@ function searchCSF(url,params){
 		data:params+"&cate=cs",
 		success:function(result){
 				var $result = $(result);
+				
+				$(".op1").remove();
+				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
 				var txt = "";
+					txt += "<colgroup class='op1'>";
+					txt += 		"<col width='5%' />";
+					txt += 		"<col />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='15%' />";
+					txt += "</colgroup>";
+					txt += "<tr class='op2'>";
+					txt +=		"<td>번호</td>";
+		    		txt += 		"<td>제목</td>";
+		    		txt += 		"<td>작성자</td>";
+		    		txt += 		"<td>등록일</td>";
+		    		txt += 		"<td>게시글관리</td>";
+		    		txt += "</tr>";
 				$result.each(function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td>"+vo.cs_subject+"</a></td>";
+					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</a></td>";
 					txt += 		"<td>"+vo.userid+"</td>";
 					txt += 		"<td>"+vo.cs_writedate+"</td>";
 					txt += 		"<td><input type='button' ";
@@ -213,12 +329,31 @@ function searchOftenqF(url,params){
 		data:params+"&cate=oftenq",
 		success:function(result){
 				var $result = $(result);
+				$(".op1").remove();
+				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
 				var txt = "";
+					txt += "<colgroup class='op1'>";
+					txt += 		"<col width='5%' />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='15%' />";
+					txt += "</colgroup>";
+					txt += "<tr class='op2'>";
+					txt +=		"<td>번호</td>";
+		    		txt += 		"<td>카테고리</td>";
+		    		txt += 		"<td>제목</td>";
+		    		txt += 		"<td>작성자</td>";
+		    		txt += 		"<td>등록일</td>";
+		    		txt += 		"<td>게시글관리</td>";
+		    		txt += "</tr>";
 				$result.each(function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td>"+vo.cs_cate+" "+vo.cs_subject+"</td>";
+					txt += 		"<td>"+vo.cs_cate+"</td>";
+					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</td>";
 					txt += 		"<td>관리자</td>";
 					txt += 		"<td></td>";
 					txt += 		"<td><input type='button' class='redBtn' name='"+vo.cs_num+"' value='삭제'/>";
@@ -238,12 +373,28 @@ function searchReportF(url,params){
 		data:params+"&cate=report",
 		success:function(result){
 				var $result = $(result);
+				$(".op1").remove();
+				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
 				var txt = "";
+					txt += "<colgroup class='op1'>";
+					txt += 		"<col width='5%' />";
+					txt += 		"<col />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='10%' />";
+					txt += 		"<col width='15%' />";
+					txt += "</colgroup>";
+					txt += "<tr class='op2'>";
+					txt +=		"<td>번호</td>";
+		    		txt += 		"<td>제목</td>";
+		    		txt += 		"<td>작성자</td>";
+		    		txt += 		"<td>등록일</td>";
+		    		txt += 		"<td>게시글관리</td>";
+		    		txt += "</tr>";
 				$result.each(function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td>"+vo.cs_subject+"</td>";
+					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</td>";
 					txt += 		"<td>"+vo.userid+"</td>";
 					txt += 		"<td>"+vo.cs_writedate+"</td>";
 					txt += 		"<td><input type='button' ";
@@ -264,16 +415,19 @@ function searchReportF(url,params){
 </script>
 <div class="main">
 	<div class="title">고객센터</div>
-	<p>
-		<select name="searchkey" class="selectcomm">
-			<option value="num">게시물 번호</option>
-			<option value="subject">게시글 제목</option>
-			<option value="content">게시글 내용</option>
-			<option value="userid">아이디</option>
-		</select>
-		<input type="text" class="textcomm"/>
-		<input type="button" class="searchbtn" id="searchCS" value="검색"/>
-	</p>
+	<form id="searchFrm">
+		<p>
+			<select name="searchKey" class="selectcomm">
+				<option value="num">게시물 번호</option>
+				<option value="subject">게시글 제목</option>
+				<option value="content">게시글 내용</option>
+				<option value="userid">아이디</option>
+			</select>
+			<input type="text" name="searchWord" class="textcomm"/>
+			<input type="button" class="searchbtn" id="searchCS" value="검색"/>
+			<input type="hidden" name="pageNum" value="1"/>
+		</p>
+	</form>
 	<p>
 		<input type="button" id="oftenBtn" class="searchbtn" value="자주하는 질문"/>
 		<input type="button" id="csBtn" class="searchbtn" value="1:1 질문"/>
@@ -282,14 +436,14 @@ function searchReportF(url,params){
 		<input type="hidden" id="selectcate" value="report"/>
 	</p>
 	<table id="resultTbl" class="tablea cstable">
-		<colgroup>
+		<colgroup class="op1">
              <col width="5%" />
              <col />
              <col width="10%"/>
              <col width="10%" />
              <col width="15%"/>
         </colgroup>
-		<tr>
+		<tr class="op2">
 			<td>번호</td>
 			<td>제목</td>
 			<td>작성자</td>
@@ -299,7 +453,7 @@ function searchReportF(url,params){
 		<c:forEach var="vo" items="${list}">
 			<tr class="reset">
 				<td>${vo.rep_num }</td>
-				<td>${vo.rep_subject }</td>
+				<td class="wordcut">${vo.rep_subject }</td>
 				<td>${vo.userid }</td>
 				<td>${vo.rep_writedate }</td>
 				<td>
@@ -316,8 +470,16 @@ function searchReportF(url,params){
 				</td>
 			</tr>
 		</c:forEach>
-		
 	</table>
+	<div class="link">
+		<a href="#">이전</a>
+		<a href="#">1</a>
+		<a href="#">2</a>
+		<a href="#">3</a>
+		<a href="#">4</a>
+		<a href="#">5</a>
+		<a href="#">다음</a>
+	</div>
 </div>
 
 

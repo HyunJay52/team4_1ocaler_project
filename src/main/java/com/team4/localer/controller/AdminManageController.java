@@ -17,7 +17,7 @@ import com.team4.localer.vo.MemberVO;
 public class AdminManageController {
 	@Inject
 	ManageService manaService;
-	
+	//=====회원관리 페이지
 	@RequestMapping("/m_mem")//회원관리-일반회원 
 	public ModelAndView m_mem() {
 		ModelAndView mav = new ModelAndView();
@@ -52,6 +52,14 @@ public class AdminManageController {
 	@ResponseBody
 	public int memUpdate(String userid, String cate, int status) {
 		return manaService.memberManageUpdate(userid,cate,status);
+	}
+	//===========셀러관리페이지
+	@RequestMapping("/m_sel")//회원관리-일반회원 
+	public ModelAndView m_sel() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",manaService.sellerAllSelect("",""));
+		mav.setViewName("admin/m_sel");
+		return mav;
 	}
 	
 	

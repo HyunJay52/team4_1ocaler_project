@@ -18,17 +18,17 @@
 			<!-- slide show -->
 			<div class="carousel-inner">
 				<div class="carousel-item active"><a href="joinMember"><img src="<%=request.getContextPath() %>/img/indexImg/ad1.png"/></a></div>
-				<div class="carousel-item"><a href="joinSeller"><img src="<%=request.getContextPath() %>/img/indexImg/ad1.png"/></a></div>
+				<div class="carousel-item"><a href="joinSeller"><img src="<%=request.getContextPath() %>/img/indexImg/ad2.png"/></a></div>
 				<div class="carousel-item"><a href="login"><img src="<%=request.getContextPath() %>/img/indexImg/ad1.png"/></a></div>
 			</div>
 			
 			<!-- left and right controls -->
-			<a class="carousel-control-prev" href="#slider" data-slide="prev">
-				<span class="carousel-control-prev-icon"></span>
-			</a>
-			<a class="carousel-control-next" href="#slider" data-slide="next">
-				<span class="carousel-control-next-icon"></span>
-			</a>	
+<!-- 			<a class="carousel-control-prev" href="#slider" data-slide="prev"> -->
+<!-- 				<span class="carousel-control-prev-icon"></span> -->
+<!-- 			</a> -->
+<!-- 			<a class="carousel-control-next" href="#slider" data-slide="next"> -->
+<!-- 				<span class="carousel-control-next-icon"></span> -->
+<!-- 			</a>	 -->
 		</div>
 	</div>
 	
@@ -152,7 +152,7 @@
 	</div>
 	
 	<div id="sggSak" class="indexDivWidth" style="margin-bottom: 100px;">
-		<div class="lgFnt indexBoardTitle">#쓱싹레시피</div>
+		<div class="lgFnt indexBoardTitle"><span style="font-size: 14px; color: gray;">오늘뭐해먹지?</span><br/>#쓱싹레시피</div>
 		<ul class="indexListNone">
 			<li><a href="commuBoard"><img src="img/indexImg/food1.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food2.jpeg"/></a></li>
@@ -162,6 +162,8 @@
 			<li><a href="commuBoard"><img src="img/indexImg/food1.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food2.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food3.jpeg"/></a></li>
+			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
+			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
 		</ul>

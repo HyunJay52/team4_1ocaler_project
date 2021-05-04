@@ -48,7 +48,7 @@
 						txt +=		"<td>"+vo.mem_no+"</td>";
 						txt +=		"<td class='memid'>"+vo.userid+"</td>";
 						txt +=		"<td>"+vo.mem_name+"</td>";
-						txt +=		"<td>"+vo.mem_addr+"</td>";
+						txt +=		"<td  class='wordcut'>"+vo.mem_addr+"</td>";
 						txt +=		"<td>"+vo.mem_tel+"</td>";
 						txt += "<td><input type='button'";
 						if(vo.mem_status==2){//휴먼일때
@@ -119,13 +119,13 @@ $(function(){
 		var userid = $(this).parent().prev().prev().prev().prev().text();//누른 버튼의 아이디
 		if(status=='휴면회원'){
 			if(confirm('휴면상태를 정지하시겠습니까?')){//1.정상, 2.휴면, 3.블랙,4.탈퇴  -->
-				memUpdate(userid,'mem_type',1);
+				memUpdate(userid,'mem_status',1);
 				$(this).val('정상회원');
 				$(this).removeClass().addClass('spuplebtn rest');	
 			}
 		}else{
 			if(confirm("휴면처리 하시겠습니까?")){
-				memUpdate(userid,'mem_type',2);
+				memUpdate(userid,'mem_status',2);
 				$(this).val('휴면회원');
 				$(this).removeClass().addClass('smallbtn rest');	
 			}
@@ -239,7 +239,7 @@ $(function(){
 				<td>${vo.mem_no }</td>
 				<td class="memid">${vo.userid }</td>
 				<td>${vo.mem_name }</td>
-				<td>${vo.mem_addr }</td>
+				<td  class="wordcut">${vo.mem_addr }</td>
 				<td>${vo.mem_tel }</td>
 				<!-- 휴면인지 아닌지 mem_status 1.정상, 2.휴면, 3.블랙,4.탈퇴  -->
 				<c:if test="${vo.mem_status==2 }"><!-- 휴면일때 -->
