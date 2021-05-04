@@ -15,7 +15,7 @@
 							'마포구','용산구','서대문구','중구','성동구','광진구','종로구','동대문구','성북구','중랑구','은평구','강북구','노원구','도봉구'];
 			var tag = "";
 			localName.map(function(obj, idx){
-				tag = "<li><a href='eatPage?loc_gu="+obj+"'>"+obj+"</a></li>";
+				tag = "<li><a href='eatPage?loc_gu="+obj+"&category=한끼미식회'>"+obj+"</a></li>";
 				$("#groupMapViewShowFrm>ul").append(tag);
 			});
 		

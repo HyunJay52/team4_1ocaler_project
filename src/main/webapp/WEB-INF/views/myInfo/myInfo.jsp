@@ -73,7 +73,7 @@
 			var email = emailAll.split("@");
 			
 			var domain = ['naver.com','gmail.com','daum.net','nate.com'];
-			var tag = "<input type='text' name='email' value='"+email[0]+"' disabled/>@";
+			var tag = "<input type='text' name='mem_email' value='"+email[0]+"' disabled/>@";
 			tag += "<select name='emaildomain' disabled>";
 			
 			for(var i = 0; i < domain.length; i++){
@@ -114,7 +114,7 @@
 	
 		<h2>내 정보</h2>
 		<div id="basicInfo">
-			<span class="header">기본정보</span>
+			<h3 class="info-font-weight">기본정보</h3>
 			<form method="post">
 				<ul>
 					<li>아이디</li>
@@ -122,12 +122,12 @@
 					<li>회원명</li>
 					<li>${myVO.mem_name }</li>
 					<li>별명</li>
-					<li><input type="text" name="nickname" value="${myVO.mem_nick }" disabled/></li>
+					<li><input type="text" name="mem_nick" value="${myVO.mem_nick }" disabled/></li>
 					<li>소개</li>
-					<li><input type="text" name="#" value="${myVO.mem_content }" disabled/><hr/></li>
-					<li><h4>대표 이미지</h4></li>
+					<li><input type="text" name="mem_content" value="${myVO.mem_content }" disabled/><hr/></li>
+					<li><h4>대표 이미지</h4><label class="btn btn-outline-dark myinfoImgLabel" for="imgFile">사진 선택</label></li>
 					<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png"></li>
-					<li><label class="btn" for="imgFile">사진 선택</label><input id="imgFile" name="file" type="file" class="editOn" style="display:none; border:none;"/></li>
+					<li><input id="imgFile" name="file" type="file" class="editOn" style="display:none; border:none;"/></li>
 					
 				</ul>
 				<hr/>
@@ -136,27 +136,27 @@
 			</form>
 		</div>
 		<div id="detailInfo">
-			<span class="header">상세정보</span>
+			<h3 class="info-font-weight">상세정보</h3>
 			<form id="detailfrm" method="post">
 				<ul>
 					<li>연락처</li>
-					<li><input type="text" name="tel" value="${myVO.mem_tel }" disabled/></li>
+					<li><input type="text" name="mem_tel" value="${myVO.mem_tel }" disabled/></li>
 					<li>이메일</li>
 					<li id="emailForm">
 					
 					</li>
 					<li style="overflow:auto; display:none"><input type="button" value="메일변경" class="btn commBtn editOn" style="float:right"/></li>
 					<li>주소</li>
-					<li><input type="text" name="zipcode" value="${myVO.mem_zip }" disabled/><input type="button" style="float:right; margin-right:60%;" value="주소찾기" class="btn commBtn editOn"></li>
+					<li><input type="text" name="mem_zip" value="${myVO.mem_zip }" disabled/><input type="button" style="float:right; margin-right:60%;" value="주소찾기" class="btn commBtn editOn"></li>
 					<li><span>서울특별시</span>
-						<select id="addr1" name="addr" disabled>
+						<select id="addr1" name="mem_addr" disabled>
 
 						</select>
 					</li>
-					<li><input type="text" name="detailaddr" value="${myVO.mem_detail }" disabled/></li>
+					<li><input type="text" name="mem_detail" value="${myVO.mem_detail }" disabled/></li>
 					<li>선호지역</li>
 					<li><span>서울특별시</span>
-						<select id="addr2" name="#" disabled>
+						<select id="addr2" name="log_gu" disabled>
 
 						</select>
 					</li>
