@@ -144,10 +144,16 @@
 }
 /*페이징 버튼*/
 .link{
+	width: 270px;
+    margin-left: auto;
+    margin-right: auto;
 	margin-bottom:15px;
 	text-align:center;
+	list-style-type:none;
+	text-align:center;
 }
-.link a{
+.link li{
 	padding:10px;
 	border: 1px solid #ddd;
+	float:left;
 }
