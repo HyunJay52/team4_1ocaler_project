@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.team4.localer.dao.ManageDAO;
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.SellerVO;
 
@@ -16,10 +17,6 @@ public class ManageServiceImp implements ManageService {
 	@Inject
 	ManageDAO manadao;
 
-	@Override
-	public List<MemberVO> memAllSelect(String searchkey,String searchword) {
-		return manadao.memAllSelect(searchkey, searchword);
-	}
 
 	@Override
 	public MemberVO memOneSelect(String userid) {
@@ -37,8 +34,13 @@ public class ManageServiceImp implements ManageService {
 	}
 
 	@Override
-	public List<SellerVO> sellerAllSelect(String searchkey, String searchword) {
-		return manadao.sellerAllSelect(searchkey, searchword);
+	public List<SellerVO> sellerAllSelect(AdminPageVO pageVO) {
+		return manadao.sellerAllSelect(pageVO);
+	}
+
+	@Override
+	public List<MemberVO> memberAllSelect(AdminPageVO pageVO) {
+		return manadao.memberAllSelect(pageVO);
 	}
 
 

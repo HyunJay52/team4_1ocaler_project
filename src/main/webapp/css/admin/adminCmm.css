@@ -5,6 +5,7 @@
 	margin:0 auto;
 	width:1300px;
 	min-height:980px;
+	overflow:auto;
 }
 /*제목 타이틀*/
 .title{

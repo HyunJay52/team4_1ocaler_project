@@ -341,26 +341,12 @@ $(function(){
 		</c:forEach>
 	</table>
 	<ul class="link">
-		<c:if test="${pageVO.pageNum>1 }">
-			<li  class="clickpage">이전</li>
-		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
-            <c:if test="${p<=pageVO.totalPage}">
-                  <!-- 현재페이지 일때 -->
-                  <c:if test="${p==pageVO.pageNum}">
-                     <li class="clickpage" >${p}</li>
-                  </c:if>
-                  <!-- 현재페이지가 아닐때 -->
-                  <c:if test="${p!=pageVO.pageNum}">
-                     <li  class="clickpage">${p}</li>
-                  </c:if>
+            <c:if test="${p<=pageVO.totalPage}">              
+            	<li class="clickpage" >${p}</li>  
             </c:if>
          </c:forEach>
-		<!-- 다음 페이지 -->
-         <c:if test="${pageVO.pageNum < pageVO.totalPage}">
-            <li class="clickpage">다음</li>
-         </c:if>
 	</ul>
 </div>
 

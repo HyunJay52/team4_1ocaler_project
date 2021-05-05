@@ -1,12 +1,10 @@
 package com.team4.localer.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -38,7 +36,8 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("/selManage")//판매관리
-	public ModelAndView selManage() {
+	public ModelAndView selManage(HttpSession session) {
+		session.setAttribute("logId", "admin");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/selManage");
 		return mav;
@@ -218,7 +217,6 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> pagingCSpage(AdminPageVO pageVO, String cate){
 		Map<String, Object> result = new HashMap<String, Object>();
-		System.out.println("현재 페이지 번호 : "+pageVO.getPageNum());
 		if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
 			//검색어가 존재하면
 			pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
