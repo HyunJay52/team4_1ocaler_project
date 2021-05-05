@@ -5,6 +5,34 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <script>
 $(function(){
+	//============검색부분 구현===========
+	$(document).on('click', '#searchCS', function(){
+		var cate = $("#selectcate").val();
+		if(cate=="report"){
+			reportAjax();
+		}else if(cate=="cs"){
+			csAjax();
+		}else {
+			oftenAjax();
+		}
+	});
+	//페이지 이동 클릭
+	$(document).on('click', '.clickpage', function(){
+		var txt = $(this).text();
+		
+		$("#pageNum").val(txt);	
+		
+		//페이지 이동 ajax 추가
+		//무슨 카테고리인지 알아오기 
+		var cate = $("#selectcate").val();
+		if(cate=="report"){
+			reportAjax();
+		}else if(cate=="cs"){
+			csAjax();
+		}else {
+			oftenAjax();
+		}
+	});
 	//자주하는 질문 클릭시
 	$("#oftenBtn").click(function(){
 		//다른 버튼 색상 변경 
@@ -13,14 +41,20 @@ $(function(){
 		$(this).removeClass("searchbtn").addClass("puplebtn");
 		//히든 selectcate value 변경
 		$("#selectcate").val("oftenq");
-		var params ="cate=oftenq";
-		var url = "oftenAndCs"
+		//검색창에 text 지워주기
+		$(".textcomm").val("");
+		oftenAjax();
+	});
+	function oftenAjax(){
 		$.ajax({
 			type : "POST",
-			url : url,
-			data : params,
+			url : "pagingCS",
+			data : $("#searchFrm").serialize()+"&cate=often",
 			success : function(result){
-				var $result = $(result);
+				var $list = $(result.list);
+				var pagenum = result.pageNum;
+				var start = result.startPageNum;
+				var last = result.totalPage;
 				$(".op1").remove();
 				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
@@ -41,25 +75,31 @@ $(function(){
 		    		txt += 		"<td>등록일</td>";
 		    		txt += 		"<td>게시글관리</td>";
 		    		txt += "</tr>";
-				$result.each(function(idx,vo){//테이블 내용 추가
+		    	$.each($list ,function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
-					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td>"+vo.cs_cate+"</td>";
-					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</td>";
+					txt += 		"<td>"+vo.of_num+"</td>";
+					txt += 		"<td>"+vo.of_cate+"</td>";
+					txt += 		"<td class='wordcut'>"+vo.of_subject+"</td>";
 					txt += 		"<td>관리자</td>";
 					txt += 		"<td></td>";
-					txt += 		"<td><input type='button' class='redBtn' name='"+vo.cs_num+"' value='삭제'/>";
-					txt +=		"<input type='button' class='smallbtn' name='"+vo.cs_num+"' title='oftenqBtn' value='수정'/></td>";
+					txt += 		"<td><input type='button' class='redBtn' name='"+vo.of_num+"' value='삭제'/>";
+					txt +=		"<input type='button' class='smallbtn' name='"+vo.of_num+"' title='oftenqBtn' value='수정'/></td>";
 					txt += "</tr>";	
 				});
 				$("#resultTbl").append(txt);
-				
+				//페이징 부분
+				var link="";
+				$(".clickpage").remove();//기존 페이징 부분 삭제
+				for(var i=start;i<=last;i++){
+					link +="<li  class='clickpage'>"+i+"</li>";
+				}
+				$(".link").append(link);
 			},error:function(){
 				$(".reset").remove();//테이블 내용 지우기 
 				$("#resultTbl").append("전송받기 실패ㅜㅜ");
 			}
 		});
-	});
+	}
 	//================================
 		
 	//1:1 질문 클릭시
@@ -70,14 +110,20 @@ $(function(){
 		$(this).removeClass("searchbtn").addClass("puplebtn");
 		//히든 selectcate value 변경
 		$("#selectcate").val("cs");
-		var params ="cate=cs";
-		var url = "oftenAndCs"
+		//검색창에 text 지워주기
+		$(".textcomm").val("");
+		csAjax();//ajax로 페이지
+	});
+	function csAjax(){
 		$.ajax({
 			type : "POST",
-			url : url,
-			data : params,
+			url : "pagingCS",
+			data : $("#searchFrm").serialize()+"&cate=cs",
 			success : function(result){
-				var $result = $(result);
+				var $list = $(result.list);
+				var pagenum = result.pageNum;
+				var start = result.startPageNum;
+				var last = result.totalPage;
 				$(".op1").remove();
 				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
@@ -96,7 +142,7 @@ $(function(){
 	    		txt += 		"<td>등록일</td>";
 	    		txt += 		"<td>게시글관리</td>";
 	    		txt += "</tr>";
-				$result.each(function(idx,vo){//테이블 내용 추가
+	    		$.each($list ,function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.cs_num+"</td>";
 					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</a></td>";
@@ -110,12 +156,19 @@ $(function(){
 					}
 				});
 				$("#resultTbl").append(txt);
+				//페이징 부분
+				var link="";
+				$(".clickpage").remove();//기존 페이징 부분 삭제
+				for(var i=start;i<=last;i++){
+					link +="<li  class='clickpage'>"+i+"</li>";
+				}
+				$(".link").append(link);
 			},error:function(){
 				$(".reset").remove();//테이블 내용 지우기 
 				$("#resultTbl").append("전송받기 실패ㅜㅜ");
 			}
 		});
-	});
+	}
 	//================
 	//사용자신고 질문 클릭시
 	$("#reportBtn").click(function(){
@@ -125,14 +178,20 @@ $(function(){
 		$(this).removeClass("searchbtn").addClass("puplebtn");
 		//히든 selectcate value 변경
 		$("#selectcate").val("report");
-		var params ="cate=report";
-		var url = "oftenAndCs"
+		//검색창에 text 지워주기
+		$(".textcomm").val("");
+		reportAjax();
+	});
+	function reportAjax(url,data){
 		$.ajax({
+			url : "pagingCS",
 			type : "POST",
-			url : url,
-			data : params,
+			data : $("#searchFrm").serialize()+"&cate=report",
 			success : function(result){
-				var $result = $(result);
+				var $list = $(result.list);
+				var pagenum = result.pageNum;
+				var start = result.startPageNum;
+				var last = result.totalPage;
 				$(".op1").remove();
 				$(".op2").remove();
 				$(".reset").remove();//테이블 내용 지우기 
@@ -151,7 +210,7 @@ $(function(){
 		    		txt += 		"<td>등록일</td>";
 		    		txt += 		"<td>게시글관리</td>";
 		    		txt += "</tr>";
-				$result.each(function(idx,vo){//테이블 내용 추가
+				$.each($list ,function(idx,vo){//테이블 내용 추가
 					txt += "<tr class='reset'>";
 					txt += 		"<td>"+vo.rep_num+"</td>";
 					txt += 		"<td class='wordcut'>"+vo.rep_subject+"</td>";
@@ -167,251 +226,61 @@ $(function(){
 					}
 				});
 				$("#resultTbl").append(txt);
+				//페이징 부분
+				var link="";
+				$(".clickpage").remove();//기존 페이징 부분 삭제
+				for(var i=start;i<=last;i++){
+					link +="<li  class='clickpage'>"+i+"</li>";
+				}
+				$(".link").append(link);
 			},error:function(){
 				$(".reset").remove();//테이블 내용 지우기 
 				$("#resultTbl").append("전송받기 실패ㅜㅜ");
 			}
 		});
-	});
+	}
 	$("#oftenqWriteBtn").click(function(){
 		location.href="oftenQWrite";
 	});
 });
-//===========테이블 안에 버튼이벤트=================
-//자주하는 질문 수정버튼 클릭시,1:1질문 처리요청
-$(document).on('click', '.smallbtn', function(){
-	var cate = $(this).attr('title');//버튼 클릭종류 파악 
-	var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
-	if(cate=="oftenqBtn"){
-		//자주하는 질문 수정클릭시
-		location.href="oftenQWriteEdit?num="+num;
-	}else if(cate=="csBtn"){
-		//1:1질문 처리요청 클릭시 
-		location.href="persnal?cs_num="+num;
-	}else if(cate=="reportBtn"){
-		//신고 처리요청 클릭시
-		location.href = "reportEdit?num="+num;
-	}
-});
-//1:1질문 처리완료
-$(document).on('click', '.spuplebtn', function(){
-	var cate = $(this).attr('title');//버튼 클릭종류 파악 
-	var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
-	if(cate=="csBtn"){
-		//1:1질문 처리요청 클릭시 
-		location.href="persnal?cs_num="+num;
-	}else if(cate=="reportBtn"){
-		//신고 반려, 처리완료 클릭시
-		location.href = "reportEdit?num="+num;
-	}
-});
-//자주하는 질문 삭제 클릭시
-$(document).on('click', '.redBtn', function(){
-	var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
-	if(confirm("삭제하시겠습니까?")){
-		location.href="oftenQDelete?num="+num;
-	}
-});
-//============검색부분 구현===========
-$(document).on('click', '#searchCS', function(){
-	var searchVal =$('.selectcomm').val();
-	var searchTxt = $('.textcomm').val();
-	var cate = $("#selectcate").val();
-	if(cate=='report'){
-		searchPage("pagingCS");
-		//searchReportF("searchCS","searchkey="+searchVal+"&text="+searchTxt);	
-	}else if(cate=='oftenq'){
-		searchOftenqF("searchCS","searchkey="+searchVal+"&text="+searchTxt);
-	}else if(cate='cs'){
-		searchCSF("searchCS","searchkey="+searchVal+"&text="+searchTxt);
-	}
-	$(".textcomm").val('');
-	$(".textcomm").focus();
-});
-//페이징
-function searchPage(url){
-	$.ajax({
-		url:url,
-		data:$("#searchFrm").serialize()+"&cate=report",
-		dataType: "json",
-		success:function(res){
-			var list = res.list;
-			var page = res.pageVO;
-			var $list = $(list);
-			$(".op1").remove();
-			$(".op2").remove();
-			$(".reset").remove();//테이블 내용 지우기 
-			var txt = "";
-				txt += "<colgroup class='op1'>";
-				txt += 		"<col width='5%' />";
-				txt += 		"<col />";
-				txt += 		"<col width='10%' />";
-				txt += 		"<col width='10%' />";
-				txt += 		"<col width='15%' />";
-				txt += "</colgroup>";
-				txt += "<tr class='op2'>";
-				txt +=		"<td>번호</td>";
-	    		txt += 		"<td>제목</td>";
-	    		txt += 		"<td>작성자</td>";
-	    		txt += 		"<td>등록일</td>";
-	    		txt += 		"<td>게시글관리</td>";
-	    		txt += "</tr>";
-			$list.each(function(idx,vo){//테이블 내용 추가
-				txt += "<tr class='reset'>";
-				txt += 		"<td>"+vo.rep_num+"</td>";
-				txt += 		"<td class='wordcut'>"+vo.rep_subject+"</td>";
-				txt += 		"<td>"+vo.userid+"</td>";
-				txt += 		"<td>"+vo.rep_writedate+"</td>";
-				txt += 		"<td><input type='button' ";
-				if((vo.cs_status)==1){
-					txt += " class='smallbtn' name='"+vo.rep_num+"' title='reportBtn' value='처리요청'</td></tr>";
-				}else if((vo.cs_status)==2){
-					txt += " class='spuplebtn' name='"+vo.rep_num+"' title='reportBtn' value='반려'</td></tr>";
-				}else{
-					txt += " class='spuplebtn' name='"+vo.rep_num+"' title='reportBtn' value='처리완료'</td></tr>";
-				}
-			});
-			$("#resultTbl").append(txt);
-		},error:function(){
-			alert("검색 실패했다 하,,,");
+	//===========테이블 안에 버튼이벤트=================
+	//자주하는 질문 수정버튼 클릭시,1:1질문 처리요청
+	$(document).on('click', '.smallbtn', function(){
+		var cate = $(this).attr('title');//버튼 클릭종류 파악 
+		var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
+		alert("자주하는 질문 수정 클릭할때 글 번호" +num);
+		if(cate=="oftenqBtn"){
+			//자주하는 질문 수정클릭시
+			location.href="oftenQWriteEdit?num="+num;
+		}else if(cate=="csBtn"){
+			//1:1질문 처리요청 클릭시 
+			location.href="persnal?num="+num;
+		}else if(cate=="reportBtn"){
+			//신고 처리요청 클릭시
+			location.href = "reportEdit?num="+num;
 		}
 	});
-}
-//1:1 질문검색 ajax 함수
-function searchCSF(url,params){
-	$.ajax({
-		url:url,
-		data:params+"&cate=cs",
-		success:function(result){
-				var $result = $(result);
-				
-				$(".op1").remove();
-				$(".op2").remove();
-				$(".reset").remove();//테이블 내용 지우기 
-				var txt = "";
-					txt += "<colgroup class='op1'>";
-					txt += 		"<col width='5%' />";
-					txt += 		"<col />";
-					txt += 		"<col width='10%' />";
-					txt += 		"<col width='10%' />";
-					txt += 		"<col width='15%' />";
-					txt += "</colgroup>";
-					txt += "<tr class='op2'>";
-					txt +=		"<td>번호</td>";
-		    		txt += 		"<td>제목</td>";
-		    		txt += 		"<td>작성자</td>";
-		    		txt += 		"<td>등록일</td>";
-		    		txt += 		"<td>게시글관리</td>";
-		    		txt += "</tr>";
-				$result.each(function(idx,vo){//테이블 내용 추가
-					txt += "<tr class='reset'>";
-					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</a></td>";
-					txt += 		"<td>"+vo.userid+"</td>";
-					txt += 		"<td>"+vo.cs_writedate+"</td>";
-					txt += 		"<td><input type='button' ";
-					if(vo.cs_status==1){
-						txt += " class='smallbtn' name='"+vo.cs_num+"' title='csBtn'value='처리요청'</td></tr>";
-					}else{
-						txt += " class='spuplebtn' name='"+vo.cs_num+"' title='csBtn' value='처리완료'</td></tr>";
-					}
-				});
-				$("#resultTbl").append(txt);
-		},error:function(){
-			alert("검색 실패했다 하,,,");
+	//1:1질문 처리완료
+	$(document).on('click', '.spuplebtn', function(){
+		var cate = $(this).attr('title');//버튼 클릭종류 파악 
+		var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
+		if(cate=="csBtn"){
+			//1:1질문 처리요청 클릭시 
+			location.href="persnal?cs_num="+num;
+		}else if(cate=="reportBtn"){
+			//신고 반려, 처리완료 클릭시
+			location.href = "reportEdit?num="+num;
 		}
 	});
-}
-//자주하는 질문검색 ajax 함수
-function searchOftenqF(url,params){
-	$.ajax({
-		url:url,
-		data:params+"&cate=oftenq",
-		success:function(result){
-				var $result = $(result);
-				$(".op1").remove();
-				$(".op2").remove();
-				$(".reset").remove();//테이블 내용 지우기 
-				var txt = "";
-					txt += "<colgroup class='op1'>";
-					txt += 		"<col width='5%' />";
-					txt += 		"<col width='10%' />";
-					txt += 		"<col />";
-					txt += 		"<col width='10%' />";
-					txt += 		"<col width='10%' />";
-					txt += 		"<col width='15%' />";
-					txt += "</colgroup>";
-					txt += "<tr class='op2'>";
-					txt +=		"<td>번호</td>";
-		    		txt += 		"<td>카테고리</td>";
-		    		txt += 		"<td>제목</td>";
-		    		txt += 		"<td>작성자</td>";
-		    		txt += 		"<td>등록일</td>";
-		    		txt += 		"<td>게시글관리</td>";
-		    		txt += "</tr>";
-				$result.each(function(idx,vo){//테이블 내용 추가
-					txt += "<tr class='reset'>";
-					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td>"+vo.cs_cate+"</td>";
-					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</td>";
-					txt += 		"<td>관리자</td>";
-					txt += 		"<td></td>";
-					txt += 		"<td><input type='button' class='redBtn' name='"+vo.cs_num+"' value='삭제'/>";
-					txt +=		"<input type='button' class='smallbtn' name='"+vo.cs_num+"' title='oftenqBtn' value='수정'/></td>";
-					txt += "</tr>";	
-				});
-				$("#resultTbl").append(txt);
-		},error:function(){
-			alert("검색 실패했다 하,,,");
+	//자주하는 질문 삭제 클릭시
+	$(document).on('click', '.redBtn', function(){
+		var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
+		if(confirm("삭제하시겠습니까?")){
+			location.href="oftenQDelete?num="+num;
 		}
 	});
-}
-//신고글 검색 ajax 함수
-function searchReportF(url,params){
-	$.ajax({
-		url:url,
-		data:params+"&cate=report",
-		success:function(result){
-				var $result = $(result);
-				$(".op1").remove();
-				$(".op2").remove();
-				$(".reset").remove();//테이블 내용 지우기 
-				var txt = "";
-					txt += "<colgroup class='op1'>";
-					txt += 		"<col width='5%' />";
-					txt += 		"<col />";
-					txt += 		"<col width='10%' />";
-					txt += 		"<col width='10%' />";
-					txt += 		"<col width='15%' />";
-					txt += "</colgroup>";
-					txt += "<tr class='op2'>";
-					txt +=		"<td>번호</td>";
-		    		txt += 		"<td>제목</td>";
-		    		txt += 		"<td>작성자</td>";
-		    		txt += 		"<td>등록일</td>";
-		    		txt += 		"<td>게시글관리</td>";
-		    		txt += "</tr>";
-				$result.each(function(idx,vo){//테이블 내용 추가
-					txt += "<tr class='reset'>";
-					txt += 		"<td>"+vo.cs_num+"</td>";
-					txt += 		"<td class='wordcut'>"+vo.cs_subject+"</td>";
-					txt += 		"<td>"+vo.userid+"</td>";
-					txt += 		"<td>"+vo.cs_writedate+"</td>";
-					txt += 		"<td><input type='button' ";
-					if((vo.cs_status)==1){
-						txt += " class='smallbtn' name='"+vo.cs_num+"' title='reportBtn' value='처리요청'</td></tr>";
-					}else if((vo.cs_status)==2){
-						txt += " class='spuplebtn' name='"+vo.cs_num+"' title='reportBtn' value='반려'</td></tr>";
-					}else{
-						txt += " class='spuplebtn' name='"+vo.cs_num+"' title='reportBtn' value='처리완료'</td></tr>";
-					}	
-				});
-				$("#resultTbl").append(txt);
-		},error:function(){
-			alert("검색 실패했다 하,,,");
-		}
-	});
-}
+
+
 </script>
 <div class="main">
 	<div class="title">고객센터</div>
@@ -425,7 +294,8 @@ function searchReportF(url,params){
 			</select>
 			<input type="text" name="searchWord" class="textcomm"/>
 			<input type="button" class="searchbtn" id="searchCS" value="검색"/>
-			<input type="hidden" name="pageNum" value="1"/>
+			<input type="hidden" id="selectcate" value="report"/>
+			<input type="hidden" name="pageNum" id="pageNum"value="1"/>
 		</p>
 	</form>
 	<p>
@@ -433,7 +303,6 @@ function searchReportF(url,params){
 		<input type="button" id="csBtn" class="searchbtn" value="1:1 질문"/>
 		<input type="button" id="reportBtn" class="puplebtn" value="사용자 신고"/>
 		<input type="button" id="oftenqWriteBtn"class="searchbtn" value="자주하는 질문작성"/>
-		<input type="hidden" id="selectcate" value="report"/>
 	</p>
 	<table id="resultTbl" class="tablea cstable">
 		<colgroup class="op1">
@@ -471,15 +340,28 @@ function searchReportF(url,params){
 			</tr>
 		</c:forEach>
 	</table>
-	<div class="link">
-		<a href="#">이전</a>
-		<a href="#">1</a>
-		<a href="#">2</a>
-		<a href="#">3</a>
-		<a href="#">4</a>
-		<a href="#">5</a>
-		<a href="#">다음</a>
-	</div>
+	<ul class="link">
+		<c:if test="${pageVO.pageNum>1 }">
+			<li  class="clickpage">이전</li>
+		</c:if>
+		<!-- 페이지 번호              1부터                            5까지   -->
+         <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
+            <c:if test="${p<=pageVO.totalPage}">
+                  <!-- 현재페이지 일때 -->
+                  <c:if test="${p==pageVO.pageNum}">
+                     <li class="clickpage" >${p}</li>
+                  </c:if>
+                  <!-- 현재페이지가 아닐때 -->
+                  <c:if test="${p!=pageVO.pageNum}">
+                     <li  class="clickpage">${p}</li>
+                  </c:if>
+            </c:if>
+         </c:forEach>
+		<!-- 다음 페이지 -->
+         <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+            <li class="clickpage">다음</li>
+         </c:if>
+	</ul>
 </div>
 
 

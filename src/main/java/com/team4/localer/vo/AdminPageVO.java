@@ -14,10 +14,8 @@ public class AdminPageVO {
 	private String searchKey;//검색키
 	private String searchWord;//검색어
 	
-	//검색 카테고리 
-	private String cate;
-	//검색할 카테고리 num;
-	private String num;
+	private String cate;//검색 카테고리 
+	private String num;//카테고리 num;
 	
 	public String getCate() {
 		return cate;
