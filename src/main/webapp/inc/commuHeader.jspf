@@ -16,11 +16,11 @@
 
 <div id="commuMain">
 			<div id="commutop" >
-				<span><a href="commuBoard?b_gu=${logLoc_gu}">우리동네 이야기 &nbsp;</a></span>
+				<span><a href="commuBoard?b_gu=${logLoc_gu}&&up_cate=1">우리동네 이야기 &nbsp;</a></span>
 				 &nbsp;|&nbsp;
-				 <span>&nbsp;<a href="#">쓱삭 레시피&nbsp;</a></span>
+				 <span>&nbsp;<a href="commuRecipeBoard?up_cate=2">쓱삭 레시피&nbsp;</a></span>
 				 &nbsp;|&nbsp;
-				 <span>&nbsp;<a href="#">자유게시판</a></span>
+				 <span>&nbsp;<a href="commuFreeBoard?up_cate=3">자유게시판</a></span>
 			</div>
 
 </div>			

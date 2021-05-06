@@ -39,7 +39,7 @@
 	
 	</script>
 
-	<div id="main">
+	<div id="dealViewMain">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<div>
 		<div id="sellImg">	
@@ -120,14 +120,42 @@
 					</li>
 					
 					<li class="wordcut">#오르골 #D.I.Y #장식 #인테리어</li>
-					<li><hr/>
-						<input type="submit" value="찜하기" class="btn commBtn" style="margin-left: 100px"/>
-						<input type="submit" value="구매하기" class="btn commBtn"/>
+				
+					<li>
+						
+						<input type="submit" value="찜하기" class="btn commBtnSell" style="margin-left: 100px"/>
+						<input type="submit" value="구매하기" class="btn commBtnSell"/>
 					</li>
 				</ul>
 			</div>
 		</form>
-		<div class="sellFont" >리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</div>
+		
+		
+		
+	
+		</div>
+		
+		
+		<div class="locationBar" id="locationBar">
+			<div>
+				<a href="#sellReview">
+					리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %
+				</a>	
+			</div>
+			<div>
+				<a href="#sellDetail">
+					상세정보
+				</a>
+			</div>
+			<div>
+				<a href="#sellQnA">
+					Q&A (4)
+				</a>	
+			</div>
+		</div>
+		
+		
+		<!-- <div class="locationBar">리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</div> -->
 		<div id="sellReview">
 			<c:forEach var="i" begin="1" end="4">
 				<div id="oneReview">
@@ -211,7 +239,7 @@
 					<textarea name="q_content" id="content" placeholder="질문을 등록해주세요."></textarea>
 				</div>
 				<div>	
-					<button class="btn cancelBtn"  id="btnClose">취소</button> &ensp;
+					<button class="btn cancelBtn"  id="btnClose">취소</button>
 					<input type="submit" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
 				</div>
 			</form>

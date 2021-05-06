@@ -12,5 +12,21 @@ public interface BoardService {
 	
 	public BoardVO commuViewSelect(int num);
 	
+	public int commuDelete(int num, String userid);
 	
+	public int commuUpdate(BoardVO vo);
+	
+	public List<BoardVO> commuRecipeSelect(BoardVO vo);
+	
+	public List<BoardVO> commuFreeSelect(BoardVO vo);
+	
+	public int hitCount(int num);
+	
+	public List<BoardVO> recipeSelect(BoardVO vo);
+	
+	public List<BoardVO> freeSelect(BoardVO vo);
+	
+	public List<BoardVO> commuMainSelect (BoardVO vo);
+	
+	public BoardVO commuOneSelect(BoardVO vo);
 }

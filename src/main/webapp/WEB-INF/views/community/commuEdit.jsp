@@ -7,7 +7,7 @@
 	
 
 	$(()=>{
-		$("select[name=up_cate]").change(()=>{
+		/* $("select[name=up_cate]").change(()=>{
 			if($("#up_cate option:selected").val()=="1"){
 				$("#down_cate").css("display","block");
 				$("select").css("width","150px");
@@ -23,6 +23,12 @@
 			if($("#up_cate option:selected").val()=="0"){
 				$("#down_cate").css("display","none");
 			}
+		}); */
+		
+		
+		$("#cancelBtn").on('click',()=>{
+			console.log("클릭");
+			history.back();
 		});
 	});
 	
@@ -32,32 +38,45 @@
 </script>
 
 
-	<div id="body">
+	<div id="commueWnEmain">
 		<div>
-			<form action="" >
-				<select id="up_cate" name="up_cate">
-					<option value="0">카테고리</option>
-					<option value="1">동네정보공유</option>	
-					<option value="2">나만의 레시피</option>			
-					<option value="3">자유게시판</option>
+			<form  method="post" action="commuEditOk"   >
+			
+			
+				<select id="up_cate" name="up_cate" disabled>
+					<option value="0" <c:if test='${vo.up_cate==0 }'></c:if> >카테고리</option>
+					<option value="1" <c:if test='${vo.up_cate==1 }'>selected</c:if>>동네정보공유</option>	
+					<option value="2" <c:if test='${vo.up_cate==2 }'>selected</c:if>>나만의 레시피</option>			
+					<option value="3" <c:if test='${vo.up_cate==3 }'>selected</c:if>>자유게시판</option>
+				</select>	
+				
+				
+				<c:if test="${vo.up_cate==1 }">	
+				<select id="Edit_down_cate" name="down_cate" disabled>
+					<option value="1"  <c:if test='${vo.down_cate==1 }'>selected</c:if>> 할인정보</option>
+					<option value="2" <c:if test='${vo.down_cate==2 }'>selected</c:if> >도움구해요</option>				
 				</select>		
-				<select id="down_cate" name="down_cate">
-					<option value="1"> 할인정보</option>
-					<option value="2">도움구해요</option>				
-				</select>				
+				</c:if>
+				
+				
+				
+				
+				
+						
 	 			<br/>
-	 			<input type="text" id ="subject" name="b_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
-	 			<input type="text" id ="cnt" name="b_gu" />
-	 			<textarea name="b_content" id ="content" > 내용을 입력해주세요. </textarea>
+	 			<input type="hidden" name="num" value="${vo.num }"/>
+	 			<input type="text" id ="subject" name="b_subject"value="${vo.b_subject }"/>
+	 			<input type="text" id ="cnt" name="b_gu" value="${logLoc_gu}"/>
+	 			<textarea name="b_content" id ="content" > ${vo.b_content } </textarea>
 	 			<script>CKEDITOR.replace("b_content");</script>
 	 			
 	 			<br/>
 
-				<input type="text" id ="tag"  name="b_tag" placeholder="&nbsp;&nbsp;태그를 입력해주세요 &nbsp; #태그를 #입력해 #주세요" />
+				<input type="text" id ="tag"  name="b_tag" value="${vo.b_tag}" />
 				
 
 	 		 	<div id="btn">
-		 		 	<input type="submit" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
+		 		 	<input type="button" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
 		 		 	<input type="submit" id="confBtn" class="btn commBtn" value="수정"/>
 		 		 	
 	 		 	</div>

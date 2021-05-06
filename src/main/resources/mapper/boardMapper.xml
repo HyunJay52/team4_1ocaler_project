@@ -9,11 +9,57 @@
 		values (boardsq.nextval, #{userid}, #{b_gu}, ${up_cate},${down_cate},#{b_subject},#{b_content}, #{b_tag})
 	</insert>
 	<select id ="commuSelect" resultType="com.team4.localer.vo.BoardVO">
-		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate
-		from board where b_gu=#{b_gu} order by num desc
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit,
+    	(select count(*) from reply where num = b.num) repcont  
+		from board b where  b_gu=#{b_gu} and up_cate=1 order by num desc
 	</select>
   	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
-  		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate
-		from board where num=#{param1}
+  		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,
+    	(select count(*) from reply where num = b.num) repcont  
+		from board b where  num=#{param1}	
   	</select>
+  	<delete id="commuDelete" >
+		delete from board where num=#{param1} and userid=#{param2}
+	</delete>
+	<update id="commuUpdate">
+		update board set b_subject=#{b_subject}, b_content=#{b_content},b_tag=#{b_tag} where num=#{num} and userid=#{userid}
+	</update>
+	<select id ="commuRecipeSelect" resultType="com.team4.localer.vo.BoardVO">
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit,
+    	(select count(*) from reply where num = b.num) repcont  
+		from board b where up_cate=2  order by num desc
+	</select>
+	<select id ="commuFreeSelect" resultType="com.team4.localer.vo.BoardVO">
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit,
+    	(select count(*) from reply where num = b.num) repcont  
+		from board b where up_cate=3  order by num desc
+	</select>
+  	<update id="hitCount">
+		update board set b_hit=b_hit+1 where num=#{param1}
+	</update>
+	<select id="recipeSelect" resultType="com.team4.localer.vo.BoardVO" >
+		<![CDATA[ 
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
+		from board where rownum <=5 and up_cate=2 order by b_hit desc
+		]]>
+	</select>
+	<select id="freeSelect" resultType="com.team4.localer.vo.BoardVO" >
+		<![CDATA[ 
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
+		from board where rownum <=5 and up_cate=3 order by b_hit desc
+		]]>
+	</select>
+	<select id="commuMainSelect" resultType="com.team4.localer.vo.BoardVO" >
+		<![CDATA[ 
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
+		from board where rownum <=5 and up_cate=1 order by b_hit desc
+		]]>
+	</select>
+	<select id="commuOneSelect"  resultType="com.team4.localer.vo.BoardVO">
+		<![CDATA[ 
+			select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit ,
+			(select count(*) from reply where num = b.num) repcont  
+			from board b where rownum <=1 and userid=#{userid} order by num desc
+		]]>
+	</select>
 </mapper>
