@@ -22,7 +22,7 @@
 				<li><input type="text" name="userid" id="userid" tabindex="1"
 					placeholder="아이디를 입력해주세요" />
 				<button type="button" class="btn commBtn Mem_lgBtn" tabindex="2" id="idOverlapBtn">중복검사</button>
-					<span id="idOverlap">N</span> <br />
+					<span id="idOverlap">N</span> <br/>
 				<span id="checkid"></span></li>
 
 				<li>비밀번호</li>
@@ -75,6 +75,13 @@
 				</li>
 				<li>활동지역</li>
 				<li>
+<!-- 					<select id="loc_gu" name="loc_gu" tabindex="12"> -->
+<!-- 								<option value="신한은행">신한은행</option> -->
+<!-- 								<option value="기업은행">기업은행</option> -->
+<!-- 								<option value="하나은행">하나은행</option> -->
+<!-- 								<option value="국민은행">국민은행</option> -->
+<!-- 								<option value="카카오뱅크">카카오뱅크</option> -->
+<!-- 					</select> -->
 					<input type="text" name="loc_gu" id="loc_gu" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요" />
 					<img src="img/indexImg/bo_pin.png" id="locImg"/>
 				</li>

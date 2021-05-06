@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.MemberDAO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.SellerVO;
 
 @Service
 public class MemberServiceImp implements MemberService {
@@ -24,6 +25,18 @@ public class MemberServiceImp implements MemberService {
 		return dao.insertMember(vo);
 	}
 
+	@Override
+	public String sellerPwdDoubleCheck(String userid, String userpwd) {
+		//셀러회원가입 비밀번호 재확인
+		return dao.sellerPwdDoubleCheck(userid, userpwd);
+	}
+
+	@Override
+	public int insertSeller(SellerVO vo) {
+		//셀러 회원가입
+		return dao.insertSeller(vo);
+	}
+	
 	@Override
 	public String idDoubleCheck(String userid) {
 		//아이디 중복확인

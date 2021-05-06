@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.MemberService;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.SellerVO;
 
 @Controller
 public class MemberController {
@@ -46,6 +47,7 @@ public class MemberController {
 				}
 				ses.setAttribute("logId", logVO.getUserid());
 				ses.setAttribute("logName", logVO.getMem_name());
+				ses.setAttribute("logType", logVO.getMem_type());
 				ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
 				goPage = "home";
 			}else {
@@ -77,6 +79,11 @@ public class MemberController {
 		req.getSession().invalidate(); //쿠키삭제하고 세션 삭제해야함
 		
 		return "home";
+	}
+//아이디 비밀번호 찾기
+	@RequestMapping("/searchIdnPwd")
+	public String searchIdnPwd() {
+		return "member/searchIdnPwd";
 	}
 // 일반회원가입	
 	@RequestMapping("/joinMember")
@@ -168,4 +175,76 @@ public class MemberController {
 	public String joinSeller() {
 		return "member/joinSeller";
 	}
-}
+// 셀러회원가입 비밀번호 재확인
+	@RequestMapping(value="/sellerPwdDoubleCheck", method = RequestMethod.GET, produces = "application/text;charset=UTF-8")
+	@ResponseBody
+	public String sellerPwdDoubleCheck(String userpwd, HttpSession ses) {
+		String result = "";
+		String userid = (String)ses.getAttribute("logId");
+		String checkPwd = service.sellerPwdDoubleCheck(userid, userpwd);
+
+		if(userpwd.equals(checkPwd)) {
+			result = "Y"; //셀러회원가입 진행 가능
+		}else {
+			result = "N"; //셀러회원가입 진행 불가능
+		}
+		return result;
+	}
+//셀러회원가입
+	@RequestMapping(value="/sellerJoinOk", method = RequestMethod.POST) //sel_profFile : 인풋 파일과 이름 다르게 해준다음에 넣어줘야함
+	public ModelAndView sellerJoinOk(SellerVO vo, HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+/////////////////////////////////프로필 사진 업로드부터 실행		
+		//업로드 파일 경로 찾기
+		String profPath = req.getSession().getServletContext().getRealPath("/img/sel_prof");
+		
+		//첨부파일 받아오기 
+		MultipartHttpServletRequest sel_mr = (MultipartHttpServletRequest)req;
+		MultipartFile sel_prof = sel_mr.getFile("sel_profFile");
+		
+		String uploadMemprofname = "";
+		
+		if(sel_prof!=null) {
+			String originName = sel_prof.getOriginalFilename();
+			if(!originName.equals("")) {
+				File uploadFile = new File(profPath, originName);
+				//중복파일 확인
+				int idx = 1;
+				while(uploadFile.exists()) {
+					int lastDot = originName.lastIndexOf(".");
+					String prof_name = originName.substring(0, lastDot);
+					String prof_exe = originName.substring(lastDot+1);
+					//중복파일 이름 수정 
+					uploadFile = new File(profPath, prof_name+"_"+idx++ +"."+prof_exe);
+				}
+				//경로에 파일 업로드 실행
+				try {
+					sel_prof.transferTo(uploadFile);
+				}catch(Exception e) {
+					System.out.println("멤버 프로필 사진 업로드 에러 발생");
+					e.printStackTrace();
+				}
+				//변경된 파일명을 저장
+				uploadMemprofname = uploadFile.getName();
+			}
+		}
+///////////////////////////////// DB 작업 시작		
+		vo.setSel_prof(uploadMemprofname);
+		int insertCnt = service.insertSeller(vo);
+		
+		if(insertCnt>0) {
+			mav.setViewName("redirect:login");
+		}else {
+			//업로드 파일 삭제하기
+			File del = new File(profPath, uploadMemprofname);
+			del.delete();
+			mav.setViewName("member/historyBack"); //뒤로가기
+		}
+		return mav;
+	}
+	
+
+	
+	
+	
+}//전체 클래스 끝	
