@@ -106,7 +106,7 @@
 		float:right
 	}
 	.dayBtn{
-		font-weight:bold; 
+		font-weight:normal; 
 		font-size:26px; 
 		margin:0 2px; 
 		border:none; 
@@ -269,4 +269,8 @@
 	}
 	.myinfoHeader{
 		width:100%;
+	}
+	/* 페이징 공용 스타일 */
+	.pagingArea{
+		margin:20px;
 	}

@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <script>
 	$(function(){
-		//회원 아이디 클릭시 상세 정보 테이블 띄워주는 부분 
-		$('.memid').click(function(){
+		//회원 아이디 클릭시 상세 정보 테이블 띄워주는 부분
+		$(document).on('click', '.memid', function(){
 			var userid = $(this).text();//회원아이디
 			meminfo(userid);
 		});
@@ -32,18 +32,29 @@
 			});
 			$("#meminfo").css("display", "block");
 		}
+		//페이지 이동 클릭
+		$(document).on('click', '.clickpage', function(){
+			var txt = $(this).text();
+			$("#pageNum").val(txt);	
+			memberAjax();
+		});
 		//검색버튼 클릭이벤트 
 		$('#searchbtn').click(function(){
-			var param = $("#memFrm").serialize();
+			memberAjax();
+		});
+		function memberAjax(){
 			$.ajax({
 				url: "memListSearch",
 				type : "POST",
-				data : param,
+				data : $("#memFrm").serialize(),
 				success : function(result){
-					var $result = $(result);
+					var $list = $(result.list);
+					var pagenum = result.pageNum;
+					var start = result.startPageNum;
+					var last = result.totalPage;
 					$(".memlist").remove();//테이블 내용 지우기
 					var txt = "";
-					$result.each(function(idx,vo){//테이블 내용 넣기
+					$.each($list ,function(idx,vo){//테이블 내용 넣기
 						txt += "<tr class='memlist'>";
 						txt +=		"<td>"+vo.mem_no+"</td>";
 						txt +=		"<td class='memid'>"+vo.userid+"</td>";
@@ -73,11 +84,18 @@
 						txt +="</tr>";
 					});
 					$("#memlistTbl").append(txt);
+					//페이징 부분
+					var link="";
+					$(".clickpage").remove();//기존 페이징 부분 삭제
+					for(var i=start;i<=last;i++){
+						link +="<li  class='clickpage'>"+i+"</li>";
+					}
+					$(".link").append(link);
 				},error : function(){
 					alert("데이터 가져오기 실패");
 				}
 			});
-		});
+		}
 	});
 $(function(){
 	//블랙리스트 버튼 클릭시
@@ -179,13 +197,14 @@ $(function(){
 	</ul>
 	
 	<form id="memFrm">
-		<select name="searchkey" class="selectcomm">
+		<select name="searchKey" class="selectcomm">
 			<option value="userid">회원아이디</option>
 			<option value="mem_no">회원 번호</option>
 			<option value="mem_name">회원 이름</option>
 		</select>
-		<input type="text" class="textcomm" name="searchword"/>
+		<input type="text" class="textcomm" name="searchWord"/>
 		<input type="button" id="searchbtn" class="searchbtn" value="검색"/>
+		<input type="hidden" name="pageNum" id="pageNum"value="1"/>
 	</form>	
 	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->
 	<table id="meminfo" class="tablea">
@@ -263,5 +282,12 @@ $(function(){
 			</tr>
 		</c:forEach>
 	</table>
-
+	<ul class="link">
+		<!-- 페이지 번호              1부터                            5까지   -->
+         <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
+            <c:if test="${p<=pageVO.totalPage}">              
+            	<li class="clickpage" >${p}</li>  
+            </c:if>
+         </c:forEach>
+	</ul>
 </div>

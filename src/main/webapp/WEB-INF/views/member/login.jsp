@@ -19,8 +19,8 @@
 				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="mem_inputSize"/></li>
 				<li class="mem_cbSize"><input type="checkbox" id="stayinLogin" name="stay" value="stay" tabindex="3"/>&nbsp;<span class="smlFnt">로그인 상태 유지</span></li>
 				<li><button id="loginBtn" class="btn commBtn lgBtn mem_lgBtn" tabindex="4" >로그인</button></li>
-				<li><button type="button" id="signupBtn" class="btn commBtn lgBtn mem_lgBtn" tabindex="5" >회원가입</button></li>
-				<li><a href="#" class="smlFnt lgA mem_lgA">아이디 | 비밀번호찾기</a></li>
+				<li><button type="button" id="signupBtn" class="btn lgBtn mem_lgBtn" tabindex="5" >회원가입</button></li>
+				<li><a href="searchIdnPwd" class="smlFnt lgA mem_lgA">아이디 | 비밀번호찾기</a></li>
 			</ul>
 		</form>
 		<p>▽ 소셜계정으로 로그인하기</p>

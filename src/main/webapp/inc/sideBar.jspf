@@ -3,28 +3,6 @@
 <%@ page session="true" %>
 
 <script>
-	$(function(){
-		//검색창 팝업 이벤트
-		$("#showSearch").click(function(){
-			$("#searchDiv").css({'display':'block', 'margin': '0px'});
-			$('html, body').css({'overflow': 'hidden', 'height': '100%'}); //스크롤 이동 막기
-		});
-    	$("#close").on('click', function(){
-        	$("#searchDiv").css('display', 'none');
-        	$('html, body').css({'overflow': 'auto', 'height': 'auto'});
-//         	$("body").off('scroll touchmove mousewheel')
-    	})
-
-		//사이드바 색깔변경
-		$("#sideBar li a img").hover(
-			function(){//in
-				$(this).attr("src", $(this).attr("src").replace("000.png", "pur.png"));
-			},
-			function(){//out
-				$(this).attr("src", $(this).attr("src").replace("pur.png", "000.png"));
-			}
-		);
-	});
 </script>
 
 <ul id="sideBar">
@@ -84,7 +62,9 @@
 	</div>
 </div>
 
+<div id="chatDiv" style="z-index: 100;">
 
+</div>
 
 </body>
 </html>

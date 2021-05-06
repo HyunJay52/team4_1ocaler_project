@@ -3,6 +3,69 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team4.localer.dao.CsDAO">
+	<select id="totalRecord" resultType="int">
+		select count(${num}) from ${cate}
+		<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색을 고려한 if문 -->
+  					where ${searchKey} like #{searchWord} 
+  		</if>
+	</select>
+	<select id="onePageRecordSelect_rep" resultType="com.team4.localer.vo.ReportVO">
+		select * from
+			(select *from
+				(select rep_num, userid, rep_subject , rep_status, to_char(rep_writedate, 'MM-DD HH:MI') rep_writedate from report
+				<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+					where ${searchKey} like #{searchWord}
+				</if>
+				order by rep_num desc)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by rep_num )
+					where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by rep_num desc
+									
+	</select>
+	<select id="onePageRecordSelect_cs" resultType="com.team4.localer.vo.CsVO">
+		select * from
+			(select *from
+				(select cs_num, userid, cs_subject , cs_status, to_char(cs_writedate, 'MM-DD HH:MI') cs_writedate from ${cate}
+				<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+					where ${searchKey} like #{searchWord}
+				</if>
+				order by ${num} desc)
+					where rownum <![CDATA[<]]>= (${pageNum}*${onePageRecord}) order by ${num} )
+					where rownum <![CDATA[<]]>=
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc
+									
+	</select>
+	<select id="onePageRecordSelect_of" resultType="com.team4.localer.vo.OftenqVO">
+		select * from
+			(select *from
+				(select of_num, of_subject ,of_cate  from oftenq
+				<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+					where ${searchKey} like #{searchWord}
+				</if>
+				order by ${num} desc)
+					where rownum <![CDATA[<]]>= (${pageNum}*${onePageRecord}) order by ${num} )
+					where rownum <![CDATA[<]]>=
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc
+									
+	</select>
 	<select id="csTblSelect" resultType="com.team4.localer.vo.CsVO">
   		select cs_num, userid, cs_cate, cs_subject ,cs_content, cs_status, cs_answer, to_char(cs_writedate, 'MM-DD HH:MI') cs_writedate  
   		from cs where cs_status=1 order by cs_num

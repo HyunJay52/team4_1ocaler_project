@@ -7,19 +7,90 @@
 
 <script>
 	document.title="셀러회원가입";
+	
+	$(function(){
+		//비밀번호 재확인
+		$("#sellPwdBtn").click(function(){
+			var url = "sellerPwdDoubleCheck";
+			var userpwd = "userpwd="+$("#sellerPwd").val();
+			
+			$.ajax({
+				url: url,
+				data: userpwd,
+				success: function(result){
+					if(result=='Y'){ //사용가능
+						$('#sellPwdCheck').text('비밀번호가 일치합니다.');
+						$("#sellPwdCheck").css({
+							"color" : "green",
+							"fontSize" : "12"
+						});
+						$("#pwdDoubleCheck").text(result);
+					}
+					if(result=='N'){
+						$('#sellPwdCheck').text('비밀번호가 일치하지 않습니다.');
+						$('#sellerPwd').val('');
+						$('#sellerPwd').focus();
+						$("#sellPwdCheck").css({
+							"color" : "pink",
+							"fontSize" : "12"
+						});
+						$("#pwdDoubleCheck").text(result);
+					}
+				},
+				error: function(error){
+					$('#sellPwdCheck').text('다시 시도해주세요.');
+					$("#sellPwdCheck").css({
+						"color" : "red",
+						"fontSize" : "12"
+					});
+					$("#sellerPwd").focus();
+					console.log("error ? ",error);
+				}
+			});
+		});
+		
+		$('#sellerPwd').keydown(function(){ // 키 이벤트가 발생했을 때
+	         $("#pwdDoubleCheck").text("N");
+	         userid=$("#sellerPwd").text();
+	    });
+		$("#sellerPwd").change(function(){ // 마우스로 잘라내기를 했을 경우를 대비
+	         if(sellerPwd!=$("#sellerPwd")){
+	            $("#pwdDoubleCheck").text("N");
+	         }
+     	});
+		
+		// 프로필 사진
+		$("#sel_prof").on('change', function() {
+			readURL(this);
+		});
+
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#sel_previewImg').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		};
+		
+	});
 </script>
 
 <div id="joinSeller">
-	<form method="post" action="backHome" id="sellerJoinFrm">
+	<form method="post" action="sellerJoinOk" id="sellerJoinFrm"  enctype="multipart/form-data">
 		<div>셀러 가입</div>
 		<div id="basicInfo">
 			<ul>
 				<li>아이디</li>
-				<li><input type="text" name="userid" id="userid" tabindex="1" value="abcd1234" readonly="readonly"/>
+				<li><input type="text" name="userid" id="userid" tabindex="1" value="${logId }" readonly="readonly"/>
 				</li>
 			
 				<li>비밀번호</li><!-- 현재 로그인한 회원의 비밀번호와 동일 -->
-				<li><input type="text" name="userpwd" id="userpwd" tabindex="3" placeholder="비밀번호를 재입력해주세요"/>
+				<li><input type="password" name="userpwd" id="sellerPwd" tabindex="3" placeholder="비밀번호를 재입력해주세요"/><button type="button" class="btn commBtn lgBtn" id="sellPwdBtn">비밀번호확인</button><span id="pwdDoubleCheck">N</span>
+					<br/><span id="sellPwdCheck"></span>
 				</li>
 				
 				<li>사업자명</li>
@@ -65,7 +136,7 @@
 				<li>
 					<button type="button" tabindex="9" class="btn commBtn lgBtn addBank">계좌등록</button>
 					<ul id="bankInput">
-						<li><input type="number" name="acc_name" id="acc_name" tabindex="13" placeholder="예금주명"/></li>
+						<li><input type="text" name="acc_name" id="acc_name" tabindex="13" placeholder="예금주명"/></li>
 						<li>
 							<select id="bank" name="bank" tabindex="14">
 								<option value="신한은행">신한은행</option>
@@ -88,12 +159,12 @@
 				<li>프로필 사진</li>
 				<li style="height: auto">
 					<div style="border:none; width:110px; height: 110px; margin-right: 10px; float:left;">
-						<img src="<%=request.getContextPath() %>/common/user.png" id="previewImg" class="profImg form-control-file border" alt="upload image"/>
+						<img src="<%=request.getContextPath() %>/common/user.png" id="sel_previewImg" class="profImg form-control-file border" alt="upload image"/>
 					</div>
 					<label class="input-file-button" for="sel_prof">
 					  사진추가
 					</label>
-					<input type="file" name="sel_prof" accept="image/*" id="sel_prof" style="display:none; margin-top: 70px; border: none;"/>
+					<input type="file" name="sel_profFile" accept="image/*" id="sel_prof" style="display:none; margin-top: 70px; border: none;"/>
 				</li>
 			
 				<li>인사말</li>

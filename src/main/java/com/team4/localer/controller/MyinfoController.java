@@ -1,5 +1,8 @@
 package com.team4.localer.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -64,6 +67,15 @@ public class MyinfoController {
 		return mav;
 	}
 	
+	//내 정보 수정
+	@RequestMapping("/myinfoUpdate")
+	public ModelAndView myinfoUpdate(MemberVO vo, HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		return mav;
+	}
+	
 	//내정보 충전 페이지
 	@RequestMapping("/myInfoLoad")
 	public ModelAndView myInfoLoad(HttpSession ses) {
@@ -77,6 +89,39 @@ public class MyinfoController {
 		mav.addObject("myPoint", myPoint);
 		mav.setViewName("myInfo/myInfoLoad");
 		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/myPointSelect")
+	public List<Cha_pVO> myPointSelect(HttpServletRequest req, HttpSession session){
+		List<Cha_pVO> list = new ArrayList<Cha_pVO>();
+		String userid = (String)session.getAttribute("logId");
+		int totalRecord = Integer.parseInt(service.pointCount(userid));
+		int onePageRecord = Integer.parseInt(req.getParameter("onePageRecord"));
+		int nowNum = Integer.parseInt(req.getParameter("nowNum"));
+		int totalPage = Integer.parseInt(req.getParameter("totalPage"));
+		
+		int lastPageRecord = totalRecord % onePageRecord;
+		int rownum1 = nowNum*onePageRecord;
+		int rownum2 = 0;
+		if(nowNum==totalPage && lastPageRecord != 0) {
+			rownum2 = lastPageRecord;			
+		}else {
+			rownum2 = onePageRecord;
+		}
+		list = service.allPointSelect(userid, rownum1, rownum2);
+		return list;
+	}
+	//유저의 총 포인트 사용횟수 조회, 총 페이지수 조회
+	@ResponseBody
+	@RequestMapping("/myPointCount")
+	public int pointCount(HttpServletRequest req, HttpSession session) {
+		String userid = (String)session.getAttribute("logId");
+		int onePageRecord = Integer.parseInt(req.getParameter("onePageRecord"));
+		int totalRecord = Integer.parseInt(service.pointCount(userid));
+		int totalPage = (int)Math.ceil(totalRecord/(double)onePageRecord);
+		System.out.println("토탈페이지"+totalPage);
+		return totalPage;
 	}
 	
 	@ResponseBody

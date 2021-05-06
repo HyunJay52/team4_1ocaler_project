@@ -11,7 +11,11 @@ public interface CsDAO {
 	//총레코드 수 구하기 
 	public int totalRecord(AdminPageVO pageVO);
 	//한페이지 레코드 select 하기
-	public List<CsVO> onePageRecordSelect_rep(AdminPageVO pageVO);
+	public List<ReportVO> onePageRecordSelect_rep(AdminPageVO pageVO);
+	//한페이지 레코드 select 하기
+	public List<CsVO> onePageRecordSelect_cs(AdminPageVO pageVO);
+	//한페이지 레코드 select 하기
+	public List<OftenqVO> onePageRecordSelect_of(AdminPageVO pageVO);
 	//고객문의 미답변 글목록
 	public List<CsVO> csTblSelect();
 	//고객문의 글 전체목록

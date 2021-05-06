@@ -22,7 +22,18 @@ $(function(){
 });
 
 //sidebar javascript
+$(function(){
+		//검색창 팝업 이벤트
+		$("#showSearch").click(function(){
+			$("#searchDiv").css({'display':'block', 'margin': '0px'});
+			$('html, body').css({'overflow': 'hidden', 'height': '100%'}); //스크롤 이동 막기
+		});
+    	$("#close").on('click', function(){
+        	$("#searchDiv").css('display', 'none');
+        	$('html, body').css({'overflow': 'auto', 'height': 'auto'});
+    	})
 
+});
 
 // index page javascript
 	document.title = "1ocler home";
@@ -65,3 +76,18 @@ $(function(){
 		});
 		
 });
+
+//ajax interceptor setting 
+	$(function(){
+		$(document).ajaxSend(function(event, request, setting){
+			request.setRequestHeader('AJAX', 'true');
+		});
+		
+		$(document).ajaxError(function(event, jqxhr, settings, throwError){
+			if(getter.status==400){
+				console.log("로그인 상태가 아닙니다.");
+				location.href="login";
+			}
+		});
+		
+	});
