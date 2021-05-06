@@ -10,37 +10,35 @@ body{
 	width:1300px;
 }
 .statis{ /*ul style*/
-		margin:0 auto;
-		padding:0;
-		width:100%;
-		float:left;
-		list-style-type:none;
-		background-color:rgb(252,252,254);
-		font-family:"nsrb";
-		font-size:32px;
-		margin-bottom:30px;
-		}
+	margin:0 auto;
+	width:100%;
+	overflow:auto;
+	list-style-type:none;
+	background-color:rgb(230,230,230,0.1);
+	}
 .statis>li{
-	margin:10px;
-	padding:0;
-	width:20%;
-	color:#3f1785;
+	margin-top:10px;
+	margin-bottom:10px;
 	float:left;
-	text-align:center;
-}
+	width:20%;
+	color:#024B40;
+	font-family:"nsrb";
+	font-size:16px;
+	text-align: center;
+	}
 .statis>li:nth-child(1){
 	margin-left:20%;
 }
 .statis>li:nth-child(2){/*중간선긋기*/
-	border-left:3px solid rgb(63,23,133,0.7);
-	border-right:3px solid rgb(63,23,133,0.7);
+	border-left:3px solid #024B40;
+	border-right:3px solid #024B40;
 }
 .statis div{
 	font-family:"nsreb";
 	font-size:50px;
 }
 
-select{
+.main select{
 	margin-left:26%;
 }
 #btndiv{ 

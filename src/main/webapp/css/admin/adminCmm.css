@@ -5,7 +5,8 @@
 	margin:0 auto;
 	width:1300px;
 	min-height:980px;
-	overflow:auto;
+	overflow-y:auto;
+	overflow-x:hidden !important;
 }
 /*제목 타이틀*/
 .title{
@@ -40,8 +41,6 @@
  } 
 .tablea tr:first-child{/*첫번째 테이블 목차*/
 	text-align:center;
-	/* color:#fff; */
-	/* border-bottom:2px solid #ddd; */
 	border-top :1px solid rgb(78,190,154);
 	background-color:rgb(78,190,154,0.2);
 	}

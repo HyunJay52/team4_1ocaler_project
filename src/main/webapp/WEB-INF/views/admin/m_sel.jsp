@@ -197,7 +197,7 @@
 		}
 	});
 </script>
-<div class="main">
+<div class="main" id="nonescroll">
 	<div class="title">셀러회원관리</div>
 	<ul class="statis">
 		<li>
@@ -352,6 +352,4 @@
             </c:if>
          </c:forEach>
 	</ul>
-
-		
 </div>
