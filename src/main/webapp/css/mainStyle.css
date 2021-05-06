@@ -59,7 +59,9 @@ body {
 	list-style-type: none;
 	float: left;
 	line-height: 70px;
-	font-size: 19px;
+}
+#navi>li a {
+	font-size: 19px;	
 }
 #navi a:hover {
 	color: #181b46;
@@ -72,7 +74,7 @@ body {
 	display: none;
 }
 #topSubMenu>ul {
-	width: 200px; height: 200px;
+	width: 200px; height: 200px; list-style-type: none;
 	float: left;
 }
 #topSubMenu>ul:first-child {
@@ -82,10 +84,12 @@ body {
 	width: 200px; height: 60px; line-height: 60px;
 	text-align: center;
 }
+#topSubMenu>ul>li a {
+	font-size: 16px;
+}
 #topSubMenu>ul>li a:hover {
 	color: #181b46;
 	text-decoration: none;
-	font-weight: 800;
 	padding-left: 5px;
 	border-left: 3px solid #3b3a73;
 }	

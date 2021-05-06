@@ -10,8 +10,6 @@
 
 <script>
 	document.title = "회원가입";
-	var cookie = document.cookie;
-	console.log("1cookie? ", cookie);
 </script>
 <div id="joinMem">
 	<form method="post" action="memJoinOk" id="memJoinFrm" enctype="multipart/form-data">
@@ -55,7 +53,7 @@
 				<li>주소</li>
 				<li>
 					<button type="button" tabindex="8" class="btn commBtn Mem_lgBtn findAddr" onclick="javascript:openKakaoPost()">
-						<img src="common/search_fff.png" id="joinSearchAddrImg">우리동네 찾기
+						<img src="common/search_000.png" id="joinSearchAddrImg">우리동네 찾기
 					</button>
 					<ul id="addrInput">
 						<li><input type="text" name="mem_zip" id="mem_zip"
@@ -75,15 +73,34 @@
 				</li>
 				<li>활동지역</li>
 				<li>
-<!-- 					<select id="loc_gu" name="loc_gu" tabindex="12"> -->
-<!-- 								<option value="신한은행">신한은행</option> -->
-<!-- 								<option value="기업은행">기업은행</option> -->
-<!-- 								<option value="하나은행">하나은행</option> -->
-<!-- 								<option value="국민은행">국민은행</option> -->
-<!-- 								<option value="카카오뱅크">카카오뱅크</option> -->
-<!-- 					</select> -->
-					<input type="text" name="loc_gu" id="loc_gu" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요" />
-					<img src="img/indexImg/bo_pin.png" id="locImg"/>
+					<select id="loc_gu" name="loc_gu" tabindex="12">
+								<option value="강서구">강서구</option>
+								<option value="양천구">양천구</option>
+								<option value="구로구">구로구</option>
+								<option value="영등포구">영등포구</option>
+								<option value="금천구">금천구</option>
+								<option value="동작구">동작구</option>
+								<option value="관악구">관악구</option>
+								<option value="서초구">서초구</option>
+								<option value="강남구">강남구</option>
+								<option value="송파구">송파구</option>
+								<option value="강동구">강동구</option>
+								<option value="마포구">마포구</option>
+								<option value="용산구">용산구</option>
+								<option value="서대문구">서대문구</option>
+								<option value="중구">중구</option>
+								<option value="성동구">성동구</option>
+								<option value="광진구">광진구</option>
+								<option value="종로구">종로구</option>
+								<option value="동대문구">동대문구</option>
+								<option value="성북구">성북구</option>
+								<option value="중랑구">중랑구</option>
+								<option value="은평구">은평구</option>
+								<option value="강북구">강북구</option>
+								<option value="노원구">노원구</option>
+								<option value="도봉구">도봉구</option>
+					</select>
+<!-- 					<img src="img/indexImg/bo_pin.png" id="join_locImg"/> -->
 				</li>
 			</ul>
 			<button type="button" id="seeMore" class="btn commBtn Mem_lgBtn"
