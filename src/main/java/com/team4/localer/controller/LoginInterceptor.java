@@ -26,6 +26,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			}
 			//3. 로그인 페이지로 이동
 			return false; // 접속한 컨트롤러의 실행중지 후, 지정 컨트롤러로 이동
+		}else {
+			res.sendRedirect(req.getContextPath()+"/home");
 		}
 		//2-2. 쿠키값이 있는지 확인하기
 		

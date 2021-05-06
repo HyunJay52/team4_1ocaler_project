@@ -9,18 +9,36 @@ $(function(){
 			$("#bankInput").css("display", "block");
 			$("#bankInput").parent().css("height", "190px");
 		});
+		// 프로필 사진
+		$("#sel_prof").on('change', function() {
+			readURL(this);
+		});
 
-	    //주소찾기 펑션
-		function openKakaoPost() {
-			new daum.Postcode({
-		        oncomplete: function(data) {
-		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-		        }
-		    }).open();
-		}
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#sel_previewImg').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		};
+		
 //////////////////////////////////////////유효성 검사 펑션
+		//비밀번호
+		var sellerPwd;
+		$('#sellerPwd').keydown(function(){ // 키 이벤트가 발생했을 때
+	         $("#pwdDoubleCheck").text("N");
+	         sellerPwd = $("#sellerPwd").val();
+	    });
+		$("#sellerPwd").change(function(){ // 마우스로 잘라내기를 했을 경우를 대비
+	         if(sellerPwd!=$("#sellerPwd")){
+	            $("#pwdDoubleCheck").text("N");
+	         }
+     	});
 		$("#sel_name").on('keyup', function() {
+			$('#sellPwdCheck').text('');
 			var regName = /^[가-힣A-Z]{2,10}$/i;
 			if (!regName.test($("#sel_name").val())) {
 				$("#sellNameCheck").text("2자리 이상이여야 합니다.");
@@ -37,17 +55,36 @@ $(function(){
 				});
 			}
 		});
+		$("#com_num").on('keyup', function() {
+			$('#sellNameCheck').text('');
+			var regComnum = /[0-9]{10,15}/;
+			if (!regComnum.test($("#com_num").val())) {
+				$("#checkCumNum").text("사업자번호가 부적합합니다.");
+				$("#checkCumNum").css({
+					"color" : "pink",
+					"fontSize" : "12"
+				})
+				$("#com_num").focus();
+			} else {
+				$("#checkCumNum").text("✔ 사업자번호가 부적합합니다.");
+				$("#checkCumNum").css({
+					"color" : "green",
+					"fontSize" : "12"
+				});
+			}
+		});
 		$("#sel_tel").on('keyup', function() {
-			var regTel = /(010|02)[0-9]{3,4}[0-9]{4}/;
+			$("#checkCumNum").text('');
+			var regTel = /[0-9]{2,3}[0-9]{3,4}[0-9]{4}/;
 			if (!regTel.test($("#sel_tel").val())) {
-				$("#checkSellTel").text("2자리 이상이여야 합니다.");
+				$("#checkSellTel").text("연락처는 9자리 이상이여야 합니다.");
 				$("#checkSellTel").css({
 					"color" : "pink",
 					"fontSize" : "12"
 				})
 				$("#sel_tel").focus();
 			} else {
-				$("#checkSellTel").text("✔ 2자리 이상이여야 합니다.");
+				$("#checkSellTel").text("✔ 연락처는 9자리 이상이여야 합니다.");
 				$("#checkSellTel").css({
 					"color" : "green",
 					"fontSize" : "12"
@@ -55,8 +92,9 @@ $(function(){
 			}
 		});
 		$("#sel_email").on('keyup', function() {
+			$("#checkSellTel").text('');
 			var regEmail = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
-			if (!regEmail.test($("#mem_email").val())) {
+			if (!regEmail.test($("#sel_email").val())) {
 				$("#checkSellEmail").text("이메일을 잘못 입력하셨습니다.");
 				$("#checkSellEmail").css({
 					"color" : "pink",
@@ -71,39 +109,95 @@ $(function(){
 				});
 			}
 		});
+		$("#acc_name").on('keyup', function() {
+			$("#checkSellEmail").text('');
+			var regName = /^[가-힣A-Z]{2,10}$/i;
+			if (!regName.test($("#acc_name").val())) {
+				$("#checkSellAccName").text("2자리 이상 입력해주세요.");
+				$("#checkSellAccName").css({
+					"color" : "pink",
+					"fontSize" : "12"
+				});
+				$("#acc_name").focus();
+			} else {
+				$("#checkSellAccName").text("✔ 2자리 이상 입력해주세요.");
+				$("#checkSellAccName").css({
+					"color" : "green",
+					"fontSize" : "12"
+				});
+			}
+		});
 		$("#account").on('keyup', function() {
-			var regEmail = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
-			if (!regEmail.test($("#mem_email").val())) {
-				$("#checkSellEmail").text("이메일을 잘못 입력하셨습니다.");
-				$("#checkSellEmail").css({
+			$("#checkSellAccName").text('');
+			var regAcc = /[0-9]{10,13}/;
+			if (!regAcc.test($("#account").val())) {
+				$("#checkSellAcc").text("계좌번호를 잘못 입력하셨습니다.");
+				$("#checkSellAcc").css({
 					"color" : "pink",
 					"fontSize" : "12"
 				});
 				$("#account").focus();
 			} else {
-				$("#checkSellEmail").text("✔ 사용가능한 이메일입니다.");
-				$("#checkSellEmail").css({
+				$("#checkSellAcc").text("✔ 사용가능한 계좌입니다.");
+				$("#checkSellAcc").css({
 					"color" : "green",
 					"fontSize" : "12"
 				});
 			}
 		});
 		
+		//비밀번호 재확인
+		$("#sellPwdBtn").click(function(){
+			var url = "sellerPwdDoubleCheck";
+			var userpwd = "userpwd="+$("#sellerPwd").val();
+			
+			$.ajax({
+				url: url,
+				data: userpwd,
+				success: function(result){
+					if(result=='Y'){ //사용가능
+						$('#sellPwdCheck').text('비밀번호가 일치합니다.');
+						$("#sellPwdCheck").css({
+							"color" : "green",
+							"fontSize" : "12"
+						});
+						$("#pwdDoubleCheck").text(result);
+					}
+					if(result=='N'){
+						$('#sellPwdCheck').text('비밀번호가 일치하지 않습니다.');
+						$('#sellerPwd').val('');
+						$('#sellerPwd').focus();
+						$("#sellPwdCheck").css({
+							"color" : "pink",
+							"fontSize" : "12"
+						});
+						$("#pwdDoubleCheck").text(result);
+					}
+				},
+				error: function(error){
+					$('#sellPwdCheck').text('다시 시도해주세요.');
+					$("#sellPwdCheck").css({
+						"color" : "red",
+						"fontSize" : "12"
+					});
+					$("#sellerPwd").focus();
+				}
+			});
+		});
+		
+		//submit 이벤트 구현
 		
 		
 		
 });
 //////////////////////////////////////////주소찾기 펑션
-var element_wrap = document.getElementById('joinSellAddrWrap'); //주소 찾기 화면
-function foldDaumPostcode() {// iframe을 넣은 element를 안보이게 한다.
-    element_wrap.style.display = 'none';
-}
-
 function sellOpenKakaoPost() {
-	var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+	var width = 500; var height =500;
 	new daum.Postcode({
+		width: width,
+		heigth: height,
 		oncomplete : function(addrData) {
-			
+		
 			var addr = '';
 			var detailAddr = '';
 			
@@ -132,17 +226,10 @@ function sellOpenKakaoPost() {
 			document.getElementById("sel_zip").value = addrData.zonecode;
 			document.getElementById("sel_addr").value = addr;
 			document.getElementById("sel_detail").focus();
-			element_wrap.style.display = 'none';
-			document.body.scrollTop = currentScroll;
 		},
-		onresize : function(size){
-			console.log('? > ', size)
-			element_wrap.style.height = size.height+'px';
-		},
-		width : '100%',
-        height : '100%'
-	}).embed(element_wrap);
-	
-	// iframe을 넣은 element를 보이게 한다.
-    element_wrap.style.display = 'block';
+		
+	}).open({
+    	left: (window.screen.width / 2) - (width / 2),
+    	top: (window.screen.height / 2) - (height / 2)
+	});
 };

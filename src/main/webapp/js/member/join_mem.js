@@ -15,7 +15,6 @@
 		$("#seeMore").on('click', function() {
 			$("#setProfile").slideDown(800);
 			$("#setProfile").prev().css("display", "block");
-			// 			$("#setProfile").css("display", "block");
 		});
 		
 		//아이디 & 별명 중복확인 
@@ -101,10 +100,10 @@
 	            $("#idOverlap").text("N");
 	         }
       	});
+      	var mem_nick;
 		$('#mem_nick').keydown(function(){ // 키 이벤트가 발생했을 때
 	         $("#nickOverlap").text("N");
-	         userid=$("#mem_nick").text();
-	         console.log("닉네임 키이벤트 발생 왜 이거? ", userid);
+	         mem_nick = $("#mem_nick").val();
 	    });
 		$("#mem_nick").change(function(){ // 마우스로 잘라내기를 했을 경우를 대비
 	         if(mem_nick!=$("#mem_nick")){
@@ -250,13 +249,18 @@
 				$('#userid').focus();
 				return false;
 			}
-			if($("#idOverlap").val()=='N'){
+			if($("#idOverlap").text()=='N'){
 				alert('아이디 중복확인을 해주세요');
 				return false;
 			}
 			if($('#userpwd1').val()==null || $('#userpwd1').val()==''){
 				alert('비밀번호를 입력해주세요');
 				$('#userpwd1').focus();
+				return false;
+			}
+			if($('#userpwd2').val()==null || $('#userpwd2').val()==''){
+				alert('비밀번호를 재입력해주세요');
+				$('#userpwd2').focus();
 				return false;
 			}
 			if($('#mem_name').val()==null || $('#mem_name').val()==''){
@@ -289,34 +293,42 @@
 				$('#mem_detail').focus();
 				return false;
 			}
-			if($('#loc_gu').val()==null || $('#loc_gu').val()==''){
-				alert('활동지역 입력은 필수입니다');
+			if($('#loc_gu').val()==null || $('#loc_gu').val()==0){
+				alert('활동지역 선택은 필수입니다');
 				$('#loc_gu').focus();
+				return false;
+			}
+			if($("#mem_prof").val()==null || $('#mem_prof').val()==''){
+				alert('프로필 사진을 설정하지 않으시면 기본사진으로 설정됩니다.');
+				$("#mem_prof").val('user.png');
 				return false;
 			}
 			if($('#mem_nick').val()==null || $('#mem_nick').val()==''){
 				alert('별명을 입력하지 않으시면 아이디로 대체됩니다.');
-				$('#mem_nick').val($('#userid'));
+				$('#mem_nick').val($('#userid').val());
 				$('#mem_nick').focus();
 				return false;
 			}
-			if($("#nickOverlap").val()=='N'){
+			if($('#mem_content').val()==null || $('#mem_content').val()==''){
+				$('#mem_content').val("안녕하세요, 잘 부탁드립니다.");
+				$('#mem_content').focus();
+				return false;
+			}
+			if($("#nickOverlap").text()=='N'){
 				alert('별명을 중복확인을 해주세요');
 				return false;
 			}
 			return true;
 		});
+		
 }); //function 끝	
 	
 //////////////////////////////////////////주소찾기 펑션
-var element_wrap = document.getElementById('joinAddrWrap'); //주소 찾기 화면
-function foldDaumPostcode() {// iframe을 넣은 element를 안보이게 한다.
-    element_wrap.style.display = 'none';
-}
-
 function openKakaoPost() {
-	var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+	var width= 500; var height= 500;
 	new daum.Postcode({
+		width: width,
+		height: height,
 		oncomplete : function(addrData) {
 			
 			var addr = '';
@@ -347,19 +359,11 @@ function openKakaoPost() {
 			document.getElementById("mem_zip").value = addrData.zonecode;
 			document.getElementById("mem_addr").value = addr;
 			document.getElementById("mem_detail").focus();
-			element_wrap.style.display = 'none';
-			document.body.scrollTop = currentScroll;
-		},
-		onresize : function(size){
-			console.log('? > ', size)
-			element_wrap.style.height = size.height+'px';
-		},
-		width : '100%',
-        height : '100%'
-	}).embed(element_wrap);
-	
-	// iframe을 넣은 element를 보이게 한다.
-    element_wrap.style.display = 'block';
+		}
+	}).open({
+    	left: (window.screen.width / 2) - (width / 2),
+    	top: (window.screen.height / 2) - (height / 2)
+	});
 };
 	
 	

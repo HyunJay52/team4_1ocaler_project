@@ -26,6 +26,12 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
+	public int insertEventbonus(String userid) {
+		//신규회원 이벤트
+		return dao.insertEventbonus(userid);
+	}
+	
+	@Override
 	public String sellerPwdDoubleCheck(String userid, String userpwd) {
 		//셀러회원가입 비밀번호 재확인
 		return dao.sellerPwdDoubleCheck(userid, userpwd);
@@ -35,6 +41,12 @@ public class MemberServiceImp implements MemberService {
 	public int insertSeller(SellerVO vo) {
 		//셀러 회원가입
 		return dao.insertSeller(vo);
+	}
+	
+	@Override
+	public int updateMemStatus(String userid) {
+		// 셀러 회원가입 후 > 회원상태 업데이트
+		return dao.updateMemStatus(userid);
 	}
 	
 	@Override

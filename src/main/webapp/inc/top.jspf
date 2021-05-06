@@ -89,8 +89,8 @@
 					</ul>
 					<ul>
 						<li><a href="commuBoard">우리동네 이야기</a></li>
-						<li><a href="#">쓱싹레시피</a></li>
-						<li><a href="#">자유자게</a></li>
+						<li><a href="commuRecipeBoard?up_cate=2">쓱싹레시피</a></li>
+						<li><a href="commuFreeBoard?up_cate=3">자유자게</a></li>
 					</ul>
 					<ul>
 						<li><a href="oftenQna">자주하는 질문</a></li>

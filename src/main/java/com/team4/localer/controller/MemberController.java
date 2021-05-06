@@ -8,7 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +28,10 @@ import com.team4.localer.vo.SellerVO;
 
 @Controller
 public class MemberController {
+	
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
+	
 	@Inject
 	MemberService service;
 	
@@ -91,6 +101,7 @@ public class MemberController {
 		return "member/joinMember";
 	}
 	@RequestMapping(value="/memJoinOk", method = RequestMethod.POST) //profFile : 인풋 파일과 이름 다르게 해준다음에 넣어줘야함
+	@Transactional(rollbackFor= {Exception.class, RuntimeException.class}) 
 	public ModelAndView memJoinOk(MemberVO vo, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 /////////////////////////////////프로필 사진 업로드부터 실행		
@@ -129,14 +140,27 @@ public class MemberController {
 		}
 ///////////////////////////////// DB 작업 시작		
 		vo.setMem_prof(uploadMemprofname);
-		int insertCnt = service.insertMember(vo);
 		
-		if(insertCnt>0) {
-			mav.setViewName("redirect:login");
-		}else {
-			//업로드 파일 삭제하기
-			File del = new File(profPath, uploadMemprofname);
-			del.delete();
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		try {
+			int insertCnt = service.insertMember(vo);
+			int insertB = service.insertEventbonus(vo.getUserid());
+			
+			if(insertCnt>0) {
+				//정상구현되면 commit 발생
+				transactionManager.commit(status);
+				mav.setViewName("redirect:login");
+			}else {
+				//업로드 파일 삭제하기
+				File del = new File(profPath, uploadMemprofname);
+				del.delete();
+				mav.setViewName("member/historyBack");
+			}
+		}catch (Exception e) {
+			System.out.println("회원가입 에러 발생 > "+e.getMessage());
 			mav.setViewName("member/historyBack");
 		}
 		return mav;
@@ -192,6 +216,7 @@ public class MemberController {
 	}
 //셀러회원가입
 	@RequestMapping(value="/sellerJoinOk", method = RequestMethod.POST) //sel_profFile : 인풋 파일과 이름 다르게 해준다음에 넣어줘야함
+	@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 	public ModelAndView sellerJoinOk(SellerVO vo, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 /////////////////////////////////프로필 사진 업로드부터 실행		
@@ -230,14 +255,25 @@ public class MemberController {
 		}
 ///////////////////////////////// DB 작업 시작		
 		vo.setSel_prof(uploadMemprofname);
-		int insertCnt = service.insertSeller(vo);
 		
-		if(insertCnt>0) {
-			mav.setViewName("redirect:login");
-		}else {
-			//업로드 파일 삭제하기
-			File del = new File(profPath, uploadMemprofname);
-			del.delete();
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+		try {
+			TransactionStatus status = transactionManager.getTransaction(def);
+			int insertCnt = service.insertSeller(vo);
+			service.updateMemStatus(vo.getUserid()); //회원상태 업데이트
+			transactionManager.commit(status);
+			
+			if(insertCnt>0) {
+				mav.setViewName("redirect:home"); //추후에 셀러페이지로 이동으로 바꾸기
+			}else {
+				//업로드 파일 삭제하기
+				File del = new File(profPath, uploadMemprofname);
+				del.delete();
+				mav.setViewName("member/historyBack"); //뒤로가기
+			}
+		}catch(Exception e) {
+			System.out.println("셀러회원 트랜젝션 에러 "+e.getMessage());
 			mav.setViewName("member/historyBack"); //뒤로가기
 		}
 		return mav;
