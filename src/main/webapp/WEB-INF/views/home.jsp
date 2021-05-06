@@ -90,7 +90,7 @@
 		<ul class="indexListNone">
 			<li>
 				<ul class="indexInnerUl">
-					<li class="gachiPostTitle"><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="gachiPostTitle"><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
 					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" style="width: 15px; margin-bottom: 5px;"> 마포구청역 3번 출구</li>
@@ -102,7 +102,7 @@
 			</li>
 			<li>
 				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
 					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
@@ -114,7 +114,7 @@
 			</li>
 			<li>
 				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
 					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
@@ -127,13 +127,73 @@
 			<li>
 				<ul class="indexInnerUl">
 					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li class="wordCut test">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
 					<li>
 						<span class="cntJoin">1</span> / 3 명
 					</li>
 					<li class="smlFnt">goguma1234 &nbsp;&nbsp;<img src="common/alarm_000.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut test">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
 				</ul>
 			</li>
 			<li>

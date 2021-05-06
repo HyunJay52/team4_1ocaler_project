@@ -19,12 +19,6 @@
 			});
 		});
 		
-		$("#login_section").children('p').click(function(){
-			$("#socialLogin").slideDown(500);
-		});
-		$("#signupBtn").click(function(){
-			location.href="joinMember";
-		});
 	});
 	
 //	네이버아디디로로그인 초기화 Script 

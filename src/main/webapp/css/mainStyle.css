@@ -108,7 +108,7 @@ body {
 	height: auto;
 	text-align: center;
 	position: fixed;
-	top: 45%;
+	top: 55%;
 	right: 20px;
 	background-color: #fec804;
 	opacity: 75%;
@@ -288,14 +288,18 @@ body {
 #sell>ul li {
 	width: 220px;
 	height: 300px;
-	border: 1px solid #ddd;
+	border: 1px solid #000;
 }
 
 #gachi>ul>li {
-	width: 220px;
-	height: 250px;
-	border: 1px solid #000;
-	margin: 5px;
+	width: 235px;
+	height: 270px;
+	margin: 10px;
+	box-shadow: 3px 3px 3px #ddd;
+}
+
+.test {
+	font-size: 18px;
 }
 #sggSak>div:first-child {
 	width: 1300px;
@@ -316,7 +320,7 @@ body {
 }
 
 #gachi .indexInnerUl>li {
-	width: 200px;
+	width: 220px;
 	height: 40px;
 	line-height: 40px;
 	padding: 0px 5px;
@@ -324,6 +328,8 @@ body {
 
 #gachi .indexInnerUl>li:nth-of-type(1) {
 	margin-top: 10px;
+	background-color: #9edae3;
+	color: #fff;
 }
 
 #gachi .indexInnerUl>li:nth-of-type(2) {
@@ -356,7 +362,7 @@ body {
 
 #gachi .gachiPoastTitle {
 	font-size: 18px;
-	font-weight: bold;
+	font-family: nsreb;
 }
 
 #indexMain .indexListNone {
@@ -394,7 +400,7 @@ body {
 #indexMain .cntJoin {
 	font-size: 22px;
 	font-weight: bold;
-	color: #3f1785;
+	color: #fa622f;
 }
 
 #indexMain .sliderIndi {
@@ -435,19 +441,19 @@ body {
 	height: 340px;
 	float: left;
 	margin: 5px;
-	border: 1px solid gray;
+	border: 1px solid #ddd;
 }
 
 #indexMain .boardText {
 	width: 1200px;
 	margin: 0 auto;
 }
-
 #indexMain .selList>div>ul li:nth-child(1) {
 	width: 100%;
 	text-align: center;
 	font-size: 18px;
 	font-weight: bold;
+	margin: 5px 0px;
 }
 
 #indexMain .selList>div>ul li:nth-child(2) {
@@ -463,7 +469,6 @@ body {
 	line-height: 24px;
 	font-size: 18px;
 	font-weight: bold;
-	color: #3f1785;
 }
 
 #indexMain .selList>div>ul li:nth-child(4) {
@@ -486,5 +491,5 @@ body {
 }
 
 #indexMain .selList:hover {
-	border: 2px solid #5f0080;
+	border: 1.5px solid #5f0080;
 }
