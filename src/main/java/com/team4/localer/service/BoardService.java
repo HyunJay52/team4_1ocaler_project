@@ -29,4 +29,6 @@ public interface BoardService {
 	public List<BoardVO> commuMainSelect (BoardVO vo);
 	
 	public BoardVO commuOneSelect(BoardVO vo);
+	
+	public int commuGuSelect(String b_gu);
 }

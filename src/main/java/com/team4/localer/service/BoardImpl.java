@@ -91,6 +91,14 @@ public class BoardImpl implements BoardService{
 		return boardDAO.commuOneSelect(vo);
 	}
 
+	@Override
+	public int commuGuSelect(String b_gu) {
+		// TODO Auto-generated method stub
+		return boardDAO.commuGuSelect(b_gu);
+	}
+
+	
+	
 
 
 	

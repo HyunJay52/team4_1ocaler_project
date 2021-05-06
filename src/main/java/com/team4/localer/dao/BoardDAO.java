@@ -30,4 +30,6 @@ public interface BoardDAO {
 	public List<BoardVO> commuMainSelect (BoardVO vo);
 	//뷰..?
 	public BoardVO commuOneSelect(BoardVO vo);
+	//구 개수
+	public int commuGuSelect(String b_gu);
 }
