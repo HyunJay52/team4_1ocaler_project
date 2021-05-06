@@ -129,7 +129,7 @@
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">
-		<form method="post" action="myinfoOk" id="myinfoFrm" enctype="multipart/form-data">
+		<form method="post" action="myinfoUpdate" id="myinfoFrm" enctype="multipart/form-data">
 		<div class="basicMyinfoHeader">내 정보</div>
 		<div class="basicMyinfo">
 			<ul>
@@ -157,7 +157,7 @@
 				</li>
 
 				<li>인사말</li>
-				<li><textarea name="mem_content" id="mem_content"
+				<li><textarea name="mem_content" id="mem_content" style="width:318px; height:62px; resize:none"
 						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.mem_content }</textarea>
 				</li>
 				<li>연락처</li>
@@ -203,40 +203,6 @@
 				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
 			</div>
 		</div>
-		<!--  
-		<div class="basicMyinfoHeader">상세정보</div>
-		<div class="detailMyinfo">
-			<ul class="myinfoProf_ul">
-				<li>프로필 사진</li>
-				<li class="memheightAuto">
-					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
-						<img src="<%=request.getContextPath()%>/common/user.png"
-							id="previewImg" class="profImg form-control-file border"
-							alt="upload image" />
-					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진추가 </label> 
-					<input type="file" name="profFile" accept="image/*" id="mem_prof" 
-					style="display: none; margin-top: 70px; border: none;" />
-				</li>
-
-				<li>닉네임</li>
-				<li><input type="text" class="inputDisabled" name="mem_nick" id="mem_nick" value="${myVO.mem_nick }" disabled="disabled"
-					placeholder="별명을 입력해주세요" />
-				<button type="button" class="btn commBtn Mem_lgBtn" id="nickOverlapBtn">중복검사</button>
-					<span id="nickOverlap">N</span><br/>
-					<span id="checkNickname"></span>	
-				</li>
-
-				<li>인사말</li>
-				<li><textarea name="mem_content" id="mem_content"
-						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.mem_content }</textarea> 
-			</ul>
-			<button type="button" id="myinfoEditBtn" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정하기</button>
-			<div class="editOn" id="editOn">
-				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정</button>
-				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
-			</div>
-		</div>
-		-->
 	</form>
 		<div class="myinfoOtherBtn">
 			<button type="button" class="btn commBtn ">셀러등록하기</button>

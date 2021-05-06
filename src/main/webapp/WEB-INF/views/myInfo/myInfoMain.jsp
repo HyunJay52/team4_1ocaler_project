@@ -55,6 +55,7 @@
 	float:right; background-color:#fff; height:40px; width:420px;
 }
 #QnA{
+	width:100%;
 	margin-top:20px;
 	float:left;
 }
