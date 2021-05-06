@@ -1,15 +1,19 @@
 @charset "UTF-8";
-*{font-family: nsr; font-size: 20px;
+	*{
+		font-family: nsr; 
+		font-size: 20px;
+		text-overflow: ellipsis;
+		white-space: nowrap
 	}
-	#body{overflow:auto;width:1300px;margin:50 auto;
+	#commueWnEmain{overflow:auto;width:1300px;margin:50 auto;
 		height: 1000px; 
 	}
 	
-	select{ 
+	#commueWnEmain>div>form select{ 
 		height: 30px; 
 		width: 150px; 
 		margin-right: 5px;	
-		border: none;
+		/* border: none; */
 		float: left;
 	
 	}
@@ -18,15 +22,18 @@
 		display: none;
 	}
 	
-	input{
+	#Edit_down_cate{
+		display: block;
+	}
+	
+	#commueWnEmain>div>form input{
 		margin: 15px 0px;
 	}
 	
 	#subject{
 		font-size: 25px; 
 		border: none; 
-		border-bottom: 1px solid gray;
-		width: 1000px;  
+		border-bottom: 1px solid gray; 
 		margin-top: 10px;
 	}
 	
@@ -40,7 +47,7 @@
 	#tag{ 
 		border: none; 
 		border-bottom: 1px solid gray;
-		width: 1200px; 
+		width: 1300px; 
 	}
 	
 	#btn{ width: 1300px; text-align: center;

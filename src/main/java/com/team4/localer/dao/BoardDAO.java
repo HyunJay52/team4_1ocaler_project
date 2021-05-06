@@ -12,6 +12,22 @@ public interface BoardDAO {
 	public List<BoardVO> commuSelect(BoardVO vo);
 	//커뮤 글 하나보기
 	public BoardVO commuViewSelect(int num);
-	
-	
+	//커뮤 글삭제
+	public int commuDelete(int num, String userid);
+	//커뮤 글수정
+	public int commuUpdate(BoardVO vo);
+	//레시피 게시판
+	public List<BoardVO> commuRecipeSelect(BoardVO vo);
+	//자유게시판
+	public List<BoardVO> commuFreeSelect(BoardVO vo);
+	//조회수 
+	public int hitCount(int num);
+	//메인 레시피 테이블?
+	public List<BoardVO> recipeSelect(BoardVO vo);
+	//메인 자유 테이블?
+	public List<BoardVO> freeSelect(BoardVO vo);
+	//메인 우리동네이야기 테이블
+	public List<BoardVO> commuMainSelect (BoardVO vo);
+	//뷰..?
+	public BoardVO commuOneSelect(BoardVO vo);
 }

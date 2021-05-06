@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealWriteStyle.css"/>
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> 
 
-	<div id="body">
+	<div id="dealWnEMain">
 		<div>
 			<form action="" >
 				<select>

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealBoardStyle.css"/>
 
 
-	<div id="main">
+	<div id="dealViewMain">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<div id="divAll">
 			<div id="dealImg">
@@ -55,7 +55,7 @@
 					<li class="wordcut">#당근 #등촌역 #식품 #야채</li>
 					<li>
 						<form>
-							<input type="submit" value="찜하기" class="btn commBtnDeal" style="margin-left: 100px"/>
+							<input type="button" value="찜하기" class="btn commBtnDeal" style="margin-left: 100px"/>
 							<input type="submit" value="함께해요" class="btn commBtnDeal"/>
 						</form>
 					</li>
@@ -89,8 +89,8 @@
 		</div>
 		
 		<div id="editBtn">
-			<button class="btn commBtn " onclick = "location.href = '#' ">삭제</button>
-			<button class="btn commBtn" onclick = "location.href = 'memberEdit' ">수정</button>
+			<button class="btn commBtnEdit " onclick = "location.href = '#' ">삭제</button>
+			<button class="btn commBtnEdit" onclick = "location.href = 'memberEdit' ">수정</button>
 		</div>
 	</div>
 </body>
