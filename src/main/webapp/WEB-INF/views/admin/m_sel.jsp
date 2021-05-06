@@ -14,9 +14,9 @@
 		//아이디 클릭시 회원정보 테이블 띄워주는 곳 
 		$('.memid').click(function(){
 			var userid = $(this).text();//회원아이디
-			alert("userid-->"+userid);
+			var sel_num = $(this).prev().text();
 			meminfo(userid);
-			selinfo(userid);
+			selinfo(sel_num);
 		});
 		
 		function meminfo(userid){//ajax로 데이터 가져오기
@@ -39,18 +39,25 @@
 			});
 			$("#meminfo").css("display", "block");
 		}
-		function selinfo(userid){
+		function selinfo(sel_num){
 			$.ajax({
 				type : "POST",
 				url : "sel_detail",
-				data : "userid="+userid,
+				data : "sel_num="+sel_num,
 				success : function(result){
+					var $result = $(result);
 					$(".seldetail").remove();
-					var txt = "<tr class='seldetail'>";
-					for(var i=0;i<result.length;i++){
-						txt += "<td>"+result[i]+"</tb>";
-					}	
-					txt+= "</tr>";
+					var txt = "";
+					$result.each(function(idx,vo){//테이블 내용 넣기
+						txt += "<tr class='seldetail'>";
+						txt += 		"<td>"+vo.i_num+"</td>";
+						txt += 		"<td>"+vo.i_subject+"</td>";
+						txt += 		"<td>"+vo.o_conf2+"</td>";
+						txt += 		"<td>"+vo.o_conf1+"</td>";
+						txt += 		"<td>"+vo.i_writedate+"</td>";
+						txt += 		"<td>"+vo.price_total+"</td>";
+						txt += "</tr>";
+					});
 					$("#selinfo").append(txt);
 				},error : function(){
 					alert("실패,,,")
@@ -270,8 +277,8 @@
 		<tr>
 			<td>번호</td>
 			<td>제목</td>
-			<td>판매 횟수/환불횟수</td>
-			<td>작성자</td>
+			<td>구매 확정</td>
+			<td>구매 확정전</td>
 			<td>작성날짜</td>
 			<td>판매금액</td>
 		</tr>

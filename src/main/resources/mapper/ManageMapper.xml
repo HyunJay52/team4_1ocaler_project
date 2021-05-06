@@ -52,4 +52,13 @@
 					</if>
 					order by ${num} desc	
   	</select>
+  	<select id="sellerDetailInfo" resultType="com.team4.localer.vo.AdminstatisVO">
+  		select s.i_num, s.i_subject, to_char(s.i_writedate,'YYYY/MM/DD') i_writedate, 
+				count(case when o.o_conf=1 then 1 end) o_conf1,
+				count(case when o.o_conf=2 then 1 end) o_conf2, 
+				sum(case when o.o_conf=2 then o.o_price else 0 end) price_total
+				from sell_item s, ordertbl o where s.i_num = o.num
+		group by i_num,s.sel_num, s.i_subject, s.i_writedate
+		having s.sel_num=#{param1}
+  	</select>
 </mapper>
