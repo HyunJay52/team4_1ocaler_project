@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
-<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script> 	
 <link ref="stylesheet" href="<%=request.getContextPath()%>/css/commonStyle.css" type="html/css"/>
 <style>
 	#pageTop{display:none;}
@@ -123,29 +123,6 @@
 			});
 		}
 		//작성폼 유효성 검사 end================================================================================================
-		
-		//창고형마트-동네마트 이동시 값들 disable 처리 및 값초기화 작업====================================================================================================
-			
-		/* $("#groupWriteFormDown_cate").change(()=>{
-			var values = $("#groupWriteFormDown_cate option:selected").val();
-			console.log(values);
-			if(values == '창고형마트'){
-				$("#groupWriteFormG_loc1").val("");
-				$("#groupWriteFormG_loc2").val("");		
-				$("#groupWriteFormG_loc2").attr("type","text").attr("disabled",false).attr("readonly",true);				
-				$("#groupWriteFormShowFrm").css("height","auto");	
-				removeMarker();
-				arrivedMarker();
-			}else{	
-				$("#groupWriteFormG_loc2").attr("type","hidden").attr("disabled",true);
-				$("#groupWriteFormG_loc1").val("");
-				$("#groupWriteFormG_loc2").val("");
-				$("#groupWriteFormShowFrm").css("height","auto");
-				marker2.setVisible(false);
-				removeMarker();
-			}
-		}); */
-		
 		
 		//===================================================================================================
 		

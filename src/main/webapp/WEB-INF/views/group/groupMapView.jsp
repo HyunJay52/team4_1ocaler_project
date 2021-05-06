@@ -79,7 +79,6 @@
 	<!-- showFrm 리스트 -->
 	<div id="groupMapViewShowFrm">
 		<div><img src="<%=request.getContextPath() %>/img/groupImg/aimP.png"/><span style="font-weight:bold;">지역선택</span></div>
-		<hr style="width:380px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin-left:10px;">
 		<hr style="margin:0px;">
 		<ul></ul>
 	</div>
