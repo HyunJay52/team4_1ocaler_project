@@ -4,9 +4,11 @@
 		font-family: nsr;
 		text-decoration: none;
 		list-style-type: none;
+		text-overflow: ellipsis;
+		white-space: nowrap
 		
 	}
-	#body{
+	#commuViewMain{
 		overflow:auto;
 		width:1300px;
 		margin:60 auto;
@@ -14,82 +16,84 @@
 	}
 		
 	/* 게시글 */
-	 #center {
+	 #commuViewcenter {
 	 	width: 1300px;
 	 }
-	 #center div:nth-child(1){
+	 #commuViewcenter div:nth-child(1){
 	 	width: 1300px;
 	 	text-align: right;
 	 }
 	 
-	 #board{
+	 #commuViewboard{
+	 	width: 1300px;
+	 	height: auto;
+	 }
+	 
+	 #commuViewboard>ul>li {
 	 	width: 1300px;
 	 }
 	 
-	 #board>ul>li {
-	 	width: 1300px;
-	 }
-	 
-	 #board>ul>li:nth-child(2){
+	 #commuViewboard>ul>li:nth-child(2){
 	 	font-size: 26px;
     	font-weight: bold;
     	color: #3f1785;
     	margin: 5 0 ;
+
 	 } 
-	 #board>ul>li:nth-child(3){
+	 #commuViewboard>ul>li:nth-child(3){
 	 	font-size: 18px; 
 	 	width: 650px;
 	 	float: left;
 	 
 	 }
-	 #board>ul>li:nth-child(3) img{
+	 #commuViewboard>ul>li:nth-child(3) img{
 	 	width: 30px;
 	 	height: 30px;
 	 
 	 } 
-	 #board>ul>li:nth-child(4){
+	 #commuViewboard>ul>li:nth-child(4){
 	 	width: 650px;
 	 	float: left;
 	 	text-align: right;
 	 } 
 	 
 	 /* 작성글 내용 */
-	 #board>ul>li:nth-child(5){
+	 #commuViewboard>ul>li:nth-child(5){
 	 	width: 1300px;
-	 	height:300px; 
+	 	height:auto; 
 	 	float: left;
-	 	margin: 40 0;
+	 	margin: 15 0;
+	 	border: 1px solid #d9d9d9; 
 	 } 
 	 
 	 /* 댓글 */
-	 #board>ul>li:nth-child(6){
+	 #commuViewboard>ul>li:nth-child(6){
 	 	width: 1300px;
 	 	float: left;
-	 	margin: 40 0;
+	 	margin: 10 0;
 	 	color: gray;
     	font-size: 13px;
 	 } 
-	 #board>ul>li:nth-child(7){
+	 #commuViewboard>ul>li:nth-child(7){
 	 	width: 1300px;
 	 	float: left;
 	 	height: 20px;
 	 	text-align: right;
-	 	padding-right:100px; 
 	 	line-height: 20px;
 	 	
 	 }
 	 
-	 #preBtnnext{
+	 #commuViewpreBtnnext{
 	 	width: 1300px;
 	 	float: left;
 	 	margin: 25 0 ;
 	 }
-	 #preBtnnext div:nth-child(1){
+	 #commuViewpreBtnnext div:nth-child(1){
 	 	width: 1300px;
 	 	float: left;
 	 	margin-bottom:5px; 
 	 } 
-	 #preBtnnext div:nth-child(2){
+	 #commuViewpreBtnnext div:nth-child(2){
 	 	width: 1300px;
 	 	float: left;
 	 } 
@@ -121,7 +125,7 @@
 	
 	/* 댓글 */
 	
-	#reply{
+	#commuViewreply{
 		width:1300px;
 	
 	}
@@ -131,26 +135,59 @@
  		font-weight: bold;
  	}
  	
- 	#reply>form div:nth-child(1){
- 		width:1200px;
+ 	#commuViewreply>form div:nth-child(1){
+ 		width:1290px;
  		float: left;
  		text-align: center;
+ 		margin: 0;
+ 		padding: 0;
  		
  	}
- 	#reply>form div:nth-child(2){
- 		margin-left: 10px;
- 		margin-top:6px;
- 		width:1200px;
+ 	#commuViewreply>form div:nth-child(2){
+ 	
+ 		margin-top:16px;
+ 		width:1300px;
  		float: left;
  		text-align: right;
- 		padding-right: 60px;
- 		padding-top: 10px;	
  	}
  	
- 	#content{
- 		width:1100px;
+ 	#rep_content{
+ 		width:1300px;
  		padding-left: 10px;
  		float: center;
+ 	}
+ 	#commuViewreplyList{
+ 		background-color: #f8f8f8;
+ 		margin-top: 130;
+ 		width:1300px;
+ 	}
+ 	
+ 	#commuViewreplyList h5{
+ 		display: inline;
+ 		padding-left:10px; 
+ 		
+ 	}
+	
+ 	#commuViewreplyList>ul>li div:nth-child(1){
+ 		margin:0px;
+ 		margin-top:10px;
+ 		width:700px;
+ 		float: left;
+ 		
+ 	}
+ 	#commuViewreplyList>ul>li div:nth-child(2){
+ 		margin:0px;
+ 		margin-top:10px;
+ 		text-align: right;
+ 		float: left;
+ 		width:600px;
+ 	}
+ 
+ 	#commuViewreplyList>ul>li div:nth-child(3){
+ 		width:1300px;
+ 		float: left;
+ 		text-align: left;
+ 		border-bottom: 1px solid gray;
  	}
  		
 /* 	input[type="submit"]{
@@ -176,6 +213,20 @@
 		border: 1px solid #3f1785;
 	}
 	.commBtn:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785;
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	
+	.replycommBtn {
+		width: 55px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+		font-size: 10px
+	}
+	.replycommBtn:hover {
 		border: 1px solid #3f1785;
 		background-color: #3f1785;
 		font-weight: bold;

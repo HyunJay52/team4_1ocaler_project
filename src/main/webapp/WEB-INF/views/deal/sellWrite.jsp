@@ -11,7 +11,7 @@
 	
 	</script>
 
-	<div id="body">
+	<div id="dealWnEMain">
 		<div>
 			<form action="" >
 				<select>

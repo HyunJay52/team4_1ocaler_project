@@ -1,139 +1,209 @@
 @charset "UTF-8";
-	
-	
-	*{font-family: nsr;
-	}
-	#main{overflow:auto;width:1300px;margin:0 auto;
-	height: 1000px;
-	}
-	
-	#selMain{
-		position:relative; 
-		background-color: white;
-		display: none;
-		
-	}
-	
-	#selTop{ height: 70px;width:1300px; line-height: 70px;
-	text-align: center; border-bottom:1px solid #3f1785;
-	 font-size: 25px; 
-	}
-	
-	#seltop a:active, #seltop a:link, #seltop a:visited{
+   
+   
+   *{font-family: nsr;
+   }
+   #dealMnSMain{
+      width:1300px;
+      margin:0 auto;
+      height: auto;
+   }
+   
+   #selMain{
+      position:relative; 
+      background-color: white;
+      display: none;   
+   }
+     
+   #selTop{
+      text-align:center;
+   }
+   #selTop>li{
+      width:650px;
+      height:100px;
+      line-height:100px;
+      display:inline-block;
+      font-size:32px;
+   }
+   #seltop a:active, #seltop a:link, #seltop a:visited{
         color: #3f1785;
         text-decoration: none;
         font-family: 'Nanum Gothic', sans-serif;
     }    
-	#seltop a:hover {
+   #seltop a:hover {
         color:#571fb8;
         font-weight: bold;
         text-decoration: underline;
     }
-	
-	#selSearch{width: 320px; margin:0 auto;
-	height: 70px;
-	}
-	
-	ul,li{ margin:0px; padding:0px; list-style-type:none;	
-	}
-	
-	select{height: 30px ; border:1px solid black;float:left; margin-right: 4px }
-	
+   
 
-	#memImgDiv img{width: 218px; height: 218px;
-	} 
-	
-	#sellImgDiv img{width: 218px; height: 218px;
-	} 
-	
-	#selBoard{width:1300px; height:780px;
-	}
-	#selList{width:220px;height: 340px; float: left; margin: 20px; border: 1px solid gray;
-	
-	}
-	#boardText{	float:left;
-	}
-	
-	#pageNum{ padding-left:44%;
-	} 
-	#pageNum a {color:#3f1785;
-	}
-	#pageNum a:hover{text-decoration:none;color:#705abf ;  font-weight: bold;
-	}
-	
+   
+   ul,li{ 
+      margin:0px;
+      padding:0px;
+      list-style-type:none;   
+   }
 
-	#search{float:left;border:1px solid black;  border-right: none;
-	height: 30px;
-	}
-	
-	
-	
-	.wordcut{
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsys;
-  	}
-  	.cntJoin {
-    font-size: 22px;    font-weight: bold;    color: #3f1785;
-	}
-  	#selList>div>ul li{ margin :2px;
-  	}
-  	#selList>div>ul li:nth-child(1){width: 100%;text-align: center; font-size: 18px;
-  	font-weight: bold;
-	}
-	#selList>div>ul li:nth-child(2){width: 40%;float: left; line-height: 24px;
-	}
-	#selList>div>ul li:nth-child(3){float: left;width: 50%;text-align: right;line-height: 24px;
-		font-size: 18px;   font-weight: bold;    color: #3f1785;
-	}
-	#selList>div>ul li:nth-child(4){width: 100%; font-size: 13px; color:gray;text-align: center;
-	}
-	#selList>div>ul li:nth-child(5){width: 100%;float: left;text-align: right;
-	}
-	#selList>div>ul>li:nth-child(5) img{width: 30px;height: 30px;text-align: right;
-	}
-	#selList:hover{border: 1px solid #571fb8;
-	
-	}
-	
-	
-	 
-	/* 버튼 스타일 클래스 모음 */
+   #selSearch{
+      text-align:center;
+      margin-top : 40px;
+      height:70px;
+   }
+   #selSearch select{
+      width:120px;
+      height:40px;
+      border-radius:5px;
+      margin-right:10px;
+   }
+   #selSearch input[type=text]{
+      height:40px;
+      width:800px;
+      border-radius:5px;
+   }
+   #selSearch button{
+      border:none;
+      background:#fff;
+   }
+   #selSearch img{
+      height:40px;
+      width:40px;
+      
+   }
+   
 
-	a:active, a:link, a:visited {
+   #memImgDiv img{width: 218px; height: 218px;
+   } 
+   
+   #sellImgDiv img{width: 218px; height: 218px;
+   } 
+   
+   #selBoard{width:1300px; height:780px;
+   }
+   #selList{
+      width:220px;
+      height: 340px;
+      float: left;
+      margin: 10px 25px 25px 25px;
+      border: 1px solid gray;
+   }
+   #boardText{   float:left;
+   }
+   #boardText>li:nth-child(5n+1){
+      margin-left:0px;
+   }
+   #boardText>li:nth-child(5n+5){
+      margin-right:0px;
+   }   
+   
+   #MBPaging{text-align:center}
+   #MBPaging>li{magin:0 -5px;display:inline-block; border:1px solid #d9d9d9; width:35px; height:40px; line-height:40px; margin:19px -2;
+    border-right: none;}
+   #MBPaging>li:first-child{
+   width:50px; border-top-left-radius:8px; border-bottom-left-radius:8px; 
+	}
+   #MBPaging>li:last-child{width:50px; border-top-right-radius:8px; border-bottom-right-radius:8px;
+   border-right:1px solid #d9d9d9;
+   }
+   
+ 
+   
+   
+   
+   
+   
+   
+   .wordcut{
+       white-space:nowrap;
+       overflow:hidden;
+       text-overflow:ellipsys;
+     }
+     .cntJoin {
+       font-size: 22px;
+       font-weight: bold;
+       color: #3f1785;
+   }
+     #selList>div>ul li{
+        margin :2px;
+     }
+     #selList>div>ul li:nth-child(1){
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+   }
+   #selList>div>ul li:nth-child(2){
+      width: 40%;
+      float: left;
+      line-height: 24px;
+   }
+   #selList>div>ul li:nth-child(3){
+      float: left;
+      width: 50%;
+      text-align: right;
+      line-height: 24px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #3f1785;
+   }
+   #selList>div>ul li:nth-child(4){
+      width: 100%;
+      font-size: 13px;
+      color:gray;
+      text-align: center;
+   }
+   #selList>div>ul li:nth-child(5){
+      width: 100%;float: left;
+      text-align: right;
+   }
+   #selList>div>ul>li:nth-child(5) img{
+      width: 30px;
+      height: 30px;
+      text-align: right;
+   }
+   #selList:hover{
+      border: 1px solid #571fb8;
+   }
+   
+   
+    
+   /* 버튼 스타일 클래스 모음 */
+
+   a:active, a:link, a:visited {
     color:#3f1785;
     text-decoration: none;
     font-family: 'Nanum Gothic', sans-serif;
 }
 
-	.commBtn {
-		width: 90px;
-		font-color: #3f1785;
-		border: 1px solid #3f1785;
-	}
-	.commBtn:hover {
-		border: 1px solid #3f1785;
-		background-color: #3f1785;
-		font-weight: bold;
-		color: #fff;
-		font-weight: bold;
-	}
-	.cancelBtn {
-		border: 1px solid #ddd;
-		color: #ddd;
-		width: 90px;
-	}
-	.cancelBtn:hover {
-		background-color: #fff;
-		color: gray;
-	}
-		
-	.confBtn {
-		background: #3f1785;
-		color: #fff;
-		width: 90px;
-	}
-	.confBtn:hover {
-		color: #fff;
-		background: #B8B2F4;
+   .commBtn {
+      width: 90px;
+      font-color: #3f1785;
+      border: 1px solid #3f1785;
+   }
+   .commBtn:hover {
+      border: 1px solid #3f1785;
+      background-color: #3f1785;
+      font-weight: bold;
+      color: #fff;
+      font-weight: bold;
+   }
+   .cancelBtn {
+      border: 1px solid #ddd;
+      color: #ddd;
+      width: 90px;
+   }
+   .cancelBtn:hover {
+      background-color: #fff;
+      color: gray;
+   }
+      
+   .confBtn {
+      background: #3f1785;
+      color: #fff;
+      width: 90px;
+   }
+   .confBtn:hover {
+      color: #fff;
+      background: #B8B2F4;
 }
-	
-	
+   
+   

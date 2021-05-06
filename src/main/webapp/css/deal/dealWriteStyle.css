@@ -1,45 +1,75 @@
 @charset "UTF-8";
 
-	*{font-family: nsr; font-size: 20px;
+	*{
+		font-family: nsr; 
+		font-size: 20px;
 	}
-	#body{overflow:auto;width:1300px;margin:50 auto;
+	#dealWnEMain{
+		overflow:auto;
+		width:1300px;
+		margin:50 auto;
 		height: 1000px; 
 	}
 	
-	select{ height: 30px; width: 150px; margin-right: 5px;
-	border: none;
+	#dealWnEMain>div>form select{ 
+		height: 30px; 
+		width: 150px; 
+		margin-right: 5px;
+		/* border: none */;
 	
 	}
 	
-	input{margin: 15px 0px;
+	input{
+		margin: 15px 0px;
 	}
 	
-	#subject{font-size: 25px; border: none; border-bottom: 1px solid gray;
-	width: 1000px;  margin-top: 10px;
+	#subject{
+		font-size: 25px; 
+		border: none; 
+		border-bottom: 1px solid gray;
+		width: 1000px;  
+		margin-top: 10px;
 	}
 	
-	#cnt{font-size: 25px; float:right; border: none; border-bottom: 1px solid gray;
-	  margin-top: 10px;
+	#cnt{
+		font-size: 25px; 
+		float:right; 
+		border: none; 
+		border-bottom: 1px solid gray;
+	  	margin-top: 10px;
 	}
 	
 	#cnt::-webkit-input-placeholder ,#gu::-webkit-input-placeholder ,#loc::-webkit-input-placeholder,#price::-webkit-input-placeholder{
 		  text-align: center;
 	}
 
-	#date{text-align: center;
+	#date{
+		text-align: center;
 	}
-	#date,#gu, #loc, #price{ margin-right: 10px;text-align: center;border: none; border-bottom: 1px solid gray;
+	#date,#gu, #loc, #price{ 
+		margin-right: 10px;
+		text-align: center;
+		border: none; 
+		border-bottom: 1px solid gray;
 	}
 
-	#tag{ border: none; border-bottom: 1px solid gray;width: 1200px; 
+	#tag{ 
+		border: none; 
+		border-bottom: 1px solid gray;
+		width: 1300px; 
 	}
 	
-	#btn{ width: 1300px; text-align: center;
+	#btn{ 
+		width: 1300px; 
+		text-align: center;
 	}
 	
 	/* 파일 */
 	
-	.file_input_textbox{  border: none; border-bottom: 1px solid gray; width:700px;
+	.file_input_textbox{  
+		border: none; 
+		border-bottom: 1px solid gray; 
+		width:700px;
 		
 	}
 

@@ -14,6 +14,21 @@ public class BoardVO {
 	private String b_tag;
 	
 	private String locgu;
+	
+	private String recipe_cate;
+	
+	
+	private int repcont;
+
+	
+	
+	public int getRepcont() {
+		return repcont;
+	}
+
+	public void setRepcont(int repcont) {
+		this.repcont = repcont;
+	}
 
 	public int getNum() {
 		return num;
@@ -101,6 +116,14 @@ public class BoardVO {
 
 	public void setLocgu(String locgu) {
 		this.locgu = locgu;
+	}
+
+	public String getRecipe_cate() {
+		return recipe_cate;
+	}
+
+	public void setRecipe_cate(String recipe_cate) {
+		this.recipe_cate = recipe_cate;
 	}
 	
 	

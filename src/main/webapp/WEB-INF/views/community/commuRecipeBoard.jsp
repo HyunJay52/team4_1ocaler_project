@@ -9,14 +9,14 @@
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
 						
-		<h1>우리동네이야기</h1>
+		<h1>쓱싹레시피</h1>
 
 		<div id="coummuBoardMaincenter">
 			<c:forEach var="vo" items="${commuList }">
 				<ul id ="coummuBoardMainboardList">
 					<li>
 						<div>${vo.b_writedate }</div>
-						<div><span>조회수 : </span> ${vo.b_hit} &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> ${vo.repcont }개</div>	 
+						<div><span>조회수 : </span> ${vo.b_hit} &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> ${vo.repcont }  개</div>	 
 					</li>
 					<li>
 						<div><a href="commuView?num=${vo.num}">${vo.b_subject }</a></div>
@@ -38,7 +38,6 @@
 					
 					
 				</ul>
-				
 			</c:forEach>
 			
 		</div>
