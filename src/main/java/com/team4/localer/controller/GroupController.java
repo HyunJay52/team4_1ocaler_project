@@ -101,6 +101,70 @@ public class GroupController{
 		return mav;
 	}
 	
+	@RequestMapping("/groupEditForm")
+	public ModelAndView groupEditFrm(GroupVO vo, GroupPageVO pageVO, HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		System.out.println(vo.getNum());//게시글번호
+		if(vo.getUserid().equals(session.getAttribute("logId"))) {
+			if(pageVO.getCategory().equals("한끼미식회")) {
+				GroupVO eatVO = groupService.eatViewPageResult(vo.getNum());
+				mav.addObject("eatVO",eatVO);
+			}else {
+				GroupVO withVO = groupService.withViewPageResult(vo.getNum());
+				mav.addObject("withVO",withVO);
+			}
+			
+		}
+		System.out.println(pageVO.getSearchWord());
+		System.out.println(pageVO.getSearchKey());
+		mav.addObject("pageVO",pageVO);
+		mav.setViewName("group/groupEditForm");
+		return mav;
+	}
+	
+	@RequestMapping("/groupEditOk")
+	public ModelAndView groupEditOk(GroupVO vo, GroupPageVO pageVO, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(vo.getUserid().equals(session.getAttribute("logId"))){
+			System.out.println(vo.getUserid()+"@@@@ userid @@@@");
+			System.out.println(vo.getNum()+"@@@@ num @@@@");
+			System.out.println(vo.getG_loc2()+"@@@@ loc2 @@@");
+			System.out.println(vo.getUp_cate());
+			System.out.println(vo.getG_date()+"이게 안되네이거");
+			System.out.println(vo.getG_time()+"이게 안되네이거");
+			System.out.println(groupService.groupRecordUpdate(vo));
+			if(groupService.groupRecordUpdate(vo)>0) {
+				if(vo.getUp_cate().equals("한끼미식회")) {
+					mav.addObject("num",vo.getNum());
+					mav.addObject("loc_gu",pageVO.getLoc_gu());
+					mav.addObject("category",vo.getUp_cate());
+					mav.addObject("pageNum",pageVO.getPageNum());
+					if(pageVO.getSearchWord()!=null) {
+						mav.addObject("searchKey",pageVO.getSearchKey());
+						mav.addObject("searchWord",pageVO.getSearchWord());						
+					}
+					mav.setViewName("redirect:eatViewPage");
+				}else {
+					mav.addObject("num",vo.getNum());
+					mav.addObject("loc_gu",pageVO.getLoc_gu());
+					mav.addObject("category",vo.getUp_cate());
+					mav.addObject("pageNum",pageVO.getPageNum());
+					if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
+						mav.addObject("searchKey",pageVO.getSearchKey());
+						mav.addObject("searchWord",pageVO.getSearchWord());						
+					}
+					mav.setViewName("redirect:withViewPage");
+				}
+			}else {
+				mav.setViewName("group/historyBack");
+			}
+		}	
+		return mav;
+	}
+	
+	
+	
+	
 	@RequestMapping("/writeForm")
 	public ModelAndView GroupWriteForm(GroupPageVO pageVO) {
 		ModelAndView mav = new ModelAndView();

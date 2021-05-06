@@ -20,7 +20,7 @@ public interface GroupService {
 	
 	public int groupTotalRecoedCount(GroupPageVO pageVO);//토탈 레코드수 구하기
 	
-	
+	public int groupRecordUpdate(GroupVO vo);//1개의레코드 수정하기
 	
 	public int hitCount(int num); //조회수 늘리기
 	

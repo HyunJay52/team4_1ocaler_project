@@ -126,7 +126,7 @@
 		
 		//창고형마트-동네마트 이동시 값들 disable 처리 및 값초기화 작업====================================================================================================
 			
-		$("#groupWriteFormDown_cate").change(()=>{
+		/* $("#groupWriteFormDown_cate").change(()=>{
 			var values = $("#groupWriteFormDown_cate option:selected").val();
 			console.log(values);
 			if(values == '창고형마트'){
@@ -144,7 +144,9 @@
 				marker2.setVisible(false);
 				removeMarker();
 			}
-		});
+		}); */
+		
+		
 		//===================================================================================================
 		
 		$("#groupWriteFormCancleBtn").on('click',()=>{
@@ -153,28 +155,28 @@
 		
 		//지도 스크립트==============================================
 		var marker;
+		var marker1;
 		var marker2;
 		var markers = [];
+		var markers2 = [];
+		var customOverlay;
+		var customOverlay2;
+		var customOverlays = [];
+		var customOverlays2 = [];
+		
 		//지도 검색 키워드 객체 생성
 		var ps = new kakao.maps.services.Places();
 		var geocoder = new kakao.maps.services.Geocoder();
 		
-		
-		
-		
-		//지도 생성
+	
 		var container = document.getElementById("groupWriteFormMap"),
 			options = {
 				center : new kakao.maps.LatLng(33.450701,126.570667),
 				level : 7
 			};
 		var map = new kakao.maps.Map(container, options);
-		
-		
-		
-		function displayMarker(place){
-		//마커를 생성하고 지도에 표시한다.	
-			var startMarkerImage = new kakao.maps.MarkerImage(
+
+		var startMarkerImage = new kakao.maps.MarkerImage(
 				'<%=request.getContextPath()%>/img/groupImg/startMarker.png',
 				new kakao.maps.Size(35,35),
 				{
@@ -183,98 +185,8 @@
 			        shape: "poly",
 			        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
 			    }
-			);		
-				marker = new kakao.maps.Marker({
-				map : map,
-				image : startMarkerImage,
-				clickable : true,
-				position : new kakao.maps.LatLng(place.y, place.x)
-			});
-			
-			markers.push(marker);
-        
-		}
-		searchPlaces();
-		
-		
-		
-		
-		//검색한 키워드 값을 내가 text에서입력한 값으로 셋팅해주는 작업
-		function searchPlaces(){
-			var keyword = document.getElementById('groupWriteFormSearchWord').value;
-			console.log(keyword);
-			 if (!keyword.replace(/^\s+|\s+$/g, '')) {
-			        alert('키워드를 입력해주세요!');
-			        return false;
-			 }
-			
-			 ps.keywordSearch( keyword, callback, {
-				 size : 1
-			 }); 
-		}
-		
-		//KeyWordSearch 에서 키워드를 검색한다음에 실행하는 콜백 함수로 
-		//검색한 다음의 결과값을 result로 받는다.
-		function callback(data, status, pagination){
-			if(status == kakao.maps.services.Status.OK){					
-				removeMarker();
-				
-				console.log(data[0].address_name+" "+data[0].place_name);
-				/* document.getElementById('groupWriteFormG_loc1').value=data[0].address_name+" "+data[0].place_name; */
-				document.getElementById('groupWriteFormSearchWord').value = '';
-
-				//검색된 장소를 기준으로 지도를 재설정하기 위해서 bounds를 통해 위도경도를 추가하기위한 객체를 생성
-				var bounds = new kakao.maps.LatLngBounds();
-				
-				// 검색결과 data(배열임 여러개의 검색겨로가가 들어있음) data를 displayMarker 에 넣어줌으로써 마커를 생성해주고
-				// 검색결과를 바탕으로 지도가 나타나야 하므로 bounds.extends 해서 위치를 지정해준다.
-				for(var i=0; i<data.length; i++){
-					displayMarker(data[i]);
-					bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-				}
-				
-				//검색된 장소(위치)기준으로 지도를 셋팅해준다.
-				 map.setBounds(bounds);
-				 map.setLevel(7);
-				
-
-		    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-
-		        alert('검색 결과가 존재하지 않습니다.');
-		        return;
-
-		    } else if (status === kakao.maps.services.Status.ERROR) {
-
-		        alert('검색 결과 중 오류가 발생했습니다.');
-		        return;
-
-		    }
-		}
-	
-		
-		
-		
-		// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소를 loc1에다가 입력합니다.
-		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-		    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-		        if (status === kakao.maps.services.Status.OK) {	        	
-		            var detailAddr = result[0].address.address_name;
-					console.log(detailAddr);
-					document.getElementById('groupWriteFormG_loc1').value = detailAddr;
-		            // 마커를 클릭한 위치에 표시합니다 
-		            marker.setPosition(mouseEvent.latLng);
-		            marker.setMap(map);
-		            markers.push(marker);   	 
-		        }   
-
-		    });
-		});
-		// 좌표로 상세 주소 정보를 요청합니다
-		function searchDetailAddrFromCoords(coords, callback) {
-		    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-		}
-		function arrivedMarker(){					
-			var arrivedMarkerImage = new kakao.maps.MarkerImage(
+		);		
+		var arrivedMarkerImage = new kakao.maps.MarkerImage(
 				'<%=request.getContextPath()%>/img/groupImg/arrivedMarker.png',
 				new kakao.maps.Size(35,35),
 				{
@@ -283,13 +195,138 @@
 			        shape: "poly",
 			        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
 			    }
-			);
+		);
+		
+		
+		
+		
+		
+		
+		function displayMarker(place){
+				marker = new kakao.maps.Marker({
+				map : map,
+				image : startMarkerImage,
+				clickable : true,
+				position : new kakao.maps.LatLng(place.y, place.x)
+			});
+			markers.push(marker);
+		}
+	
+		function searchPlaces(){
+			var keyword = document.getElementById('groupWriteFormSearchWord').value;
+			console.log(keyword);
+			 if (!keyword.replace(/^\s+|\s+$/g, '')) {
+			        alert('키워드를 입력해주세요!');
+			        return false;
+			 }		
+			 ps.keywordSearch( keyword, callback, {
+				 size : 1
+			 }); 
+		}
+		
+		
+		function callback(data, status, pagination){
+			if(status == kakao.maps.services.Status.OK){					
+				removeMarker();	
+				document.getElementById('groupWriteFormSearchWord').value = '';
+				var bounds = new kakao.maps.LatLngBounds();			
+				for(var i=0; i<data.length; i++){
+					displayMarker(data[i]);
+					bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+				}							
+				 map.setBounds(bounds);
+				 map.setLevel(7);		
+		    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+		        alert('검색 결과가 존재하지 않습니다.');
+		        return;
+		    } else if (status === kakao.maps.services.Status.ERROR) {
+		        alert('검색 결과 중 오류가 발생했습니다.');
+		        return;
+		    }
+		}
+		
+		if(${pageVO.category=='가치가장'}){
+			//출발지 도착지 찍기
+			if('${withVO.g_loc2}'!=null && '${withVO.g_loc2}'!=''){
+				locMarker('${withVO.g_loc1}',startMarkerImage, '출발지');
+				locMarker('${withVO.g_loc2}',arrivedMarkerImage, '도착지');
+			}else{
+				locMarker('${withVO.g_loc1}',startMarkerImage, '약속장소');
+			}
+		}else{		
+			locMarker('${eatVO.g_loc1}',startMarkerImage, '약속장소');
+		}
+		
+		
+		
+		
+		function locMarker(locations, markerImage, contents){
+			geocoder.addressSearch( locations , function(result, status) {
+			     if (status === kakao.maps.services.Status.OK) {
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);					     
+			        console.log(contents.includes('도착지'));
+			        if(contents.includes('도착지')){
+			            marker2 = new kakao.maps.Marker({
+				            map: map,
+				            position: coords,
+				            image : markerImage
+				        });   
+			    		
+			        }else{
+			        	marker1 = new kakao.maps.Marker({
+				            map: map,
+				            position: coords,
+				            image : markerImage
+				        }); 			    		
+			    		
+			        }
+			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+			        map.setCenter(coords);
+			    } 
+			}); 	
+		}
+		//출발지위치찍지
+		startMarker();
+		//도착지 위치찍기 (창고형마트일때만)
+		if(${withVO.g_loc2!=null}){
+			arrivedMarker();
+		}
+
+		function searchDetailAddrFromCoords(coords, callback) {
+		    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+		}
+		
+		
+		//마우스 클릭시 출발지 
+		function startMarker(){
+			marker1 = new kakao.maps.Marker({
+						map: map,
+						image:startMarkerImage			
+			});
+			kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+			    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+			        if (status === kakao.maps.services.Status.OK) {	        	
+			            var detailAddr = result[0].address.address_name;
+						console.log(detailAddr);
+						document.getElementById('groupWriteFormG_loc1').value = detailAddr;
+			            // 마커를 클릭한 위치에 표시합니다 
+			            marker1.setPosition(mouseEvent.latLng);
+			            marker1.setMap(map);	 
+			        }   
+			    });
+			});
+		}
+		
+		
+		
+		
+		//마우스 우클릭시 도착지
+		function arrivedMarker(){
 			marker2 = new kakao.maps.Marker({
-				map: map,
-				image:arrivedMarkerImage
-				
-			});	
-			//마우스 우측클릭시 도착지 
+					map: map,
+					image:arrivedMarkerImage
+					
+			});
 			kakao.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
 				searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
 			        if (status === kakao.maps.services.Status.OK) {
@@ -299,12 +336,14 @@
 			            // 마커를 클릭한 위치에 표시합니다 
 			            marker2.setPosition(mouseEvent.latLng);
 			            marker2.setMap(map);
-			            markers.push(marker2);
-			        }   
-			       
+			            markers2.push(marker2);			        
+			        }   		       
 			    });	
-			});			
-		}	
+			});
+		}
+		
+		
+		
 		//마커지우는용도
 		function removeMarker() {
 		    for ( var i = 0; i < markers.length; i++ ) {
@@ -339,13 +378,15 @@
 			<input type="image" id='groupWriteFormSearchFrms' src="<%=request.getContextPath()%>/img/groupImg/search.png" value="검색"/>
 	</div>
 	
+	
+
 	<!-- groupWriteFormShowFrm 리스트 -->
 	<div id="groupWriteFormShowFrm">
-		<form id="groupWriteFormGroupWriteFrm" method="post" action="writeFormOk">
+		<form id="groupWriteFormGroupWriteFrm" method="post" action="groupEditOk">
 			
-			
+			<!-- pageVO 에서 끝낼수 있는 항목 -->
 			<div> 
-				<select name="up_cate" id="groupWriteFormUp_cate" size="1">
+				<select name="up_cate" id="groupWriteFormUp_cate" size="1" >
 					<c:if test="${pageVO.category=='한끼미식회' }">
 						<option value="한끼미식회" selected>한끼미식회</option>
 					</c:if>
@@ -354,52 +395,112 @@
 					</c:if>
 				</select>
 				
+				
 				<select name="down_cate" id="groupWriteFormDown_cate" size="1">
 					<c:if test="${pageVO.category=='한끼미식회' }">
-						<option value="같이먹어요">같이먹어요</option>
+						<option value="같이먹어요" selected>같이먹어요</option>
 					</c:if>
 					<c:if test="${pageVO.category=='가치가장' }">
-						<option value="동네마트">동네마트</option>
-						<option value="창고형마트">창고형마트</option>
+						<c:if test="${withVO.down_cate=='동네마트'}">
+							<option value="동네마트">동네마트</option>
+						</c:if>
+						<c:if test="${withVO.down_cate=='창고형마트'}">
+							<option value="창고형마트">창고형마트</option>
+						</c:if>
 					</c:if>
 				</select><br/>
 			</div>
-			<div>
-				<input type="text" name="g_subject" id="groupWriteFormG_subject" placeholder="&nbsp;제목을 입력하세요.....">
-			</div>
 			
 			
-			<textarea name="g_content" id="groupWriteFormG_content"></textarea>
-			
-			<div>
-				<input type="date" name="g_date" id="groupWriteFormG_date"/>
-				<input type="time" name="g_time" id="groupWriteFormG_time"/>
-				<select name="g_cnt" id="groupWriteFormG_cnt" size="1" >
-						<option value="" disabled selected hidden>모집인원</option>
-						<option value="1">1명</option>
-						<option value="2">2명</option>
-						<option value="3">3명</option>
-						<option value="4">4명</option>
-						<option value="5">5명</option>
-				</select>
+			<!-- 한끼미식회일때 수정폼 -->
+			<c:if test="${pageVO.category=='한끼미식회' }">
 				<div>
-					<input type="text" name="g_loc1" id="groupWriteFormG_loc1" placeholder="지역을 입력해주세요(지도를 클릭하세요)" readonly/>
-					<div>				
-						<input  type="hidden" name="g_loc2" id="groupWriteFormG_loc2" placeholder="도착지를 입력해 주세요(지도에서 마우스 우측클릭)..." disabled/>					
+					<input type="text" name="g_subject" id="groupWriteFormG_subject" value='${eatVO.g_subject }' placeholder="&nbsp;제목을 입력하세요.....">
+				</div>
+			
+				<textarea name="g_content" id="groupWriteFormG_content">${eatVO.g_content }</textarea>
+			
+				<div>
+					<input type="date" name="g_date" id="groupWriteFormG_date" value="${eatVO.g_date }"/>
+					<input type="time" name="g_time" id="groupWriteFormG_time" value="${eatVO.g_time }"/>
+					<select name="g_cnt" id="groupWriteFormG_cnt" size="1" >
+							<option value="" disabled selected hidden>모집인원</option>
+							<option value="1" <c:if test='${eatVO.g_cnt==1 }'>selected</c:if>>1명</option>
+							<option value="2" <c:if test='${eatVO.g_cnt==2 }'>selected</c:if>>2명</option>
+							<option value="3" <c:if test='${eatVO.g_cnt==3 }'>selected</c:if>>3명</option>
+							<option value="4" <c:if test='${eatVO.g_cnt==4 }'>selected</c:if>>4명</option>
+							<option value="5" <c:if test='${eatVO.g_cnt==5 }'>selected</c:if>>5명</option>
+					</select>
+					
+					
+					<div>
+						<input type="text" name="g_loc1" id="groupWriteFormG_loc1" value="${eatVO.g_loc1 }" placeholder="지역을 입력해주세요(지도를 클릭하세요)" readonly/>
+						<input type="text" name="g_tag" id="groupWriteFormG_tag" value="${eatVO.g_tag }" placeholder="해시태그를 달아주세요 Ex) #한끼미식회 #가치가장" />
 					</div>
-					<input type="text" name="g_tag" id="groupWriteFormG_tag" placeholder="해시태그를 달아주세요 Ex) #한끼미식회 #가치가장" />
+					
+					<div id="groupWriteFormCcFrm">
+						<input class="btn cancelBtn" id="groupWriteFormCancleBtn" type="button" value="취소"/>
+						<input class="btn confBtn" id="groupWriteFormConfBtn" type="submit" value="수정"/>
+					</div>
 				</div>
-				<div id="groupWriteFormCcFrm">
-					<input class="btn cancelBtn" id="groupWriteFormCancleBtn" type="button" value="취소"/>
-					<input class="btn confBtn" id="groupWriteFormConfBtn" type="submit" value="등록"/>
-				</div>
-			</div>	 
-			<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/>
-			<input type="hidden" name="category" value="${pageVO.category }"/>
-		</form>	
-	</div>
-	
-	<div id="clickLatlng" style="z-index:10; position:absolute; top:500px; left:500px;"></div>
+				
+					<input type="hidden" name="num" value="${eatVO.num }"/><!-- num -->
+					<input type="hidden" name="userid" value="${eatVO.userid }"/><!-- num -->
+					<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/><!-- num -->
+					<input type="hidden" name="pageNum" value="${pageVO.pageNum }"/><!-- pageNum -->
+					<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">
+						<input type="hidden" name="searchKey" value="${pageVO.searchKey }"/><!--searchkey  -->
+						<input type="hidden" name="searchWord" value="${pageVO.searchWord }"/><!--searchword  -->
+					</c:if>
+			</c:if>
 
+			<!--가치가장일때 수정폼 -->
+			<c:if test="${pageVO.category=='가치가장' }">
+				<div>
+					<input type="text" name="g_subject" id="groupWriteFormG_subject" value='${withVO.g_subject }' placeholder="&nbsp;제목을 입력하세요.....">
+				</div>
+			
+				<textarea name="g_content" id="groupWriteFormG_content">${withVO.g_content }</textarea>
+			
+				<div>
+					<input type="date" name="g_date" id="groupWriteFormG_date" value="${withVO.g_date }"/>
+					<input type="time" name="g_time" id="groupWriteFormG_time" value="${withVO.g_time }"/>
+					<select name="g_cnt" id="groupWriteFormG_cnt" size="1" >
+							<option value="" disabled selected hidden>모집인원</option>
+							<option value="1" <c:if test='${withVO.g_cnt==1 }'>selected</c:if>>1명</option>
+							<option value="2" <c:if test='${withVO.g_cnt==2 }'>selected</c:if>>2명</option>
+							<option value="3" <c:if test='${withVO.g_cnt==3 }'>selected</c:if>>3명</option>
+							<option value="4" <c:if test='${withVO.g_cnt==4 }'>selected</c:if>>4명</option>
+							<option value="5" <c:if test='${withVO.g_cnt==5 }'>selected</c:if>>5명</option>
+					</select>
+					
+					
+					<div>
+						<input type="text" name="g_loc1" id="groupWriteFormG_loc1" value="${withVO.g_loc1 }" placeholder="지역을 입력해주세요(지도를 클릭하세요)" readonly/>
+						<c:if test="${withVO.g_loc2!=null }">
+							<input type="text" name="g_loc2" id="groupWriteFormG_loc2" value="${withVO.g_loc2 }" placeholder="지역을 입력해주세요(지도를 클릭하세요)" readonly/>
+						</c:if>
+						<input type="text" name="g_tag" id="groupWriteFormG_tag" value="${withVO.g_tag }" placeholder="해시태그를 달아주세요 Ex) #한끼미식회 #가치가장" />
+					
+					</div>
+					
+					<div id="groupWriteFormCcFrm">
+						<input class="btn cancelBtn" id="groupWriteFormCancleBtn" type="button" value="취소"/>
+						<input class="btn confBtn" id="groupWriteFormConfBtn" type="submit" value="수정"/>
+					</div>
+				</div>
+					<input type="hidden" name="num" value="${withVO.num }"/><!-- num -->
+					<input type="hidden" name="userid" value="${withVO.userid }"/><!-- num -->
+					<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/><!-- num -->
+					<input type="hidden" name="pageNum" value="${pageVO.pageNum }"/><!-- pageNum -->
+					<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">
+						<input type="hidden" name="searchKey" value="${pageVO.searchKey }"/><!--searchkey  -->
+						<input type="hidden" name="searchWord" value="${pageVO.searchWord }"/><!--searchword  -->
+					</c:if>
+			</c:if>
+			
+			
+			</form>	
+	</div>
 </body>
 </html>	

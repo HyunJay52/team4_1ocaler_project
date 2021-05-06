@@ -291,6 +291,7 @@
 			</select>
 			<input type="text" name="searchWord" id="eatViewSearchWord"/>
 			<button id="eatViewButton"><img src="<%=request.getContextPath()%>/img/groupImg/search.png"></button>
+			<input type="hidden" name="category" value="${pageVO.category }"/>
 		</form>
 		
 

@@ -60,8 +60,12 @@ public class GroupServiceImpl implements GroupService{
 			return groupDAO.groupTotalRecoedCount(pageVO);
 		}
 
-		
+		@Override
+		public int groupRecordUpdate(GroupVO vo) {
+			return groupDAO.groupRecordUpdate(vo);
+		}
 
+	
 
 	
 		
