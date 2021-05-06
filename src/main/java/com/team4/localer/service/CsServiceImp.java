@@ -99,8 +99,18 @@ public class CsServiceImp implements CsService {
 	}
 
 	@Override
-	public List<CsVO> onePageRecordSelect_rep(AdminPageVO pageVO) {
+	public List<ReportVO> onePageRecordSelect_rep(AdminPageVO pageVO) {
 		return csdao.onePageRecordSelect_rep(pageVO);
+	}
+
+	@Override
+	public List<CsVO> onePageRecordSelect_cs(AdminPageVO pageVO) {
+		return csdao.onePageRecordSelect_cs(pageVO);
+	}
+
+	@Override
+	public List<OftenqVO> onePageRecordSelect_of(AdminPageVO pageVO) {
+		return csdao.onePageRecordSelect_of(pageVO);
 	}
 
 }
