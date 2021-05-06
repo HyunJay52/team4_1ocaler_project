@@ -35,12 +35,18 @@
 	font-weight:bold;
 	border-radius:5em;
 }
-
+.myinfoBottom{
+	overflow:auto;
+	float:left;
+}
 #waiting{
-	width:450px; float:left; margin-top:30px; margin-right:20px;
+	margin-bottom:20px;
+	width:100%;
+	float:left;
 }
 #status{
-	width:530px; float:right; margin-top:30px; height:100px;
+	float:right;	
+	height:100px;
 }
 #status>div{
 	height:60px; background-color:#ddd; border:1px solid #ddd; padding:10px;
@@ -49,7 +55,9 @@
 	float:right; background-color:#fff; height:40px; width:420px;
 }
 #QnA{
-	width:530px; float:right; margin-top:20px;
+	width:100%;
+	margin-top:20px;
+	float:left;
 }
 </style>	
 <script>
@@ -122,110 +130,113 @@
 				<h2 style="float:right">100,000원</h2>
 			</div>
 		</div>
-		<div id="waiting">
-			<span class="header">참여대기</span>
+		<div class="myinfoBottom">	
+			<div id="status">
+				<span class="myinfoHeader mdFnt info-font-weight">배송상태</span>
+				<div>
+					<label class="btn btn-primary">update</label>
+					<div><a href="#">[나주베]배송이 시작되었습니다.</a></div>
+				</div>
+			</div>
+			<div id="waiting">
+				<span class="myinfoHeader mdFnt info-font-weight">참여대기</span>
+				<a href="#" style="float:right">더보기</a>
+				<table class="myinfoTable2">
+					<tr>
+						<td>구분</td>
+						<td>제목</td>
+						<td>참여자</td>
+						<td>날짜</td>
+						<td>승인</td>
+					</tr>
+					<tr>
+						<td>참여글</td>
+						<td>신촌역</td>
+						<td>goguma</td>
+						<td>2021.04.16</td>
+						<td><button class="btn btn-primary btn-block">참여됨</button></td>
+					</tr>
+						<tr>
+						<td>내글</td>
+						<td>서강대역</td>
+						<td>gamja</td>
+						<td>2021.04.17</td>
+						<td><button class="btn btn-danger btn-block">승인하기</button></td>
+					</tr>
+					<tr>
+						<td>참여글</td>
+						<td>신촌역</td>
+						<td>goguma</td>
+						<td>2021.04.16</td>
+						<td><button class="btn btn-primary btn-block">참여됨</button></td>
+					</tr>
+					<tr>
+						<td>내글</td>
+						<td>서강대역</td>
+						<td>gamja</td>
+						<td>2021.04.17</td>
+						<td><button class="btn btn-danger btn-block">승인하기</button></td>
+					</tr>
+					<tr>
+						<td>참여글</td>
+						<td>신촌역</td>
+						<td>goguma</td>
+						<td>2021.04.16</td>
+						<td><button class="btn btn-primary btn-block">참여됨</button></td>
+					</tr>
+					<tr>
+						<td>내글</td>
+						<td>서강대역</td>
+						<td>gamja</td>
+						<td>2021.04.17</td>
+						<td><button class="btn btn-danger btn-block">승인하기</button></td>
+					</tr>
+					<tr>
+						<td>내글</td>
+						<td>서강대역</td>
+						<td>gamja</td>
+						<td>2021.04.17</td>
+						<td><button class="btn btn-danger btn-block">승인하기</button></td>
+					</tr>
+				</table>
+			</div>
+			
+			<div id="QnA">
+			<span class="myinfoHeader mdFnt info-font-weight">QnA</span>
 			<a href="#" style="float:right">더보기</a>
 			<table class="myinfoTable2">
-				<tr>
-					<td>구분</td>
-					<td>제목</td>
-					<td>참여자</td>
-					<td>날짜</td>
-					<td>승인</td>
-				</tr>
-				<tr>
-					<td>참여글</td>
-					<td>신촌역</td>
-					<td>goguma</td>
-					<td>2021.04.16</td>
-					<td><button class="btn btn-primary btn-block">참여됨</button></td>
-				</tr>
 					<tr>
-					<td>내글</td>
-					<td>서강대역</td>
-					<td>gamja</td>
-					<td>2021.04.17</td>
-					<td><button class="btn btn-danger btn-block">승인하기</button></td>
-				</tr>
-				<tr>
-					<td>참여글</td>
-					<td>신촌역</td>
-					<td>goguma</td>
-					<td>2021.04.16</td>
-					<td><button class="btn btn-primary btn-block">참여됨</button></td>
-				</tr>
-				<tr>
-					<td>내글</td>
-					<td>서강대역</td>
-					<td>gamja</td>
-					<td>2021.04.17</td>
-					<td><button class="btn btn-danger btn-block">승인하기</button></td>
-				</tr>
-				<tr>
-					<td>참여글</td>
-					<td>신촌역</td>
-					<td>goguma</td>
-					<td>2021.04.16</td>
-					<td><button class="btn btn-primary btn-block">참여됨</button></td>
-				</tr>
-				<tr>
-					<td>내글</td>
-					<td>서강대역</td>
-					<td>gamja</td>
-					<td>2021.04.17</td>
-					<td><button class="btn btn-danger btn-block">승인하기</button></td>
-				</tr>
-				<tr>
-					<td>내글</td>
-					<td>서강대역</td>
-					<td>gamja</td>
-					<td>2021.04.17</td>
-					<td><button class="btn btn-danger btn-block">승인하기</button></td>
-				</tr>
+						<td>제목</td>
+						<td>유저</td>
+						<td>날짜</td>
+						<td>상태</td>
+					</tr>
+					<tr>
+						<td>고구마 추가구매</td>
+						<td>test</td>
+						<td>2021-04-18</td>
+						<td>답변대기</td>
+					</tr>
+					<tr>
+						<td>셀러가입문의</td>
+						<td>test2</td>
+						<td>2021-04-18</td>
+						<td>답변완료</td>
+					</tr>
+					<tr>
+						<td>고구마 추가구매</td>
+						<td>test</td>
+						<td>2021-04-18</td>
+						<td>답변대기</td>
+					</tr>
+					<tr>
+						<td>셀러가입문의</td>
+						<td>test2</td>
+						<td>2021-04-18</td>
+						<td>답변완료</td>
+					</tr>
 			</table>
-		</div>
-		<div id="status">
-			<span class="header">배송상태</span>
-			<div>
-				<label class="btn btn-primary">update</label>
-				<div><a href="#">[나주베]배송이 시작되었습니다.</a></div>
 			</div>
-		</div>
-		<div id="QnA">
-		<span class="header">QnA</span>
-		<a href="#" style="float:right">더보기</a>
-		<table class="myinfoTable2">
-				<tr>
-					<td>제목</td>
-					<td>유저</td>
-					<td>날짜</td>
-					<td>상태</td>
-				</tr>
-				<tr>
-					<td>고구마 추가구매</td>
-					<td>test</td>
-					<td>2021-04-18</td>
-					<td>답변대기</td>
-				</tr>
-				<tr>
-					<td>셀러가입문의</td>
-					<td>test2</td>
-					<td>2021-04-18</td>
-					<td>답변완료</td>
-				</tr>
-				<tr>
-					<td>고구마 추가구매</td>
-					<td>test</td>
-					<td>2021-04-18</td>
-					<td>답변대기</td>
-				</tr>
-				<tr>
-					<td>셀러가입문의</td>
-					<td>test2</td>
-					<td>2021-04-18</td>
-					<td>답변완료</td>
-				</tr>
-		</table>
 		</div>
 	</div>
 </div>	

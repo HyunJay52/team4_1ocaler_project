@@ -128,6 +128,104 @@
 			});
 		};
 		
+		//페이징
+		var totalRecord; //총 레코드
+		var totalPage =3;	//총 페이지
+		var onePageRecord = 5; //한 페이지에 표시할 레코드
+		var onePageSize = 5; // 한 페이지에 표시할 페이지
+		
+		var nowNum = 1;	//현제 페이지
+		//시작 페이지
+		var startPage = ((nowNum -1) / onePageSize*onePageSize)+1;
+		console.log("startPage="+startPage+"sum="+startPage+onePageSize )
+		
+		startPaging();
+		function startPaging(){
+		var data = {
+				'onePageRecord' : onePageRecord
+		}
+			//총 페이지 구하기
+			$.ajax({
+				url : "myPointCount",
+				data : data,
+				dataType: 'json',
+				success : function(result){
+					totalPage = result;
+					setPointRecord(nowNum);
+				}, error : function(e){
+					console.log(e);
+				}
+			});
+		}
+		$(".pagingArea>ul>li").on('click' ,function(){
+			setPointRecord(nowNum);
+		});
+		function setPointRecord(p){
+			var data = {
+				'nowNum' : p,
+				'onePageRecord' : onePageRecord,
+				'totalPage' : totalPage				
+			}
+			$.ajax({
+				url : "myPointSelect",
+				data : data,
+				dataType : 'json',
+				success : function(result){
+					console.log(result);
+					$(".pointList").html("");
+					result.forEach(function(data,idx){
+						var tag = "<li>";
+						if(data.cha_mth == 1){
+							tag += "<div class='pointStatus point-color-green'>적립</div>";
+							tag += "<p class='pointDate'>"+data.po_date+"</p>";
+							tag += "<span class='pointContent'>구매 적립</span>";
+							tag += "<span class='usePoint point-color-green'>+"+data.cha_point+"원</span>";
+							tag == "<p class='pointItem'>충전포인트 결제(카드)<p>";
+							tag += "</li>"
+						}else if(data.cha_mth > 1){
+							tag += "<div class='pointStatus point-color-red point-status-red'>사용</div>";
+							tag += "<p class='pointDate'>"+data.po_date+"</p>";
+							tag += "<span class='pointContent'>포인트 결제</span>";
+							tag += "<span class='usePoint point-color-red'>-"+data.cha_point+"원</span>";
+							tag == "<p class='pointItem'>물품 결제(포인트)<p>";
+							tag += "</li>"
+						}
+						$(".pointList").append(tag);
+					});
+					setpaging();
+			
+				}, error : function(e){
+					console.log(e);
+				}
+			
+			
+			});
+		}
+		
+		function setpaging(){
+			var tag = '<ul class="pagination justify-content-center">';
+			if(nowNum > 1){
+				tag += '<li class="page-item"><a href="myPointSelect?nowNum='+(nowNum-1)+'" class="page-link">Prev</a></li>';					
+			}else{
+				tag += '<li class="page-item disabled"><a href="" class="page-link">Prev</a></li>';				
+			}
+			for(var p = startPage; p < startPage+onePageSize; p++){
+				if(p <= totalPage){
+					if(nowNum == p){
+						tag += '<li class="page-item active"><a href="javascript:test('+p+')" class="page-link">'+p+'</a></li>';						
+					}else{
+						tag += '<li class="page-item"><a href="javascript:setPointRecord('+p+')" class="page-link">'+p+'</a></li>';						
+					}
+				}	
+			}
+			if(nowNum == totalPage){
+				tag += '<li class="page-item disabled"><a href="" class="page-link">Next</a></li>';				
+			}else{
+				tag += '<li class="page-item"><a href="myPointSelect?nowNum='+(nowNum+1)+'" class="page-link">Next</a></li>';				
+			}
+			tag += "</ul>";
+			$(".pagingArea").append(tag);
+		}
 	});
 </script>
 <div class="myinfoBody">
@@ -163,7 +261,7 @@
 		</div>
 	</div>	
 		<div id="loadList">
-				<select class="selectBox " name="sel" id="sel">
+				<select class="selectBox " name="selPayment" id="selPayment">
 					<option value="전체">전체</option>
 					<option value="충전내역">충전내역</option>
 					<option value="사용내역">사용내역</option>
@@ -171,7 +269,29 @@
 				<div class="loadLine"></div>
 				<div class="loadDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
 				<input type="date" min="2021-01-01" max="2021-05-31" class="loadDate"/>
-				
+				<ul class="pointList">
+				<c:forEach var="i" items="${pList }">
+					<c:if test="${i.cha_mth == 1 }">
+					<li>
+						<div class="pointStatus point-color-green">적립</div>
+						<p class="pointDate">${i.po_date }</p>
+						<span class="pointContent">구매 적립</span>
+						<span class="usePoint point-color-green">+${i.cha_point }원</span>
+						<p class="pointItem">충전포인트 결제(카드)<p>
+					</li>
+					</c:if>
+					<c:if test="${i.cha_mth > 1 }">
+					<li>
+						<div class="pointStatus point-color-red point-status-red">사용</div>
+						<p class="pointDate">${i.po_date }</p>
+						<span class="pointContent">포인트 결제</span>
+						<span class="usePoint point-color-red">-${i.cha_point }원</span>
+						<p class="pointItem">물품 결제(포인트)<p>
+					</li>
+					</c:if>
+				</c:forEach>
+				</ul>
+			<!--
 			<table class="myinfoTable2">
 				<tr>
 					<td>구분</td>
@@ -179,43 +299,29 @@
 					<td>수단</td>
 					<td>금액</td>
 				</tr>
-				<tr>
-					<td><label class="btn">충전</label></td>
-					<td>2021.04.02</td>
-					<td>카드결제</td>
-					<td>100,000원</td>
-				</tr>
-				<tr>
-					<td><label class="btn">사용</label></td>
-					<td>2021.04.01</td>
-					<td>포인트결제</td>
-					<td>100,000원</td>
-				</tr>
-				<tr>
-					<td><label class="btn">충전</label></td>
-					<td>2021.04.02</td>
-					<td>카드결제</td>
-					<td>100,000원</td>
-				</tr>
-				<tr>
-					<td><label class="btn">사용</label></td>
-					<td>2021.04.01</td>
-					<td>포인트결제</td>
-					<td>100,000원</td>
-				</tr>
-				<tr>
-					<td><label class="btn">충전</label></td>
-					<td>2021.04.02</td>
-					<td>카드결제</td>
-					<td>100,000원</td>
-				</tr>
-				<tr>
-					<td><label class="btn">사용</label></td>
-					<td>2021.04.01</td>
-					<td>포인트결제</td>
-					<td>100,000원</td>
-				</tr>
+				<c:forEach var="i" items="${pList }">
+					<c:if test="${i.cha_mth == 1 }">
+						<tr>
+							<td><label class="btn">충전</label></td>
+							<td>${i.po_date }</td>
+							<td>카드결제</td>
+							<td>${i.cha_point }원</td>
+						</tr>
+					</c:if>
+					<c:if test="${i.cha_mth > 1 }">
+						<tr>
+							<td><label class="btn">사용</label></td>
+							<td>${i.po_date }</td>
+							<td>포인트결제</td>
+							<td>${i.cha_point }원</td>
+						</tr>
+					</c:if>
+				</c:forEach>
 			</table>
+			-->
+			<div class="pagingArea">
+			
+			</div>
 		</div>
 	</div>
 </div>

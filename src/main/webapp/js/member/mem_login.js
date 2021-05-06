@@ -5,9 +5,6 @@
 		$("#loginBtn").click(function(){
 			$("#login_section").submit(function(){
 				//로그인 상태 유지 확인
-				if($("checkbox").val()=='stay'){
-					alert("로그인 상태 유지합니다 ~");
-				}
 				if($("#userid").val()===""){
 					alert("아이디를 입력해주세요.");
 					$("#userid").focus();
@@ -22,12 +19,6 @@
 			});
 		});
 		
-		$("#login_section").children('p').click(function(){
-			$("#socialLogin").slideDown(500);
-		});
-		$("#signupBtn").click(function(){
-			location.href="joinMember";
-		});
 	});
 	
 //	네이버아디디로로그인 초기화 Script 

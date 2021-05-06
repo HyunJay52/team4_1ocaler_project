@@ -56,7 +56,7 @@
 			</div>
 			<div class="reviewSearchArea">
 				<input type="text" name="searchWord"/>
-				<input type="button" value="검색"/>
+				<input type="button" value="검색" id="reviewSearchAreaBtn"/>
 			</div>
 			<div class="reviewList">
 			<table class="myinfoTable2">

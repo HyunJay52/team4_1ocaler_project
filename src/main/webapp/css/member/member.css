@@ -129,7 +129,7 @@
 }
 
 #memJoinFrm .Mem_lgBtn:hover {
-	color: #fff;
+	color: black; background-color: #ddd;
 	font-weight: bold;
 }
 
@@ -146,7 +146,7 @@
 
 #loginContainer {
 	width: 1300px;
-	height: 84%;
+	height: auto;
 	text-align: center;
 	margin: 0 auto;
 }
@@ -154,7 +154,7 @@
 #login_section {
 	width: 400px;
 	height: auto;
-	padding-top: 110px;
+	padding-top: 13%;
 	padding-bottom: 110px;
 	margin: 0 auto;
 }
@@ -206,8 +206,8 @@
 	color: #212529;
     margin-left: 190px;
 }
-#socialLogin {
-	display: none;
+#login_section>p {
+	margin-top: 50px;
 }
 #naverIdLogin img {
 	margin-bottom: 5px;
@@ -226,15 +226,165 @@
 #login_section .mem_lgBtn {
 		width: 320px; height: 50px;
 		margin-top: 5px;
-		border: 1px solid #3f1785;
-		color: #3f1785;
+		border: 1px solid #bdbdbf;
+		color: #bdbdbf;
 	}
-#login_section .mem_lgBtn:hover {
-		color: #fff;
-		font-weight: bold;
-	}
+#login_section>form>ul li:nth-child(4)>button {
+	background-color: #5f0080;
+	color: #fff;
+}	
+/* #login_section .mem_lgBtn:hover { */
+/* 		color: #fff; */
+/* 		font-weight: bold; */
+/* 	} */
 #login_section .mem_lgA:hover {
 		margin-top: 20px;
 		color: #000;
 		text-decoration: none;
 	}
+
+/* - - - - - - - - - - - - - - - - - - - - 셀러회원 스타일 */
+	#joinSeller {
+		width: 1300px; height: auto;
+		margin: 100px auto;
+	}
+	#joinSeller div:nth-child(odd) {
+		width: 700px; height: 50px; line-height: 50px;
+		margin-top: 10px;
+		font-size: 25px;
+		text-align: center;
+		border-bottom: 3px solid #3f1785;
+	}
+	#joinSeller>form ul {
+		width: 700px; height: 600px;
+		margin: 0;
+	}
+	#sellerJoinFrm {
+		width: 700px;
+		margin: 0 auto;
+	}
+	#sellerJoinFrm>#basicInfo {
+		width: 700px; 
+		margin: 20px auto;
+	}
+	#sellerJoinFrm>#setProfile ul {
+		height: 300px;
+	}
+	#sellerJoinFrm>#basicInfo input, #sellerJoinFrm>#setProfile input {
+		width: 320px; height: 50px; padding: 0 15px; border-radius: 3px; border: 1px solid #ddd;
+	}
+	#sellerJoinFrm #sel_content {
+		width: 320px; height: 150px;
+		border-radius: 3px; border: 1px solid #ddd;
+	}
+	#setProfile>button:first-child {
+		width: 320px; display: block; argin: 0 auto; font-size: 20px;
+	}
+	#joinSeller>form>div>ul>li {
+		float: left;
+		list-style-type: none;
+		width: 27%; height: 75px;
+	}
+	#joinSeller>form>div>ul>li:nth-child(odd) {
+		font-family: nsreb; font-size: 18px; padding-left: 70px; line-height: 50px;
+		
+	}
+	#joinSeller>form>div>ul>li:nth-child(even) {
+		width: 72%;
+	}	
+		#joinSeller #addrInput, #joinSeller #bankInput {
+		display: none;
+		width: 100%; height: 200px;
+	}
+	#joinSeller #addrInput>li, #joinSeller #bankInput>li {
+		list-style-type: none;
+		margin-bottom: 10px;
+	}
+	#joinSeller #addrInput>li:first-child {
+		float:left;
+	}
+
+	#setProfile, #joinSeller div:nth-child(3) {
+		display: none;
+	}
+	#bank {
+		width: 160px;
+	    height: 50px;
+	    border-radius: 5px;
+	    border-bottom-left-radius: 5px;
+	    padding-left: 10px;
+	    border: 1px solid #ddd;
+	}
+		/*      button     class       */
+	#joinSeller .lgBtn {
+		width: 120px; height: 50px;
+		margin-left: 10px;
+		border: 1px solid #3f1785;
+		color: #3f1785;
+	}
+	#joinSeller .lgBtn:hover {
+		color: #fff;
+		font-weight: bold;
+	}
+	#joinSeller .lgA:hover{
+		margin-top: 20px;
+		color: #000;
+		text-decoration: none;
+	}
+	#joinSeller .findAddr, #joinSeller .addBank {
+		width: 320px; margin: 0;
+	}
+	#joinSeller .profImg {
+		width: 100px; height: 100px; border: none; border-radius: 70%;
+	}
+	#joinSeller .input-file-button{
+		padding: 3px 15px;
+		margin-top: 70px; border: none;
+		font-size: 16px;
+    	width: 95px;
+		text-align: center;
+		background-color: 3f1785;
+		border-radius: 5px;
+		color: white;
+		cursor: pointer;
+	}
+/* - - - - - - - - - - - - - - - - - - - - 아이디 비밀번호 찾기 */	
+#searchMem {
+	width: 1300px; height: auto;
+	overflow: auto;
+	margin: 0 auto;
+}
+#searchMemIndex, #searchMemId, #searchMemPwd {
+	width: 1300px; height: auto;
+	margin: 100px 0;
+}
+#searchMemIndex>div:first-child {
+	width: 1300px; height: 50px;
+	text-align: center;
+}
+#searchMemIndex>ul {
+	width: 480px; height: 250px;
+	margin: 50px auto;
+}
+#searchMemIndex>ul li {
+	width:200px; height: 200px; 
+	float:left; line-height: 200px;
+	display: block;
+	margin: 20px;
+	text-align: center; font-size: 22px;
+	border-radius: 70%;
+	background-color: #ddd; color: #fff;
+}
+#searchMemIndex>ul li:hover {
+	background-color: #fff; color: black;
+	border: 3px solid #fec804;
+	opacity: 80%;
+}
+
+#searchMemId, #searchMemPwd {
+	display: none;
+}
+#searchMemId form, #searchMemPwd form {
+	
+	margin: 0 auto;
+}

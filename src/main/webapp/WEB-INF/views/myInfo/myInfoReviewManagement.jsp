@@ -62,17 +62,17 @@
 				<div class="myInfoReviewManagementTableReview">
 					<ul>
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span>(2021.03.31)</li>
+						<li><span class="info-font-weight">user123</span></li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>
 							
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span><br/>(2021.03.31)</li>
+						<li><span class="info-font-weight">user123</span></li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>	
 														
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span></li>
+						<li><span class="info-font-weight">user123</span></li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>					
 					</ul>
@@ -89,17 +89,17 @@
 				<div class="myInfoReviewManagementTableReview">
 					<ul>
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span></li>
+						<li><span class=" info-font-weight">user123</span></li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>
 							
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span></li>
+						<li><span class=" info-font-weight">user123</span></li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>	
 														
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span></li>
+						<li><span class=" info-font-weight">user123</span></li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>					
 					</ul>
@@ -116,17 +116,17 @@
 				<div class="myInfoReviewManagementTableReview">
 					<ul>
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span><br/>(2021.03.31)</li>
+						<li><span class=" info-font-weight">user123</span><br/>(2021.03.31)</li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>
 							
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span></li>
+						<li><span class=" info-font-weight">user123</span></li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>	
 														
 						<li><img src="img/myInfo/slider/heartBigsize.png"/></li>
-						<li><span class="mdFnt info-font-weight">user123</span></li>
+						<li><span class=" info-font-weight">user123</span></li>
 						<li class="wordCut">상태 뿐만 아니라 맛도 최고여서 선물하고 보람이 있었습니다. 다음에 또 오픈 해주셨으면 좋겠습니다.</li>
 						<li><input type="button" class="btn commBtn" value="답글달기"/></li>					
 					</ul>

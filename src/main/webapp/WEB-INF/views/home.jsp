@@ -4,47 +4,6 @@
 
 <script>
 	document.title = "1ocler home";
-	
-	$(function(){
-		//bxslider 넣을 부분
-		
-		//우리직구 게시판 클릭시 이동 이벤트
-		$("#indexMain>#sell").children("#selltitle").click(function(){
-			location.href="memberBoard";
-		});
-		$("#sell>ul li").on('click', function(){
-			alert("우리직구 클릭함");
-			location.href="#";
-		});
-		
-		//가치가장 게시판 클릭시 이동 이벤트
-		$("#indexMain>#gachi").children("#gachititle").click(function(){
-			location.href="groupPage";
-		});
-		$(".indexInnerUl").click(function(){
-			alert("ul 클릭함 ");
-			location.href="#";
-		});
-		
-		//쓱싹레시피 게시판 클릭시 이동 이벤트
-		$("#sggSak li").on('click', function(){
-			alert("쓱싹 레시피 클릭함");
-			location.href="#";
-		});
-		
-		//사이드바 색깔 변경
-		$(window).on("scroll", function(){
-			var scrollTop = $(this).scrollTop();
-			if(scrollTop==0){
-// 				$("#sideBar li a img").attr("src", $("#sideBar li a img").attr("src").replace("000.png", "fff.png"));
-			}
-			if(scrollTop>0){
-// 				$("#sideBar li a img").attr("src", $("#sideBar li a img").attr("src").replace("fff.png", "000.png"));
-			}
-		});
-		
-	});
-	
 </script>
 
 	<!-- bx-slider part -->
@@ -59,17 +18,17 @@
 			<!-- slide show -->
 			<div class="carousel-inner">
 				<div class="carousel-item active"><a href="joinMember"><img src="<%=request.getContextPath() %>/img/indexImg/ad1.png"/></a></div>
-				<div class="carousel-item"><a href="joinSeller"><img src="<%=request.getContextPath() %>/img/indexImg/ad1.png"/></a></div>
+				<div class="carousel-item"><a href="joinSeller"><img src="<%=request.getContextPath() %>/img/indexImg/ad2.png"/></a></div>
 				<div class="carousel-item"><a href="login"><img src="<%=request.getContextPath() %>/img/indexImg/ad1.png"/></a></div>
 			</div>
 			
 			<!-- left and right controls -->
-			<a class="carousel-control-prev" href="#slider" data-slide="prev">
-				<span class="carousel-control-prev-icon"></span>
-			</a>
-			<a class="carousel-control-next" href="#slider" data-slide="next">
-				<span class="carousel-control-next-icon"></span>
-			</a>	
+<!-- 			<a class="carousel-control-prev" href="#slider" data-slide="prev"> -->
+<!-- 				<span class="carousel-control-prev-icon"></span> -->
+<!-- 			</a> -->
+<!-- 			<a class="carousel-control-next" href="#slider" data-slide="next"> -->
+<!-- 				<span class="carousel-control-next-icon"></span> -->
+<!-- 			</a>	 -->
 		</div>
 	</div>
 	
@@ -131,7 +90,7 @@
 		<ul class="indexListNone">
 			<li>
 				<ul class="indexInnerUl">
-					<li class="gachiPostTitle"><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="gachiPostTitle"><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
 					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" style="width: 15px; margin-bottom: 5px;"> 마포구청역 3번 출구</li>
@@ -143,7 +102,7 @@
 			</li>
 			<li>
 				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
 					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
@@ -155,7 +114,7 @@
 			</li>
 			<li>
 				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
 					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
@@ -168,13 +127,73 @@
 			<li>
 				<ul class="indexInnerUl">
 					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li class="wordCut test">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
 					<li>04/29 15:00</li>
 					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
 					<li>
 						<span class="cntJoin">1</span> / 3 명
 					</li>
 					<li class="smlFnt">goguma1234 &nbsp;&nbsp;<img src="common/alarm_000.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut test">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="indexInnerUl">
+					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+					<li>04/29 15:00</li>
+					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+					<li>
+						<span class="cntJoin">1</span> / 3 명
+					</li>
+					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
 				</ul>
 			</li>
 			<li>
@@ -193,7 +212,7 @@
 	</div>
 	
 	<div id="sggSak" class="indexDivWidth" style="margin-bottom: 100px;">
-		<div class="lgFnt indexBoardTitle">#쓱싹레시피</div>
+		<div class="lgFnt indexBoardTitle"><span style="font-size: 14px; color: gray;">오늘뭐해먹지?</span><br/>#쓱싹레시피</div>
 		<ul class="indexListNone">
 			<li><a href="commuBoard"><img src="img/indexImg/food1.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food2.jpeg"/></a></li>
@@ -203,6 +222,8 @@
 			<li><a href="commuBoard"><img src="img/indexImg/food1.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food2.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food3.jpeg"/></a></li>
+			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
+			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
 			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
 		</ul>

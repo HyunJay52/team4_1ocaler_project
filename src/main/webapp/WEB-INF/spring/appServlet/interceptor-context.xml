@@ -15,6 +15,9 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/myInfoMain" />
+			<mvc:mapping path="/joinSeller" />
+			<mvc:mapping path="/sellerJoinOk" />
+			<mvc:mapping path="/sellerPwdDoubleCheck"/>
 			<bean class="com.team4.localer.controller.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

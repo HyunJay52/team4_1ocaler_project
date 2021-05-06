@@ -46,10 +46,26 @@ public class GroupController{
 	public ModelAndView eatPage(GroupPageVO pageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
+		//페이징=================
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		//총레코드구하기
+		pageVO.setTotalRecord(groupService.groupTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
+		//현재 페이지 검색어에 해당하는 레코드를 선택
+		System.out.println(pageVO.getLoc_gu());//들어가는 지역마다 찍혀야합니다.
+		System.out.println(pageVO.getCategory());
+		System.out.println(pageVO.getSearchKey()+"<====key"+pageVO.getSearchWord()+"<====word");
+		System.out.println(groupService.groupTotalRecoedCount(pageVO)+"<==총레코드수");
+		System.out.println(pageVO.getPageNum()+"<==현재 페이지번호");
+		System.out.println(pageVO.getTotalPage()+"마지막페이지");//마지막페이지
+		System.out.println(pageVO.getOnePageRecord()+"한페이지에 보이는수");
+		System.out.println(pageVO.getLastPageRecord()+"마지막 레코드수");
+		//end======================
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
-		mav.addObject("eatList",groupService.GroupEatList(pageVO.getLoc_gu()));
+		mav.addObject("eatList",groupService.GroupListAll(pageVO));
 		mav.addObject("pageVO",pageVO);
 		
 		mav.setViewName("group/eatView");
@@ -60,12 +76,25 @@ public class GroupController{
 	@RequestMapping("/withPage")
 	public ModelAndView withPage(GroupPageVO pageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
+		//페이징 
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		pageVO.setTotalRecord(groupService.groupTotalRecoedCount(pageVO));
+		//현재 페이지 검색어에 해당하는 레코드를 선택
+		System.out.println(pageVO.getLoc_gu());//들어가는 지역마다 찍혀야합니다.
+		System.out.println(pageVO.getCategory());
+		System.out.println(pageVO.getSearchKey()+"<====key"+pageVO.getSearchWord()+"<====word");
+		System.out.println(groupService.groupTotalRecoedCount(pageVO)+"<==총레코드수");
+		System.out.println(pageVO.getPageNum()+"<==현재 페이지번호");
+		System.out.println(pageVO.getTotalPage()+"마지막페이지");//마지막페이지
+		System.out.println(pageVO.getOnePageRecord()+"한페이지에 보이는수");
+		System.out.println(pageVO.getLastPageRecord()+"마지막 레코드수");
+		//end======================
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 		mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
-		
-		mav.addObject("withList",groupService.GroupWithList(pageVO.getLoc_gu()));
+		mav.addObject("withList",groupService.GroupListAll(pageVO));
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("group/withView");
 		
@@ -98,19 +127,22 @@ public class GroupController{
 				if(groupService.groupInsert(vo)>0) {
 					System.out.println("성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					if(vo.getUp_cate().equals("한끼미식회")) {
+						mav.addObject("category",pageVO.getCategory());
 						mav.addObject("loc_gu",pageVO.getLoc_gu());
 						mav.setViewName("redirect:eatPage");
 					}else {
+						mav.addObject("category",pageVO.getCategory());
 						mav.addObject("loc_gu",pageVO.getLoc_gu());
 						mav.setViewName("redirect:withPage");
 					}
 				}else {
 					System.out.println("실패했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-						mav.setViewName("group/writeFormOk");
+						mav.setViewName("group/historyBack");
 				}
 			}else {
 				if(groupService.groupBigMartInsert(vo)>0) {
 					System.out.println("창고형마트 인설트 성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					mav.addObject("category",pageVO.getCategory());
 					mav.addObject("loc_gu",pageVO.getLoc_gu());
 					mav.setViewName("redirect:withPage");
 				}else {
@@ -121,6 +153,7 @@ public class GroupController{
 
 			//멤버 게시글수 카운트해주는 메서드
 			memberService.memPostCount(vo.getUserid());
+			
 			//트랜젝션 commit실행
 			transactionManager.commit(status);
 		}catch(Exception e) {
@@ -198,16 +231,7 @@ public class GroupController{
 		}else {
 			mav.setViewName("group/historyBack");
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		return mav;
 		
 	}

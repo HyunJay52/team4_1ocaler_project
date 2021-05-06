@@ -10,6 +10,8 @@
 
 <script>
 	document.title = "회원가입";
+	var cookie = document.cookie;
+	console.log("1cookie? ", cookie);
 </script>
 <div id="joinMem">
 	<form method="post" action="memJoinOk" id="memJoinFrm" enctype="multipart/form-data">
@@ -20,7 +22,7 @@
 				<li><input type="text" name="userid" id="userid" tabindex="1"
 					placeholder="아이디를 입력해주세요" />
 				<button type="button" class="btn commBtn Mem_lgBtn" tabindex="2" id="idOverlapBtn">중복검사</button>
-					<span id="idOverlap">N</span> <br />
+					<span id="idOverlap">N</span> <br/>
 				<span id="checkid"></span></li>
 
 				<li>비밀번호</li>
@@ -39,7 +41,7 @@
 				<span id="checkname"></span></li>
 
 				<li>연락처</li>
-				<li><input type="text" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11"
+				<li><input type="number" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11"
 					placeholder="예) 01012341234" />
 				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
 				<span id="checktel"></span></li>
@@ -73,6 +75,13 @@
 				</li>
 				<li>활동지역</li>
 				<li>
+<!-- 					<select id="loc_gu" name="loc_gu" tabindex="12"> -->
+<!-- 								<option value="신한은행">신한은행</option> -->
+<!-- 								<option value="기업은행">기업은행</option> -->
+<!-- 								<option value="하나은행">하나은행</option> -->
+<!-- 								<option value="국민은행">국민은행</option> -->
+<!-- 								<option value="카카오뱅크">카카오뱅크</option> -->
+<!-- 					</select> -->
 					<input type="text" name="loc_gu" id="loc_gu" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요" />
 					<img src="img/indexImg/bo_pin.png" id="locImg"/>
 				</li>

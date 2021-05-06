@@ -14,27 +14,40 @@
 				url : "https://apis.tracker.delivery/carriers/kr.epost/tracks/"+deliveryNo,
 				dataType : 'json',
 				success : function(result){
-					var listHead = "<ul>";
-					var listTag ="<ul>";
-					
-						listHead += "<li><span class='deliveryListHead'>신청인</span><span class='deliveryName'>";
-						listHead += result['from']['name']+"</span></li>";
-						listHead += "<li><span class='deliveryListHead'>수령인</span><span class='deliveryName'>";
-						listHead += result['to']['name']+"</span></li>";
-						listHead += "<li><span class='deliveryListHead'>송장번호</span><span class='deliveryName'>";
-						listHead += deliveryNo+"</span></li>";
+
+					//데이터 날짜 기준으로 내림차순 정렬
+					result.progresses.sort(function(a, b){
+						var dateA = new Date(a['time']).getTime();
+						var dateB = new Date(b['time']).getTime();
 						
+						return dateA < dateB ? 1 : -1;
+					});
+					
+					var listHead = "<table class='myinfoDeliveryTable'><tr>";
+					var listTag ="<table class='myinfoDeliveryTable'><tr>";
+					
+						listHead += "<td>신청인</td>";
+						listHead += "<td>수령인</td>";
+						listHead += "<td>송장번호</td></tr>";
+						listHead += "<tr><td>"+result['from']['name']+"</td>";
+						listHead += "<td>"+result['to']['name']+"</td>";
+						listHead += "<td>"+deliveryNo+"</td></tr></table>";
+						
+						listTag += "<td>날짜</td>";
+						listTag += "<td>상태</td>";
+						listTag += "<td>발생국</td>";
+						listTag += "<td>현황</td></tr>";
 					$.each(result.progresses, function(idx, data){
 						var time = data['time'].split("T");
 						var min = time[1].split(":");
 						var minute = min[0];
-
-						listTag += "<li><span class='listLeft'>"+time[0]+" "+minute+":"+min[1]+"</span>";
-						listTag += "<span class='listRight'>"+data['status']['text']+"</span>";
-						listTag += "<span class='listLeft'>"+data['location']['name']+"</span>";
-						listTag += "<span class='listRight'>"+data['description']+"</span></li>";
+						
+						listTag += "<tr><td style='width:15%'>"+time[0]+"<br/>"+minute+":"+min[1]+"</td>";
+						listTag += "<td>"+data['status']['text']+"</td>";
+						listTag += "<td>"+data['location']['name']+"</td>";
+						listTag += "<td>"+data['description']+"</td></tr>";
 					});
-					listTag += "</ul>";
+					listTag += "</table>";
 					$("#deliveryHeader").append(listHead);
 					$("#deliveryList").append(listTag);
 				},error:function(request, status, error){
@@ -106,18 +119,15 @@
 		<div id="deliveryTop">
 			<ul>
 				<li><img src="img/myInfo/delivery/box.png"/></li>
-				<li><p class="lgFnt">배송준비</p><span class="lgFnt header">1</span></li>
+				<li><p>배송준비</p><span class="lgFnt">1</span></li>
 				<li><img src="img/myInfo/delivery/delivery.png"/></li>
-				<li><p class="lgFnt">배송 중</p><span class="lgFnt header">1</span></li>
+				<li><p>배송 중</p><span class="lgFnt">1</span></li>
 				<li><img src="img/myInfo/delivery/home.png"/></li>
-				<li><p class="lgFnt">배송완료</p><span class="lgFnt header">0</span></li>
-			</ul>
-			<ul>				
+				<li><p>배송완료</p><span class="lgFnt">0</span></li>
+							
 				<li><img src="img/myInfo/delivery/return.png"/></li>
-				<li><p class="lgFnt">반품</p><span class="lgFnt header">1</span></li>
-				<li><img src="img/myInfo/delivery/cancel.png"/></li>
-				<li><p class="lgFnt">취소</p><span class="lgFnt header">0</span></li>
-			</ul>
+				<li><p>반품</p><span class="lgFnt">1</span></li>
+			</ul>			 
 		</div>
 		
 		<div id="deliveryBottom">
@@ -139,7 +149,7 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header" id="deliveryHeader">
-				<h4 class="modal-title">배 송 조 회<button class="close" data-dismiss="modal">&times;</button></h4>
+				<h3 class="modal-title lgFnt" style="height:50px">배 송 조 회<button class="close" data-dismiss="modal">&times;</button></h3>
 				
 						
 						

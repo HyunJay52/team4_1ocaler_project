@@ -26,6 +26,9 @@
 
 		text-align:center;
 	}
+	#sideMenu div{
+		margin-bottom:20px;
+	}
 	#sideMenu>h1{
 		color:#fff;
 	}
@@ -33,7 +36,6 @@
 		background-color:#fff;
 		overflow:auto;
 		border:1px solid black;
-		margin:0;
 	}
 	#sideMenu a:active, #sideMenu a:link, #sideMenu a:visited{
 		text-decoration:none;
@@ -49,9 +51,13 @@
 		border:1px solid #fff; 
 		background-color:#571fb8;
 	}
+	.sideMenuBtn{
+	 	border:2px solid #3f1785;
+	
+	}
 /* 테이블 스타일 */
 	.myinfoTable2 {
-		width:90%;
+		width:100%;
 		margin:0 auto;
 		padding:0;
 	}
@@ -100,7 +106,7 @@
 		float:right
 	}
 	.dayBtn{
-		font-weight:bold; 
+		font-weight:normal; 
 		font-size:26px; 
 		margin:0 2px; 
 		border:none; 
@@ -112,14 +118,16 @@
 		height:202px;
 		border:1px solid #ddd;
 	}
-	.dealTop{
-		padding:50px;
-	}
 	.dealBottom{
 		position:relative;
 	}
+	.dealTop{
+		margin:20px 0;
+		border-bottom:1px solid #ddd;
+		height:230px;
+	}
 	.dealTop, .dealBottom{
-		width:900px;
+		width:100%;
 		
 	}
 	.infoList>ul>li{
@@ -138,8 +146,9 @@
 		padding:20px;
 		
 	}
+
 	.dealBtn{
-		 width:250px; height:50px; float:right;
+		 width:246px; height:50px; float:right;
 	}
 	
 /* bxslider 세팅 */
@@ -257,4 +266,11 @@
 	}
 	.managementHeader>li:nth-child(4n){
 		border-left:2px solid black;
+	}
+	.myinfoHeader{
+		width:100%;
+	}
+	/* 페이징 공용 스타일 */
+	.pagingArea{
+		margin:20px;
 	}

@@ -116,9 +116,9 @@
         chart.draw(data3, options3);
       }
 </script>
-<div id="main">
+<div class="main">
 	<div class="btitle">회원통계</div>
-	<form>
+	<form class="dateFrm">
      <!--  <p><input type="date" value="2019-09-22" min="2019-09-10" max="2019-09-25"></p> -->
       <p><input type="date" name="startDate">~<input type="date" name="lastDate">
       <input type="submit" class="pupleBtn" value="검색"></p>
@@ -127,7 +127,7 @@
      
      <div class="btitle">월별 회원 통계 추이</div>
      
-     <ul>
+     <ul class="donutUl">
      	<li id="donut_single"></li>
      	<li id="donut_two"></li>
      	<li id="donut_three"></li>

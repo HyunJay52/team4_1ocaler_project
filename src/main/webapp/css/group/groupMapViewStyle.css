@@ -1,26 +1,58 @@
 @charset "UTF-8";
-	#groupMapViewFold, #groupMapViewOpen{position:absolute; z-index:1;}	
-	#groupMapViewFold{background-color:#fff; top:140px; left:493px; margin-top:348px; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	#groupMapViewOpen{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
-	
-	#groupMapViewSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
-	#groupMapViewSearchFrm input[type=text]{float:left; height:48px; border-radius:5px;}
-	#groupMapViewSearchFrm input[type=image]{display:block; height:48px;}
+	/*공통 열고 닫기 버튼 eatview, withview*/
+	.groupViewFold, .groupViewOpen{position:absolute; z-index:1;}	
+	.groupViewFold{background-color:#fff; top:140px; left:433px; margin-top:348px; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
+	.groupViewOpen{display:none; top: 140px; left:30px; margin-top:348px; background-color:#fff; opacity:0.9; width:40px; padding:5px; border-radius:10px;}
 	
 	
-	#groupMapViewTopFrm{position:absolute; width:250px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
-	#groupMapViewTopFrm>ul{text-align:center; overflow:auto; border-radius:10px; background-color:#571FB8;}
-	#groupMapViewTopFrm li{display:inline-block; background-color:#571FB8; margin:0 10px;}
-	#groupMapViewTopFrm img{width:30px; margin:9px 0px;}
-	#groupMapViewTopFrm li:first-child>a>img{ margin-left:10px;}
-	#groupMapViewTopFrm li:last-child>a>img{ margin-right:10px;}
 	
+	/*공통 상단 우측에 있는 search css 모든 jsp에 있음*/
+	.groupSearchFrm{position:absolute; top:20px; right:0px; z-index:1;}
+	.groupSearchFrm input[type=text]{float:left; height:38px; border-radius:5px; padding-left:20px;}
+	.groupSearchFrm input[type=image]{display:block; height:38px;}
+	
+	/*공통 상단 가운데 있는 category css 모든 jsp에 있음*/
+	.groupTopFrm{position:absolute; width:200px; top:20px; right:50%; z-index:1; transform:translateX(50%) }
+	.groupTopFrm>ul{text-align:center; overflow:auto; border-radius:10px; background:#fff;  box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 25%);}
+	.groupTopFrm li{display:inline-block; margin:0 10px;}
+	.groupTopFrm img{width:20px; margin:9px 0px;}
+	.groupTopFrm li:first-child>a>img{ margin-left:10px;}
+	.groupTopFrm li:last-child>a>img{ margin-right:10px;}
 
-	#groupMapViewShowFrm{position:absolute; height:780px; top:100px; left:30px; z-index:1; width:460px; background-color:#fff; opacity:0.9; border-radius:10px;}
+	/* 공통 custom overlay*/
+	.customOverlay{padding: 10px;position: absolute;border: 1px solid #d9d9d9;border-radius:10px;top:-40;left:20;background: #fff;text-align: center;color:#2c92ff;}
+
+	/* 공통 showFrmList*/
+	.groupListView>a{color:#000}
+	.groupListView>a:hover{font-weight:bold; text-decoration:none; color:#404040}
+	.groupListView{	overflow:auto;	height:600px; }
+	.groupListView>li{ border:1px solid gray;}
+	.groupListView div:first-child{ overflow:auto; position:relative;}
+ 	.groupListView div:first-child>span{display:block; float:left; font-size:14px; margin:7px 0px;}
+	.groupListView div:first-child>img:first-child{display:block;float:left;height:14px;margin: 9px 15px;}
+	.groupListView li>span{display:block;text-align:center;font-size:16px;margin-bottom: 5px;font-weight:bold;}
+	.groupListView div:not(:first-child)>img{margin:5px 40px;}
+	.groupListView div:nth-child(6){font-size: 13px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-left: 15px;padding-right: 15px;margin-top:3px;margin-bottom:5px;}
+
+	/* 공통 groupInnerSearchFrm eatview, withview*/
+	.groupInnerSearchFrm>select{height: 32px; width: 80px; margin: 5px 10px 15px 15px; border: 1px solid #d9d9d9; border-radius: 5px;}	    
+	.groupInnerSearchFrm>input:nth-of-type(2){    height: 32px;   width: 240px; border: 1px solid #d9d9d9;  border-radius: 5px;  margin: 5px 5px 5px 0px;}
+    .groupInnerSearchFrm>input:nth-of-type(3){    display: block;  height: 32px;   float: right;   margin: 5px 15px 15px 0px;}
+
+	/* 공통 groupPaings eatview,withview*/
+	.groupPagings{text-align:center	}
+	.groupPagings>li{display:inline-block;border:1px solid #d9d9d9;width:35px;height:40px;line-height:40px;margin:19px auto;}
+	.groupPagings>li:first-child{width:50px;border-top-left-radius:8px;border-bottom-left-radius:8px}
+	.groupPagings>li:last-child{width:50px;border-top-right-radius:8px;border-bottom-right-radius:8px}
+	.groupPagings a{color:#000;}
+	.groupPagings a:hover{color:#0056b3;font-weight:bold;text-decoration:none;}
+	
+	/*groupMapView Page꺼 스타일리스트*/
+	#groupMapViewShowFrm{position:absolute; height:720px; top:100px; left:30px; z-index:1; width:400px; background-color:#fff; opacity:0.9; }
 	#groupMapViewShowFrm li>a{text-decoration:none; color:#000}
-	#groupMapViewShowFrm li>a:hover{color:#571fb8; font-weight:bold;}
-	#groupMapViewShowFrm li{float:left; width:230px; padding-left:80px; height:50px; line-height:50px; border-bottom:1px solid #e1e1e1;}
+	#groupMapViewShowFrm li>a:hover{font-weight:bold;}
+	#groupMapViewShowFrm li{float:left; width:200px; padding-left:80px; height:45px; line-height:45px; border-bottom:1px solid #e1e1e1;}
 	#groupMapViewShowFrm>div:first-child{margin:10px; overflow:auto; padding-left:15px;}
-	#groupMapViewShowFrm>div>span{display:block; width:auto; height:45px; line-height:45px; float:left; font-size:22px; color:#571fb8;} 
+	#groupMapViewShowFrm>div>span{display:block; width:auto; height:45px; line-height:45px; float:left; font-size:22px; color:#571fb8; padding-top:4px;} 
 	#groupMapViewShowFrm img{display:block; width:35px; float:left; margin-right:15px; padding-top:6px;}
 	#groupMapViewShowFrm img:nth-child(3){float:right} 

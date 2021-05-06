@@ -3,15 +3,12 @@
 	공통 지정 색상
 	#3f1785 > #571fb8 > #B8B2F4
 */
-#main{
-	font-family:"nsr";
-	margin:0 auto;
-	padding:0;
-	width:1300px;
+#cirdiv{
 	overflow:auto;
-	}
+	background-color:rgb(230,230,230,0.1);
+}
 .cir1{
-	background-color:#fff;/*#3f1785 > #571fb8 > #705abf  */
+	background-color:rgb(230,230,230,0.1);/*#3f1785 > #571fb8 > #705abf  */
 	width:240px;
 	height:240px; 
 	border-radius:120px; 
@@ -21,18 +18,20 @@
 	font-size:22px; 
 	line-height:80px; 
 	float:left;
-	margin-left:40px;
+	margin:40px;
+	/* margin-left:40px;
 	margin-right:40px;
-	margin-bottom:40px;
-	color:#3f1785;
-	border:1px solid #3f1785;
+	margin-bottom:40px; */
+	color:#024B40;
+	border:1px solid #024B40;
 	}
 .cir1>b{font-size:120px;}
 /*더보기*/
-#more{
-	width:60px;
-	background-color:#ddd;
+.more{
 	float: right;
+	margin-top: -30px;
     margin-bottom: 10px;
+    text-align: center;
+    margin-right: 32px;
 }
 	

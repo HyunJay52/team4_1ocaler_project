@@ -31,6 +31,7 @@
 .smlFnt {
 	font-size: 13px;
 }
+
 /* 글자 생략 클래스 */
 .wordCut {
 	white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -45,27 +46,26 @@
 .commBtn {
 	width: 90px;
 	color: #3f1785;
-	border: 1px solid #3f1785;
+	border: 1px solid #5f0080;
 }
 .commBtn:hover {
-	border: 1px solid #3f1785;
-	background-color: #3f1785;
+	border: 1px solid #5f0080;
+	background-color: #5f0080;
 	font-weight: bold;
 	color: #fff;
 	font-weight: bold;
 }
 .cancelBtn {
-	border: 1px solid #ddd;
-	color: #ddd;
+	border: 1px solid #bdbdbf;
+	color: #bdbdbf;
 	width: 90px;
 }
 .cancelBtn:hover {
 	background-color: #fff;
 	color: gray;
 }
-	
 .confBtn {
-	background: #3f1785;
+	background: #5f0080;
 	color: #fff;
 	width: 90px;
 }
@@ -74,20 +74,21 @@
 	background: #B8B2F4;
 }
 
-
 /*테이블 css  */
-	.table {margin:0 auto;padding:0}
-    .table tr{/*테이블 목록*/
-    	border-bottom:1px solid rgb(227,227,227); 
-    	text-align:center;
-    	height:40px;
-    }
-	.table tr:first-child{/*첫번째 테이블 목차*/
-		text-align:center;
-		background-color:#3f1785;
-		color:#fff;
-	}
-	.table tr:last-child{/*마지막 줄 tr 스타일*/
-		border-bottom:2px solid #3f1785;
-	}
+.table {
+	margin:0 auto;padding:0
+}
+.table tr{/*테이블 목록*/
+    border-bottom:1px solid rgb(227,227,227); 
+    text-align:center;
+    height:40px;
+}
+.table tr:first-child{/*첫번째 테이블 목차*/
+	text-align:center;
+	background-color:#3f1785;
+	color:#fff;
+}
+.table tr:last-child{/*마지막 줄 tr 스타일*/
+	border-bottom:2px solid #3f1785;
+}
 	

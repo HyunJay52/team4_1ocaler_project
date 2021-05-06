@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team4.localer.dao.ManageDAO">
+	<select id="memberAllSelect" resultType="com.team4.localer.vo.MemberVO">
+  		select * from
+			(select *from
+				(select mem_no, userid, mem_name, mem_addr, mem_tel, mem_status, mem_type from ${cate}
+				<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+					where ${searchKey} like #{searchWord}
+				</if>
+				order by ${num} desc)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+					where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc		
+  	</select>
+  	<select id="memInfoCount" resultType="int">
+  		select count(userid) from ${param2} where userid=#{param1}
+  	</select>
+  	<select id="memOneSelect" resultType="com.team4.localer.vo.MemberVO">
+  		<!-- 게시물수 , 등급, 가입날짜 -->
+  		select userid, mem_post, mem_rev, to_char(mem_sub, 'YYYY.MM.DD') mem_sub from member where userid=#{param1}
+  	</select>
+  	<update id="memberManageUpdate">
+  		update member set ${param2}=${param3} where userid=#{param1}
+  	</update>
+  	<!-- 셀러관리 페이지 부분 -->
+  	<select id="sellerAllSelect" resultType="com.team4.localer.vo.SellerVO">
+  		select * from
+			(select *from
+				(select s.sel_num, s.userid ,s.sel_name, s.sel_addr,s.sel_detail, s.sel_lvl,s.sel_tel, 
+				   m.mem_status, m.mem_type 
+				   from seller s join member m on s.userid = m.userid 
+				<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+					where ${searchKey} like #{searchWord}
+				</if>
+				order by ${num} desc)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+					where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc	
+  	</select>
+</mapper>

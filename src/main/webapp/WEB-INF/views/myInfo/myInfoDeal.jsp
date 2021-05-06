@@ -83,7 +83,7 @@
 </script>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div class="myinfoContainer noOver">
+	<div class="myinfoContainer">
 		<h3>회원간거래</h3>
 		<div class="dealTop">
 			<div class="dealInfo">
@@ -100,8 +100,10 @@
 						<li>좋아요(21)</li>
 					</ul>
 				</div>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Info"/>
+				<div>
+					<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message" style="float:left"/>
+					<input type="button" class="btn dealBtn btn-outline-dark" value="Info" />
+				</div>
 			</div>
 		</div>
 		<div class="dealBottom">

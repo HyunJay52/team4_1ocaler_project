@@ -33,7 +33,7 @@
 							"color" : "green",
 							"fontSize" : "12"
 						});
-						$("#idOverlap").text('Y');
+						$("#idOverlap").text(result);
 					}
 					if(result=='N'){
 						$('#checkid').text('이미 존재하는 아이디입니다.');
@@ -43,11 +43,16 @@
 							"color" : "pink",
 							"fontSize" : "12"
 						});
-						$("#idOverlap").text('N');
+						$("#idOverlap").text(result);
 					}
 				},
 				error: function(){
-					alert("아이디 중복검사를 실패했습니다. 다시 시도해주세요");
+					$('#checkid').text('아이디 중복검사를 실패했습니다. 다시 시도해주세요.');
+					$('#userid').focus();
+						$("#checkid").css({
+							"color" : "red",
+							"fontSize" : "12"
+						});
 					$('#userid').focus();
 				}
 			});
@@ -81,8 +86,12 @@
 					}
 				},
 				error: function(){
-					alert("아이디 중복검사를 실패했습니다. 다시 시도해주세요");
-					$('#userid').focus();
+					$('#checkNickname').text('별명 중복검사를 실패했습니다. 다시 시도해주세요.');
+					$("#checkNickname").css({
+							"color" : "red",
+							"fontSize" : "12"
+					});
+					$('#mem_nick').focus();
 				}
 			});
 		})
@@ -95,6 +104,7 @@
 		$('#mem_nick').keydown(function(){ // 키 이벤트가 발생했을 때
 	         $("#nickOverlap").text("N");
 	         userid=$("#mem_nick").text();
+	         console.log("닉네임 키이벤트 발생 왜 이거? ", userid);
 	    });
 		$("#mem_nick").change(function(){ // 마우스로 잘라내기를 했을 경우를 대비
 	         if(mem_nick!=$("#mem_nick")){
@@ -168,7 +178,6 @@
 				});
 			}
 		});
-//////////////////////////////////////////유효성검사안됨 (이메일 부분 확인)	
 		$("#mem_name").on('keyup', function() {
 			$("#checkpwd2").css("display", "none");
 			var regName = /^[가-힣A-Z]{2,10}$/i;
@@ -225,9 +234,8 @@
 				});
 			}
 		});
-		//////////// 정규식 표현 ////////////
 		function regExpCheck() {
-			// 인증 번호
+			// 이메일 인증 번호
 			//        var regEmailCheck=/[0-9]{6}$/;
 			//        if(!regEmailCheck.test(document.getElementById("emailCheck").value)){
 			//           alert("인증번호는 숫자 6자리를 입력해야 합니다.");
