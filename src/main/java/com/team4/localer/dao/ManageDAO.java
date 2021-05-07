@@ -31,4 +31,6 @@ public interface ManageDAO {
 	public List<MemShareVO> memShareAllSelect(AdminPageVO pageVO);
 	//셀러판매 게시판 목록
 	public List<SellitemVO> sellerBoardSelect(AdminPageVO pageVO);
+	//판매게시글관리 글 삭제
+	public int selManageDel(int num,String cate,String numName);
 }
