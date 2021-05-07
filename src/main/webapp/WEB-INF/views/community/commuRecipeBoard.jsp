@@ -5,7 +5,7 @@
 
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
-
+ 
 	<div id="coummuBoardMain">
 		
 						
