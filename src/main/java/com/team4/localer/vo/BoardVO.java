@@ -17,11 +17,35 @@ public class BoardVO {
 	
 	private String recipe_cate;
 	
-	
+	//댓글갯수
 	private int repcont;
+	
+	//게시글 순번
+	private String numselect;  
+	
+	//배열?
+	private int gu_select;
+	
 
 	
 	
+	
+	public int getGu_select() {
+		return gu_select;
+	}
+
+	public void setGu_select(int gu_select) {
+		this.gu_select = gu_select;
+	}
+
+	public String getNumselect() {
+		return numselect;
+	}
+
+	public void setNumselect(String numselect) {
+		this.numselect = numselect;
+	}
+
 	public int getRepcont() {
 		return repcont;
 	}

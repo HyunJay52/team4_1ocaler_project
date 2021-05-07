@@ -23,9 +23,25 @@ public class CommuController {
 	@RequestMapping("/commuMain")
 	public ModelAndView commuMain(BoardVO vo , HttpServletRequest req) { //커뮤 메인으로 이동
 		ModelAndView mav = new ModelAndView();
+		  
+		String[] all_Gu = { "강서구","양천구","영등포구","동작구","관악구","금천구","구로구","마포구","서대문구","은평구", 
+ 				 "종로구","용산구","중구","성동구","동대문구","성북구","강북구","도봉구","노원구","중랑구","광진구",
+ 				 "강동구","서초구","강남구","송파구"
+				   };
 		
-//		mav.addObject("commuList",boardService.commuRecipeSelect(vo));
 		
+		int cnt_result[] =new int[25];
+		
+		for (int i = 0 ; i <all_Gu.length;i++) {
+			
+			cnt_result[i]=boardService.commuGuSelect(all_Gu[i]);
+			
+			
+			 
+		}
+		
+		mav.addObject("result",cnt_result);
+		System.out.println(cnt_result.length);
 		mav.addObject("recipe",boardService.recipeSelect(vo));
 		mav.addObject("free",boardService.freeSelect(vo));
 		mav.addObject("commuBor",boardService.commuMainSelect(vo));

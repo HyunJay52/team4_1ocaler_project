@@ -39,20 +39,20 @@
 	</update>
 	<select id="recipeSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
-		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board where rownum <=5 and up_cate=2 order by b_hit desc
+		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
+		from board A  where rownum <=5 and up_cate=2
 		]]>
 	</select>
 	<select id="freeSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
-		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board where rownum <=5 and up_cate=3 order by b_hit desc
+		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
+		from board A  where rownum <=5 and up_cate=3
 		]]>
 	</select>
 	<select id="commuMainSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
-		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board where rownum <=5 and up_cate=1 order by b_hit desc
+		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
+		from board A  where rownum <=5 and up_cate=1
 		]]>
 	</select>
 	<select id="commuOneSelect"  resultType="com.team4.localer.vo.BoardVO">
@@ -61,5 +61,8 @@
 			(select count(*) from reply where num = b.num) repcont  
 			from board b where rownum <=1 and userid=#{userid} order by num desc
 		]]>
+	</select>
+	<select id="commuGuSelect"  resultType="int">
+	 	select count(*)gu_select from board where b_gu=#{param1}
 	</select>
 </mapper>
