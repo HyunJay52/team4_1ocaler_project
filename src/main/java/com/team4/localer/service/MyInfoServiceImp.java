@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.team4.localer.dao.MyInfoDAO;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoPageVO;
 
 @Service
 public class MyInfoServiceImp implements MyInfoService{
@@ -40,9 +41,9 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	@Override
-	public List<Cha_pVO> allPointSelect(String userid, int rownum1, int rownum2){
+	public List<Cha_pVO> allPointSelect(MyinfoPageVO pVO) {
 
-		return dao.allPointSelect(userid, rownum1, rownum2);
+		return dao.allPointSelect(pVO);
 	}
 
 	@Override

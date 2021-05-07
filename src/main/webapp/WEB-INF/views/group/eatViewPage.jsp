@@ -47,15 +47,17 @@
 			});
 
 			//버튼 클릭시============================================================================
-				//뒤로가기		
+			//뒤로가기		
 			$("#eatViewPageBackBtn").click(()=>{
-				history.back();
+				location.href="eatPage?&loc_gu=${pageVO.loc_gu}&pageNum=${pageVO.pageNum}&category=한끼미식회<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>";
 			});	
-				//수정
+			//수정
+			$("#eatViewPageEditBtn").click(()=>{
+				location.href="groupEditForm?num=${vo.num}&userid=${vo.userid}&loc_gu=${pageVO.loc_gu}&pageNum=${pageVO.pageNum}&category=한끼미식회<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>";
+			})	
 				
 				
-				
-				//삭제
+			//삭제
 			$("#eatViewDeleteBtn").click(()=>{
 				if(confirm('삭제 하시겠습니까?')){
 					location.href="eatViewPageDel?loc_gu=${pageVO.loc_gu}&up_cate=${vo.up_cate}";
@@ -98,6 +100,10 @@
 			
 		//지도============================================================================================
 		var markers = [];	
+		//지도 검색 키워드 객체 생성
+		var ps = new kakao.maps.services.Places();
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
 			//지도 생성
 			var container = document.getElementById("eatViewPageMap"),
 				options = {
@@ -117,7 +123,7 @@
 				        shape: "poly",
 				        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
 				    }
-				);				
+			);				
 			function displayMarker(place){
 				//마커를 생성하고 지도에 표시한다.	
 					marker = new kakao.maps.Marker({
@@ -132,8 +138,7 @@
 				}
 				
 			
-			//지도 검색 키워드 객체 생성
-			var ps = new kakao.maps.services.Places();
+			
 				
 			//검색한 키워드 값을 내가 text에서입력한 값으로 셋팅해주는 작업
 			function searchPlaces(){
@@ -187,8 +192,7 @@
 			
 			
 			
-			// 주소-좌표 변환 객체를 생성합니다
-			var geocoder = new kakao.maps.services.Geocoder();
+			
 
 			// 주소로 좌표를 검색합니다
 			geocoder.addressSearch('${vo.g_loc1}', function(result, status) {
@@ -238,7 +242,7 @@
 
 </head>
 <body id="eatViewPagebody">
-	<div id="eatViewPageMap" style="width:2500px; height:1500px; position:relative; overflow:hidden;"></div>
+	<div id="eatViewPageMap" style="width:2000px; height:1200px; position:relative; overflow:hidden;"></div>
 		
 	<!-- 맨위 폼 -->
 	<div class="groupTopFrm">
@@ -270,12 +274,12 @@
 		<div>
 			${vo.g_content }
 		</div>
-		<hr style="width:480px; margin:0 auto;">	
+		<hr style="width:450px; margin:0 auto;">	
 		<span> 약속정보</span>
 		<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/><div>${vo.g_date }  ${vo.g_time }</div></div><!-- g_date, g_time 값을 가지고 온다. -->
 		<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소"/><div> ${vo.g_loc1 }</div></div><!-- g_loc1 값을 가져온다. -->
 		<div> ${vo.g_tag }</div>
-		<hr style="width:480px; margin:0 auto;"/>
+		<hr style="width:450px; margin:0 auto;"/>
 		<div>
 			<button id="eatViewPageBackBtn" class="btn cancelBtn">뒤로가기</button>
 			<c:if test="${vo.userid!=logId}"> 

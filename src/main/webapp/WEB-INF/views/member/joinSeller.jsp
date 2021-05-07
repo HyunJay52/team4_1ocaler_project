@@ -9,72 +9,84 @@
 	document.title="셀러회원가입";
 	
 	$(function(){
-		//비밀번호 재확인
-		$("#sellPwdBtn").click(function(){
-			var url = "sellerPwdDoubleCheck";
-			var userpwd = "userpwd="+$("#sellerPwd").val();
-			
-			$.ajax({
-				url: url,
-				data: userpwd,
-				success: function(result){
-					if(result=='Y'){ //사용가능
-						$('#sellPwdCheck').text('비밀번호가 일치합니다.');
-						$("#sellPwdCheck").css({
-							"color" : "green",
-							"fontSize" : "12"
-						});
-						$("#pwdDoubleCheck").text(result);
-					}
-					if(result=='N'){
-						$('#sellPwdCheck').text('비밀번호가 일치하지 않습니다.');
-						$('#sellerPwd').val('');
-						$('#sellerPwd').focus();
-						$("#sellPwdCheck").css({
-							"color" : "pink",
-							"fontSize" : "12"
-						});
-						$("#pwdDoubleCheck").text(result);
-					}
-				},
-				error: function(error){
-					$('#sellPwdCheck').text('다시 시도해주세요.');
-					$("#sellPwdCheck").css({
-						"color" : "red",
-						"fontSize" : "12"
-					});
-					$("#sellerPwd").focus();
-					console.log("error ? ",error);
-				}
-			});
-		});
-		
-		$('#sellerPwd').keydown(function(){ // 키 이벤트가 발생했을 때
-	         $("#pwdDoubleCheck").text("N");
-	         userid=$("#sellerPwd").text();
-	    });
-		$("#sellerPwd").change(function(){ // 마우스로 잘라내기를 했을 경우를 대비
-	         if(sellerPwd!=$("#sellerPwd")){
-	            $("#pwdDoubleCheck").text("N");
-	         }
-     	});
-		
-		// 프로필 사진
-		$("#sel_prof").on('change', function() {
-			readURL(this);
-		});
-
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					$('#sel_previewImg').attr('src', e.target.result);
-				}
-
-				reader.readAsDataURL(input.files[0]);
+		$("#sellerJoinFrm").submit(function(){
+			if($("#sellerPwd").val()==null || $("#sellerPwd").val()==''){
+				alert("비밀번호를 다시 입력해주세요");
+				$("#sellerPwd").focus();
+				return false;
 			}
-		};
+			if($("#pwdDoubleCheck").text()=='N'){
+				alert("비밀번호 확인은 필수입니다");
+				return false;
+			}
+			if($("#sel_name").val()==null || $("#sel_name").val()==''){
+				alert("사업자명은 필수입니다");
+				$("#sel_name").focus();
+				return false;
+			}
+			if($("#company").val()==null || $("#company").val()==''){
+				alert("회사명은 필수입니다");
+				$("#company").focus();
+				return false;
+			}
+			if($("#com_num").val()==null || $("#company").val()==''){
+				alert("사업자번호는 필수입니다");
+				$("#com_num").focus();
+				return false;
+			}
+			if($("#sel_tel").val()==null || $("#sel_tel").val()==''){
+				alert("대표번호를 입력해주세요");
+				$("#sel_tel").focus();
+				return false;
+			}
+			if($("#sel_email").val()==null || $("#sel_email").val()==''){
+				alert("이메일을 입력해주세요");
+				$("#sel_email").focus();
+				return false;
+			}
+			if($("#sel_zip").val()==null || $("#sel_zip").val()==''){
+				alert("우편번호를 입력해주세요");
+				$("#sel_zip").focus();
+				return false;
+			}
+			if($("#sel_addr").val()==null || $("#sel_addr").val()==''){
+				alert("주소를 입력해주세요");
+				$("#sel_addr").focus();
+				return false;
+			}
+			if($("#sel_detail").val()==null || $("#sel_detail").val()==''){
+				alert("상세주소를 입력해주세요");
+				$("#sel_detail").focus();
+				return false;
+			}
+			if($("#acc_name").val()==null || $("#acc_name").val()==''){
+				alert("계좌주의 이름을 입력해주세요");
+				$("#acc_name").focus();
+				return false;
+			}
+			if($("#bank").val()==null || $("#bank").val()==0){
+				alert("거래은행을 선택해주세요");
+				$("#bank").focus();
+				return false;
+			}
+			if($("#account").val()==null || $("#account").val()==''){
+				alert("계좌번호를 입력해주세요");
+				$("#account").focus();
+				return false;
+			}
+			if($("#sel_prof").val()==null || $("#sel_prof").val()==''){
+				alert("프로필 사진을 선택하지 않으시면, 기본 이미지로 지정됩니다");
+				$("#sel_prof").val('user.png');
+				$("#sel_prof").focus();
+				return false;
+			}
+			if($("#sel_content").val()==null || $("#sel_prof").val()==''){
+				$("#sel_content").val("안녕하세요,"+$("#company").val()+"입니다");
+				$("#sel_content").focus();
+				return false;
+			}
+			return true;
+		});
 		
 	});
 </script>
@@ -104,7 +116,7 @@
 				
 				<li>사업자번호</li>
 				<li><input type="number" name="com_num" id="com_num" tabindex="6" placeholder="사업자등록번호를 입력해주세요"/>
-					<br/><span id="checktel"></span>
+					<br/><span id="checkCumNum"></span>
 				</li>
 				
 				<li>대표번호</li>
@@ -136,9 +148,12 @@
 				<li>
 					<button type="button" tabindex="9" class="btn commBtn lgBtn addBank">계좌등록</button>
 					<ul id="bankInput">
-						<li><input type="text" name="acc_name" id="acc_name" tabindex="13" placeholder="예금주명"/></li>
+						<li><input type="text" name="acc_name" id="acc_name" tabindex="13" placeholder="예금주명"/>
+							<br/><span id="checkSellAccName"></span>
+						</li>
 						<li>
 							<select id="bank" name="bank" tabindex="14">
+								<option value="0">은행선택</option>
 								<option value="신한은행">신한은행</option>
 								<option value="기업은행">기업은행</option>
 								<option value="하나은행">하나은행</option>
@@ -146,12 +161,12 @@
 								<option value="카카오뱅크">카카오뱅크</option>
 							</select>
 							<input type="number" name="account" id="account" tabindex="15" placeholder="계좌번호(숫자만 입력해주세요)"/>
-							<br/><span id="checkSellEmail"></span>
+							<br/><span id="checkSellAcc"></span>
 						</li>
 					</ul>
 				</li>
 			</ul>
-			<button type="button" id="seeMore" class="btn commBtn lgBtn" style="width: 700px; height: 40px; display: block; margin: 0 auto;">더보기</button>
+			<button type="button" id="seeMore" class="btn seeMoreClass">더보기</button>
 		</div>
 		<div>추가정보</div>		
 		<div id="setProfile">
@@ -171,7 +186,7 @@
 				<li><textarea name="sel_content" id="sel_content" maxlength="200" placeholder="최대 200자"></textarea>
 <!-- 					<input type="text" name="mem_content" id="mem_content" maxlength="100" placeholder="최대 100자"/> </li> -->
 			</ul>
-			<button class="btn commBtn lgBtn" style="width: 320px; display:block; margin: 0 auto;" >가입하기</button>
+			<button class="btn seeMoreClass" >가입하기</button>
 		</div>
 	</form>
 	

@@ -74,6 +74,7 @@
 				<li>활동지역</li>
 				<li>
 					<select id="loc_gu" name="loc_gu" tabindex="12">
+								<option value="0"> = = = = = = = = 지역선택 = = = = = = = = </option>
 								<option value="강서구">강서구</option>
 								<option value="양천구">양천구</option>
 								<option value="구로구">구로구</option>
@@ -103,8 +104,7 @@
 <!-- 					<img src="img/indexImg/bo_pin.png" id="join_locImg"/> -->
 				</li>
 			</ul>
-			<button type="button" id="seeMore" class="btn commBtn Mem_lgBtn"
-				style="width: 700px; height: 40px; display: block; margin: 0 auto;">더보기</button>
+			<button type="button" id="seeMore" class="btn seeMoreClass" >더보기</button>
 		</div>
 		<div>추가정보</div>
 		<div id="setProfile">
@@ -132,7 +132,7 @@
 				<li><textarea name="mem_content" id="mem_content"
 						maxlength="200" placeholder="최대 200자"></textarea> 
 			</ul>
-			<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">가입하기</button>
+			<button type="submit" class="btn seeMoreClass">가입하기</button>
 		</div>
 	</form>
 </div>

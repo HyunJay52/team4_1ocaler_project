@@ -105,7 +105,7 @@ public class SellerVO {
 	public String getBank() {
 		return bank;
 	}
-	public void setBack(String bank) {
+	public void setBank(String bank) {
 		this.bank = bank;
 	}
 	public String getAcc_name() {

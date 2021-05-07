@@ -8,12 +8,12 @@
 
 #joinMem div:nth-child(odd) {
 	width: 700px;
-	height: 50px;
+	height: 70px;
 	line-height: 50px;
-	margin-top: 10px;
+/* 	margin-top: 10px; */
 	font-size: 25px;
 	text-align: center;
-	border-bottom: 3px solid #3f1785;
+	border-bottom: 2px solid #000;
 }
 
 #joinMem>form ul {
@@ -29,11 +29,11 @@
 
 #memJoinFrm>#basicInfo {
 	width: 700px;
-	margin: 20px auto;
+	margin: 40px auto;
 }
 
-#memJoinFrm>#setProfile ul {
-	height: 360px;
+#setProfile>#prof_ul {
+	height: 360px; margin: 40px 0px;
 }
 
 #memJoinFrm>#basicInfo input, form>#setProfile input {
@@ -50,7 +50,13 @@
 	border-radius: 3px;
 	border: 1px solid #ddd;
 }
-
+#basicInfo .seeMoreClass, #setProfile .seeMoreClass{
+	width: 700px; background-color: #5f0080;
+	color: #fff; font-size: 17px;
+}
+#basicInfo .seeMoreClass:hover,  #setProfile .seeMoreClass:hover {
+	font-family: nsreb;
+}
 #setProfile>button:first-child {
 	width: 320px;
 	display: block;
@@ -126,18 +132,18 @@
 	width: 120px;
 	height: 45px;
 	margin-left: 10px;
-	border: 1px solid #3f1785;
-	color: #3f1785;
+	border: 1px solid #3b3a73;
+	color: #3b3a73;
 }
 
 #memJoinFrm .Mem_lgBtn:hover {
-	color: black; background-color: #ddd;
-	font-weight: bold;
+	color: #3b3a73; background-color: #fff;
+	font-family: nsreb;
 }
 
 #memJoinFrm .lgA:hover {
 	margin-top: 20px;
-	color: #000;
+	color: #fff;
 	text-decoration: none;
 }
 
@@ -188,14 +194,12 @@
 .Mem_input-file-button {
 	padding: 3px 15px;
 	margin-top: 70px;
-	border: none;
 	font-size: 16px;
 	width: 95px;
 	text-align: center;
-	background-color: 3f1785;
-	border-radius: 5px;
-	color: white;
+	border-radius: 5px; border: 1px solid #3f1785;
 	cursor: pointer;
+	color: #3f1785; background-color: #fff;
 }
 
 /* 로그인 페이지 */
@@ -244,7 +248,9 @@
 		color: #000;
 		text-decoration: none;
 	}
-
+#nickOverlap, #idOverlap{
+	display: none;
+}
 /* - - - - - - - - - - - - - - - - - - - - 셀러회원 스타일 */
 	#joinSeller {
 		width: 1300px; height: auto;
@@ -255,7 +261,7 @@
 		margin-top: 10px;
 		font-size: 25px;
 		text-align: center;
-		border-bottom: 3px solid #3f1785;
+		border-bottom: 2px solid #000;
 	}
 	#joinSeller>form ul {
 		width: 700px; height: 600px;

@@ -128,52 +128,25 @@
 			});
 		};
 		
-		//페이징
-		var totalRecord; //총 레코드
-		var totalPage =3;	//총 페이지
-		var onePageRecord = 5; //한 페이지에 표시할 레코드
-		var onePageSize = 5; // 한 페이지에 표시할 페이지
-		
+		//페이징		
 		var nowNum = 1;	//현제 페이지
-		//시작 페이지
-		var startPage = ((nowNum -1) / onePageSize*onePageSize)+1;
-		console.log("startPage="+startPage+"sum="+startPage+onePageSize )
-		
-		startPaging();
-		function startPaging(){
-		var data = {
-				'onePageRecord' : onePageRecord
-		}
-			//총 페이지 구하기
-			$.ajax({
-				url : "myPointCount",
-				data : data,
-				dataType: 'json',
-				success : function(result){
-					totalPage = result;
-					setPointRecord(nowNum);
-				}, error : function(e){
-					console.log(e);
-				}
-			});
-		}
-		$(".pagingArea>ul>li").on('click' ,function(){
-			setPointRecord(nowNum);
+		var date = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; 
+		$(document).ready(function(){
+			var searchDate = $(".loadDate").val();
+			console.log(searchDate);
+			setPointRecord(1, searchDate, 'all', "");
 		});
-		function setPointRecord(p){
-			var data = {
-				'nowNum' : p,
-				'onePageRecord' : onePageRecord,
-				'totalPage' : totalPage				
-			}
+		
+		//시작 페이지
+
+		function setPointRecord(p, date, key, word){
 			$.ajax({
 				url : "myPointSelect",
-				data : data,
-				dataType : 'json',
+				data : "nowNum="+p+"&searchDate="+date+"&searchKey="+key+"&searchWord="+word,
 				success : function(result){
-					console.log(result);
+					console.log(result.pList);
 					$(".pointList").html("");
-					result.forEach(function(data,idx){
+					result.pList.forEach(function(data,idx){
 						var tag = "<li>";
 						if(data.cha_mth == 1){
 							tag += "<div class='pointStatus point-color-green'>적립</div>";
@@ -192,40 +165,63 @@
 						}
 						$(".pointList").append(tag);
 					});
-					setpaging();
+					setpaging(result.pVO);
 			
 				}, error : function(e){
 					console.log(e);
 				}
 			
-			
+			 
 			});
 		}
 		
-		function setpaging(){
+		function setpaging(pVO){
+			console.log(pVO);
+			$(".pagingArea").html("");
 			var tag = '<ul class="pagination justify-content-center">';
-			if(nowNum > 1){
-				tag += '<li class="page-item"><a href="myPointSelect?nowNum='+(nowNum-1)+'" class="page-link">Prev</a></li>';					
+			if(pVO.nowNum > 1){
+				tag += '<li class="page-item"><button value="'+(pVO.nowNum-1)+'" class="page-link">Prev</button></li>';					
 			}else{
-				tag += '<li class="page-item disabled"><a href="" class="page-link">Prev</a></li>';				
+				tag += '<li class="page-item disabled"><button class="page-link">Prev</button></li>';				
 			}
-			for(var p = startPage; p < startPage+onePageSize; p++){
-				if(p <= totalPage){
-					if(nowNum == p){
-						tag += '<li class="page-item active"><a href="javascript:test('+p+')" class="page-link">'+p+'</a></li>';						
+			for(var p = pVO.startPage; p < pVO.startPage + pVO.onePageSize; p++){
+				if(p <= pVO.totalPage){
+					if(p == pVO.nowNum){
+						tag += '<li class="page-item active"><button class="page-link" value="'+p+'">'+p+'</button></li>';						
 					}else{
-						tag += '<li class="page-item"><a href="javascript:setPointRecord('+p+')" class="page-link">'+p+'</a></li>';						
+						tag += '<li class="page-item"><button class="page-link" value="'+p+'">'+p+'</button></li>';						
 					}
 				}	
 			}
-			if(nowNum == totalPage){
-				tag += '<li class="page-item disabled"><a href="" class="page-link">Next</a></li>';				
+			if(pVO.nowNum == pVO.totalPage){
+				tag += '<li class="page-item disabled"><button class="page-link">Next</button></li>';				
 			}else{
-				tag += '<li class="page-item"><a href="myPointSelect?nowNum='+(nowNum+1)+'" class="page-link">Next</a></li>';				
+				tag += '<li class="page-item"><button value="'+(pVO.nowNum+1)+'" class="page-link">Next</button></li>';				
 			}
 			tag += "</ul>";
 			$(".pagingArea").append(tag);
 		}
+		
+		$(document).on('click', '.pagingArea>ul>li>button', function(){
+			var nowNum = $(this).val(); //현제 페이지
+			//검색할 날짜 데이터
+			var searchDate = $(".loadDate").val();
+			//검색할 키 데이터
+			var searchKey = $("#selPayment option:selected").val();//
+			
+			console.log(nowNum+"/"+searchDate+"/"+searchKey);
+			
+			setPointRecord(nowNum, searchDate, searchKey, "");			
+		});
+		$("#selPayment").change(function(){
+			//검색할 날짜 데이터
+			var searchDate = $(".loadDate").val();
+			//검색할 키 데이터
+			var searchKey = $("#selPayment option:selected").val();//
+			setPointRecord(1, searchDate, searchKey, "");			
+
+		})
+		
 	});
 </script>
 <div class="myinfoBody">
@@ -262,34 +258,15 @@
 	</div>	
 		<div id="loadList">
 				<select class="selectBox " name="selPayment" id="selPayment">
-					<option value="전체">전체</option>
-					<option value="충전내역">충전내역</option>
-					<option value="사용내역">사용내역</option>
+					<option value="all">전체</option>
+					<option value="1">충전내역</option>
+					<option value="2">사용내역</option>
 				</select>
 				<div class="loadLine"></div>
 				<div class="loadDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
-				<input type="date" min="2021-01-01" max="2021-05-31" class="loadDate"/>
+				<input type="date" value="2021-05-06" min="2020-01-01" max="2022-01-01" class="loadDate"/>
 				<ul class="pointList">
-				<c:forEach var="i" items="${pList }">
-					<c:if test="${i.cha_mth == 1 }">
-					<li>
-						<div class="pointStatus point-color-green">적립</div>
-						<p class="pointDate">${i.po_date }</p>
-						<span class="pointContent">구매 적립</span>
-						<span class="usePoint point-color-green">+${i.cha_point }원</span>
-						<p class="pointItem">충전포인트 결제(카드)<p>
-					</li>
-					</c:if>
-					<c:if test="${i.cha_mth > 1 }">
-					<li>
-						<div class="pointStatus point-color-red point-status-red">사용</div>
-						<p class="pointDate">${i.po_date }</p>
-						<span class="pointContent">포인트 결제</span>
-						<span class="usePoint point-color-red">-${i.cha_point }원</span>
-						<p class="pointItem">물품 결제(포인트)<p>
-					</li>
-					</c:if>
-				</c:forEach>
+				
 				</ul>
 			<!--
 			<table class="myinfoTable2">

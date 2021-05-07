@@ -3,8 +3,11 @@ package com.team4.localer.dao;
 import java.util.List;
 
 import com.team4.localer.vo.AdminPageVO;
+import com.team4.localer.vo.AdminstatisVO;
+import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.SellerVO;
+import com.team4.localer.vo.SellitemVO;
 
 public interface ManageDAO {
 	//회원목록 allSelect
@@ -20,4 +23,12 @@ public interface ManageDAO {
 	//셀러관리 페이지 
 	//셀러 list Select 
 	public List<SellerVO> sellerAllSelect(AdminPageVO pageVO);
+	//셀러가 작성한 판매글 리스트
+	public List<AdminstatisVO> sellerDetailInfo(int sel_num);
+	
+	//게시글관리 페이지
+	//회원 판매게시판 목록
+	public List<MemShareVO> memShareAllSelect(AdminPageVO pageVO);
+	//셀러판매 게시판 목록
+	public List<SellitemVO> sellerBoardSelect(AdminPageVO pageVO);
 }
