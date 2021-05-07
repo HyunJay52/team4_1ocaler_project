@@ -340,19 +340,19 @@ body {
 #gachi .indexInnerUl>li:nth-of-type(2) {
 	font-family: nsreb; font-size: 16px;
 }
-
-#gachi .indexInnerUl>li:nth-of-type(2), #gachi .indexInnerUl>li:nth-of-type(3),
-	#gachi .innerUl>li:nth-of-type(4) {
+#gachi .indexInnerUl>li:nth-of-type(3) {
+	text-align: center; height: 30px; margin-top: 10px;
+}
+#gachi .indexInnerUl>li:nth-of-type(2), #gachi .innerUl>li:nth-of-type(4) {
 	height: 35px;
 	text-align: left;
 }
-
 #gachi .indexInnerUl>li:nth-of-type(5), #gachi .indexInnerUl>li:nth-of-type(6) {
 	text-align: right;
 }
 
 #gachi .indexInnerUl>li:nth-of-type(5) {
-	padding-right: 10px; height: 40px; line-height: 40px;
+	height: 40px; line-height: 40px;
 }
 #gachi .indexInnerUl>li:nth-of-type(6){
 	height: 60px; font-size: 15px;

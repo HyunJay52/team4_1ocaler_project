@@ -52,7 +52,7 @@
 		</c:if>
 		<c:if test="${logName!=null && logName!='' }">
 			<div id="afterLogin">
-				<a href="myInfoMain">${logName }</a>님 환영합니다. <a href="logOut">로그아웃</a>
+				<a href="myInfoMain">${logName }</a>님 환영합니다. &nbsp; &nbsp;<a href="logOut">로그아웃</a>
 			</div>
 		</c:if>
 	</div>
