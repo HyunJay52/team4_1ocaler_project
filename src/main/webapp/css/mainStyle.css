@@ -43,7 +43,9 @@ body {
 #pageTop a {
 	color: #000;
 }
-
+#topNavi {
+	width: 1700px;
+}
 #navi {
 	width: 1300px;
 	height: 70px;
@@ -297,11 +299,10 @@ body {
 
 #gachi>ul>li {
 	width: 235px;
-	height: 270px;
+	height: auto;
 	margin: 10px;
 	box-shadow: 3px 3px 3px #ddd;
 }
-
 .test {
 	font-size: 18px;
 }
@@ -325,20 +326,19 @@ body {
 
 #gachi .indexInnerUl>li {
 	width: 220px;
-	height: 40px;
-	line-height: 40px;
-	padding: 0px 5px;
+	height: 45px;
+	line-height: 45px;
+	padding: 0px 15px;
 }
 
 #gachi .indexInnerUl>li:nth-of-type(1) {
-	margin-top: 10px;
+	width: 218px; margin-bottom: 10px;
 	background-color: #9edae3;
 	color: #fff;
 }
 
 #gachi .indexInnerUl>li:nth-of-type(2) {
-	height: 50px;
-	line-height: 50px;
+	font-family: nsreb; font-size: 16px;
 }
 
 #gachi .indexInnerUl>li:nth-of-type(2), #gachi .indexInnerUl>li:nth-of-type(3),
@@ -352,11 +352,10 @@ body {
 }
 
 #gachi .indexInnerUl>li:nth-of-type(5) {
-	padding-right: 10px;
+	padding-right: 10px; height: 40px; line-height: 40px;
 }
-
-#gachi .gachiPostImg {
-	width: 30px;
+#gachi .indexInnerUl>li:nth-of-type(6){
+	height: 60px; font-size: 15px;
 }
 
 #gachi .gachiPostLoc {
@@ -387,8 +386,8 @@ body {
 }
 
 #indexMain .indexInnerUl>li:last-child>img {
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	border-radius: 70%;
 }
 

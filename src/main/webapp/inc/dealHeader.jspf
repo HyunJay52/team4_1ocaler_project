@@ -14,7 +14,7 @@
       console.log(scrollY);
       
       //헤더의 높이 구하기
-      var top = 70;
+      var top =105;
       
       var bar = document.getElementById("selMain").style;
       
