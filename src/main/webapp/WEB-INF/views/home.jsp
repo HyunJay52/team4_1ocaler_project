@@ -4,6 +4,27 @@
 
 <script>
 	document.title = "1ocler home";
+	
+// 	$(document).ready(function(){
+// 		var url = "sendGroupList";
+// 		var g_gu;
+// 		if(${g_gu!=null && g_gu!=''}){
+// 			g_gu = 'g_gu='+${logLoc_gu};
+// 		}else {
+// 			g_gu = '';
+// 		}
+		
+// 		$.ajax({
+// 			url: url,
+// 			data: g_gu,
+// 			success: function(result){
+// 				console.log("리스트 불러오기 성공...");
+// 			},
+// 			error: function(error){
+// 				console.log("리스트 불러오기 에러...", error);
+// 			}
+// 		});
+// 	});
 </script>
 
 	<!-- bx-slider part -->
@@ -93,7 +114,7 @@
 					<ul class="indexInnerUl">
 						<li class="gachiPostTitle"><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
 						<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-						<li>04/29 15:00</li>
+						<li>2021/04/29 15:00</li>
 						<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
 						<li>
 							<span class="cntJoin">1</span> / 3 명
