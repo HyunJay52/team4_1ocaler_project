@@ -110,18 +110,19 @@ public class MyinfoController {
 		pVO.setOnePageRecord(5);
 		pVO.setOnePageSize(5);
 		pVO.setStartPage(pVO.getNowNum(), pVO.getOnePageSize());
-		
+		pVO.setSearchWord(searchWord);
 		
 		if(searchDate != null && searchDate != "") {
 			pVO.setSearchDate(searchDate+" 01:00:00");
+			pVO.setSearchDate2(searchDate+" 12:59:59");
 		}
 		if(searchKey != null && searchKey != "") {
 			if(searchKey.equals("all")) {
 				pVO.setSearchKey("");
 			}else {
 				int searchValue = Integer.parseInt(searchKey);
-				if(searchValue <= 1 ) {
-					pVO.setSearchKey("1");				
+				if(searchValue == 1 ) {
+					pVO.setSearchKey("1");
 				}else {
 					pVO.setSearchKey("2");
 				}				
@@ -129,7 +130,9 @@ public class MyinfoController {
 		}
 		System.out.println("totalPage="+pVO.getTotalPage()+"onePageSize="+pVO.getOnePageSize());
 		System.out.println("date="+pVO.getSearchDate()+"key="+pVO.getSearchKey()+"word="+pVO.getSearchWord());
-		pVO.setTotalRecord(Integer.parseInt(service.pointCount(userid)));
+		System.out.println("date2="+pVO.getSearchDate2());
+		pVO.setTotalRecord(Integer.parseInt(service.pointCount(pVO)));
+		System.out.println("totalRecord="+pVO.getTotalRecord());
 		pVO.setTotalPage(pVO.getTotalRecord(), pVO.getOnePageRecord());
 		pVO.setLastPageRecord(pVO.getTotalRecord(), pVO.getOnePageRecord());
 		pVO.setRowNum1(pVO.getNowNum(), pVO.getOnePageRecord());
@@ -137,6 +140,7 @@ public class MyinfoController {
 		
 		
 		list = service.allPointSelect(pVO);
+		System.out.println(list.size());
 		result.put("pList", list);
 		result.put("pVO", pVO);
 		return result;

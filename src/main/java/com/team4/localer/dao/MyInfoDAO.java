@@ -23,5 +23,5 @@ public interface MyInfoDAO {
 	public List<Cha_pVO> allPointSelect(MyinfoPageVO pVO);
 	
 	//유저의 총 포인트 사용횟수 조회
-	public String pointCount(String userid);
+	public String pointCount(MyinfoPageVO pVO);
 }

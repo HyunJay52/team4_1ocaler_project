@@ -47,9 +47,9 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	@Override
-	public String pointCount(String userid) {
+	public String pointCount(MyinfoPageVO pVO) {
 		
-		return dao.pointCount(userid);
+		return dao.pointCount(pVO);
 	}
 
 

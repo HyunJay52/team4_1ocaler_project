@@ -202,6 +202,7 @@
 			$(".pagingArea").append(tag);
 		}
 		
+		//페이징 이벤트
 		$(document).on('click', '.pagingArea>ul>li>button', function(){
 			var nowNum = $(this).val(); //현제 페이지
 			//검색할 날짜 데이터
@@ -211,16 +212,58 @@
 			
 			console.log(nowNum+"/"+searchDate+"/"+searchKey);
 			
-			setPointRecord(nowNum, searchDate, searchKey, "");			
+			setPointRecord(nowNum, searchDate, searchKey, "0");			
 		});
+		//검색 내역 선택 이벤트 
 		$("#selPayment").change(function(){
 			//검색할 날짜 데이터
 			var searchDate = $(".loadDate").val();
 			//검색할 키 데이터
 			var searchKey = $("#selPayment option:selected").val();//
-			setPointRecord(1, searchDate, searchKey, "");			
+			setPointRecord(1, searchDate, searchKey, "0");			
 
-		})
+		});
+		
+		//날짜 버튼 이벤트
+		$(".loadDateFrm>button").click(function(){
+
+			console.log($(".setMonth").text());
+			var date = $(".loadDate").val();
+			
+			var dateArr = date.split("-");
+			var year = parseInt(dateArr[0]);
+			var getMonth = parseInt(dateArr[1]);
+			var getDay = parseInt(dateArr[2]);
+			if($(this).hasClass('prev')){
+				getMonth--;
+				if(getMonth == 0){
+					getMonth = 12;
+					year--;
+				}
+			}else if($(this).hasClass('next')){
+				getMonth++;
+				if(getMonth == 13){
+					getMonth = 1;
+					year++;
+				}
+			}
+			var month = String(getMonth).padStart(2,'0');
+			var day = String(getDay).padStart(2,'0');
+			var setDate = year+"-"+month+"-"+day;
+			$(".loadDate").attr('value', setDate);
+			var searchKey = $("#selPayment option:selected").val();
+			setPointRecord(1, setDate, searchKey, "0");			
+			
+		});	
+		
+		$(".loadDate").change(function(){
+			var date = $(this).val();
+			var month = date.split("-");
+			$(".setMonth").text(parseInt(month[1])+"월");
+			var searchKey = $("#selPayment option:selected").val();
+			setPointRecord(1, date, searchKey, "0");	
+		});
+		
 		
 	});
 </script>

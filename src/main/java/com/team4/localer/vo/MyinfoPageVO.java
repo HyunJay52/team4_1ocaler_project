@@ -14,10 +14,17 @@ public class MyinfoPageVO {
 	private int rowNum2;
 	
 	private String searchDate;
+	private String searchDate2;	
 	private String searchKey;
 	private String searchWord;
 	
 	
+	public String getSearchDate2() {
+		return searchDate2;
+	}
+	public void setSearchDate2(String searchDate2) {
+		this.searchDate2 = searchDate2;
+	}
 	public String getUserid() {
 		return userid;
 	}
