@@ -100,4 +100,36 @@
 				</div>
 			</div>
 		</c:if>
+		<c:if test="${logId.equals('admin') }">
+			<div id="topNavi">
+				<ul id="navi">
+					<li><a href="main">HOME<span id=line></span></a></li>
+					<li><a href="m_mem">회원관리</a></li>
+					<li><a href="selManage">게시글관리</a></li>
+					<li><a href="statis_mem">통계</a></li>
+					<li><a href="spend_mem">정산 관리</a></li>
+				</ul>
+				<div id="topSubMenu">
+					<ul>
+						<li><a href="cspage">고객센터</a></li>
+					</ul>
+					<ul>
+						<li><a href="m_mem">일반회원</a></li>
+						<li><a href="m_sel">셀러회원</a></li>
+					</ul>
+					<ul>
+						<li><a href="selManage">판매게시글관리</a></li>
+						<li><a href="boardManage">게시글관리</a></li>
+					</ul>
+					<ul>
+						<li><a href="statis_mem">회원 통계</a></li>
+						<li><a href="statis_board">게시글 통계</a></li>
+					</ul>
+					<ul>
+						<li><a href="spend_mem">회원정산</a></li>
+						<li><a href="spend_sel">셀러정산</a></li>
+					</ul>
+				</div>
+			</div>
+		</c:if>
 	</div>

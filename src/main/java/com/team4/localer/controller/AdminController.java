@@ -35,13 +35,6 @@ public class AdminController {
 		mav.setViewName("admin/main");
 		return mav;
 	}
-	@RequestMapping("/selManage")//판매관리
-	public ModelAndView selManage(HttpSession session) {
-		session.setAttribute("logId", "admin");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/selManage");
-		return mav;
-	}
 	@RequestMapping("/boardManage")//판매관리
 	public ModelAndView boardManage() {
 		ModelAndView mav = new ModelAndView();
