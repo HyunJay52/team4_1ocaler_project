@@ -109,20 +109,19 @@
 		}
 		
 		//지역 세팅
-		function setGu(){
-			var gu = ['강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구', 
-				'노원구','도봉구','동대문구','동작구','마포구','서대문구','서초구','성동구','성북구','송파구','양천구','영등포구','용산구','은평구','종로구','중구','중랑구'];
-			var tag = "";
-			gu.map(function(value, index){
-				if(value == '${myVO.loc_gu}'){
-					tag += "<option value="+value+" selected>"+value+"</option>";					
-				}else{
-					tag += "<option value="+value+">"+value+"</option>";					
-				}
-			});
-			$("#addr1").html(tag);
-			$("#addr2").html(tag);
+		var gu = ['강서구','양천구','구로구','영등포구','금천구','동작구','관악구','서초구', 
+				'강남구','송파구','강동구','마포구','용산구','서대문구','중구','성동구',
+				'광진구','종로구','동대문구','성북구','중랑구','은평구','강북구','노원구','도봉구'];
+		var tag = "<option value='0'> = = = = = = = = 지역선택 = = = = = = = = </option>";
+		for(var i = 0; i < gu.length; i++){
+			if(gu[i] == '${myVO.loc_gu}'){
+				tag += "<option value="+gu[i]+" selected>"+gu[i]+"</option>";
+			}else{
+				tag += "<option value="+gu[i]+">"+gu[i]+"</option>";
+			}
 		}
+		$("#myinfoLoc_gu").append(tag);
+
 		
 	});
 </script>
@@ -191,8 +190,9 @@
 				</li>
 				<li>활동지역</li>
 				<li>
-					<input type="text" class="inputDisabled" name="loc_gu" id="loc_gu" tabindex="12" value="${myVO.loc_gu }" disabled="disabled" placeholder="ㅇㅇ구로 입력해주세요" />
-					<img src="img/indexImg/bo_pin.png" id="locImg"/>
+					<select id="myinfoLoc_gu" name="loc_gu" tabindex="12" class="inputDisabled" disabled="disabled">
+
+					</select>			
 				</li>
 			</ul>
 			
@@ -205,7 +205,7 @@
 		</div>
 	</form>
 		<div class="myinfoOtherBtn">
-			<button type="button" class="btn commBtn ">셀러등록하기</button>
+			<a href="joinSeller" class="btn commBtn">셀러등록하기</a>
 		</div>
 		<button style="float:right" type="button" class="btn cancelBtn " data-target="#myinfoMd" data-toggle="modal">탈퇴하기</button>
 	</div>

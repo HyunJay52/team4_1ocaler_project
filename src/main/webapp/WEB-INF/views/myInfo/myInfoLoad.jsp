@@ -75,7 +75,7 @@
 			    pay_method : payStatus,
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '포인트 충전',
-			    amount : 100,
+			    amount : $("#chargeMoney").val(),
 			    buyer_email : 'test@localer.com',
 			    buyer_name : username,
 			    buyer_tel : '010-1234-5678',
@@ -107,14 +107,6 @@
 				        		console.log("충전실패");
 				        	}
 				        });
-				        location.href="";
-				     /*   if(payStatus == 'vbank'){
-				        	msg += '가상계좌 입금계좌번호 : ' + rsp.vbank_num;
-				        	msg += '가상계좌 은행명 : ' + rsp.vbank_name;
-				        	msg += '가상계좌 예금주 : ' + rsp.vbank_holder;
-				        	msg += '가상계좌 입금기한 : ' + rsp.vbank_date;
-				        	
-				        }*/
 				       
 				        alert("결제가 완료되었습니다.");
 				        
@@ -148,19 +140,25 @@
 					$(".pointList").html("");
 					result.pList.forEach(function(data,idx){
 						var tag = "<li>";
-						if(data.cha_mth == 1){
+						if(data.cha_mth <= 1){
 							tag += "<div class='pointStatus point-color-green'>적립</div>";
 							tag += "<p class='pointDate'>"+data.po_date+"</p>";
-							tag += "<span class='pointContent'>구매 적립</span>";
-							tag += "<span class='usePoint point-color-green'>+"+data.cha_point+"원</span>";
-							tag == "<p class='pointItem'>충전포인트 결제(카드)<p>";
+							if(data.cha_mth == 0){
+								tag += "<span class='pointContent'>보너스 적립</span>";
+								tag += "<span class='usePoint point-color-green'>+"+data.cha_point+"원</span>";
+								tag += "<p class='pointItem'>가입 이벤트</p>";
+							}else{
+								tag += "<span class='pointContent'>구매 적립</span>";
+								tag += "<span class='usePoint point-color-green'>+"+data.cha_point+"원</span>";
+								tag += "<p class='pointItem'>충전포인트 결제(카드)</p>";								
+							}
 							tag += "</li>"
 						}else if(data.cha_mth > 1){
 							tag += "<div class='pointStatus point-color-red point-status-red'>사용</div>";
 							tag += "<p class='pointDate'>"+data.po_date+"</p>";
 							tag += "<span class='pointContent'>포인트 결제</span>";
 							tag += "<span class='usePoint point-color-red'>-"+data.cha_point+"원</span>";
-							tag == "<p class='pointItem'>물품 결제(포인트)<p>";
+							tag += "<p class='pointItem'>물품 결제(포인트)</p>";
 							tag += "</li>"
 						}
 						$(".pointList").append(tag);
@@ -274,7 +272,7 @@
 	<div class="loadTop">
 		<div id="loadArea">
 			<form method="post" action="myInfoLoad" id="loadFrom">
-				<input type="text" name="load" class="lgFnt load"/>
+				<input type="text" id="chargeMoney" name="load" class="lgFnt load"/>
 					<span class="mdFnt">충전 후 잔액 :</span><span class="mdFnt" id="loadMoney"></span>
 					<ul>
 						<li><input type="button" class="btn commBtn mdFnt btn-block" title="10000" value="1 만원"/></li>
@@ -296,7 +294,7 @@
 		</div>
 		<div id="myPoint">
 			<h2>잔액</h2>
-			<h2 style="float:right">${myPoint}</h2>
+			<h2 style="float:right">${myPoint} 원</h2>
 		</div>
 	</div>	
 		<div id="loadList">
