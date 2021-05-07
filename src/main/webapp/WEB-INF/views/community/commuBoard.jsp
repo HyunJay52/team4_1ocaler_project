@@ -9,7 +9,8 @@
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
 						
-		<h1>우리동네이야기</h1>
+		<h3 style="margin-top:50px;">#우리동네이야기 <span style="font-size:20px">| 동네 주민들과 여러 정보를 나눠보아요!</span></h3>
+		
 
 		<div id="coummuBoardMaincenter">
 			<c:forEach var="vo" items="${commuList }">

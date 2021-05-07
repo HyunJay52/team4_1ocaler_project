@@ -7,7 +7,7 @@
 		white-space: nowrap
 	}
 	#coummuBoardMain{
-		overflow:auto;
+		/* overflow:auto; */
 		width:1300px;
 		margin:50 auto;
 		height: auto;
@@ -19,7 +19,7 @@
 		margin-top:30px;
 		}
 	span{
-		font-weight: bold;
+		/* font-weight: bold; */
 	}
 	
 	#coummuBoardMaincenter{ 

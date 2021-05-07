@@ -220,6 +220,13 @@
 	
 	/* 탑헤더? */
 	
+	#commuHeaderMain{
+		position:relative; 
+      	background-color: white;
+     	display: none;  
+	}
+	
+	
 	#commutop{ 
 		height: 70px;
 		width:1300px; 

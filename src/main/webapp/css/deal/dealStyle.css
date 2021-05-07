@@ -1,6 +1,9 @@
 @charset "UTF-8";
    
-   
+   a:visited { 
+   	  color: black; 
+   	  text-decoration: none;}
+
    *{font-family: nsr;
    }
    #dealMnSMain{
@@ -14,19 +17,22 @@
       background-color: white;
       display: none;   
    }
+   #seltop>li a{
+   		font-size: 20px;
+   }
      
    #selTop{
       text-align:center;
    }
    #selTop>li{
       width:650px;
-      height:100px;
-      line-height:100px;
+      height:70px;
+      line-height:70px;
       display:inline-block;
-      font-size:32px;
+      font-size:40px;
    }
    #seltop a:active, #seltop a:link, #seltop a:visited{
-        color: #3f1785;
+        color: #000;
         text-decoration: none;
         font-family: 'Nanum Gothic', sans-serif;
     }    
@@ -59,6 +65,7 @@
       height:40px;
       width:800px;
       border-radius:5px;
+      border: 1px solid gray;
    }
    #selSearch button{
       border:none;

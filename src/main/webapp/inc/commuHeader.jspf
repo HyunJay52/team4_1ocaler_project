@@ -6,6 +6,36 @@
 
 <script>
 
+		window.onscroll=function(){bannerMove()};
+		
+		function bannerMove(){
+		   //현재스크롤바 위치 
+		   var scrollY = window.scrollY;
+		   console.log(scrollY);
+		
+		 //헤더의 높이 구하기
+	      var top =105;
+	      
+	      var bar = document.getElementById("commuHeaderMain").style;
+	      
+	      if(scrollY>top){ // 스크롤 높이가 top보다 내려갔을떄.
+	          bar.top = scrollY-top+"px";
+	          $("#commuHeaderMain").css("display","block");
+	          
+	       }else { // 스크롤 높이가 top보다 내려가지않았을때,
+	          bar.top="0px"; // 원래있는 자리에 있으면됨
+	          $("#commuHeaderMain").css("display","none");
+	       }
+		}
+	      
+	      $(()=>{
+	          $("#commutop>li").hover(function(){
+	             $(this).css('background','#d9d9d9');
+	          },function(){
+	             $(this).css('background','#fff');
+	          });
+	      
+	      });
 	
 </script>
 
@@ -14,7 +44,7 @@
 </style>
 
 
-<div id="commuMain">
+<div id="commuHeaderMain">
 			<div id="commutop" >
 				<span><a href="commuBoard?b_gu=${logLoc_gu}&&up_cate=1">우리동네 이야기 &nbsp;</a></span>
 				 &nbsp;|&nbsp;
