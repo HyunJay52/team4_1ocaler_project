@@ -45,13 +45,14 @@
 		
 		
 		//버튼 클릭시============================================================================
-			//뒤로가기	
+		//뒤로가기	
 		$("#withViewPageBackBtn").click(()=>{
-			history.back();
+			location.href="withPage?loc_gu=${pageVO.loc_gu}&pageNum=${pageVO.pageNum}&category=가치가장<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>";
 		});
-		//수정
-		
-		
+		//수정하기
+		$("#withViewPageEditBtn").click(()=>{
+			location.href="groupEditForm?num=${vo.num}&userid=${vo.userid}&loc_gu=${pageVO.loc_gu}&pageNum=${pageVO.pageNum}&category=가치가장<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>";
+		})	
 		
 		//삭제
 		$("#withViewPageDeleteBtn").click(()=>{
@@ -99,6 +100,10 @@
 		}				
 		//지도============================================================================================
 		var markers = [];	
+		//지도 검색 키워드 객체 생성
+		var ps = new kakao.maps.services.Places();
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
 		//지도 생성
 		var container = document.getElementById("withViewPageMap"),
 			options = {
@@ -108,32 +113,43 @@
 		var map = new kakao.maps.Map(container, options);
 		//마커 찍기를 함수화
 		var marker;
-		function displayMarker(place){
-			//마커를 생성하고 지도에 표시한다.	
-				var startMarkerImage = new kakao.maps.MarkerImage(
-					'<%=request.getContextPath()%>/img/groupImg/startMarker.png',
-					new kakao.maps.Size(35,35),
-					{
-				        offset: new kakao.maps.Point(16, 34),
-				        alt: "출발지",
-				        shape: "poly",
-				        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
-				    }
-				);		
-					marker = new kakao.maps.Marker({
-					map : map,
-					image : startMarkerImage,
-					clickable : true,
-					position : new kakao.maps.LatLng(place.y, place.x)
-				});
-				
-				markers.push(marker);
-				
-			}
 		
-		//지도 검색 키워드 객체 생성
-		var ps = new kakao.maps.services.Places();
+		var startMarkerImage = new kakao.maps.MarkerImage(
+				'<%=request.getContextPath()%>/img/groupImg/startMarker.png',
+				new kakao.maps.Size(35,35),
+				{
+			        offset: new kakao.maps.Point(16, 34),
+			        alt: "출발지",
+			        shape: "poly",
+			        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
+			    }
+		);	
+		var arrivedMarkerImage = new kakao.maps.MarkerImage(
+			'<%=request.getContextPath()%>/img/groupImg/arrivedMarker.png',
+			new kakao.maps.Size(35,35),
+			{
+		        offset: new kakao.maps.Point(16, 34),
+		        alt: "도착지",
+		        shape: "poly",
+		        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
+		    }
+		);
+		
+		
+		
+		
+		
+		function displayMarker(place){
+			//마커를 생성하고 지도에 표시한다.				
+			marker = new kakao.maps.Marker({
+				map : map,
+				image : startMarkerImage,
+				clickable : true,
+				position : new kakao.maps.LatLng(place.y, place.x)
+			});
 			
+			markers.push(marker);
+		}	
 		//검색한 키워드 값을 내가 text에서입력한 값으로 셋팅해주는 작업
 		function searchPlaces(){
 			var keyword = document.getElementById('withViewPageSearchWord').value;
@@ -147,7 +163,7 @@
 				 size : 1
 			 }); 
 		}
-		searchPlaces();
+		
 		
 		//KeyWordSearch 에서 키워드를 검색한다음에 실행하는 콜백 함수로 
 		//검색한 다음의 결과값을 result로 받는다.
@@ -183,7 +199,20 @@
 
 		    }
 		}
+		//출발지 도착지 찍기
+		if('${vo.g_loc2}'!=null && '${vo.g_loc2}'!=''){
+			locMarker('${vo.g_loc1}',startMarkerImage, '<div class="customOverlay"> 출발지 </div>');
+			locMarker('${vo.g_loc2}',arrivedMarkerImage, '<div class="customOverlay"> 도착지 </div>');
+		}else{
+			locMarker('${vo.g_loc1}',startMarkerImage, '<div class="customOverlay"> 약속장소 </div>');
+		}
+		
+		
 	
+		
+		
+		
+		
 		//마커지우는용도
 		function removeMarker() {
 		    for ( var i = 0; i < markers.length; i++ ) {
@@ -192,6 +221,39 @@
 		    markers = [];
 		}
 	
+		
+		function locMarker(locations, markerImage, contents){
+			geocoder.addressSearch( locations , function(result, status) {
+			    // 정상적으로 검색이 완료됐으면 
+			     if (status === kakao.maps.services.Status.OK) {
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);		
+			        // 결과값으로 받은 위치를 마커로 표시합니다
+			        var marker = new kakao.maps.Marker({
+			            map: map,
+			            position: coords,
+			            image : markerImage
+			        });     
+			      
+			    	var customOverlay = new kakao.maps.CustomOverlay({
+		        	    map: map,
+		        	    position: coords,
+		        	    content: contents,
+		        	    yAnchor: 1
+		        	});
+			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+			        map.setCenter(coords);
+			    } 
+			}); 	
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		$("#withViewPageSearchFrm").click(()=>{
 			searchPlaces();
@@ -206,7 +268,7 @@
 
 </head>
 <body id="withViewPageBody">
-	<div id="withViewPageMap" style="width:2500px; height:1500px; position:relative; overflow:hidden;"></div>
+	<div id="withViewPageMap" style="width:2000px; height:1200px; position:relative; overflow:hidden;"></div>
 	
 	<!-- 맨위 폼 -->
 	<div class="groupTopFrm">
@@ -238,7 +300,7 @@
 		<div>
 			${vo.g_content }
 		</div>
-		<hr style="width:480px; margin:0 auto;">
+		<hr style="width:450px; margin:0 auto;">
 		<span> 약속정보</span>
 		<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/><div>${vo.g_date } ${vo.g_time}</div></div><!-- g_date, g_time 값을 가지고 온다. -->
 		<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소/출발지"/><div> ${vo.g_loc1 }</div></div><!-- g_loc1 값을 가져온다. -->
@@ -246,7 +308,7 @@
 			<div><img src="<%=request.getContextPath()%>/img/groupImg/markerP.png" title="도착지"/><div>${vo.g_loc2 }</div></div><!-- g_loc1 값을 가져온다. -->
 		</c:if>
 		<div>${vo.g_tag }</div>
-		<hr style="width:480px; margin:0 auto;"/>
+		<hr style="width:450px; margin:0 auto;"/>
 		<div>
 			<button id="withViewPageBackBtn" class="btn cancelBtn">뒤로가기</button>
 			<c:if test="${logId!=vo.userid }">  

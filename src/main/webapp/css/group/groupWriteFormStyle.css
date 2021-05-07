@@ -1,6 +1,6 @@
 @charset "UTF-8";
 	/*버튼*/
-	#groupWriteFormShowFrm{position:absolute; height:auto; top:100px; left:30px; z-index:1; width:500px; background-color:#fff;  border-radius:10px;}		
+	#groupWriteFormShowFrm{position:absolute; height:auto; top:100px; left:30px; z-index:1; width:480px; background-color:#fff;  border-radius:10px;}		
 	/* 맨위 셀렉트 박스 부분 */
 	#groupWriteFormUp_cate, #groupWriteFormDown_cate{ width:150px; height:40px; padding-left:10px; border:1px solid #d3d3d3;
 		background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}
@@ -8,7 +8,7 @@
 	#groupWriteFormG_cnt{ width:100px; height:40px; padding-left:5px; border:1px solid #d3d3d3;
 		background:url("<%=request.getContextPath()%>/img/groupImg/dropDown.png")  no-repeat 95% 50%; border-radius:5px; apperance:none; -webkit-appearance:none;}
 	/*제목라인*/
-	#groupWriteFormG_subject{border:1px solid #d9d9d9; border-radius:5px; margin:0 15px; width:470px; height:40px; padding-left:10px;}
+	#groupWriteFormG_subject{border:1px solid #d9d9d9; border-radius:5px; margin:0 15px; width:450px; height:40px; padding-left:10px;}
 	/*input 박스 클릭시, 호버, 액티브시시 */
 	/*check 박스 클릭시, 호버, 액티브시시*/
 	/*날짜 시간 참여인원 선택 클릭 호버 액티브시*/
@@ -17,12 +17,12 @@
 	#groupWriteFormUp_cate:hover, #groupWriteFormDown_cate:hover, #groupWriteFormG_cnt:hover, #groupWriteFormG_subject:hover, #groupWriteFormG_date:hover, #groupWriteFormG_time:hover, #groupWriteFormG_loc1:hover, #groupWriteFormG_tag:hover, #groupWriteFormG_loc2:hover {border:2px solid #571fb8;}
 	/*날짜 시간 선택 참여인원 선택*/
 	#groupWriteFormG_date, #groupWriteFormG_time{width:150px; height:40px; border-radius:5px; border:1px solid #d9d9d9}
-	#groupWriteFormG_date{margin-left:15px} #groupWriteFormG_time{margin:0 31px;}
+	#groupWriteFormG_date{margin-left:15px} #groupWriteFormG_time{margin:0 22px;}
 	/*지역선택 해시태그*/
-	#groupWriteFormG_loc1,#groupWriteFormG_loc2, #groupWriteFormG_tag{margin: 15px 15px 0px 15px;height: 40px;border-radius: 5px; border: 1px solid #d9d9d9; width: 470px; padding-left:5px}
+	#groupWriteFormG_loc1,#groupWriteFormG_loc2, #groupWriteFormG_tag{margin: 15px 15px 0px 15px;height: 40px;border-radius: 5px; border: 1px solid #d9d9d9; width: 450px; padding-left:5px}
 	/*취소 등록*/
 	#groupWriteFormCcFrm{width:364px; margin:0 auto;}
 	#groupWriteFormCancleBtn, #groupWriteFormConfBtn{margin:30px 15px; width:150px; height:40px;}
 	/*CKEDTOR 필요없는거 삭제*/
- 	 #cke_32, #cke_30, #cke_44,  #cke_38,  #cke_26, #cke_1_bottom{display:none; } 
+ 	 #cke_32, #cke_30, #cke_44, #cke_47, #cke_38,  #cke_26, #cke_1_bottom{display:none; } 
 	 #cke_groupWriteFormG_content{ margin:15px;}

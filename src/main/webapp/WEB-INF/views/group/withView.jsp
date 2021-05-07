@@ -6,9 +6,9 @@
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*withViewGroupList-like btn*/
 	.fakeCheckBoxImg[type=checkbox]{ display:none; }
- 	groupListView div>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
-	groupListView div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
-	groupListView div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
+ 	.groupListView div>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
+	.groupListView div>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
+	.groupListView div>label{position: absolute; height: 30px; right: 20px; top: 4px;}
 	/*버튼*/
 	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}
 	.commBtn:hover {border: 1px solid #3f1785;	background-color: #3f1785;	font-weight: bold;	color: #fff;	font-weight: bold;}
@@ -292,6 +292,7 @@
 				<option value="g_content">내용</option>
 			</select>
 			<input type="text" name="searchWord" id="withViewSearchWord"/>
+			<input type="hidden" name="category" value="${pageVO.category }"/>
 			<button id="withViewButton"><img src="<%=request.getContextPath()%>/img/groupImg/search.png"></button>
 		</form>
 		
