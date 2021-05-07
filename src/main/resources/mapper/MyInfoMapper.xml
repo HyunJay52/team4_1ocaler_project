@@ -22,20 +22,41 @@
 		where m.userid = #{param1}
 	</select>
 
-	<select id="allPointSelect" resultType="com.team4.localer.vo.Cha_pVO">
-		<![CDATA[
+	<select id="allPointSelect" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.Cha_pVO">
+		
 		select * from (
 		select * from (
 		select userid, cha_point, to_char(po_date, 'YYYY-MM-DD HH:MI:SS') po_date, cha_mth from cha_p
 		union all
-		select userid, sp_point, to_char(sp_date, 'YYYY-MM-DD HH:MI:SS') sp_date, sp_item from sp_p )
-		where rownum<=#{param2} order by po_date asc)
-		where userid = #{param1} and rownum<=#{param3} order by po_date desc]]>
+		select userid, sp_point, to_char(sp_date, 'YYYY-MM-DD HH:MI:SS') sp_date, sp_item from sp_p order by po_date desc)
+		<![CDATA[where rownum <=#{rowNum1} and userid = #{userid} ]]>
+			<if test="searchKey == 1">
+				<![CDATA[and cha_mth <= #{searchKey}]]>
+			</if>
+			<if test="searchKey == 2">
+				<![CDATA[and cha_mth >= #{searchKey}]]>
+			</if>		
+				order by po_date asc)
+				<![CDATA[where rownum<=#{rowNum2} ]]>
+		<if test="searchDate != '' and searchDate != null">
+			and po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH:MI:SS'), 'MM'), 'YYYY-MM-DD HH:MI:SS')
+			and to_char(last_day(to_date(#{searchDate},'YYYY-MM-DD HH:MI:SS')),'YYYY-MM-DD HH:MI:SS' )
+		</if>
+			order by po_date desc
+		
 	</select>
 	
 	<select id="pointCount" resultType="String">
 		select count(userid) from 
-		(select * from cha_p union all 
-		select * from sp_p where userid=#{param} )
+		(select * from cha_p 
+		union all 
+		select * from sp_p)
+		where userid=#{param1}
+		<if test="param2 != null and param2 == 1">
+		<![CDATA[and cha_mth <= 1]]>
+		</if>
+		<if test="param2 != null and param2 == 2">
+		<![CDATA[and cha_mth >= 2]]>
+		</if>
 	</select>
 </mapper>

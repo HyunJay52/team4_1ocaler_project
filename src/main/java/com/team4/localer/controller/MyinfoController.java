@@ -1,7 +1,9 @@
 package com.team4.localer.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.MyInfoService;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoPageVO;
 
 @Controller
 public class MyinfoController {
@@ -93,35 +96,50 @@ public class MyinfoController {
 	
 	@ResponseBody
 	@RequestMapping("/myPointSelect")
-	public List<Cha_pVO> myPointSelect(HttpServletRequest req, HttpSession session){
+	public Map<String, Object> myPointSelect(HttpServletRequest req, HttpSession session){
+		Map<String, Object> result = new HashMap<String, Object>();
 		List<Cha_pVO> list = new ArrayList<Cha_pVO>();
+		MyinfoPageVO pVO = new MyinfoPageVO();
 		String userid = (String)session.getAttribute("logId");
-		int totalRecord = Integer.parseInt(service.pointCount(userid));
-		int onePageRecord = Integer.parseInt(req.getParameter("onePageRecord"));
-		int nowNum = Integer.parseInt(req.getParameter("nowNum"));
-		int totalPage = Integer.parseInt(req.getParameter("totalPage"));
+		String searchDate = req.getParameter("searchDate");
+		String searchKey = req.getParameter("searchKey");
+		String searchWord = req.getParameter("searchWord");
 		
-		int lastPageRecord = totalRecord % onePageRecord;
-		int rownum1 = nowNum*onePageRecord;
-		int rownum2 = 0;
-		if(nowNum==totalPage && lastPageRecord != 0) {
-			rownum2 = lastPageRecord;			
-		}else {
-			rownum2 = onePageRecord;
+		pVO.setUserid(userid);
+		pVO.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
+		pVO.setOnePageRecord(5);
+		pVO.setOnePageSize(5);
+		pVO.setStartPage(pVO.getNowNum(), pVO.getOnePageSize());
+		
+		
+		if(searchDate != null && searchDate != "") {
+			pVO.setSearchDate(searchDate+" 01:00:00");
 		}
-		list = service.allPointSelect(userid, rownum1, rownum2);
-		return list;
-	}
-	//유저의 총 포인트 사용횟수 조회, 총 페이지수 조회
-	@ResponseBody
-	@RequestMapping("/myPointCount")
-	public int pointCount(HttpServletRequest req, HttpSession session) {
-		String userid = (String)session.getAttribute("logId");
-		int onePageRecord = Integer.parseInt(req.getParameter("onePageRecord"));
-		int totalRecord = Integer.parseInt(service.pointCount(userid));
-		int totalPage = (int)Math.ceil(totalRecord/(double)onePageRecord);
-		System.out.println("토탈페이지"+totalPage);
-		return totalPage;
+		if(searchKey != null && searchKey != "") {
+			if(searchKey.equals("all")) {
+				pVO.setSearchKey("");
+			}else {
+				int searchValue = Integer.parseInt(searchKey);
+				if(searchValue <= 1 ) {
+					pVO.setSearchKey("1");				
+				}else {
+					pVO.setSearchKey("2");
+				}				
+			}
+		}
+		System.out.println("totalPage="+pVO.getTotalPage()+"onePageSize="+pVO.getOnePageSize());
+		System.out.println("date="+pVO.getSearchDate()+"key="+pVO.getSearchKey()+"word="+pVO.getSearchWord());
+		pVO.setTotalRecord(Integer.parseInt(service.pointCount(userid)));
+		pVO.setTotalPage(pVO.getTotalRecord(), pVO.getOnePageRecord());
+		pVO.setLastPageRecord(pVO.getTotalRecord(), pVO.getOnePageRecord());
+		pVO.setRowNum1(pVO.getNowNum(), pVO.getOnePageRecord());
+		pVO.setRowNum2(pVO.getNowNum(), pVO.getTotalPage(), pVO.getLastPageRecord(), pVO.getOnePageRecord());
+		
+		
+		list = service.allPointSelect(pVO);
+		result.put("pList", list);
+		result.put("pVO", pVO);
+		return result;
 	}
 	
 	@ResponseBody
