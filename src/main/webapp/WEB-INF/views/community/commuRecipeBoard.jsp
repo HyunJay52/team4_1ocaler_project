@@ -3,41 +3,68 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commu/communityBoardStyle.css"/>
 
 
-
-
-	<div id="coummuBoardMain">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
+
+	<div id="coummuBoardMain">
+		
 						
-		<h1>쓱싹레시피</h1>
+		<h3 style="margin-top:50px;">#쓱싹레시피 <span style="font-size:16px">| 쉽고 간편한 요리를 공유해보세요 </span></h3>
 
 		<div id="coummuBoardMaincenter">
-			<c:forEach var="vo" items="${commuList }">
-				<ul id ="coummuBoardMainboardList">
-					<li>
-						<div>${vo.b_writedate }</div>
-						<div><span>조회수 : </span> ${vo.b_hit} &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> ${vo.repcont }  개</div>	 
-					</li>
-					<li>
-						<div><a href="commuView?num=${vo.num}">${vo.b_subject }</a></div>
-						<div>
-							<div><img src="common/user.png"/><a href="#"> ${vo.userid }</a></div>
+			<div id ="coummuboardListTitle">
+						<div style="width: 130px; text-align: center;">
+							글번호
 						</div>
-					</li>
+						<div >
+							<div style="width: 770px ; text-align: center;">제목 </div>
+							<div id ="" style="width: 400px ;">
+								<ul id ="commuSubTitle">
+									<li>아이디</li>
+									<li>작성일</li>
+									<li>조회수</li>
+									<li>좋아요</li>
+								</ul>
+							</div>
+						</div>	 
 					
-					<c:if test="${vo.b_tag == null }">
-						<li>
-							&nbsp;
-						</li>
-					</c:if>
-					<c:if test="${vo.b_tag != '' }">
-						<li>
-							${vo.b_tag }
-						</li>
-					</c:if>
+				</div>
+		
+		
+		
+			
+			<c:forEach var="vo" items="${commuList }">
+				<div id ="coummuBoardMainboardList">
+						<div>
+								${vo.num }
+						</div>
+						
+						<div id="commusubList">
+							<div>${vo.b_subject} &emsp; [${vo.repcont}]</div>
+							<div>
+								<ul id ="commuSubTitle">
+									<li>${vo.userid}</li>
+									<li>${vo.b_writedate}</li>
+									<li>${vo.b_hit}</li>
+									<li>${vo.b_hit}</li>
+								</ul>
+							</div>
+							<div id="tagList">
+								<c:if test="${vo.b_tag == null }">
+									
+										&nbsp;
+									
+								</c:if>
+								<c:if test="${vo.b_tag != '' }">
+									
+										${vo.b_tag }
+								
+								</c:if>
+							</div>
+						</div>	 
 					
-					
-				</ul>
+				</div>
+				
 			</c:forEach>
 			
 		</div>

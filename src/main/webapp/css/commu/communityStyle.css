@@ -224,6 +224,8 @@
 		position:relative; 
       	background-color: white;
      	display: none;  
+     	border-bottom:1px solid #181b46;
+     	
 	}
 	
 	
@@ -232,8 +234,13 @@
 		width:1300px; 
 		line-height: 70px;
 		text-align: center; 
-		border-bottom:1px solid #3f1785;
+		
 	 	font-size: 25px; 
+	 	margin: 0 auto;
+	}
+	#commutop div{
+		width: 33%;
+		float: left;
 	}
 	
 	#commutop a:active, #commutop a:link, #commutop a:visited{

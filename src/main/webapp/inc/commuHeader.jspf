@@ -37,7 +37,7 @@
 	      
 	      });
 	
-</script>
+ </script> 
 
 <style>
 
@@ -46,11 +46,9 @@
 
 <div id="commuHeaderMain">
 			<div id="commutop" >
-				<span><a href="commuBoard?b_gu=${logLoc_gu}&&up_cate=1">우리동네 이야기 &nbsp;</a></span>
-				 &nbsp;|&nbsp;
-				 <span>&nbsp;<a href="commuRecipeBoard?up_cate=2">쓱삭 레시피&nbsp;</a></span>
-				 &nbsp;|&nbsp;
-				 <span>&nbsp;<a href="commuFreeBoard?up_cate=3">자유게시판</a></span>
+				<div><a href="commuBoard?b_gu=${logLoc_gu}&&up_cate=1">우리동네 이야기</a></div>
+				 <div><a href="commuRecipeBoard?up_cate=2">쓱싹 레시피</a></div>
+				 <div><a href="commuFreeBoard?up_cate=3">자유게시판</a></div>
 			</div>
 
 </div>			
