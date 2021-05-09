@@ -288,6 +288,7 @@
 				<option value="g_subject">제목</option>
 				<option value="userid">작성자</option>
 				<option value="g_content">내용</option>
+				<option value="g_gu">약속장소</option>
 			</select>
 			<input type="text" name="searchWord" id="eatViewSearchWord"/>
 			<button id="eatViewButton"><img src="<%=request.getContextPath()%>/img/groupImg/search.png"></button>

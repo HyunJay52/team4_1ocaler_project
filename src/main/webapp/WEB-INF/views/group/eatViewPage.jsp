@@ -43,6 +43,7 @@
 					location.href="reportWrite?userid=${vo.userid}"	
 				}else{
 					alert('로그인후 사용할 수 있습니다.');
+					location.href="login";
 				}
 			});
 
@@ -85,7 +86,7 @@
 				}else{
 					$("#eatViewPageJoinBtn").click(()=>{
 						alert('로그인 후 이용해 주세요')
-						location.href="";
+						location.href="login";
 					});
 				}
 				
