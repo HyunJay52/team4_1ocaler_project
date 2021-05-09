@@ -250,7 +250,7 @@
 </script>
 </head>
 <body id="withViewBody">
-	<div id="withViewMap" style="width:2500px; height:1500px; position:relative; overflow:hidden;"></div>
+	<div id="withViewMap" style="width:2000px; height:1100px; position:relative; overflow:hidden;"></div>
 	
 	<!-- withViewShowFrm접기펴기 -->	
 	<div class="groupViewFold"><img src="<%=request.getContextPath()%>/img/groupImg/left.png"/></div>

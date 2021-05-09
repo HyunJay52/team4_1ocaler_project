@@ -250,7 +250,7 @@
 
 </head>
 <body id="eatViewBody">
-	<div id="eatViewMap" style="width:2000px; height:1200px; position:relative; overflow:hidden;"></div>
+	<div id="eatViewMap" style="width:1950px; height:1100px; position:relative; overflow:hidden;"></div>
 	
 	<!-- eatViewShowFrm접기펴기 -->	
 	<div class="groupViewFold"><img src="<%=request.getContextPath()%>/img/groupImg/left.png"/></div>
