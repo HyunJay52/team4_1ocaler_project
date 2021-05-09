@@ -1,12 +1,10 @@
 package com.team4.localer.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +49,6 @@ public class AdminManageController {
 		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
 		pageVO.setNum("mem_no");
 		pageVO.setCate("member");
-		System.out.println("컨트롤러에서 확인 searchWord"+pageVO.getSearchWord());
 		pageVO.setTotalRecord(csService.totalRecord(pageVO));
 		result.put("list",manaService.memberAllSelect(pageVO));
 		result.put("pageNum",pageVO.getPageNum());
@@ -105,7 +102,6 @@ public class AdminManageController {
 		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
 		pageVO.setNum("sel_num");
 		pageVO.setCate("seller");
-		System.out.println("컨트롤러에서 확인 searchWord"+pageVO.getSearchWord());
 		pageVO.setTotalRecord(csService.totalRecord(pageVO));
 		result.put("list",manaService.sellerAllSelect(pageVO));
 		result.put("pageNum",pageVO.getPageNum());
@@ -117,10 +113,10 @@ public class AdminManageController {
 	@RequestMapping(value="/sel_detail", method=RequestMethod.POST)
 	@ResponseBody
 	public List<AdminstatisVO> sellerdetail(int sel_num) {
-		
 		//판매글 번호, 글제목, 판매 횟수/환불횟수, 작성자, 작성날짜, 디폴트판매가격
 		return manaService.sellerDetailInfo(sel_num);
 	};
+	
 	//게시글관리========================
 	//======판매게시글관리===================
 	@RequestMapping("/selManage")//회원판매 게시글 조회
@@ -135,7 +131,6 @@ public class AdminManageController {
 		System.out.println("totalRecord"+pageVO.getTotalRecord());
 		//판매게시글목록가져오기 
 		List<MemShareVO> list = manaService.memShareAllSelect(pageVO);
-		System.out.println("listSize-->"+list.size());
 		mav.addObject("list",list);
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("admin/selManage");
@@ -143,25 +138,64 @@ public class AdminManageController {
 	}
 	@RequestMapping(value="/sellerBoardSearch",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> sellerBoardSearch(AdminPageVO pageVO){
+	public Map<String, Object> sellerBoardSearch(AdminPageVO pageVO){//sell_item,mem_share list 아작스 호출
 		Map<String, Object> result = new HashMap<String, Object>();
-		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+		if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
+			//검색어가 존재하면
+			pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+		}else {
+			pageVO.setSearchKey("");
+			pageVO.setSearchWord("");
+		}
 		if(pageVO.getCate()=="sell_item"|| pageVO.getCate().equals("sell_item")) {
 			pageVO.setNum("i_num");
 			pageVO.setCate("sell_item");
+			//i_num게시글번호,i_subject글제목, i_content, sel_num판매자 번호
+			if(pageVO.getSearchKey()=="userid"||pageVO.getSearchKey().equals("userid")) {
+				pageVO.setSearchKey("sel_num");
+				pageVO.setTotalRecord(csService.totalRecord(pageVO));
+				
+				pageVO.setSearchKey("i.sel_num");
+				result.put("list",manaService.sellerBoardSelect(pageVO));
+			}else {
+				pageVO.setSearchKey("i_"+pageVO.getSearchKey());
+				pageVO.setTotalRecord(csService.totalRecord(pageVO));
+				pageVO.setSearchKey("i."+pageVO.getSearchKey());
+				result.put("list",manaService.sellerBoardSelect(pageVO));
+			}
 		}else {
 			pageVO.setNum("num");
 			pageVO.setCate("mem_share");
+			if(pageVO.getSearchKey()=="userid"||pageVO.getSearchKey().equals("userid")
+					||pageVO.getSearchKey()=="num"||pageVO.getSearchKey().equals("num")) {
+				pageVO.setTotalRecord(csService.totalRecord(pageVO));
+				pageVO.setSearchKey("m."+pageVO.getSearchKey());
+			}else {
+				pageVO.setSearchKey("s_"+pageVO.getSearchKey());
+				pageVO.setTotalRecord(csService.totalRecord(pageVO));
+				pageVO.setSearchKey("m."+pageVO.getSearchKey());
+				
+			}
+			List<MemShareVO> list = manaService.memShareAllSelect(pageVO);
+			result.put("list",list);
+			
 		}
-		System.out.println("setCate-->"+pageVO.getCate());
-		System.out.println("컨트롤러에서 확인 searchWord"+pageVO.getSearchWord());
-		pageVO.setTotalRecord(csService.totalRecord(pageVO));
-		
-		result.put("list",manaService.sellerBoardSelect(pageVO));
 		result.put("pageNum",pageVO.getPageNum());
 		result.put("startPageNum",pageVO.getStartPageNum());
 		result.put("totalPage", pageVO.getTotalPage());
 		return result;
+	}
+	@RequestMapping("/selManageDel")
+	public ModelAndView selManageDel(int num, String cate) {
+		String numName="num";
+		if(cate!="mem_share"&&!cate.equals("mem_share")) {
+			numName="i_num";
+		}
+		System.out.println("현재 검색하는 글번호 컬럼명"+numName);
+		manaService.selManageDel(num,cate,numName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:selManage");
+		return mav;
 	}
 	
 }

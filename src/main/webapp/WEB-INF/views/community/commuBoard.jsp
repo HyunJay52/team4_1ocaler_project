@@ -3,41 +3,77 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commu/communityBoardStyle.css"/>
 
 
-
-
+	<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
+	<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="coummuBoardMain">
-		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
-		<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
+		
+	
 						
-		<h1>우리동네이야기</h1>
+		<h3 style="margin-top:50px;">#우리동네이야기 <span style="font-size:16px">| 동네 주민들과 여러 정보를 나눠보아요</span></h3>
+		
 
 		<div id="coummuBoardMaincenter">
-			<c:forEach var="vo" items="${commuList }">
-				<ul id ="coummuBoardMainboardList">
-					<li>
-						<div>${vo.b_writedate }</div>
-						<div><span>조회수 : </span> ${vo.b_hit} &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> ${vo.repcont }개</div>	 
-					</li>
-					<li>
-						<div><a href="commuView?num=${vo.num}">${vo.b_subject }</a></div>
-						<div>
-							<div><img src="common/user.png"/><a href="#"> ${vo.userid }</a></div>
+		
+		
+			<div id ="coummuboardListTitle">
+						<div style="width: 130px; text-align: center;">
+							카테고리
 						</div>
-					</li>
+						<div >
+							<div style="width: 770px ; text-align: center;">제목 </div>
+							<div id ="" style="width: 400px ;">
+								<ul id ="commuSubTitle">
+									<li>아이디</li>
+									<li>작성일</li>
+									<li>조회수</li>
+									<li>좋아요</li>
+								</ul>
+							</div>
+						</div>	 
 					
-					<c:if test="${vo.b_tag == null }">
-						<li>
-							&nbsp;
-						</li>
-					</c:if>
-					<c:if test="${vo.b_tag != '' }">
-						<li>
-							${vo.b_tag }
-						</li>
-					</c:if>
+				</div>
+		
+		
+		
+			
+			<c:forEach var="vo" items="${commuList }">
+				<div id ="coummuBoardMainboardList">
+						<c:if test="${vo.down_cate == 1 }">
+							<div>
+								할인정보
+							</div>
+						</c:if>
+						<c:if test="${vo.down_cate == 2 }">
+							<div>
+								도움구해요
+							</div>
+						</c:if>
+						
+						<div id="commusubList">
+							<div>${vo.b_subject} &emsp; [${vo.repcont}]</div>
+							<div>
+								<ul id ="commuSubTitle">
+									<li>${vo.userid}</li>
+									<li>${vo.b_writedate}</li>
+									<li>${vo.b_hit}</li>
+									<li>${vo.b_hit}</li>
+								</ul>
+							</div>
+							<div id="tagList">
+								<c:if test="${vo.b_tag == null }">
+									
+										&nbsp;
+									
+								</c:if>
+								<c:if test="${vo.b_tag != '' }">
+									
+										${vo.b_tag }
+								
+								</c:if>
+							</div>
+						</div>	 
 					
-					
-				</ul>
+				</div>
 				
 			</c:forEach>
 			

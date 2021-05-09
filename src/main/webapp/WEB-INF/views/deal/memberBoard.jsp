@@ -14,7 +14,7 @@
    <div id="dealMnSMain">
  
       
-      <h3 style="margin-top:50px;">#동내직구 <span style="font-size:20px">| 지역 주민들과 나눔</span></h3>
+      <h3 style="margin-top:50px;">#동네직구 <span style="font-size:20px">| 지역 주민들과 나눔</span></h3>
       <span style="display: inline-block; font-size:20px; float:right;"><a href="#">식료품</a> | <a href="#">생필품</a></span>
                   
                

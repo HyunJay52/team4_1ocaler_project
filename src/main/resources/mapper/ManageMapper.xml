@@ -64,9 +64,10 @@
   	<select id="memShareAllSelect" resultType="com.team4.localer.vo.MemShareVO">
   		select * from
 			(select *from
-				(select m.num , m.s_cate ,m.s_subject ,m.s_cnt ,m.userid , to_char(m.s_writedate,'YYYY/MM/DD') s_writedate, count(case when r.num=m.num then 1 end) reportCount
+				(select m.num , m.s_cate ,m.s_subject ,m.s_cnt ,m.userid , 
+				to_char(m.s_writedate,'YYYY/MM/DD') s_writedate, count(case when r.num=m.num then 1 end) reportCount
 				from mem_share m, report r 
-				<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+				<if test="!searchWord.equals('') and searchWord!=null">
 					where ${searchKey} like #{searchWord}
 				</if>
 				group by m.num, m.s_cate,m.s_subject,m.s_cnt,m.userid, m.s_writedate
@@ -85,11 +86,12 @@
   	<select id="sellerBoardSelect" resultType="com.team4.localer.vo.SellitemVO">
 	  	select * from
 			(select *from
-				(select i.i_num, i.i_status, i.i_subject,i.i_cnt, s.userid userid,i.i_writedate,i.i_hit
+				(select i.i_num, i.i_status, i.i_subject,i.i_cnt, s.userid ,to_char(i.i_writedate, 'YYYY/MM/DD') i_writedate,i.i_hit
 		from sell_item i join seller s on i.sel_num = s.sel_num
 			<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
 					where ${searchKey} like #{searchWord}
 			</if>
+			order by ${num} desc)
 			where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
 			where rownum <![CDATA[<=]]>
 					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
@@ -100,4 +102,7 @@
 					</if>
 					order by ${num} desc
   	</select>
+  	<delete id="selManageDel">
+  		delete from ${param2} where ${param3}=${param1}
+  	</delete>
 </mapper>

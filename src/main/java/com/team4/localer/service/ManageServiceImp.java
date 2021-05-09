@@ -61,6 +61,11 @@ public class ManageServiceImp implements ManageService {
 		return manadao.sellerBoardSelect(pageVO);
 	}
 
+	@Override
+	public int selManageDel(int num, String cate, String numName) {
+		return manadao.selManageDel(num, cate, numName);
+	}
+
 
 
 	

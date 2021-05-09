@@ -119,14 +119,13 @@
 		<div id="deliveryTop">
 			<ul>
 				<li><img src="img/myInfo/delivery/box.png"/></li>
-				<li><p>배송준비</p><span class="lgFnt">1</span></li>
+				<li><p class="mdFnt">배송준비</p><span class="lgFnt">1</span></li>
 				<li><img src="img/myInfo/delivery/delivery.png"/></li>
-				<li><p>배송 중</p><span class="lgFnt">1</span></li>
+				<li><p class="mdFnt">배송 중</p><span class="lgFnt">1</span></li>
 				<li><img src="img/myInfo/delivery/home.png"/></li>
-				<li><p>배송완료</p><span class="lgFnt">0</span></li>
-							
+				<li><p class="mdFnt">배송완료</p><span class="lgFnt">0</span></li>						
 				<li><img src="img/myInfo/delivery/return.png"/></li>
-				<li><p>반품</p><span class="lgFnt">1</span></li>
+				<li><p class="mdFnt">반품</p><span class="lgFnt">1</span></li>
 			</ul>			 
 		</div>
 		

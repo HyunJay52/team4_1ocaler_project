@@ -110,7 +110,12 @@
 					var link="";
 					$(".clickpage").remove();//기존 페이징 부분 삭제
 					for(var i=start;i<=last;i++){
-						link +="<li  class='clickpage'>"+i+"</li>";
+						if(pagenum==i){
+							link +="<li  class='clickpage nowPg'>"+i+"</li>";
+						}else{
+							link +="<li  class='clickpage'>"+i+"</li>";	
+						}
+						
 					}
 					$(".link").append(link);
 				},error : function(){
@@ -348,7 +353,12 @@
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
-            	<li class="clickpage" >${p}</li>  
+            	<c:if test="${p==pageVO.pageNum }">
+            		<li class="clickpage nowPg" >${p}</li> 
+            	</c:if>
+            	<c:if test="${p!=pageVO.pageNum }">
+            		<li class="clickpage" >${p}</li>  
+            	</c:if>
             </c:if>
          </c:forEach>
 	</ul>
