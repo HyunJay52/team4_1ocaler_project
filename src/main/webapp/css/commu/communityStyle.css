@@ -5,6 +5,21 @@
 		text-overflow: ellipsis;
 		white-space: nowrap
 	}
+	
+	
+	a:visited{ 
+		color: #181b46; 
+	}
+	a:link { 
+		color:#181b46; 
+	}
+	a:active{
+		color:#181b46;
+	}
+	a:hover{
+		color:#181b46;
+	}
+
 	#commumain{
 		overflow:auto;
 		width:1300px;
@@ -220,13 +235,27 @@
 	
 	/* 탑헤더? */
 	
+	#commuHeaderMain{
+		position:relative; 
+      	background-color: white;
+     	display: none;  
+     	border-bottom:1px solid #181b46;
+     	
+	}
+	
+	
 	#commutop{ 
 		height: 70px;
 		width:1300px; 
 		line-height: 70px;
 		text-align: center; 
-		border-bottom:1px solid #3f1785;
+		
 	 	font-size: 25px; 
+	 	margin: 0 auto;
+	}
+	#commutop div{
+		width: 33%;
+		float: left;
 	}
 	
 	#commutop a:active, #commutop a:link, #commutop a:visited{
@@ -266,7 +295,7 @@
 	/* 버튼 스타일 클래스 모음 */
 
 	a:active, a:link, a:visited {
-	    color:#3f1785;
+	    color:#181b46;
 	    text-decoration: none;
 	    font-family: 'Nanum Gothic', sans-serif;
 }

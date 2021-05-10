@@ -9,14 +9,14 @@
 		values (boardsq.nextval, #{userid}, #{b_gu}, ${up_cate},${down_cate},#{b_subject},#{b_content}, #{b_tag})
 	</insert>
 	<select id ="commuSelect" resultType="com.team4.localer.vo.BoardVO">
-		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit,
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
     	(select count(*) from reply where num = b.num) repcont  
 		from board b where  b_gu=#{b_gu} and up_cate=1 order by num desc
 	</select>
   	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
   		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,
     	(select count(*) from reply where num = b.num) repcont  
-		from board b where  num=#{param1}	
+		from board b where  num=#{param1} 
   	</select>
   	<delete id="commuDelete" >
 		delete from board where num=#{param1} and userid=#{param2}
@@ -25,12 +25,12 @@
 		update board set b_subject=#{b_subject}, b_content=#{b_content},b_tag=#{b_tag} where num=#{num} and userid=#{userid}
 	</update>
 	<select id ="commuRecipeSelect" resultType="com.team4.localer.vo.BoardVO">
-		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit,
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
     	(select count(*) from reply where num = b.num) repcont  
 		from board b where up_cate=2  order by num desc
 	</select>
 	<select id ="commuFreeSelect" resultType="com.team4.localer.vo.BoardVO">
-		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit,
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate,'YYYY.MM.DD') b_writedate ,b_hit,
     	(select count(*) from reply where num = b.num) repcont  
 		from board b where up_cate=3  order by num desc
 	</select>

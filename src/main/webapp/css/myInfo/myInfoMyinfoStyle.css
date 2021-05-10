@@ -134,7 +134,16 @@
 		margin:0 auto;
 		text-align:center;
 	}
-	.myinfoOtherBtn button{
+	.myinfoOtherBtn a{
 		width:320px;
 		height:40px;
+		line-height:30px;
+	}
+	#myinfoLoc_gu{
+		width:320px;
+	    height:50px;
+	    padding:0 15px;
+	    border-radius:3px;
+	    border:1px solid #ddd;
+	    font-size:16px;
 	}

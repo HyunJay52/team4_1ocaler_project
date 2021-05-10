@@ -4,6 +4,37 @@
 
 <script>
 	document.title = "1ocler home";
+	
+	$(document).ready(function(){
+		var url = "sendGroupList";
+		var g_gu = '${logLoc_gu}';
+		
+		$.ajax({
+			url: url,
+			data: {'g_gu': g_gu},
+			type : 'post',
+			success: function(result){
+				console.log(result);
+				var $result = $(result); //ajax 결과값 변수에 담음
+				var idx = 10;
+				$result.each(function(idx, list){
+					$("#gachiIndex").append(
+							"<li><ul class='indexInnerUl'>"+
+							"<li class='gachiPostTitle'><span class='gachiPoastTitle'>&nbsp;"+list.up_cate+"</span></li>"+
+							"<li class='wordCut'>"+list.g_subject+"</li>"+
+							"<li>"+list.g_date+", "+list.g_time+"</li>"+ //g_time undefined error 해결 필요 
+							"<li class='smlFnt'><img src='img/indexImg/bo_pin.png' class='gachiPostLoc'>"+list.g_loc1+"</li>"+
+							"<li><span class='cntJoin'>"+list.g_joinCnt+"</span>/"+list.g_cnt+"명 </li>"+
+							"<li><span>"+list.userid+"</span>&nbsp;&nbsp;<img src='common/user.png' class='gachiPostImg'/></li>"+
+							"</ul></li>"
+						);	
+				})
+			},
+			error: function(error){
+				console.log("리스트 불러오기 에러...", error);
+			}
+		});
+	});
 </script>
 
 	<!-- bx-slider part -->
@@ -17,9 +48,9 @@
 			</ul>
 			<!-- slide show -->
 			<div class="carousel-inner">
-				<div class="carousel-item active"><a href="joinMember"><img src="<%=request.getContextPath() %>/img/indexImg/ad1.png"/></a></div>
+				<div class="carousel-item active"><a href="joinMember"><img src="<%=request.getContextPath() %>/img/indexImg/banner2.png"/></a></div>
 				<div class="carousel-item"><a href="joinSeller"><img src="<%=request.getContextPath() %>/img/indexImg/ad2.png"/></a></div>
-				<div class="carousel-item"><a href="login"><img src="<%=request.getContextPath() %>/img/indexImg/ad1.png"/></a></div>
+				<div class="carousel-item"><a href="login"><img src="<%=request.getContextPath() %>/img/indexImg/banner1.png"/></a></div>
 			</div>
 			
 			<!-- left and right controls -->
@@ -40,6 +71,7 @@
 		
 		<div class="mdFnt indexSubTitle"><img src="common/map_000.png" style="width: 25px; margin-right: 5px;">동네직구</div>
 		<div class="selBoard">
+			
 			<ul class="boardText">
 				<c:forEach var="i" begin="1" end="5">
 				<li class="selList">
@@ -87,127 +119,21 @@
 	
 	<div id="gachi" class="indexDivWidth">
 		<div id="gachititle" class="lgFnt indexBoardTitle">가치가장</div>
-		<ul class="indexListNone">
-			<li>
-				<ul class="indexInnerUl">
-					<li class="gachiPostTitle"><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" style="width: 15px; margin-bottom: 5px;"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234 &nbsp;&nbsp;<img src="common/user.png"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span  class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234 &nbsp;&nbsp;<img src="common/user.png"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234 &nbsp;&nbsp;<img src="common/purplebg.jpeg"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut test">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234 &nbsp;&nbsp;<img src="common/alarm_000.png"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut test">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="indexInnerUl">
-					<li><img src="img/indexImg/dinner.png" class="gachiPostImg"/><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-					<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-					<li>04/29 15:00</li>
-					<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-					<li>
-						<span class="cntJoin">1</span> / 3 명
-					</li>
-					<li class="smlFnt">goguma1234&nbsp;&nbsp;<img src="common/user.png"/></li>
-				</ul>
-			</li>
+		<ul id="gachiIndex" class="indexListNone">
+<!-- 			<c:forEach var="i" begin="1" end="10"> 
+				<li>
+					<ul class="indexInnerUl">
+						<li class="gachiPostTitle"><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
+						<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
+						<li>2021/04/29 15:00</li>
+						<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
+						<li>
+							<span class="cntJoin">1</span> / 3 명
+						</li>
+						<li><span>goguma1234</span> &nbsp;&nbsp;<img src="common/user.png" class="gachiPostImg"/></li>
+					</ul>
+				</li>
+			</c:forEach> 	-->
 		</ul>
 	</div>
 	
@@ -228,4 +154,7 @@
 			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
 		</ul>
 	</div>
+	
+	<div style="width:350px; height: 700px; background-color: pink; float:left; margin-right: 20px;"></div>
+	<div style="width:900px; height: 700px; background-color: yellow; float:left; "></div>
 </div>

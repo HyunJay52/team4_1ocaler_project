@@ -43,7 +43,9 @@ body {
 #pageTop a {
 	color: #000;
 }
-
+#topNavi {
+	width: 1700px;
+}
 #navi {
 	width: 1300px;
 	height: 70px;
@@ -108,10 +110,10 @@ body {
 
 /* sidebar style */
 #sideBar {
-	width: 70px;
+	width: 60px;
 	height: auto;
 	text-align: center;
-	position: fixed;
+	position: fixed; z-index: 100;
 	top: 55%;
 	right: 20px;
 	background-color: #fec804;
@@ -122,7 +124,7 @@ body {
 #sideBar li {
 	margin: 0px;
 	padding: 0px;
-	width: 70px;
+	width: 60px;
 	height: 50px;
 	line-height: 50px;
 	list-style-type: none;
@@ -199,6 +201,50 @@ body {
 #sidebarTag table td:last-child {
 	padding-right: 0px;
 }
+
+/* side bar - 채팅 div */
+#chatDiv {
+	width: 250px; height: 350px;
+	z-index: 100; display: none;
+	position: fixed; top: 32%; right: 42px;
+	border-radius: 3px; background-color: #fff; opacity: 95%;
+}
+#chatDiv>hr {
+	margin: 0px; margin-bottom: 1px; 
+}
+.chatTitle > span {
+	float: right; font-family: nsreb; padding-right: 20px;
+}
+#chatList {
+	width: 250px; height: auto;
+}
+#chatList>li {
+	width: 250px; height: 40px; line-height: 40px; border-bottom: 1px solid #ddd;
+}
+#chat_box {
+
+}
+#chat_box, #chat_box:div:first-child {
+	width: 250px; height: auto;
+	display: none;
+}
+#showMsg {
+	display: none; padding: 5px; white-space: normal;
+}
+.chat_input {
+	position: absolute; display: none;
+    top: 315px;
+    margin: 2px;
+}
+.chat_input>input {
+	width: 196px;
+    height: 30px;
+    padding: 0 5px;
+}
+.chat_input>button {
+	width: 50px;
+    height: 30px;
+}
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 클래스 */
 /* navi 슬라이드 클래스 */
 
@@ -208,7 +254,15 @@ body {
 	width: 25px;
 	height: 25px;
 }
-
+.chatTitle {
+	width: 100%; height: 20px; margin: 8px;
+	font-family: nsreb; 
+}
+.chat_input {
+	position: absolute;
+    top: 315px;
+    margin: 2px;
+}
 /* index class*/
 .indexBoardTitle {
 	font-family: nsreb;
@@ -297,11 +351,10 @@ body {
 
 #gachi>ul>li {
 	width: 235px;
-	height: 270px;
+	height: auto;
 	margin: 10px;
 	box-shadow: 3px 3px 3px #ddd;
 }
-
 .test {
 	font-size: 18px;
 }
@@ -325,38 +378,36 @@ body {
 
 #gachi .indexInnerUl>li {
 	width: 220px;
-	height: 40px;
-	line-height: 40px;
-	padding: 0px 5px;
+	height: 45px;
+	line-height: 45px;
+	padding: 0px 15px;
 }
 
 #gachi .indexInnerUl>li:nth-of-type(1) {
-	margin-top: 10px;
+	width: 218px; margin-bottom: 10px;
 	background-color: #9edae3;
 	color: #fff;
 }
 
 #gachi .indexInnerUl>li:nth-of-type(2) {
-	height: 50px;
-	line-height: 50px;
+	font-family: nsreb; font-size: 16px;
 }
-
-#gachi .indexInnerUl>li:nth-of-type(2), #gachi .indexInnerUl>li:nth-of-type(3),
-	#gachi .innerUl>li:nth-of-type(4) {
+#gachi .indexInnerUl>li:nth-of-type(3) {
+	text-align: center; height: 30px; margin-top: 10px;
+}
+#gachi .indexInnerUl>li:nth-of-type(2), #gachi .innerUl>li:nth-of-type(4) {
 	height: 35px;
 	text-align: left;
 }
-
 #gachi .indexInnerUl>li:nth-of-type(5), #gachi .indexInnerUl>li:nth-of-type(6) {
 	text-align: right;
 }
 
 #gachi .indexInnerUl>li:nth-of-type(5) {
-	padding-right: 10px;
+	height: 40px; line-height: 40px;
 }
-
-#gachi .gachiPostImg {
-	width: 30px;
+#gachi .indexInnerUl>li:nth-of-type(6){
+	height: 60px; font-size: 15px;
 }
 
 #gachi .gachiPostLoc {
@@ -387,8 +438,8 @@ body {
 }
 
 #indexMain .indexInnerUl>li:last-child>img {
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	border-radius: 70%;
 }
 

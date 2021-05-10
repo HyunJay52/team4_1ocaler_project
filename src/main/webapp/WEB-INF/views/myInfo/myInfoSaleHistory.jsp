@@ -25,7 +25,7 @@
 			<div class="saleHistoryBottom">
 				<h3>today's update</h3>
 				<div id="saleHistoryList">
-					<h5 class="saleHistoryHeader"><a href="myInfoSalesManagement">>판매현황</a></h5>
+					<h5 class="saleHistoryHeader"><a href="myInfoSalesManagement">>>판매현황</a></h5>
 					<table class="myinfoSaleHistoryTable2">
 						<tr>
 							<td>신규주문</td>

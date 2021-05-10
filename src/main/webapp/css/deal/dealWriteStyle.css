@@ -3,18 +3,21 @@
 	*{
 		font-family: nsr; 
 		font-size: 20px;
+		height: auto;
+		
 	}
 	#dealWnEMain{
-		overflow:auto;
+	/* 	overflow:auto; */
 		width:1300px;
 		margin:50 auto;
-		height: 1000px; 
+		height: auto; 
 	}
 	
 	#dealWnEMain>div>form select{ 
 		height: 30px; 
 		width: 150px; 
 		margin-right: 5px;
+		font-size: 13px;
 		/* border: none */;
 	
 	}
@@ -37,23 +40,29 @@
 		border: none; 
 		border-bottom: 1px solid gray;
 	  	margin-top: 10px;
+	  	text-align: center;
 	}
 	
-	#cnt::-webkit-input-placeholder ,#gu::-webkit-input-placeholder ,#loc::-webkit-input-placeholder,#price::-webkit-input-placeholder{
+	#cnt::-webkit-input-placeholder ,#gu::-webkit-input-placeholder ,#price::-webkit-input-placeholder,
+	#i_ship1::-webkit-input-placeholder ,#i_ship2::-webkit-input-placeholder {
 		  text-align: center;
+	}
+	
+	#i_ship1,#i_ship2{
+		 display: none;
 	}
 
 	#date{
 		text-align: center;
 	}
-	#date,#gu, #loc, #price{ 
+	#date,#gu, #price,#i_ship1,#i_ship2{ 
 		margin-right: 10px;
 		text-align: center;
 		border: none; 
 		border-bottom: 1px solid gray;
 	}
 
-	#tag{ 
+	#tag,#loc { 
 		border: none; 
 		border-bottom: 1px solid gray;
 		width: 1300px; 
@@ -115,7 +124,12 @@
 	input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+	}
+	
+	#cke_content,#s_content {
+		height: 500px;
+		width: 1300px
+	}
 	
 	
 	#subject:active{border-bottom:2px solid #571fb8;}

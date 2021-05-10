@@ -10,6 +10,7 @@ public class GroupVO {
 	private String g_subject;
 	private String g_content;
 	private String g_cnt;
+	private int g_joinCnt; //joinUs table 참여자 수 카운트 담기위한 변수 지우지 말아주세요 
 	private String g_date;
 	private String g_time;
 	private String g_loc1;
@@ -78,6 +79,12 @@ public class GroupVO {
 	}
 	public void setG_cnt(String g_cnt) {
 		this.g_cnt = g_cnt;
+	}
+	public int getG_joinCnt() {
+		return g_joinCnt;
+	}
+	public void setG_joinCnt(int g_joinCnt) {
+		this.g_joinCnt = g_joinCnt;
 	}
 	public String getG_date() {
 		return g_date;

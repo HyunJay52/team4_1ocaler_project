@@ -30,6 +30,12 @@ public class MemberServiceImp implements MemberService {
 		//신규회원 이벤트
 		return dao.insertEventbonus(userid);
 	}
+
+	@Override
+	public int updateMember(MemberVO vo) {
+		// 일반회원정보 수정
+		return dao.updateMember(vo);
+	}
 	
 	@Override
 	public String sellerPwdDoubleCheck(String userid, String userpwd) {

@@ -6,11 +6,25 @@
 		text-overflow: ellipsis;  
 		white-space: nowrap
 	}
+	
+	a:visited{ 
+		color:black; 
+	}
+	a:link { 
+		color:#000; 
+	}
+	a:active{
+		color:#000;
+	}
+	a:hover{
+		color:#000;
+	}
 	#coummuBoardMain{
-		overflow:auto;
+		/* overflow:auto; */
 		width:1300px;
 		margin:50 auto;
 		height: auto;
+		overflow: hidden;
 	}
 	h1{ 
 		padding:20 30px;
@@ -19,91 +33,208 @@
 		margin-top:30px;
 		}
 	span{
-		font-weight: bold;
+		/* font-weight: bold; */
 	}
 	
-	#coummuBoardMaincenter{ 
+	#coummuBoardMaincenter{
+	 	margin-top:50px;
 		width:1100px; 
 	}
 	
-	#coummuBoardMainboardList li {
-		width: 1300px;
-		float: left; 
-		background-color: rgb(249 248 252);
-		border-radius: 5px;
+	
+	/* 테이블시작 */
+	
+	.table td, .table th {
+ 
+    	vertical-align: middle;
+    	border-top: none;
 	}
 	
-	/* 날짜 */
-	#coummuBoardMainboardList>li:nth-child(1)>div:nth-child(1){
-		width: 540;
-		height: 35px;
-		font-size: 18px;
+	#coummuBoardMaincenter a{
 		float: left;
-		line-height: 35px;
-		margin-left:20px;
-		padding-top: 5px;
+		
 	}
+	#coummuBoardMaincenter a:visited{ 
+		color:black; 
+	}
+	
+	#newImg{
+		text-align: center;
+	    font-size: 10px;
+    	float: left;
+     	color: #fff;
+     	background-color: rgb(0 104 208); 
+     	font-family: nsreb; 
+     	width: 15px;
+     	height: 15px; 
+     	line-height: 17px; 
+     	margin-top: 1px; 
+     	display: inline-block; 
+     	margin-left: 5px; 
+     	border-radius: 5px; 
+	}
+	
 
-	/* 조회수 */
-	#coummuBoardMainboardList>li:nth-child(1)>div:nth-child(2){
-		width:730px;
+     #coummuBoardMaincenter>.table th{
+		border-bottom:1px solid #181b46; 
+	}
+	
+	#coummuBoardMaincenter>.table tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color: #fff;
+    	color: #000;
+		font-weight:bold;
+		border-top:2px solid #181b46;
+		border-bottom:1px solid #181b46; 
+	}
+	#coummuBoardMaincenter>.table tr:last-child{/*첫번째 테이블 목차*/
+	
+		border-bottom:2px solid #181b46; 
+	}
+	
+	
+	#coummuBoardMaincenter>.table tr>td:nth-child(1){
+		width:130px; /*첫번째 열 선택*/
+		
+	}
+	#coummuBoardMaincenter>.table tr>td:nth-child(2){
+		width:770px; /*첫번째 열 선택*/
+		text-align: left;
+		
+	}
+	#coummuBoardMaincenter a
+	
+	#coummuBoardMaincenter>.table tr>td:nth-child(3){
+		width:115px; /*첫번째 열 선택*/
+	}
+	#coummuBoardMaincenter>.table tr>td:nth-child(4){
+		width:95px;
+		
+	}
+	#coummuBoardMaincenter>.table tr>td:nth-child(5){
+		width:95px;
+		
+	}
+	#coummuBoardMaincenter>.table tr>td:nth-child(6){
+		width:95px;
+		
+	}
+	
+	
+	
+	
+	
+/* ------------------------------------------- */		
+	/* new 게시판내용 */
+	
+	#coummuboardListTitle{
+		width:1300px;
+		margin: 0px;
+		padding: 0px;
+		background-color: gray;
+	}
+	
+	#coummuboardListTitle div{
+		float: left;
+		background-color: gray;
+		height: 40px;
+		line-height: 40px;
+	}
+	
+	
+	
+	#commuSubTitle>li:nth-child(4n+1){
+		width:125px ;
+		float: left;
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+	}
+	#commuSubTitle>li:nth-child(4n+2){
+		width:93px ;
+		float: left;
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+	}
+	#commuSubTitle>li:nth-child(4n+3){
+		width:91px ;
+		float: left;
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+	}
+	#commuSubTitle>li:nth-child(4n+4){
+		width:91px ;
+		float: left;
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+	}
+	
+
+	#coummuBoardMainboardList {
+		width: 1300px;
+	}
+	/* 카테고리 */
+	#coummuBoardMainboardList div:nth-child(1){
+		width: 130px;
+		float: left;
+		height: 50px;
+		margin: 0px;
+		padding: 0px;
+		line-height: 50px;
+		text-align: center;
+		
+	}
+	#commusubList{
+		width: 1170px;
+		height: 50px;
+		margin: 0px;
+		padding: 0px;
+		float: left;
+		
+	}
+	
+	/* 제목 */
+	#commusubList>div:nth-child(1){
+		width: 770px;
+		float: left;
 		height: 35px;
-		font-size: 16px;
-		text-align: right;
-		float: left;
+		margin: 0px;
+		padding: 0px;
 		line-height: 35px;
-		padding-right:20px; 
-		padding-top: 5px;
+		text-align: left;
 	}
-	/* 프로필 이미지 */
-	#coummuBoardMainboardList>li>div img{
-		width: 30px;
-		height:30px;
+	/* 조회수그런거 */
+	#commusubList>div:nth-child(2){
+		width: 400px;
 		float: left;
-		margin-right: 10px;
-		margin: 9px;
+		height: 38px;
+		margin: 0px;
+		padding: 0px;
+		line-height: 38px;
 	}
-	#coummuBoardMainboardList>li:nth-child(2){
-	 
-	}
-	#coummuBoardMainboardList>li:nth-child(2)>div:nth-child(1){
-		width: 1000px;
-		float:left;
-		height:48px;
+	/* 태그 */
+	#tagList{
+		width: 1200px;
+		height: 12px;
+		margin: 0px;
+		padding: 0px;
 		float: left;
-		line-height: 48px;
-		color: #3f1785;  
-		font-weight: bold;  
-		font-size:22px ;
-		padding-left: 50px;
-	
-		
-	}
-	#coummuBoardMainboardList>li:nth-child(2)>div:nth-child(2){
-		width: 300px;
-		height:48px;
-		line-height: 48px;
-		padding-right :10px;
-		float: left;
-	
-		
-	}
-	#coummuBoardMainboardList>li:nth-child(3){
-		width: 1300;
-		color: gray; 
-		font-size: 13px;
-		border-bottom: 4px solid #fff;
-		padding-left: 20px;
-		
+		line-height: 12px;
+		font-size: 12px;
+		color: gray;
 	}
 	
+	/* ------------------------------------------- */
 	/* a링크 */
 	#coummuBoardMainboardList>li:nth-child(2)>div:nth-child(1) a:active,#coummuBoardMainboardList>li:nth-child(2)>div:nth-child(1) a:link,#boardList>li:nth-child(2)>div:nth-child(1) a:visited {
-    	color: #3f1785; 
+    	color: #000; 
    	}
    	#coummuBoardMainboardList>li:nth-child(2)>div:nth-child(1) a:hover{
    		text-decoration: none; 	
-   		color: #571fb8 ; 
+   		color: #000 ; 
    	}
    	
    	/* a링크 닉넴 */
@@ -123,8 +254,46 @@
   	#coummuBoardpageNum{ padding-left:42%; margin-bottom:40px;width: 1280px; height: 20px;float: left;
   	margin-top: 30px;
 	} 
-	#coummuBoardpageNum a {color:#3f1785;
+	#coummuBoardpageNum a {color:#000;
 	}
 	#coummuBoardpageNum a:hover{text-decoration:none;color:#705abf ;  font-weight: bold;
 	}
 	
+	#MBPaging{
+		text-align:center
+	}
+   	
+   	#MBPaging>li{
+   		magin:0 -5px;
+   		display:inline-block; 
+   		border:1px solid #d9d9d9; 
+   		width:35px; 
+   		height:40px; 
+   		line-height:40px; 
+   		margin:19px -2;
+    	border-right: none;
+    }
+   #MBPaging>li:first-child{
+   		width:50px; 
+   		border-top-left-radius:8px; 
+   		border-bottom-left-radius:8px; 
+	}
+   #MBPaging>li:last-child{
+   		width:50px; 
+   		border-top-right-radius:8px; 
+   		border-bottom-right-radius:8px;
+  		border-right:1px solid #d9d9d9;
+   }
+   
+   .wriBtn {
+		width: 90px;
+		font-color: #181b46;
+		border: 1px solid #181b46;
+	}
+	.wriBtn:hover {
+		border: 1px solid #181b46;
+		background-color: #181b46;
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
