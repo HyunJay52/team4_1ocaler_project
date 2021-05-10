@@ -39,27 +39,27 @@
 		if($("#groupWriteFormUp_cate").val()=="한끼미식회"){
 			$("#groupWriteFormGroupWriteFrm").on('submit',function(){
 				if($("#groupWriteFormG_subject").val()=='' || $("#groupWriteFormG_subject").val()==null){
-					alert('제목입력해라');
+					alert('제목을 입력해 주세요.');
 					return false;
 				}
 				if(CKEDITOR.instances.groupWriteFormG_content.getData()==''){
-					alert('내용입력해라');
+					alert('내용을 입력해 주세요');
 					return false;
 				}
 				if($("#groupWriteFormG_date").val()=='' || $("#groupWriteFormG_date").val()==null){
-					alert('날짜입력해라');
+					alert('날짜를 선택해 주세요.');
 					return false;
 				}
 				if($("#groupWriteFormG_time").val()=='' || $("#groupWriteFormG_time").val()==null){
-					alert('시간입력해라');
+					alert('시간을 선택해 주세요.');
 					return false;
 				}
 				if($("#groupWriteFormG_cnt").val()=='' || $("#groupWriteFormG_cnt").val()==null){
-					alert('모집인원입력해라');
+					alert('참여 인원을 선택해 주세요');
 					return false;
 				}
 				if($("#groupWriteFormG_loc1").val()=='' || $("#groupWriteFormG_loc1").val()==null){
-					alert('지역입력해라');
+					alert('약속장소를 선택해 주세요.');
 					return false;
 				}
 			});
@@ -67,56 +67,56 @@
 			$("#groupWriteFormGroupWriteFrm").on('submit',function(){
 				if($("#groupWriteFormDown_cate option:selected").val()=='동네마트'){
 					if($("#groupWriteFormG_subject").val()=='' || $("#groupWriteFormG_subject").val()==null){
-						alert('제목입력해라');
+						alert('제목을 입력해 주세요.');
 						return false;
 					}
 					if(CKEDITOR.instances.groupWriteFormG_content.getData()==''){
-						alert('내용입력해라');
+						alert('내용을 입력해 주세요');
 						return false;
 					}
 					if($("#groupWriteFormG_date").val()=='' || $("#groupWriteFormG_date").val()==null){
-						alert('날짜입력해라');
+						alert('날짜를 선택해 주세요.');
 						return false;
 					}
 					if($("#groupWriteFormG_time").val()=='' || $("#groupWriteFormG_time").val()==null){
-						alert('시간입력해라');
+						alert('시간을 선택해 주세요.');
 						return false;
 					}
 					if($("#groupWriteFormG_cnt").val()=='' || $("#groupWriteFormG_cnt").val()==null){
-						alert('모집인원입력해라');
+						alert('참여 인원을 선택해 주세요.');
 						return false;
 					}
 					if($("#groupWriteFormG_loc1").val()=='' || $("#groupWriteFormG_loc1").val()==null){
-						alert('지역입력해라');
+						alert('약속 장소를 선택해 주세요');
 						return false;
 					}
 				}else{
 					if($("#groupWriteFormG_subject").val()=='' || $("#groupWriteFormG_subject").val()==null){
-						alert('제목입력해라');
+						alert('제목을 입력해 주세요.');
 						return false;
 					}
 					if(CKEDITOR.instances.groupWriteFormG_content.getData()==''){
-						alert('내용입력해라');
+						alert('내용을 입력해 주세요');
 						return false;
 					}
 					if($("#groupWriteFormG_date").val()=='' || $("#groupWriteFormG_date").val()==null){
-						alert('날짜입력해라');
+						alert('날짜를 선택해 주세요.');
 						return false;
 					}
 					if($("#groupWriteFormG_time").val()=='' || $("#groupWriteFormG_time").val()==null){
-						alert('시간입력해라');
+						alert('시간을 선택해 주세요.');
 						return false;
 					}
 					if($("#groupWriteFormG_cnt").val()=='' || $("#groupWriteFormG_cnt").val()==null){
-						alert('모집인원입력해라');
+						alert('참여 인원을 선택해 주세요.');
 						return false;
 					}
 					if($("#groupWriteFormG_loc1").val()=='' || $("#groupWriteFormG_loc1").val()==null){
-						alert('지역입력해라123123123123');
+						alert('출발지를 선택해 주세요.');
 						return false;
 					}
 					if($("#groupWriteFormG_loc2").val()=='' || $("#groupWriteFormG_loc2").val()==null){
-						alert('지역입력해라AAAAAAAAAAAAAAAAAAAAAAAAAAa');
+						alert('도착지를 선택해 주세요.');
 						return false;
 					}
 				}
