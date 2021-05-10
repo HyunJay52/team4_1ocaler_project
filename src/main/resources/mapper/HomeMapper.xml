@@ -5,11 +5,12 @@
 <mapper namespace="com.team4.localer.dao.HomeDAO">
 
 	<select id="getGroupList" resultType="com.team4.localer.vo.GroupVO">
-		SELECT up_cate, g_subject, TO_CHAR(g_date, 'YYYY/MM/DD') g_date, TO_CHAR(g_time, 'HH24:MI') g_time, g_loc1, g_cnt, g.USERID   
-		FROM GROUPLOCAL g  
-		<if test='g_gu!=null and g_gu!="" '>
-			and g_gu = #{param1}
+		SELECT g.num, up_cate, g_subject, TO_CHAR(g_date, 'YYYY/MM/DD') g_date, TO_CHAR(g_time, 'HH24:MI') g_time, g_loc1, g_cnt, g.USERID, mem_prof 
+		FROM GROUPLOCAL g, MEMBER m where g.userid = m.userid
+		<if test="param1!=null and param1!='' ">
+			AND g.G_LOC1 LIKE '%${param1}%'
 		</if>
+		AND <![CDATA[rownum<=10]]> ORDER BY g.num DESC 
 	</select>
 	
 </mapper>
