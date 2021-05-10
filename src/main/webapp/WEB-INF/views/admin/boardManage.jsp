@@ -217,15 +217,15 @@
 	<ul class="statis">
 		<li>
 			우리직구
-			<div>1127</div>
+			<div>${statisVO.price_total }</div>
 		</li>
 		<li>
 			가치가장
-			<div>1995</div>
+			<div>${statisVO.o_conf1 }</div>
 		</li>
 		<li>
 			커뮤니티
-			<div>1219</div>
+			<div>${statisVO.o_conf2 }</div>
 		</li>
 	</ul>
 	<div class="searchDiv">

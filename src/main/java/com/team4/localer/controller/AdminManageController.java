@@ -147,7 +147,7 @@ public class AdminManageController {
 		List<MemShareVO> list = manaService.memShareAllSelect(pageVO);
 		mav.addObject("list",list);
 		//페이지 통계부분 
-		mav.addObject("statisVO",manaService.boardManageStatis());
+		mav.addObject("statisVO",manaService.selManageStatis());
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("admin/selManage");
 		return mav;
@@ -225,7 +225,8 @@ public class AdminManageController {
 		pageVO.setTotalRecord(csService.totalRecord(pageVO));
 		//모집게시글목록가져오기 
 		mav.addObject("list",manaService.boardManageAllSelect(pageVO));
-		
+		//페이지 통계부분 
+		mav.addObject("statisVO",manaService.boardManageStatis());
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("admin/boardManage");
 		return mav;

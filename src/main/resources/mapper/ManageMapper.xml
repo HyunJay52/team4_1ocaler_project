@@ -150,10 +150,18 @@
 					</if>
 					order by ${num} desc
   	</select>
-  	<select id="boardManageStatis" resultType="com.team4.localer.vo.AdminstatisVO">
+  	<select id="selManageStatis" resultType="com.team4.localer.vo.AdminstatisVO">
   		select count(m.num)+count(s.i_num) price_total,
 				count(case when m.s_status=1 then 1 end)+count(case when s.i_status=1 then 1 end) o_conf1, 
 				count(case when m.s_status=2 then 1 end)+count(case when s.i_status=2 then 1 end) o_conf2
 				from mem_share m, sell_item s
+  	</select>
+  	<select id="boardManageStatis" resultType="com.team4.localer.vo.AdminstatisVO">
+  		select 
+		    (select count(*)  from grouplocal) o_conf1,
+		    (select count(*)  from board) o_conf2,
+		    (select count(*)  from sell_item)
+		    +(select count(*) from mem_share) price_total 
+		    from dual
   	</select>
 </mapper>

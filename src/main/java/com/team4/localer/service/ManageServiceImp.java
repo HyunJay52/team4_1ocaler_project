@@ -79,6 +79,11 @@ public class ManageServiceImp implements ManageService {
 	}
 
 	@Override
+	public AdminstatisVO selManageStatis() {
+		return manadao.selManageStatis();
+	}
+
+	@Override
 	public AdminstatisVO boardManageStatis() {
 		return manadao.boardManageStatis();
 	}

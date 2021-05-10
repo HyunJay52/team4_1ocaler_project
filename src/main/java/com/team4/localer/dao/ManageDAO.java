@@ -30,7 +30,7 @@ public interface ManageDAO {
 	
 	//판매게시글관리 페이지
 	//판매게시글관리 상단 통계
-	public AdminstatisVO boardManageStatis();
+	public AdminstatisVO selManageStatis();
 	//회원 판매게시판 목록
 	public List<MemShareVO> memShareAllSelect(AdminPageVO pageVO);
 	//셀러판매 게시판 목록
@@ -39,6 +39,8 @@ public interface ManageDAO {
 	public int selManageDel(int num,String cate,String numName);
 	
 	//게시글 관리 페이지 
+	//게시글관리 상단 통계
+	public AdminstatisVO boardManageStatis();
 	//모집게시글 전체 목록
 	public List<GroupVO> boardManageAllSelect(AdminPageVO pageVO);
 	//자유게시판 전체 목록 & 검색
