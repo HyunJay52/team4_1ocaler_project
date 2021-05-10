@@ -16,6 +16,7 @@ import com.team4.localer.service.CsService;
 import com.team4.localer.service.ManageService;
 import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.AdminstatisVO;
+import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
 
@@ -99,10 +100,23 @@ public class AdminManageController {
 	@ResponseBody
 	public Map<String, Object> sellerListSearch(AdminPageVO pageVO){
 		Map<String, Object> result = new HashMap<String, Object>();
-		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+		System.out.println("Key="+pageVO.getSearchKey());
+		System.out.println("word="+pageVO.getSearchWord());
 		pageVO.setNum("sel_num");
 		pageVO.setCate("seller");
-		pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
+			//검색어가 존재하면
+			pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+			System.out.println("검색어 존재하는데 여기 안들어오니?");
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+			pageVO.setSearchKey("s."+pageVO.getSearchKey());
+		}else {
+			pageVO.setSearchKey("");
+			pageVO.setSearchWord("");
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		}
+		
+		
 		result.put("list",manaService.sellerAllSelect(pageVO));
 		result.put("pageNum",pageVO.getPageNum());
 		result.put("startPageNum",pageVO.getStartPageNum());
@@ -132,6 +146,8 @@ public class AdminManageController {
 		//판매게시글목록가져오기 
 		List<MemShareVO> list = manaService.memShareAllSelect(pageVO);
 		mav.addObject("list",list);
+		//페이지 통계부분 
+		mav.addObject("statisVO",manaService.boardManageStatis());
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("admin/selManage");
 		return mav;
@@ -182,6 +198,7 @@ public class AdminManageController {
 		}
 		result.put("pageNum",pageVO.getPageNum());
 		result.put("startPageNum",pageVO.getStartPageNum());
+		result.put("onePageNum", pageVO.getOnePageNum());
 		result.put("totalPage", pageVO.getTotalPage());
 		return result;
 	}
@@ -191,11 +208,93 @@ public class AdminManageController {
 		if(cate!="mem_share"&&!cate.equals("mem_share")) {
 			numName="i_num";
 		}
-		System.out.println("현재 검색하는 글번호 컬럼명"+numName);
 		manaService.selManageDel(num,cate,numName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:selManage");
 		return mav;
 	}
-	
+	//============게시글 관리
+	@RequestMapping("/boardManage")//회원판매 게시글 조회
+	public ModelAndView boardManage(AdminPageVO pageVO) {
+		ModelAndView mav = new ModelAndView();
+		pageVO.setNum("num");
+		pageVO.setCate("grouplocal");
+		pageVO.setSearchKey("");
+		pageVO.setSearchWord("");
+		//총레코드 구하기
+		pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		//모집게시글목록가져오기 
+		mav.addObject("list",manaService.boardManageAllSelect(pageVO));
+		
+		mav.addObject("pageVO",pageVO);
+		mav.setViewName("admin/boardManage");
+		return mav;
+	}
+	//자유자게 리스트,검색, 페이징
+	@RequestMapping(value="/cumuManageListSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> cumuManageListSearch(AdminPageVO pageVO){
+		Map<String, Object> result = new HashMap<String, Object>();
+		System.out.println("Key="+pageVO.getSearchKey());
+		System.out.println("word="+pageVO.getSearchWord());
+		pageVO.setNum("num");
+		pageVO.setCate("board");
+		if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
+			//검색어가 존재하면
+			pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+			if(pageVO.getSearchKey()=="subject" || pageVO.getSearchKey().equals("subject")) {
+				pageVO.setSearchKey("b_"+pageVO.getSearchKey());
+			}
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+			pageVO.setSearchKey("b."+pageVO.getSearchKey());
+		}else {
+			pageVO.setSearchKey("");
+			pageVO.setSearchWord("");
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		}
+		
+		
+		result.put("list",manaService.cumuManageListSearch(pageVO));
+		result.put("pageNum",pageVO.getPageNum());
+		result.put("startPageNum",pageVO.getStartPageNum());
+		result.put("totalPage", pageVO.getTotalPage());
+		return result;
+	}
+	//모집 게시판 검색, 리스트,페이징 
+	@RequestMapping(value="/groupManageListSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> groupManageListSearch(AdminPageVO pageVO){
+		Map<String, Object> result = new HashMap<String, Object>();
+		System.out.println("Key="+pageVO.getSearchKey());
+		System.out.println("word="+pageVO.getSearchWord());
+		pageVO.setNum("num");
+		pageVO.setCate("grouplocal");
+		if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
+			//검색어가 존재하면
+			pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+			if(pageVO.getSearchKey()=="subject" || pageVO.getSearchKey().equals("subject")) {
+				pageVO.setSearchKey("g_"+pageVO.getSearchKey());
+			}
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+			pageVO.setSearchKey("g."+pageVO.getSearchKey());
+			
+		}else {
+			pageVO.setSearchKey("");
+			pageVO.setSearchWord("");
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		}
+		result.put("list",manaService.boardManageAllSelect(pageVO));
+		result.put("pageNum",pageVO.getPageNum());
+		result.put("startPageNum",pageVO.getStartPageNum());
+		result.put("totalPage", pageVO.getTotalPage());
+		return result;
+	}
+	@RequestMapping("/boardManageDel")
+	public ModelAndView boardManageDel(int num, String cate) {
+		String numName="num";
+		manaService.selManageDel(num,cate,numName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:boardManage");
+		return mav;
+	}
 }

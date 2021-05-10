@@ -105,4 +105,55 @@
   	<delete id="selManageDel">
   		delete from ${param2} where ${param3}=${param1}
   	</delete>
+  	<select id="boardManageAllSelect" resultType="com.team4.localer.vo.GroupVO">
+  		select * from
+			(select *from
+				(select g.num,g.up_cate,g.down_cate,g.g_subject,g.g_cnt,g.userid, 
+			  		to_char(g.g_writedate,'YYYY-MM-DD') g_writedate, 
+			  		count(case when r.num=g.num then 1 end) reportCount
+				from grouplocal g, report r 
+				<if test="!searchWord.equals('') and searchWord!=null">
+					where ${searchKey} like #{searchWord}
+				</if>
+				group by g.num,g.up_cate,g.down_cate,g.g_subject,g.g_cnt,g.userid, g.g_writedate
+				order by g.num desc
+			)
+			where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+			where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc
+  	</select>
+  	<select id="cumuManageListSearch" resultType="com.team4.localer.vo.BoardVO">
+  		select * from
+			(select *from
+				(select b.num, b.up_cate, b.b_gu,b.b_subject,b.userid,b.b_hit,
+  					to_char(b.b_writedate,'YYYY-MM-DD') b_writedate, count(case when r.num=b.num then 1 end) reportCount
+					from board b, report r 
+					<if test="!searchWord.equals('') and searchWord!=null">
+						where ${searchKey} like #{searchWord}
+					</if>
+					group by b.num, b.up_cate, b.b_gu, b.b_subject, b.userid, b.b_writedate, b.b_hit
+			  		order by b.num desc
+			)
+			where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+			where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc
+  	</select>
+  	<select id="boardManageStatis" resultType="com.team4.localer.vo.AdminstatisVO">
+  		select count(m.num)+count(s.i_num) price_total,
+				count(case when m.s_status=1 then 1 end)+count(case when s.i_status=1 then 1 end) o_conf1, 
+				count(case when m.s_status=2 then 1 end)+count(case when s.i_status=2 then 1 end) o_conf2
+				from mem_share m, sell_item s
+  	</select>
 </mapper>

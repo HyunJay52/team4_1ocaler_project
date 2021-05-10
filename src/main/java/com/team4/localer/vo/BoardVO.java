@@ -26,10 +26,20 @@ public class BoardVO {
 	//배열?
 	private int gu_select;
 	
+	//신고횟수
+	private int reportCount;
 
 	
 	
 	
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
+
 	public int getGu_select() {
 		return gu_select;
 	}

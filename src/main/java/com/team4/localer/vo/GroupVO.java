@@ -17,7 +17,14 @@ public class GroupVO {
 	private int g_hit;
 	private String g_writedate;
 	private String g_tag;
+	private int reportCount;
 	
+	public int getReportCount() {
+		return reportCount;
+	}
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
 	private MemberVO memberVO;
 	
 	

@@ -14,10 +14,22 @@
 <div class="main">
 	<div class="title">일일현황</div>
 	<div id="cirdiv">
-		<div class="cir1">신규회원<br/><b>25</b></div>
-		<div class="cir1">새 게시물<br/><b>10</b></div>
-		<div class="cir1">방문자수<br/><b>3</b>/총</div>
-		<div class="cir1">셀러신청<br/><b>1</b></div>
+		<div class="cir1">
+			<div class="top">신규회원</div>
+			<div class="btm">25</div>
+		</div>
+		<div class="cir1">
+			<div class="top">새 게시물</div>
+			<div class="btm">10</div>
+		</div>
+		<div class="cir1">
+			<div class="top">방문자수</div>
+			<div class="btm">3</div>
+		</div>
+		<div class="cir1">
+			<div class="top">셀러신청</div>
+			<div class="btm">1</div>
+		</div>
 	</div>
 	
 	<div class="title">문의사항</div>

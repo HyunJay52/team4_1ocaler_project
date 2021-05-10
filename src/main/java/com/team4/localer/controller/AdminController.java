@@ -35,12 +35,6 @@ public class AdminController {
 		mav.setViewName("admin/main");
 		return mav;
 	}
-	@RequestMapping("/boardManage")//판매관리
-	public ModelAndView boardManage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/boardManage");
-		return mav;
-	}
 	@RequestMapping("/publicwrite")//판매관리
 	public ModelAndView publicwrite() {
 		ModelAndView mav = new ModelAndView();

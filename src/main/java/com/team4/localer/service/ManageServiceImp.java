@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.team4.localer.dao.ManageDAO;
 import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.AdminstatisVO;
+import com.team4.localer.vo.BoardVO;
+import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.SellerVO;
@@ -64,6 +66,21 @@ public class ManageServiceImp implements ManageService {
 	@Override
 	public int selManageDel(int num, String cate, String numName) {
 		return manadao.selManageDel(num, cate, numName);
+	}
+
+	@Override
+	public List<GroupVO> boardManageAllSelect(AdminPageVO pageVO) {
+		return manadao.boardManageAllSelect(pageVO);
+	}
+
+	@Override
+	public List<BoardVO> cumuManageListSearch(AdminPageVO pageVO) {
+		return manadao.cumuManageListSearch(pageVO);
+	}
+
+	@Override
+	public AdminstatisVO boardManageStatis() {
+		return manadao.boardManageStatis();
 	}
 
 
