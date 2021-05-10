@@ -23,6 +23,11 @@
 	<insert id="insertEventbonus" >
 		INSERT INTO CHA_P(userid, CHA_POINT, CHA_MTH) VALUES (#{param1}, 3000, 0)
 	</insert>
+	<update id="updateMember" parameterType="com.team4.localer.vo.MemberVO">
+		UPDATE MEMBER SET MEM_NICK=#{mem_nick}, mem_prof=#{mem_prof}, MEM_CONTENT =#{mem_content}, 
+		MEM_TEL = #{mem_tel}, MEM_EMAIL = #{mem_email}, MEM_ZIP = ${mem_zip}, MEM_ADDR = #{mem_addr}, MEM_DETAIL = #{mem_detail}, LOC_GU = #{loc_gu} 
+		WHERE userid = #{userid}
+	</update>
 	
 	<select id="sellerPwdDoubleCheck" resultType="String">
 		select userpwd from member where userid=#{param1} and userpwd=#{param2}

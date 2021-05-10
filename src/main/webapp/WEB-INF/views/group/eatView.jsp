@@ -250,7 +250,7 @@
 
 </head>
 <body id="eatViewBody">
-	<div id="eatViewMap" style="width:2000px; height:1200px; position:relative; overflow:hidden;"></div>
+	<div id="eatViewMap" style="width:1950px; height:1100px; position:relative; overflow:hidden;"></div>
 	
 	<!-- eatViewShowFrm접기펴기 -->	
 	<div class="groupViewFold"><img src="<%=request.getContextPath()%>/img/groupImg/left.png"/></div>
@@ -288,6 +288,7 @@
 				<option value="g_subject">제목</option>
 				<option value="userid">작성자</option>
 				<option value="g_content">내용</option>
+				<option value="g_gu">약속장소</option>
 			</select>
 			<input type="text" name="searchWord" id="eatViewSearchWord"/>
 			<button id="eatViewButton"><img src="<%=request.getContextPath()%>/img/groupImg/search.png"></button>
