@@ -6,6 +6,19 @@
 		text-overflow: ellipsis;  
 		white-space: nowrap
 	}
+	
+	a:visited{ 
+		color:black; 
+	}
+	a:link { 
+		color:#000; 
+	}
+	a:active{
+		color:#000;
+	}
+	a:hover{
+		color:#000;
+	}
 	#coummuBoardMain{
 		/* overflow:auto; */
 		width:1300px;
@@ -28,6 +41,90 @@
 		width:1100px; 
 	}
 	
+	
+	/* 테이블시작 */
+	
+	.table td, .table th {
+ 
+    	vertical-align: middle;
+    	border-top: none;
+	}
+	
+	#coummuBoardMaincenter a{
+		float: left;
+		
+	}
+	#coummuBoardMaincenter a:visited{ 
+		color:black; 
+	}
+	
+	#newImg{
+		text-align: center;
+	    font-size: 10px;
+    	float: left;
+     	color: #fff;
+     	background-color: rgb(0 104 208); 
+     	font-family: nsreb; 
+     	width: 15px;
+     	height: 15px; 
+     	line-height: 17px; 
+     	margin-top: 1px; 
+     	display: inline-block; 
+     	margin-left: 5px; 
+     	border-radius: 5px; 
+	}
+	
+
+     #coummuBoardMaincenter>.table th{
+		border-bottom:1px solid #181b46; 
+	}
+	
+	#coummuBoardMaincenter>.table tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color: #fff;
+    	color: #000;
+		font-weight:bold;
+		border-top:2px solid #181b46;
+		border-bottom:1px solid #181b46; 
+	}
+	#coummuBoardMaincenter>.table tr:last-child{/*첫번째 테이블 목차*/
+	
+		border-bottom:2px solid #181b46; 
+	}
+	
+	
+	#coummuBoardMaincenter>.table tr>td:nth-child(1){
+		width:130px; /*첫번째 열 선택*/
+		
+	}
+	#coummuBoardMaincenter>.table tr>td:nth-child(2){
+		width:770px; /*첫번째 열 선택*/
+		text-align: left;
+		
+	}
+	#coummuBoardMaincenter a
+	
+	#coummuBoardMaincenter>.table tr>td:nth-child(3){
+		width:115px; /*첫번째 열 선택*/
+	}
+	#coummuBoardMaincenter>.table tr>td:nth-child(4){
+		width:95px;
+		
+	}
+	#coummuBoardMaincenter>.table tr>td:nth-child(5){
+		width:95px;
+		
+	}
+	#coummuBoardMaincenter>.table tr>td:nth-child(6){
+		width:95px;
+		
+	}
+	
+	
+	
+	
+	
+/* ------------------------------------------- */		
 	/* new 게시판내용 */
 	
 	#coummuboardListTitle{
@@ -75,8 +172,7 @@
 		text-align: center;
 	}
 	
-	
-	
+
 	#coummuBoardMainboardList {
 		width: 1300px;
 	}
@@ -131,14 +227,14 @@
 		color: gray;
 	}
 	
-	
+	/* ------------------------------------------- */
 	/* a링크 */
 	#coummuBoardMainboardList>li:nth-child(2)>div:nth-child(1) a:active,#coummuBoardMainboardList>li:nth-child(2)>div:nth-child(1) a:link,#boardList>li:nth-child(2)>div:nth-child(1) a:visited {
-    	color: #3f1785; 
+    	color: #000; 
    	}
    	#coummuBoardMainboardList>li:nth-child(2)>div:nth-child(1) a:hover{
    		text-decoration: none; 	
-   		color: #571fb8 ; 
+   		color: #000 ; 
    	}
    	
    	/* a링크 닉넴 */
@@ -158,8 +254,46 @@
   	#coummuBoardpageNum{ padding-left:42%; margin-bottom:40px;width: 1280px; height: 20px;float: left;
   	margin-top: 30px;
 	} 
-	#coummuBoardpageNum a {color:#3f1785;
+	#coummuBoardpageNum a {color:#000;
 	}
 	#coummuBoardpageNum a:hover{text-decoration:none;color:#705abf ;  font-weight: bold;
 	}
 	
+	#MBPaging{
+		text-align:center
+	}
+   	
+   	#MBPaging>li{
+   		magin:0 -5px;
+   		display:inline-block; 
+   		border:1px solid #d9d9d9; 
+   		width:35px; 
+   		height:40px; 
+   		line-height:40px; 
+   		margin:19px -2;
+    	border-right: none;
+    }
+   #MBPaging>li:first-child{
+   		width:50px; 
+   		border-top-left-radius:8px; 
+   		border-bottom-left-radius:8px; 
+	}
+   #MBPaging>li:last-child{
+   		width:50px; 
+   		border-top-right-radius:8px; 
+   		border-bottom-right-radius:8px;
+  		border-right:1px solid #d9d9d9;
+   }
+   
+   .wriBtn {
+		width: 90px;
+		font-color: #181b46;
+		border: 1px solid #181b46;
+	}
+	.wriBtn:hover {
+		border: 1px solid #181b46;
+		background-color: #181b46;
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}

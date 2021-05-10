@@ -15,22 +15,26 @@
  
       
       <h3 style="margin-top:50px;">#동네직구 <span style="font-size:20px">| 지역 주민들과 나눔</span></h3>
-      <span style="display: inline-block; font-size:20px; float:right;"><a href="#">식료품</a> | <a href="#">생필품</a></span>
+      <span style="display: inline-block; font-size:20px; float:right; margin-bottom: 6px;">
+      	<a href="#">식료품</a>&ensp;<span style="font-size:10px; ">|</span>&nbsp;
+      	<a href="#">생필품</a>&ensp;<span style="font-size:10px; ">|</span>&ensp; 
+      	<a href="#">기 타</a>&ensp; 
+      </span>
                   
                
          <div id="selBoard" >
             <ul id="boardText">
-               <c:forEach var="i" begin="1" end="10">
+               <c:forEach var="i" begin="1" end="8">
                   <li id="selList">
                      <div OnClick="location.href ='memberView'">
-                        <div id="memImgDiv">
+                        <div id="sellImgDiv">
                            <img src="img/deal/Karrot.jpeg"/>
                         </div>
                         <ul >   
                            <li class="wordcut">당근 나눔 하실분</li>
                            
-                           <li>
-                              <span class="cntJoin">&nbsp;&nbsp;</span>
+                           <li style="text-align: center; font-size: 20px">
+                              <span class="cntJoin">3</span>
                               /5개
                            </li>
                            <li>1,000원</li>

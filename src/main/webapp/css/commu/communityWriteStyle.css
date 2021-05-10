@@ -9,6 +9,11 @@
 		height: 1000px; 
 	}
 	
+	#commueWnEmain h5{
+		margin-bottom: 24px;
+		color:gray;
+	}
+	
 	#commueWnEmain>div>form select{ 
 		height: 30px; 
 		width: 150px; 
@@ -81,25 +86,25 @@
 	}
 		
 	.confBtn {
-		background: #3f1785;
+		background: #122706;
 		color: #fff;
 		width: 90px;
 	}
 	.confBtn:hover {
-	color: #fff;
-	background: #B8B2F4;
+		color: #fff;
+		background: rgb(0 128 64);
 	}
 	
 	
-	#subject:active{border-bottom:2px solid #571fb8;}
-	#subject:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#subject:hover{border-bottom:2px solid #571fb8;}
+	#subject:active{border-bottom:2px solid #122706;}
+	#subject:focus{border-bottom:2px solid #122706; outline: none;}
+	#subject:hover{border-bottom:2px solid #122706;}
 	
-	#cnt:active{border-bottom:2px solid #571fb8;}
-	#cnt:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#cnt:hover{border-bottom:2px solid #571fb8;}
+	#cnt:active{border-bottom:2px solid #122706;}
+	#cnt:focus{border-bottom:2px solid #122706; outline: none;}
+	#cnt:hover{border-bottom:2px solid #122706;}
 	
-	#tag:active{border-bottom:2px solid #571fb8;}
-	#tag:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#tag:hover{border-bottom:2px solid #571fb8;}
+	#tag:active{border-bottom:2px solid #122706;}
+	#tag:focus{border-bottom:2px solid #122706; outline: none;}
+	#tag:hover{border-bottom:2px solid #122706;}
 	 
