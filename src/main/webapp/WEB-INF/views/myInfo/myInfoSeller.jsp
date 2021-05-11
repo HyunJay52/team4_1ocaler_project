@@ -2,6 +2,35 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+	document.title = "내정보(판매자)";
+	
+	$(function(){
+		//moreSellerInfo 더보기 이벤트
+		var moreSellerInfo = false;
+		$("#moreSellerInfo").click(function(){
+			if(moreSellerInfo == false){
+				$(this).css('display', 'none');
+				$(".editOn").css('display', 'block');
+				$(".inputDisabled").attr('disabled', false);
+				//$("#sel_prof").attr('readyonly', false);
+				moreSellerInfo = true;
+			}else{
+				if(confirm("수정을 취소하시겠습니까?")){
+						
+				}else{
+					return false;
+				}
+				
+				$(".editOn").css('display', 'none');	
+				$(".inputDisabled").attr('disabled', true);
+				moreSellerInfo = false;								
+			}
+		});
+	});	
+</script>
+
 <div class="myinfoBody">
 
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
@@ -12,49 +41,44 @@
 				<li>대표 이미지</li>
 				<li class="memheightAuto">
 					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
-						<img src="<%=request.getContextPath()%>/common/user.png"
+						<img src="<%=request.getContextPath()%>/img/sel_prof/${myVO.sel_prof}"
 							id="previewImg" class="profImg form-control-file border"
 							alt="upload image" />
-					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진수정 </label> 
-					<input type="file" name="profFile" accept="image/*" id="mem_prof" 
+					</div> <label class="Mem_input-file-button" for="sel_prof"> 사진수정 </label> 
+					<input type="file" name="profFile" accept="image/*" id="sel_prof"
 					style="display: none; margin-top: 70px; border: none;" />
 				</li>
 				
 				<li>아이디</li>
 				<li><input type="text" name="userid" id="userid" tabindex="1" value="${myVO.userid }" disabled/></li>
 				<li>사업자명</li>
-				<li><input type="text" name="mem_name" id="mem_name"tabindex="5" value="${myVO.mem_name }" disabled/></li>
+				<li><input type="text" name="sel_name" id="sel_name"tabindex="5" value="${myVO.sel_name }" disabled/></li>
 				<li>회사명</li>
-				<li><input type="text" class="inputDisabled" name="mem_nick" id="mem_nick" value="${myVO.mem_nick }" disabled="disabled"
-					placeholder="회사명을 입력해주세요" />
-				<button type="button" class="btn commBtn Mem_lgBtn" id="nickOverlapBtn">중복검사</button>
-					<span id="nickOverlap">N</span><br/>
-					<span id="checkNickname"></span>	
+				<li>
+					<input type="text" class="inputDisabled" name="company" id="company" value="${myVO.company }" disabled="disabled" placeholder="회사명을 입력해주세요" />
 				</li>
 				<li>사업자 번호</li>
-				<li><input type="text" class="inputDisabled" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11" value="${myVO.mem_tel }" disabled="disabled"/>
-				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
-				<span id="checktel"></span></li>
-					
-				<li>전화번호</li>
-				<li><input type="text" class="inputDisabled" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11" value="${myVO.mem_tel }" disabled="disabled"/>
-				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
-				<span id="checktel"></span></li>
-					
-				<li>고객상담 번호</li>
-				<li><input type="text" class="inputDisabled" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11" value="${myVO.mem_tel }" disabled="disabled"/>
-				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
+				<li>
+					<input type="text" class="inputDisabled" name="com_num" id="com_num" tabindex="6" maxlength="11" value="${myVO.com_num }" disabled="disabled"/>
+				</li>
+				<li>고객상담번호</li>
+				<li>
+					<input type="text" class="inputDisabled" name="sel_tel" id="sel_tel" tabindex="6" maxlength="11" value="${myVO.sel_tel }" disabled="disabled"/>
+				</li>
+				<li>이메일</li>
+				<li><input type="text" class="inputDisabled" name="sel_email" id="sel_email" tabindex="6" maxlength="11" value="${myVO.sel_email }" disabled="disabled"/>
+				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">이메일인증</button> <br />
 				<span id="checktel"></span></li>
 					
 				<li>주소</li>
 				<li style="height:200px">
 					<ul class="myifoAddrInput">
-						<li><input type="text" class="inputDisabled" name="mem_zip" id="mem_zip" value="${myVO.mem_zip }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="sel_zip" id="sel_zip" value="${myVO.sel_zip }" disabled="disabled"
 							tabindex="9" />
 						<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:openKakaoPost()">재검색</button></li>
-						<li><input type="text" class="inputDisabled" name="mem_addr" id="mem_addr" value="${myVO.mem_addr }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="sel_addr" id="sel_addr" value="${myVO.sel_addr }" disabled="disabled"
 							tabindex="10" /></li>
-						<li><input type="text" class="inputDisabled" name="mem_detail" id="mem_detail" value="${myVO.mem_detail }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="sel_detail" id="sel_detail" value="${myVO.sel_detail }" disabled="disabled"
 							tabindex="11" />
 						</li>
 						<li>
@@ -67,12 +91,12 @@
 				<li>반품지 주소</li>
 				<li style="height:200px">
 					<ul class="myifoAddrInput">
-						<li><input type="text" class="inputDisabled" name="mem_zip" id="mem_zip" value="${myVO.mem_zip }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="sel_zip" id="sel_zip" value="${myVO.sel_zip }" disabled="disabled"
 							tabindex="9" />
 						<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:openKakaoPost()">재검색</button></li>
-						<li><input type="text" class="inputDisabled" name="mem_addr" id="mem_addr" value="${myVO.mem_addr }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="sel_addr" id="sel_addr" value="${myVO.sel_addr }" disabled="disabled"
 							tabindex="10" /></li>
-						<li><input type="text" class="inputDisabled" name="mem_detail" id="mem_detail" value="${myVO.mem_detail }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="sel_detail" id="sel_detail" value="${myVO.sel_detail }" disabled="disabled"
 							tabindex="11" />
 						</li>
 						<li>
@@ -81,21 +105,27 @@
 							</div>
 						</li>
 					</ul>
-				</li>				
-				<li>계좌정보</li>
-				<li style="height:110px"><input type="text" name="bank" class="sellerAccountInfoForm"/>
-					<select class="sellerAccountInfoForm">
-							<option value="기업은행">기업은행</option>
-							<option value="우리은행">우리은행</option>
-							<option value="국민은행">국민은행</option>
-							<option value="하나은행">하나은행</option>
-							<option value="신한은행">신한은행</option>
-							<option value="SC제일은행">SC제일은행</option>
-							<option value="한국씨티은행">한국씨티은행</option>
-							<option value="농협은행">농협은행</option>
-						</select>
-					<button class="btn btn-outline-dark sellerBtn" style="float:left; margin:2px 0; width:90px">계좌인증</button>
 				</li>
+				<li>계좌정보</li>
+				<li>
+					<ul id="bankInput"  style="height: auto;">
+						<li><input type="text" name="acc_name" id="acc_name" class="inputDisabled" value="${myVO.acc_name }"/>
+							<br/><span id="checkSellAccName"></span>
+						</li>
+						<li><!-- bank -->
+							<select id="bank" name="bank" class="inputDisabled">
+								<option value="0">은행선택</option>
+								<option value="신한은행">신한은행</option>
+								<option value="기업은행">기업은행</option>
+								<option value="하나은행">하나은행</option>
+								<option value="국민은행">국민은행</option>
+								<option value="카카오뱅크">카카오뱅크</option>
+							</select>
+							<input type="number" name="account" id="account" class="inputDisabled" value="${myVO.account }"/>
+							<br/><span id="checkSellAcc"></span>
+						</li>
+					</ul>
+				</li>				
 			</ul>
 			
 			<button type="button" id="moreSellerInfo" class="btn commBtn Mem_lgBtn"

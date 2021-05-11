@@ -40,6 +40,7 @@
 				location.href="reportWrite?userid=${vo.userid}"	
 			}else{
 				alert('로그인후 사용할 수 있습니다.');
+				location.href="login";
 			}
 		});
 		
@@ -84,7 +85,7 @@
 		}else{
 			$("#withViewPageJoinBtn").click(()=>{
 				alert('로그인 후 이용해 주세요');
-				location.href="";
+				location.href="login";
 			});
 		}
 		
@@ -108,7 +109,7 @@
 		var container = document.getElementById("withViewPageMap"),
 			options = {
 				center : new kakao.maps.LatLng(33.450701,126.570667),
-				level : 7
+				level : 4
 			};
 		var map = new kakao.maps.Map(container, options);
 		//마커 찍기를 함수화
@@ -185,7 +186,7 @@
 				
 				//검색된 장소(위치)기준으로 지도를 셋팅해준다.
 				 map.setBounds(bounds);
-				 map.setLevel(7);
+				 map.setLevel(4);
 				
 		    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
@@ -245,16 +246,7 @@
 			    } 
 			}); 	
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		$("#withViewPageSearchFrm").click(()=>{
 			searchPlaces();
 		});

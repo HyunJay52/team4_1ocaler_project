@@ -42,6 +42,15 @@
 		<div>
 			<form  method="post" action="commuEditOk"   >
 			
+				<c:if test="${vo.up_cate==1}">		
+					<h5>우리동네 이야기 글수정</h5>
+				</c:if>
+				<c:if test="${vo.up_cate==2}">		
+					<h5>쓱싹레시피 글수정</h5>
+				</c:if>
+				<c:if test="${vo.up_cate==3}">		
+					<h5>자유자게 글수정</h5>
+				</c:if>
 			
 				<select id="up_cate" name="up_cate" disabled>
 					<option value="0" <c:if test='${vo.up_cate==0 }'></c:if> >카테고리</option>
@@ -65,8 +74,18 @@
 						
 	 			<br/>
 	 			<input type="hidden" name="num" value="${vo.num }"/>
-	 			<input type="text" id ="subject" name="b_subject"value="${vo.b_subject }"/>
-	 			<input type="text" id ="cnt" name="b_gu" value="${logLoc_gu}"/>
+	 			
+	 			<c:if test="${vo.up_cate==2}">
+	 				<input type="text" id ="subject" name="b_subject"value="${vo.b_subject }"style="width: 100%; "/>
+	 			</c:if>
+	 			<c:if test="${vo.up_cate==3}">
+	 				<input type="text" id ="subject" name="b_subject"value="${vo.b_subject }"style="width: 100%; "/>
+	 			</c:if>
+	 			<c:if test="${vo.up_cate==1 }">
+	 				<input type="text" id ="subject" name="b_subject"value="${vo.b_subject }"style="width: 1000px; "/>
+	 				<input type="text" id ="cnt" name="b_gu" value="${logLoc_gu}"/>
+	 			</c:if>
+	 			
 	 			<textarea name="b_content" id ="content" > ${vo.b_content } </textarea>
 	 			<script>CKEDITOR.replace("b_content");</script>
 	 			

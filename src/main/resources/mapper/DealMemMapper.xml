@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.team4.localer.dao.DealShareDAO">
+ 	<insert id="dealInsert" parameterType="com.team4.localer.vo.DealShareVO" >
+		insert into mem_share (num,userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu,s_price,s_date,s_tag)
+		values (boardsq.nextval, #{userid},#{s_cate},#{s_status},#{s_subject},#{s_cnt},#{s_content},#{s_img1},#{s_loc},#{s_gu},#{s_price},#{s_date},#{s_tag})
+	</insert>
+	<select id="dealOneselect"  resultType="com.team4.localer.vo.DealShareVO">
+		<![CDATA[ 
+			select num,userid, s_cate, s_subject, s_content,s_img1,s_loc,s_gu,to_char(s_price,'999,999,999,999') s_price,s_date,s_tag
+			from mem_share b where rownum <=1 and userid=#{userid} order by num desc
+		]]>
+	</select>
+	<select id="dealListSelect" resultType="com.team4.localer.vo.DealShareVO" >
+		select num,userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, s_price ,s_date,s_tag
+		from mem_share order by num desc
+	</select>
+ </mapper>

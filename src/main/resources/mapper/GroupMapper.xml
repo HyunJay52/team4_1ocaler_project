@@ -20,8 +20,9 @@
   	
 	<!-- 모집 리스트 뽑기 -->  
   	<select id="GroupListAll" resultType="com.team4.localer.vo.GroupVO">
-  		select * from (select * from (select num, down_cate, g_subject, g_cnt, to_char(g_date, 'YYYY-MM-DD') g_date, to_char(g_time, 'HH24:MI') g_time,
-  		 g_loc1, g_tag from grouplocal where g_gu=#{loc_gu}
+  		select * from (select * from (select num, userid, down_cate, g_subject, g_cnt, to_char(g_date, 'YYYY-MM-DD') g_date, to_char(g_time, 'HH24:MI') g_time,
+  		 g_loc1, g_tag from grouplocal where g_gu=#{loc_gu} 
+  		 
   		 
   		 <if test="category=='한끼미식회'">
   		 and up_cate=#{category}

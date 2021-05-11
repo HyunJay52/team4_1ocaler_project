@@ -12,79 +12,60 @@
 		<h3 style="margin-top:50px;">#자유게시판 <span style="font-size:16px">| 자유롭게 의견을 나눠보세요 </span></h3>
 
 		<div id="coummuBoardMaincenter">
-				<div id ="coummuboardListTitle">
-						<div style="width: 130px; text-align: center;">
-							글번호
-						</div>
-						<div >
-							<div style="width: 770px ; text-align: center;">제목 </div>
-							<div id ="" style="width: 400px ;">
-								<ul id ="commuSubTitle">
-									<li>아이디</li>
-									<li>작성일</li>
-									<li>조회수</li>
-									<li>좋아요</li>
-								</ul>
-							</div>
-						</div>	 
-					
-				</div>
-		
-		
-		
-			
-			<c:forEach var="vo" items="${commuList }">
-				<div id ="coummuBoardMainboardList">
-						<div>
-								${vo.num }
-						</div>
+				<table cellpadding="0" cellspacing="0" style="width:1300px ;height: 300px;" class="table">
+					<tbody>
+						<tr height="41px">
+							<th>글번호</th>
+							<th>제목</th>
+							<th>아이디</th>
+							<th>작성일</th>
+							<th>조회수</th>
+							<th>좋아요</th>
+						</tr>	
 						
-						<div id="commusubList">
-							<div>${vo.b_subject} &emsp; [${vo.repcont}]</div>
-							<div>
-								<ul id ="commuSubTitle">
-									<li>${vo.userid}</li>
-									<li>${vo.b_writedate}</li>
-									<li>${vo.b_hit}</li>
-									<li>${vo.b_hit}</li>
-								</ul>
-							</div>
-							<div id="tagList">
-								<c:if test="${vo.b_tag == null }">
-									
-										&nbsp;
-									
-								</c:if>
-								<c:if test="${vo.b_tag != '' }">
-									
-										${vo.b_tag }
-								
-								</c:if>
-							</div>
-						</div>	 
-					
-				</div>
-				
-			</c:forEach>
+						<c:forEach var="vo" items="${commuList }">
+						<tr>
+							<td>
+								${vo.num }
+							</td>
+													
+							<td style="float: left ;line-height: 14px;">
+								<a href="commuView?num=${vo.num}">${vo.b_subject} 
+									<span style="font-weight: bold;"> [${vo.repcont}]</span>
+								</a> 
+									&nbsp;
+								<div id="newImg">N</div>
+							</td>
+							<td>${vo.userid}</td>
+							<td>${vo.b_writedate}</td>
+							<td>${vo.b_hit}</td>
+							<td>${vo.b_hit}</td>
+						</tr>
+						<tr style="text-align: left; padding-right: 20px;font-size: 12px;color:gray;">
+							<td colspan="6" style="height: 10px;padding: 0px;padding-top: 0px;">${vo.b_tag }</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			
 			
 			
 		</div>
 			
 			
-		<div id ="coummuBoardpageNum">
-			<ul class="pagination pagination-sm" >
-			 	<li class="page-item"><a href="#" class="page-link"> << </a></li>
-			 	<li class="page-item"><a href="#" class="page-link">1</a></li>
-			 	<li class="page-item"><a href="#" class="page-link">2</a></li>
-			 	<li class="page-item "><a href="#" class="page-link">3</a></li>
-			 	<li class="page-item"><a href="#" class="page-link">4</a></li>
-			 	<li class="page-item"><a href="#" class="page-link">5</a></li>
-			 	<li class="page-item "><a href="#" class="page-link"> >> </a></li>
-			</ul>
-		</div>
+		<ul id="MBPaging">
+               <li>이전</li>
+               <li>1</li>
+               <li>2</li>
+               <li>3</li>
+               <li>4</li>
+               <li>5</li>
+               <li>다음</li>
+          </ul>	
+		
 			
 		<div>
-			<a href="commuWrite?up_cate=${vo.up_cate}"  class="btn commBtn"  style="float:right"> 글쓰기</a>
+			<a href="commuWrite?up_cate=${vo.up_cate}"  class="btn wriBtn"  style="float:right;font-color: #181b46;"> 글쓰기</a>
 			<div id="commuSearch">
 				<form method="post" action="" id="commuForm">
 					<select>

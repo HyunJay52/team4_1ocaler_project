@@ -1,8 +1,10 @@
 package com.team4.localer.controller;
 
 import java.io.File;
+import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,11 +12,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.MemberService;
+import com.team4.localer.service.MyInfoService;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.SellerVO;
 
@@ -31,20 +36,44 @@ public class MemberController {
 	
 	@Autowired
 	private DataSourceTransactionManager transactionManager;
-	
 	@Inject
 	MemberService service;
+	@Inject
+	JavaMailSenderImpl mailSender; //메일보내기 객체 생성 
 	
 	@RequestMapping("/login")
 	public String loginFrm() {
 		return "member/login";
 	}
+	
+//	try {
+//		TransactionStatus status = transactionManager.getTransaction(def);
+//		int insertCnt = service.insertSeller(vo);
+//		service.updateMemStatus(vo.getUserid()); //회원상태 업데이트
+//		transactionManager.commit(status);
+//		
+//		if(insertCnt>0) {
+//			mav.setViewName("redirect:home"); //추후에 셀러페이지로 이동으로 바꾸기
+//		}else {
+//			//업로드 파일 삭제하기
+//			File del = new File(profPath, uploadMemprofname);
+//			del.delete();
+//			mav.setViewName("member/historyBack"); //뒤로가기
+//		}
+//	}catch(Exception e) {
 // 로그인	
 	@RequestMapping(value="/loginConfrim", method=RequestMethod.POST)
+	@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 	public String loginConfirm(String userid, String userpwd, String stay, HttpSession ses, HttpServletResponse res) {
 		String goPage = "";
-		MemberVO logVO = service.memLogin(userid, userpwd);
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+		
 		try {
+			TransactionStatus status = transactionManager.getTransaction(def);
+			
+			MemberVO logVO = service.memLogin(userid, userpwd);
+			
 			if(logVO.getMem_name()!=null && !logVO.getMem_name().equals("")) {
 				if(stay!=null && stay.equals("stay")) {
 					Cookie logCookie = new Cookie("logCookie", logVO.getUserid());
@@ -59,10 +88,16 @@ public class MemberController {
 				ses.setAttribute("logName", logVO.getMem_name());
 				ses.setAttribute("logType", logVO.getMem_type());
 				ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
+				
+				service.logCount(logVO.getUserid(), logVO.getLoc_gu());
+				
 				goPage = "home";
 			}else {
 				goPage = "member/login";
 			}
+			
+			transactionManager.commit(status);
+			
 			return goPage;
 		}catch (NullPointerException nullpoint) {
 			nullpoint.printStackTrace();
@@ -92,8 +127,79 @@ public class MemberController {
 	}
 //아이디 비밀번호 찾기
 	@RequestMapping("/searchIdnPwd")
-	public String searchIdnPwd() {
+	public String searchIdnPwd(MemberVO vo) {
 		return "member/searchIdnPwd";
+	}
+	@RequestMapping(value="/searchId", method=RequestMethod.POST)
+	public String searchId(MemberVO vo) {
+		String returnView = "";
+		System.out.println("아이디 찾기 > "+vo.getMem_name()+", "+vo.getMem_email());
+		
+		String subject = "1ocaler - 아이디 찾기 결과입니다.";
+		String content = "";
+		
+		try {
+			String returnUserid = service.searchId(vo);
+			if(returnUserid!=null) {
+				MimeMessage msg = mailSender.createMimeMessage();
+				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
+				msgHelper.setFrom("addict520@naver.com"); //보내는 사람
+				msgHelper.setTo(vo.getMem_email()); //받는 사람
+				msgHelper.setSubject(subject); //제목
+				
+				content = "아이디 ? "+returnUserid;
+				
+				msgHelper.setText("text/html;charset=UTF-8", content);
+				mailSender.send(msg); //메일전송
+				
+				returnView = "member/login";
+			}else {
+				returnView = "member/historyBack";
+			}
+		}catch(Exception e) {
+			System.out.println("아이디 찾기 에러");
+			e.printStackTrace();
+			returnView = "member/historyBack";
+		}
+		return returnView;
+	}
+	
+	@RequestMapping(value="/searchPwd", method=RequestMethod.POST)
+	public String searchPwd(MemberVO vo) {
+		String returnView = "";
+		System.out.println("비밀번호 찾기 > "+vo.getUserid()+", "+vo.getMem_email());
+		UUID random = UUID.randomUUID(); //랜덤번호
+		String uuid = random.toString();
+		
+		String verifyNum = uuid.substring(0, 7);
+		
+		String subject = "1ocaler - 비밀번호 찾기 인증번호입니다";
+		String content = "";
+		
+		try {
+			String returnPwd = service.searchPwd(vo);
+			if(returnPwd!=null) {
+				MimeMessage msg = mailSender.createMimeMessage();
+				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
+				msgHelper.setFrom("addict520@naver.com"); //보내는 사람
+				msgHelper.setTo(vo.getMem_email()); //받는 사람
+				msgHelper.setSubject(subject); //제목
+				
+				content = "인증코드 ? "+verifyNum;
+				
+				msgHelper.setText("text/html;charset=UTF-8", content);
+				mailSender.send(msg); //메일전송
+				
+				returnView = "member/login";
+			}else {
+				returnView = "member/historyBack";
+			}
+		}catch(Exception e) {
+			System.out.println("아이디 찾기 에러");
+			e.printStackTrace();
+			returnView = "member/historyBack";
+		}
+		return returnView;
 	}
 // 일반회원가입	
 	@RequestMapping("/joinMember")
@@ -165,6 +271,67 @@ public class MemberController {
 		}
 		return mav;
 	}
+// 회원정보수정	
+	@RequestMapping(value="/myinfoUpdate", method=RequestMethod.POST)
+	@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
+	public ModelAndView myinfoUpdate(MemberVO vo, HttpServletRequest req, HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+/////////////////////////////////프로필 사진 재업로드부터 실행
+		//기존 프로필 파일
+		//String path = req.getSession().getServletContext().getRealPath("/img/mem_prof");
+		String path = ses.getServletContext().getRealPath("/img/mem_prof");
+		String delMemProf=req.getParameter("getMem_prof");
+		
+		//새로 업로드 할 파일 
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		MultipartFile updateMemprof = mr.getFile("profFile");
+		String editProfFile = "";
+		
+		try {
+			if(updateMemprof!=null) {
+				String orgName = updateMemprof.getOriginalFilename(); //원 파일명
+				if(orgName!=null && !orgName.equals("")) {
+					File updateF = new File(path, orgName);
+					int idx = 0;
+					while(updateF.exists()) {
+						int dot = orgName.lastIndexOf(".");
+						String fileName = orgName.substring(0, dot);
+						String exeName = orgName.substring(dot+1);
+						
+						updateF = new File(path, fileName+"_"+ idx++ +"."+exeName);
+					}
+					updateMemprof.transferTo(updateF); //파일업로드 실행
+					editProfFile = updateF.getName(); //업로드한 파일이름 담기
+				}
+			}
+			
+			vo.setUserid((String)req.getSession().getAttribute("logId"));
+			vo.setMem_prof(editProfFile); //업로드 할 파일명 세팅
+			
+			if(service.updateMember(vo)>0) {
+				//기존 파일 삭제하기
+				if(delMemProf!=null) {
+					File delF = new File(path, delMemProf);
+					delF.delete();
+				}
+				//비밀번호
+				MyInfoService myinfoService = null;
+				MemberVO backVO = myinfoService.setMyinfo(vo.getUserid());
+				mav.addObject("userid", backVO.getUserid());
+				mav.addObject("userpwd", backVO.getUserpwd());
+				mav.setViewName("redirect:myInfo");
+			}else {
+				
+				mav.setViewName("member/historyBack");
+			}
+		}catch (Exception e) {
+			System.out.println("회원정보 수정 에러 발생 > "+e.getMessage());
+			mav.setViewName("member/historyBack");
+		}
+		return mav;
+	}
+
 // 아이디 중복확인
 	@RequestMapping(value="/idOverlapCheck", method=RequestMethod.GET, produces="application/text;charset=UTF-8")
 	@ResponseBody
@@ -197,6 +364,7 @@ public class MemberController {
 // 셀러회원가입
 	@RequestMapping("/joinSeller")
 	public String joinSeller() {
+		System.out.println("???? 셀러가입으로 넘어간다...");
 		return "member/joinSeller";
 	}
 // 셀러회원가입 비밀번호 재확인
@@ -278,9 +446,21 @@ public class MemberController {
 		}
 		return mav;
 	}
-	
 
-	
-	
+//셀러회원정보 조회
+	@RequestMapping("/myInfoSeller")
+	public String myInfoSeller(HttpSession ses, Model model) {
+		String setMapping = "";
+		String userid = (String)ses.getAttribute("logId");
+		
+		if(userid!=null) {
+			model.addAttribute("myVO", service.selectSeller(userid));
+			setMapping = "myInfo/myInfoSeller";
+		}else {
+			setMapping = "member/login";
+		}
+		return setMapping;
+	}
+//셀러정보 수정하기 myinfoSellerOk	
 	
 }//전체 클래스 끝	

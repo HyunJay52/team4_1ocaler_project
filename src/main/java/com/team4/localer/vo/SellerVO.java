@@ -9,7 +9,7 @@ public class SellerVO {
 	private String com_num;//사업자번호
 	private String sel_tel;//고객상담번호
 	private String sel_email;//판매자 이메일
-	private String sel_zip;//우편번호
+	private int sel_zip;//우편번호
 	private String sel_addr;//주소
 	private String sel_detail;//상세주소
 	private String sel_prof;//셀러프로필
@@ -72,10 +72,10 @@ public class SellerVO {
 	public void setSel_email(String sel_email) {
 		this.sel_email = sel_email;
 	}
-	public String getSel_zip() {
+	public int getSel_zip() {
 		return sel_zip;
 	}
-	public void setSel_zip(String sel_zip) {
+	public void setSel_zip(int sel_zip) {
 		this.sel_zip = sel_zip;
 	}
 	public String getSel_addr() {

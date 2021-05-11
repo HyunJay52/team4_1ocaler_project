@@ -14,7 +14,7 @@
 	#likeLi label{
 		height:30px; 
 		width:30px;
-		vertical-align:-22px; 
+		vertical-align:-24px; 
 	}
 </style>
 
@@ -46,13 +46,17 @@
 					var tag ="<ul>";
 					
 					$result.each(function(idx,obj){
-						tag+= "<li><div><a href='#'><h5>"+obj.userid+"</h5></a> &emsp;("+obj.rep_date+")</div><div>";
+						tag+= "<li><div><a href='#'><h5>"+obj.userid+"</h5></a> &emsp;("+obj.rep_date+")</div>";
 						
 						if(obj.userid =="${logId}"){
-							tag+= "<input type='button' class='btn replycommBtn' value='수정' /> &ensp;";
-		                    tag+= "<input type='button' class='btn replycommBtn' value='삭제' title='"+obj.rep_num+"' /></div>"; 	
+							tag+= "<div><input type='button' class='btn replycommBtn' value='수정' /> &ensp;";
+		                    tag+= "<input type='button' class='btn replycommBtn' value='삭제' title='"+obj.rep_num+"' /></div><br/>"; 	
+						}else{
+							
+							
 						}
-						  tag+= "<div>"+ obj.rep_content+"</div>";
+						  tag+= "<br/><div>"+ obj.rep_content+"</div>";
+						  
 						  
 						  
 						   //수정폼 보여주기
@@ -146,10 +150,10 @@
         $(document).on('click','#commuViewreplyList input[value=수정]',function(){
             
             $("#commuViewreplyList>ul>li>div:nth-child(1)").css("display", "block"); 
-             $("#commuViewreplyList>ul>li>div:nth-child(2)").css("display", "none"); 
+            $("#commuViewreplyList>ul>li>div:nth-child(2)").css("display", "none"); 
             
-          //   $(this).parent().css("display", "none");
-          //  $(this).parent().next().css("display", "block");
+            $(this).parent().css("display", "none");
+            $(this).parent().next().css("display", "block");
          });
 	})
 	
@@ -174,19 +178,22 @@
 			<div id="commuViewboard">
 				<ul>
 					<li>
-						<span>
-							<a href="commuBoard?b_gu=${logLoc_gu}">
+						<span style="color: #fff;">
 								<c:if test="${vo.up_cate == 1 }">
-									우리동네이야기
+									<a href="commuBoard?b_gu=${logLoc_gu}">
+										우리동네이야기
+									</a>	
 								</c:if>	
 								<c:if test="${vo.up_cate == 2 }">
-									쓱싹레시피
+									<a href="commuBoard?b_gu=${logLoc_gu}">
+										쓱싹레시피
+									</a>	
 								</c:if>
 								<c:if test="${vo.up_cate == 3 }">
-									자유게시판
+									<a href="commuFreeBoard?up_cate=3">
+										자유게시판
+									</a>	
 								</c:if>
-								 
-							</a>
 						</span>
 						<span>  
 							<c:if test="${vo.down_cate == 1 }">
@@ -235,15 +242,24 @@
 		</div>
 		
 		<div id="commuViewpreBtnnext">
-			<div><a href=""> 이전글 : 안녕하세요 </a></div>
-			<div><a href=""> 다음글 : 안녕히계세요 </a></div>
+			<div style="border-bottom:1px solid #d9d9d9;color: #181b46; ">
+				<a href=""> 
+					<span style="font-weight: bold;">이전글 :</span> 안녕하세요 
+				</a>
+			</div>
+			<div>
+				<a href=""> 
+					<span style="font-weight: bold;">다음글 :</span> 안녕히계세요 
+				</a>
+			</div>
 		</div>
 		
 
 		<div id="commuViewreply">
-			<h4>COMMENT</h4>
+			
 			<form method="post" id="commuViewreplyFrm">
 				<div>
+					<h4>COMMENT</h4>
 					<input type="hidden" name="num" value="${vo.num }"/>
 		        	<textarea placeholder="자신의 의견을 간단히 적어주세요." name="rep_content" id="rep_content"></textarea>
 		        </div>
