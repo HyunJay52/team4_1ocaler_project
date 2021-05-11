@@ -48,6 +48,7 @@
          </div>
          
          <div>
+
          	<c:if test='${logType==2 }'>
          		<a href="selWrite" class="btn commBtn "  style="float:right"> 글쓰기</a>
          	</c:if>
