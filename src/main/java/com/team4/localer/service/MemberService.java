@@ -10,6 +10,8 @@ public interface MemberService {
 	public int insertMember(MemberVO vo);
 	//일반회원가입 보너스 적립액
 	public int insertEventbonus(String userid);
+	//일반회원정보 수정
+	public int updateMember(MemberVO vo);
 	//셀러 회원가입 비밀번호 재확인
 	public String sellerPwdDoubleCheck(String userid, String userpwd);
 	//셀러 회원가입

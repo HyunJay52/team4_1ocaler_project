@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -165,6 +164,63 @@ public class MemberController {
 		}
 		return mav;
 	}
+// 회원정보수정	
+	@RequestMapping(value="/myinfoUpdate", method=RequestMethod.POST)
+	@Transactional(rollbackFor = {Exception.class, RuntimeException.class })
+	public ModelAndView myinfoUpdate(MemberVO vo, HttpServletRequest req, HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+/////////////////////////////////프로필 사진 재업로드부터 실행
+		//기존 프로필 파일
+		//String path = req.getSession().getServletContext().getRealPath("/img/mem_prof");
+		String path = ses.getServletContext().getRealPath("/img/mem_prof");
+		String delMemProf=req.getParameter("getMem_prof");
+		
+		//새로 업로드 할 파일 
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		MultipartFile updateMemprof = mr.getFile("profFile");
+		String editProfFile = "";
+		
+		try {
+			if(updateMemprof!=null) {
+				String orgName = updateMemprof.getOriginalFilename(); //원 파일명
+				if(orgName!=null && !orgName.equals("")) {
+					File updateF = new File(path, orgName);
+					int idx = 0;
+					while(updateF.exists()) {
+						int dot = orgName.lastIndexOf(".");
+						String fileName = orgName.substring(0, dot);
+						String exeName = orgName.substring(dot+1);
+						
+						updateF = new File(path, fileName+"_"+ idx++ +"."+exeName);
+					}
+					updateMemprof.transferTo(updateF); //파일업로드 실행
+					editProfFile = updateF.getName(); //업로드한 파일이름 담기
+				}
+			}
+			
+			vo.setUserid((String)req.getSession().getAttribute("logId"));
+			vo.setMem_prof(editProfFile); //업로드 할 파일명 세팅
+			
+			if(service.updateMember(vo)>0) {
+				//기존 파일 삭제하기
+				if(delMemProf!=null) {
+					File delF = new File(path, delMemProf);
+					delF.delete();
+					System.out.println("수정 파일지우기 성공");
+				}
+				mav.setViewName("redirect:myInfoMain");
+			}else {
+				
+				mav.setViewName("member/historyBack");
+			}
+		}catch (Exception e) {
+			System.out.println("회원정보 수정 에러 발생 > "+e.getMessage());
+			mav.setViewName("member/historyBack");
+		}
+		return mav;
+	}
+
 // 아이디 중복확인
 	@RequestMapping(value="/idOverlapCheck", method=RequestMethod.GET, produces="application/text;charset=UTF-8")
 	@ResponseBody
@@ -279,7 +335,6 @@ public class MemberController {
 		return mav;
 	}
 	
-
 	
 	
 	

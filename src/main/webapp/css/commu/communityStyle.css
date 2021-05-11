@@ -5,6 +5,21 @@
 		text-overflow: ellipsis;
 		white-space: nowrap
 	}
+	
+	
+	a:visited{ 
+		color: #181b46; 
+	}
+	a:link { 
+		color:#181b46; 
+	}
+	a:active{
+		color:#181b46;
+	}
+	a:hover{
+		color:#181b46;
+	}
+
 	#commumain{
 		overflow:auto;
 		width:1300px;
@@ -280,7 +295,7 @@
 	/* 버튼 스타일 클래스 모음 */
 
 	a:active, a:link, a:visited {
-	    color:#3f1785;
+	    color:#181b46;
 	    text-decoration: none;
 	    font-family: 'Nanum Gothic', sans-serif;
 }

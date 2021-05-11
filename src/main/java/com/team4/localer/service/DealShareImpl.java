@@ -1,0 +1,31 @@
+package com.team4.localer.service;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.team4.localer.dao.DealShareDAO;
+import com.team4.localer.vo.DealShareVO;
+
+@Service
+
+public class DealShareImpl implements DealShareService{
+	
+	@Inject
+	DealShareDAO dealshaerdDAO;
+
+	@Override
+	public int dealInsert(DealShareVO vo) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealInsert(vo);
+	}
+
+	@Override
+	public DealShareVO dealOneselect(DealShareVO vo) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealOneselect(vo);
+	}
+	
+	
+	
+}
