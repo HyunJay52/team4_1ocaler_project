@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>  
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealWriteStyle.css"/>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 
 	<script>
-		$(function(){
-		      CKEDITOR.replace("i_content"); //설명글 name 설정 필요
-		   });
-		
 		$(()=>{
-				$("select[name=ship_opt]").change(()=>{
+			$(document).ready(function() {
+			    $('#summernote').summernote();
+			  });
+
+			
+			$("select[name=ship_opt]").change(()=>{
 				if($("#ship_opt option:selected").val()=="1"){
 					$("#i_ship1").css("display","block").attr("disabled",true);
 					$("#i_ship2").css("display","none").attr("disabled",true);		
@@ -47,10 +50,8 @@
 	 			<br/>
 	 			<input type="text" id ="subject" class ="boardLine" name="i_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
 	 			<input type="number" id ="cnt" class ="boardLine" name="i_cnt" placeholder="판매수량"/>
-	 			<textarea name="i_content" id ="content" > 내용을 입력해주세요. </textarea>
-	 			<!-- <script>CKEDITOR.replace("i_content");</script> -->
-	 			
-	 		
+	 			<textarea id="summernote" name="i_content"></textarea>
+
 	 			<span style="font:bold;">판매기한 &ensp; : &ensp;</span>
 	 			<input type="date"  id ="date" name="i_date" value="" style="width: 300px;"/> <!-- 날짜 -->
 	 			
