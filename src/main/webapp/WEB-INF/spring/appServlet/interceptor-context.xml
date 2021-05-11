@@ -14,7 +14,6 @@
 		class and controllers -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/joinSeller" />
 			<mvc:mapping path="/sellerJoinOk" />
 			<mvc:mapping path="/sellerPwdDoubleCheck"/>
 			<bean class="com.team4.localer.controller.LoginInterceptor"></bean>

@@ -45,22 +45,6 @@ public class MemberController {
 	public String loginFrm() {
 		return "member/login";
 	}
-	
-//	try {
-//		TransactionStatus status = transactionManager.getTransaction(def);
-//		int insertCnt = service.insertSeller(vo);
-//		service.updateMemStatus(vo.getUserid()); //회원상태 업데이트
-//		transactionManager.commit(status);
-//		
-//		if(insertCnt>0) {
-//			mav.setViewName("redirect:home"); //추후에 셀러페이지로 이동으로 바꾸기
-//		}else {
-//			//업로드 파일 삭제하기
-//			File del = new File(profPath, uploadMemprofname);
-//			del.delete();
-//			mav.setViewName("member/historyBack"); //뒤로가기
-//		}
-//	}catch(Exception e) {
 // 로그인	
 	@RequestMapping(value="/loginConfrim", method=RequestMethod.POST)
 	@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
