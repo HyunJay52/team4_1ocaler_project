@@ -26,9 +26,9 @@
             <ul id="boardText">
                <c:forEach var="vo" items="${dealSellList}">
                   <li id="selList">
-                     <div OnClick="location.href ='memberView?num${vo.num}'">
+                     <div OnClick="location.href ='memberView?num=${vo.num}'">
                         <div id="sellImgDiv">
-                           <img src="img/deal/Karrot.jpeg"/>
+                           <img src="<%=request.getContextPath()%>/img/dealFileImg/${vo.s_img1}"/>
                         </div>
                         <ul >   
                            <li class="wordcut">${vo.s_subject }</li>

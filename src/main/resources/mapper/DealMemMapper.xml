@@ -17,4 +17,11 @@
 		select num,userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, s_price ,s_date,s_tag
 		from mem_share order by num desc
 	</select>
+	<select id ="dealViewSelect" resultType="com.team4.localer.vo.DealShareVO">
+  		 select num,userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, s_price ,to_char( s_date , 'YYYY-MM-DD') s_date, s_tag
+		from mem_share where  num=#{param1} 
+  	</select>
+  	<delete id="dealSellDelete" >
+		delete from mem_share where num=#{param1} and userid=#{param2}
+	</delete>
  </mapper>

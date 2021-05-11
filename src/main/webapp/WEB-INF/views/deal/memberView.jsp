@@ -6,6 +6,13 @@
 
 
 <script>
+
+		function boardDel(){
+			if(confirm("삭제하시겠습니까? ")){
+				location.href="dealDel?num=${vo.num}";
+			}
+		}
+
 		//지도============================================================================================
 		$(function(){
 			var markers = [];	
@@ -59,7 +66,7 @@
 					
 				//검색한 키워드 값을 내가 text에서입력한 값으로 셋팅해주는 작업
 				function searchPlaces(){
-					var keyword = "가양역2번출구";
+					var keyword = "${vo.s_loc}";
 					console.log(keyword);
 					 if (!keyword.replace(/^\s+|\s+$/g, '')) {
 					        alert('키워드를 입력해주세요!');
@@ -112,32 +119,43 @@
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<div id="divAll">
 			<div id="dealImg">
-				<img src="img/deal/Karrot.jpeg"/>
+				<img src="<%=request.getContextPath()%>/img/dealFileImg/${vo.s_img1}"/>
 			</div>
 			<div id="dealInfo">
 				<ul >	
-					<li class="wordcut">당근 같이 나누실 분?</li>
+					<li class="wordcut">
+						${vo.s_subject }
+						<span  style="display: none">${vo.num }</span>
+					</li>
 					<li style="width:100%;">
 						<ul style="margin: 20 0;">
 							<li style="width:50%; line-height:33px;margin:10 0">
 								<img src="common/user.png">&nbsp;&nbsp;
-								<a href="#"> goguma1234</a><hr/>
+								<a href="#"> ${vo.userid }</a><hr/>
 							</li>
 							<li style="color: #3f1785;  font-weight: bold;  text-align: right;margin:10 0 ;width: 50%;font-size: 30px;">
-								1,000원 &nbsp; &nbsp;	<hr/>
+								${vo.s_price }원 &nbsp; &nbsp;	<hr/>
 							</li>				
 						</ul>
 					</li>
 					<li>
 						<ul>
 							<li>상품 종류</li>
-							<li>식료품</li>
+							<c:if test="${vo.s_cate==1 }">
+								<li>식료품</li>
+							</c:if>	
+							<c:if test="${vo.s_cate==2 }">
+								<li>생필품</li>
+							</c:if>
+							<c:if test="${vo.s_cate==3 }">
+								<li>기타</li>
+							</c:if>
 						</ul>
 					</li>
 					<li>
 						<ul>
 							<li>거래 위치</li>
-							<li>강서구 등촌역 근처 직거래</li>
+							<li>${vo.s_loc }</li>
 						</ul>
 					</li>
 					<li>
@@ -145,17 +163,17 @@
 							<li>판매 개수</li>
 							<li>
 								<span class="cntJoin">1</span>
-								/5개
+								/${vo.s_cnt }개
 							</li>
 						</ul>
 					</li>
 					<li>
 						<ul>
 							<li>판매 기한</li>
-							<li>2020  / 05 / 28 일 까지</li>
+							<li>${vo.s_date}</li>
 						</ul>
 					</li>
-					<li class="wordcut">#당근 #등촌역 #식품 #야채</li>
+					<li class="wordcut">${vo.s_tag }</li>
 					<li>
 						<form>
 							<input type="button" value="찜하기" class="btn commBtnDeal" style="margin-left: 100px"/>
@@ -168,8 +186,7 @@
 		<div id="boardInfo">
 			<ul>
 				<li>
-					당근 나눔하실 분이 계실까요?
-					많이사서.ㅠㅠ 같이 나눠요 직거래 예정인데 연락주세요!
+					${vo.s_content }
 				</li>
 			</ul>		
 		</div>
@@ -187,7 +204,7 @@
 		</div>
 		
 		<div id="editBtn">
-			<button class="btn commBtnEdit " onclick = "location.href = '#' ">삭제</button>
+			<button class="btn commBtnEdit " onclick = "location.href = 'javascript:boardDel()' ">삭제</button>
 			<button class="btn commBtnEdit" onclick = "location.href = 'memberEdit' ">수정</button>
 		</div>
 	</div>

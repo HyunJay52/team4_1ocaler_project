@@ -138,8 +138,13 @@ public class DealController {
 	}
 	
 	@RequestMapping("/memberView")
-	public ModelAndView memberView() {
+	public ModelAndView memberView(DealShareVO vo) {
 		ModelAndView mav= new ModelAndView();
+		
+		mav.addObject("vo",dealshareService.dealViewSelect(vo.getNum()));
+		
+		System.out.println(vo.getNum());
+		
 		
 		mav.setViewName("deal/memberView");
 		return mav;
@@ -152,6 +157,26 @@ public class DealController {
 	}
 	
 
+	//글삭제
+	@RequestMapping("/dealDel")
+	public ModelAndView dealDel(HttpServletRequest req,DealShareVO vo) {
+		ModelAndView mav = new ModelAndView();
+		
+		vo.setUserid((String)req.getSession().getAttribute("logId"));
+		vo.setNum(vo.getNum());
+		
+		if(dealshareService.dealSellDelete(vo.getNum(),vo.getUserid())>0) { //성공했을떄
+			System.out.println("성공");
+			mav.setViewName("redirect:memberBoard");
+		}else { // 시래했을떄
+			System.out.println("실패");
+			mav.addObject("num", vo.getNum());
+			mav.setViewName("redirect:memberView");
+		}
+		
+		
+		return mav;
+	}
 	
 
 	
