@@ -122,7 +122,6 @@
 		}
 		$("#myinfoLoc_gu").append(tag);
 
-		
 	});
 </script>
 <div class="myinfoBody">
@@ -135,12 +134,14 @@
 				<li>프로필 사진</li>
 				<li class="memheightAuto">
 					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
-						<img src="<%=request.getContextPath()%>/common/user.png"
+						<img src="<%=request.getContextPath()%>/img/mem_prof/${myVO.mem_prof}"
 							id="previewImg" class="profImg form-control-file border"
 							alt="upload image" />
-					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진추가 </label> 
+					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진수정 </label> 
 					<input type="file" name="profFile" accept="image/*" id="mem_prof" 
 					style="display: none; margin-top: 70px; border: none;" />
+					<!-- 수정 전의 프로필 사진 저장 -->
+					<input type="hidden" id="getMem_prof" name="getMem_prof" value="${myVO.mem_prof}"/>
 				</li>
 				
 				<li>아이디</li>

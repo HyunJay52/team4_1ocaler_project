@@ -43,7 +43,17 @@
 	<div id="commueWnEmain">
 		<div>
 			<form method="post" action="commuWriteOk" >
-			
+				
+				<c:if test="${vo.up_cate==1}">		
+					<h5>우리동네 이야기 글쓰기</h5>
+				</c:if>
+				<c:if test="${vo.up_cate==2}">		
+					<h5>쓱싹레시피 글쓰기</h5>
+				</c:if>
+				<c:if test="${vo.up_cate==3}">		
+					<h5>자유자게 글쓰기</h5>
+				</c:if>
+				
 				<select id="up_cate" name="up_cate" Readonly >
 					<option value="0" Readonly  selected hidden>카테고리</option>
 					<option value="1"<c:if test='${vo.up_cate==1 }'>selected</c:if>>동네정보공유</option>	
@@ -82,7 +92,7 @@
 
 	 		 	<div id="btn">
 		 		 	<input type="button" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
-		 		 	<input type="submit" id="confBtn" class="btn commBtn" value="등록"/>
+		 		 	<input type="submit" id="confBtn" class="btn confBtn" value="등록"/>
 	 		 	</div>
 			</form>
 		</div>
