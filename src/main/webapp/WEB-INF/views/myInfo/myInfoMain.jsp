@@ -1,65 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<style>
-#toggle{
-	position:relative;
-}
-#profile{
-	width:200px; height:370px; background-color:#fff; border:1px solid #ddd; float:left;
-}
-#profile>ul>li:nth-child(1)>img{
-	width:198px; height:180px;
-}
-#profile>ul>li:nth-child(2), #profile>ul>li:nth-child(3), #profile>ul>li:nth-child(4){
-	margin:10px;
-}
-#profile>ul>li:nth-child(3){
-	height:90px;
-}
-#profile>ul>li:nth-child(4){
-	text-align:right;
-}
-.top{
-	width:700px; height:370px; border-top:1px solid black; border-bottom:1px solid black; margin:0 50px; float:right; padding:90px 30px;
-}
-#grade{
-	width:300px;
-	float:left;
-}
-#myPoint{
-	border:3px solid #3f1785;
-	color:#3f1785;
-	width:300px;
-	float:right;
-	padding:50px 30px;
-	font-weight:bold;
-	border-radius:5em;
-}
-.myinfoBottom{
-	overflow:auto;
-	float:left;
-}
-#waiting{
-	margin-bottom:20px;
-	width:100%;
-	float:left;
-}
-#status{
-	float:right;	
-	height:100px;
-}
-#status>div{
-	height:60px; background-color:#ddd; border:1px solid #ddd; padding:10px;
-}
-#status>div>div{
-	float:right; background-color:#fff; height:40px; width:420px;
-}
-#QnA{
-	width:100%;
-	margin-top:20px;
-	float:left;
-}
-</style>	
 <script>
 	$(function(){
 
@@ -71,7 +11,7 @@
 		$("#slider").html(tag);			
 		
 		//시작 페이지 설정 변수
-		var startSlide = 8;
+		var startSlide = 5;
 		
 		//bx슬라이더 셋팅
 		$("#slider").bxSlider({
@@ -96,7 +36,7 @@
 		
 		//등급만큼 이미지 띄우기
 		if(startSlide > 0){
-			var setPX = startSlide*20;
+			var setPX = startSlide*19.3;
 			$("#slider img").css('margin-left', setPX+'px');
 		}
 	});
@@ -113,7 +53,7 @@
 				<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png"/></li>
 				<li>${myVO.mem_nick}</li>
 				<li>${myVO.loc_gu }</li>
-				<li><input type="button" value="버튼" class="btn"/></li>
+				<li><a href="myInfoCheck" type="button" class="btn">내 정보</a></li>
 			</ul>
 		</div>
 		<div class="myinfoTop">
@@ -122,12 +62,14 @@
 				<ul id="slider">
 
 				</ul>
-				<span style="float:left; margin-left:28px;">0</span>
-				<span style="float:right; margin-right:30px;">100(%)</span>
+				<div style="margin-top:30px;">
+					<span style="float:left; margin-left:28px;">0</span>
+					<span style="float:right; margin-right:30px;">100(%)</span>				
+				</div>
 			</div>
 			<div id="myPoint">
 				<h2>잔액</h2>
-				<h2 style="float:right">100,000원</h2>
+				<h2 style="float:right">${myPoint }원</h2>
 			</div>
 		</div>
 		<div class="myinfoBottom">	
@@ -161,7 +103,7 @@
 						<td>서강대역</td>
 						<td>gamja</td>
 						<td>2021.04.17</td>
-						<td><button class="btn btn-danger btn-block">승인하기</button></td>
+						<td><button class="btn btn-danger btn-block" data-target="#myinfoMainMd" data-toggle="modal">승인하기</button></td>
 					</tr>
 					<tr>
 						<td>참여글</td>
@@ -239,4 +181,33 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="myinfoMainMd"	>
+		<div class="modal-dialog"  style="margin-top:20%">
+			<div class="modal-content"  style="width:600px; height:300px">
+				<div class="modal-body"  style="text-align:center; padding:40px; overflow:auto;">
+					<h2 class="mdFnt">참여회원 정보<button class="close" data-dismiss="modal">&times;</button></h2>
+					<div id="joinMemberinfo">
+						<ul>
+							<li>
+								<div style="border: none; width: 110px; height:155px; margin-right: 10px; float: left;">
+									<img src="<%=request.getContextPath()%>/common/user.png"
+									id="previewImg" class="profImg form-control-file border" />
+									<label style="margin-top:10px;">회원 별명</label>
+								</div>
+							</li>
+							<li>아이디 : <label></label></li>
+							<li>참여율 : <span></span></li>
+							<li>평가점수 : <span></span></li>
+							<li>신청일 :</li>
+						</ul>
+						<div>
+							<input class="btn commBtn" type="button" value="참여승인"/>
+							<input class="btn btn-danger" style="width:90px" type="button" value="참여거절"/>						
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </div>	

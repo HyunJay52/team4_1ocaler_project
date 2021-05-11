@@ -24,23 +24,23 @@
                
          <div id="selBoard" >
             <ul id="boardText">
-               <c:forEach var="i" begin="1" end="8">
+               <c:forEach var="vo" items="${dealSellList}">
                   <li id="selList">
-                     <div OnClick="location.href ='memberView'">
+                     <div OnClick="location.href ='memberView?num${vo.num}'">
                         <div id="sellImgDiv">
                            <img src="img/deal/Karrot.jpeg"/>
                         </div>
                         <ul >   
-                           <li class="wordcut">당근 나눔 하실분</li>
+                           <li class="wordcut">${vo.s_subject }</li>
                            
                            <li style="text-align: center; font-size: 20px">
                               <span class="cntJoin">3</span>
-                              /5개
+                              /${vo.s_cnt } 개
                            </li>
-                           <li>1,000원</li>
-                           <li class="wordcut">#야채 #당근 #등촌역 #직거래</li>
+                           <li>${vo.s_price }원</li>
+                           <li class="wordcut">${vo.s_tag }</li>
                            <li>
-                              goguma1234 &nbsp;
+                              ${vo.userid } &nbsp;
                               <img src="common/user.png">&nbsp;&nbsp;
                            </li>
                         </ul>

@@ -1,5 +1,7 @@
 package com.team4.localer.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -24,6 +26,12 @@ public class DealShareImpl implements DealShareService{
 	public DealShareVO dealOneselect(DealShareVO vo) {
 		// TODO Auto-generated method stub
 		return dealshaerdDAO.dealOneselect(vo);
+	}
+
+	@Override
+	public List<DealShareVO> dealListSelect(DealShareVO vo) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealListSelect(vo);
 	}
 	
 	

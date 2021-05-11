@@ -3,12 +3,13 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealWriteStyle.css"/>
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> 
 
+
 	<div id="dealWnEMain">
 		<div>
 		
 			<h4 >동네직구 글쓰기 </h4>
 			
-			<form method="post" action="memWriteOk" >
+			<form method="post" action="memWriteOk" enctype="multipart/form-data">
 				<select name="s_cate">
 					<option>카테고리</option>
 					<option value="1">식료품</option>	
@@ -34,32 +35,43 @@
 	 			<input type="number" id ="price"  name="s_price" placeholder="판매가격" style="float: right"/>
 	 			<input type="text" id ="gu"  name="s_gu" value="${logLoc_gu }" placeholder="${logLoc_gu }" style="float: right"/> <!-- 선호구역은는 vo에서 가져오기 -->
 	 			
+	 			
+				
 	 			<br/>
 	 			
-	 			
-	 			
-				<span style="font:bold;display: inline-block;margin-top: 25px;">사진파일을 선택해주세요. ↓</span><br/>
-				
-				<!-- <input type="file" name ="s_img1" id="filename1" class="filename1" style="display:none"onchange="javascript: document.getElementById('fileName1').value = this.value"/>
-				<input type="text" id="fileName1" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
-				<label class="btn confBtn" for ="filename1" style="font-size:15px ;height: 44px ">파일등록</label>
-				
-				<input type="file" name ="s_img1"id="filename2" class="filename2" style="display:none"onchange="javascript: document.getElementById('fileName2').value = this.value"/>
-				<input type="text" id="fileName2" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
-				<label class="btn confBtn" for ="filename2" style="font-size:15px ;height: 44px ">파일등록</label>
-				 -->
+				<span style="font:bold;display: inline-block;margin-top: 25px;">사진파일을 선택해주세요.
+					<label class="deal_input-file-button" for="s_img1"> 사진선택 </label> 
+				</span><br/>
 				 
-				 //시도
-				<!-- <input type="file" name ="s_img1"id="filename3" class="filename3" style="display:none"onchange="javascript: document.getElementById('fileName3').value = this.value"/>
-				<input type="text"  name ="s_img1" id="fileName3" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
-				<label class="btn confBtn" for ="filename3" style="font-size:15px ;height: 44px ">파일등록</label> -->
+				<div style="border: none; width: 1300px; height: 400px; margin-right: 10px; float: left;">
+					<img src="img/deal/color.jpg"	id="dealSellImg" class="dealSellerImg form-control-file border" alt="upload image" />
+				</div> 
+				<input type="file" name="s_img" accept="image/*" id="s_img1"style="display: none; margin-top: 70px; border: none;" />
 				
-				<input type="text"  name ="s_img1" id="fileName3"/ >
+			<script>
+				//프로필 사진
+				$("#s_img1").on('change', function() {
+					readURL(this);
+				});
 				
+				function readURL(input) {
+					if (input.files && input.files[0]) {
+						var reader = new FileReader();
 				
-				<input type="text" id = "loc" name="s_loc" placeholder="&ensp;지도에 표시될 위치를 기재해주세요."/>
+						reader.onload = function(e) {
+							$('#dealSellImg').attr('src', e.target.result);
+						}
+				
+						reader.readAsDataURL(input.files[0]);
+					}
+			};
+
+	
+			</script>
+				
+				<br/>
+	 			<input type="text" id = "loc" name="s_loc" placeholder="&ensp;지도에 표시될 위치 한 곳을 정확히 기재해주세요. ex) 광화문 2번출구 , 김포공항 롯데시네마"/>
 				<input type="text" id ="tag"  name="s_tag" placeholder="&ensp;태그를 입력해주세요 &nbsp; #태그를 #입력해 #주세요" />
-				
 				
 	 		 	<div id="btn" >
 		 		 	<input type="submit" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;

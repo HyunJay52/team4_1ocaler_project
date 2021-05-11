@@ -16,38 +16,15 @@
 			$(this).parent().parent().parent().prev().text($(this).text());
 		});
 
-		//리스트 세팅
-		function setList(){
-			var item = ['김회원','박회원','최회원'];
-
-			for(var i = 0; i < 10; i++){
-				var tag = "<tr>"; 
-				tag += "<td>2021.04.21</td>";
-				tag += "<td>상수역에서 10kg 고구마 소분하실 분?</td>";
-				tag += "<td><button class='btn btn-light btn-outline-dark btn-block myDealBtn' data-toggle='collapse'>선택&nbsp;&nbsp;</button>";
-				
-				tag += "<div class='myDealMem collapse'><ul>";			
-				for(var j = 0; j < 3; j++){
-					tag += "<li><button class='btn btn-light btn-block' data-target='#myDealMd' data-toggle='modal'>"+item[j]+"</button></li>";
-					
-				}
-				tag += "</ul></div></td>";
-				tag += "<td>리뷰완료</td>";
-				tag += "</tr>";
-				$("#myDealTbl").append(tag);
-			}
-			
-		}
-		setList();
 		
 		//다른곳 클릭시 드롭박스 닫기
 		$("body").click(function(){
 			$('#myDealTbl tr>td>div').attr('class', 'myDealMem collapse');
 		});
 		
-		$("#myDealToggle>button").click(function(){
-			$("#myDealToggle>button").css('background-color', '#fff').css('color', '#3f1785').attr('value', null);
-			$(this).css('background-color', '#3f1785').css('color', '#fff').attr('value', 'select');
+		$("#myDealToggle>input").click(function(){
+			$("#myDealToggle>input").css('background-color', '#fff').css('color', '#3f1785').attr('name', null);
+			$(this).css('background-color', '#3f1785').css('color', '#fff').attr('name', 'kategorie');
 			
 		});
 		
@@ -69,16 +46,53 @@
 			$(".imgBtn").attr('value' , null);
 			$(this).attr('value', '1');
 		});
-		
-		//검색 이벤트 
-		$(".searchArea>input[type=button]").click(function(){
-			var searchWord = $(this).prev().val();
+				
+		$("#myDealSearch").click(function(){
+			var kategorie = $("#myDealToggle>input[name='kategorie']").attr('title');
+			console.log($("#myDealForm").serialize()+"&kategorie="+kategorie);
+			setDealPaging(1);
 			$(this).prev().val("");
-			console.log(searchWord);
 		});
-		
 		//////////////////////
 		
+		function setDealPaging(page){
+			var kategorie = $("#myDealToggle>input[name='kategorie']").attr('title');
+			$.ajax({
+				url : "myDealList",
+				data : $("#myDealForm").serialize()+"&kategorie="+kategorie+"&nowNum="+page,
+				type : 'POST',
+				success: function(result){
+					console.log(result);
+					var tag = "<tr><td>작성자</td><td>날짜</td><td>제목</td><td>회원선택</td><td>상태</td></tr>";
+					result.list.forEach(function(data,idx){
+						console.log("jnum="+data.j_num);
+						if(data.j_num != null){
+							tag += "<tr>";
+							tag += "<td>"+data.userid+"</td>";
+							tag += "<td>"+data.j_writedate+"</td>";
+							tag += "<td>"+data.s_subject+"</td>";
+							tag += "<td><button class='btn btn-block btn-outline-dark'>"+data.j_status+"</button></td>";
+							tag += "<td><button class='btn btn-block btn-outline-dark'>참여취소</button></td>";
+							tag += "</tr>";
+						}else{							
+							tag += "<tr>";
+							tag += "<td>"+data.userid+"</td>";
+							tag += "<td>"+data.s_writedate+"</td>";
+							tag += "<td>"+data.s_subject+"</td>";
+							tag += "<td><button class='btn btn-block btn-outline-dark' data-target='#myDealMd' data-toggle='modal'>참여회원</button></td>";
+							tag += "<td>1/3완료</td>";
+							tag += "</tr>";
+						}
+						
+					});
+					$("#myDealTbl").html(tag);
+				},error : function(e){
+					console.log(e);
+				}
+			
+			});
+		}
+		setDealPaging(1);
 	});
 </script>
 <div class="myinfoBody">
@@ -106,36 +120,40 @@
 				</div>
 			</div>
 		</div>
+		<form method="post" action="" id="myDealForm">
 		<div class="dealBottom">
 			<div id="myDealToggle">
-				<button class="btn commBtn btn-outline-dark">참여한</button>
-				<button class="btn commBtn btn-outline-dark">개설한</button>
+				<input type="button" class="btn commBtn btn-outline-dark" title="joinus" value="참여한"/>
+				<input type="button" class="btn commBtn btn-outline-dark" title="mem_share" name="kategorie" value="개설한"/>
 			</div>
 			<div class="dealDateForm">
-				<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
+				<input type="date" min="2021-03-01" max="2021-05-31" class="date"/>
 				<div class="myDealFrm"><button class="dayBtn prev">《</button><button class="dayBtn setMonth mdFnt"></button><button class="dayBtn next">》</button></div>
-				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
-				<input type="date" min="2021-01-01" max="2021-05-31"/>
+				<input type="date" value="2021-05-01" name="searchDate" min="2021-03-01" max="2021-05-31"/> ~ 
+				<input type="date" value="2021-05-31"name="searchDate2" min="2021-03-01" max="2021-05-31"/>
 			</div>
 			<table class="myinfoTable2" id="myDealTbl">
-				<tr>
-					<td>날짜</td>
-					<td>제목</td>
-					<td>회원선택</td>
-					<td>리뷰상태</td>
-				</tr>
-				<tr>
-					<td>2021.04.20</td>
-					<td>마포역 3kg 세제2+1 같이 사실 분?</td>
-					<td><button class="btn btn-block btn-outline-dark" data-target='#myDealMd' data-toggle='modal'>회원4</button></td>
-					<td>1/3완료</td>
-				</tr>
+				
+		
 			</table>
 			<div class="searchArea">
+				<select id="DealSearchKey" name="searchKey">
+					<option value="s_subject">제목</option>
+					<option value="s_content">내용</option>
+					<option value="s_loc">위치</option>
+					<option value="s_status">판매상태</option>
+					<option value="s_tag">태그</option>
+					<option value="s_cate">식료품</option>
+					<option value="s_cate">생필품</option>		
+				</select>
 				<input type="text" name="searchWord"/>
-				<input type="button" value="검색"/>
+				<input type="button" value="검색" id="myDealSearch"/>
+			</div>
+			<div id="myinfoDealPaging">
+				
 			</div>
 		</div>
+		</form>
 	</div>
 		<div class="modal fade" id="myDealMd">
 		<div class="modal-dialog modal-lg">

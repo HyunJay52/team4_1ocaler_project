@@ -62,4 +62,28 @@
 		<![CDATA[and cha_mth >= #{searchKey}]]>
 		</if>
 	</select>
+	
+	<select id="myCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="int">
+		select count(num) from(
+		select * from ${kategorie}
+		<if test="kategorie.equals('joinus')">
+			join mem_share on joinus.numjoin = mem_share.num	
+		</if>
+		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD')
+		and to_date(#{searchDate2},'YYYY-MM-DD') and mem_share.userid=#{userid})
+		where ${searchKey} like #{searchWord}
+	</select>
+	
+	<select id="selectMyShare" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MemShareVO">
+		select * from(
+		select * from(
+		select * from ${kategorie}
+		<if test="kategorie.equals('joinus')">
+			join mem_share on joinus.numjoin = mem_share.num
+		</if>
+		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD')
+		and to_date(#{searchDate2},'YYYY-MM-DD') and mem_share.userid = #{userid} and ${searchKey} like #{searchWord} order by num desc)
+        <![CDATA[where rownum <= #{rowNum1} order by num asc)]]>
+		<![CDATA[where rownum <= #{rowNum2} order by num desc]]>
+	</select>
 </mapper>

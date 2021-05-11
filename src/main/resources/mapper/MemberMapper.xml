@@ -7,6 +7,16 @@
 	<select id="memLogin" resultType="com.team4.localer.vo.MemberVO">
 		select userid, mem_name, mem_nick, loc_gu, mem_type from member where userid=#{param1} and userpwd=#{param2}
 	</select>
+	<insert id="logCount" parameterType="String">
+		INSERT INTO LOGCOUNT(userid, loc_gu) VALUES (#{param1}, #{param2})
+	</insert>
+	
+	<select id="searchId" parameterType="com.team4.localer.vo.MemberVO" resultType="String">
+		SELECT userid FROM MEMBER WHERE mem_name=#{mem_name} AND mem_email=#{mem_email}
+	</select>
+	<select id="searchPwd" parameterType="com.team4.localer.vo.MemberVO" resultType="String">
+		select userpwd from member where mem_name=#{mem_name} and userid=#{userid} and mem_email=#{mem_email}
+	</select>
 	
 	<select id="idDoubleCheck" resultType="String">
 		select userid from member where userid=#{param1}
@@ -40,7 +50,9 @@
 	<update id="updateMemStatus">
 		UPDATE MEMBER SET MEM_TYPE = 2 WHERE USERID = #{param1}
 	</update>
-	
+	<select id="selectSeller" resultType="com.team4.localer.vo.SellerVO">
+		SELECT * FROM seller WHERE userid=#{param1}
+	</select>		
 	<update id="memPostCount"><!-- 게시글올리면 카운트되는 함수 -->
 		update member set mem_post = mem_post+1 where userid=#{param1}
 	</update>

@@ -1,0 +1,78 @@
+@charset "UTF-8";
+#toggle{
+	position:relative;
+}
+#profile{
+	width:200px; height:310px; background-color:#fff; border:1px solid #ddd; float:left;
+}
+#profile>ul>li:nth-child(1)>img{
+	width:198px; height:180px;
+}
+#profile>ul>li:nth-child(2){
+	border-bottom:1px solid #ddd;
+}
+#profile>ul>li:nth-child(2), #profile>ul>li:nth-child(3), #profile>ul>li:nth-child(4){
+	margin:10px; 
+}
+#profile>ul>li:nth-child(3){
+	height:40px;
+}
+#profile>ul>li:nth-child(4){
+	text-align:right;
+}
+.top{
+	width:700px; height:370px; border-top:1px solid black; border-bottom:1px solid black; margin:0 50px; float:right; padding:90px 30px;
+}
+#grade{
+	width:300px;
+	float:left;
+}
+#myPoint{
+	border:3px solid #3f1785;
+	color:#3f1785;
+	width:300px;
+	float:right;
+	padding:50px 30px;
+	font-weight:bold;
+	border-radius:5em;
+}
+.myinfoBottom{
+	overflow:auto;
+	float:left;
+}
+#waiting{
+	margin-bottom:20px;
+	width:100%;
+	float:left;
+}
+#status{
+	float:right;	
+	height:100px;
+	margin:20px 0px;
+}
+#status>div{
+	height:60px; background-color:#ddd; border:1px solid #ddd; padding:10px;
+}
+#status>div>div{
+	float:right; background-color:#fff; height:40px; width:420px;
+}
+#QnA{
+	width:100%;
+	margin-top:20px;
+	float:left;
+}
+#joinMemberinfo>ul{
+	height:155px;
+}
+#joinMemberinfo>ul>li:nth-child(1){
+	height:0px;
+}
+#joinMemberinfo>ul>li{
+	text-align:left;
+	font-size:16px;
+	height:30px;
+	line-height:30px;
+}
+#joinMemberinfo>div{
+	height:30px;
+}

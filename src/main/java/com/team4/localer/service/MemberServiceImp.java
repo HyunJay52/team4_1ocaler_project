@@ -18,6 +18,24 @@ public class MemberServiceImp implements MemberService {
 		//로그인
 		return dao.memLogin(userid, userpwd);
 	}
+
+	@Override
+	public void logCount(String userid, String loc_gu) {
+		// 로그인 카운트
+		dao.logCount(userid, loc_gu);
+	}
+	
+	@Override
+	public String searchId(MemberVO vo) {
+		// 아이디 찾기
+		return dao.searchId(vo);
+	}
+	
+	@Override
+	public String searchPwd(MemberVO vo) {
+		// 비밀번호 찾기
+		return dao.searchPwd(vo);
+	}
 	
 	@Override
 	public int insertMember(MemberVO vo) {
@@ -53,6 +71,12 @@ public class MemberServiceImp implements MemberService {
 	public int updateMemStatus(String userid) {
 		// 셀러 회원가입 후 > 회원상태 업데이트
 		return dao.updateMemStatus(userid);
+	}
+	
+	@Override
+	public SellerVO selectSeller(String userid) {
+		// 셀러회원 정보 수정
+		return dao.selectSeller(userid);
 	}
 	
 	@Override
