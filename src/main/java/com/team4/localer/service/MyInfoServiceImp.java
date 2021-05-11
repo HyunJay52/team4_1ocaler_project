@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.MyInfoDAO;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.MyinfoPageVO;
 
@@ -50,6 +51,18 @@ public class MyInfoServiceImp implements MyInfoService{
 	public String pointCount(MyinfoPageVO pVO) {
 		
 		return dao.pointCount(pVO);
+	}
+
+	@Override
+	public int myCount(MyinfoPageVO vo) {
+
+		return dao.myCount(vo);
+	}
+
+	@Override
+	public List<MemShareVO> selectMyShare(MyinfoPageVO vo) {
+		
+		return dao.selectMyShare(vo);
 	}
 
 

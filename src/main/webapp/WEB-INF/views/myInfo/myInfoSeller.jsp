@@ -6,8 +6,8 @@
 
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<form method="post" action="myinfoSellerOk" id="myinfoSellerFrm" enctype="multipart/form-data">
-		<div class="basicMyinfoHeader">판매자 정보</div>
 		<div class="basicMyinfo">
+		<div class="basicMyinfoHeader">판매자 정보</div>
 			<ul>
 				<li>대표 이미지</li>
 				<li class="memheightAuto">
