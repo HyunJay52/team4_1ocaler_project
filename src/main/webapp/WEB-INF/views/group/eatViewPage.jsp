@@ -61,7 +61,7 @@
 			//삭제
 			$("#eatViewDeleteBtn").click(()=>{
 				if(confirm('삭제 하시겠습니까?')){
-					location.href="eatViewPageDel?loc_gu=${pageVO.loc_gu}&up_cate=${vo.up_cate}";
+					location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&up_cate=${vo.up_cate}";
 				}
 			});	
 			//참여하기================================================================================
@@ -133,7 +133,6 @@
 						clickable : true,
 						position : new kakao.maps.LatLng(place.y, place.x)
 					});
-					
 					markers.push(marker);
 					
 				}
@@ -210,7 +209,7 @@
 			            image : startMarkerImage
 			        });
 			        
-			        var content ='<div class="customOverlay"> 약속장소 </div>'
+			        var content ='<div class="customOverlay"> 약속장소 </div>';
 			        
 			    	var customOverlay = new kakao.maps.CustomOverlay({
 		        	    map: map,

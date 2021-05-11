@@ -166,7 +166,7 @@
 		var container = document.getElementById("groupWriteFormMap"),
 			options = {
 				center : new kakao.maps.LatLng(33.450701,126.570667),
-				level : 7
+				level : 3
 			};
 		var map = new kakao.maps.Map(container, options);
 		
@@ -235,7 +235,7 @@
 				
 				//검색된 장소(위치)기준으로 지도를 셋팅해준다.
 				 map.setBounds(bounds);
-				 map.setLevel(7);
+				 map.setLevel(3);
 				
 
 		    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
