@@ -121,7 +121,7 @@
 						<li><a href="boardManage">게시글관리</a></li>
 					</ul>
 					<ul>
-						<li><a href="statis_mem">회원 통계</a></li>
+						<li><a href="statis_mem?month=5">회원 통계</a></li>
 						<li><a href="statis_board">게시글 통계</a></li>
 					</ul>
 					<ul>

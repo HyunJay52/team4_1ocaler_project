@@ -14,21 +14,16 @@
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-          ['2004/05',  165,      938,         522,             998,           450,      614.6],
-          ['2005/06',  135,      1120,        599,             1268,          288,      682],
-          ['2006/07',  157,      1167,        587,             807,           397,      623],
-          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-          ['2008/09',  136,      691,         629,             1026,          366,      569.6],
-          ['2008/10',  136,      691,         629,             1026,          366,      569.6]
+          ['Month', '방문자수', '누적회원수', '신규회원수', '신규셀러수'],
+          ['21/${dataVO.month1}',  ${memCountVO.loginmem1},${memCountVO.totalmem1},${newCountVO.loginmem1},${newCountVO.totalmem1}],
+          ['21/${dataVO.month2}',  ${memCountVO.loginmem2},${memCountVO.totalmem2},${newCountVO.loginmem1},${newCountVO.totalmem2}],
+          ['21/${dataVO.month3}',  ${memCountVO.loginmem3},${memCountVO.totalmem3},${newCountVO.loginmem1},${newCountVO.totalmem3}]
         ]);
 
         var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Cups'},
           hAxis: {title: 'Month'},
           seriesType: 'bars',
-          series: {5: {type: 'line'}},
+          series: {0: {type: 'line'}},
           fontSize: 16
         };
 
@@ -40,39 +35,53 @@
     function drawChart1() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Effort', 'Amount given'],
-          ['My all',     20],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+          ['지역구', '방문자수'],
+          ['강서구',${guVO.gu1}],
+          ['구로구',${guVO.gu2}],
+          ['금천구',${guVO.gu3}],
+          ['관악구',${guVO.gu4}],
+          ['강남구',${guVO.gu5}],
+          ['강동구',${guVO.gu6}],
+          ['용산구',${guVO.gu7}],
+          ['중구',${guVO.gu8}],
+          ['광진구',${guVO.gu9}],
+          ['동대문구',${guVO.gu10}],
+          ['중랑구',${guVO.gu11}],
+          ['은평구',${guVO.gu12}],
+          ['강북구',${guVO.gu13}],
+          ['노원구',${guVO.gu14}],
+          ['도봉구',${guVO.gu15}],
+          ['양천구',${guVO.gu16}],
+          ['영등포구',${guVO.gu17}],
+          ['동작구',${guVO.gu18}],
+          ['서초구',${guVO.gu19}],
+          ['송파구',${guVO.gu20}],
+          ['마포구',${guVO.gu21}],
+          ['서대문구',${guVO.gu22}],
+          ['성동구',${guVO.gu23}],
+          ['종로구',${guVO.gu24}],
+          ['성북구',${guVO.gu25}],          
         ]);
 
         var options = {
+          title : '지역별',
           width: 400,
        	  height: 400,
           pieHole: 0.3,
           pieSliceTextStyle: {
-            color: 'black',
+            color: 'black'
           },
           legend: 'none',
-          fontSize: 16
         };
-
         var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
         chart.draw(data, options);
       }
     function drawChart2() {
 
         var data2 = google.visualization.arrayToDataTable([
-          ['Effort', 'Amount given'],
-          ['My all',     20],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+          ['분류', '회원수'],
+          ['신규',     ${subVO.totalmem1}],
+          ['휴면',     ${subVO.totalmem2}]
         ]);
 
         var options2 = {
@@ -92,13 +101,9 @@
     function drawChart3() {
 
         var data3 = google.visualization.arrayToDataTable([
-          ['Effort', 'Amount given'],
-          ['My all',     20],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+        	['분류', '회원수'],
+            ['일반',     ${subVO.loginmem1}],
+            ['셀러',     ${subVO.loginmem2}]
         ]);
 
         var options3 = {

@@ -13,6 +13,7 @@ import com.team4.localer.vo.AdminstatisVO;
 import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.MemShareVO;
+import com.team4.localer.vo.Mem_statisVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
@@ -87,6 +88,27 @@ public class ManageServiceImp implements ManageService {
 	public AdminstatisVO boardManageStatis() {
 		return manadao.boardManageStatis();
 	}
+
+	@Override
+	public Mem_statisVO loginNum(Mem_statisVO statisVO) {
+		return manadao.loginNum(statisVO);
+	}
+
+	@Override
+	public Mem_statisVO newmem(Mem_statisVO statisVO) {
+		return manadao.newmem(statisVO);
+	}
+
+	@Override
+	public Mem_statisVO guLoginCount(Mem_statisVO statisVO) {
+		return manadao.guLoginCount(statisVO);
+	}
+
+	@Override
+	public Mem_statisVO subCount(Mem_statisVO statisVO) {
+		return manadao.subCount(statisVO);
+	}
+
 
 
 

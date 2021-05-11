@@ -41,12 +41,6 @@ public class AdminController {
 		mav.setViewName("admin/publicwrite");
 		return mav;
 	}
-	@RequestMapping("/statis_mem")//판매관리
-	public ModelAndView statis_mem() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/statis_mem");
-		return mav;
-	}
 	@RequestMapping("/statis_board")//판매관리
 	public ModelAndView statis_board() {
 		ModelAndView mav = new ModelAndView();
@@ -236,8 +230,6 @@ public class AdminController {
 		}
 		
 		//총레코드 구하기
-		
-		
 		result.put("pageNum",pageVO.getPageNum());
 		result.put("startPageNum",pageVO.getStartPageNum());
 		result.put("totalPage", pageVO.getTotalPage());

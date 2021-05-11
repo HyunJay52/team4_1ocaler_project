@@ -1,5 +1,6 @@
 package com.team4.localer.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.AdminstatisVO;
 import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.MemShareVO;
+import com.team4.localer.vo.Mem_statisVO;
 import com.team4.localer.vo.MemberVO;
 
 @Controller
@@ -296,6 +298,25 @@ public class AdminManageController {
 		manaService.selManageDel(num,cate,numName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:boardManage");
+		return mav;
+	}
+	//=========================통계부분==============================
+	//회원통계부분
+	@RequestMapping("/statis_mem")//회원 통계
+	public ModelAndView statis_mem(int month) {
+		ModelAndView mav = new ModelAndView();
+		Mem_statisVO statisVO = new Mem_statisVO();
+		statisVO.setMonth(month);
+		mav.addObject("dataVO",statisVO);
+		//3,4,5월 방문자수 구하기, //3,4,5월 누적 회원 순위 
+		mav.addObject("memCountVO",manaService.loginNum(statisVO));
+		//3,4,5월 신규 회원수,셀러수
+		mav.addObject("newCountVO",manaService.newmem(statisVO));
+		//지역구별 로그인수
+		mav.addObject("guVO",manaService.guLoginCount(statisVO));
+		//일반회원수/셀러회원수, 신규회원수/휴면회원수
+		mav.addObject("subVO",manaService.subCount(statisVO));
+		mav.setViewName("admin/statis_mem");
 		return mav;
 	}
 }

@@ -164,4 +164,88 @@
 		    +(select count(*) from mem_share) price_total 
 		    from dual
   	</select>
+  	<select id="loginNum" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select 
+		(select count(*) from logcount 
+		where logdate between to_date('21-${month1}-01','YY-MM-DD')
+		              and to_date('21-${month1}-${last1}','YY-MM-DD')) loginmem1,
+		(select count(*) from logcount 
+		where logdate between to_date('21-${month2}-01','YY-MM-DD')
+		              and to_date('21-${month2}-${last2}','YY-MM-DD')) loginmem2,
+		(select count(*) from logcount 
+		where logdate between to_date('21-${month3}-01','YY-MM-DD')
+		              and to_date('21-${month3}-${last3}','YY-MM-DD')) loginmem3,<!-- 로그인수 count -->
+		(select count(userid) from member 
+		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month1}-${last1}','YY-MM-DD')) totalmem1,<!-- 총 회원수 count -->
+		    (select count(userid) from member 
+		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month2}-${last2}','YY-MM-DD')) totalmem2,
+		    (select count(userid) from member 
+		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month3}-${last3}','YY-MM-DD')) totalmem3
+		from dual
+  	</select>
+  	<select id="newmem" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select 
+		    (select count(userid) from member 
+		        where mem_status=1 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month1}-${last1}','YY-MM-DD')) loginmem1,
+		    (select count(userid) from member 
+		        where mem_status=1 and  mem_sub between to_date('21-${month2}-01','YY-MM-DD') 
+		        and to_date('21-${month2}-${last2}','YY-MM-DD')) loginmem2,
+		    (select count(userid) from member 
+		        where mem_status=1 and  mem_sub between to_date('21-${month3}-01','YY-MM-DD') 
+		        and to_date('21-${month3}-${last3}','YY-MM-DD')) loginmem3,
+		    (select count(userid) from member <!-- 신규 셀러회원수 -->
+		        where mem_status=2 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month1}-${last1}','YY-MM-DD')) totalmem1,
+		    (select count(userid) from member 
+		        where mem_status=2 and  mem_sub between to_date('21-${month2}-01','YY-MM-DD') 
+		        and to_date('21-${month2}-${last2}','YY-MM-DD')) totalmem2,
+		    (select count(userid) from member 
+		        where mem_status=2 and  mem_sub between to_date('21-${month3}-01','YY-MM-DD') 
+		        and to_date('21-${month3}-${last3}','YY-MM-DD')) totalmem3
+		from dual
+  	</select>
+  	<select id="guLoginCount" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select 
+			    count(case when loc_gu='강서구' then 1 end) gu1 ,
+			    count(case when loc_gu='구로구' then 1 end) gu2 ,
+			    count(case when loc_gu='금천구' then 1 end) gu3 ,
+			    count(case when loc_gu='관악구' then 1 end) gu4 ,
+			    count(case when loc_gu='강남구' then 1 end) gu5 ,
+			    count(case when loc_gu='강동구' then 1 end) gu6 ,
+			    count(case when loc_gu='용산구' then 1 end) gu7 ,
+			    count(case when loc_gu='중구' then 1 end) gu8 ,
+			    count(case when loc_gu='광진구' then 1 end) gu9 ,
+			    count(case when loc_gu='동대문구' then 1 end) gu10 ,
+			    count(case when loc_gu='중랑구' then 1 end) gu11 ,
+			    count(case when loc_gu='은평구' then 1 end) gu12 ,
+			    count(case when loc_gu='강북구' then 1 end) gu13 ,
+			    count(case when loc_gu='노원구' then 1 end) gu14 ,
+			    count(case when loc_gu='도봉구' then 1 end) gu15 ,
+			    count(case when loc_gu='양천구' then 1 end) gu16 ,
+			    count(case when loc_gu='영등포구' then 1 end) gu17 ,
+			    count(case when loc_gu='동작구' then 1 end) gu18 ,
+			    count(case when loc_gu='서초구' then 1 end) gu19 ,
+			    count(case when loc_gu='송파구' then 1 end) gu20 ,
+			    count(case when loc_gu='마포구' then 1 end) gu21 ,
+			    count(case when loc_gu='서대문구' then 1 end) gu22 ,
+			    count(case when loc_gu='성동구' then 1 end) gu23 ,
+			    count(case when loc_gu='종로구' then 1 end) gu24 ,
+			    count(case when loc_gu='성북구' then 1 end) gu25
+			    from logcount where  logdate
+			    between to_date('21-${month3}-01','YY-MM-DD') and to_date('21-${month3}-${last3}','YY-MM-DD')
+  	</select>
+  	<select id="subCount" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select count(case when mem_type =1 then 1 end) loginmem1,<!-- 일반회원수 --> 
+		       count(case when mem_type =2 then 1 end) loginmem2,<!-- 셀러회원수 -->
+		       count(case when mem_status =1 then 1 end) totalmem1, <!-- 일반 -->
+      		   count(case when mem_status =2 then 1 end) totalmem2 <!-- 휴면 -->
+		from member where mem_sub
+		between to_date('21-03-01','YY-MM-DD') 
+		        and to_date('21-${month3}-${last3}','YY-MM-DD')
+  	
+  	</select>
 </mapper>

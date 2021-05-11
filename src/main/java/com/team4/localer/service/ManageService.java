@@ -7,11 +7,23 @@ import com.team4.localer.vo.AdminstatisVO;
 import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.MemShareVO;
+import com.team4.localer.vo.Mem_statisVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
 
 public interface ManageService {
+	//======회원 통계=====
+	//3,4,5월 방문자수 ,총 회원수 
+	public Mem_statisVO loginNum(Mem_statisVO statisVO);
+	//3,4,5월 신규 회원수
+	public Mem_statisVO newmem(Mem_statisVO statisVO);
+	//지역구별 로그인수
+	public Mem_statisVO guLoginCount(Mem_statisVO statisVO);
+	//일반/셀러회원수, 신규/휴면회원수 
+	public Mem_statisVO subCount(Mem_statisVO statisVO);
+	
+	
 	//회원목록 allSelect
 	public List<MemberVO> memberAllSelect(AdminPageVO pageVO);
 	//회원의 신고, 댓글수 count
