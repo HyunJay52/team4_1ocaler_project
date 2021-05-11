@@ -36,4 +36,22 @@
 		<beans:constructor-arg name="dataSource" ref="dataSource"></beans:constructor-arg>
 	</beans:bean>
 	
+	<!-- naver email -->
+	<context:component-scan base-package="kr.co.lty"/>
+	<beans:bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="mailSender">
+		<beans:property value="smtp.naver.com" name="host"/>
+		<beans:property value="587" name="port"/>
+		<beans:property name="username" value="addict520@naver.com"/>
+		<beans:property name="password" value="K@nahyunj1401"/>
+		<beans:property name="defaultEncoding" value="utf-8"/>
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	
+	</beans:bean>
 </beans:beans>
