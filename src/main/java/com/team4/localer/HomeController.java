@@ -29,17 +29,15 @@ public class HomeController {
 		System.out.println("서비스 문제 해결 ^^ 행벅");
 		return "home";
 	}
-	@RequestMapping("/backHome")
-	public String backHome() {
-		return "home";
-	}
+//	@RequestMapping("/backHome")
+//	public String backHome() {
+//		return "home";
+//	}
 	
 	@RequestMapping(value="/sendGroupList", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public List<GroupVO> sendGroupList(HttpServletRequest req){
 		String g_gu = req.getParameter("g_gu");
-		
-		System.out.println("home 로그인한 회원의 지역구 > "+g_gu);
 		
 		List<GroupVO> list = new ArrayList<GroupVO>();
 		list = service.getGroupList(g_gu);
@@ -49,8 +47,6 @@ public class HomeController {
 			int joinMem = joinService.getJCount(num);
 			list.get(listIdx).setG_joinCnt(joinMem);
 		}
-		
-		System.out.println("size "+list.size()+", and join > "+list.get(1).getG_joinCnt()+"g_time? ? ? "+list.get(1).getG_time());
 		return list;
 	}
 	

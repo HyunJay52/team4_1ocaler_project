@@ -3,6 +3,7 @@ package com.team4.localer.dao;
 import java.util.List;
 
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.MyinfoPageVO;
 
@@ -24,4 +25,10 @@ public interface MyInfoDAO {
 	
 	//유저의 총 포인트 사용횟수 조회
 	public String pointCount(MyinfoPageVO pVO);
+	
+	//유저의 특정 게시글 Count 조회
+	public int myCount(MyinfoPageVO vo);
+	
+	//유저의 회원간 거래 게시글 리스트 조회
+	public List<MemShareVO> selectMyShare(MyinfoPageVO vo);
 }

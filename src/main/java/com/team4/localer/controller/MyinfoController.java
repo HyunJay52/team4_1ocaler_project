@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.CsService;
+import com.team4.localer.service.ManageService;
 import com.team4.localer.service.MyInfoService;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.MemberVO;
@@ -24,6 +27,10 @@ import com.team4.localer.vo.MyinfoPageVO;
 public class MyinfoController {
 	@Inject
 	MyInfoService service;
+	@Inject
+	ManageService manaService;
+	@Inject
+	CsService csService;
 	
 	//비밀번호 재확인 페이지
 	@RequestMapping("/myInfoCheck")
@@ -64,21 +71,13 @@ public class MyinfoController {
 		if(userid == null) {
 			mav.setViewName("member/login");		
 		}else {
+			mav.addObject("myPoint", service.joinPoint(userid));
 			mav.addObject("myVO", service.setMyinfo(userid));
 			mav.setViewName("myInfo/myInfoMain");
 		}
 		return mav;
 	}
-	
-	//내 정보 수정
-	@RequestMapping("/myinfoUpdate")
-	public ModelAndView myinfoUpdate(MemberVO vo, HttpSession ses) {
-		ModelAndView mav = new ModelAndView();
 		
-		
-		return mav;
-	}
-	
 	//내정보 충전 페이지
 	@RequestMapping("/myInfoLoad")
 	public ModelAndView myInfoLoad(HttpSession ses) {
@@ -94,6 +93,7 @@ public class MyinfoController {
 		return mav;
 	}
 	
+	//포인트 내역 불러오기
 	@ResponseBody
 	@RequestMapping("/myPointSelect")
 	public Map<String, Object> myPointSelect(HttpServletRequest req, HttpSession session){
@@ -165,9 +165,45 @@ public class MyinfoController {
 		return "myInfo/myInfoDelivery";
 	}
 	
+	//회원간 거래 페이지
 	@RequestMapping("/myInfoDeal")
-	public String myInfoDeal() {
-		return "myInfo/myInfoDeal";
+	public ModelAndView myInfoDeal() {
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("myInfo/myInfoDeal");
+		return mav;
+	}
+	@ResponseBody
+	@RequestMapping(value="/myDealList", method=RequestMethod.POST)
+	public Map<String, Object> myDealList(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> result = new HashMap<String, Object>();	
+		String searchId = (String)ses.getAttribute("logId");
+		vo.setUserid(searchId);
+		vo.setOnePageRecord(5);
+		vo.setOnePageSize(5);
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		System.out.println("kategorie="+vo.getKategorie());
+
+		if(vo.getKategorie() == null) {
+			vo.setKategorie("mem_share");
+		}
+		
+		vo.setDateContent("s_writedate");			
+
+		if(vo.getSearchWord().equals("") || vo.getSearchWord() == null) {
+			vo.setSearchWord("%%");
+		}
+		System.out.println("kategorie="+vo.getKategorie());
+		vo.setTotalRecord(service.myCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+		
+		System.out.println("dateContent="+vo.getDateContent());
+		result.put("pVO", vo);
+		result.put("list", service.selectMyShare(vo));
+		return result;
 	}
 	
 	@RequestMapping("/myInfoFarmerDeal")
@@ -186,10 +222,6 @@ public class MyinfoController {
 	@RequestMapping("/myInfoSaleHistory")
 	public String myInfoSaleHistory() {
 		return "myInfo/myInfoSaleHistory";
-	}
-	@RequestMapping("/myInfoSeller")
-	public String myInfoSeller() {
-		return "myInfo/myInfoSeller";
 	}
 	@RequestMapping("/myInfoProductManagement")
 	public String myInfoProductManagement(){

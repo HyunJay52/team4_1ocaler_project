@@ -17,8 +17,23 @@ public class MyinfoPageVO {
 	private String searchDate2;	
 	private String searchKey;
 	private String searchWord;
+	private String kategorie;
+	private String dateContent;
 	
 	
+	
+	public String getDateContent() {
+		return dateContent;
+	}
+	public void setDateContent(String dateContent) {
+		this.dateContent = dateContent;
+	}
+	public String getKategorie() {
+		return kategorie;
+	}
+	public void setKategorie(String kategorie) {
+		this.kategorie = kategorie;
+	}
 	public String getSearchDate2() {
 		return searchDate2;
 	}

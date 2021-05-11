@@ -11,6 +11,10 @@
 	document.title = "로그인";
 	
 	$(function(){
+		$("#signupBtn").click(function(){
+			location.href="joinMember";
+		})
+		
 		 //<![CDATA[
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
         Kakao.init('d4ac434ad90579b218d8e00cf709e965');
