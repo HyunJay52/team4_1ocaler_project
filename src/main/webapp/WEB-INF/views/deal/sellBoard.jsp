@@ -48,8 +48,9 @@
          </div>
          
          <div>
-         	<a href="selWrite" class="btn commBtn "  style="float:right"> 글쓰기</a>
-         
+         	<c:if test="${logType!=null }">
+         		<a href="selWrite" class="btn commBtn "  style="float:right"> 글쓰기</a>
+         	</c:if>
             <ul id="MBPaging">
                <li>이전</li>
                <li>1</li>
