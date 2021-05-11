@@ -288,7 +288,7 @@
 				<option value="g_subject">제목</option>
 				<option value="userid">작성자</option>
 				<option value="g_content">내용</option>
-				<option value="g_gu">약속장소</option>
+				<option value="g_loc1">약속장소</option>
 			</select>
 			<input type="text" name="searchWord" id="eatViewSearchWord"/>
 			<button id="eatViewButton"><img src="<%=request.getContextPath()%>/img/groupImg/search.png"></button>
@@ -310,6 +310,7 @@
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소"/>${vo.g_loc1}</div><!-- g_loc1 값을 가져온다. -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>1 / ${vo.g_cnt }명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
+					<div><img src="<%=request.getContextPath()%>/img/groupImg/writer.png" title="모집인원"/>${vo.userid }</div>
 					<div>${vo.g_tag }</div><!-- 태그값을 가지고온다. -->
 					<hr/>
 					

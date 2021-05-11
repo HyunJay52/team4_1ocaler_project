@@ -9,15 +9,15 @@
       border-radius:10px;
    }
 </style>
-   <%@ include file="/inc/dealHeader.jspf" %> <!-- 사이드 메뉴 include -->
+   <%-- <%@ include file="/inc/dealHeader.jspf" %> <!-- 사이드 메뉴 include --> --%>
+   <%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
    <div id="dealMnSMain">
-      <%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
-      
-      <div id="SBBanner">
+   <div id="SBBanner">
       	<span style="display:block; padding:30px 0px 0px 150px; font-size:36px; color:#fff; font-weight:bold;">1인 공방에서 만든 핸드메이드 제품</span> <span style="display:block; padding:0px 0px 0px 500px; font-size:36px; color:#fff; font-weight:bold;">
       		제품의 질을 느껴보세요</span>
       </div>
       	<h3 style="margin-top:50px;">#착한발견 <span style="font-size:20px">| 핸드메이드 제품의 매력을 느껴봐요</span></h3>
+                  
                   
          <div id="selBoard" >
             <ul id="boardText">
