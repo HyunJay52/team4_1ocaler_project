@@ -8,22 +8,6 @@
       height:180px;
       border-radius:10px;
    }
-   
-   #sellImgDiv input[type=checkbox]{
-		display:none;
-   }
-   #sellImgDiv input[type=checkbox]+label{
-		background:url("<%=request.getContextPath()%>/img/groupImg/likeE.png") no-repeat; line-height:20px; ;
-   }
-	#sellImgDiv input[type=checkbox]:checked+label{
-		background:url("<%=request.getContextPath()%>/img/groupImg/likeF.png") no-repeat;
-	}
-	#sellImgDiv label{
-		height:30px; 
-		width:30px;
-		vertical-align:-24px; 
-	}
-	
 </style>
    <%-- <%@ include file="/inc/dealHeader.jspf" %> <!-- 사이드 메뉴 include --> --%>
    <%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
@@ -37,32 +21,18 @@
                   
          <div id="selBoard" >
             <ul id="boardText">
-               <c:forEach var="i" begin="1" end="8">
+               <c:forEach var="i" begin="1" end="10">
                   <li id="selList">
-                     <div >
+                     <div  OnClick="location.href ='sellView'">
                         <div id="sellImgDiv">
-                           <img src="img/deal/div.jfif" OnClick="location.href ='sellView'"  />
-                           
-                           <!-- 체크박스 넣고싶은데 -->
-<!--                            <input type="checkbox" name="num" id="like" value="1" style="position: relative ;top:150px;left:278px;" />
-                           <label for="like"></label>
-                           <script>
-									$("#sellImgDiv input[name=num]").on('click',function(){
-									    if($(this).is(':checked')){
-									       console.log($(this).val());
-									    }else{
-									       console.log($(this).val());
-									    }
-									 });  
-							</script> -->
-							
-						 <!-- 체크	박스 ㅎ  -->
+                           <img src="img/deal/div.jfif"/>
                         </div>
-                        <ul OnClick="location.href ='sellView'">   
+                        <ul>   
                            <li class="wordcut">D.I.Y 오르골 엔틱소품</li>
                            
                            <li>
-                              리뷰 : 180개
+                              <span class="cntJoin">&nbsp;&nbsp;5</span>
+                              /160개
                            </li>
                            <li>20,000원</li>
                            <li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
@@ -78,8 +48,9 @@
          </div>
          
          <div>
-         	<a href="selWrite" class="btn commBtn "  style="float:right"> 글쓰기</a>
-         
+         	<c:if test='${logType==2 }'>
+         		<a href="selWrite" class="btn commBtn "  style="float:right"> 글쓰기</a>
+         	</c:if>
             <ul id="MBPaging">
                <li>이전</li>
                <li>1</li>

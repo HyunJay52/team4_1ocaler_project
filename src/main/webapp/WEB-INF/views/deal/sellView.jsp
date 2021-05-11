@@ -2,8 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <script src="plugin/jquery.bxslider.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealSellViewStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealSellViewStyle.css"/>
+
 
 
 	<script>
@@ -14,10 +15,10 @@
 			pagerCustom:"#bx-pager"
 		});
 		
-	});
-	var popup;
+
+		var popup;
 	
-	$(function(){
+	
 		//검색창 팝업 이벤트
 		$("#qaBtn").click(function(){
 			$("#popup").css('display', 'block');
@@ -28,9 +29,6 @@
 
     	})
 		
-	});
-	
-	$(()=>{
 		$('.cbBtn').on('change',function(){
 			console.log("들어오는지 체크합니다.");
 			$('.cbBtn').not(this).prop('checked',false);
