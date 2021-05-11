@@ -5,12 +5,12 @@
 	$(function(){
 
 		var nowMoney = ${myPoint};
-		setMoney(nowMoney); //현제 포인트 세팅
+		 //현제 포인트 세팅
 		//충전금액 버튼 선택시
 		var firstMoney = nowMoney;
-		setMoney(${myPoint});
+		setMoney(0);
 		$(".load").val(0);
-		$("#loadArea>form>ul>li input").click(function(){
+		$(".chargePoint>li input").click(function(){
 			var charge = parseInt($(this).attr("title"));
 			var nowCharge = parseInt($(".load").val());
 			nowCharge += charge;
@@ -21,11 +21,16 @@
 		//충전후 잔액 세팅
 		var myMoney = 0;
 		function setMoney(money){
-			var chargeMoney = money += firstMoney;
+			var chargeMoney = money += ${myPoint};
 			myMoney = chargeMoney;
 			$("#loadMoney").text(money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 		}
 		
+		//초기화
+		$("#resetLoad").click(function(){
+			setMoney(0);
+			$(".load").val(0);
+		});
 		//입력 이벤트 세팅
 		$(".load").on("keyup", function(){
 			if($(this).val()== "" || $(this).val() < 0){
@@ -36,30 +41,26 @@
 		});
 
 		//결제수단 이벤트
-		$("#loadFrom").on("submit", function(){
-			if($("#loadArea>form>select").val() == '결제수단 선택'){
+		$("#chargeBtn").on("click", function(){
+			if($("#payStatus").val() == '결제수단 선택'){
 				alert("결제수단을 선택해주세요");
-				return false;
+
 			}else if('${logId}' == '' || '${logId}' == null){
 				alert("로그인 후 이용 가능합니다.");
 				location.href="login";
-				return false;
+		
+			}else if($(".load").val() == 0){
+				alert("충전금액을 선택해주세요");
+		
 			}else{
 				if(payment()){
-					$("#myPoint").children().next().text(myMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");				
-										
-				}else{
-					return false;
+					location.href="myInfoLoad";
 				}
-	
-				
-	
 			}
-			
+		//					replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");	
 		});
-		
+			
 		var msg ="";
-		
 		//결제 api 식별코드 세팅
 		var IMP = window.IMP;
 		IMP.init('imp45051525');
@@ -270,32 +271,26 @@
 	<div class="myinfoContainer">
 	<h2>충전하기</h2>
 	<div class="loadTop">
-		<div id="loadArea">
-			<form method="post" action="myInfoLoad" id="loadFrom">
-				<input type="text" id="chargeMoney" name="load" class="lgFnt load"/>
-					<span class="mdFnt">충전 후 잔액 :</span><span class="mdFnt" id="loadMoney"></span>
-					<ul>
-						<li><input type="button" class="btn commBtn mdFnt btn-block" title="10000" value="1 만원"/></li>
-						<li><input type="button" class="btn commBtn mdFnt btn-block" title="50000" value="5 만원"/></li>
-						<li><input type="button" class="btn commBtn mdFnt btn-block" title="100000" value="10 만원"/></li>
-						<li><input type="button" class="btn commBtn mdFnt btn-block" title="200000" value="20 만원"/></li>
-					</ul>
-					<br/>
-					<select class="selectBox" id="payStatus" name="payStatus">
-						<option value="결제수단 선택">결제수단 선택</option>
-						<option value="card">카드결제</option>
-			<!--		<option value="trans">실시간 계좌이체</option>
-						<option value="vbank">가상계좌</option>
-						<option value="phone">휴대폰 소액결제</option>
-			 -->
-					</select>
-					<input type="submit" class="btn commBtn" value="충전하기"/>
-			</form>
+		<div class="myPoint">					
+			<input type="text" id="chargeMoney" name="load" class="lgFnt load" disabled/>
+			<p><span class="mdFnt">충전 후 잔액 :</span>
+				<span class="mdFnt" id="loadMoney"></span>
+				<input type="button" id="resetLoad" class="btn commBtn" value="초기화" style="float:right"/>
+			</p>
+			<select id="payStatus" name="payStatus">
+				<option value="결제수단 선택">결제수단 선택</option>
+				<option value="card">카드결제</option>
+			</select>
+			<input type="button" id="chargeBtn" class="btn commBtn" value="충전하기"/>
 		</div>
-		<div id="myPoint">
-			<h2>잔액</h2>
-			<h2 style="float:right">${myPoint} 원</h2>
-		</div>
+		<ul class="chargePoint">
+			<li><input type="button" class="btn commBtn lgFnt btn-block" title="1000" value="1 천원"/></li>
+			<li><input type="button" class="btn commBtn lgFnt btn-block" title="5000" value="5 천원"/></li>
+			<li><input type="button" class="btn commBtn lgFnt btn-block" title="10000" value="1 만원"/></li>
+			<li><input type="button" class="btn commBtn lgFnt btn-block" title="50000" value="5 만원"/></li>
+			<li><input type="button" class="btn commBtn lgFnt btn-block" title="100000" value="10 만원"/></li>
+			<li><input type="button" class="btn commBtn lgFnt btn-block" title="200000" value="20 만원"/></li>		
+		</ul>
 	</div>	
 		<div id="loadList">
 				<select class="selectBox " name="selPayment" id="selPayment">
@@ -305,7 +300,7 @@
 				</select>
 				<div class="loadLine"></div>
 				<div class="loadDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
-				<input type="date" value="2021-05-06" min="2020-01-01" max="2022-01-01" class="loadDate"/>
+				<input type="date" value="2021-05-01" min="2020-03-01" max="2022-05-31" class="loadDate"/>
 				<ul class="pointList">
 				
 				</ul>
@@ -342,4 +337,5 @@
 			</div>
 		</div>
 	</div>
+	
 </div>

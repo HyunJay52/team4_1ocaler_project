@@ -7,8 +7,9 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
+	document.title = "내 정보";
+
 	$(function(){
-		
 		//myinfo 더보기 이벤트
 		var moreInfoOn = false;
 		$("#moreInfo").click(function(){
@@ -16,6 +17,7 @@
 				$(this).css('display', 'none');
 				$(".editOn").css('display', 'block');
 				$(".inputDisabled").attr('disabled', false);
+				//$("#mem_prof").attr('readyonly', false);
 				moreInfoOn = true;
 			}else{
 				if(confirm("수정을 취소하시겠습니까?")){

@@ -32,7 +32,7 @@
 	.groupListView div:first-child>img:first-child{display:block;float:left;height:14px;margin: 9px 15px;}
 	.groupListView li>span{display:block;text-align:center;font-size:16px;margin-bottom: 5px;font-weight:bold;}
 	.groupListView div:not(:first-child)>img{margin:5px 40px;}
-	.groupListView div:nth-child(6){font-size: 13px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-left: 15px;padding-right: 15px;margin-top:3px;margin-bottom:5px;}
+	.groupListView div:nth-child(7){font-size: 13px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-left: 15px;padding-right: 15px;margin-top:3px;margin-bottom:5px;}
 
 	/* 공통 groupInnerSearchFrm eatview, withview*/
 	.groupInnerSearchFrm>select{height: 32px; width: 80px; margin: 5px 10px 15px 15px; border: 1px solid #d9d9d9; border-radius: 5px;}	    

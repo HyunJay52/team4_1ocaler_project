@@ -1,33 +1,44 @@
 @charset "UTF-8";
 	.loadTop{
 		overflow:auto;
-	}
-	#loadArea{
-		width:500px;
+		width:1000px;
 		height:300px;
-		float:left;
+		padding:50px 30px;
+		border-bottom:1px solid #ddd;
+
 	}
-	#loadArea>form>ul>li{
+
+	.loadTop>ul>li{
 		float:left;
-		width:25%;
-		margin:20px 0;
+		width:21%;
+		margin:1px 5px;
+		height:70px;
 	}
-	#loadArea>form>input:nth-child(1){
+	.chargePoint>li>input{
+		height:60px;
+	}
+	.loadTop>input:nth-child(1){
 		width:100%;
 		height:50px;
 		padding-left:10px;
 	}
-	#myPoint{
-		border:1px solid #3f1785;
+	.myPoint{  		
 		color:#3f1785;
-		width:300px;
-		float:right;
-		padding:50px 30px;
+		width:500px;
+		float:left;
 		font-weight:bold;
-		border-radius:5em;
+		border-right: 1px solid #ddd;
+    	margin-right: 20px;
+    	padding-right:20px;
 	}
-	.selectBox{
-		width:140px; height:38px; margin-bottom:10px; position:relative;
+	.chargePoint{
+		
+	}
+	#payStatus{
+		width:240px; 
+		height:38px; 
+		margin:30px 0px;
+		position:relative;
 	}
 	.textBox{
 		width:300px; height:30px; margin-bottom:10px; padding-left:5px;
@@ -71,11 +82,12 @@
 		height:30px; 
 		float:right; 
 		margin:0px 0px 0px 790px;
-		top:46px;
+		top:16px;
  	 	z-index:200;
 	}
 	.load{
-		margin:10px 0;	
+		width:100%;
+		padding:0px 6px;	
 	}
 	.pointList{
 		width:100%;

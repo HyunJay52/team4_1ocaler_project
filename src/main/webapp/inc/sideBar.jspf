@@ -1,54 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
-
-<script src="http://localhost:82/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-
+<!-- <script src="http://localhost:82/socket.io/socket.io.js"></script> -->
+<!-- <script src="http://code.jquery.com/jquery-1.11.1.js"></script> -->
 <script>
-	$(document).ready(function(){
-		$(".chatting").click(function(){
-			//채팅창 열기
-			$("#chatDiv").css({display: "block"});
-			//채팅창 닫기
-			$("#chatClose").click(function(){
-				$("#chatDiv").css({
-					display: "none"
-				})
-			});
+// 	$(document).ready(function(){
+// 		$(".chatting").click(function(){
+// 			//채팅창 열기
+// 			$("#chatDiv").css({display: "block"});
+// 			//채팅창 닫기
+// 			$("#chatClose").click(function(){
+// 				$("#chatDiv").css({
+// 					display: "none"
+// 				})
+// 			});
 			
-			//대화상대 선택하기
-			$("#chatList>li").click(function(){
-				$("#chatList").css({display: "none"});
-				$("#showMsg").css({display:"block"});
-				$(".chat_input").css({display:"block"});
-				$("#chat_box").css({display:"block"});
-			})
-		})
+// 			//대화상대 선택하기
+// 			$("#chatList>li").click(function(){
+// 				$("#chatList").css({display: "none"});
+// 				$("#showMsg").css({display:"block"});
+// 				$(".chat_input").css({display:"block"});
+// 				$("#chat_box").css({display:"block"});
+// 			})
+// 		})
 		
 		
-		// 채팅용 function 
-		var socket = io.connect("http://localhost:82");
+// 		// 채팅용 function 
+// 		var socket = io.connect("http://localhost:82");
 		
-		$("#msg").keydown(function(key){
-			if(key.keyCode==13){
-				msg_process.click();
-			}	
-		});
+// 		$("#msg").keydown(function(key){
+// 			if(key.keyCode==13){
+// 				msg_process.click();
+// 			}	
+// 		});
 		
-		$("#msg_process").click(function(){
+// 		$("#msg_process").click(function(){
 			
-			socket.emit('sendMsg', $("#msg").val());
-			console.log("보낼 메세지 > ", $("#msg").val());
-			$("#msg").val("");
-		});
+// 			socket.emit('sendMsg', $("#msg").val());
+// 			console.log("보낼 메세지 > ", $("#msg").val());
+// 			$("#msg").val("");
+// 		});
 		
-		socket.on('sendMsg', function(data){
-			console.log(data);
-			$("#showMsg").append(data+"<br/>");
-		});
+// 		socket.on('sendMsg', function(data){
+// 			console.log(data);
+// 			$("#showMsg").append(data+"<br/>");
+// 		});
 		
-	});
+// 	});
 </script>
 
 <ul id="sideBar">

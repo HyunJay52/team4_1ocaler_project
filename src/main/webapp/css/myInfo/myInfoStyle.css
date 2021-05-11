@@ -19,31 +19,38 @@
 	
 /* 사이드 메뉴 */
 	#sideMenu{
+		margin-top:50px;
 		padding:10px; 
 		float:left;
 		width:150px;
 		height:100%;
-
-		text-align:center;
+		text-align:center;		
 	}
 	#sideMenu div{
 		margin-bottom:20px;
 	}
-	#sideMenu>h1{
-		color:#fff;
+	#sideMenu>h2{
+		margin-bottom:20px;
+	}
+	.myinfoSideHeader{
+		font-size:30px;
+		font-weight:bold;
+		
+	}
+	.myinfoSideHeader:hover, .myinfoSideHeader:link, .myinfoSideHeader:visited{
+		color:black;
+		font-weight:bold;
+		
 	}
 	.btnul{
 		background-color:#fff;
 		overflow:auto;
-		border:1px solid black;
+		
 	}
 	#sideMenu a:active, #sideMenu a:link, #sideMenu a:visited{
 		text-decoration:none;
 		font-family:'Nanum Gothic', sans-serif;
 	}    
-	#sideMenu a:hover {
-		font-weight:normal;
-	}
 	#sideMenu .btn-outline-dark{
 		border:1px solid #571fb8;
 	}
@@ -52,7 +59,8 @@
 		background-color:#571fb8;
 	}
 	.sideMenuBtn{
-	 	border:2px solid #3f1785;
+	 	border-bottom:1px solid #3f1785;
+	 	font-size:24px;
 	
 	}
 /* 테이블 스타일 */
@@ -175,12 +183,12 @@
 	}
 	.myinfoTop{
 		width:700px; 
-		height:370px; 
+		height:310px; 
 		border-top:1px solid black;
 		border-bottom:1px solid black; 
 		margin:0 50px; 
 		float:right; 
-		padding:90px 30px;
+		padding:50px 30px;
 	}
 /* 모달 세팅 */
 	.modal-body{
@@ -233,7 +241,7 @@
 /* 회원간 거래, 파머 직거래 검색 폼 */
 	.searchArea{
 		text-align:center;
-		margin-top:10px;
+		margin:10px 0px;
 		padding-left:6px;
 		height:30px;
 	}

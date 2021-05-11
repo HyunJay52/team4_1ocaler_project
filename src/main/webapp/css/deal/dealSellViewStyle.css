@@ -1,0 +1,575 @@
+@charset "UTF-8";
+
+	*{
+		list-style-type: none;
+		font-family: nsr; 
+	}
+	#dealViewMain{
+		width:1300px;
+		margin:50 auto;
+		height: auto;
+		overflow: hidden;
+	}
+
+	
+	#bx-pager img{
+		width: 80px;
+		height: 80px;
+		margin: 0 10;
+		padding: 0;
+	}
+	#dealImg ,#sellImg{ 
+		width: 640px; 
+		height: 400px; 
+		float: left;
+		margin:0 auto; 
+		margin-right: 20;
+	}
+
+
+	.section1{
+		margin:0; 
+		width: 640; 
+		height: 300px;
+		border:1px solid rgb(233 233 233);  
+	}
+	
+	.bx-viewport{
+		height:344px;
+	}
+	
+	.slider>li img{ 
+		width: 640; 
+		height: 341px;
+		border:1px solid rgb(233 233 233);  
+		margin:0 auto; 
+		padding: 0;
+	}
+
+	
+	.cntJoin {
+    	font-size: 22px;   
+    	font-weight: bold;    
+    	color: #3f1785;
+	}
+
+
+	.commBtn { 
+		font-size:20px;
+		width: 100px; 
+		color: #3f1785;
+		border: 1px solid #3f1785;
+		margin-top:30px;
+	}
+	.commBtn:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785; 
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	
+	.commBtnDeal { 
+		font-size:20px;
+		width: 100px; 
+		margin: -5px 60px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+
+	}
+	.commBtnDeal:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785; 
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+
+	}
+	
+	.commBtnSell { 
+		font-size:20px;
+		width: 100px; 
+		color: #3f1785;
+		border: 1px solid #3f1785;
+
+	}
+	.commBtnSell:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785; 
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+
+	}
+	
+	.commBtn_sm { 
+		float:right;
+		font-size:14px;
+		width: 80px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+		margin-left: 490;
+	}
+	.commBtn_sm:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785; 
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	
+	.commBtnEdit { 
+		font-size:20px;
+		width: 100px; 
+		color: #3f1785;
+		border: 1px solid #3f1785;
+		margin-top:30px;
+		margin-left:10px;
+	}
+	.commBtnEdit:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785; 
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+
+	
+
+	
+ 
+   	/* 셀러부분 */
+   	
+   	#sellInfo{
+   		width:640px;
+   		float:left;
+	}
+   	
+   	#sellInfo>ul li{ 
+   		float:left;
+   		height:50px;
+   		line-height:50px;
+   		
+  	}
+  	#sellInfo>ul li:nth-child(1){
+  		width: 100%;
+  		text-align: center; 
+  		font-size: 26px;
+  		font-weight: bold; 
+  		margin-bottom:10px;
+  		border-bottom:1px solid #d9d9d9;
+	}
+	#sellInfo>ul li:not(first-child){
+		width:50%;
+		font-size:18px;
+	}
+	#sellInfo>ul li:nth-child(2n){
+		font-weight:bold;
+		text-align: center; 
+	}
+	#sellInfo>ul li:nth-child(2n+1){
+		padding-left:30px
+	}
+	#sellInfo>ul li:nth-child(10){
+		width:100%;
+		text-align:left;
+	}
+	#sellInfo>ul li:nth-child(11){
+		width:100%;
+		font-size:16px;
+		font-weight:400;
+		text-align:left;
+		padding-left:30px;
+		height:32px;
+		line-height:32px;
+		border-bottom:1px solid #d9d9d9;
+	}
+	#sellInfo>ul li:nth-child(12){
+		padding-top:15px;
+	}
+	#sellInfo>ul li:nth-child(13){
+		text-align:center;
+		padding-top:15px;
+	}
+	#sellInfo>ul li:nth-child(14){
+		width:100%;
+		height:100px;
+		line-height:40px;
+	}
+	
+	#sellInfo input{
+		margin:30px 60px;
+	}
+	
+	/* 중간페이지 이동*/
+	#locationBar a{
+		color:gray;
+		text-decoration:none;
+	}
+	#locationBar a:hover{
+		font-weight:700;
+	}
+	
+	.locationBar{ 
+		float: left;
+		margin: 0 auto;
+   		margin-bottom: 40px;
+		padding: 0;
+		width: 1300px;
+		height: 40px;
+		line-height:39px;
+		border-bottom: 1px solid gray;
+	}
+	
+	.locationBar div{
+		float: left;
+		width: 433;
+		text-align: center;
+		height: 40px;
+	}
+	/* -----중간페이지 이동*/
+	
+	
+	/* 리뷰 */
+	#sellReview{ 
+		width:1300px;
+		height: 370;
+		float: left;
+	 	margin: 22px 0px;
+	}
+	#sellReview>div:nth-child(2n+1){
+		margin:0px 20px 20px 0px;
+	}
+	
+	#oneReview{
+		width: 640px; 
+		height: 160px; 
+		float: left; 
+		border: 1px solid gray;
+	}	
+   	#oneReview li{
+   		float:left
+   	}
+   	#oneReview li>div:nth-of-type(1){
+   		width: 479px;
+   		height:40px;
+   		font-weight: bold;
+   		margin: 0px;
+   		padding: 10px;
+   	}
+   	#oneReview li>div:nth-of-type(2){
+   		padding: 10px;
+   		width:479px;
+   		height:120px;
+   	}
+   	#oneReview li>div:nth-of-type(1)>img{
+   		float: right;
+   		margin-right: 10px;
+   	}
+
+	
+	
+   	#pic>img {
+   		width: 159px; 
+   		height: 159px;
+   		margin: 0 ; 
+   		padding: 0;
+   	}
+   	/* ------리뷰 */
+   
+   	 
+	 
+	 
+	 /* 페이징 */
+  	#pageNum{ 
+  		padding-left:42%; 
+  		margin-bottom:40px;
+  		width: 1300px; 
+  		height: 20px;
+  		float: left;
+	} 
+	
+	#pageNum a {
+		color:#3f1785;
+	}
+	#pageNum a:hover{
+		text-decoration:none;
+		color:#705abf ;  
+		font-weight: bold;
+	}
+	
+	#qaBtn{
+		padding-right: 
+
+	}
+	
+   	
+   	
+   	/* 내용부분 */
+   	
+   	#sellDetail{
+   		width:1300;
+   		float: left;
+		margin: 22px auto;
+		border: 1px solid gray;
+		padding: 20px;
+   	}
+   	
+   	/* 큐앤에이 */
+   	#sellQnA{
+   		width:1300;
+
+   		float: left;
+
+   	
+   	}
+   	
+   	 
+	.sellShortDescription{
+ 		color: #3f1785;
+ 		font-weight: bold;
+ 		margin-bottom:20px;
+ 	}
+ 	
+ 	h4{
+ 		font-weight: bold;
+ 		display: inline;
+ 	} 
+ 	
+ 	
+
+	#sellQnAList{
+ 		margin : 22 0; 
+ 		width:1300px;
+ 		list-style-type:none; 
+		overflow:auto;
+		border-top:1px solid #d9d9d9; 
+	}  
+	#sellQnA li{ 
+		margin:0 ; 
+		padding:0; 
+		list-style-type:none; 
+	}
+	#sellQnAList>#point{
+		text-align:center;
+	}
+	#sellQnAList>li{ 
+		float : left; 
+		height:40px; 
+		line-height:40px ;
+		border-bottom:1px solid #d9d9d9;
+		text-align: center;
+	}
+	#sellQnAList>li:nth-child(5n+1){
+		width:100 ;
+	}
+	#sellQnAList>li:nth-child(5n+2){
+		width:200 ;
+	}
+	#sellQnAList>li:nth-child(5n+3){
+		width:550 ;
+		text-overflow:ellipsis;
+		text-align: left; 
+	}
+	#sellQnAList>li:nth-child(5n+4){
+		width:225 ;
+		text-overflow:ellipsis; 
+	}
+	#sellQnAList>li:nth-child(5n+5){
+		width:225 ;
+		text-overflow:ellipsis; 
+	}
+	
+	
+
+  	.commBtn {
+		width: 120px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+	}
+	.commBtn:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785;
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	.cancelBtn {
+		border: 1px solid #ddd;
+		color: #ddd;
+		width: 90px;
+	}
+	.cancelBtn:hover {
+		background-color: #fff;
+		color: gray;
+	}
+		
+	.confBtn {
+		background: #3f1785;
+		color: #fff;
+		width: 90px;
+	}
+	.confBtn:hover {
+		color: #fff;
+		background: #B8B2F4;
+	}
+  	#popup{
+	  	position:absolute;
+	  	top:1500px;
+	  	left:30%;
+  		display: none;
+  		width: 800px;
+  		height: 250px;
+  		background-color: white;
+  		border: 1px solid #000;
+  	}
+  	#popup div{
+  		float:left;
+  		
+  	}
+  	#popup div:nth-child(1) {
+  		padding-left:20px;
+  		padding-top:10px;
+		margin-bottom: 2px;
+		margin-top: 18;
+		margin-left:20;
+		margin-right:20;
+		width: 760px;
+	}
+  	#popup div:nth-child(1) label{
+		vertical-align:2px; 
+	}
+	#popup div:nth-child(2) {
+		text-align: center;
+		margin-bottom: 2px;
+		margin: 10;
+		width: 780px;
+	}
+	
+	#popup div:nth-child(2) textarea {
+		width: 700;
+		height: 90;
+		
+	}
+	#popup div:nth-child(3) {
+		text-align: right;
+		margin: 10;
+		width: 780px;
+	
+	}
+	
+	
+	/* 체크박스 시도 */
+	
+	.where {
+	  display: block;
+	  margin: 25px 15px;
+	  font-size: 11px;
+	  color: #000;
+	  text-decoration: none;
+	  font-family: verdana;
+	  font-style: italic;
+	}
+		
+	.checks {position: relative;}
+	
+	.checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
+	  position: absolute;
+	  width: 1px;
+	  height: 1px;
+	  padding: 0;
+	  margin: -1px;
+	  overflow: hidden;
+	  clip:rect(0,0,0,0);
+	  border: 0
+	}
+	.checks input[type="checkbox"] + label {
+	  display: inline-block;
+	  position: relative;
+	  cursor: pointer;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	}
+	.checks input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+	  content: ' ';
+	  display: inline-block;
+	  width: 21px;  /* 체크박스의 너비를 지정 */
+	  height: 21px;  /* 체크박스의 높이를 지정 */
+	  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+	  margin: -2px 8px 0 0;
+	  text-align: center; 
+	  vertical-align: middle;
+	  background: #fafafa;
+	  border: 1px solid #cacece;
+	  border-radius : 3px;
+	  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	}
+	.checks input[type="checkbox"] + label:active:before,
+	.checks input[type="checkbox"]:checked + label:active:before {
+	  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+	}
+	
+	.checks input[type="checkbox"]:checked + label:before {  /* 체크박스를 체크했을때 */ 
+	  content: '\2714';  /* 체크표시 유니코드 사용 */
+	  color: #99a1a7;
+	  text-shadow: 1px 1px #fff;
+	  background: #e9ecee;
+	  border-color: #adb8c0;
+	  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	}
+	
+	.checks.small input[type="checkbox"] + label {
+	  font-size: 12px;
+	}
+	
+	.checks.small input[type="checkbox"] + label:before {
+	  width: 17px;
+	  height: 17px;
+	  line-height: 17px;
+	  font-size: 11px;
+	}
+	
+	.checks.etrans input[type="checkbox"] + label {
+	  padding-left: 30px;
+	}
+	.checks.etrans input[type="checkbox"] + label:before {
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  margin-top: 0;
+	  opacity: .6;
+	  box-shadow: none;
+	  border-color: #3f17854 ;
+	  -webkit-transition: all .12s, border-color .08s;
+	  transition: all .12s, border-color .08s;
+	}
+	
+	.checks.etrans input[type="checkbox"]:checked + label:before {
+	  position: absolute;
+	  content: "";
+	  width: 10px;
+	  top: -5px;
+	  left: 5px;
+	  border-radius: 0;
+	  opacity:1; 
+	  background: transparent;
+	  border-color:transparent #3f1785 #3f1785 transparent;
+	  border-top-color:transparent;
+	  border-left-color:transparent;
+	  -ms-transform:rotate(45deg);
+	  -webkit-transform:rotate(45deg);
+	  transform:rotate(45deg);
+	}
+	
+	.no-csstransforms .checks.etrans input[type="checkbox"]:checked + label:before {
+	  /*content:"\2713";*/
+	  content: "\2714";
+	  top: 0;
+	  left: 0;
+	  width: 21px;
+	  line-height: 21px;
+	  color: #3f1785;
+	  text-align: center;
+	  border: 1px solid #3f1785;
+}  	

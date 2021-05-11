@@ -246,16 +246,7 @@
 			    } 
 			}); 	
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		$("#withViewPageSearchFrm").click(()=>{
 			searchPlaces();
 		});

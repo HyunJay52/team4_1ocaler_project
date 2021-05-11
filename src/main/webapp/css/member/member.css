@@ -360,11 +360,10 @@
 #searchMem {
 	width: 1300px; height: auto;
 	overflow: auto;
-	margin: 0 auto;
+	margin: 150px auto;
 }
 #searchMemIndex, #searchMemId, #searchMemPwd {
 	width: 1300px; height: auto;
-	margin: 100px 0;
 }
 #searchMemIndex>div:first-child {
 	width: 1300px; height: 50px;
@@ -395,4 +394,55 @@
 #searchMemId form, #searchMemPwd form {
 	
 	margin: 0 auto;
+}
+/* 아이디 찾기, 비밀번호 찾기  */
+#searchId, #searchPwd {
+	width: 600px; height: auto;
+	margin: 0 auto;
+}
+#searchId>div:first-child, #searchPwd>div:first-child {
+	width: 600px; height: 30px; line-height: 30px;
+	font-family: nsreb; font-size: 22px; text-align: center;
+}
+#searchId>ul, #searchPwd>ul{
+	list-style-type: none; width: 420px;
+	height: 230px; margin: 10px auto;
+}
+#searchId>ul {
+	height: 170px;
+}
+#searchId>ul>li, #searchPwd>ul>li{
+	float: left; height: 40px; line-height: 40px; margin: 10px;
+}
+#searchId>ul>li:nth-child(even) input,
+#searchPwd>ul>li:nth-child(even) input {
+	padding: 5px;
+}	
+#searchId>ul>li:nth-child(odd),
+#searchPwd>ul>li:nth-child(odd) {
+	width: 80px;
+	font-family: nsreb; font-size: 18px; text-align: center;
+}
+#searchId>ul>li:nth-child(even),
+#searchPwd>ul>li:nth-child(even) {
+	width: 300px;
+}
+#searchId>ul>li:last-child>input,
+#searchPwd>ul>li:last-child>input {
+	width: 400px; line-height: 40px; 
+	border: 1.5px solid #5f0080; border-radius: 5px; color: #5f0080; background: #fff;
+}
+#searchId>ul>li:last-child>input:hover,
+#searchPwd>ul>li:last-child>input:hover {
+	background-color: #5f0080; color: #fff;
+}
+#searchId input, #searchPwd input {
+	width: 300px; height: 40px;
+}	
+#goSearchPwd, #goSearchId {
+	width: 600px; height: 30px; line-height: 30px; cursor: pointer;
+	text-align: center; font-family: nsrb; font-size: 16px; color: #ddd;
+}
+#goSearchPwd:hover, #goSearchId:hover {
+	text-decoration: underline; color: gray;
 }

@@ -4,19 +4,19 @@
 		top:5px;
   	  	left:62px;
   	 	height:40px;
-		width:110px;
+		width:150px;
 		line-height:40px;
 		background-color:#fff;
 	    text-align:center;
 	}
 	#myDealTbl tr>td{/*전체적인 열 폭조정*/
-		width:15%; 
+		width:10.5%; 
 	}
-	#myDealTbl tr>td:nth-child(1){/*첫번째 열 선택*/
-		width:15%;
+	#myDealTbl tr>td:nth-child(){/*첫번째 열 선택*/
+
 	}
-	#myDealTbl tr>td:nth-child(2){/*세번째 열 선택 : 제목부분*/
-		width:55%;
+	#myDealTbl tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
+		width:50%;
 	}
 	.myDealBtn{
 		position:relative;
@@ -42,4 +42,7 @@
 	}
 	.modal-dialog {
 		margin-top:10%;
+	}
+	#myinfoPaging{
+		margin-top:10px;
 	}
