@@ -3,6 +3,7 @@ package com.team4.localer.service;
 import java.util.List;
 
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.MyinfoPageVO;
@@ -31,4 +32,7 @@ public interface MyInfoService {
 	
 	//유저의 회원간 거래 게시글 리스트 조회
 	public List<MemShareVO> selectMyShare(MyinfoPageVO vo);
+	
+	//참여신청 회원 리스트 조회
+	public List<JoinUsVO> selectJoinUs(int num);
 }

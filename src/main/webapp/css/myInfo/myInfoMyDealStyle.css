@@ -22,17 +22,19 @@
 		position:relative;
 	}
 	.myDealMem{
-   		width:114px;
+   		width:113px;
+   		height:100px;
+    	overflow:auto;
 		position:absolute;
 		top:0;
-		left:124px;
+		left:116px;
 		z-index:200;
 		text-align:center;
 		border:2px solid black;
 	}
 	#myDealToggle{
 		float:right;
-		margin-top:10px;
+		margin-bottom:10px;
 	}
 	.modal-dialog{
 		margin-top:20%;
@@ -45,4 +47,28 @@
 	}
 	#myinfoPaging{
 		margin-top:10px;
+	}
+	#dealSearchKey{
+		height:30px;
+	}
+	.reviewList{
+		text-align:center;
+		padding:20px 30px;
+	}
+
+	.reviewListHearder>ul>li{
+		background-color:#ddd;
+	}
+	#reviewList>ul>li, .reviewListHearder>ul>li{
+		float:left;
+		width:20%;
+		height:70px;
+		line-height:70px;
+		font-weight:bold;
+   		font-size:16px;
+   		border-bottom:1px solid #ddd;
+	}
+	#reviewList>ul>li:nth-child(5n+2)>button{
+		width:100px;
+		height:40px;
 	}

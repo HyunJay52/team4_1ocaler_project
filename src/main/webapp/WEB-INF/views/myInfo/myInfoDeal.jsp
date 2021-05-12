@@ -25,7 +25,7 @@
 		$("#myDealToggle>input").click(function(){
 			$("#myDealToggle>input").css('background-color', '#fff').css('color', '#3f1785').attr('name', null);
 			$(this).css('background-color', '#3f1785').css('color', '#fff').attr('name', 'kategorie');
-			
+			setDealList(1);
 		});
 		
 		//리뷰버튼 클릭이벤트
@@ -46,16 +46,17 @@
 			$(".imgBtn").attr('value' , null);
 			$(this).attr('value', '1');
 		});
-				
+		
+		//검색 이벤트
 		$("#myDealSearch").click(function(){
 			var kategorie = $("#myDealToggle>input[name='kategorie']").attr('title');
 			console.log($("#myDealForm").serialize()+"&kategorie="+kategorie);
-			setDealPaging(1);
+			setDealList(1);
 			$(this).prev().val("");
 		});
 		//////////////////////
-		
-		function setDealPaging(page){
+		//리스트 불러오기
+		function setDealList(page){
 			var kategorie = $("#myDealToggle>input[name='kategorie']").attr('title');
 			$.ajax({
 				url : "myDealList",
@@ -63,36 +64,106 @@
 				type : 'POST',
 				success: function(result){
 					console.log(result);
-					var tag = "<tr><td>작성자</td><td>날짜</td><td>제목</td><td>회원선택</td><td>상태</td></tr>";
+					var tag = "<tr><td>작성자</td><td>날짜</td><td>제목</td><td>위치</td><td>상태</td><td>비고</td></tr>";
 					result.list.forEach(function(data,idx){
-						console.log("jnum="+data.j_num);
-						if(data.j_num != null){
+						if(data.j_num != null && data.j_num > 0){
 							tag += "<tr>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.j_writedate+"</td>";
 							tag += "<td>"+data.s_subject+"</td>";
+							tag += "<td>"+data.s_gu+"</td>";
 							tag += "<td><button class='btn btn-block btn-outline-dark'>"+data.j_status+"</button></td>";
-							tag += "<td><button class='btn btn-block btn-outline-dark'>참여취소</button></td>";
+							tag += "<td><button class='btn btn-block btn-outline-danger'>취소</button></td>";
 							tag += "</tr>";
-						}else{							
+						}else if(data.j_num == 0){
 							tag += "<tr>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.s_writedate+"</td>";
 							tag += "<td>"+data.s_subject+"</td>";
-							tag += "<td><button class='btn btn-block btn-outline-dark' data-target='#myDealMd' data-toggle='modal'>참여회원</button></td>";
+							tag += "<td>"+data.s_gu+"</td>";
+							tag += "<td><button class='btn btn-block btn-outline-dark dealModalOpen' data-target='#myDealMd' data-toggle='modal' value='"+data.num+"'>참여회원</button></td>";
 							tag += "<td>1/3완료</td>";
 							tag += "</tr>";
 						}
 						
 					});
 					$("#myDealTbl").html(tag);
+					setDealPaging(result.pVO);
+			
 				},error : function(e){
 					console.log(e);
 				}
 			
 			});
 		}
-		setDealPaging(1);
+		setDealList(1);
+		//페이징
+		function setDealPaging(pVO){
+			console.log(pVO);
+			$("#myinfoDealPaging").html("");
+			var tag = '<ul class="pagination justify-content-center">';
+			if(pVO.nowNum > 1){
+				tag += '<li class="page-item"><button value="'+(pVO.nowNum-1)+'" class="page-link">Prev</button></li>';					
+			}else{
+				tag += '<li class="page-item disabled"><button class="page-link">Prev</button></li>';				
+			}
+			for(var p = pVO.startPage; p < pVO.startPage + pVO.onePageSize; p++){
+				if(p <= pVO.totalPage){
+					if(p == pVO.nowNum){
+						tag += '<li class="page-item active"><button class="page-link" value="'+p+'">'+p+'</button></li>';						
+					}else{
+						tag += '<li class="page-item"><button class="page-link" value="'+p+'">'+p+'</button></li>';						
+					}
+				}	
+			}
+			if(pVO.nowNum == pVO.totalPage){
+				tag += '<li class="page-item disabled"><button class="page-link">Next</button></li>';				
+			}else{
+				tag += '<li class="page-item"><button value="'+(pVO.nowNum+1)+'" class="page-link">Next</button></li>';				
+			}
+			tag += "</ul>";
+			$("#myinfoDealPaging").append(tag);
+		}
+		//페이징 이벤트
+		$(document).on('click', '#myinfoDealPaging>ul>li>button', function(){
+			var nowNum = $(this).val(); //현제 페이지
+			console.log("nownum="+nowNum)
+			setDealList(nowNum);			
+		});
+			
+		
+		$(document).on('click', '.dealModalOpen', function(){
+			var num = $(this).val();
+			console.log(num);
+			$.ajax({
+				url : "selectJoinUs",
+				data : {'numJoin':num},
+				success : function(result){
+					var tag = "";
+					result.forEach(function(data,idx){
+					tag += "<ul><li>"+data.userid+"</li>";
+					if(data.j_status == '참여신청'){
+						tag += "<li><button class='btn btn-outline-danger'>";					
+					}else if(data.j_status == '참여승인'){
+						tag += "<li><button class='btn btn-outline-primary'>";
+					}else if(data.j_status == '참여취소'){
+						tag += "<li><button class='btn btn-outline-Secondary'>";
+					}else if(data.j_status == '참여완료'){
+						tag += "<li><button class='btn btn-outline-Success'>";
+					}
+					tag += data.j_status+"</button></li>";
+					tag += "<li>"+data.mem_post+"</li>";
+					tag += "<li>"+data.mem_rev+"</li>";
+					tag += "<li><p>"+data.j_writedate+"</p></li>";
+					tag += "</ul>";											
+					});
+					$("#reviewList").html(tag);
+				}, error : function(e){
+					console.log("error");
+				}
+				
+			});
+		});
 	});
 </script>
 <div class="myinfoBody">
@@ -120,31 +191,26 @@
 				</div>
 			</div>
 		</div>
-		<form method="post" action="" id="myDealForm">
+		<form method="post" id="myDealForm" onsubmit="return false;">
 		<div class="dealBottom">
 			<div id="myDealToggle">
 				<input type="button" class="btn commBtn btn-outline-dark" title="joinus" value="참여한"/>
-				<input type="button" class="btn commBtn btn-outline-dark" title="mem_share" name="kategorie" value="개설한"/>
+				<input type="button" style="background-color:#3f1785; color:#fff;" class="btn commBtn btn-outline-dark" title="mem_share" name="kategorie" value="개설한"/>
 			</div>
 			<div class="dealDateForm">
-				<input type="date" min="2021-03-01" max="2021-05-31" class="date"/>
-				<div class="myDealFrm"><button class="dayBtn prev">《</button><button class="dayBtn setMonth mdFnt"></button><button class="dayBtn next">》</button></div>
-				<input type="date" value="2021-05-01" name="searchDate" min="2021-03-01" max="2021-05-31"/> ~ 
-				<input type="date" value="2021-05-31"name="searchDate2" min="2021-03-01" max="2021-05-31"/>
+				<input type="date" value="2021-05-01" id="dealDate" name="searchDate" min="2021-03-01" max="2021-05-31"/> ~ 
+				<input type="date" value="2021-05-31" id="dealDate2" name="searchDate2" min="2021-03-01" max="2021-05-31"/>
 			</div>
+			
 			<table class="myinfoTable2" id="myDealTbl">
-				
 		
 			</table>
 			<div class="searchArea">
-				<select id="DealSearchKey" name="searchKey">
+				<select id="dealSearchKey" name="searchKey">
 					<option value="s_subject">제목</option>
 					<option value="s_content">내용</option>
 					<option value="s_loc">위치</option>
-					<option value="s_status">판매상태</option>
-					<option value="s_tag">태그</option>
-					<option value="s_cate">식료품</option>
-					<option value="s_cate">생필품</option>		
+					<option value="s_tag">태그</option>	
 				</select>
 				<input type="text" name="searchWord"/>
 				<input type="button" value="검색" id="myDealSearch"/>
@@ -159,10 +225,25 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header reviewHeader">
-				<h4 class="modal-title"></h4>
+				<h4 class="modal-title">참여자 목록</h4>
 
 				</div>
-				<div class="modal-body reviewBody">
+				<div class="model-body reviewList">
+						
+					<div class="reviewListHearder">
+						<ul>
+							<li>신청자</li>
+							<li>상태</li>
+							<li>작성글 수</li>
+							<li>받은 평가</li>	
+							<li>신청 날짜</li>	
+						</ul>
+					</div>
+					<div id="reviewList">
+						
+					</div>
+				</div>
+				<div class="modal-body reviewBody" style='display:none'>
 					<ul>
 						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
 						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>

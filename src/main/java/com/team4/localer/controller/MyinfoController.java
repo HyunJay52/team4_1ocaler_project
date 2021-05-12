@@ -20,6 +20,7 @@ import com.team4.localer.service.CsService;
 import com.team4.localer.service.ManageService;
 import com.team4.localer.service.MyInfoService;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.MyinfoPageVO;
 
@@ -84,10 +85,13 @@ public class MyinfoController {
 		String myPoint = "0";
 		ModelAndView mav = new ModelAndView();
 		String userid = (String)ses.getAttribute("logId");
-		if(userid != null || userid != "") {
+		if(userid != null && userid != "") {
 			myPoint = service.joinPoint(userid);
 		}
-		System.out.println(myPoint);
+		if(myPoint == null) {
+			myPoint = "0";
+		}
+		System.out.println("mypoint="+myPoint);
 		mav.addObject("myPoint", myPoint);
 		mav.setViewName("myInfo/myInfoLoad");
 		return mav;
@@ -181,19 +185,29 @@ public class MyinfoController {
 		vo.setUserid(searchId);
 		vo.setOnePageRecord(5);
 		vo.setOnePageSize(5);
+		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		System.out.println("kategorie="+vo.getKategorie());
 
 		if(vo.getKategorie() == null) {
 			vo.setKategorie("mem_share");
 		}
-		
-		vo.setDateContent("s_writedate");			
+		if(vo.getKategorie().equals("mem_share")) {
+			vo.setDateContent("s_writedate");			
+		}else {
+			vo.setDateContent("j_writedate");
+		}
 
 		if(vo.getSearchWord().equals("") || vo.getSearchWord() == null) {
 			vo.setSearchWord("%%");
+		}else {
+			vo.setSearchWord("%"+vo.getSearchWord()+"%");
 		}
+		System.out.println("nowNum="+vo.getNowNum());
 		System.out.println("kategorie="+vo.getKategorie());
+		System.out.println("key="+vo.getSearchKey());
+		System.out.println("word="+vo.getSearchWord());
+		
 		vo.setTotalRecord(service.myCount(vo));
 		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
@@ -201,9 +215,20 @@ public class MyinfoController {
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
 		
 		System.out.println("dateContent="+vo.getDateContent());
+		
 		result.put("pVO", vo);
 		result.put("list", service.selectMyShare(vo));
 		return result;
+	}
+	@ResponseBody
+	@RequestMapping("/selectJoinUs")
+	public List<JoinUsVO> selectJoinUs(HttpServletRequest req){
+		List<JoinUsVO> list = new ArrayList<JoinUsVO>();
+		int numJoin = Integer.parseInt(req.getParameter("numJoin"));
+		System.out.println(numJoin);
+		list = service.selectJoinUs(numJoin);
+		System.out.println(list.toString());
+		return list;
 	}
 	
 	@RequestMapping("/myInfoFarmerDeal")

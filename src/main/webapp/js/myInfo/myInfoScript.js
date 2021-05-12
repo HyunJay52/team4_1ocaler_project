@@ -20,9 +20,7 @@ $(function(){
 		//월 세팅
 		function setMonth(toYear, toMonth){
 			$(".setMonth").text(toMonth+"월");
-			if(toMonth == 5 ){
-				$(".next").css('display', 'none');
-			}
+
 			if($("#sel").val() != null){// 충전하기 페이지(load)의 셀렉트박스 체크
 				console.log($("#sel").val());			
 			}
@@ -34,18 +32,14 @@ $(function(){
 			
 			console.log(toYear);
 			console.log(toMonth);
-
 		}	
 		
 		//이전날짜
 		$(".prev").click(function(){
 			toMonth--;
-			if(toMonth == 0){
-				toMonth = 12;
+			if(toMonth == 2){
+				toMonth = 3;
 				toYear--;
-			}
-			if(toYear == 2020){
-				toYear = 2021;
 			}
 			setMonth(toYear, toMonth);
 		});
@@ -53,14 +47,10 @@ $(function(){
 		//다음날짜
 		$(".next").click(function(){
 			toMonth++;
-			if(toMonth == 13){
-				toMonth = 1;
-				toYear++;
-			}
-			if(toYear == 2022){
-				toYear = 2021;
-			}
-			
+			if(toMonth == 6){
+				toMonth = 5;
+				
+			}		
 			setMonth(toYear, toMonth);
 		});	
 			

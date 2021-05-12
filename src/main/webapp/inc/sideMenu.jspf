@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMainStyle.css?ver=1"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMainStyle.css?ver=2"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStyle.css?ver=16"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyActivityStyle.css?ver=1"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=1"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=2"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoLoadStyle.css?ver=7"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyDealStyle.css?ver=5"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyDealStyle.css?ver=9"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoFarmerDealStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoDeliveryStyle.css?ver=3"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoSaleHistoryStyle.css?ver=1"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyinfoStyle.css?ver=2"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyinfoStyle.css?ver=3"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoSellerStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoProductManagementStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStatisticsStyle.css"/>
@@ -19,7 +19,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="<%=request.getContextPath() %>/plugin/jquery.easing.1.3.js"></script>
 <script src="<%=request.getContextPath() %>/plugin/jquery.bxslider.js"></script>
-<script src="<%=request.getContextPath() %>/js/myInfo/myInfoScript.js?ver=2"></script>
+<script src="<%=request.getContextPath() %>/js/myInfo/myInfoScript.js?ver=4"></script>
 <!-- 그래프  -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="<%=request.getContextPath() %>/js/myInfo/myInfoBarScript.js?ver=3"></script>
@@ -48,10 +48,10 @@
 				
 			});
 			$("#sideMenu").html(tag);
-			if(${logType != 2}){
-				$("#menuBtn2").css('display', 'none');
-				$("#menu2").css('display', 'none');
-			}
+			//if(${logType != 2}){
+			//	$("#menuBtn2").css('display', 'none');
+			//	$("#menu2").css('display', 'none');
+			//}
 		}	
 		
 		//토글 버튼 이벤트(보류함)

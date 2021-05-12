@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.MyInfoDAO;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.MyinfoPageVO;
@@ -63,6 +64,12 @@ public class MyInfoServiceImp implements MyInfoService{
 	public List<MemShareVO> selectMyShare(MyinfoPageVO vo) {
 		
 		return dao.selectMyShare(vo);
+	}
+
+	@Override
+	public List<JoinUsVO> selectJoinUs(int num) {
+		
+		return dao.selectJoinUs(num);
 	}
 
 

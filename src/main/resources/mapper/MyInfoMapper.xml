@@ -70,11 +70,11 @@
 			join mem_share on joinus.numjoin = mem_share.num	
 		</if>
 		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD')
-		and to_date(#{searchDate2},'YYYY-MM-DD') and mem_share.userid=#{userid})
+		and to_date(#{searchDate2},'YYYY-MM-DD') and ${kategorie}.userid=#{userid})
 		where ${searchKey} like #{searchWord}
 	</select>
 	
-	<select id="selectMyShare" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MemShareVO">
+	<select id="selectMyShare" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoDealVO">
 		select * from(
 		select * from(
 		select * from ${kategorie}
@@ -82,8 +82,14 @@
 			join mem_share on joinus.numjoin = mem_share.num
 		</if>
 		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD')
-		and to_date(#{searchDate2},'YYYY-MM-DD') and mem_share.userid = #{userid} and ${searchKey} like #{searchWord} order by num desc)
-        <![CDATA[where rownum <= #{rowNum1} order by num asc)]]>
-		<![CDATA[where rownum <= #{rowNum2} order by num desc]]>
+		and to_date(#{searchDate2},'YYYY-MM-DD') and 
+		${kategorie}.userid = #{userid} and 
+		${searchKey} like #{searchWord} order by ${dateContent} desc)
+        <![CDATA[where rownum <= #{rowNum1} order by ${dateContent} asc)]]>
+		<![CDATA[where rownum <= #{rowNum2} order by ${dateContent} desc]]>
+	</select>
+	
+	<select id="selectJoinUs" parameterType="int" resultType="com.team4.localer.vo.MyinfoJoinUsVO">
+		select j.userid, numjoin, j_status, mem_sub, j_writedate, mem_post, mem_rev from joinus j join member m on j.userid = m.userid where numjoin = #{param1}
 	</select>
 </mapper>
