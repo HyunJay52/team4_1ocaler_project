@@ -18,9 +18,9 @@
 		margin: 0 10;
 		padding: 0;
 	}
-	#dealImg ,#sellImg{ 
+	#sellImg{ 
 		width: 640px; 
-		height: 400px; 
+		height: 620px; 
 		float: left;
 		margin:0 auto; 
 		margin-right: 20;
@@ -35,12 +35,12 @@
 	}
 	
 	.bx-viewport{
-		height:344px;
+		height:480px;
 	}
 	
 	.slider>li img{ 
 		width: 640; 
-		height: 341px;
+		height: 480px;
 		border:1px solid rgb(233 233 233);  
 		margin:0 auto; 
 		padding: 0;
@@ -143,15 +143,39 @@
    	#sellInfo{
    		width:640px;
    		float:left;
+   		height:620px;
 	}
-   	
-   	#sellInfo>ul li{ 
+   	#sellInfo>div:first-child{
+   		overflow:auto;
+   		border-top:2px solid gray;
+   		border-bottom:1px solid #d9d9d9;
+   		padding: 10px 0px 10px 10px;
+   	}	
+   	#sellInfo ul{
+   		overflow:auto;
+   	}
+   	#sellInfo ul li{ 
    		float:left;
-   		height:50px;
-   		line-height:50px;
-   		
+   		font-size:16px;
+   		height:45px;
+   		line-height:45px;	
   	}
-  	#sellInfo>ul li:nth-child(1){
+	#sellInfo ul li:nth-child(2n+1){
+		width:40%;
+		padding-left: 35px;
+	}
+	#sellInfo ul li:nth-child(2n+2){
+	 	width:60%;
+	}
+	
+	
+	#option_content{
+		width:200px;
+		height:33px;
+		border-radius:5px;
+	}
+	
+  	/* #sellInfo>ul li:nth-child(1){
   		width: 100%;
   		text-align: center; 
   		font-size: 26px;
@@ -195,7 +219,7 @@
 		width:100%;
 		height:100px;
 		line-height:40px;
-	}
+	} */
 	
 	#sellInfo input{
 		margin:30px 60px;

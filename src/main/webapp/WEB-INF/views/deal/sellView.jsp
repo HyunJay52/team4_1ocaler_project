@@ -4,7 +4,13 @@
 <script src="plugin/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealSellViewStyle.css"/>
+<style>
 
+	.facker[type=checkbox]{ display:none; }
+	#sellInfo>div:first-child>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/deal/sellLikeE.png") left/22px no-repeat; }
+	#sellInfo>div:first-child>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/deal/sellLikeF.png"); }
+	#sellInfo>div:first-child>label{height: 29px; margin:0px; float:right; margin-right:7px;}
+</style>
 
 
 	<script>
@@ -39,7 +45,6 @@
 	<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="dealViewMain">
 		
-		
 		<div id="sellImg">	
 			<section class="section1">
 				<ul class="slider">
@@ -54,47 +59,57 @@
 					<a data-slide-index="2" href=""><img src="img/deal/div.jfif"/></a>
 				</div>
 			</section>
-		
 		</div>
+		
+		
 		<div>
 			<form method="post"  action="sellBuy">
 				<div id="sellInfo">	
-					<ul>	
-						<li>D.I.Y 오르골 만들기</li>
-						
-						<li>판매 개수</li><li>1 / 5개</li>
-						<li>판매기한</li><li>작성일 ~ 2020/ 05/ 28</li>
-						<li>옵션</li>
-						<li>
-							<select>
-								<option>옵션을 선택하세요</option>
-								<option>이걸</option>
-								<option>어떻게</option>
-								<option>하라고</option>
-							</select>
-						</li>
-						<li>배송비</li>
-						<li>
-							<select>
-								<option>배송비</option>
-								<option>이걸</option>
-								<option>어떻게</option>
-								<option>하라고</option>
-							</select>
-						</li>
-						<li>
-							<span style="font-size:18px; font-weight:bold; margin: 0px 136px 0px 136px">판매자</span>
-							<span style="font-size:18px; font-weight:400;">goguma1234</span><img style="width:40px; margin:0px 30px 0px 30px" src="<%=request.getContextPath() %>/img/mem_prof/user.png"/>
-						</li>
-						<li class="wordcut">#오르골 #D.I.Y #장식 #인테리어</li>
-						<li><span style="font-size:24px;">TOTAL : </span></li>
-						<li><span style="font-size:24px;">20,000원</span></li>
-					
-						<li>	
-							<input type="submit" value="찜하기" class="btn commBtnSell"/>
-							<input type="submit" value="구매하기" class="btn commBtnSell"/>
-						</li>
-					</ul>
+					<div> 
+						<h3 style="margin:0px; float:left;">D.I.Y 오르골 만들기 </h3>
+						<input class="facker" type="checkbox" name="numLike" id="sellLike" value="" /><label for="sellLike"></label>
+					</div>
+					<div>
+						<ul>
+							<li> 판매수량</li>
+							<li><span style="color:blue; font-weight: bold; font-size:18px;">50개</span></li>
+							<li> 판매가</li>
+							<li><span style="color:red; font-size:18px; font-weight:bold">250,000원</span></li>
+							<li> 판매기간</li>
+							<li><span style="font-weight:bold; font-size:18px;">2021-05-01 ~ 2021-05-20</span></li>
+							<li> 판매자</li>
+							<li>
+								<span style="font-size:16px;">goguma1234</span><img style="width:35px; height:35px; margin-left:10px;" src="<%=request.getContextPath() %>/img/mem_prof/user.png"/>
+							</li>
+						</ul>
+							<hr style="margin-top: -9px;"/>
+						<ul>
+							<li><span style="font-size:16px;"> ＞&nbsp;옵션</span></li>
+							<li>
+								<select id="option_content" name="option_content">
+									<option selected disabled hidden>-[필수]- 옵션선택 - </option>
+									<option>12</option>
+									<option>23</option>
+									<option>34</option>
+									<option>45</option>
+								</select>
+							</li>
+						</ul>
+						<div style="padding-left:30px;">
+							<span style="color:#d9d9d9;">(최소주문수량 1개 이상) 위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</span><br/>
+							<span style="color:#d9d9d9;">배송비 3000원 입니다.</span>
+						</div>
+							<hr/>
+						<div id="sellItemList">
+							<div style="background-color:#f0f0f0; text-align:center; line-height:30px; height:30px;"> 선택한 상품 리스트 <span style="font-size:12px;">(Selected product list)</span></div>
+						</div>
+						<hr/>
+						<div><span style="font-size:1.75em; color:red; padding-left:20px;">총상품 금액</span><span style="font-size:1.75em; color:red; float:right; padding-right:10px;">원</span></div>
+					</div>
+					<div>
+						<input type="button" value="취소" class="btn commBtnSell"/>
+						<input type="submit" value="구매하기" class="btn commBtnSell"/>
+					</div>
 				</div> 
 			</form>		
 		</div>		
@@ -204,7 +219,7 @@
 				 	<li class="page-item"><a href="#" class="page-link">4</a></li>
 				 	<li class="page-item"><a href="#" class="page-link">5</a></li>
 				 	<li class="page-item "><a href="#" class="page-link"> >> </a></li>
-					<button class="btn commBtn_sm" id ="qaBtn">질문하기</button>
+					<li><button class="btn commBtn_sm" id ="qaBtn">질문하기</button></li>
 				</ul>
 			</div>	
 		</div>
@@ -233,6 +248,5 @@
 		
 		
 	</div>
-</div>	
 </body>
 </html>

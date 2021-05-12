@@ -6,19 +6,20 @@
 		height: auto;
 		
 	}
+	
 	#dealWnEMain{
-	/* 	overflow:auto; */
 		width:1300px;
 		margin:50 auto;
 		height: auto; 
 	}
 	
-	#dealWnEMain>div>form select{ 
-		height: 30px; 
+	#sellWriteFrm>select{ 
+		height: 40px; 
 		width: 150px; 
 		margin-right: 5px;
 		font-size: 13px;
-		/* border: none */;
+		border:1px solid gray;
+		border-radius:5px;
 	
 	}
 	
@@ -26,16 +27,20 @@
 		margin: 15px 0px;
 	}
 	
-	#subject{
-		font-size: 25px; 
+	#i_subject{
+		font-size: 18px; 
 		border: none; 
 		border-bottom: 1px solid gray;
 		width: 1000px;  
-		margin-top: 10px;
+		margin-top: 25px;
 	}
 	
-	#cnt{
-		font-size: 25px; 
+	#summernote{
+		margin-bottom:20px;
+	}
+	
+	#i_cnt{
+		font-size: 18px; 
 		float:right; 
 		border: none; 
 		border-bottom: 1px solid gray;
@@ -43,26 +48,21 @@
 	  	text-align: center;
 	}
 	
-	#cnt::-webkit-input-placeholder ,#gu::-webkit-input-placeholder ,#price::-webkit-input-placeholder,
-	#i_ship1::-webkit-input-placeholder ,#i_ship2::-webkit-input-placeholder {
-		  text-align: center;
-	}
-	
 	#i_ship1,#i_ship2{
 		 display: none;
 	}
 
-	#date{
+	#i_period{
 		text-align: center;
 	}
-	#date,#gu, #price,#i_ship1,#i_ship2{ 
+	#i_period,#gu, #i_price,#i_ship1,#i_ship2{ 
 		margin-right: 10px;
 		text-align: center;
 		border: none; 
 		border-bottom: 1px solid gray;
 	}
 
-	#tag,#loc { 
+	#i_tag,#loc { 
 		border: none; 
 		border-bottom: 1px solid gray;
 		width: 1300px; 
@@ -72,20 +72,22 @@
 		width: 1300px; 
 		text-align: center;
 	}
-	
+
 	/* 파일 */
 	
 	.file_input_textbox{  
 		border: none; 
 		border-bottom: 1px solid gray; 
-		width:700px;
+		width:335px;
 		
 	}
 
-	/* input[type="submit"]{
-	color:#3f1785;
+	/* 옵션 */
+	.option_title, .option_content, .option_price{
+		width:300px;
+		margin-left:10px;
 	}
- */
+
 
 	/* 버튼 스타일 클래스 모음 */
 	.commBtn {
@@ -111,65 +113,14 @@
 	}
 		
 	.confBtn {
-		background: #3f1785;
-		color: #fff;
+		color: #000;
+		background-color:#f8f8f8;
+		border:1px solid gray;
 		width: 90px;
 	}
 	.confBtn:hover {
 		color: #fff;
-		background: #B8B2F4;
+		background: #3f1785;
 	}
-	
-	input[type="number"]::-webkit-outer-spin-button,
-	input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-	}
-	
-	#cke_content,#s_content {
-		height: 500px;
-		width: 1300px
-	}
-	
-	
-	#subject:active{border-bottom:2px solid #571fb8;}
-	#subject:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#subject:hover{border-bottom:2px solid #571fb8;}
-	
-	#cnt:active{border-bottom:2px solid #571fb8;}
-	#cnt:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#cnt:hover{border-bottom:2px solid #571fb8;}
-	
-	#date:active{border-bottom:2px solid #571fb8;}
-	#date:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#date:hover{border-bottom:2px solid #571fb8;}
-	
-	#price:active{border-bottom:2px solid #571fb8;}
-	#price:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#price:hover{border-bottom:2px solid #571fb8;}
-	
-	#loc:active{border-bottom:2px solid #571fb8;}
-	#loc:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#loc:hover{border-bottom:2px solid #571fb8;}
-	
-	#gu:active{border-bottom:2px solid #571fb8;}
-	#gu:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#gu:hover{border-bottom:2px solid #571fb8;}
-	
-	#tag:active{border-bottom:2px solid #571fb8;}
-	#tag:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#tag:hover{border-bottom:2px solid #571fb8;}
-	
-	#filename1:active{border-bottom:2px solid #571fb8;}
-	#filename1:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#filename1:hover{border-bottom:2px solid #571fb8;}
-	
-	#filename2:active{border-bottom:2px solid #571fb8;}
-	#filename2:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#filename2:hover{border-bottom:2px solid #571fb8;}
-	
-	#filename3:active{border-bottom:2px solid #571fb8;}
-	#filename3:focus{border-bottom:2px solid #571fb8; outline: none;}
-	#filename3:hover{border-bottom:2px solid #571fb8;}
 	
 	
