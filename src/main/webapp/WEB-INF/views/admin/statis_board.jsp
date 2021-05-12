@@ -7,16 +7,16 @@
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
-
-      function drawVisualization() {
+	  var month1Cnt = ${month1.boardcnt}+${month1.sell_itemcnt}+${month1.grouplocalcnt}+${month1.mem_sharecnt};//입력받은 달-2
+	  var month2Cnt = ${month2.boardcnt}+${month2.sell_itemcnt}+${month2.grouplocalcnt}+${month2.mem_sharecnt};
+	  var month3Cnt = ${month3.boardcnt}+${month3.sell_itemcnt}+${month3.grouplocalcnt}+${month3.mem_sharecnt};
+	  function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-          ['2004/05',  165,      938,         522,             998,           450,      614.6],
-          ['2005/06',  135,      1120,        599,             1268,          288,      682],
-          ['2006/07',  157,      1167,        587,             807,           397,      623],
-          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
+          ['Month', '자유게시판', '판매자게시판', '모집게시판', '회원간거래', '신규게시글총합'],
+          ['21/${monthArr[0]}',${month1.boardcnt},${month1.sell_itemcnt},${month1.grouplocalcnt},${month1.mem_sharecnt},month1Cnt],
+          ['21/${monthArr[1]}',${month2.boardcnt},${month2.sell_itemcnt},${month2.grouplocalcnt},${month2.mem_sharecnt},month2Cnt],
+          ['21/${monthArr[2]}',${month3.boardcnt},${month3.sell_itemcnt},${month3.grouplocalcnt},${month3.mem_sharecnt},month3Cnt]
         ]);
 
         var options = {
@@ -24,15 +24,20 @@
           vAxis: {title: 'Cups'},
           hAxis: {title: 'Month'},
           seriesType: 'bars',
-          series: {5: {type: 'line'}}
+          series: {4: {type: 'line'}}
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
 </script>
-<div id="main">
-	<div class="btitle">게시글 통계</div>
+<div class="main">
+	<!--월 이동 부분-->
+	 <div class="loadDateFrm">
+	 	<button class="dayBtn prev">이전</button>
+	 	<button class="setMonth">2021년 ${monthArr[2]}월</button>
+	 	<button class="dayBtn next">다음</button>
+	 </div>
 	<ul class="statis">
 		<li>
 			전체 게시글
@@ -43,26 +48,26 @@
 			<div>19951219</div>
 		</li>
 	</ul>
+	<div class="btitle">게시글 통계</div>
 	<div id="chart_div"></div>
-	
-	<form>
-		<input type="button" class="puplebtn" value="월간"/>
-		<input type="button" class="searchbtn" value="주간"/>
-     <!--  <p><input type="date" value="2019-09-22" min="2019-09-10" max="2019-09-25"></p> -->
-     	<p><input type="date" name="startDate">~<input type="date" name="lastDate">
-     	<input type="submit" class="pupleBtn" value="검색">
-     	<select name="serchkey" class="selectcomm">
-			<option value="판매글">우리직구</option>
-			<option value="모집글">가치가장</option>
-			<option value="게시판">커뮤니티</option>
-		</select>
-		<select name="orderBy" class="selectcomm">
-			<option value="조회수">조회수</option>
-			<option value="좋아요">좋아요</option>
-			<option value="댓글수">댓글수</option>
-			<option value="거래율">거래율</option>
-		</select></p>
-    </form>
+	<div class="searchDiv">
+		<div class="searchInfo">
+			<form id="searhFrm">
+		     	<select name="searchKey" class="selectcomm">
+					<option value="판매글">우리직구</option>
+					<option value="모집글">가치가장</option>
+					<option value="게시판">커뮤니티</option>
+				</select>
+				<select name="orderBy" class="selectcomm">
+					<option value="조회수">조회수</option>
+					<option value="좋아요">좋아요</option>
+					<option value="댓글수">댓글수</option>
+					<option value="거래율">거래율</option>
+				</select>
+				<input type="button" class="pupleBtn" value="검색">
+		    </form>
+	    </div>
+	</div>
     <table class="tablea" >
 		 <colgroup>
                <col width="10%" />

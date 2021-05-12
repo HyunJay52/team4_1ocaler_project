@@ -197,15 +197,15 @@
 		    (select count(userid) from member 
 		        where mem_status=1 and  mem_sub between to_date('21-${month3}-01','YY-MM-DD') 
 		        and to_date('21-${month3}-${last3}','YY-MM-DD')) loginmem3,
-		    (select count(userid) from member <!-- 신규 셀러회원수 -->
-		        where mem_status=2 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
-		        and to_date('21-${month1}-${last1}','YY-MM-DD')) totalmem1,
-		    (select count(userid) from member 
-		        where mem_status=2 and  mem_sub between to_date('21-${month2}-01','YY-MM-DD') 
-		        and to_date('21-${month2}-${last2}','YY-MM-DD')) totalmem2,
-		    (select count(userid) from member 
-		        where mem_status=2 and  mem_sub between to_date('21-${month3}-01','YY-MM-DD') 
-		        and to_date('21-${month3}-${last3}','YY-MM-DD')) totalmem3
+		    (select count(userid) from seller --<!-- 신규 셀러회원수 -->
+		        where  sel_date between to_date('21-03-01','YY-MM-DD') 
+		        and to_date('21-03-31','YY-MM-DD')) totalmem1,
+		    (select count(userid) from seller 
+		        where sel_date between to_date('21-04-01','YY-MM-DD') 
+		        and to_date('21-04-30','YY-MM-DD')) totalmem2,
+		    (select count(userid) from seller 
+		        where sel_date between to_date('21-05-01','YY-MM-DD') 
+		        and to_date('21-05-31','YY-MM-DD')) totalmem3
 		from dual
   	</select>
   	<select id="guLoginCount" resultType="com.team4.localer.vo.Mem_statisVO">
@@ -247,5 +247,25 @@
 		between to_date('21-03-01','YY-MM-DD') 
 		        and to_date('21-${month3}-${last3}','YY-MM-DD')
   	
+  	</select>
+  	<select id="boardStatis" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select
+		    (select count(*) from board 
+		        where b_writedate 
+		        between to_date('2021-${month3}-01','YYYY-MM-DD')
+		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) boardcnt,
+		    (select count(*) from sell_item
+		        where i_writedate 
+		        between to_date('2021-${month3}-01','YYYY-MM-DD')
+		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) sell_itemcnt,
+		    (select count(*) from grouplocal
+		        where g_writedate 
+		        between to_date('2021-${month3}-01','YYYY-MM-DD')
+		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) grouplocalcnt,
+		    (select count(*) from mem_share
+		        where s_writedate 
+		        between to_date('2021-${month3}-01','YYYY-MM-DD')
+		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) mem_sharecnt
+		from dual 
   	</select>
 </mapper>

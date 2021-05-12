@@ -109,6 +109,11 @@ public class ManageServiceImp implements ManageService {
 		return manadao.subCount(statisVO);
 	}
 
+	@Override
+	public Mem_statisVO boardStatis(Mem_statisVO statisVO) {
+		return manadao.boardStatis(statisVO);
+	}
+
 
 
 

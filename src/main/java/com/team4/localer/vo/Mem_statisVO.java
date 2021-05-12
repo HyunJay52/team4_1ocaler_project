@@ -20,8 +20,36 @@ public class Mem_statisVO {
 	private int totalmem2;//4월
 	private int totalmem3;//5월
 	
+	private int boardcnt;
+	private int sell_itemcnt;
+	private int grouplocalcnt;
+	private int mem_sharecnt;
 
 	
+	public int getBoardcnt() {
+		return boardcnt;
+	}
+	public void setBoardcnt(int boardcnt) {
+		this.boardcnt = boardcnt;
+	}
+	public int getSell_itemcnt() {
+		return sell_itemcnt;
+	}
+	public void setSell_itemcnt(int sell_itemcnt) {
+		this.sell_itemcnt = sell_itemcnt;
+	}
+	public int getGrouplocalcnt() {
+		return grouplocalcnt;
+	}
+	public void setGrouplocalcnt(int grouplocalcnt) {
+		this.grouplocalcnt = grouplocalcnt;
+	}
+	public int getMem_sharecnt() {
+		return mem_sharecnt;
+	}
+	public void setMem_sharecnt(int mem_sharecnt) {
+		this.mem_sharecnt = mem_sharecnt;
+	}
 	public int getTotalmem1() {
 		return totalmem1;
 	}

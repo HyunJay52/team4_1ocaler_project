@@ -41,12 +41,6 @@ public class AdminController {
 		mav.setViewName("admin/publicwrite");
 		return mav;
 	}
-	@RequestMapping("/statis_board")//판매관리
-	public ModelAndView statis_board() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/statis_board");
-		return mav;
-	}
 	@RequestMapping("/spend_mem")//판매관리
 	public ModelAndView spend_mem() {
 		ModelAndView mav = new ModelAndView();

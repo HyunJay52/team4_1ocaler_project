@@ -319,4 +319,31 @@ public class AdminManageController {
 		mav.setViewName("admin/statis_mem");
 		return mav;
 	}
+	//게시판 통계부분
+	@RequestMapping("/statis_board")//판매관리
+	public ModelAndView statis_board(int month) {
+		ModelAndView mav = new ModelAndView();
+		Mem_statisVO statisVO = new Mem_statisVO();
+		//5월 신규
+		statisVO.setMonth(month);
+		String resultMonth[] = {statisVO.getMonth1(),statisVO.getMonth2(),statisVO.getMonth3()};
+		mav.addObject("monthArr",resultMonth);
+		mav.addObject("month3",manaService.boardStatis(statisVO));
+		//4월 신규
+		statisVO = monthCal1(statisVO);//4월 넣어주는 과정
+		mav.addObject("month2",manaService.boardStatis(statisVO));
+		//3월 신규
+		statisVO = monthCal1(statisVO);//3월 넣어주는 과정
+		mav.addObject("month1",manaService.boardStatis(statisVO));
+		mav.setViewName("admin/statis_board");
+		return mav;
+	}
+	public Mem_statisVO monthCal1(Mem_statisVO vo) {
+		if(vo.getMonth()-1<=0) {
+			vo.setMonth(12);
+		}else {
+			vo.setMonth(vo.getMonth()-1);
+		}
+		return vo;
+	}
 }

@@ -16,12 +16,12 @@
         var data = google.visualization.arrayToDataTable([
           ['Month', '방문자수', '누적회원수', '신규회원수', '신규셀러수'],
           ['21/${dataVO.month1}',  ${memCountVO.loginmem1},${memCountVO.totalmem1},${newCountVO.loginmem1},${newCountVO.totalmem1}],
-          ['21/${dataVO.month2}',  ${memCountVO.loginmem2},${memCountVO.totalmem2},${newCountVO.loginmem1},${newCountVO.totalmem2}],
-          ['21/${dataVO.month3}',  ${memCountVO.loginmem3},${memCountVO.totalmem3},${newCountVO.loginmem1},${newCountVO.totalmem3}]
+          ['21/${dataVO.month2}',  ${memCountVO.loginmem2},${memCountVO.totalmem2},${newCountVO.loginmem2},${newCountVO.totalmem2}],
+          ['21/${dataVO.month3}',  ${memCountVO.loginmem3},${memCountVO.totalmem3},${newCountVO.loginmem3},${newCountVO.totalmem3}]
         ]);
 
         var options = {
-          hAxis: {title: 'Month'},
+         // hAxis: {title: 'Month'},
           seriesType: 'bars',
           series: {0: {type: 'line'}},
           fontSize: 16
@@ -64,18 +64,20 @@
         ]);
 
         var options = {
-          title : '지역별',
+          title : '지역별이용률',
           width: 400,
        	  height: 400,
           pieHole: 0.3,
           pieSliceTextStyle: {
-            color: 'black'
+            color: 'white'
           },
+          pieSliceText : 'label',
           legend: 'none',
         };
         var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
         chart.draw(data, options);
       }
+    
     function drawChart2() {
 
         var data2 = google.visualization.arrayToDataTable([
@@ -91,6 +93,7 @@
           pieSliceTextStyle: {
             color: 'white',
           },
+          pieSliceText : 'label',
           legend: 'none',
           fontSize: 16
         };
@@ -111,8 +114,9 @@
        	  height: 400,
           pieHole: 0.3,
           pieSliceTextStyle: {
-            color: 'black',
+            color: 'white',
           },
+          pieSliceText : 'label',
           legend: 'none',
           fontSize: 16
         };
@@ -122,21 +126,24 @@
       }
 </script>
 <div class="main">
-	<div class="btitle">회원통계</div>
-	<form class="dateFrm">
-     <!--  <p><input type="date" value="2019-09-22" min="2019-09-10" max="2019-09-25"></p> -->
-      <p><input type="date" name="startDate">~<input type="date" name="lastDate">
-      <input type="submit" class="pupleBtn" value="검색"></p>
-    </form>
-     <div id="chart_div"></div>
+	<!--월 이동 부분-->
      
+	 <div class="loadDateFrm">
+	 	<button class="dayBtn prev">이전</button>
+	 	<button class="setMonth">2021년 ${dataVO.month3}월</button>
+	 	<button class="dayBtn next">다음</button>
+	 </div>
+	 
+	<div class="btitle">회원통계</div>
+    <div id="chart_div"></div>
+				
      <div class="btitle">월별 회원 통계 추이</div>
      
      <ul class="donutUl">
      	<li id="donut_single"></li>
      	<li id="donut_two"></li>
      	<li id="donut_three"></li>
-     	<li>지역별</li>
+     	<li>지역별이용률</li>
      	<li>신규/휴면</li>
      	<li>일반/셀러</li>
      </ul>

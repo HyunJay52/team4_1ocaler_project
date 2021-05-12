@@ -122,7 +122,7 @@
 					</ul>
 					<ul>
 						<li><a href="statis_mem?month=5">회원 통계</a></li>
-						<li><a href="statis_board">게시글 통계</a></li>
+						<li><a href="statis_board?month=5">게시글 통계</a></li>
 					</ul>
 					<ul>
 						<li><a href="spend_mem">회원정산</a></li>

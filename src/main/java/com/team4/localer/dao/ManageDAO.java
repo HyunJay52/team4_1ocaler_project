@@ -23,6 +23,9 @@ public interface ManageDAO {
 	//일반/셀러회원수, 신규/휴면회원수 
 	public Mem_statisVO subCount(Mem_statisVO statisVO);
 	
+	//==게시판 통계====
+	public Mem_statisVO boardStatis(Mem_statisVO statisVO);
+	
 	//회원목록 allSelect
 	public List<MemberVO> memberAllSelect(AdminPageVO pageVO);
 	//회원의 신고, 댓글수 count
