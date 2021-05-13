@@ -125,4 +125,15 @@
   		select cs_num, userid, cs_cate, cs_subject ,cs_content, cs_status, cs_answer, to_char(cs_writedate, 'MM-DD HH:MI') cs_writedate  
   		from cs where ${param1} like #{param2} order by cs_num
   	</select>
+  	
+ <!--view page sql -->
+ 	<insert id="reportInsert" parameterType="com.team4.localer.vo.ReportVO">
+ 		INSERT INTO report(rep_num, num, userid, rep_subject, rep_content) values (reqsq.nextval, ${num}, #{userid}, #{rep_subject}, #{rep_content})
+ 	</insert>
+ 	
+ 	<insert id="csQnaInsert" parameterType="com.team4.localer.vo.CsVO">
+ 		INSERT INTO CS(cs_num, userid, cs_cate, cs_subject, cs_content) 
+ 		VALUES (cssq.nextval, #{userid}, #{cs_cate}, #{cs_subject}, #{cs_content})
+ 	</insert>
+ 	
 </mapper>

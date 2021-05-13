@@ -47,4 +47,12 @@ public interface CsDAO {
 	public List<CsVO> searchOftenq(String searchkey,String text);
 	//1:1 문의 검색
 	public List<CsVO> searchCs(String searchkey, String text);
+	
+//뷰페이지 부분 
+	//신고글 insert
+	public int reportInsert(ReportVO vo);
+	//1:1 질문 insert
+	public int csQnaInsert(CsVO vo);
+	
+	
 }

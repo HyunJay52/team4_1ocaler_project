@@ -159,7 +159,7 @@
 				</li>
 
 				<li>인사말</li>
-				<li><textarea name="mem_content" id="mem_content" style="width:318px; height:62px; resize:none"
+				<li><textarea name="mem_content" id="mem_content" style="width:318px; height:62px; padding: 5px; resize:none"
 						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.mem_content }</textarea>
 				</li>
 				<li>연락처</li>
@@ -221,8 +221,8 @@
 				</div>
 				<div class="modal-body" style="display:none" data-backdrop="static">
 					<p class="mdFnt">탈퇴사유 조사</p>
-					<form id="secessionForm" method="post">
-						<select id="selBox" class="selectBox" name="why">
+					<form id="secessionForm" method="post" action="deletMember">
+						<select id="selBox" class="selectBox" name="del_why">
 							<option value="탈퇴 사유">탈퇴 사유</option>
 							<option value="디자인이 마음에 안들어요">디자인이 마음에 안들어요</option>
 							<option value="사용하기 불편해요">사용하기 불편해요</option>
@@ -231,7 +231,7 @@
 							<option value="기타">기타</option>
 						</select>
 						<div style="display:none">
-							<span class="smlFnt">기타 내용 : </span><input type="text" id="detailwhy" class="textBox" name="detailwhy"/>
+							<span class="smlFnt">기타 내용 : </span><input type="text" id="detailwhy" class="textBox" name="del_why"/>
 						</div>
 						<input id="secession" type="button" class="btn commBtn" value="취소"/>
 						<input id="secessionOk" type="button" class="btn cancelBtn" value="등록"/>

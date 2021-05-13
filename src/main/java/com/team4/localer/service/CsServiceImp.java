@@ -112,5 +112,17 @@ public class CsServiceImp implements CsService {
 	public List<OftenqVO> onePageRecordSelect_of(AdminPageVO pageVO) {
 		return csdao.onePageRecordSelect_of(pageVO);
 	}
+//뷰 페이지 부분
+	@Override
+	public int reportInsert(ReportVO vo) {
+		//신고하기 글작성
+		return csdao.reportInsert(vo);
+	}
+
+	@Override
+	public int csQnaInsert(CsVO vo) {
+		// 1:1 문의 글작성
+		return csdao.csQnaInsert(vo);
+	}
 
 }
