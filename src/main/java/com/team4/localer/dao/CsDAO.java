@@ -53,6 +53,9 @@ public interface CsDAO {
 	public int reportInsert(ReportVO vo);
 	//1:1 질문 insert
 	public int csQnaInsert(CsVO vo);
-	
+	//자주하는 질문 전체 선택
+	public List<OftenqVO> selectAlloftenQ();
+	//자주하는 질문 조회수 
+	public int oftenqnaCnt(int of_num);
 	
 }

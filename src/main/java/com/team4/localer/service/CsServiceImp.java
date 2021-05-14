@@ -125,4 +125,16 @@ public class CsServiceImp implements CsService {
 		return csdao.csQnaInsert(vo);
 	}
 
+	@Override
+	public List<OftenqVO> selectAlloftenQ() {
+		// 자주하는 질문 리스트 불러오기 
+		return csdao.selectAlloftenQ();
+	}
+
+	@Override
+	public int oftenqnaCnt(int of_num) {
+		// 자주하는 질문 조회수
+		return csdao.oftenqnaCnt(of_num);
+	}
+
 }

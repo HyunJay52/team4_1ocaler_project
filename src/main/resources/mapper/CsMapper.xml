@@ -111,7 +111,7 @@
   	<update id="reportUpdate" parameterType="com.team4.localer.vo.ReportVO">
   		update report set rep_status=#{rep_status}, rep_ok = sysdate where rep_num=#{rep_num}
   	</update>
-  	<!--검색부분 -->
+  	<!-- 검색부분 -->
   	<select id="searchReport" resultType="com.team4.localer.vo.CsVO">
   		select rep_num cs_num,rep_subject cs_subject, userid, 
   		to_char(rep_writedate,'MM-DD HH:MI') cs_writedate, rep_status cs_status
@@ -135,5 +135,12 @@
  		INSERT INTO CS(cs_num, userid, cs_cate, cs_subject, cs_content) 
  		VALUES (cssq.nextval, #{userid}, #{cs_cate}, #{cs_subject}, #{cs_content})
  	</insert>
+ 	
+ 	<select id="selectAlloftenQ" resultType="com.team4.localer.vo.OftenqVO">
+ 		select * from oftenQ order by of_cnt desc
+ 	</select>
+ 	<update id="oftenqnaCnt">
+ 		update oftenQ set of_cnt=of_cnt+0.5 where of_num=#{param1}
+ 	</update>
  	
 </mapper>

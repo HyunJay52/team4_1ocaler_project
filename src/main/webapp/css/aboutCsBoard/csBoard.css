@@ -205,12 +205,12 @@
 /* 공통 css */
 .cs_main {
 	width: 1100px;
-	height: 100%;
+	height: auto;
 	margin: 70px auto;	
 	
 }
 .cs_wrap {
-	width: 880px; height: 100%;
+	width: 880px; height: auto;
 	margin-left: 270px;
 }
 .cs_title {
