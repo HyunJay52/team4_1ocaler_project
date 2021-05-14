@@ -5,6 +5,7 @@ public class OftenqVO {
 	private String of_subject;
 	private String of_content;
 	private String of_cate;
+	
 	public String getOf_cate() {
 		return of_cate;
 	}

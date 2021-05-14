@@ -87,7 +87,7 @@
 							href="eatPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">한끼미식회</a></li>
 					</ul>
 					<ul>
-						<li><a href="commuBoard">우리동네 이야기</a></li>
+						<li><a href="commuBoard?b_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>&up_cate=1">우리동네 이야기</a></li>
 						<li><a href="commuRecipeBoard?up_cate=2">쓱싹레시피</a></li>
 						<li><a href="commuFreeBoard?up_cate=3">자유자게</a></li>
 					</ul>

@@ -14,7 +14,7 @@
 		<p class="p_qnaWrite">고객님의 소중한 의견을 들려주세요.</p>
 		<br/>
 		<form method="post" action="cs_qnaOk" id="qnaFrm">
-			<select id="csSearchKey" name="csSearchKey">
+			<select id="csSearchKey" name="cs_cate">
 				<option>카테고리 선택</option>
 				<option value="mem_qna">회원문의</option>
 				<option value="bor_qna">게시판문의</option>

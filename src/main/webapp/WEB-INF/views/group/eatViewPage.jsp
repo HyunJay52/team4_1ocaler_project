@@ -38,9 +38,9 @@
 				$("#EVPProfilePopup").css("display","none");
 			});
 			/*신고하기*/
-			$('#eatViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+			$('#eatViewPageReportBtn').click(()=>{
 				if(${logId!=null}){
-					location.href="reportWrite?userid=${vo.userid}"	
+					location.href="reportWrite?num=${vo.num}"	
 				}else{
 					alert('로그인후 사용할 수 있습니다.');
 					location.href="login";
