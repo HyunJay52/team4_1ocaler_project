@@ -127,8 +127,7 @@
 </script>
 <div class="main">
 	<!--월 이동 부분-->
-     
-	 <div class="loadDateFrm">
+     <div class="loadDateFrm">
 	 	<button class="dayBtn prev">《</button>
 	 	<button class="setMonth">2021년 ${dataVO.month3}월</button>
 	 	<button class="dayBtn next">》</button>
