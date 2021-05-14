@@ -9,16 +9,16 @@
 	</insert>
 	<select id="dealOneselect"  resultType="com.team4.localer.vo.DealShareVO">
 		<![CDATA[ 
-			select num,userid, s_cate, s_subject, s_content,s_img1,s_loc,s_gu,to_char(s_price,'999,999,999,999') s_price,s_date,s_tag
-			from mem_share b where rownum <=1 and userid=#{userid} order by num desc
+			select num,userid, s_cate, s_subject, s_content,s_img1,s_loc,s_gu,to_char(s_price,'999,999,999,999') s_price,s_date,s_tag 
+			from (select * from mem_share where userid=#{userid} order by num desc) where rownum<2
 		]]>
 	</select>
 	<select id="dealListSelect" resultType="com.team4.localer.vo.DealShareVO" >
 		select num, s.userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, to_char(s_price,'999,999,999,999') s_price ,s_date,s_tag,
             to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick 
-		from mem_share s join member m on s.userid=m.userid 
+		from mem_share s join member m on s.userid=m.userid where s_status=1
 		<if test="s_cate !=null and s_cate!='' ">
-			where s_cate=${s_cate}
+			and s_cate=${s_cate}
 		</if>
 		order by num desc    
 	</select>

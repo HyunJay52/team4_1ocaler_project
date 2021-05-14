@@ -43,27 +43,25 @@
 	</update>
 	<select id="recipeSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
-		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board A  where rownum <=5 and up_cate=2 order by b_hit desc
+		SELECT num,userid, b_gu, up_cate, B_SUBJECT, B_WRITEDATE , to_char(B_WRITEDATE, 'YYYY/MM/DD') AS B_WRITEDATE , B_HIT FROM (SELECT * FROM board WHERE UP_CATE =3  ORDER BY b_hit DESC) WHERE rownum<6
 		]]>
 	</select>
 	<select id="freeSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
-		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board A  where rownum <=5 and up_cate=3 order by b_hit desc
+		SELECT num,userid, b_gu, up_cate, B_SUBJECT, B_WRITEDATE , to_char(B_WRITEDATE, 'YYYY/MM/DD') AS B_WRITEDATE , B_HIT FROM (SELECT * FROM board WHERE UP_CATE =2  ORDER BY b_hit DESC) WHERE rownum<6
 		]]>
 	</select>
 	<select id="commuMainSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
-		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board A  where rownum <=5 and up_cate=1 order by b_hit desc
+		SELECT num,userid, b_gu, up_cate,down_cate, B_SUBJECT, B_WRITEDATE , to_char(B_WRITEDATE, 'YYYY/MM/DD') AS B_WRITEDATE , B_HIT FROM (SELECT * FROM board WHERE UP_CATE =1  ORDER BY b_hit DESC) WHERE rownum<6
 		]]>
 	</select>
 	<select id="commuOneSelect"  resultType="com.team4.localer.vo.BoardVO">
 		<![CDATA[ 
-			select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit ,
-			(select count(*) from reply where num = b.num) repcont  
-			from board b where rownum <=1 and userid=#{userid} order by num desc
+			SELECT num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit , repcont FROM 
+			(select b.num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit ,
+    	    (select count(*) from reply where num = b.num) AS repcont  
+         	from board b where userid=#{userid} order by num DESC) WHERE rownum<2 
 		]]>
 	</select>
 	<select id="commuGuSelect"  resultType="int">

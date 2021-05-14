@@ -18,8 +18,8 @@
 				</select>		
 				<select name="s_status">
 					<option selected disabled hidden> 판매상태</option>
-					<option value="1">판매종료</option>	
-					<option value="2">판매중</option>			
+					<option value="1">판매중</option>	
+					<option value="2">판매완료</option>			
 				</select>				
 	 			<br/>
 	 			<input type="text" id ="subject" name="s_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />

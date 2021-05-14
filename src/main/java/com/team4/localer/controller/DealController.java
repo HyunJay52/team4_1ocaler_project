@@ -126,7 +126,6 @@ public class DealController {
 				mav.addObject("vo",vo2);
 				mav.addObject("num", vo2.getNum());
 				mav.setViewName("redirect:memberView");
-			//	mav.setViewName("redirect:memberWrite");
 			}else {// 실패했을때
 				System.out.println("실패했다");
 				mav.setViewName("redirect:memberWrite");

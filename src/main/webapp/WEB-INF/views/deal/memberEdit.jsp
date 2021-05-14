@@ -22,8 +22,8 @@
 				</select>		
 				<select>
 					<option selected disabled hidden > 판매상태</option>
-					<option value="1" <c:if test='${vo.s_status==1 }'>selected</c:if> >판매종료</option>	
-					<option value="2" <c:if test='${vo.s_status==2 }'>selected</c:if> >판매중</option>			
+					<option value="1" <c:if test='${vo.s_status==1 }'>selected</c:if> >판매중</option>	
+					<option value="2" <c:if test='${vo.s_status==2 }'>selected</c:if> >판매완료</option>			
 				</select>				
 	 			<br/>
 	 			<input type="text" id ="subject" name="s_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." value="${vo.s_subject }"/>
