@@ -37,28 +37,6 @@
 		
 	
 	});
-	
-	//스크롤 값 받아오기
-	window.onscroll=function(){bannerMove()};
-   	
-	function bannerMove(){
-		//현재스크롤바 위치 
-		var scrollY = window.scrollY;
-		console.log(scrollY);
-      
-	    if(scrollY>300 && scrollY<621){
-	         //620
-	         $('html,body').scrollTop(620);
-	         scrollY = window.scrollY;
-	         $('html,body').scrollTop(scrollY);
-	    }
-// 	    if(scroll>1000 && scrollY<1630){
-	         //2495
-// 	    	$('html,body').scrollTop(2495);
-// 	    }else if(scrollY>2875){
-	         //3205
-// 	    	$('html,body').scrollTop(3205);
-// 	    }
    }
 </script>
 
@@ -98,7 +76,7 @@
 		<div class="selBoard">
 			
 			<ul class="boardText">
-				<c:forEach var="i" begin="1" end="8">
+				<c:forEach var="i" begin="1" end="4">
 				<li class="selList" OnClick="location.href='sellView'">
 					<div>
 						<div>
@@ -121,7 +99,7 @@
 		<div class="mdFnt indexSubTitle"><span class="indexSubTitleSpan">오늘의</span> "착한발견"</div>
 		<div class="selBoard">
 			<ul class="boardText">
-				<c:forEach var="i" begin="1" end="8">
+				<c:forEach var="i" begin="1" end="4">
 				<li class="selList">
 					<div OnClick="location.href='sellView'">
 						<div>
