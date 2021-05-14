@@ -37,7 +37,7 @@
 	<table class="tablea">
 		<colgroup>
            <col width="5%" />
-           <col width="5%" />
+           <col width="8%" />
            <col />
            <col width="5%" />
            <col width="10%" />
