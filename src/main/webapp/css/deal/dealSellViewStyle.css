@@ -18,9 +18,9 @@
 		margin: 0 10;
 		padding: 0;
 	}
-	#dealImg ,#sellImg{ 
+	#sellImg{ 
 		width: 640px; 
-		height: 400px; 
+		height: 620px; 
 		float: left;
 		margin:0 auto; 
 		margin-right: 20;
@@ -35,22 +35,15 @@
 	}
 	
 	.bx-viewport{
-		height:344px;
+		height:480px;
 	}
 	
 	.slider>li img{ 
 		width: 640; 
-		height: 341px;
+		height: 480px;
 		border:1px solid rgb(233 233 233);  
 		margin:0 auto; 
 		padding: 0;
-	}
-
-	
-	.cntJoin {
-    	font-size: 22px;   
-    	font-weight: bold;    
-    	color: #3f1785;
 	}
 
 
@@ -87,8 +80,7 @@
 	}
 	
 	.commBtnSell { 
-		font-size:20px;
-		width: 100px; 
+		width: 200px; 
 		color: #3f1785;
 		border: 1px solid #3f1785;
 
@@ -144,63 +136,82 @@
    		width:640px;
    		float:left;
 	}
-   	
-   	#sellInfo>ul li{ 
+   	#sellInfo>div:first-child{
+   		overflow:auto;
+   		border-top:2px solid gray;
+   		border-bottom:1px solid #d9d9d9;
+   		padding: 10px 0px 10px 10px;
+   	}	
+   	#sellInfo ul{
+   		overflow:auto;
+   	}
+   	#sellInfo ul li{ 
    		float:left;
-   		height:50px;
-   		line-height:50px;
-   		
+   		font-size:16px;
+   		height:45px;
+   		line-height:45px;	
   	}
-  	#sellInfo>ul li:nth-child(1){
-  		width: 100%;
-  		text-align: center; 
-  		font-size: 26px;
-  		font-weight: bold; 
-  		margin-bottom:10px;
-  		border-bottom:1px solid #d9d9d9;
+	#sellInfo ul li:nth-child(2n+1){
+		width:40%;
+		padding-left: 35px;
 	}
-	#sellInfo>ul li:not(first-child){
-		width:50%;
-		font-size:18px;
+	#sellInfo ul li:nth-child(2n+2){
+	 	width:60%;
 	}
-	#sellInfo>ul li:nth-child(2n){
-		font-weight:bold;
-		text-align: center; 
+	
+	#option_content{
+		width:200px;
+		height:33px;
+		border-radius:5px;
 	}
-	#sellInfo>ul li:nth-child(2n+1){
-		padding-left:30px
+	
+	
+	.itemElement{
+	   background:#e0e0e0;
+	    margin-top: 5px;
+	    margin-bottom: 2px;
+	    border-radius: 5px;	
 	}
-	#sellInfo>ul li:nth-child(10){
-		width:100%;
-		text-align:left;
+	
+	.itemElement>div{
+	 height: 40px;
+	 line-height:40px;
+	 float:left;
+	
 	}
-	#sellInfo>ul li:nth-child(11){
-		width:100%;
-		font-size:16px;
-		font-weight:400;
-		text-align:left;
-		padding-left:30px;
-		height:32px;
-		line-height:32px;
-		border-bottom:1px solid #d9d9d9;
+	.itemElement>div:first-child{
+		width:350px;
+		padding-left:10px;
 	}
-	#sellInfo>ul li:nth-child(12){
-		padding-top:15px;
+	.itemElement>div:nth-child(2){
+		width:100px;
 	}
-	#sellInfo>ul li:nth-child(13){
+	.itemElement>div:nth-child(3){
+		width:140px;
 		text-align:center;
-		padding-top:15px;
 	}
-	#sellInfo>ul li:nth-child(14){
-		width:100%;
-		height:100px;
-		line-height:40px;
+	.itemElement>div:nth-child(4){
+		width:50px;
+	}
+	.itemElementDel{
+		margin-top:8px;
+		margin-right:5px;
+		float:right;
+	}
+	.choice{
+		height:28px;
+		width:100px;
+		margin-top:6px;
+		placeholder:수량
 	}
 	
-	#sellInfo input{
-		margin:30px 60px;
+	#submitCancleBtn>input{
+		width:300px;
+		height:35px;
+		margin: 20px 9px;
 	}
 	
+
 	/* 중간페이지 이동*/
 	#locationBar a{
 		color:gray;
@@ -260,7 +271,7 @@
    	#oneReview li>div:nth-of-type(2){
    		padding: 10px;
    		width:479px;
-   		height:120px;
+   		height:130px;
    	}
    	#oneReview li>div:nth-of-type(1)>img{
    		float: right;
@@ -457,119 +468,3 @@
 		width: 780px;
 	
 	}
-	
-	
-	/* 체크박스 시도 */
-	
-	.where {
-	  display: block;
-	  margin: 25px 15px;
-	  font-size: 11px;
-	  color: #000;
-	  text-decoration: none;
-	  font-family: verdana;
-	  font-style: italic;
-	}
-		
-	.checks {position: relative;}
-	
-	.checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
-	  position: absolute;
-	  width: 1px;
-	  height: 1px;
-	  padding: 0;
-	  margin: -1px;
-	  overflow: hidden;
-	  clip:rect(0,0,0,0);
-	  border: 0
-	}
-	.checks input[type="checkbox"] + label {
-	  display: inline-block;
-	  position: relative;
-	  cursor: pointer;
-	  -webkit-user-select: none;
-	  -moz-user-select: none;
-	  -ms-user-select: none;
-	}
-	.checks input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
-	  content: ' ';
-	  display: inline-block;
-	  width: 21px;  /* 체크박스의 너비를 지정 */
-	  height: 21px;  /* 체크박스의 높이를 지정 */
-	  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
-	  margin: -2px 8px 0 0;
-	  text-align: center; 
-	  vertical-align: middle;
-	  background: #fafafa;
-	  border: 1px solid #cacece;
-	  border-radius : 3px;
-	  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-	}
-	.checks input[type="checkbox"] + label:active:before,
-	.checks input[type="checkbox"]:checked + label:active:before {
-	  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
-	}
-	
-	.checks input[type="checkbox"]:checked + label:before {  /* 체크박스를 체크했을때 */ 
-	  content: '\2714';  /* 체크표시 유니코드 사용 */
-	  color: #99a1a7;
-	  text-shadow: 1px 1px #fff;
-	  background: #e9ecee;
-	  border-color: #adb8c0;
-	  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-	}
-	
-	.checks.small input[type="checkbox"] + label {
-	  font-size: 12px;
-	}
-	
-	.checks.small input[type="checkbox"] + label:before {
-	  width: 17px;
-	  height: 17px;
-	  line-height: 17px;
-	  font-size: 11px;
-	}
-	
-	.checks.etrans input[type="checkbox"] + label {
-	  padding-left: 30px;
-	}
-	.checks.etrans input[type="checkbox"] + label:before {
-	  position: absolute;
-	  left: 0;
-	  top: 0;
-	  margin-top: 0;
-	  opacity: .6;
-	  box-shadow: none;
-	  border-color: #3f17854 ;
-	  -webkit-transition: all .12s, border-color .08s;
-	  transition: all .12s, border-color .08s;
-	}
-	
-	.checks.etrans input[type="checkbox"]:checked + label:before {
-	  position: absolute;
-	  content: "";
-	  width: 10px;
-	  top: -5px;
-	  left: 5px;
-	  border-radius: 0;
-	  opacity:1; 
-	  background: transparent;
-	  border-color:transparent #3f1785 #3f1785 transparent;
-	  border-top-color:transparent;
-	  border-left-color:transparent;
-	  -ms-transform:rotate(45deg);
-	  -webkit-transform:rotate(45deg);
-	  transform:rotate(45deg);
-	}
-	
-	.no-csstransforms .checks.etrans input[type="checkbox"]:checked + label:before {
-	  /*content:"\2713";*/
-	  content: "\2714";
-	  top: 0;
-	  left: 0;
-	  width: 21px;
-	  line-height: 21px;
-	  color: #3f1785;
-	  text-align: center;
-	  border: 1px solid #3f1785;
-}  	
