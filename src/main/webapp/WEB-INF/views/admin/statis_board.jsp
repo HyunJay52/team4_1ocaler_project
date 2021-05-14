@@ -30,6 +30,10 @@
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+	  $(document).ready(function(){//페이지 실행되자마자 실행된다.
+		  $("#totalCnt").append(month1Cnt+month2Cnt+month3Cnt);
+		  $("#newTotal").append(month3Cnt);
+		});
 </script>
 <div class="main">
 	<!--월 이동 부분-->
@@ -41,11 +45,11 @@
 	<ul class="statis">
 		<li>
 			전체 게시글
-			<div>19921127</div>
+			<div id="totalCnt"></div>
 		</li>
 		<li>
 			신규 게시글
-			<div>19951219</div>
+			<div id="newTotal"></div>
 		</li>
 	</ul>
 	<div class="btitle">게시글 통계</div>
@@ -54,15 +58,14 @@
 		<div class="searchInfo">
 			<form id="searhFrm">
 		     	<select name="searchKey" class="selectcomm">
-					<option value="판매글">우리직구</option>
-					<option value="모집글">가치가장</option>
-					<option value="게시판">커뮤니티</option>
+					<option value="sell_item">착한발견</option>
+					<option value="mem_share">동네직구</option>
+					<option value="grouplocal">같이가치</option>
+					<option value="board">커뮤니티</option>
 				</select>
-				<select name="orderBy" class="selectcomm">
-					<option value="조회수">조회수</option>
-					<option value="좋아요">좋아요</option>
-					<option value="댓글수">댓글수</option>
-					<option value="거래율">거래율</option>
+				<select name="orderBy"class="selectcomm">
+					<option value="hit">조회수</option>
+					<option value="repot">신고</option>
 				</select>
 				<input type="button" class="pupleBtn" value="검색">
 		    </form>
@@ -80,9 +83,8 @@
 			<td>순위</td>
 			<td>제목</td>
 			<td>조회수</td>
-			<td>게시판</td>
-			<td>작성일</td>
-			
+			<td>신고</td>
+			<td>작성자</td>
 		</tr>
 		<tr>
 			<td>1</td>

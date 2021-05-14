@@ -3,6 +3,7 @@ package com.team4.localer.service;
 import java.util.List;
 
 import com.team4.localer.vo.AdminPageVO;
+import com.team4.localer.vo.AdminspendVO;
 import com.team4.localer.vo.AdminstatisVO;
 import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.GroupVO;
@@ -26,6 +27,8 @@ public interface ManageService {
 	//==게시판 통계====
 	public Mem_statisVO boardStatis(Mem_statisVO statisVO);
 	
+	//===회원정산===
+	public AdminspendVO memspend(Mem_statisVO statisVO);
 	
 	//회원목록 allSelect
 	public List<MemberVO> memberAllSelect(AdminPageVO pageVO);

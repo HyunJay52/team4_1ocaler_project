@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.CsService;
 import com.team4.localer.service.ManageService;
 import com.team4.localer.vo.AdminPageVO;
+import com.team4.localer.vo.AdminspendVO;
 import com.team4.localer.vo.AdminstatisVO;
 import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.MemShareVO;
@@ -335,9 +336,11 @@ public class AdminManageController {
 		//3월 신규
 		statisVO = monthCal1(statisVO);//3월 넣어주는 과정
 		mav.addObject("month1",manaService.boardStatis(statisVO));
+		//셀러판매 게시판 조회수 기준으로 select 하기
 		mav.setViewName("admin/statis_board");
 		return mav;
 	}
+	
 	public Mem_statisVO monthCal1(Mem_statisVO vo) {
 		if(vo.getMonth()-1<=0) {
 			vo.setMonth(12);
@@ -345,5 +348,26 @@ public class AdminManageController {
 			vo.setMonth(vo.getMonth()-1);
 		}
 		return vo;
+	}
+	
+	//===========정산====
+	@RequestMapping("/spend_mem")//회원정산
+	public ModelAndView spend_mem(int month) {
+		ModelAndView mav = new ModelAndView();
+//		Mem_statisVO statisVO = new Mem_statisVO();
+//		//5월 신규
+//		statisVO.setMonth(month);
+//		String resultMonth[] = {statisVO.getMonth1(),statisVO.getMonth2(),statisVO.getMonth3()};
+//		mav.addObject("monthArr",resultMonth);//3월,4월 5월 넣기
+//		AdminspendVO resultVO = manaService.memspend(statisVO);
+		mav.setViewName("admin/spend_mem");
+		return mav;
+	}
+	//셀러 정산============
+	@RequestMapping("/spend_sel")//판매관리
+	public ModelAndView spend_sel(int month) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/spend_sel");
+		return mav;
 	}
 }

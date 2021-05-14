@@ -268,4 +268,18 @@
 		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) mem_sharecnt
 		from dual 
   	</select>
+  	<!-- <select id="memspend" resultType="com.team4.localer.vo.AdminspendVO">
+		select 
+		    (select sum(cha_point) from cha_p
+		    where po_date <=to_date(last_day('21/05/01'),'YY/MM/DD')) totalcharge,
+		    (select sum(sp_point)from sp_p
+		    where sp_date <=to_date(last_day('21/05/01'),'YY/MM/DD')) totalspend,
+		     (select sum(cha_point) from cha_p
+		    where po_date between to_date('21/05/01','YY/MM/DD') 
+		    and to_date(last_day('21/05/01'),'YY/MM/DD')) chargemoney,
+		    (select sum(sp_point)from sp_p
+		    where sp_date between to_date('21/05/01','YY/MM/DD') 
+		    and to_date(last_day('21/05/01'),'YY/MM/DD')) spendmoney
+		from dual
+  	</select> -->
 </mapper>

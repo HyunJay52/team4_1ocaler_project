@@ -35,23 +35,10 @@ public class AdminController {
 		mav.setViewName("admin/main");
 		return mav;
 	}
-	@RequestMapping("/publicwrite")//판매관리
+	@RequestMapping("/publicwrite")//공지작성
 	public ModelAndView publicwrite() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/publicwrite");
-		return mav;
-	}
-	@RequestMapping("/spend_mem")//판매관리
-	public ModelAndView spend_mem() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/spend_mem");
-		return mav;
-	}
-	
-	@RequestMapping("/spend_sel")//판매관리
-	public ModelAndView spend_sel() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/spend_sel");
 		return mav;
 	}
 	@RequestMapping("/oftenAndCs")

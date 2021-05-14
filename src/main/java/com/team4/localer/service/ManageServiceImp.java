@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.ManageDAO;
 import com.team4.localer.vo.AdminPageVO;
+import com.team4.localer.vo.AdminspendVO;
 import com.team4.localer.vo.AdminstatisVO;
 import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.GroupVO;
@@ -112,6 +113,11 @@ public class ManageServiceImp implements ManageService {
 	@Override
 	public Mem_statisVO boardStatis(Mem_statisVO statisVO) {
 		return manadao.boardStatis(statisVO);
+	}
+
+	@Override
+	public AdminspendVO memspend(Mem_statisVO statisVO) {
+		return manadao.memspend(statisVO);
 	}
 
 
