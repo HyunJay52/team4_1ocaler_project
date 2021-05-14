@@ -20,8 +20,11 @@ import com.team4.localer.service.CsService;
 import com.team4.localer.service.ManageService;
 import com.team4.localer.service.MyInfoService;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.ItemReviewVO;
+import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.MyinfoPageVO;
+import com.team4.localer.vo.OrderVO;
 
 @Controller
 public class MyinfoController {
@@ -84,10 +87,13 @@ public class MyinfoController {
 		String myPoint = "0";
 		ModelAndView mav = new ModelAndView();
 		String userid = (String)ses.getAttribute("logId");
-		if(userid != null || userid != "") {
+		if(userid != null && userid != "") {
 			myPoint = service.joinPoint(userid);
 		}
-		System.out.println(myPoint);
+		if(myPoint == null) {
+			myPoint = "0";
+		}
+		System.out.println("mypoint="+myPoint);
 		mav.addObject("myPoint", myPoint);
 		mav.setViewName("myInfo/myInfoLoad");
 		return mav;
@@ -113,8 +119,8 @@ public class MyinfoController {
 		pVO.setSearchWord(searchWord);
 		
 		if(searchDate != null && searchDate != "") {
-			pVO.setSearchDate(searchDate+" 01:00:00");
-			pVO.setSearchDate2(searchDate+" 12:59:59");
+			pVO.setSearchDate(searchDate+" 00:00:00");
+			pVO.setSearchDate2(searchDate+" 23:59:59");
 		}
 		if(searchKey != null && searchKey != "") {
 			if(searchKey.equals("all")) {
@@ -181,19 +187,31 @@ public class MyinfoController {
 		vo.setUserid(searchId);
 		vo.setOnePageRecord(5);
 		vo.setOnePageSize(5);
+		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		System.out.println("kategorie="+vo.getKategorie());
-
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		
 		if(vo.getKategorie() == null) {
 			vo.setKategorie("mem_share");
 		}
-		
-		vo.setDateContent("s_writedate");			
+		if(vo.getKategorie().equals("mem_share")) {
+			vo.setDateContent("s_writedate");			
+		}else {
+			vo.setDateContent("j_writedate");
+		}
 
 		if(vo.getSearchWord().equals("") || vo.getSearchWord() == null) {
 			vo.setSearchWord("%%");
+		}else {
+			vo.setSearchWord("%"+vo.getSearchWord()+"%");
 		}
+		System.out.println("nowNum="+vo.getNowNum());
 		System.out.println("kategorie="+vo.getKategorie());
+		System.out.println("key="+vo.getSearchKey());
+		System.out.println("word="+vo.getSearchWord());
+		
 		vo.setTotalRecord(service.myCount(vo));
 		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
@@ -201,19 +219,89 @@ public class MyinfoController {
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
 		
 		System.out.println("dateContent="+vo.getDateContent());
+		
 		result.put("pVO", vo);
 		result.put("list", service.selectMyShare(vo));
 		return result;
 	}
+	@ResponseBody
+	@RequestMapping("/selectJoinUs")
+	public List<JoinUsVO> selectJoinUs(HttpServletRequest req){
+		List<JoinUsVO> list = new ArrayList<JoinUsVO>();
+		int numJoin = Integer.parseInt(req.getParameter("numJoin"));
+		System.out.println(numJoin);
+		list = service.selectJoinUs(numJoin);
+
+		return list;
+	}
 	
 	@RequestMapping("/myInfoFarmerDeal")
 	public String myInfoFarmerDeal() {
+		
 		return "myInfo/myInfoFarmerDeal";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/myFarmerDealSelect")
+	public Map<String, Object> myFarmerDealSelect(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> result = new HashMap<String, Object>();	
+		
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setOnePageRecord(5);
+		vo.setOnePageSize(5);
+		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
+		if(vo.getSearchWord() == null || vo.getSearchWord().equals("")) {
+			vo.setSearchWord("%%");
+		}else {
+			vo.setSearchWord("%"+vo.getSearchWord()+"%");
+		}
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		
+		vo.setTotalRecord(service.myCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+		
+		System.out.println("key="+vo.getSearchKey());
+		System.out.println("word="+vo.getSearchWord());
+		System.out.println("dayCon="+vo.getDateContent());		
+		System.out.println("dey="+vo.getSearchDate());
+		System.out.println("dey2="+vo.getSearchDate2());
+		
+		result.put("list", service.selectOrder(vo));
+		result.put("pVO", vo);
+		return result;
 	}
 	
 	@RequestMapping("/myInfoReview")
 	public String myInfoReview() {
 		return "myInfo/myInfoReview";
+	}
+	@ResponseBody
+	@RequestMapping("/writeReview")
+	public int writeReview(HttpSession ses, HttpServletRequest req, ItemReviewVO vo) {
+		int result = 0;
+		vo.setUserid((String)ses.getAttribute("logId"));
+		int j_num = Integer.parseInt(req.getParameter("j_num"));
+		
+		result = service.writeReview(vo);
+		if(result > 0) {
+			result = service.updateReviewStatus(j_num);
+		}
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping("/joinUpdate")
+	public int joinUpdate(HttpServletRequest req) {
+		int result = 0;
+		int j_num = Integer.parseInt(req.getParameter("j_num"));
+		System.out.println(j_num);
+		result = service.updateJoinStatus(j_num);
+		
+		
+		return result;
 	}
 	@RequestMapping("/myInfoActivity")
 	public String myInfoActivity() {

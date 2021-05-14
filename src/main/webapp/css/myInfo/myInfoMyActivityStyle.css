@@ -1,7 +1,6 @@
 @charset "UTF-8";
 	.activitySelect{
 		float:right;	
-		margin-top:10px;
 	}
 	#activitySelectbox{
 		width:106px;
@@ -11,7 +10,7 @@
 		float:right;
 	}
 	.myActivityForm{
-		width:690px;
+		width:430px;
 		float:left;
 	}
 	.myActivityDateFrm{
