@@ -4,7 +4,8 @@
 <style>
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	#pageTop{display:none;}
-	#footer{display:none;}
+	#mainFooter{display:none;}
+	#mem_login{display:none;}
 	#eatViewPagebody{overflow:hidden;}
 	/*버튼*/
 	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}

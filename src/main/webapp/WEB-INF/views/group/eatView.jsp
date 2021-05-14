@@ -3,7 +3,8 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script><!-- 지도 -->
 <style>
 	#pageTop{display:none;}
-	#footer{display:none;}
+	#mainFooter{display:none;}
+	#mem_login{display:none;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*eatViewGroupList-like btn*/
 	.fakeCheckBoxImg[type=checkbox]{ display:none; }

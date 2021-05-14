@@ -39,81 +39,150 @@
 			console.log("들어오는지 체크합니다.");
 			$('.cbBtn').not(this).prop('checked',false);
 		})
+		
+		
+		var moneyCollect = [];
+		var total = 0;
+    	var cnt = 1000;
+    	var choice = 100;
+    	// 옵션 선택시 div추가
+		$("#option_content").change(function(){
+			
+			console.log(cnt);
+			$("#sellItemList").append("<div class='itemElement' style='overflow:auto'><div>D.I.Y 오르골 만들기["+$('#option_content').val()+"]</div><div><input type='number' id="+choice+" class='choice' min='1' max='5' value='1'/></div><div id="+cnt+">"+cnt+"</div><div><img class='itemElementDel' src='img/deal/close.png'/></div></div>");
+			$("#option_content>option:eq(0)").prop("selected", true);
+			// 가겨모은 배열추가
+			moneyCollect.push($("#"+cnt).text());
+			console.log(moneyCollect);
+			
+			total += parseInt(($("#"+cnt).text()));
+			console.log(total,'여기는 토탈입니다.');
+			$("#i_price").val(total);
+			console.log(choice);
+			cnt++;
+			choice--;
+		})
+		
+		//옵션 엘리먼트 삭제
+    	$(document).on('click','.itemElementDel',function(){
+    		$(".itemElementDel").index(this);
+    		console.log($(".itemElementDel").index(this));
+			total -= parseInt($(this).parent().prev().text());
+			
+			// 가겨모은 배열삭제
+			moneyCollect.splice($('.itemElementDel').index(this),1);
+			console.log(moneyCollect);
+			
+			
+			
+    		$("#i_price").val(total);
+    		console.log(total);
+			$(this).parent().parent().remove();
+		});
+    	
+    	//옵션 엘리먼트 수량변경
+    	$(document).on('change','.choice',function(){
+    		$(".choice").index(this);
+    		console.log('몇번쨰니 수량선택기',$(".choice").index(this));
+       		var numbers = parseInt($(this).val());
+       		
+       		var result = numbers*moneyCollect[$(".choice").index(this)];
+       		
+       		//늘어날떈 되는데 줄어들떈 어떻게 해야하지?
+       		
+       		
+       		
+       		//console.log('토탈값',total = total + result - moneyCollect[$(".choice").index(this)]);
+       		console.log(result,'이건 곱하긱밧');
+    		console.log(numbers,'수량');
+    	});
+		
 	});
 	
+	
+		console.log($("input[type=number]::-webkit-outer-spin-button").val(),'sdf');
+		console.log($("input[type=number]::-webkit-inner-spin-button").val(),'asdasdg');
 	</script>
 	<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="dealViewMain">
-		
-		<div id="sellImg">	
-			<section class="section1">
-				<ul class="slider">
-					<li><a href="#"><img src="img/deal/div.jfif"/></a></li>
-					<li><a href="#"><img src="img/deal/div.jfif"/></a></li>
-					<li><a href="#"><img src="img/deal/div.jfif"/></a></li>
-				</ul>
-				
-				<div id="bx-pager" style="text-align:center">
-					<a data-slide-index="0" href="#"><img src="img/deal/div.jfif"/></a>
-					<a data-slide-index="1" href=""><img src="img/deal/div.jfif"/></a>
-					<a data-slide-index="2" href=""><img src="img/deal/div.jfif"/></a>
-				</div>
-			</section>
-		</div>
-		
-		
-		<div>
-			<form method="post"  action="sellBuy">
-				<div id="sellInfo">	
-					<div> 
-						<h3 style="margin:0px; float:left;">D.I.Y 오르골 만들기 </h3>
-						<input class="facker" type="checkbox" name="numLike" id="sellLike" value="" /><label for="sellLike"></label>
-					</div>
-					<div>
-						<ul>
-							<li> 판매수량</li>
-							<li><span style="color:blue; font-weight: bold; font-size:18px;">50개</span></li>
-							<li> 판매가</li>
-							<li><span style="color:red; font-size:18px; font-weight:bold">250,000원</span></li>
-							<li> 판매기간</li>
-							<li><span style="font-weight:bold; font-size:18px;">2021-05-01 ~ 2021-05-20</span></li>
-							<li> 판매자</li>
-							<li>
-								<span style="font-size:16px;">goguma1234</span><img style="width:35px; height:35px; margin-left:10px;" src="<%=request.getContextPath() %>/img/mem_prof/user.png"/>
-							</li>
-						</ul>
-							<hr style="margin-top: -9px;"/>
-						<ul>
-							<li><span style="font-size:16px;"> ＞&nbsp;옵션</span></li>
-							<li>
-								<select id="option_content" name="option_content">
-									<option selected disabled hidden>-[필수]- 옵션선택 - </option>
-									<option>12</option>
-									<option>23</option>
-									<option>34</option>
-									<option>45</option>
-								</select>
-							</li>
-						</ul>
-						<div style="padding-left:30px;">
-							<span style="color:#d9d9d9;">(최소주문수량 1개 이상) 위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</span><br/>
-							<span style="color:#d9d9d9;">배송비 3000원 입니다.</span>
-						</div>
-							<hr/>
-						<div id="sellItemList">
-							<div style="background-color:#f0f0f0; text-align:center; line-height:30px; height:30px;"> 선택한 상품 리스트 <span style="font-size:12px;">(Selected product list)</span></div>
-						</div>
-						<hr/>
-						<div><span style="font-size:1.75em; color:red; padding-left:20px;">총상품 금액</span><span style="font-size:1.75em; color:red; float:right; padding-right:10px;">원</span></div>
-					</div>
-					<div>
-						<input type="button" value="취소" class="btn commBtnSell"/>
-						<input type="submit" value="구매하기" class="btn commBtnSell"/>
-					</div>
-				</div> 
-			</form>		
-		</div>		
+		<div style="overflow:auto;">
+			<div id="sellImg">	
+				<section class="section1">
+					<ul class="slider">
+						<li><a href="#"><img src="img/deal/div.jfif"/></a></li>
+						<li><a href="#"><img src="img/deal/div.jfif"/></a></li>
+						<li><a href="#"><img src="img/deal/div.jfif"/></a></li>
+					</ul>
 					
+					<div id="bx-pager" style="text-align:center">
+						<a data-slide-index="0" href="#"><img src="img/deal/div.jfif"/></a>
+						<a data-slide-index="1" href=""><img src="img/deal/div.jfif"/></a>
+						<a data-slide-index="2" href=""><img src="img/deal/div.jfif"/></a>
+					</div>
+				</section>
+			</div>
+			
+			
+			<div>
+				<form method="post"  action="sellBuy">
+					<div id="sellInfo">	
+						<div> 
+							<h3 style="margin:0px; float:left;">D.I.Y 오르골 만들기 </h3>
+							<input class="facker" type="checkbox" name="numLike" id="sellLike" value="" /><label for="sellLike"></label>
+						</div>
+						<div>
+							<ul>
+								<li> 판매수량</li>
+								<li><span style="color:blue; font-weight: bold; font-size:18px;">50개</span></li>
+								<li> 판매가</li>
+								<li><span style="color:red; font-size:18px; font-weight:bold">250,000원</span></li>
+								<li> 판매기간</li>
+								<li><span style="font-weight:bold; font-size:18px;">2021-05-01 ~ 2021-05-20</span></li>
+								<li> 판매자</li>
+								<li>
+									<span style="font-size:16px;">goguma1234</span><img style="width:35px; height:35px; margin-left:10px;" src="<%=request.getContextPath() %>/img/mem_prof/user.png"/>
+								</li>
+							</ul>
+								<hr style="margin-top: -9px;"/>
+							<ul>
+								<li><span style="font-size:16px;"> ＞&nbsp;옵션</span></li>
+								<li>
+									<select id="option_content" name="option_content">
+										<option selected disabled hidden>-[필수]- 옵션선택 - </option>
+										<option>12</option>
+										<option>23</option>
+										<option>34</option>
+										<option>45</option>
+									</select>
+								</li>
+							</ul>
+							<div style="padding-left:30px;">
+								<span style="color:#d9d9d9;">(최소주문수량 1개 이상) 위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</span><br/>
+								<span style="color:#d9d9d9;">배송비 3000원 입니다.</span>
+							</div>
+								<hr/>
+							<div style="overflow:auto;" id="sellItemList">
+								<div style="background-color:#f0f0f0; text-align:center; line-height:30px; height:30px;"> 선택한 상품 리스트 <span style="font-size:12px;">(Selected product list)</span></div>
+							</div>
+							<hr/>
+							<div style="float:left; width:350px;">
+							<span style="font-size:1.75em; color:gray; font-weight:bold; padding-left:20px;">총상품 금액</span>
+							</div>
+							<div style="float:left; width:250px; height:36px;">
+								<input type="text" id="i_price" name="i_price" style="float:right; height:36px; border:none; color:gray; font-size:1.75em; text-align:right" value="0" readonly  />
+							</div>
+							<div style="float:left; width:40px;">
+								<span style="font-size:1.75em;  color:gray; font-weight:bold; float:right; padding-right:10px;">원</span>
+							</div>
+						</div>
+						<div id="submitCancleBtn">
+							<input type="button" value="취소" class="btn commBtnSell"/>
+							<input type="submit" value="구매하기" class="btn commBtnSell"/>
+						</div>
+					</div> 
+				</form>		
+			</div>		
+		</div>			
 				
 		<!-- 1 -->
 		<div class="locationBar" id="locationBar">
@@ -127,7 +196,7 @@
 				<a href="#sellQusetion">Q&A (4)</a>	
 			</div>
 		</div>
-		
+		<br/>
 		<h3 class="sellShortDescription">상품 상세정보<span> | 상품의 상세한 내용을 확인하세요. </span></h3> 		
 		
 		<div id="sellDetail">
