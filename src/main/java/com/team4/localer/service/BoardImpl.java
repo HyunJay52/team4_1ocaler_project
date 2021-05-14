@@ -97,6 +97,12 @@ public class BoardImpl implements BoardService{
 		return boardDAO.commuGuSelect(b_gu);
 	}
 
+	@Override
+	public BoardVO newSelect(int num) {
+		// TODO Auto-generated method stub
+		return boardDAO.newSelect(num);
+	}
+
 	
 	
 

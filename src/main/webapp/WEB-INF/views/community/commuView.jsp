@@ -22,14 +22,42 @@
 <script>
 
 	function boardDel(){
-	if(confirm("삭제하시겠습니까? ")){
+		if(confirm("삭제하시겠습니까? ")){
 		location.href="commuDel?num=${vo.num}";
+		}
 	}
-}
 
 	//댓글시작
 	$(function(){
-
+		
+		//팝업창 띄우기================================================
+		/*위치설정*/
+		var x = window.innerWidth;
+		var y = window.innerHeight;
+		var width =	$("#WVPProfilePopup").width();
+		var height = $("#WVPProfilePopup").height();
+		console.log(width,height)
+		$("#WVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
+		/*띄우기*/
+		$("#commuImgProf").click(()=>{
+			$("#WVPProfilePopup").css("display","block");
+			
+		});	
+		/*팝업창 닫기*/
+		
+		$('#WVPProfilePopup>div:first-child>span').click(()=>{
+			$("#WVPProfilePopup").css("display","none");
+		});
+		
+		$('#withViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+			if(${logId!=null}){
+				location.href="reportWrite?userid=${vo.userid}"	
+			}else{
+				alert('로그인후 사용할 수 있습니다.');
+				location.href="login";
+			}
+		});
+		
 		//댓글보기
 		
 		function replyList(){
@@ -205,8 +233,8 @@
 						</span>	
 					</li>
 					<li>${vo.b_subject }</li>
-					<li>
-						<img src="common/user.png">
+					<li id = "commuImgProf">
+						<img src="<%=request.getContextPath()%>/img/mem_prof/${vo.mem_prof}">
 						<a href="">${vo.userid }</a>
 					</li>
 					<li>
@@ -270,6 +298,21 @@
 		</div>
 		<div id="commuViewreplyList">
 		
+		</div>
+		
+		<div id="WVPProfilePopup">
+		<div><span>X</span></div>
+		<div><span>활동정보</span></div>
+		<div><img src="<%=request.getContextPath()%>/img/mem_prof/${vo.mem_prof}"></div>
+		<div>
+			<ul>
+				<li><span>${vo.userid }</span></li>
+				<li><span>가입일 : ${vo.mem_sub } </span></li>
+				<li><span>총 게시물 : ${vo.mem_post }개</span></li>
+				<li><span>총 댓글수 : ${vo.mem_rev }개</span></li>
+			</ul>
+		</div>
+		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
 		</div>
 	</div>
 	

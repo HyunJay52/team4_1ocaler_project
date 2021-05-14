@@ -11,13 +11,13 @@
 			
 			<form method="post" action="memWriteOk" enctype="multipart/form-data">
 				<select name="s_cate">
-					<option>카테고리</option>
+					<option selected disabled hidden >카테고리</option>
 					<option value="1">식료품</option>	
 					<option value="2">생필품</option>			
 					<option value="3">기타</option>
 				</select>		
 				<select name="s_status">
-					<option > 판매상태</option>
+					<option selected disabled hidden> 판매상태</option>
 					<option value="1">판매종료</option>	
 					<option value="2">판매중</option>			
 				</select>				
@@ -49,7 +49,7 @@
 				<input type="file" name="s_img" accept="image/*" id="s_img1"style="display: none; margin-top: 70px; border: none;" />
 				
 			<script>
-				//프로필 사진
+				//상품 사진
 				$("#s_img1").on('change', function() {
 					readURL(this);
 				});
@@ -70,7 +70,7 @@
 			</script>
 				
 				<br/>
-	 			<input type="text" id = "loc" name="s_loc" placeholder="&ensp;지도에 표시될 위치 한 곳을 정확히 기재해주세요. ex) 광화문 2번출구 , 김포공항 롯데시네마"/>
+	 			<input type="text" id = "loc" name="s_loc" placeholder="&ensp;지도에 표시될 위치 한 곳을 정확히 기재해주세요. ex) 광화문역 2번출구 , 김포공항 롯데시네마"/>
 				<input type="text" id ="tag"  name="s_tag" placeholder="&ensp;태그를 입력해주세요 &nbsp; #태그를 #입력해 #주세요" />
 				
 	 		 	<div id="btn" >

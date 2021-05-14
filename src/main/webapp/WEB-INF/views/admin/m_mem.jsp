@@ -35,7 +35,15 @@
 		//페이지 이동 클릭
 		$(document).on('click', '.clickpage', function(){
 			var txt = $(this).text();
-			$("#pageNum").val(txt);	
+			if(txt=="이전"){
+				var nextPage = parseInt($("#pageNum").val())-1;
+				$("#pageNum").val(nextPage);	
+			}else if(txt=="다음"){
+				var nextPage = parseInt($("#pageNum").val())+1;
+				$("#pageNum").val(nextPage);
+			}else{
+				$("#pageNum").val(txt);
+			}
 			memberAjax();
 		});
 		//검색버튼 클릭이벤트 
@@ -87,13 +95,25 @@
 					//페이징 부분
 					var link="";
 					$(".clickpage").remove();//기존 페이징 부분 삭제
-					for(var i=start;i<=last;i++){
+					if(pagenum>1){
+						link +="<li  class='clickpage'>이전</li>";	
+					}
+					var lastPg=last;
+					if(lastPg>=start+4){//>11>2+4
+						lastPg=5;
+					}else{
+						lastPg = last-start+1;
+					}
+					for(var i=start;i<=start+lastPg-1;i++){
 						if(pagenum==i){
 							link +="<li  class='clickpage nowPg'>"+i+"</li>";
 						}else{
 							link +="<li  class='clickpage'>"+i+"</li>";	
 						}
 						
+					}
+					if(last>pagenum){
+						link +="<li  class='clickpage'>다음</li>";
 					}
 					$(".link").append(link);
 				},error : function(){
@@ -173,7 +193,7 @@ $(function(){
 </script>
 <div class="main">
 	<div class="title">일반회원관리</div>
-	<ul class="statis">
+	<ul class="statisM">
 		<li>
 			총회원수
 			<div>2500</div>
@@ -200,17 +220,20 @@ $(function(){
 			<b>4% </b>지난주 대비
 		</li>
 	</ul>
-	
-	<form id="memFrm">
-		<select name="searchKey" class="selectcomm">
-			<option value="userid">회원아이디</option>
-			<option value="mem_no">회원 번호</option>
-			<option value="mem_name">회원 이름</option>
-		</select>
-		<input type="text" class="textcomm" name="searchWord"/>
-		<input type="button" id="searchbtn" class="searchbtn" value="검색"/>
-		<input type="hidden" name="pageNum" id="pageNum"value="1"/>
-	</form>	
+	<div class="searchDiv">
+		<div class="searchInfo">
+			<form id="memFrm">
+				<select name="searchKey" class="selectcomm">
+					<option value="userid">회원아이디</option>
+					<option value="mem_no">회원 번호</option>
+					<option value="mem_name">회원 이름</option>
+				</select>
+				<input type="text" class="textcomm" name="searchWord"/>
+				<input type="button" id="searchbtn" class="searchbtn" value="검색"/>
+				<input type="hidden" name="pageNum" id="pageNum"value="1"/>
+			</form>
+		</div>
+	</div>
 	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->
 	<table id="meminfo" class="tablea">
 		<colgroup>
@@ -288,6 +311,10 @@ $(function(){
 		</c:forEach>
 	</table>
 	<ul class="link">
+		<!-- 이전버튼 -->
+		<c:if test="${pageVO.pageNum>1 }">
+			<li class="clickpage">이전</li>
+		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
@@ -299,5 +326,8 @@ $(function(){
             	</c:if>
             </c:if>
          </c:forEach>
+         <c:if test="${pageVO.totalPage>pageVO.pageNum }">
+			<li class="clickpage">다음</li>
+		</c:if>
 	</ul>
 </div>

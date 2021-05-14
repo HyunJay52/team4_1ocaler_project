@@ -92,8 +92,9 @@
    	  border-bottom: 1px solid gray;
    	 
    } 
-   ##sellImgDiv{
-		border-bottom: 3px solid #d9d9d9;
+   #sellImgDiv{
+		
+		position: relative; 
    }
    
    #selBoard{

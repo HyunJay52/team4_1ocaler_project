@@ -34,11 +34,36 @@
 				console.log("리스트 불러오기 에러...", error);
 			}
 		});
+		
+	
 	});
+	
+	//스크롤 값 받아오기
+	window.onscroll=function(){bannerMove()};
+   	
+	function bannerMove(){
+		//현재스크롤바 위치 
+		var scrollY = window.scrollY;
+		console.log(scrollY);
+      
+	    if(scrollY>300 && scrollY<621){
+	         //620
+	         $('html,body').scrollTop(620);
+	         scrollY = window.scrollY;
+	         $('html,body').scrollTop(scrollY);
+	    }
+// 	    if(scroll>1000 && scrollY<1630){
+	         //2495
+// 	    	$('html,body').scrollTop(2495);
+// 	    }else if(scrollY>2875){
+	         //3205
+// 	    	$('html,body').scrollTop(3205);
+// 	    }
+   }
 </script>
 
 	<!-- bx-slider part -->
-	<div id="sliderDiv">
+	<div id="slidersDiv">
 		<div id="slider" class="carousel slide" data-ride="carousel">
 			<!-- indicators -->
 			<ul class="carousel-indicators sliderIndi">
@@ -73,11 +98,11 @@
 		<div class="selBoard">
 			
 			<ul class="boardText">
-				<c:forEach var="i" begin="1" end="5">
-				<li class="selList">
-					<div OnClick="location.href='sellView'">
+				<c:forEach var="i" begin="1" end="8">
+				<li class="selList" OnClick="location.href='sellView'">
+					<div>
 						<div>
-							<img src="img/deal/Karrot.jpeg" />
+							<img src="img/deal/food1.jpeg" />
 						</div>
 						<ul>
 							<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
@@ -96,7 +121,7 @@
 		<div class="mdFnt indexSubTitle"><span class="indexSubTitleSpan">오늘의</span> "착한발견"</div>
 		<div class="selBoard">
 			<ul class="boardText">
-				<c:forEach var="i" begin="1" end="5">
+				<c:forEach var="i" begin="1" end="8">
 				<li class="selList">
 					<div OnClick="location.href='sellView'">
 						<div>
@@ -120,20 +145,7 @@
 	<div id="gachi" class="indexDivWidth">
 		<div id="gachititle" class="lgFnt indexBoardTitle">가치가장</div>
 		<ul id="gachiIndex" class="indexListNone">
-<!-- 			<c:forEach var="i" begin="1" end="10"> 
-				<li>
-					<ul class="indexInnerUl">
-						<li class="gachiPostTitle"><span class="gachiPoastTitle">&nbsp;한끼미식회</span></li>
-						<li class="wordCut">해물찜 같이 드실 분?해물찜 같이 드실 분?</li>
-						<li>2021/04/29 15:00</li>
-						<li class="smlFnt"><img src="img/indexImg/bo_pin.png" class="gachiPostLoc"> 마포구청역 3번 출구</li>
-						<li>
-							<span class="cntJoin">1</span> / 3 명
-						</li>
-						<li><span>goguma1234</span> &nbsp;&nbsp;<img src="common/user.png" class="gachiPostImg"/></li>
-					</ul>
-				</li>
-			</c:forEach> 	-->
+			<!-- 반복문이 들어 갈 자리 -->
 		</ul>
 	</div>
 	
@@ -155,6 +167,6 @@
 		</ul>
 	</div>
 	
-	<div style="width:350px; height: 700px; background-color: pink; float:left; margin-right: 20px;"></div>
-	<div style="width:900px; height: 700px; background-color: yellow; float:left; "></div>
+<!-- 	<div style="width:350px; height: 700px; background-color: pink; float:left; margin-right: 20px;"></div> -->
+<!-- 	<div style="width:900px; height: 700px; background-color: yellow; float:left; "></div> -->
 </div>

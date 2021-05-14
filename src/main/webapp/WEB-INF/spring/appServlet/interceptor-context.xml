@@ -14,9 +14,23 @@
 		class and controllers -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/joinSeller" />
+			<mvc:mapping path="/myInfoMain"/>
+			<mvc:mapping path="/myInfo"/>
+			<mvc:mapping path="/joinSeller"/>
 			<mvc:mapping path="/sellerJoinOk" />
+			<mvc:mapping path="/myInfoDelivery"/>
+			<mvc:mapping path="/myInfoLoad" />
+			<mvc:mapping path="/myInfoDeal"/>
+			<mvc:mapping path="/myInfoFarmerDeal"/>
+			<mvc:mapping path="/myInfoReview"/>
+			<mvc:mapping path="/myInfoActivity"/>
+			<mvc:mapping path="/myInfoReviewManagement"/>
 			<mvc:mapping path="/sellerPwdDoubleCheck"/>
+			<mvc:mapping path="/myInfoSeller"/>
+			<mvc:mapping path="/reportWrite"/>
+			<mvc:mapping path="/cs_repOk"/>
+			<mvc:mapping path="/qnaWrite"/>
+			<mvc:mapping path="/cs_qnaOk"/>
 			<bean class="com.team4.localer.controller.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

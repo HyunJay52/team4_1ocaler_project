@@ -3,8 +3,11 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 	$(function(){
-
-		var nowMoney = ${myPoint};
+		
+		var nowMoney = 0;
+		if(${myPoint != '0'}){		
+			nowMoney = ${myPoint};
+		}
 		 //현제 포인트 세팅
 		//충전금액 버튼 선택시
 		var firstMoney = nowMoney;
@@ -237,13 +240,13 @@
 				getMonth--;
 				if(getMonth == 0){
 					getMonth = 12;
-					year--;
+					
 				}
 			}else if($(this).hasClass('next')){
 				getMonth++;
 				if(getMonth == 13){
 					getMonth = 1;
-					year++;
+				
 				}
 			}
 			var month = String(getMonth).padStart(2,'0');
@@ -325,7 +328,7 @@
 						<tr>
 							<td><label class="btn">사용</label></td>
 							<td>${i.po_date }</td>
-							<td>포인트결제</td>
+							<	td>포인트결제</td>
 							<td>${i.cha_point }원</td>
 						</tr>
 					</c:if>

@@ -32,4 +32,7 @@ public interface BoardDAO {
 	public BoardVO commuOneSelect(BoardVO vo);
 	//구 개수
 	public int commuGuSelect(String b_gu);
+	//새글
+	public BoardVO newSelect(int num);
+	
 }

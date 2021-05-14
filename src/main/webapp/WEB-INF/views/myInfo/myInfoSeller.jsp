@@ -22,7 +22,6 @@
 				}else{
 					return false;
 				}
-				
 				$(".editOn").css('display', 'none');	
 				$(".inputDisabled").attr('disabled', true);
 				moreSellerInfo = false;								
@@ -32,7 +31,6 @@
 </script>
 
 <div class="myinfoBody">
-
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<form method="post" action="myinfoSellerOk" id="myinfoSellerFrm" enctype="multipart/form-data">
 		<div class="basicMyinfo">
@@ -75,25 +73,7 @@
 					<ul class="myifoAddrInput">
 						<li><input type="text" class="inputDisabled" name="sel_zip" id="sel_zip" value="${myVO.sel_zip }" disabled="disabled"
 							tabindex="9" />
-						<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:openKakaoPost()">재검색</button></li>
-						<li><input type="text" class="inputDisabled" name="sel_addr" id="sel_addr" value="${myVO.sel_addr }" disabled="disabled"
-							tabindex="10" /></li>
-						<li><input type="text" class="inputDisabled" name="sel_detail" id="sel_detail" value="${myVO.sel_detail }" disabled="disabled"
-							tabindex="11" />
-						</li>
-						<li>
-							<div id="joinAddrWrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:absolute">
-							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-							</div>
-						</li>
-					</ul>
-				</li>
-				<li>반품지 주소</li>
-				<li style="height:200px">
-					<ul class="myifoAddrInput">
-						<li><input type="text" class="inputDisabled" name="sel_zip" id="sel_zip" value="${myVO.sel_zip }" disabled="disabled"
-							tabindex="9" />
-						<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:openKakaoPost()">재검색</button></li>
+						<button type="button" class="btn commBtn Mem_lgBtn inputDisabled" onclick="javascript:openKakaoPost()">재검색</button></li>
 						<li><input type="text" class="inputDisabled" name="sel_addr" id="sel_addr" value="${myVO.sel_addr }" disabled="disabled"
 							tabindex="10" /></li>
 						<li><input type="text" class="inputDisabled" name="sel_detail" id="sel_detail" value="${myVO.sel_detail }" disabled="disabled"
@@ -125,7 +105,12 @@
 							<br/><span id="checkSellAcc"></span>
 						</li>
 					</ul>
-				</li>				
+				</li>
+				<li>인사말</li>
+				<li><textarea name="sel_content" id="mem_content" style="width:318px; height:62px; padding: 5px; resize:none"
+						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.sel_content }</textarea>
+				</li>
+								
 			</ul>
 			
 			<button type="button" id="moreSellerInfo" class="btn commBtn Mem_lgBtn"

@@ -64,7 +64,13 @@
       
       });
 </script>
-<div id="main">
+<div class="main">
+	<!--월 이동 부분-->
+	 <div class="loadDateFrm">
+	 	<button class="dayBtn prev">이전</button>
+	 	<button class="setMonth">2021년 ${monthArr[2]}월</button>
+	 	<button class="dayBtn next">다음</button>
+	 </div>
 <div class="title">회원 정산</div>
 <div id="doublediv">
 	<table class="t_spend" >

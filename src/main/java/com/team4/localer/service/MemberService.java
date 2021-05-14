@@ -18,6 +18,12 @@ public interface MemberService {
 	public int insertEventbonus(String userid);
 	//일반회원정보 수정
 	public int updateMember(MemberVO vo);
+	//일반회원 탈퇴
+	public int deleteMember(String userid);
+	//회원 탈퇴 시
+	public int insertDelMember(MemberVO vo);
+	//셀러회원 상태 업뎃
+	public int updateSellerStatus(String userid);
 	//셀러 회원가입 비밀번호 재확인
 	public String sellerPwdDoubleCheck(String userid, String userpwd);
 	//셀러 회원가입
@@ -26,6 +32,8 @@ public interface MemberService {
 	public int updateMemStatus(String userid);
 	//셀러회원 정보수정
 	public SellerVO selectSeller(String userid);
+	//셀러 정보 수정 확인
+	public int updateSeller(SellerVO vo);
 	//아이디 중복확인
 	public String idDoubleCheck(String userid);
 	//별명 중복확인

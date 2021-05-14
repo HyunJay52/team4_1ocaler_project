@@ -1,54 +1,5 @@
 @charset "UTF-8";
-/*32 22 13*/
-body{
-	font-family:"nsr";
-	}
-#main{
-	margin:0 auto; 
-	padding:0;
-	overflow:auto;
-	width:1300px;
-}
-.statis{ /*ul style*/
-	margin:0 auto;
-	width:100%;
-	overflow:auto;
-	list-style-type:none;
-	background-color:rgb(230,230,230,0.1);
-	}
-.statis>li{
-	margin-top:10px;
-	margin-bottom:10px;
-	float:left;
-	width:20%;
-	color:#024B40;
-	font-family:"nsrb";
-	font-size:16px;
-	text-align: center;
-	}
-.statis>li:nth-child(1){
-	margin-left:20%;
-}
-.statis>li:nth-child(2){/*중간선긋기*/
-	border-left:3px solid #024B40;
-	border-right:3px solid #024B40;
-}
-.statis div{
-	font-family:"nsreb";
-	font-size:50px;
-}
 
-.main select{
-	margin-left:26%;
-}
-#btndiv{ 
-	width:400px;
-	margin-right:auto;
-	margin-left:auto;
-}
-#btndiv input{
-	margin:20px;
-}
 #del{
 	background-color:rgb(232,0,0,0.8);
 	border:1px solid rgb(232,0,0,0.8);

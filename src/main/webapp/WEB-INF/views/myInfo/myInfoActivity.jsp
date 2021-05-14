@@ -45,8 +45,6 @@
 			<div class="activityRight">
 				<input type="button" class="btn btn-outline-danger" value="삭제" style="float:right; height:30px; margin-top:10px; line-height:10px"/>
 				<div class="myActivityForm">
-					<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
-					<div class="myActivityDateFrm"><button class="dayBtn prev">《</button><button class="setMonth dayBtn mdFnt"></button><button class="dayBtn next">》</button></div>
 					<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
 					<input type="date" min="2021-01-01" max="2021-05-31"/>
 					<div class="activitySelect">

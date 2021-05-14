@@ -26,10 +26,30 @@ public class BoardVO {
 	//배열?
 	private int gu_select;
 	
+	//신고횟수
+	private int reportCount;
 
+	// 새로운글 
+	private int newDate;
+	
+	
+	//플필그거
+	private String mem_sub;
+	private String mem_post;
+	private String mem_rev;
+	private String mem_prof;
+	private String mem_nick;
 	
 	
 	
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
+
 	public int getGu_select() {
 		return gu_select;
 	}

@@ -1,5 +1,6 @@
 package com.team4.localer.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +14,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
 		//1. 로그인 정보 구하기
 		String userid = (String)req.getSession().getAttribute("logId"); //""문자도 확인
+
+		//1-2. 쿠키값 받아오기 
+		Cookie[] cookies = req.getCookies();
 		
 		//2-1. 로그인 상태 확인하기
 		if(userid==null || userid.equals("")) {
@@ -26,11 +30,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			}
 			//3. 로그인 페이지로 이동
 			return false; // 접속한 컨트롤러의 실행중지 후, 지정 컨트롤러로 이동
-		}else {
-			res.sendRedirect(req.getContextPath()+"/home");
+		}else if(cookies.length<=0) {
+			//2-2. 쿠키값이 없으면 로그인 페이지로 이동
+			System.out.println("인터셉터에서 페이지를 보냄");
+			res.sendRedirect(req.getContextPath()+"/login");
+			return false;
 		}
-		//2-2. 쿠키값이 있는지 확인하기
-		
 		return true; //실행한 컨트롤러 계속 실행
 	}
 
