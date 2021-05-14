@@ -129,9 +129,9 @@
 	<!--월 이동 부분-->
      
 	 <div class="loadDateFrm">
-	 	<button class="dayBtn prev">이전</button>
+	 	<button class="dayBtn prev">《</button>
 	 	<button class="setMonth">2021년 ${dataVO.month3}월</button>
-	 	<button class="dayBtn next">다음</button>
+	 	<button class="dayBtn next">》</button>
 	 </div>
 	 
 	<div class="btitle">회원통계</div>
