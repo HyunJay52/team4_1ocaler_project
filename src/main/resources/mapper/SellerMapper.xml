@@ -3,5 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team4.localer.dao.SellerDAO">
-
+	<insert id="">
+		insert into sell_item(i_num, sel_num, i_subject, i_gu, i_cnt, i_content, i_img1, i_img2, i_img3, i_price,
+		i_ship, i_period, i_status, i_tag)
+		values(999999, (select sel_num from seller where userid='bitcamp2'),'123', '123', 1,
+		'내용입니다','123.png','123.png','123.png',1214214,3000,to_date('2021-05-14','YYYY-MM-DD'),1,'태그');
+	</insert>
 </mapper>

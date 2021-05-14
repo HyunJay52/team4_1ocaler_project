@@ -2,6 +2,8 @@ package com.team4.localer.vo;
 
 public class SellitemVO {
 	private String userid;//작성자
+	
+	
 	private int i_num;//셀러판매글번호
 	private int sel_num;//셀러회원번호
 	private String i_subject;
