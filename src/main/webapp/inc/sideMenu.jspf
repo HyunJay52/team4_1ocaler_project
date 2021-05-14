@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMainStyle.css?ver=2"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStyle.css?ver=16"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStyle.css?ver=17"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyActivityStyle.css?ver=1"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=3"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoLoadStyle.css?ver=7"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyDealStyle.css?ver=10"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyDealStyle.css?ver=12"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoFarmerDealStyle.css?ver=1"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoDeliveryStyle.css?ver=3"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoDeliveryStyle.css?ver=4"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoSaleHistoryStyle.css?ver=1"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyinfoStyle.css?ver=3"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoSellerStyle.css"/>

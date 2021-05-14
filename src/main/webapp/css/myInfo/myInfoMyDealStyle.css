@@ -76,6 +76,14 @@
 	}
 	.imgBtn{
 		font-weight:bold;
+		height:128px;
+		width:130px;
+	}
+	.btnYellow{
+		color:#eded00;
+	}
+	.btnYellow:hover{
+		color:#fff;
 	}
 	.checkJoinMember, .cancelJoinMember{
 		position: absolute;
@@ -90,6 +98,19 @@
 	    text-align: center;
 	    padding: 50px 20px;
 	}
+	.cancelJoinMember{
+		z-index:100;
+	}
+	.modalBackground{
+		color: black;
+	    width: 100%;
+	    height: 100%;
+	    position: absolute;
+	    background: black;
+	    z-index: 0;
+	    opacity: 0.4;
+	   	display:none;
+	}
 	.readMe{
 		height:300px;
     	width:100%;
@@ -99,4 +120,8 @@
 		width: 100%;
 	    height: 120;
 	    line-height: 70px;
+	}
+	.cancelJoin{
+		width:90px;
+		height:33.5px;
 	}

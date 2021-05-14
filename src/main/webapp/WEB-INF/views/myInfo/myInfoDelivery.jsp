@@ -148,7 +148,7 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header" id="deliveryHeader">
-				<h3 class="modal-title lgFnt" style="height:50px">배 송 조 회<button class="close" data-dismiss="modal">&times;</button></h3>
+				<h3 class="modal-title" style="height:50px; font-size:24px; font-weight:bold; margin-bottom:20px;">배 송 조 회<button class="close" data-dismiss="modal" style="position:absolute">&times;</button></h3>
 				
 						
 						

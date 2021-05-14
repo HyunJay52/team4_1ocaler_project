@@ -7,6 +7,7 @@ import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 
@@ -49,4 +50,10 @@ public interface MyInfoDAO {
 	
 	//참여신청 수락시 상태 업데이트
 	public int updateJoinStatus(int j_num);
+	
+	//참여신청 취소처리 업데이트
+	public int updateJoinCancel(int j_num);
+	
+	//거래글의 참여인원 카운트, 리뷰작성이 완료된 카운트 조회후 vo로 리턴
+	public MyinfoJoinUsVO selectReviewCount(int num);
 }

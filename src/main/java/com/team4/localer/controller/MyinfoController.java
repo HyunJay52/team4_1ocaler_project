@@ -23,6 +23,7 @@ import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 
@@ -225,6 +226,18 @@ public class MyinfoController {
 		return result;
 	}
 	@ResponseBody
+	@RequestMapping("/selectReviewCount")
+	public MyinfoJoinUsVO selectReviewCount(HttpServletRequest req) {
+		MyinfoJoinUsVO vo = new MyinfoJoinUsVO();
+		int num = Integer.parseInt(req.getParameter("num"));
+		
+		vo = service.selectReviewCount(num);
+		System.out.println("joincount="+vo.getJoinCount());
+		System.out.println("reviewcount="+vo.getReviewCount());
+		
+		return vo;
+	}
+	@ResponseBody
 	@RequestMapping("/selectJoinUs")
 	public List<JoinUsVO> selectJoinUs(HttpServletRequest req){
 		List<JoinUsVO> list = new ArrayList<JoinUsVO>();
@@ -279,6 +292,8 @@ public class MyinfoController {
 	public String myInfoReview() {
 		return "myInfo/myInfoReview";
 	}
+	
+	//리뷰쓰기
 	@ResponseBody
 	@RequestMapping("/writeReview")
 	public int writeReview(HttpSession ses, HttpServletRequest req, ItemReviewVO vo) {
@@ -292,6 +307,8 @@ public class MyinfoController {
 		}
 		return result;
 	}
+	
+	//
 	@ResponseBody
 	@RequestMapping("/joinUpdate")
 	public int joinUpdate(HttpServletRequest req) {
@@ -300,6 +317,18 @@ public class MyinfoController {
 		System.out.println(j_num);
 		result = service.updateJoinStatus(j_num);
 		
+		
+		return result;
+	}
+	
+	//참여신청 취소
+	@ResponseBody
+	@RequestMapping("/joinCancel")
+	public int joinCancel(HttpServletRequest req) {
+		int result = 0;
+		int j_num = Integer.parseInt(req.getParameter("j_num"));
+		System.out.println(j_num);
+		result = service.updateJoinCancel(j_num);
 		
 		return result;
 	}

@@ -12,6 +12,7 @@ import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 
@@ -96,6 +97,18 @@ public class MyInfoServiceImp implements MyInfoService{
 	public int updateJoinStatus(int j_num) {
 		
 		return dao.updateJoinStatus(j_num);
+	}
+
+	@Override
+	public int updateJoinCancel(int j_num) {
+		
+		return dao.updateJoinCancel(j_num);
+	}
+
+	@Override
+	public MyinfoJoinUsVO selectReviewCount(int num) {
+		
+		return dao.selectReviewCount(num);
 	}
 
 

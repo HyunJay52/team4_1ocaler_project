@@ -133,4 +133,18 @@
 	<update id="updateJoinStatus" parameterType="int">
 		update joinus set j_status = '참여승인' where j_num = #{param1}
 	</update> 
+	
+	<update id="updateJoinCancel" parameterType="int">
+		update joinus set j_status = '참여취소' where j_num = #{param1}	
+	</update>
+	
+	<select id="selectReviewCount" parameterType="int" resultType="com.team4.localer.vo.MyinfoJoinUsVO">
+		select count(numjoin) joinCount, 
+		count(case when j_status = '리뷰완료' then 0 end) reviewCount, 
+		count(case when j_status = '참여취소' then 0 end) joinCancel
+		from (
+		select j.userid, j_num, numjoin, j_status, j_writedate 
+		from joinus j join mem_share m on j.numjoin = m.num 
+		where num=#{param1})
+	</select>
 </mapper>
