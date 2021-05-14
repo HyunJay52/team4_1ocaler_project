@@ -1,16 +1,4 @@
 @charset "UTF-8";
-.dateFrm{
-	text-align:center;
-}
-.dateFrm input[type="date"]:first-child{
-	/* margin-left:35%; */
-}
-.dateFrm input[type="date"]{
-	width:150px;/*너비설정*/
-	padding:6px;/*여백설정*/
-	border:1px solid #3f1785;
-	font-family: inherit;/*폰트상속*/
-}
 /*그래프차트부분*/
 #chart_div{
 	margin-left:auto;
@@ -19,6 +7,54 @@
 	width:1200px;
 	height:400px;
 }
+/*월 이동 버튼*/
+.loadDateFrm{
+	width:1300px;
+	padding:20px;
+	background-color:rgb(243,245,248,0.5);
+	border:1px solid #ddd;
+	border-top:none;
+	text-align:center;
+}
+.dayBtn {
+  width: 60px;
+  height: 60px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius:50%;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.prev:hover, .next:hover{
+  background-color: #024B40;
+  /* box-shadow: 0px 15px 20px #024B40; */
+  color: #fff;
+  transform: translateY(-7px);
+}
+.setMonth{
+	width: 130px;
+  	height: 45px;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+ 	color: #000;
+ 	background-color: #fff;
+  	border: none;
+  	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  	transition: all 0.3s ease 0s;
+  	cursor: pointer;
+  	outline: none;
+  	margin-left:10px;
+  	margin-right:10px;
+}
+
 /*월별회원통계추기*/
 .btitle{
 	font-family:"nsreb";
@@ -29,6 +65,10 @@
 	}
 
 /*도넛 차트1*/
+.donutUl{
+	overflow:auto;
+	margin-bottom:30px;
+}
 .donutUl li{
 	float:left;
 	width:400px;

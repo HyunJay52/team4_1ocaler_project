@@ -121,12 +121,12 @@
 						<li><a href="boardManage">게시글관리</a></li>
 					</ul>
 					<ul>
-						<li><a href="statis_mem">회원 통계</a></li>
-						<li><a href="statis_board">게시글 통계</a></li>
+						<li><a href="statis_mem?month=5">회원 통계</a></li>
+						<li><a href="statis_board?month=5">게시글 통계</a></li>
 					</ul>
 					<ul>
-						<li><a href="spend_mem">회원정산</a></li>
-						<li><a href="spend_sel">셀러정산</a></li>
+						<li><a href="spend_mem?month=5">회원정산</a></li>
+						<li><a href="spend_sel?month=5">셀러정산</a></li>
 					</ul>
 				</div>
 			</div>

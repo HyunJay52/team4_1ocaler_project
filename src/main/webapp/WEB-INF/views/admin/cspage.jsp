@@ -20,7 +20,15 @@ $(function(){
 	$(document).on('click', '.clickpage', function(){
 		var txt = $(this).text();
 		
-		$("#pageNum").val(txt);	
+		if(txt=="이전"){
+			var nextPage = parseInt($("#pageNum").val())-1;
+			$("#pageNum").val(nextPage);	
+		}else if(txt=="다음"){
+			var nextPage = parseInt($("#pageNum").val())+1;
+			$("#pageNum").val(nextPage);
+		}else{
+			$("#pageNum").val(txt);
+		}
 		
 		//페이지 이동 ajax 추가
 		//무슨 카테고리인지 알아오기 
@@ -90,13 +98,25 @@ $(function(){
 				//페이징 부분
 				var link="";
 				$(".clickpage").remove();//기존 페이징 부분 삭제
-				for(var i=start;i<=last;i++){
+				if(pagenum>1){
+					link +="<li  class='clickpage'>이전</li>";	
+				}
+				var lastPg=last;
+				if(lastPg>=start+4){//>11>2+4
+					lastPg=5;
+				}else{
+					lastPg = last-start+1;
+				}
+				for(var i=start;i<=start+lastPg-1;i++){
 					if(pagenum==i){
 						link +="<li  class='clickpage nowPg'>"+i+"</li>";
 					}else{
 						link +="<li  class='clickpage'>"+i+"</li>";	
 					}
 					
+				}
+				if(last>pagenum){
+					link +="<li  class='clickpage'>다음</li>";
 				}
 				$(".link").append(link);
 			},error:function(){
@@ -164,13 +184,25 @@ $(function(){
 				//페이징 부분
 				var link="";
 				$(".clickpage").remove();//기존 페이징 부분 삭제
-				for(var i=start;i<=last;i++){
+				if(pagenum>1){
+					link +="<li  class='clickpage'>이전</li>";	
+				}
+				var lastPg=last;
+				if(lastPg>=start+4){//>11>2+4
+					lastPg=5;
+				}else{
+					lastPg = last-start+1;
+				}
+				for(var i=start;i<=start+lastPg-1;i++){
 					if(pagenum==i){
 						link +="<li  class='clickpage nowPg'>"+i+"</li>";
 					}else{
 						link +="<li  class='clickpage'>"+i+"</li>";	
 					}
 					
+				}
+				if(last>pagenum){
+					link +="<li  class='clickpage'>다음</li>";
 				}
 				$(".link").append(link);
 			},error:function(){
@@ -239,13 +271,25 @@ $(function(){
 				//페이징 부분
 				var link="";
 				$(".clickpage").remove();//기존 페이징 부분 삭제
-				for(var i=start;i<=last;i++){
+				if(pagenum>1){
+					link +="<li  class='clickpage'>이전</li>";	
+				}
+				var lastPg=last;
+				if(lastPg>=start+4){//>11>2+4
+					lastPg=5;
+				}else{
+					lastPg = last-start+1;
+				}
+				for(var i=start;i<=start+lastPg-1;i++){
 					if(pagenum==i){
 						link +="<li  class='clickpage nowPg'>"+i+"</li>";
 					}else{
 						link +="<li  class='clickpage'>"+i+"</li>";	
 					}
 					
+				}
+				if(last>pagenum){
+					link +="<li  class='clickpage'>다음</li>";
 				}
 				$(".link").append(link);
 			},error:function(){
@@ -299,26 +343,28 @@ $(function(){
 </script>
 <div class="main">
 	<div class="title">고객센터</div>
-	<form id="searchFrm">
-		<p>
-			<select name="searchKey" class="selectcomm">
-				<option value="num">게시물 번호</option>
-				<option value="subject">게시글 제목</option>
-				<option value="content">게시글 내용</option>
-				<option value="userid">아이디</option>
-			</select>
-			<input type="text" name="searchWord" class="textcomm"/>
-			<input type="button" class="searchbtn" id="searchCS" value="검색"/>
-			<input type="hidden" id="selectcate" value="report"/>
-			<input type="hidden" name="pageNum" id="pageNum"value="1"/>
-		</p>
-	</form>
-	<p>
-		<input type="button" id="oftenBtn" class="searchbtn" value="자주하는 질문"/>
-		<input type="button" id="csBtn" class="searchbtn" value="1:1 질문"/>
-		<input type="button" id="reportBtn" class="puplebtn" value="사용자 신고"/>
-		<input type="button" id="oftenqWriteBtn"class="searchbtn" value="자주하는 질문작성"/>
-	</p>
+	<div class="searchDiv">
+		<div class="searchInfo">
+			<form id="searchFrm">
+					<select name="searchKey" class="selectcomm">
+						<option value="num">게시물 번호</option>
+						<option value="subject">게시글 제목</option>
+						<option value="content">게시글 내용</option>
+						<option value="userid">아이디</option>
+					</select>
+					<input type="text" name="searchWord" class="textcomm"/>
+					<input type="button" class="searchbtn" id="searchCS" value="검색"/>
+					<input type="hidden" id="selectcate" value="report"/>
+					<input type="hidden" name="pageNum" id="pageNum"value="1"/>
+			</form>
+		</div>
+		<div class="searchCate">
+			<input type="button" id="oftenBtn" class="searchbtn" value="자주하는 질문"/>
+			<input type="button" id="csBtn" class="searchbtn" value="1:1 질문"/>
+			<input type="button" id="reportBtn" class="puplebtn" value="사용자 신고"/>
+			<input type="button" id="oftenqWriteBtn"class="searchbtn" value="자주하는 질문작성"/>
+		</div>
+	</div>
 	<table id="resultTbl" class="tablea cstable">
 		<colgroup class="op1">
              <col width="5%" />
@@ -356,6 +402,10 @@ $(function(){
 		</c:forEach>
 	</table>
 	<ul class="link">
+		<!-- 이전버튼 -->
+		<c:if test="${pageVO.pageNum>1 }">
+			<li class="clickpage">이전</li>
+		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
@@ -367,6 +417,9 @@ $(function(){
             	</c:if>
             </c:if>
          </c:forEach>
+         <c:if test="${pageVO.totalPage>pageVO.pageNum }">
+			<li class="clickpage">다음</li>
+		</c:if>
 	</ul>
 </div>
 

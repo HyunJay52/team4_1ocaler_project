@@ -1,5 +1,6 @@
 package com.team4.localer.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.CsService;
 import com.team4.localer.service.ManageService;
 import com.team4.localer.vo.AdminPageVO;
+import com.team4.localer.vo.AdminspendVO;
 import com.team4.localer.vo.AdminstatisVO;
+import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.MemShareVO;
+import com.team4.localer.vo.Mem_statisVO;
 import com.team4.localer.vo.MemberVO;
 
 @Controller
@@ -99,10 +103,23 @@ public class AdminManageController {
 	@ResponseBody
 	public Map<String, Object> sellerListSearch(AdminPageVO pageVO){
 		Map<String, Object> result = new HashMap<String, Object>();
-		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+		System.out.println("Key="+pageVO.getSearchKey());
+		System.out.println("word="+pageVO.getSearchWord());
 		pageVO.setNum("sel_num");
 		pageVO.setCate("seller");
-		pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
+			//검색어가 존재하면
+			pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+			System.out.println("검색어 존재하는데 여기 안들어오니?");
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+			pageVO.setSearchKey("s."+pageVO.getSearchKey());
+		}else {
+			pageVO.setSearchKey("");
+			pageVO.setSearchWord("");
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		}
+		
+		
 		result.put("list",manaService.sellerAllSelect(pageVO));
 		result.put("pageNum",pageVO.getPageNum());
 		result.put("startPageNum",pageVO.getStartPageNum());
@@ -132,6 +149,8 @@ public class AdminManageController {
 		//판매게시글목록가져오기 
 		List<MemShareVO> list = manaService.memShareAllSelect(pageVO);
 		mav.addObject("list",list);
+		//페이지 통계부분 
+		mav.addObject("statisVO",manaService.selManageStatis());
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("admin/selManage");
 		return mav;
@@ -182,6 +201,7 @@ public class AdminManageController {
 		}
 		result.put("pageNum",pageVO.getPageNum());
 		result.put("startPageNum",pageVO.getStartPageNum());
+		result.put("onePageNum", pageVO.getOnePageNum());
 		result.put("totalPage", pageVO.getTotalPage());
 		return result;
 	}
@@ -191,11 +211,163 @@ public class AdminManageController {
 		if(cate!="mem_share"&&!cate.equals("mem_share")) {
 			numName="i_num";
 		}
-		System.out.println("현재 검색하는 글번호 컬럼명"+numName);
 		manaService.selManageDel(num,cate,numName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:selManage");
 		return mav;
 	}
+	//============게시글 관리
+	@RequestMapping("/boardManage")//회원판매 게시글 조회
+	public ModelAndView boardManage(AdminPageVO pageVO) {
+		ModelAndView mav = new ModelAndView();
+		pageVO.setNum("num");
+		pageVO.setCate("grouplocal");
+		pageVO.setSearchKey("");
+		pageVO.setSearchWord("");
+		//총레코드 구하기
+		pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		//모집게시글목록가져오기 
+		mav.addObject("list",manaService.boardManageAllSelect(pageVO));
+		//페이지 통계부분 
+		mav.addObject("statisVO",manaService.boardManageStatis());
+		mav.addObject("pageVO",pageVO);
+		mav.setViewName("admin/boardManage");
+		return mav;
+	}
+	//자유자게 리스트,검색, 페이징
+	@RequestMapping(value="/cumuManageListSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> cumuManageListSearch(AdminPageVO pageVO){
+		Map<String, Object> result = new HashMap<String, Object>();
+		System.out.println("Key="+pageVO.getSearchKey());
+		System.out.println("word="+pageVO.getSearchWord());
+		pageVO.setNum("num");
+		pageVO.setCate("board");
+		if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
+			//검색어가 존재하면
+			pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+			if(pageVO.getSearchKey()=="subject" || pageVO.getSearchKey().equals("subject")) {
+				pageVO.setSearchKey("b_"+pageVO.getSearchKey());
+			}
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+			pageVO.setSearchKey("b."+pageVO.getSearchKey());
+		}else {
+			pageVO.setSearchKey("");
+			pageVO.setSearchWord("");
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		}
+		
+		
+		result.put("list",manaService.cumuManageListSearch(pageVO));
+		result.put("pageNum",pageVO.getPageNum());
+		result.put("startPageNum",pageVO.getStartPageNum());
+		result.put("totalPage", pageVO.getTotalPage());
+		return result;
+	}
+	//모집 게시판 검색, 리스트,페이징 
+	@RequestMapping(value="/groupManageListSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> groupManageListSearch(AdminPageVO pageVO){
+		Map<String, Object> result = new HashMap<String, Object>();
+		System.out.println("Key="+pageVO.getSearchKey());
+		System.out.println("word="+pageVO.getSearchWord());
+		pageVO.setNum("num");
+		pageVO.setCate("grouplocal");
+		if(pageVO.getSearchWord()!=null && !pageVO.getSearchWord().equals("")) {
+			//검색어가 존재하면
+			pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+			if(pageVO.getSearchKey()=="subject" || pageVO.getSearchKey().equals("subject")) {
+				pageVO.setSearchKey("g_"+pageVO.getSearchKey());
+			}
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+			pageVO.setSearchKey("g."+pageVO.getSearchKey());
+			
+		}else {
+			pageVO.setSearchKey("");
+			pageVO.setSearchWord("");
+			pageVO.setTotalRecord(csService.totalRecord(pageVO));
+		}
+		result.put("list",manaService.boardManageAllSelect(pageVO));
+		result.put("pageNum",pageVO.getPageNum());
+		result.put("startPageNum",pageVO.getStartPageNum());
+		result.put("totalPage", pageVO.getTotalPage());
+		return result;
+	}
+	@RequestMapping("/boardManageDel")
+	public ModelAndView boardManageDel(int num, String cate) {
+		String numName="num";
+		manaService.selManageDel(num,cate,numName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:boardManage");
+		return mav;
+	}
+	//=========================통계부분==============================
+	//회원통계부분
+	@RequestMapping("/statis_mem")//회원 통계
+	public ModelAndView statis_mem(int month) {
+		ModelAndView mav = new ModelAndView();
+		Mem_statisVO statisVO = new Mem_statisVO();
+		statisVO.setMonth(month);
+		mav.addObject("dataVO",statisVO);
+		//3,4,5월 방문자수 구하기, //3,4,5월 누적 회원 순위 
+		mav.addObject("memCountVO",manaService.loginNum(statisVO));
+		//3,4,5월 신규 회원수,셀러수
+		mav.addObject("newCountVO",manaService.newmem(statisVO));
+		//지역구별 로그인수
+		mav.addObject("guVO",manaService.guLoginCount(statisVO));
+		//일반회원수/셀러회원수, 신규회원수/휴면회원수
+		mav.addObject("subVO",manaService.subCount(statisVO));
+		mav.setViewName("admin/statis_mem");
+		return mav;
+	}
+	//게시판 통계부분
+	@RequestMapping("/statis_board")//판매관리
+	public ModelAndView statis_board(int month) {
+		ModelAndView mav = new ModelAndView();
+		Mem_statisVO statisVO = new Mem_statisVO();
+		//5월 신규
+		statisVO.setMonth(month);
+		String resultMonth[] = {statisVO.getMonth1(),statisVO.getMonth2(),statisVO.getMonth3()};
+		mav.addObject("monthArr",resultMonth);
+		mav.addObject("month3",manaService.boardStatis(statisVO));
+		//4월 신규
+		statisVO = monthCal1(statisVO);//4월 넣어주는 과정
+		mav.addObject("month2",manaService.boardStatis(statisVO));
+		//3월 신규
+		statisVO = monthCal1(statisVO);//3월 넣어주는 과정
+		mav.addObject("month1",manaService.boardStatis(statisVO));
+		//셀러판매 게시판 조회수 기준으로 select 하기
+		mav.setViewName("admin/statis_board");
+		return mav;
+	}
 	
+	public Mem_statisVO monthCal1(Mem_statisVO vo) {
+		if(vo.getMonth()-1<=0) {
+			vo.setMonth(12);
+		}else {
+			vo.setMonth(vo.getMonth()-1);
+		}
+		return vo;
+	}
+	
+	//===========정산====
+	@RequestMapping("/spend_mem")//회원정산
+	public ModelAndView spend_mem(int month) {
+		ModelAndView mav = new ModelAndView();
+//		Mem_statisVO statisVO = new Mem_statisVO();
+//		//5월 신규
+//		statisVO.setMonth(month);
+//		String resultMonth[] = {statisVO.getMonth1(),statisVO.getMonth2(),statisVO.getMonth3()};
+//		mav.addObject("monthArr",resultMonth);//3월,4월 5월 넣기
+//		AdminspendVO resultVO = manaService.memspend(statisVO);
+		mav.setViewName("admin/spend_mem");
+		return mav;
+	}
+	//셀러 정산============
+	@RequestMapping("/spend_sel")//판매관리
+	public ModelAndView spend_sel(int month) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/spend_sel");
+		return mav;
+	}
 }

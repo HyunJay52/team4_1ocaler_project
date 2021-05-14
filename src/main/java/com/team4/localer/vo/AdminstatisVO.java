@@ -1,6 +1,8 @@
 package com.team4.localer.vo;
 
+
 public class AdminstatisVO {
+
 	//sell_item
 	private int i_num;//판매글번호 
 	private String i_subject;//판매글제목
@@ -9,6 +11,7 @@ public class AdminstatisVO {
 	private int o_conf1;//구매확정 전
 	private int o_conf2;//구매확정후 
 	private int price_total;//구매확정 가격 합산 
+	
 	
 	public int getI_num() {
 		return i_num;

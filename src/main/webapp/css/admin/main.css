@@ -6,6 +6,7 @@
 #cirdiv{
 	overflow:auto;
 	background-color:rgb(230,230,230,0.1);
+	border:1px solid #ddd;
 }
 .cir1{
 	background-color:rgb(230,230,230,0.1);/*#3f1785 > #571fb8 > #705abf  */
@@ -19,13 +20,19 @@
 	line-height:80px; 
 	float:left;
 	margin:40px;
-	/* margin-left:40px;
-	margin-right:40px;
-	margin-bottom:40px; */
 	color:#024B40;
 	border:1px solid #024B40;
 	}
-.cir1>b{font-size:120px;}
+.top{
+	font-size: 22px;
+    margin-bottom: 15px;
+	font-weight: bold;
+}
+.btm{
+	font-weight: bold;
+	font-size:130px;
+	color:#fd9735;
+}
 /*더보기*/
 .more{
 	float: right;

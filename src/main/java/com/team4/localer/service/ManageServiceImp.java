@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.ManageDAO;
 import com.team4.localer.vo.AdminPageVO;
+import com.team4.localer.vo.AdminspendVO;
 import com.team4.localer.vo.AdminstatisVO;
+import com.team4.localer.vo.BoardVO;
+import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.MemShareVO;
+import com.team4.localer.vo.Mem_statisVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
@@ -65,6 +69,57 @@ public class ManageServiceImp implements ManageService {
 	public int selManageDel(int num, String cate, String numName) {
 		return manadao.selManageDel(num, cate, numName);
 	}
+
+	@Override
+	public List<GroupVO> boardManageAllSelect(AdminPageVO pageVO) {
+		return manadao.boardManageAllSelect(pageVO);
+	}
+
+	@Override
+	public List<BoardVO> cumuManageListSearch(AdminPageVO pageVO) {
+		return manadao.cumuManageListSearch(pageVO);
+	}
+
+	@Override
+	public AdminstatisVO selManageStatis() {
+		return manadao.selManageStatis();
+	}
+
+	@Override
+	public AdminstatisVO boardManageStatis() {
+		return manadao.boardManageStatis();
+	}
+
+	@Override
+	public Mem_statisVO loginNum(Mem_statisVO statisVO) {
+		return manadao.loginNum(statisVO);
+	}
+
+	@Override
+	public Mem_statisVO newmem(Mem_statisVO statisVO) {
+		return manadao.newmem(statisVO);
+	}
+
+	@Override
+	public Mem_statisVO guLoginCount(Mem_statisVO statisVO) {
+		return manadao.guLoginCount(statisVO);
+	}
+
+	@Override
+	public Mem_statisVO subCount(Mem_statisVO statisVO) {
+		return manadao.subCount(statisVO);
+	}
+
+	@Override
+	public Mem_statisVO boardStatis(Mem_statisVO statisVO) {
+		return manadao.boardStatis(statisVO);
+	}
+
+	@Override
+	public AdminspendVO memspend(Mem_statisVO statisVO) {
+		return manadao.memspend(statisVO);
+	}
+
 
 
 

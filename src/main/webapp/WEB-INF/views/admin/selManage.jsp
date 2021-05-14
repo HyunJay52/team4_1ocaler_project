@@ -19,6 +19,7 @@
 	$(function(){
 		$(".seller").click(function(){//셀러판매관리 버튼 클릭시 셀러판매목록 호출
 			$("#cate").val("sell_item");
+			$("#pageNum").val(1);//현재페이지 히든태그의 번호를 1로 변경해줘야한다.
 			$(".puplebtn").removeClass().addClass("searchbtn member");//멤버 목록 버튼 css바꿔주기
 			$(this).removeClass().addClass("puplebtn seller");
 			$(".textcomm").val("");//text 글씨 지워주기
@@ -26,6 +27,7 @@
 		});
 		$(".member").click(function(){//회원간 거래 관리 클릭시
 			$("#cate").val("mem_share");
+			$("#pageNum").val(1);
 			$(".puplebtn").removeClass().addClass("searchbtn seller");//멤버 목록 버튼 css바꿔주기
 			$(this).removeClass().addClass("puplebtn member");
 			$(".textcomm").val("");//text 글씨 지워주기
@@ -35,7 +37,16 @@
 		$(document).on('click', '.clickpage', function(){
 			var txt = $(this).text();
 			var cate = $("#cate").val();
-			$("#pageNum").val(txt);	
+			if(txt=="이전"){
+				var nextPage = parseInt($("#pageNum").val())-1;
+				$("#pageNum").val(nextPage);	
+			}else if(txt=="다음"){
+				var nextPage = parseInt($("#pageNum").val())+1;
+				$("#pageNum").val(nextPage);
+			}else{
+				$("#pageNum").val(txt);
+			}
+			
 			if(cate=="mem_share"){
 				memberAjax();
 			}else{
@@ -60,6 +71,7 @@
 					var $list = $(result.list);
 					var pagenum = result.pageNum;
 					var start = result.startPageNum;
+					var onePageNum = result.onePageNum;
 					var last = result.totalPage;
 					$(".selboardList").remove();//테이블 내용 지우기 
 					var txt = "";
@@ -104,13 +116,25 @@
 					//페이징 부분
 					var link="";
 					$(".clickpage").remove();//기존 페이징 부분 삭제
-					for(var i=start;i<=last;i++){
+					if(pagenum>1){
+						link +="<li  class='clickpage'>이전</li>";	
+					}
+					var lastPg=last;
+					if(lastPg>=start+4){//>11>2+4
+						lastPg=5;
+					}else{
+						lastPg = last-start+1;
+					}
+					for(var i=start;i<=start+lastPg-1;i++){
 						if(pagenum==i){
 							link +="<li  class='clickpage nowPg'>"+i+"</li>";
 						}else{
 							link +="<li  class='clickpage'>"+i+"</li>";	
 						}
 						
+					}
+					if(last>pagenum){
+						link +="<li  class='clickpage'>다음</li>";
 					}
 					$(".link").append(link);
 				},error:function(){
@@ -130,6 +154,7 @@
 					var pagenum = result.pageNum;
 					var start = result.startPageNum;
 					var last = result.totalPage;
+					var onePageNum = result.onePageNum;
 					$(".selboardList").remove();//테이블 내용 지우기 
 					var	txt = "<colgroup class='selboardList'>";
 						txt += 		"<col width='5%' />";
@@ -171,13 +196,22 @@
 					//페이징 부분
 					var link="";
 					$(".clickpage").remove();//기존 페이징 부분 삭제
-					for(var i=start;i<=last;i++){
+					if(pagenum>1){
+						link +="<li  class='clickpage'>이전</li>";	
+					}
+					if(last>=start+4){
+						last=4;
+					}
+					for(var i=start;i<=start+last-1;i++){
 						if(pagenum==i){
 							link +="<li  class='clickpage nowPg'>"+i+"</li>";
 						}else{
 							link +="<li  class='clickpage'>"+i+"</li>";	
 						}
 						
+					}
+					if(pagenum<last){
+						link +="<li  class='clickpage'>다음</li>";
 					}
 					$(".link").append(link);
 				},error:function(){
@@ -193,32 +227,36 @@
 	<ul class="statis">
 		<li>
 			총게시글
-			<div>100</div>
+			<div>${statisVO.price_total }</div>
 		</li>
 		<li>
 			거래진행
-			<div>94</div>
+			<div>${statisVO.o_conf1 }</div>
 		</li>
 		<li>
 			거래종료
-			<div>6</div>
+			<div>${statisVO.o_conf2 }</div>
 		</li>
 	</ul>
-	<form id="boardFrm">
-		<select name="searchKey" class="selectcomm">
-				<option value="num">게시글 번호</option>
-				<option value="subject">게시글 제목</option>
-				<option value="content">게시글 내용</option>
-				<option value="userid">작성자 아이디</option>
-		</select>
-		<input type="text" class="textcomm" name="searchWord" />
-		<input type="button" class="searchbtn" id="searchBTN" value="검색"/>
-		<input type="hidden" id="cate" name="cate" value="mem_share"/>
-		<input type="hidden" name="pageNum" id="pageNum"value="1"/>
-	</form>
-	<div id="btndiv">
-		<input type="button" class="puplebtn member" value="회원간 거래관리"/>
-		<input type="button" class="searchbtn seller" value="셀러 판매관리"/>
+	<div class="searchDiv">
+		<div class="searchInfo">
+			<form id="boardFrm">
+				<select name="searchKey" class="selectcomm">
+						<option value="num">게시글 번호</option>
+						<option value="subject">게시글 제목</option>
+						<option value="content">게시글 내용</option>
+						<option value="userid">작성자 아이디</option>
+				</select>
+				<input type="text" class="textcomm" name="searchWord" />
+				<input type="button" class="searchbtn" id="searchBTN" value="검색"/>
+				<input type="hidden" id="cate" name="cate" value="mem_share"/>
+				<input type="hidden" name="pageNum" id="pageNum"value="1"/>
+			</form>
+		</div>
+		<div class="searchCate">
+			<input type="button" class="puplebtn member" value="회원간 거래관리"/>
+			<input type="button" class="searchbtn seller" value="셀러 판매관리"/>
+		</div>
 	</div>
 	<table class="tablea">
 		<colgroup class="selBoardList">
@@ -264,6 +302,10 @@
 		
 	</table>
 	<ul class="link">
+	<!-- 이전버튼 -->
+		<c:if test="${pageVO.pageNum>1 }">
+			<li class="clickpage">이전</li>
+		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
@@ -275,6 +317,9 @@
             	</c:if>
             </c:if>
          </c:forEach>
+         <c:if test="${pageVO.totalPage>pageVO.pageNum }">
+			<li class="clickpage">다음</li>
+		</c:if>
 	</ul>
 </div>
 
