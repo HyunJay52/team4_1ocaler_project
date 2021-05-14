@@ -49,14 +49,14 @@
 		</div>
 		<div class="reviewBottom">
 			<div class="dealDateForm">
-				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
-				<input type="date" min="2021-01-01" max="2021-05-31"/>
+				<input type="date" value="2021-05-01" min="2021-03-01" max="2021-05-31"/> ~ 
+				<input type="date" value="2021-05-31" min="2021-03-01" max="2021-05-31"/>
 			</div>
 			<div class="reviewSearchArea">
 				<input type="text" name="searchWord"/>
 				<input type="button" value="검색" id="reviewSearchAreaBtn"/>
 			</div>
-			<div class="reviewList">
+			<div class="myinfoReviewList">
 			<table class="myinfoTable2">
 					<tr>
 						<td>구분</td>
@@ -94,14 +94,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="reviewMd">
-		<div class="modal-dialog modal-lg">
+	<div class="modal fade" id="reviewMd" data-backdrop="static">
+		<div class="modal-dialog modal-lg" data-backdrop="static">
 			<div class="modal-content">
-				<div class="modal-header reviewHeader">
+				<div class="modal-header reviewHeader" data-backdrop="static">
 				<h4 class="modal-title"></h4>
 
 				</div>
-				<div class="modal-body reviewBody">
+				<div class="modal-body reviewBody" data-backdrop="static">
 					<ul>
 						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
 						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>

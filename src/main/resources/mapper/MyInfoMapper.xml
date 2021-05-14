@@ -26,13 +26,13 @@
 		
 		select * from (
 		select * from (
-		select userid, cha_point, to_char(po_date, 'YYYY-MM-DD HH:MI:SS') po_date, cha_mth from cha_p
+		select userid, cha_point, to_char(po_date, 'YYYY-MM-DD HH24:MI:SS') po_date, cha_mth from cha_p
 		union all
-		select userid, sp_point, to_char(sp_date, 'YYYY-MM-DD HH:MI:SS') sp_date, sp_item from sp_p order by po_date desc)
+		select userid, sp_point, to_char(sp_date, 'YYYY-MM-DD HH24:MI:SS') sp_date, sp_item from sp_p order by po_date desc)
 		<![CDATA[where rownum <=#{rowNum1} and userid = #{userid} ]]>
 			<if test="searchDate != '' and searchDate != null">
-				and po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH:MI:SS'), 'MM'), 'YYYY-MM-DD HH:MI:SS')
-				and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH:MI:SS')),'YYYY-MM-DD HH:MI:SS' )							
+				and po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS'), 'MM'), 'YYYY-MM-DD HH24:MI:SS')
+				and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')),'YYYY-MM-DD HH24:MI:SS' )							
 			</if>
 			<if test="searchKey == 1">
 				<![CDATA[and cha_mth <= #{searchKey}]]>
@@ -49,11 +49,11 @@
 	<select id="pointCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="String">
 		select count(userid) from(
 		select * from (
-		select userid, cha_mth, to_char(po_date,'YYYY-MM-DD HH:MI:SS') po_date from cha_p
+		select userid, cha_mth, to_char(po_date,'YYYY-MM-DD HH24:MI:SS') po_date from cha_p
 		union all
-		select userid, sp_item, to_char(sp_date,'YYYY-MM-DD HH:MI:SS') from sp_p)
-		where po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH:MI:SS'), 'MM'), 'YYYY-MM-DD HH:MI:SS')
-		and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH:MI:SS')),'YYYY-MM-DD HH:MI:SS' ))
+		select userid, sp_item, to_char(sp_date,'YYYY-MM-DD HH24:MI:SS') from sp_p)
+		where po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS'), 'MM'), 'YYYY-MM-DD HH24:MI:SS')
+		and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')),'YYYY-MM-DD HH24:MI:SS' ))
 		where userid=#{userid}
 		<if test="searchKey != null and searchKey == 1">
 		<![CDATA[and cha_mth <= #{searchKey}]]>
@@ -69,8 +69,12 @@
 		<if test="kategorie.equals('joinus')">
 			join mem_share on joinus.numjoin = mem_share.num	
 		</if>
-		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD')
-		and to_date(#{searchDate2},'YYYY-MM-DD') and ${kategorie}.userid=#{userid})
+		<if test="kategorie.equals('ordertbl')">
+			join sell_item s on ordertbl.num = s.i_num
+			join seller on s.sel_num = seller.sel_num 
+		</if>
+		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and ${kategorie}.userid=#{userid})
 		where ${searchKey} like #{searchWord}
 	</select>
 	
@@ -81,8 +85,8 @@
 		<if test="kategorie.equals('joinus')">
 			join mem_share on joinus.numjoin = mem_share.num
 		</if>
-		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD')
-		and to_date(#{searchDate2},'YYYY-MM-DD') and 
+		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and 
 		${kategorie}.userid = #{userid} and 
 		${searchKey} like #{searchWord} order by ${dateContent} desc)
         <![CDATA[where rownum <= #{rowNum1} order by ${dateContent} asc)]]>
@@ -90,6 +94,43 @@
 	</select>
 	
 	<select id="selectJoinUs" parameterType="int" resultType="com.team4.localer.vo.MyinfoJoinUsVO">
-		select j.userid, numjoin, j_status, mem_sub, j_writedate, mem_post, mem_rev from joinus j join member m on j.userid = m.userid where numjoin = #{param1}
+		select j_num, j.userid, numjoin, j_status, mem_sub, j_writedate, mem_post, mem_rev 
+		from joinus j join member m on j.userid = m.userid where numjoin = #{param1}
+		order by j_writedate desc
 	</select>
+	
+	<select id="selectOrder" parameterType="com.team4.localer.vo.OrderVO" resultType="com.team4.localer.vo.OrderVO">
+		select * from(
+		select * from(
+		select o_num, seller.userid, s.i_subject, num, o_mtd, o_cnt, o_price, o_date, o_conf, o_status 
+		from ordertbl o join sell_item s on o.num = s.i_num 
+		                join seller on s.sel_num = seller.sel_num 
+		                where o.userid=#{userid} and o_date between to_date(#{searchDate},'YYYY-MM-DD HH24:MI:SS')
+		                and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and s.${searchKey} like #{searchWord}
+		                order by o_date desc)
+		       <![CDATA[where rownum <= #{rowNum1} order by o_date asc)
+		                where rownum <= #{rowNum2} order by o_date desc]]>
+	</select>
+	
+	<insert id="writeReview" parameterType="com.team4.localer.vo.ItemReviewVO">
+		
+		insert into item_review(re_num, userid, num, re_rate, re_content
+		<if test="re_img != null">
+			, re_img
+		</if>
+		)
+		values(itemsq.nextval, #{userid}, #{num}, #{re_rate}, #{re_content}
+		<if test="re_img != null">
+			, #{re_img}
+		</if>
+		)
+	</insert>
+	
+	<update id="updateReviewStatus" parameterType="int">
+		update joinus set j_status = '리뷰완료' where j_num = #{param1}
+	</update>
+	
+	<update id="updateJoinStatus" parameterType="int">
+		update joinus set j_status = '참여승인' where j_num = #{param1}
+	</update> 
 </mapper>

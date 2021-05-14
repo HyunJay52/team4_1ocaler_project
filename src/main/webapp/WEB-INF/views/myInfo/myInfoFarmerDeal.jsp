@@ -4,22 +4,62 @@
 	$(function(){
 
 		//리스트 세팅
-		function setList(){
-			for(var i = 0; i < 3; i++){
-				var tag = "<tr>"; 
-				tag += "<td>2021.04.04</td>";
-				tag += "<td><a href='' data-target='#farmerDealMd' data-toggle='modal'>청년농장 나주 왕크니까 왕맛있는 배</a></td>";
-				tag += "<td>tset</td>";
-				tag += "<td>20,000원</td>";
-				tag += "<td>주문확정</td>";
-				tag += "<td>리뷰작성</td>";
-				tag += "</tr>";
-				$("#farmerDealTbl").append(tag);
-			}
-			
+		function setList(page){
+			$.ajax({
+				url : "myFarmerDealSelect",
+				data : $("#myFarmerDealForm").serialize()+"&nowNum="+page,
+				success : function(result){
+					var tag = "<tr><td>날짜</td><td>제목</td><td>판매자</td><td>금액</td><td>주문확정</td><td>리뷰상태</td></tr>"; 
+					console.log(result);
+					result.list.forEach(function(data,idx){
+						tag += "<tr><td>"+data.o_date+"</td>";
+						tag += "<td><a href='' data-target='#farmerDealMd' data-toggle='modal'>"+data.i_subject+"</a></td>";
+						tag += "<td>"+data.userid+"</td>";
+						tag += "<td>"+data.o_price+"</td>";
+						if(data.o_conf == 1){
+							tag += "<td>주문대기</td>";
+						}else{
+							tag += "<td>주문확정</td>";							
+						}
+						tag += "<td>리뷰작성</td>";
+						tag += "</tr>";
+						
+					});
+					$("#farmerDealTbl").html(tag);
+					setFarmerDealPaging(result.pVO)
+				}, error : function(e){
+					console.log("error")
+				}
+			});
 		}
-		setList();
-		
+		setList(1);
+		//페이징
+		function setFarmerDealPaging(pVO){
+			console.log(pVO);
+			$("#myinfoFarmerDealPaging").html("");
+			var tag = '<ul class="pagination justify-content-center">';
+			if(pVO.nowNum > 1){
+				tag += '<li class="page-item"><button value="'+(pVO.nowNum-1)+'" class="page-link">Prev</button></li>';					
+			}else{
+				tag += '<li class="page-item disabled"><button class="page-link">Prev</button></li>';				
+			}
+			for(var p = pVO.startPage; p < pVO.startPage + pVO.onePageSize; p++){
+				if(p <= pVO.totalPage){
+					if(p == pVO.nowNum){
+						tag += '<li class="page-item active"><button class="page-link" value="'+p+'">'+p+'</button></li>';						
+					}else{
+						tag += '<li class="page-item"><button class="page-link" value="'+p+'">'+p+'</button></li>';						
+					}
+				}	
+			}
+			if(pVO.nowNum == pVO.totalPage){
+				tag += '<li class="page-item disabled"><button class="page-link">Next</button></li>';				
+			}else{
+				tag += '<li class="page-item"><button value="'+(pVO.nowNum+1)+'" class="page-link">Next</button></li>';				
+			}
+			tag += "</ul>";
+			$("#myinfoFarmerDealPaging").append(tag);
+		}
 		//리뷰버튼 클릭이벤트
 		$("#farmerDealTbl a").click(function(){
 			var title = $(this).text()+"의 상품이 어떠셨나요 ?";
@@ -40,10 +80,18 @@
 		});
 		
 		//검색 이벤트
-		$(".searchArea>input[type=button]").click(function(){
+		$("#myFarmerDealSearch").click(function(){
 			var searchWord = $(this).prev().val();
-			$(this).prev().val("");
 			console.log(searchWord);
+			setList(1);
+			$(this).prev().val("");
+		});
+		
+		//페이징 이벤트
+		$(document).on('click', '#myinfoFarmerDealPaging>ul>li>button', function(){
+			var nowNum = $(this).val(); //현제 페이지
+			console.log("nownum="+nowNum)
+			setList(nowNum);			
 		});
 	});
 </script>
@@ -72,27 +120,30 @@
 				</div>
 			</div>
 		</div>
+		<form method="post" id="myFarmerDealForm" onsubmit="return false;">
 		   <div class="dealBottom">
 			<div class="dealDateForm">
-				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
-				<input type="date" min="2021-01-01" max="2021-05-31"/>
+				<input type="date" name="searchDate" value="2021-05-01" min="2021-01-01" max="2021-05-31"/> ~ 
+				<input type="date" name="searchDate2" value="2021-05-31" min="2021-01-01" max="2021-05-31"/>
 			</div>
 			<table class="myinfoTable2" id="farmerDealTbl">
-				<tr>
-					<td>날짜</td>
-					<td>제목</td>
-					<td>판매자</td>
-					<td>금액</td>
-					<td>주문확정</td>
-					<td>리뷰상태</td>
-					
-				</tr>
+				
 			</table>
 			<div class="searchArea">
+				<select name="searchKey" style="height: 30px">
+					<option value="i_subject">제목</option>
+					<option value="i_content">내용</option>
+				</select>
 				<input type="text" name="searchWord"/>
-				<input type="button" value="검색"/>
+				<input type="button" value="검색" id="myFarmerDealSearch"/>
+			</div>
+			<div id="myinfoFarmerDealPaging">
+			
 			</div>
 		</div>
+		<input type="hidden" name="dateContent" value="o_date"/>
+		<input type="hidden" name="kategorie" value="ordertbl"/>
+		</form>
 	</div>
 	<div class="modal fade" id="farmerDealMd">
 		<div class="modal-dialog modal-lg">
