@@ -14,7 +14,9 @@ public interface DealShareDAO{
 	public List<DealShareVO> dealListSelect(DealShareVO vo);
 	//게시글 하나보기
 	public DealShareVO dealViewSelect(int num);
+	public DealShareVO dealViewSelectNumX(int num);
 	//게시글 삭제
 	public int dealSellDelete(int num, String userid);
-	
+	//게시글 수정
+	public int dealUpdate(DealShareVO vo);
 }

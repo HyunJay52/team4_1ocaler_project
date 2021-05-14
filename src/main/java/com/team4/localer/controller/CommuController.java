@@ -59,7 +59,10 @@ public class CommuController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("commuList",boardService.commuSelect(vo));
+		
+	
 		mav.addObject("vo",vo);
+		
 		mav.setViewName("community/commuBoard");
 	//	return "community/commuBoard";
 		return mav;

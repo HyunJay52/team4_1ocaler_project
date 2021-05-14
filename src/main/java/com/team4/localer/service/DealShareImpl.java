@@ -45,7 +45,20 @@ public class DealShareImpl implements DealShareService{
 		// TODO Auto-generated method stub
 		return dealshaerdDAO.dealSellDelete(num, userid);
 	}
-	
+
+	@Override
+	public int dealUpdate(DealShareVO vo) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealUpdate(vo);
+	}
+
+	@Override
+	public DealShareVO dealViewSelectNumX(int num) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealViewSelectNumX(num);
+	}
+
+
 	
 	
 }

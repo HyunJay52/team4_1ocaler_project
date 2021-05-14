@@ -10,13 +10,15 @@
 	</insert>
 	<select id ="commuSelect" resultType="com.team4.localer.vo.BoardVO">
 		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
+		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
     	(select count(*) from reply where num = b.num) repcont  
 		from board b where  b_gu=#{b_gu} and up_cate=1 order by num desc
 	</select>
   	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
-  		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,
+  		select num, b.userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,
+        to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick,
     	(select count(*) from reply where num = b.num) repcont  
-		from board b where  num=#{param1} 
+		from board b join member m on b.userid=m.userid  where  num=${num} 
   	</select>
   	<delete id="commuDelete" >
 		delete from board where num=#{param1} and userid=#{param2}
@@ -26,11 +28,13 @@
 	</update>
 	<select id ="commuRecipeSelect" resultType="com.team4.localer.vo.BoardVO">
 		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
+		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
     	(select count(*) from reply where num = b.num) repcont  
 		from board b where up_cate=2  order by num desc
 	</select>
 	<select id ="commuFreeSelect" resultType="com.team4.localer.vo.BoardVO">
 		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate,'YYYY.MM.DD') b_writedate ,b_hit,
+		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
     	(select count(*) from reply where num = b.num) repcont  
 		from board b where up_cate=3  order by num desc
 	</select>
@@ -40,19 +44,19 @@
 	<select id="recipeSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
 		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board A  where rownum <=5 and up_cate=2
+		from board A  where rownum <=5 and up_cate=2 order by b_hit desc
 		]]>
 	</select>
 	<select id="freeSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
 		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board A  where rownum <=5 and up_cate=3
+		from board A  where rownum <=5 and up_cate=3 order by b_hit desc
 		]]>
 	</select>
 	<select id="commuMainSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
 		select ROW_NUMBER() over(order by b_writedate) numselect ,num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit 
-		from board A  where rownum <=5 and up_cate=1
+		from board A  where rownum <=5 and up_cate=1 order by b_hit desc
 		]]>
 	</select>
 	<select id="commuOneSelect"  resultType="com.team4.localer.vo.BoardVO">
@@ -64,5 +68,8 @@
 	</select>
 	<select id="commuGuSelect"  resultType="int">
 	 	select count(*)gu_select from board where b_gu=#{param1}
+	</select>
+	<select id="newSelect" resultType="com.team4.localer.vo.BoardVO">
+		 select num, to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate from board where num=#{num}
 	</select>
 </mapper>

@@ -14,14 +14,31 @@
 		]]>
 	</select>
 	<select id="dealListSelect" resultType="com.team4.localer.vo.DealShareVO" >
-		select num,userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, s_price ,s_date,s_tag
-		from mem_share order by num desc
+		select num, s.userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, to_char(s_price,'999,999,999,999') s_price ,s_date,s_tag,
+            to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick 
+		from mem_share s join member m on s.userid=m.userid 
+		<if test="s_cate !=null and s_cate!='' ">
+			where s_cate=${s_cate}
+		</if>
+		order by num desc    
 	</select>
 	<select id ="dealViewSelect" resultType="com.team4.localer.vo.DealShareVO">
-  		 select num,userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, s_price ,to_char( s_date , 'YYYY-MM-DD') s_date, s_tag
+  		 select num, s.userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu,to_char(s_price,'999,999,999,999') s_price ,to_char( s_date , 'YYYY-MM-DD') s_date, s_tag,
+  		 to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick 
+		from mem_share s join member m on s.userid=m.userid  where  num=#{param1} 
+  	</select>
+  	<select id ="dealViewSelectNumX" resultType="com.team4.localer.vo.DealShareVO">
+  		 select num,userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu,s_price ,to_char( s_date , 'YYYY-MM-DD') s_date, s_tag
 		from mem_share where  num=#{param1} 
   	</select>
   	<delete id="dealSellDelete" >
 		delete from mem_share where num=#{param1} and userid=#{param2}
 	</delete>
+	<update id="dealUpdate" parameterType="com.team4.localer.vo.DealShareVO">
+		UPDATE mem_share SET s_status=#{s_status}, s_subject=#{s_subject},s_cnt=#{s_cnt}, s_content=#{s_content},
+		<if test="s_img1!=null and s_img1!='' ">
+		s_img1=#{s_img1},
+		</if>
+		s_loc=#{s_loc},s_price=#{s_price},s_date=#{s_date},	s_tag=#{s_tag}  where num=#{num} and userid=#{userid}
+	</update>
  </mapper>

@@ -31,4 +31,6 @@ public interface BoardService {
 	public BoardVO commuOneSelect(BoardVO vo);
 	
 	public int commuGuSelect(String b_gu);
+	
+	public BoardVO newSelect(int num);
 }
