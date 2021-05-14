@@ -16,33 +16,11 @@
 			        disableResizeEditor: true
 			    });
 			  });
-
-
-			
-			$("select[name=ship_opt]").change(()=>{
-				if($("#ship_opt option:selected").val()=="1"){
-					$("#i_ship1").css("display","block").attr("disabled",true);
-					$("#i_ship2").css("display","none").attr("disabled",true);		
-					
-				}
-				if($("#ship_opt option:selected").val()=="2"){
-						$("#i_ship1").css("display","none").attr("disabled",true);
-						$("#i_ship2").css("display","none").attr("disabled",true);
-	
-				}
-				if($("#ship_opt option:selected").val()=="3"){
-						$("#i_ship1").css("display","none").attr("disabled",true);
-						$("#i_ship2").css("display","block").attr("disabled",false);
-				}	
-			}); 	
-				
-				
-				
 				
 			//옵션 추가	
 			tag = '';
 			$(document).on("click",'#optionDiv>div>img[class=optionPlus]', ()=>{
-				tag += '<div><input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/>';
+				tag += '<div>&nbsp;&nbsp; ● <input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/>';
 				tag += '<input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/>';
 				tag += '<input type="number" min="0" class="option_price" name="option_price" placeholder="추가 옵션 가격을 입력해 주세요"/>';
 				tag += '<img class="optionPlus" style="margin-left:10px;" src="/1ocaler/img/deal/plus.png"/>';
@@ -54,15 +32,11 @@
 			$(document).on('click','.optionMinus',function(){
 				$(this).parent().remove();
 			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
+		
+			//취소누르면 sellView 로 이동
+			$("#cancelBtn").click(()=>{
+				location.href="selBard";
+			})
 			
 			
 		});
@@ -76,7 +50,7 @@
 		<div>
 		
 			<!-- 상품 type, 제목 내용 등 -->
-			<form id="sellWriteFrm" action="" >
+			<form id="sellWriteFrm" action="sellWriteOk" >
 				<select disabled>
 					<option selected>착한발견</option>
 				</select>
@@ -92,29 +66,14 @@
 
 	 			<span style="font:bold;">판매 종료일 &ensp; : &ensp;</span>
 	 			<input type="date"  id ="i_period" name="i_period" value="" style="width: 300px;"/> <!-- 날짜 -->
-	 			
-	 			
-	 			<input type="number" id ="i_price"  name="i_price" placeholder="판매 가격" style="float: right"/>
-	 			<input type="number" id="i_ship1" name="i_ship" value="2500"  placeholder="2500원"  style="float: right ;" />
-	 			<input type="number" id="i_ship2" name="i_ship"  placeholder="배송비 입력"  style="float: right ;"/>
-	 			<select id="ship_opt" name="ship_opt" style="float: right ;margin-top: 8px;">
-					<option>배송비</option> 
-					<option value="1">기본료 (+2500)</option>	
-					<option value="2">무료배송</option>			
-					<option value="3">기타</option>				
-				</select>		
+	 			<input type="number" id ="i_price"  name="i_price" placeholder="판매 가격" style="float: right"/>		
 	 			<br/>
 	 			<input type="text" id ="i_tag"  name="i_tag" placeholder="&nbsp;&nbsp;태그를 입력해주세요 &nbsp; #태그를 #입력해 #주세요" />
-	 			
-	 			
-	 			
-	 			
-	 			
+	 				
 	 			<h4 style="text-align:center; font-size:30px; margin-top:50px;">#상품사진 및 옵션등록</h4>
 				<hr style=" margin: 0px; margin-bottom:50px; width: 298px; border-bottom: 10px solid #FFFF00; margin-top: -16px; margin-left: 503px; opacity: 0.7;"/>
 	 			<hr/>
 	 			
-
 	 			<!-- 사진등록 및 옵션등록 -->
 				<span style="font-weight:bold; display:inline-block; margin:25px 0px 25px 0px;"> ▶ 상품 이미지를 등록해 주세요</span><span style="font-size:16px;"> (이미지 1개는 필수 등록 해야합니다.)</span><br/>
 				<input type="file" name ="i_img1" id="filename1" style="display:none"onchange="javascript: document.getElementById('fileName1').value = this.value"/>
@@ -132,13 +91,19 @@
 				<span style="font-weight:bold; display:inline-block; margin:25px 0px 0px 0px;"> ▶ 상품 옵션을 입력해 주세요</span><span style="font-size:16px;"> (옵션명과 옵션 내용을 필수로 입력해 주세요)</span><br/>
 				
 				<div id="optionDiv">
+					<div style="margin:5px 0px;"><span>&nbsp;&nbsp; ● &nbsp;&nbsp;배송비 :</span>
+		 			<select id="i_ship" name="i_ship" style="margin: 8px 0px 0px 10px;;">	
+						<option value="3000">기본료 (+3000)</option>	
+						<option value="0">무료배송</option>						
+					</select>
+					</div>
 					<div>
-						<input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/><input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/><input type="number" min="0" class="option_price" name="option_price" placeholder="추가 옵션 가격을 입력해 주세요"/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
+						&nbsp;&nbsp; ● <input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/><input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/><input type="number" min="0" class="option_price" name="option_price" placeholder="추가 옵션 가격을 입력해 주세요"/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
 					</div>
 				</div>
 				
 	 		 	<div id="btn">
-		 		 	<input type="submit" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
+		 		 	<input type="button" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
 		 		 	<input type="submit" id="confBtn" class="btn commBtn" value="등록"/>	
 	 		 	</div>
 
