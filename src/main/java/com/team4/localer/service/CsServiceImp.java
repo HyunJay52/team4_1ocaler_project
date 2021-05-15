@@ -113,4 +113,10 @@ public class CsServiceImp implements CsService {
 		return csdao.onePageRecordSelect_of(pageVO);
 	}
 
+	@Override
+	public int spendtotalRecord(AdminPageVO pageVO) {
+		return csdao.spendtotalRecord(pageVO);
+		
+	}
+
 }

@@ -125,7 +125,7 @@
         chart.draw(data3, options3);
       }
 </script>
-<div class="main">
+<div class="main backcolor">
 	<!--월 이동 부분-->
      <div class="loadDateFrm">
 	 	<button class="dayBtn prev">《</button>
