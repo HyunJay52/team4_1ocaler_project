@@ -147,4 +147,12 @@
 		from joinus j join mem_share m on j.numjoin = m.num 
 		where num=#{param1})
 	</select>
+	
+	<select id="selectMyReview" resultType="com.team4.localer.vo.ItemReviewVO" parameterType="com.team4.localer.vo.ItemReviewVO">
+		select * from item_review where userid=#{userid} and num = #{num}
+	</select>
+	
+	<select id="">
+		select * from item_review where userid=#{param1} order by re_writedate desc
+	</select>
 </mapper>

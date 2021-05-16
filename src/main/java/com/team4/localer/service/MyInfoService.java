@@ -56,6 +56,9 @@ public interface MyInfoService {
 	
 	//거래글의 리뷰작성이 완료된 카운트 조회
 	public MyinfoJoinUsVO selectReviewCount(int num);
+	
+	//특정 게시글의 나의 리뷰 조회
+	public ItemReviewVO selectMyReview(ItemReviewVO vo);
 }
 
 

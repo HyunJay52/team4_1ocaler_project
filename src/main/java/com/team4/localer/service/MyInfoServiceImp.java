@@ -111,6 +111,12 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.selectReviewCount(num);
 	}
 
+	@Override
+	public ItemReviewVO selectMyReview(ItemReviewVO vo) {
+		
+		return dao.selectMyReview(vo);
+	}
+
 
 	
 

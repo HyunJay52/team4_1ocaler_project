@@ -332,6 +332,17 @@ public class MyinfoController {
 		
 		return result;
 	}
+	
+	//한 게시글의 내 리뷰 가져오기
+	@ResponseBody
+	@RequestMapping("/selectMyReview")
+	public ItemReviewVO selectMyReview(HttpSession ses, ItemReviewVO vo) {
+		ItemReviewVO rVO = new ItemReviewVO();
+		vo.setUserid((String)ses.getAttribute("logId"));
+		
+		rVO = service.selectMyReview(vo);
+		return rVO;
+	}
 	@RequestMapping("/myInfoActivity")
 	public String myInfoActivity() {
 		return "myInfo/myInfoActivity";

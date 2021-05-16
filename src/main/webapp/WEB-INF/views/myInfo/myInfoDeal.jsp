@@ -78,7 +78,7 @@
 							
 							if(data.j_status == '리뷰완료'){
 								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger' value='"+data.numJoin+"'>리뷰보기</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.numJoin+"'>리뷰보기</button></td>";
 							}else if(data.j_status == '참여취소'){
 								tag += "<td><button class='btn btn-block btn-outline-danger'>취소됨</button></td>";
 								tag += "<td></td>";
@@ -218,6 +218,7 @@
 		$(document).on('click', ".cancelMyJoin", function(){
 			$("#joinMemberCancel").attr('value', $(this).val());
 			$("#myjoinDealCancel").attr('value', $(this).val());
+			$(".modal-content").css('background-color', 'rgba(255,255,255,0)');
 		});
 		//내가 참여한 목록 취소처리
 		$(document).on('click', '#myjoinDealCancel', function(){
@@ -405,6 +406,49 @@
 			});
 			setDealList(1);
 		}
+		//리뷰보기 클릭시
+		$(document).on('click', ".getMyReview", function(){
+			var num = $(this).val();
+			selectMyReview(num);
+		});
+		
+		//리뷰보기 닫기시
+		$("#closeMyReview").click(function(){
+			$("#viewMyReview").css('display', 'none');
+			$(".cancelJoinMember").css('display', 'block');
+			
+			
+		});
+		//한 게시글의 내 리뷰 가져오기
+		function selectMyReview(num){
+			$.ajax({
+				url : "selectMyReview",
+				data : {"num": num},
+				dataType : "json",
+				success: function(result){
+					console.log(result);
+					var tag = "<li>번호 : "+result.re_num+"</li>";
+					tag += "<li>작성자 : "+result.userid+"</li>";
+					if(result.re_rate == 1){
+						tag += "<li>평가 : 재구매 의사 있음</li>";						
+					}else if(result.re_rata == 2){
+						tag += "<li>평가 : 재구매 의사 없음</li>";
+					}
+					tag += "<li>작성일 : "+result.re_writedate+"</li>";
+					if(result.re_img != null){
+						tag += "<li><div class=''>"+result.re_img+"</div>"+result.re_content+"</li>";						
+					}
+					tag += "<li>"+result.re_content+"</li>";
+					
+					
+					$("#viewMyReviewForm").html(tag);	
+					$(".cancelJoinMember").css('display', 'none');
+					$("#viewMyReview").css('display', 'block');
+				}, error : function(){
+					console.log("error");
+				}
+			});
+		}
 	});
 </script>
 <div class="myinfoBody">
@@ -499,7 +543,13 @@
 					</ul>
 				</div>
 				</form>
-				
+				<div class="modal-body" id="viewMyReview" style="display:none">
+					<h3>리뷰 보기</h3>
+					<ul id="viewMyReviewForm">
+					
+					</ul>
+					<button class="btn btn-outline-dark" id="closeMyReview" data-dismiss="modal">닫기</button>
+				</div>
 			</div>
 		</div>
 	</div>

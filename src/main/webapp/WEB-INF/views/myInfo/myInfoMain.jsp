@@ -82,7 +82,7 @@
 			</div>
 			<div id="waiting">
 				<span class="myinfoHeader mdFnt info-font-weight">참여대기</span>
-				<a href="#" style="float:right">더보기</a>
+				<a href="myInfoDeal" style="float:right">더보기</a>
 				<table class="myinfoTable2">
 					<tr>
 						<td>구분</td>

@@ -56,4 +56,7 @@ public interface MyInfoDAO {
 	
 	//거래글의 참여인원 카운트, 리뷰작성이 완료된 카운트 조회후 vo로 리턴
 	public MyinfoJoinUsVO selectReviewCount(int num);
+	
+	//특정 게시글의 나의 리뷰 조회
+	public ItemReviewVO selectMyReview(ItemReviewVO vo);
 }
