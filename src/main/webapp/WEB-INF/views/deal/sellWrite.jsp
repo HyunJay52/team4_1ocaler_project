@@ -50,7 +50,7 @@
 		<div>
 		
 			<!-- 상품 type, 제목 내용 등 -->
-			<form id="sellWriteFrm" action="sellWriteOk" >
+			<form method="post" id="sellWriteFrm" action="sellWriteOk" enctype="multipart/form-data">
 				<select disabled>
 					<option selected>착한발견</option>
 				</select>
@@ -76,15 +76,15 @@
 	 			
 	 			<!-- 사진등록 및 옵션등록 -->
 				<span style="font-weight:bold; display:inline-block; margin:25px 0px 25px 0px;"> ▶ 상품 이미지를 등록해 주세요</span><span style="font-size:16px;"> (이미지 1개는 필수 등록 해야합니다.)</span><br/>
-				<input type="file" name ="i_img1" id="filename1" style="display:none"onchange="javascript: document.getElementById('fileName1').value = this.value"/>
+				<input type="file" name ="i_imgName" id="filename1" style="display:none"onchange="javascript: document.getElementById('fileName1').value = this.value"/>
 				<input type="text" id="fileName1" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
 				<label class="btn confBtn" for ="filename1" style="font-size:15px ;height: 39px ">파일등록</label>
 				
-				<input type="file" name ="i_img1"id="filename2" style="display:none"onchange="javascript: document.getElementById('fileName2').value = this.value"/>
+				<input type="file" name ="i_imgName"id="filename2" style="display:none"onchange="javascript: document.getElementById('fileName2').value = this.value"/>
 				<input type="text" id="fileName2" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
 				<label class="btn confBtn" for ="filename2" style="font-size:15px ;height: 39px ">파일등록</label>
 				
-				<input type="file" name ="i_img1"id="filename3" style="display:none"onchange="javascript: document.getElementById('fileName3').value = this.value"/>
+				<input type="file" name ="i_imgName"id="filename3" style="display:none"onchange="javascript: document.getElementById('fileName3').value = this.value"/>
 				<input type="text" id="fileName3" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
 				<label class="btn confBtn" for ="filename3" style="font-size:15px ;height: 39px ">파일등록</label>
 				
@@ -93,7 +93,7 @@
 				<div id="optionDiv">
 					<div style="margin:5px 0px;"><span>&nbsp;&nbsp; ● &nbsp;&nbsp;배송비 :</span>
 		 			<select id="i_ship" name="i_ship" style="margin: 8px 0px 0px 10px;;">	
-						<option value="3000">기본료 (+3000)</option>	
+						<option value="3000" selected>기본료 (+3000)</option>	
 						<option value="0">무료배송</option>						
 					</select>
 					</div>
