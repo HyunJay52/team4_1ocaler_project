@@ -21,7 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.DealShareService;
 import com.team4.localer.service.JoinUsService;
-import com.team4.localer.service.MemberService;
+import com.team4.localer.service.LikeItService;
+
 import com.team4.localer.vo.DealShareVO;
 import com.team4.localer.vo.MemberVO;
 
@@ -35,16 +36,22 @@ public class DealController {
 	DealShareService dealshareService;
 	@Inject
 	JoinUsService joinUsService;
+	@Inject
+	LikeItService likeItService;
 	
 	//동네직구(회원)
 	@RequestMapping("/memberBoard")
-	public ModelAndView memberBoard(DealShareVO vo,HttpServletRequest req,MemberVO memVo) {
+	public ModelAndView memberBoard(DealShareVO vo,HttpServletRequest req,MemberVO memVo,HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		vo.setUserid((String)req.getSession().getAttribute("logId"));
 		
 		mav.addObject("dealSellList",dealshareService.dealListSelect(vo));
+		
+		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
+			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
+		}
 		
 		mav.addObject("vo",vo);
 		mav.setViewName("deal/memberBoard");
@@ -159,6 +166,10 @@ public class DealController {
 		}
 		
 		System.out.println(vo.getNum());
+		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
+			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
+		}
+		
 		
 		
 		mav.setViewName("deal/memberView");

@@ -11,13 +11,15 @@
 	<select id ="commuSelect" resultType="com.team4.localer.vo.BoardVO">
 		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
 		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
-    	(select count(*) from reply where num = b.num) repcont  
+    	(select count(*) from reply where num = b.num) repcont,
+    	(select count(*) from likeit where num = numlike) numlike   
 		from board b where  b_gu=#{b_gu} and up_cate=1 order by num desc
 	</select>
   	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
   		select num, b.userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,
         to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick,
-    	(select count(*) from reply where num = b.num) repcont  
+    	(select count(*) from reply where num = b.num) repcont,
+    	(select count(*) from likeit where num = numlike) numlike     
 		from board b join member m on b.userid=m.userid  where  num=${num} 
   	</select>
   	<delete id="commuDelete" >
@@ -29,13 +31,15 @@
 	<select id ="commuRecipeSelect" resultType="com.team4.localer.vo.BoardVO">
 		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
 		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
-    	(select count(*) from reply where num = b.num) repcont  
+    	(select count(*) from reply where num = b.num) repcont,
+    	(select count(*) from likeit where num = numlike) numlike       	 
 		from board b where up_cate=2  order by num desc
 	</select>
 	<select id ="commuFreeSelect" resultType="com.team4.localer.vo.BoardVO">
 		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate,'YYYY.MM.DD') b_writedate ,b_hit,
 		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
-    	(select count(*) from reply where num = b.num) repcont  
+    	(select count(*) from reply where num = b.num) repcont,
+    	(select count(*) from likeit where num = numlike) numlike       	  
 		from board b where up_cate=3  order by num desc
 	</select>
   	<update id="hitCount">
@@ -52,8 +56,10 @@
 		]]>
 	</select>
 	<select id="commuMainSelect" resultType="com.team4.localer.vo.BoardVO" >
-		<![CDATA[ 
-		SELECT num,userid, b_gu, up_cate,down_cate, B_SUBJECT, B_WRITEDATE , to_char(B_WRITEDATE, 'YYYY/MM/DD') AS B_WRITEDATE , B_HIT FROM (SELECT * FROM board WHERE UP_CATE =1  ORDER BY b_hit DESC) WHERE rownum<6
+		<![CDATA[
+		SELECT num,userid, b_gu, up_cate,down_cate, B_SUBJECT, B_WRITEDATE , to_char(B_WRITEDATE, 'YYYY/MM/DD') AS B_WRITEDATE , B_HIT, 
+		(select count(*) from likeit where num = numlike) numlike
+		FROM (SELECT * FROM board WHERE UP_CATE =1  ORDER BY b_hit DESC) WHERE rownum<6
 		]]>
 	</select>
 	<select id="commuOneSelect"  resultType="com.team4.localer.vo.BoardVO">
@@ -69,5 +75,18 @@
 	</select>
 	<select id="newSelect" resultType="com.team4.localer.vo.BoardVO">
 		 select num, to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate from board where num=#{num}
+	</select>
+	<select id="lagLeadSelect" resultType="com.team4.localer.vo.PrevNextVO">
+		select * from( 
+		      select num, 
+		    lag(num,1,0) over (order by num ) prevNo, 
+		    lag(b_subject, 1, '이전글이 없습니다') over(order by num ) prevSubject, 
+		    lead(num,1,0) over (order by num ) nextNO, 
+		    lead(b_subject,1,'다음글이 없습니다.') over (order by num ) nextSubject 
+		    from board order by num)
+		where num=#{param1}
+	</select>
+	<select id="likeCount" resultType="com.team4.localer.vo.BoardVO">
+		select count(*) numlike from likeit where numlike=#{param1}
 	</select>
 </mapper>

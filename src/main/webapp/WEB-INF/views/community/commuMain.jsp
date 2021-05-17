@@ -49,7 +49,7 @@
 							    <td>${vo.userid }</td>
 							    <td>${vo.b_writedate }</td>
 							    <td>${vo.b_hit}</td>
-							    <td>12</td>
+							    <td> ${vo.numlike }</td>
 							  </tr>
 						  
 					 </c:forEach>

@@ -41,7 +41,7 @@
 							<td>${vo.userid}</td>
 							<td>${vo.b_writedate}</td>
 							<td>${vo.b_hit}</td>
-							<td>${vo.b_hit}</td>
+							<td> ${vo.numlike }</td>
 						</tr>
 						<tr style="text-align: left; padding-right: 20px;font-size: 12px;color:gray;">
 							<td colspan="6" style="height: 10px;padding: 0px;padding-top: 0px;">${vo.b_tag }</td>

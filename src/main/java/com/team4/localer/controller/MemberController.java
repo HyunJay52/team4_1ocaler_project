@@ -613,4 +613,4 @@ public class MemberController {
 		}
 		return mav;
 	}
-}//전체 클래스 끝	
+}//전체 클래스 끝
