@@ -48,14 +48,12 @@
 	  	text-align: center;
 	}
 	
-	#i_ship1,#i_ship2{
-		 display: none;
-	}
+	
 
 	#i_period{
 		text-align: center;
 	}
-	#i_period,#gu, #i_price,#i_ship1,#i_ship2{ 
+	#i_period,#gu, #i_price{ 
 		margin-right: 10px;
 		text-align: center;
 		border: none; 
@@ -87,7 +85,14 @@
 		width:300px;
 		margin-left:10px;
 	}
-
+	#optionDiv input{
+		margin:10px;
+	}
+	
+	#i_ship{
+		width:200px;
+		height:30px;
+	}
 
 	/* 버튼 스타일 클래스 모음 */
 	.commBtn {

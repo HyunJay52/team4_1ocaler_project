@@ -59,7 +59,7 @@
 		//삭제
 		$("#withViewPageDeleteBtn").click(()=>{
 			if(confirm('삭제 하시겠습니까?')){
-				location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&up_cate=${vo.up_cate}";
+				location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&category=${vo.up_cate}";
 			}
 		});
 			
@@ -284,7 +284,7 @@
 			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span> ${vo.up_cate} > ${vo.down_cate }</span></li>
 			<li><span>조회수 : ${vo.g_hit } </span></li>
 			<li><span> ${vo.g_subject }</span></li>
-			<li><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"/></li>
+			<li><img src="<%=request.getContextPath()%>/img/mem_prof/${vo.memberVO.mem_prof}"/></li>
 			<li><div>${vo.memberVO.mem_nick }</div><div>${vo.g_writedate }</div></li>
 			<li>모집인원 : <span> ${appNum }</span> / <span> ${vo.g_cnt } </span></li>
 			

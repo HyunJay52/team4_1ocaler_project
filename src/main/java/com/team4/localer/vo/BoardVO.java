@@ -40,7 +40,6 @@ public class BoardVO {
 	private String mem_prof;
 	private String mem_nick;
 	
-	
 	public int getReportCount() {
 		return reportCount;
 	}
