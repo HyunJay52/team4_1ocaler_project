@@ -158,7 +158,7 @@
 								<li><span style="font-weight:bold; font-size:18px;">2021-05-01 ~ 2021-05-20</span></li>
 								<li> 판매자</li>
 								<li>
-									<span style="font-size:16px;">goguma1234</span><img style="width:35px; height:35px; margin-left:10px;" src="<%=request.getContextPath() %>/img/mem_prof/user.png"/>
+									<a href="sellerInfo"><span style="font-size:16px;">goguma1234</span><img style="width:35px; height:35px; margin-left:10px;" src="<%=request.getContextPath() %>/img/mem_prof/user.png"/></a>
 								</li>
 							</ul>
 								<hr style="margin-top: -9px;"/>

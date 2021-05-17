@@ -116,6 +116,13 @@ public class SellitemVO {
 	public void setI_tag(String i_tag) {
 		this.i_tag = i_tag;
 	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
 	
 	
 }
