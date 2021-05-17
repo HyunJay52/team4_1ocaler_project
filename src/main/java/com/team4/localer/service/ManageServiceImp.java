@@ -140,6 +140,36 @@ public class ManageServiceImp implements ManageService {
 		return manadao.mempsendmodal2List(userid);
 	}
 
+	@Override
+	public AdminspendVO selspendtotal(Mem_statisVO statisVO) {
+		return manadao.selspendtotal(statisVO);
+	}
+
+	@Override
+	public AdminspendVO selspendmonth(Mem_statisVO statisVO) {
+		return manadao.selspendmonth(statisVO);
+	}
+
+	@Override
+	public AdminspendVO countboard(Mem_statisVO statisVO) {
+		return manadao.countboard(statisVO);
+	}
+
+	@Override
+	public AdminspendVO countspend(Mem_statisVO statisVO) {
+		return manadao.countspend(statisVO);
+	}
+
+	@Override
+	public List<AdminspendVO> selspendList(AdminPageVO pageVO) {
+		return manadao.selspendList(pageVO);
+	}
+
+	@Override
+	public List<AdminspendVO> selpsendmodalList(int num) {
+		return manadao.selpsendmodalList(num);
+	}
+
 
 
 

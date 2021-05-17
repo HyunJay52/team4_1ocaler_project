@@ -12,6 +12,8 @@ public interface CsService {
 	public int totalRecord(AdminPageVO pageVO);
 	//총레코드 수 구하기 
 	public int spendtotalRecord(AdminPageVO pageVO);
+	//총레코드 수 구하기 
+	public int selspendtotalRecord(AdminPageVO pageVO);
 	//한페이지 레코드 select 하기
 	public List<ReportVO> onePageRecordSelect_rep(AdminPageVO pageVO);
 	//한페이지 레코드 select 하기

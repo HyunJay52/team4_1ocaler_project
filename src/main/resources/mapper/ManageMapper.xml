@@ -304,9 +304,9 @@
 					</if>
 					 
 					 group by ch3.userid, ch3.charge_point,ch3. spend_point
-  					 order by ${num} desc
+  					 order by ${num} 
   					)
-					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} desc)
 					where rownum <![CDATA[<=]]>
 							<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
 								${lastPageRecord}
@@ -314,7 +314,7 @@
 							<if test="pageNum != totalPage">
 								${onePageRecord}
 							</if>
-							order by ${num}
+							order by ${num} 
   	</select>
   	<select id="mempsendmodal1List" resultType="com.team4.localer.vo.AdminspendVO">
   		select sp.sp_item as item_num, mem.s_subject as sel_subject, mem.userid as sel_userid, sp.sp_point as spend_point,sp.sp_date sp_date from sp_p sp
@@ -327,5 +327,55 @@
   	<select id="mempsendmodal2List" resultType="com.team4.localer.vo.AdminspendVO">
   		select mem.num as item_num, mem.s_subject as sel_subject , sp.userid as sel_userid, sp.sp_point as add_point, sp.sp_date 
 		from mem_share mem join sp_p sp on sp.sp_item = mem.num where mem.userid=#{param1} order by sp_point
+  	</select>
+  	<select id="selspendtotal" resultType="com.team4.localer.vo.AdminspendVO">
+  		select sum(rec_money) totalsale,count(o_num)*2000  totalmoney from receipt
+			where conf_date <![CDATA[<=]]>to_date(last_day('21/${month3}/01'),'YY/MM/DD')
+  	</select>
+  	<select id="selspendmonth" resultType="com.team4.localer.vo.AdminspendVO">
+  		select sum(rec_money)  monthsale,count(o_num)*2000 monthmoney from receipt 
+				where conf_date between to_date('21/${month3}/01','YY/MM/DD')
+                and to_date(last_day('21/${month3}/01'),'YY/MM/DD')
+  	</select>
+  	<select id="countboard" resultType="com.team4.localer.vo.AdminspendVO">
+  		select 
+			(select count(i_num) from sell_item 
+			where i_writedate between to_date('21/${month1}/01','YY/MM/DD')
+			                and to_date(last_day('21/${month1}/01'),'YY/MM/DD'))month1,
+			                (select count(i_num) from sell_item 
+			where i_writedate between to_date('21/${month2}/01','YY/MM/DD')
+			                and to_date(last_day('21/${month2}/01'),'YY/MM/DD'))month2,
+			(select count(i_num) from sell_item 
+			where i_writedate between to_date('21/${month3}/01','YY/MM/DD')
+			                and to_date(last_day('21/${month3}/01'),'YY/MM/DD'))month3
+		from dual
+  	</select>
+  	<select id="countspend" resultType="com.team4.localer.vo.AdminspendVO">
+  		select count(case when rec_date<![CDATA[>]]>  to_date(last_day('21/${month3}/01'),'YY/MM/DD') then 1 end) sp_be, 
+		count(case when rec_date<![CDATA[<]]> to_date(last_day('21/${month3}/01'),'YY/MM/DD') then 1 end) sp_af from receipt
+  	</select>
+  	<select id="selspendList" resultType="com.team4.localer.vo.AdminspendVO">
+  		select * from
+			(select *from
+				(select sel1.sel_num, sel1.sel_userid, sel1.sel_subject, sum(o.o_cnt) as sel_cnt,sum(o_price) as sel_price, sum(o.o_cnt)*2000 as fee,sum(o_price)-sum(o.o_cnt)*2000 as remoney from 
+					(select i.i_num as sel_num, sel.userid as sel_userid, i.i_subject as sel_subject from sell_item i join seller sel on sel.sel_num=i.sel_num) sel1
+					join ordertbl o on o.num(+)=sel1.sel_num where o_date between to_date('21/${month}/01','YY/MM/DD') and to_date(last_day('21/${month}/01'),'YY/MM/DD')
+					<if test="!searchWord.equals('') and searchWord!=null">
+						and ${searchKey} like #{searchWord}
+					</if>
+					group by sel1.sel_num, sel1.sel_userid, sel1.sel_subject order by sel_num desc
+					)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by sel_num desc)
+					where rownum <![CDATA[<=]]>
+							<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+								${lastPageRecord}
+							</if>
+							<if test="pageNum != totalPage">
+								${onePageRecord}
+							</if>
+							order by sel_num
+  	</select>
+  	<select id="selpsendmodalList" resultType="com.team4.localer.vo.AdminspendVO">
+  		select num ,userid,o_cnt,o_price,o_date from ordertbl where o_conf=2 and num=${parma1}
   	</select>
 </mapper>
