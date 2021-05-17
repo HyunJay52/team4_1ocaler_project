@@ -26,6 +26,30 @@ public class MyinfoJoinUsVO {
 	private String mem_content;
 	private int mem_type;
 	private int mem_status;
+	
+	private int joinCount; // 참가한 회원 수
+	private int reviewCount;// 리뷰가 등록완료된 수
+	private int joinCancel;// 참여가 취소된 수
+	
+
+	public int getJoinCancel() {
+		return joinCancel;
+	}
+	public void setJoinCancel(int joinCancel) {
+		this.joinCancel = joinCancel;
+	}
+	public int getJoinCount() {
+		return joinCount;
+	}
+	public void setJoinCount(int joinCount) {
+		this.joinCount = joinCount;
+	}
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
 	public int getJ_num() {
 		return j_num;
 	}

@@ -207,14 +207,16 @@
 		width:50%;
 		position:relative;
 	}
+	.reviewBody>ul>li:nth-child(3){
+		color:#eded00;
+	}
 	.reviewBody>ul>li:nth-child(3), .reviewBody>ul>li:nth-child(4){/*모달안에 리뷰쓰기*/
 		position:absolute;	
-		color:#fff;
-		top:65px;
+		top:22px;
 		text-align:center;
 		font-weight:bold;
 		width:45%;
-		left:35px;
+		left:33px;
 	}
 	.reviewBody>ul>li:nth-child(4){
 		left:390px; 

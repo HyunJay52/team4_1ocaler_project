@@ -7,6 +7,7 @@ import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 
@@ -49,6 +50,15 @@ public interface MyInfoService {
 	
 	//참여신청 수락시 상태 업데이트
 	public int updateJoinStatus(int j_num);
+	
+	//참여신청 취소처리 업데이트
+	public int updateJoinCancel(int j_num);
+	
+	//거래글의 리뷰작성이 완료된 카운트 조회
+	public MyinfoJoinUsVO selectReviewCount(int num);
+	
+	//특정 게시글의 나의 리뷰 조회
+	public ItemReviewVO selectMyReview(ItemReviewVO vo);
 }
 
 
