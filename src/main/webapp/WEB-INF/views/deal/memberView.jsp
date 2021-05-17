@@ -82,6 +82,15 @@
 				}
 			});
 			
+			/*신고하기*/
+			$('#eatViewPageReportBtn').click(()=>{
+				if(${logId!=null}){
+					location.href="reportWrite?num=${vo.num}"	
+				}else{
+					alert('로그인후 사용할 수 있습니다.');
+					location.href="login";
+				}
+			});
 			
 			var markers = [];	
 			//지도 검색 키워드 객체 생성
@@ -243,7 +252,7 @@
 					</li>
 					<li class="wordcut">${vo.s_tag }</li>
 					<li>
-						<input type="button" value="찜하기" class="btn commBtnDeal" style="margin-left: 100px"/>
+						<input type="button" value="좋아요" class="btn commBtnDeal" style="margin-left: 100px"/>
 					<!-- 	<input type="submit" value="함께해요" class="btn commBtnDeal"/> -->
 						<button type="button" id="eatViewPageJoinBtn" class="btn commBtnDeal" value="${vo.num }"<c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>>
 							<span  id="eatViewPagejoinCheck">
@@ -291,7 +300,7 @@
 				<li><span>총 댓글수 : ${vo.mem_rev }개</span></li>
 			</ul>
 		</div>
-		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
+		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>
 		</div>
 		
 		

@@ -45,7 +45,7 @@
 								</a> 
 									&nbsp;
 									
-								<c:if test="${vo.newDate == 0 }">	
+								<c:if test="${vo.newDate==0 }">	
 									<div id="newImg">N</div>
 								</c:if>
 							</td>

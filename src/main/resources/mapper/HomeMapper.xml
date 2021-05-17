@@ -4,13 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team4.localer.dao.HomeDAO">
 
+	<!-- 참여자 카운트까지 포함하는 쿼리 만들어주기 -->
 	<select id="getGroupList" resultType="com.team4.localer.vo.GroupVO">
-		SELECT g.num, up_cate, g_subject, TO_CHAR(g_date, 'YYYY/MM/DD') g_date, TO_CHAR(g_time, 'HH24:MI') g_time, g_loc1, g_cnt, g.USERID, mem_prof 
+		SELECT g.num, g.g_gu, g.up_cate, g.g_subject, TO_CHAR(g_date, 'YYYY/MM/DD') AS g_date, TO_CHAR(g.g_time, 'HH24:MI') AS g_time, g.g_loc1,
+		(SELECT count(numjoin) FROM JOINUS j, GROUPLOCAL g WHERE j.numjoin = g.num) AS g_joinCnt, g.g_cnt, g.userid, m.mem_prof 
 		FROM GROUPLOCAL g, MEMBER m where g.userid = m.userid
 		<if test="param1!=null and param1!='' ">
 			AND g.G_LOC1 LIKE '%${param1}%'
 		</if>
-		AND <![CDATA[rownum<=10]]> ORDER BY g.num DESC 
+		AND <![CDATA[rownum<=10]]> ORDER BY g.num DESC  
 	</select>
 	
 </mapper>

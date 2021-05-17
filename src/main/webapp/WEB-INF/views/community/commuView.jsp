@@ -57,7 +57,15 @@
 				location.href="login";
 			}
 		});
-		
+		/*신고하기*/
+		$('#eatViewPageReportBtn').click(()=>{
+			if(${logId!=null}){
+				location.href="reportWrite?num=${vo.num}"	
+			}else{
+				alert('로그인후 사용할 수 있습니다.');
+				location.href="login";
+			}
+		});
 		//댓글보기
 		
 		function replyList(){
@@ -208,12 +216,12 @@
 					<li>
 						<span style="color: #fff;">
 								<c:if test="${vo.up_cate == 1 }">
-									<a href="commuBoard?b_gu=${logLoc_gu}">
+									<a href="commuBoard?b_gu=${logLoc_gu}&up_cate=1">
 										우리동네이야기
 									</a>	
 								</c:if>	
 								<c:if test="${vo.up_cate == 2 }">
-									<a href="commuBoard?b_gu=${logLoc_gu}">
+									<a href="commuFreeBoard?up_cate=2">
 										쓱싹레시피
 									</a>	
 								</c:if>
@@ -312,7 +320,7 @@
 				<li><span>총 댓글수 : ${vo.mem_rev }개</span></li>
 			</ul>
 		</div>
-		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
+		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>
 		</div>
 	</div>
 	

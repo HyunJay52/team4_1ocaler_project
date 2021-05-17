@@ -9,6 +9,20 @@
   					where ${searchKey} like #{searchWord} 
   		</if>
 	</select>
+	<!--회원정산 테이블 totalRecord -->
+	<select id="spendtotalRecord" resultType="int">
+		select count(userid) from 
+		(select ch3.userid, ch3.charge_point,ch3. spend_point, sum(sp2.sp_point) as add_point from 
+		 (select ch2.userid, ch2.charge_point,ch2.spend_point ,mem.num from
+		 (select ch.userid, ch.charge_point, sum(sp.sp_point) as spend_point from
+		 (select userid,sum(cha_point) as charge_point  from cha_p group by userid) ch 
+		 join sp_p sp on sp.userid(+)=ch.userid
+		 group by ch.userid, ch.charge_point) ch2 join mem_share mem on mem.userid(+)=ch2.userid) ch3 
+		 join sp_p sp2 on sp2.sp_item(+)=ch3.num group by ch3.userid, ch3.charge_point,ch3. spend_point)
+		<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색을 고려한 if문 -->
+  					where ${searchKey} like #{searchWord} 
+  		</if>
+	</select>
 	<select id="onePageRecordSelect_rep" resultType="com.team4.localer.vo.ReportVO">
 		select * from
 			(select *from
@@ -143,4 +157,8 @@
  		update oftenQ set of_cnt=of_cnt+0.5 where of_num=#{param1}
  	</update>
  	
+ 	<select id="searchOftenqView" resultType="com.team4.localer.vo.CsVO">
+  		select of_num cs_num, of_subject cs_subject, of_content cs_content, 
+  		of_cate cs_cate from oftenQ where of_cate=#{param1} and of_subject like #{param2} order by of_cnt desc
+  	</select>
 </mapper>

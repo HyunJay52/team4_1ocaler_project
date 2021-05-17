@@ -53,24 +53,14 @@ public class csBoardController {
 	@RequestMapping(value="csBoard/searchofteqna", method=RequestMethod.GET)
 	@ResponseBody
 	public List<OftenqVO> searchofteqna(String key, String word){
-		String setKey = "'["+key+"]'";
+		String setKey = "["+key+"]";
 		String setWord = "%"+word+"%";
-		
-		List<CsVO> csList = service.searchOftenq(setKey, setWord);
+
 		List<OftenqVO> list = new ArrayList<OftenqVO>();
+		list = service.searchOftenqView(setKey, setWord);
 		
-		OftenqVO vo = new OftenqVO();
+		System.out.println("???? 검색 결과 ? >  >  " + list.size() );
 		
-		if(csList.size()>0) {
-			for(int i=0; i<csList.size(); i++) {
-				vo.setOf_num(csList.get(i).getCs_num());
-				vo.setOf_subject(csList.get(i).getCs_subject());
-				vo.setOf_content(csList.get(i).getCs_content());
-				vo.setOf_cate(csList.get(i).getCs_cate());
-				list.add(vo);
-			}
-		}
-		System.out.println("cslist > "+csList.size()+", list  > "+list.size());
 		return list;
 	}
 	

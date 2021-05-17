@@ -52,12 +52,13 @@
 			var kategorie = $("#myDealToggle>input[name='kategorie']").attr('title');
 			console.log($("#myDealForm").serialize()+"&kategorie="+kategorie);
 			setDealList(1);
-			$(this).prev().val("");
+			//$(this).prev().val(""); 보류
 		});
 		//////////////////////
 		//리스트 불러오기
 		function setDealList(page){
 			var kategorie = $("#myDealToggle>input[name='kategorie']").attr('title');
+			
 			$.ajax({
 				url : "myDealList",
 				data : $("#myDealForm").serialize()+"&kategorie="+kategorie+"&nowNum="+page,
@@ -66,24 +67,60 @@
 					console.log(result);
 					var tag = "<tr><td>작성자</td><td>날짜</td><td>제목</td><td>위치</td><td>상태</td><td>비고</td></tr>";
 					result.list.forEach(function(data,idx){
+						
+						//내가 참여한 리스트일 경우
 						if(data.j_num != null && data.j_num > 0){
 							tag += "<tr>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.j_writedate+"</td>";
 							tag += "<td>"+data.s_subject+"</td>";
 							tag += "<td>"+data.s_gu+"</td>";
-							tag += "<td><button class='btn btn-block btn-outline-dark'>"+data.j_status+"</button></td>";
-							tag += "<td><button class='btn btn-block btn-outline-danger'>취소</button></td>";
+							
+							if(data.j_status == '리뷰완료'){
+								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.numJoin+"'>리뷰보기</button></td>";
+							}else if(data.j_status == '참여취소'){
+								tag += "<td><button class='btn btn-block btn-outline-danger'>취소됨</button></td>";
+								tag += "<td></td>";
+							}else if(data.j_status == '참여승인'){
+								tag += "<td><button class='btn btn-block btn-outline-primary'>"+data.j_status+"</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";
+							}else if(data.j_status == '참여완료'){
+								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
+							}else{//참여신청
+								tag += "<td><button class='btn btn-block btn-light btn-outline-dark'>"+data.j_status+"</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
+							}
 							tag += "</tr>";
+							
+						//내가 개설한 리스트일 경우
 						}else if(data.j_num == 0){
+							var joinCount = 0;
+							var reviewCount = 0;
+							
 							tag += "<tr>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.s_writedate+"</td>";
 							tag += "<td>"+data.s_subject+"</td>";
 							tag += "<td>"+data.s_gu+"</td>";
 							tag += "<td><button class='btn btn-block btn-outline-dark dealModalOpen' data-target='#myDealMd' data-toggle='modal' value='"+data.num+"'>참여회원</button></td>";
-							tag += "<td>1/3완료</td>";
-							tag += "</tr>";
+							$.ajax({
+								url : "selectReviewCount",
+								data : {"num": data.num},
+								dataType : 'json',
+								async : false,
+								success : function(result){
+									console.log(result);
+									console.log("reviewcount="+result.reviewCount);
+									console.log("joincount="+result.joinCount);
+									tag += "<td>"+result.reviewCount+"/"+(result.joinCount-result.joinCancel)+"명</td>";	
+								},error : function(e){
+									console.log("리뷰완료 조회 실패");
+								}
+							});				
+							
+							tag += "</tr>";									
 						}
 						
 					});
@@ -152,11 +189,11 @@
 					if(data.j_status == '참여신청'){
 						tag += "<li><button class='btn btn-outline-danger reviewJoin' title='"+data.numJoin+"' value='"+data.j_num+"'>"+data.j_status+"</button></li>";					
 					}else if(data.j_status == '참여승인'){
-						tag += "<li><button class='btn btn-outline-primary cancelJoin'>"+data.j_status+"</button></li>";
+						tag += "<li><button class='btn btn-outline-primary cancelJoin' title='"+data.numJoin+"' value='"+data.j_num+"'>"+data.j_status+"</button></li>";
 					}else if(data.j_status == '참여취소'){
 						tag += "<li><button class='btn btn-outline-Secondary'>"+data.j_status+"</button></li>";
 					}else if(data.j_status == '참여완료'){
-						tag += "<li><button class='btn btn-outline-Success reviewBtn' title='"+data.j_num+"' value='"+data.numJoin+"'>리뷰쓰기</button></li>";
+						tag += "<li><button class='btn btn-outline-Success reviewBtn' title='"+data.numJoin+"' value='"+data.j_num+"'>리뷰쓰기</button></li>";
 					}else if(data.j_status == '리뷰완료'){
 						tag += "<li><button class='btn btn-outline-dark'>"+data.j_status+"</button></li>";
 					}
@@ -172,10 +209,37 @@
 				
 			});
 		}
+		//내가 참여한 리뷰 작성하기 버튼 클릭
+		$("#myReviewWrite").click(function(){
+			$("#myReviewForm").serialize();
+		});
+		
+		//내가 참여한 목록 취소버튼 이벤트
+		$(document).on('click', ".cancelMyJoin", function(){
+			$("#joinMemberCancel").attr('value', $(this).val());
+			$("#myjoinDealCancel").attr('value', $(this).val());
+			$(".modal-content").css('background-color', 'rgba(255,255,255,0)');
+		});
+		//내가 참여한 목록 취소처리
+		$(document).on('click', '#myjoinDealCancel', function(){
+			joinCancel($(this).val(), 0)
+		});
+		//내가 참여한 리뷰쓰기
+		$(document).on('click', '.myReviewBtn', function(){
+			$("#myjoinReview").css('display', 'block');
+			$(".cancelJoinMember").css('display', 'none');
+			$("#myReviewNum").attr('value', $(this).attr('title'));
+			$("#myReviewNum").attr('title', $(this).attr('value'));
+		});
+		//내가 참여한 리뷰쓰기 폼 닫기
+		$(document).on('click', '#myReviewCancel', function(){
+			$("#myjoinReview").css('display', 'none');	
+			$(".cancelJoinMember").css('display', 'block');
+		});
 		
 		//참여신청 수락 이벤트
-		function joinUpdate(j_num){
-			console.log(j_num);
+		function joinUpdate(j_num, num){
+			console.log(j_num+"/"+num);
 			$.ajax({
 				url : "joinUpdate",
 				data : {'j_num': j_num},
@@ -184,7 +248,7 @@
 				success : function(result){
 					console.log("참여신청 승인 성공");
 					$(".checkJoinMember").css('display', 'none');
-					setJoinList($("#joinMember").attr('title'));
+					setJoinList(num);
 				}, error : function(e){
 					console.log("참여신청 승인 실패");
 				}
@@ -192,28 +256,64 @@
 				
 			})
 		}
+		//참여신청 취소처리 이벤트
+		function joinCancel(j_num, num){
+			$.ajax({
+				url : "joinCancel",
+				data : {'j_num': j_num},
+				dataType : 'json',
+				success : function(result){
+					$(".modalBackground").css('display', 'none');
+					$(".cancelJoinMember").css('display', 'none');
+					$(".checkJoinMember").css('display', 'none');
+					if(num != null && num != 0){
+						setJoinList(num);						
+					}else{
+						setJoinList(num);	
+					}
+					$('.modal-backdrop').hide();
+					$("#myJoinDealMd").hide();
+					setDealList(1);
+					
+				}, error : function(e){
+					console.log("error");
+				}
+				
+			});
+		}
 		//참여신청 취소
-		$(document).on('click', '.cancelJoin', function(){
-			console.log("event");
-			$(".cancelJoinMember").css('display', 'block');
-			
-		})
+		$("#joinMemberCancel").click(function(){
+			var j_num = $("#joinMemberCancel").val();
+			var num = $("#joinMemberCancel").attr('title');
+			joinCancel(j_num, num);
+		});
 		
+		//참여신청 취소폼 표시하기
+		$(document).on('click', '.cancelJoin', function(){
+			$(".cancelJoinMember").css('display', 'block');
+			$(".modalBackground").css('display', 'block');
+			$("#joinMemberCancel").attr('value', $(this).val());
+			$("#joinMemberCancel").attr('title', $(this).attr('title'));
+		});
+	 	
 		//참여신청 수락
 		$("#joinMember").click(function(){
 			var j_num = $(this).val();
-			joinUpdate(j_num);
+			var num = $(this).attr('title');
+			joinUpdate(j_num, num);
 		});
-		//참여신청 수락 취소
+		//참여신청 수락폼 닫기
 		$(".joinCancel").click(function(){
 			$(this).parent().parent().css('display', 'none');
+			$(".modalBackground").css('display', 'none');
 		});
-		//참여신청 승인 이벤트
+		//참여신청 이벤트
 		$(document).on('click', '.reviewJoin', function(){
 			$(".checkJoinMember").css('display', 'block');
-			$(".joinBtnform>button:first-child").attr('value', $(this).val());
-			$(".joinBtnform>button:first-child").attr('title', $(this).attr('title'));
-			
+			$("#joinMember").attr('value', $(this).val());
+			$("#joinMember").attr('title', $(this).attr('title'));
+			$("#joinReject").attr('value', $(this).val());
+			$("#joinReject").attr('title', $(this).attr('title'));
 		});
 		//리뷰쓰기 클릭 이벤트
 		$(document).on('click','.reviewBtn', function(){
@@ -225,7 +325,7 @@
 		});
 		
 		//리뷰쓰기 취소 이벤트
-		$(document).on('click', '#canselReview', function(){
+		$(document).on('click', '#cancelReview', function(){
 			$(".reviewBody").css('display', 'none');
 			$(".reviewList").css('display', 'block');
 		});
@@ -236,31 +336,53 @@
 			$(this).attr('name', 're_rate');
 		});
 		
-		//리뷰작성 클릭 이벤트
-		$(document).on('click', '#reviewWrite', function(){
-			if($(".dealTextArea").val() == null || $(".dealTextArea").val() == ''){
+		//내 리뷰쓰기 이벤트
+		$(document).on('click', '#myReviewWrite', function(){
+			if($("#myjoinReview>ul>li>textarea").val() == null || $("#myjoinReview>ul>li>textarea").val() == ''){
 				alert('내용을 입력해주세요.');
 			}else{
-				var rateCheck = $(".reviewBody>ul>li>button[name=re_rate]").val();
-				var j_num = $("#reviewNum").attr('title');
+				var rateCheck = $("#myjoinReview>ul>li>button[name=re_rate]").val();
+				var j_num = $("#myReviewNum").attr('title');
+				var num = $("#myReviewNum").val();
 				console.log("re_rate="+rateCheck);
 				if(rateCheck == null || rateCheck == ''){
 					alert('리뷰점수를 선택해주세요.');				
 				}else{
 					if(confirm('리뷰를 작성하시겠습니까?')){
-						writeReview(rateCheck, j_num);				
+						var data = $("#myReviewForm").serialize();
+						console.log(data);
+						writeReview(data, rateCheck, j_num, num);				
+					}
+				}
+			}
+		});
+		//리뷰작성 클릭 이벤트
+		$(document).on('click', '#reviewWrite', function(){
+			if($("#writeReviewBody>ul>li>textarea").val() == null || $("#writeReviewBody>ul>li>textarea").val() == ''){
+				alert('내용을 입력해주세요.');
+			}else{
+				var rateCheck = $("#writeReviewBody>ul>li>button[name=re_rate]").val();
+				var j_num = $("#reviewNum").val();
+				var num = $("#reviewNum").attr('title');
+				console.log("re_rate="+rateCheck);
+				if(rateCheck == null || rateCheck == ''){
+					alert('리뷰점수를 선택해주세요.');				
+				}else{
+					if(confirm('리뷰를 작성하시겠습니까?')){
+						var data = $("#reviewForm").serialize();
+						writeReview(data, rateCheck, j_num, num);				
 					}
 				}
 			}
 		});
 		
 		//리뷰쓰기 이벤트
-		function writeReview(rate,j_num){
-			console.log("j_num="+j_num);
-			console.log($("#reviewForm").serialize());
+		function writeReview(data,rate,j_num, num){
+
+			console.log("data="+data);
 			$.ajax({
 				url : "writeReview",
-				data : $("#reviewForm").serialize()+"&re_rate="+rate+"&j_num="+j_num,
+				data : data+"&re_rate="+rate+"&j_num="+j_num,
 				type : "post",
 				success: function(result){
 					console.log(result);
@@ -268,8 +390,11 @@
 						alert("리뷰가 작성되었습니다.");
 						$(".reviewBody").css('display', 'none');
 						$(".reviewList").css('display', 'block');
-						setJoinList($(".reviewBtn").val());
+						setJoinList(num);
 						$("#reviewForm")[0].reset();
+						$("#myReviewForm")[0].reset();
+						$('.modal-backdrop').remove();
+						$("#myJoinDealMd").hide();
 						$(".imgBtn").attr('name', null);
 					}else{
 						alert("리뷰작성에 실패했습니다.");
@@ -278,6 +403,50 @@
 					console.log("error")
 				}
 			
+			});
+			setDealList(1);
+		}
+		//리뷰보기 클릭시
+		$(document).on('click', ".getMyReview", function(){
+			var num = $(this).val();
+			selectMyReview(num);
+		});
+		
+		//리뷰보기 닫기시
+		$("#closeMyReview").click(function(){
+			$("#viewMyReview").css('display', 'none');
+			$(".cancelJoinMember").css('display', 'block');
+			
+			
+		});
+		//한 게시글의 내 리뷰 가져오기
+		function selectMyReview(num){
+			$.ajax({
+				url : "selectMyReview",
+				data : {"num": num},
+				dataType : "json",
+				success: function(result){
+					console.log(result);
+					var tag = "<li>번호 : "+result.re_num+"</li>";
+					tag += "<li>작성자 : "+result.userid+"</li>";
+					if(result.re_rate == 1){
+						tag += "<li>평가 : 재구매 의사 있음</li>";						
+					}else if(result.re_rata == 2){
+						tag += "<li>평가 : 재구매 의사 없음</li>";
+					}
+					tag += "<li>작성일 : "+result.re_writedate+"</li>";
+					if(result.re_img != null){
+						tag += "<li><div class=''>"+result.re_img+"</div>"+result.re_content+"</li>";						
+					}
+					tag += "<li>"+result.re_content+"</li>";
+					
+					
+					$("#viewMyReviewForm").html(tag);	
+					$(".cancelJoinMember").css('display', 'none');
+					$("#viewMyReview").css('display', 'block');
+				}, error : function(){
+					console.log("error");
+				}
 			});
 		}
 	});
@@ -337,13 +506,63 @@
 		</div>
 		</form>
 	</div>
-		<div class="modal fade" id="myDealMd" data-backdrop="static">
+		<!-- 내가 참여한 리스트 모달 -->
+	<div class="modal fade" id="myJoinDealMd" data-backdrop="static">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content" style="overflow:none">
+			<div class="model-body">
+				<div class="cancelJoinMember" style="height:300px">
+					<h2>참여신청을 거절하시겠습니까?</h2>
+					<div class="cancelJoinBody">
+						<p class="mdFnt">참여신청을 거절할 시 재수락이 불가능합니다</p>
+						
+					</div>
+					<div class="joinBtnform">
+						<button type="button" class="btn commBtn" id="myjoinDealCancel" value="">확인</button>
+						<button type="button" class="btn commBtn myjoinCancel" data-dismiss="modal">취소</button>		
+					</div>
+				</div>
+				
+				</div>
+				<form method="post" id="myReviewForm" onsubmit="return false;">
+				<div class="modal-body reviewBody" id="myjoinReview" style='display:none' data-backdrop="static">
+					<h3 style="height:0px">리뷰 작성하기</h3>
+					<ul>
+						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
+						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>
+						<li><button class="btn lgFnt btn-lg imgBtn btnYellow" value="1">또 참여할래요</button></li>
+						<li><button class="btn lgFnt btn-lg imgBtn" value="2">음, 글쎄요</button></li>
+						<li>
+							<textarea class="dealTextarea mdFnt" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
+						</li>
+						<li><input type="file" name="re_img"/></li>
+						<li style="display:none"><input type="hidden" id="myReviewNum" name="num" value=""/></li>
+						<li><button class="btn btn-outline-dark btn-lg" id="myReviewCancel" data-dismiss="modal">다음에 할게요</button>
+							<button class="btn btn-outline-dark btn-lg" id="myReviewWrite">작성완료</button>
+						</li>
+					</ul>
+				</div>
+				</form>
+				<div class="modal-body" id="viewMyReview" style="display:none">
+					<h3>리뷰 보기</h3>
+					<ul id="viewMyReviewForm">
+					
+					</ul>
+					<button class="btn btn-outline-dark" id="closeMyReview" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		<!-- 내가 개설한 리스트 모달 -->
+	<div class="modal fade" id="myDealMd" data-backdrop="static">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content" style="overflow:none">
 				<div class="modal-header reviewHeader">
 					<h4 class="modal-title" style="width:100%">참여자 목록<button class="close" data-dismiss="modal" style="float:right">&times;</button></h4>
 					
 				</div>
+				
+				
 				<div class="model-body reviewList">
 						
 					<div class="reviewListHearder">
@@ -360,12 +579,13 @@
 					</div>
 				</div>
 				<form method="post" id="reviewForm" onsubmit="return false;">
-				<div class="modal-body reviewBody" style='display:none' data-backdrop="static">
+				<div class="modal-body reviewBody" id="writeReviewBody" style='display:none' data-backdrop="static">
+				
 					<ul>
 						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
 						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>
-						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn" value="1">또 참여할래요</button></li>
-						<li><button class="btn lgFnt btn-outline-light btn-lg imgBtn" value="2">음, 글쎄요</button></li>
+						<li><button class="btn lgFnt btn-lg imgBtn btnYellow" value="1">또 참여할래요</button></li>
+						<li><button class="btn lgFnt btn-lg imgBtn" value="2">음, 글쎄요</button></li>
 						<li>
 							<textarea class="dealTextarea mdFnt" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
 						</li>
@@ -384,7 +604,7 @@
 						
 					</div>
 					<div class="joinBtnform">
-						<button type="button" class="btn commBtn" id="joinMember" value="">확인</button>
+						<button type="button" class="btn commBtn" id="joinMemberCancel" value="">확인</button>
 						<button type="button" class="btn commBtn joinCancel">취소</button>		
 					</div>
 				</div>
@@ -393,7 +613,7 @@
 					<div class="">
 						<textarea class="readMe" readonly>
 							거래시 유의사항
-							제 1 조 [목적]
+제 1 조 [목적]
 이 준칙은 회사의 윤리경영을 통하여 투자자 보호와 자본시장의 발전을 도모함을 목적으로 한다.
 제 2 조 [적용범위]
 이 준칙은 회사 및 회사의 금융투자상품 판매임직원들(계약직원 및 임시직원 등을 포함한다. 이하 이 준칙에서 같다)에게 적용되며, 현재의 투자자 및 잠재적 투자자에 대해서도 준수되어야 한다.
@@ -496,10 +716,12 @@
 						</textarea>
 					</div>
 					<div class="joinBtnform">
-						<button type="button" class="btn commBtn" id="joinMember" value="">확인</button>
+						<button type="button" class="btn commBtn" id="joinMember" value="">수락</button>
+						<button type="button" class="btn btn-outline-danger cancelJoin" id="joinReject" value="">거절</button>
 						<button type="button" class="btn commBtn joinCancel">취소</button>		
 					</div>
 				</div>
+				<div class="modalBackground"></div>
 			</div>
 		</div>
 	</div>

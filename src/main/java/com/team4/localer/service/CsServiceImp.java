@@ -137,4 +137,16 @@ public class CsServiceImp implements CsService {
 		return csdao.oftenqnaCnt(of_num);
 	}
 
+	@Override
+	public List<OftenqVO> searchOftenqView(String setKey, String setWord) {
+		// 자주하는 질문 검색
+		return csdao.searchOftenqView(setKey, setWord);
+	}
+
+	@Override
+	public int spendtotalRecord(AdminPageVO pageVO) {
+		return csdao.spendtotalRecord(pageVO);
+		
+	}
+
 }
