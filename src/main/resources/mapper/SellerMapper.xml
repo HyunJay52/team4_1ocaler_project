@@ -27,15 +27,15 @@
 		,#{i_price},#{i_ship},to_date(#{i_period},'YYYY-MM-DD'),#{i_status},#{i_tag})
 	</insert>
 	
+
 	<insert id="itemOptionInsert">
 		insert into item_option(opt_num, i_num, option_title, option_content, o_price)
 		values(optsq.nextval, (select i_num from sell_item where sel_num=(select sel_num from seller where userid=#{param1}) and <![CDATA[  rownum <=]]> 1),
 		#{param2},#{param3},#{param4})
 	</insert>
 	
-	
-	
-	
-	
-	
+	<select id="selectAllitem" resultType="com.team4.localer.vo.SellitemVO">
+		SELECT si.i_num, si.sel_num, si.i_subject, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof  
+		FROM SELL_ITEM si JOIN SELLER s ON si.sel_num = s.sel_num WHERE <![CDATA[ sysdate<=si.i_period ]]> ORDER BY si.i_num DESC
+	</select>
 </mapper>

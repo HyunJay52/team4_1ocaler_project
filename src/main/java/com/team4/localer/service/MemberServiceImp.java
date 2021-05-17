@@ -121,4 +121,10 @@ public class MemberServiceImp implements MemberService {
 		return dao.insertDelMember(vo);
 	}
 
+	@Override
+	public int checkMemEmail(String whichpage, String mem_email) {
+		//이메일 중복확인 
+		return dao.checkMemEmail(whichpage, mem_email);
+	}
+
 }

@@ -82,4 +82,14 @@
 		update member set mem_post = mem_post+1 where userid=#{param1}
 	</update>
 	
+	<!-- 이메일 인증용 맵퍼 -->
+	<select id="checkMemEmail" resultType="int">
+		SELECT count(mem_email) FROM 
+		<if test="parma1=='mem'">
+			member WHERE mem_email=#{param2}
+		</if>
+		<if test="parma1=='sel'">
+			seller WHERE sel_email=#{param2}
+		</if>
+	</select>
 </mapper>

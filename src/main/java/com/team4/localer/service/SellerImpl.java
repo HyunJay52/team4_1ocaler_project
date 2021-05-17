@@ -1,5 +1,7 @@
 package com.team4.localer.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -22,7 +24,14 @@ public class SellerImpl implements SellerService {
 		return sellerDAO.itemOptionInsert(userid, option_title, option_content, o_price);
 	}
 
+	@Override
+	public List<SellitemVO> selectAllitem() {
+		return sellerDAO.selectAllitem();
+	}
 
+
+
+	
 
 	
 	

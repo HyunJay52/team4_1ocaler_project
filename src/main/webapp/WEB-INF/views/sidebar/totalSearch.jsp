@@ -2,8 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 
-<div id="totalSearchResult">
-	<span>"사과" 통합검색 결과</span>
+<%@ include file="/inc/sideBar.jspf" %>
+<div id="totalSearchResult" class="centerDiv">
+	<div>"${sideWord }" 통합검색 결과</div>
 	<ul>
 		<li>
 			<select>

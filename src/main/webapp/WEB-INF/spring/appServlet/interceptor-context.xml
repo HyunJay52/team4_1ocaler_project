@@ -31,6 +31,8 @@
 			<mvc:mapping path="/cs_repOk"/>
 			<mvc:mapping path="/qnaWrite"/>
 			<mvc:mapping path="/cs_qnaOk"/>
+			<mvc:mapping path="/memberWrite"/>
+			<mvc:mapping path="/memWriteOk"/>
 			<bean class="com.team4.localer.controller.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
