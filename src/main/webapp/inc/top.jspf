@@ -24,7 +24,8 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/aboutCsBoard/aboutBoard.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/aboutCsBoard/csBoard.css" />
+	href="<%=request.getContextPath()%>/css/aboutCsBoard/csBoard.css" /> 
+	
 <html>
 <head>
 <title>1ocaler</title>

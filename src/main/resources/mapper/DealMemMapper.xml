@@ -14,13 +14,13 @@
 		]]>
 	</select>
 	<select id="dealListSelect" resultType="com.team4.localer.vo.DealShareVO" >
-		select num, s.userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, to_char(s_price,'999,999,999,999') s_price ,s_date,s_tag,
+		select num, s.userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, to_char(s_price,'999,999,999,999') s_price ,to_char(s_date, 'MM/YY HH:MI') as s_date, s_tag,
             to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick 
-		from mem_share s join member m on s.userid=m.userid 
+		from mem_share s join member m on s.userid=m.userid <![CDATA[ where sysdate<=s_date ]]>
 		<if test="s_cate !=null and s_cate!='' ">
-			where s_cate=${s_cate}
+			and s_cate=${s_cate}
 		</if>
-		order by num desc    
+		order by num desc
 	</select>
 	<select id ="dealViewSelect" resultType="com.team4.localer.vo.DealShareVO">
   		 select num, s.userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu,to_char(s_price,'999,999,999,999') s_price ,to_char( s_date , 'YYYY-MM-DD') s_date, s_tag,

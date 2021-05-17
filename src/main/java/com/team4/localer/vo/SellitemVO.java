@@ -19,6 +19,7 @@ public class SellitemVO {
 	private String i_writedate;//등록일
 	private int i_hit;
 	private String i_tag;//판매글태그
+
 	public int getI_num() {
 		return i_num;
 	}
