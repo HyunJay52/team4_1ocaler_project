@@ -39,6 +39,12 @@ public class SellerController {
 	//착한발견 (셀러)
 	@RequestMapping("/selBard")
 	public String selBard() {
+		
+		
+		
+		
+		
+		
 		return "deal/sellBoard";
 	}
 	
