@@ -152,7 +152,37 @@
 		select * from item_review where userid=#{userid} and num = #{num}
 	</select>
 	
-	<select id="">
-		select * from item_review where userid=#{param1} order by re_writedate desc
+	<select id="selectMyReviewCount" resultType="int">
+		select count(re_num) count from ordertbl o join item_review i on o.num = i.num 
+		where o.userid=#{param1} and o.num=#{param2}
 	</select>
+	
+	<select id="selectMyCount" resultType="com.team4.localer.vo.MyinfoCountVO">
+		select (
+			select count(userid) from board where userid = #{param1}) as board,(
+			select count(userid) from reply where userid = #{param1}) as reply,(
+			select count(userid) from likeit where userid = #{param1}) as likeit,(
+			select count(userid) from joinus where userid = #{param1}) as joinus,(
+			select count(userid) from mem_share where userid = #{param1}) as mem_share,(
+			select count(userid) from logcount where userid = #{param1}) as logcount,(
+			select count(userid) from grouplocal where userid = #{param1}) as grouplocal,(
+			select mem_name from member where userid = #{param1}) as mem_name
+		from dual
+	</select>
+	<select id="selectMyJoinList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoDealVO">
+    	select * from(
+		select * from(
+		select * from joinus j join mem_share m on j.numjoin = m.num 
+		where j.userid=#{userid} order by j_status desc)
+        where rownum <![CDATA[ <= ]]> #{rowNum1} order by j_status asc)
+		where rownum <![CDATA[ <= ]]> #{rowNum2} order by j_status desc
+    </select>
+    <select id="selectMyShareJoinList" resultType="com.team4.localer.vo.MyinfoDealVO">
+		select * from (
+        select j_num, numjoin, joinus.userid, j_status, j_writedate, num, mem_share.userid share_userid, s_cate, s_subject, s_cnt, s_content, s_img1, s_loc, s_gu, s_price, s_date, s_status, s_writedate, s_hit, s_tag from joinus
+        join mem_share on joinus.numjoin = mem_share.num
+		where mem_share.userid = #{param1} order by j_writedate desc)where rownum <![CDATA[ <= ]]> 4
+   </select>
+    
+    
 </mapper>

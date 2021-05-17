@@ -218,7 +218,8 @@
 		$(document).on('click', ".cancelMyJoin", function(){
 			$("#joinMemberCancel").attr('value', $(this).val());
 			$("#myjoinDealCancel").attr('value', $(this).val());
-			$(".modal-content").css('background-color', 'rgba(255,255,255,0)');
+			$(".cancelJoinMember").css('display', 'block');
+			$("#myjoinContent").css('background-color', 'rgba(255,255,255,0)');
 		});
 		//내가 참여한 목록 취소처리
 		$(document).on('click', '#myjoinDealCancel', function(){
@@ -230,6 +231,8 @@
 			$(".cancelJoinMember").css('display', 'none');
 			$("#myReviewNum").attr('value', $(this).attr('title'));
 			$("#myReviewNum").attr('title', $(this).attr('value'));
+			$("#myjoinContent").css('background-color', 'rgba(255,255,255,1)');
+			
 		});
 		//내가 참여한 리뷰쓰기 폼 닫기
 		$(document).on('click', '#myReviewCancel', function(){
@@ -276,11 +279,18 @@
 					setDealList(1);
 					
 				}, error : function(e){
-					console.log("error");
+					console.log("error"); 
 				}
 				
 			});
 		}
+			
+		//내 참여신청 취소창 닫기
+		$(".myjoinCancel").click(function(){
+			$(".modal-content").css('background-color', 'rgba(255,255,255,1)');
+			$(".cancelJoinMember").css('display', 'none');
+		});
+		
 		//참여신청 취소
 		$("#joinMemberCancel").click(function(){
 			var j_num = $("#joinMemberCancel").val();
@@ -415,8 +425,7 @@
 		//리뷰보기 닫기시
 		$("#closeMyReview").click(function(){
 			$("#viewMyReview").css('display', 'none');
-			$(".cancelJoinMember").css('display', 'block');
-			
+						
 			
 		});
 		//한 게시글의 내 리뷰 가져오기
@@ -459,20 +468,29 @@
 			<div class="dealInfo">
 				<img src="img/myInfo/saver.gif"/>
 				<div class="infoList">
-					<h3>김자바</h3>
-					<ul>
-						<li>참여(10)</li>
-						<li>모집(5)</li>
-						<li>직거래(3)</li>
-						<li>방문(31)</li>
-						<li>내글(5)</li>
-						<li>댓글(21)</li>
-						<li>좋아요(21)</li>
+					<div class="infoListHeader">
+						<h3>${vo.mem_name }</h3>
+						<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
+						<a href="myInfoCheck"><input type="button" class="btn dealBtn btn-outline-dark" value="Info" /></a>
+					</div>
+					<ul style="font-weight:bold;">
+						<li>참여</li>
+						<li>모집</li>
+						<li>직거래</li>
+						<li>방문</li>
+						<li>내글</li>
+						<li>댓글</li>
+						<li>좋아요</li>
 					</ul>
-				</div>
-				<div>
-					<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message" style="float:left"/>
-					<input type="button" class="btn dealBtn btn-outline-dark" value="Info" />
+					<ul>
+						<li>${vo.joinus}</li>						
+						<li>${vo.grouplocal}</li>
+						<li>${vo.mem_share }</li>
+						<li>${vo.logcount}</li>
+						<li>${vo.board}</li>
+						<li>${vo.reply}</li>
+						<li>${vo.likeit}</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -509,8 +527,8 @@
 		<!-- 내가 참여한 리스트 모달 -->
 	<div class="modal fade" id="myJoinDealMd" data-backdrop="static">
 		<div class="modal-dialog modal-lg">
-			<div class="modal-content" style="overflow:none">
-			<div class="model-body">
+			<div class="modal-content" id="myjoinContent" style="overflow:none" data-backdrop="static">
+			<div class="model-body" data-backdrop="static">
 				<div class="cancelJoinMember" style="height:300px">
 					<h2>참여신청을 거절하시겠습니까?</h2>
 					<div class="cancelJoinBody">

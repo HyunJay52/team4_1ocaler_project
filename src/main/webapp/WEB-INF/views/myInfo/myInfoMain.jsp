@@ -39,6 +39,57 @@
 			var setPX = startSlide*19.3;
 			$("#slider img").css('margin-left', setPX+'px');
 		}
+		
+		function myInfoMainDeal(){
+			$.ajax({
+				url : "myInfoMainDeal",
+				success : function(result){
+					var tag = "<tr><td>구분</td><td>제목</td><td>참여자</td><td>날짜</td><td>상태</td></tr>";
+					console.log(result);
+					//리스트 두 개를 하나의 배열로 합친다 : concat();
+					var concatData = result.joinList.concat(result.shareList)
+					
+					//합친 리스트를 날짜 기준으로 정렬한다 : sort();
+					concatData.sort(function(a, b){
+						var a = new Date(a.j_writedate).getTime();
+						var b = new Date(b.j_writedate).getTime();
+
+						return a < b ? 1 : -1;
+					});
+					console.log(concatData);
+					concatData.forEach(function(data,idx){
+						if(data.share_userid == '${logId}' && data.userid != '${logId}'){
+							tag += "<tr><td>내 모집글</td>";
+							tag += "<td>"+data.s_subject+"</td>";
+							tag += "<td>"+data.userid+"</td>";
+							tag += "<td>"+data.j_writedate+"</td>";
+							tag += "<td><button class='btn btn-info btn-block'>승인대기</button></td>";
+
+						}else if(data.userid == '${logId}'){
+							tag += "<tr><td>참여신청</td>";
+							tag += "<td>"+data.s_subject+"</td>";
+							tag += "<td>"+data.userid+"</td>";
+							tag += "<td>"+data.j_writedate+"</td>";
+							if(data.j_status == '참여취소'){
+								tag += "<td><button class='btn btn-danger btn-block'>"+data.j_status+"</button></td>";							
+							}else{
+								tag += "<td><button class='btn btn-primary btn-block'>"+data.j_status+"</button></td>";							
+							}
+						}
+						// data-target='#myinfoMainMd' data-toggle='modal'
+						
+					
+			
+						
+						tag += "</tr>";
+					});
+					$("#myinfoMainDealTable").html(tag);
+				},error : function(){
+					console.log("error");
+				}
+			});
+		}
+		myInfoMainDeal();
 	});
 </script>
 <div class="myinfoBody"> 
@@ -81,65 +132,10 @@
 				</div>
 			</div>
 			<div id="waiting">
-				<span class="myinfoHeader mdFnt info-font-weight">참여대기</span>
+				<span class="myinfoHeader mdFnt info-font-weight">참여현황</span>
 				<a href="myInfoDeal" style="float:right">더보기</a>
-				<table class="myinfoTable2">
-					<tr>
-						<td>구분</td>
-						<td>제목</td>
-						<td>참여자</td>
-						<td>날짜</td>
-						<td>승인</td>
-					</tr>
-					<tr>
-						<td>참여글</td>
-						<td>신촌역</td>
-						<td>goguma</td>
-						<td>2021.04.16</td>
-						<td><button class="btn btn-primary btn-block">참여됨</button></td>
-					</tr>
-						<tr>
-						<td>내글</td>
-						<td>서강대역</td>
-						<td>gamja</td>
-						<td>2021.04.17</td>
-						<td><button class="btn btn-danger btn-block" data-target="#myinfoMainMd" data-toggle="modal">승인하기</button></td>
-					</tr>
-					<tr>
-						<td>참여글</td>
-						<td>신촌역</td>
-						<td>goguma</td>
-						<td>2021.04.16</td>
-						<td><button class="btn btn-primary btn-block">참여됨</button></td>
-					</tr>
-					<tr>
-						<td>내글</td>
-						<td>서강대역</td>
-						<td>gamja</td>
-						<td>2021.04.17</td>
-						<td><button class="btn btn-danger btn-block">승인하기</button></td>
-					</tr>
-					<tr>
-						<td>참여글</td>
-						<td>신촌역</td>
-						<td>goguma</td>
-						<td>2021.04.16</td>
-						<td><button class="btn btn-primary btn-block">참여됨</button></td>
-					</tr>
-					<tr>
-						<td>내글</td>
-						<td>서강대역</td>
-						<td>gamja</td>
-						<td>2021.04.17</td>
-						<td><button class="btn btn-danger btn-block">승인하기</button></td>
-					</tr>
-					<tr>
-						<td>내글</td>
-						<td>서강대역</td>
-						<td>gamja</td>
-						<td>2021.04.17</td>
-						<td><button class="btn btn-danger btn-block">승인하기</button></td>
-					</tr>
+				<table class="myinfoTable2" id="myinfoMainDealTable">
+					
 				</table>
 			</div>
 			

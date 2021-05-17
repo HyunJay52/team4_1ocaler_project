@@ -12,6 +12,8 @@ import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoCountVO;
+import com.team4.localer.vo.MyinfoDealVO;
 import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
@@ -115,6 +117,30 @@ public class MyInfoServiceImp implements MyInfoService{
 	public ItemReviewVO selectMyReview(ItemReviewVO vo) {
 		
 		return dao.selectMyReview(vo);
+	}
+
+	@Override
+	public MyinfoCountVO selectMyCount(String userid) {
+
+		return dao.selectMyCount(userid);
+	}
+
+	@Override
+	public int selectMyReviewCount(String userid, int num) {
+
+		return dao.selectMyReviewCount(userid, num);
+	}
+
+	@Override
+	public List<MyinfoDealVO> selectMyJoinList(MyinfoPageVO vo) {
+
+		return dao.selectMyJoinList(userid, rownum);
+	}
+
+	@Override
+	public List<MyinfoDealVO> selectMyShareJoinList(String userid) {
+		
+		return dao.selectMyShareJoinList(userid);
 	}
 
 
