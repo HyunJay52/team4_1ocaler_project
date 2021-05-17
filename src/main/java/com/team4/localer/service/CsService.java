@@ -57,4 +57,7 @@ public interface CsService {
 	public List<OftenqVO> selectAlloftenQ();
 	//자주하는 질문 조회수 
 	public int oftenqnaCnt(int of_num);
+	//자주하는 질문 검색
+	public List<OftenqVO> searchOftenqView(String setKey, String setWord);
+		
 }

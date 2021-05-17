@@ -41,55 +41,6 @@ public class BoardVO {
 	private String mem_nick;
 	
 	
-	
-	public int getNewDate() {
-		return newDate;
-	}
-
-	public void setNewDate(int newDate) {
-		this.newDate = newDate;
-	}
-
-	public String getMem_sub() {
-		return mem_sub;
-	}
-
-	public void setMem_sub(String mem_sub) {
-		this.mem_sub = mem_sub;
-	}
-
-	public String getMem_post() {
-		return mem_post;
-	}
-
-	public void setMem_post(String mem_post) {
-		this.mem_post = mem_post;
-	}
-
-	public String getMem_rev() {
-		return mem_rev;
-	}
-
-	public void setMem_rev(String mem_rev) {
-		this.mem_rev = mem_rev;
-	}
-
-	public String getMem_prof() {
-		return mem_prof;
-	}
-
-	public void setMem_prof(String mem_prof) {
-		this.mem_prof = mem_prof;
-	}
-
-	public String getMem_nick() {
-		return mem_nick;
-	}
-
-	public void setMem_nick(String mem_nick) {
-		this.mem_nick = mem_nick;
-	}
-
 	public int getReportCount() {
 		return reportCount;
 	}
@@ -216,6 +167,54 @@ public class BoardVO {
 
 	public void setRecipe_cate(String recipe_cate) {
 		this.recipe_cate = recipe_cate;
+	}
+
+	public int getNewDate() {
+		return newDate;
+	}
+
+	public void setNewDate(int newDate) {
+		this.newDate = newDate;
+	}
+
+	public String getMem_sub() {
+		return mem_sub;
+	}
+
+	public void setMem_sub(String mem_sub) {
+		this.mem_sub = mem_sub;
+	}
+
+	public String getMem_post() {
+		return mem_post;
+	}
+
+	public void setMem_post(String mem_post) {
+		this.mem_post = mem_post;
+	}
+
+	public String getMem_rev() {
+		return mem_rev;
+	}
+
+	public void setMem_rev(String mem_rev) {
+		this.mem_rev = mem_rev;
+	}
+
+	public String getMem_prof() {
+		return mem_prof;
+	}
+
+	public void setMem_prof(String mem_prof) {
+		this.mem_prof = mem_prof;
+	}
+
+	public String getMem_nick() {
+		return mem_nick;
+	}
+
+	public void setMem_nick(String mem_nick) {
+		this.mem_nick = mem_nick;
 	}
 	
 	
