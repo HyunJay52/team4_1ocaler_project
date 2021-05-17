@@ -134,7 +134,7 @@ public class MyInfoServiceImp implements MyInfoService{
 	@Override
 	public List<MyinfoDealVO> selectMyJoinList(MyinfoPageVO vo) {
 
-		return dao.selectMyJoinList(userid, rownum);
+		return dao.selectMyJoinList(vo);
 	}
 
 	@Override
