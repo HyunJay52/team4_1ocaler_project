@@ -21,6 +21,7 @@ public class SellerVO {
 	private String sel_date;//셀러 신청일,승인일
 	private int sel_status;//셀러 상태정보 0:탈퇴, 1:활동, 2:정지
 	
+	
 	//판매자 관리 페이지 필요에 의한 변수,,,ㅎ
 	private int mem_status;//1.정상, 2.휴면, 3.블랙,
 	private int mem_type;//1.일반, 2.셀러

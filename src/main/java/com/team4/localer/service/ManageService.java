@@ -29,6 +29,14 @@ public interface ManageService {
 	
 	//===회원정산===
 	public AdminspendVO memspend(Mem_statisVO statisVO);
+	//충전횟수, 방식 count
+	public AdminspendVO memspendCnt(Mem_statisVO statisVO);
+	//회원포인트 list
+	public List<AdminspendVO> mempsendList(AdminPageVO pageVO);
+	//모달1 list
+	public List<AdminspendVO> mempsendmodal1List(String userid);
+	//모달2 list
+	public List<AdminspendVO> mempsendmodal2List(String userid);
 	
 	//회원목록 allSelect
 	public List<MemberVO> memberAllSelect(AdminPageVO pageVO);

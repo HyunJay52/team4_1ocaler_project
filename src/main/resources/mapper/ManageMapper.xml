@@ -268,18 +268,64 @@
 		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) mem_sharecnt
 		from dual 
   	</select>
-  	<!-- <select id="memspend" resultType="com.team4.localer.vo.AdminspendVO">
+  	<select id="memspend" resultType="com.team4.localer.vo.AdminspendVO">
 		select 
 		    (select sum(cha_point) from cha_p
-		    where po_date <=to_date(last_day('21/05/01'),'YY/MM/DD')) totalcharge,
+		    where po_date <![CDATA[<=]]>to_date(last_day('21/${month3}/01'),'YY/MM/DD')) totalcharge,
 		    (select sum(sp_point)from sp_p
-		    where sp_date <=to_date(last_day('21/05/01'),'YY/MM/DD')) totalspend,
+		    where sp_date <![CDATA[<=]]>to_date(last_day('21/${month3}/01'),'YY/MM/DD')) totalspend,
 		     (select sum(cha_point) from cha_p
-		    where po_date between to_date('21/05/01','YY/MM/DD') 
-		    and to_date(last_day('21/05/01'),'YY/MM/DD')) chargemoney,
+		    where po_date between to_date('21/${month3}/01','YY/MM/DD') 
+		    and to_date(last_day('21/${month3}/01'),'YY/MM/DD')) chargemoney,
 		    (select sum(sp_point)from sp_p
-		    where sp_date between to_date('21/05/01','YY/MM/DD') 
-		    and to_date(last_day('21/05/01'),'YY/MM/DD')) spendmoney
+		    where sp_date between to_date('21/${month3}/01','YY/MM/DD') 
+		    and to_date(last_day('21/${month3}/01'),'YY/MM/DD')) spendmoney
 		from dual
-  	</select> -->
+  	</select>
+  	<select id="memspendCnt" resultType="com.team4.localer.vo.AdminspendVO">
+  		select count(cha_point) chargecnt , count(case when cha_mth=1 then 1 end) cardcnt,
+			count(case when cha_mth=2 then 1 end) moneycnt from cha_p
+			where po_date between to_date('21/${month3}/01','YY/MM/DD')
+				        and to_date(last_day('21/${month3}/01'),'YY/MM/DD')
+  	</select>
+  	<select id="mempsendList" resultType="com.team4.localer.vo.AdminspendVO">
+  		 select * from
+			(select *from
+				(select ch3.userid, ch3.charge_point, ch3.spend_point, sum(sp2.sp_point) as add_point from 
+					 (select ch2.userid, ch2.charge_point,ch2.spend_point ,mem.num from
+					 (select ch.userid, ch.charge_point, sum(sp.sp_point) as spend_point from
+					 (select userid,sum(cha_point) as charge_point  from cha_p group by userid) ch 
+					 join sp_p sp on sp.userid(+)=ch.userid
+					 group by ch.userid, ch.charge_point) ch2 join mem_share mem on mem.userid(+)=ch2.userid) ch3 
+					 join sp_p sp2 on sp2.sp_item(+)=ch3.num 
+					 
+					 <if test="!searchWord.equals('') and searchWord!=null">
+						where ${searchKey} like #{searchWord}
+					</if>
+					 
+					 group by ch3.userid, ch3.charge_point,ch3. spend_point
+  					 order by ${num} desc
+  					)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+					where rownum <![CDATA[<=]]>
+							<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+								${lastPageRecord}
+							</if>
+							<if test="pageNum != totalPage">
+								${onePageRecord}
+							</if>
+							order by ${num}
+  	</select>
+  	<select id="mempsendmodal1List" resultType="com.team4.localer.vo.AdminspendVO">
+  		select sp.sp_item as item_num, mem.s_subject as sel_subject, mem.userid as sel_userid, sp.sp_point as spend_point,sp.sp_date sp_date from sp_p sp
+		join mem_share mem on mem.num=sp.sp_item where sp.userid=#{param1}
+		union all
+		select sp.sp_item as item_num, item.i_subject as sel_subject, item.sel_userid, sp.sp_point as spend_point, sp.sp_date sp_date from 
+		(select i.i_num, i.sel_num , i.i_subject, mem.userid as sel_userid from sell_item i join seller mem on mem.sel_num =i.sel_num) item join sp_p sp
+		on sp.sp_item = item.i_num where sp.userid=#{param1} order by sp_date desc
+  	</select>
+  	<select id="mempsendmodal2List" resultType="com.team4.localer.vo.AdminspendVO">
+  		select mem.num as item_num, mem.s_subject as sel_subject , sp.userid as sel_userid, sp.sp_point as add_point, sp.sp_date 
+		from mem_share mem join sp_p sp on sp.sp_item = mem.num where mem.userid=#{param1} order by sp_point
+  	</select>
 </mapper>

@@ -143,4 +143,10 @@ public class CsServiceImp implements CsService {
 		return csdao.searchOftenqView(setKey, setWord);
 	}
 
+	@Override
+	public int spendtotalRecord(AdminPageVO pageVO) {
+		return csdao.spendtotalRecord(pageVO);
+		
+	}
+
 }

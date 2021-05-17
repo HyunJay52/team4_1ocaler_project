@@ -354,14 +354,56 @@ public class AdminManageController {
 	@RequestMapping("/spend_mem")//회원정산
 	public ModelAndView spend_mem(int month) {
 		ModelAndView mav = new ModelAndView();
-//		Mem_statisVO statisVO = new Mem_statisVO();
-//		//5월 신규
-//		statisVO.setMonth(month);
-//		String resultMonth[] = {statisVO.getMonth1(),statisVO.getMonth2(),statisVO.getMonth3()};
-//		mav.addObject("monthArr",resultMonth);//3월,4월 5월 넣기
-//		AdminspendVO resultVO = manaService.memspend(statisVO);
+		Mem_statisVO statisVO = new Mem_statisVO();
+		//5월 신규
+		statisVO.setMonth(month);
+		String resultMonth[] = {statisVO.getMonth1(),statisVO.getMonth2(),statisVO.getMonth3()};
+		///이번달 충번횟수, 무통장, 카드
+		mav.addObject("cntVO",manaService.memspendCnt(statisVO));
+		mav.addObject("monthArr",resultMonth);//3월,4월 5월 넣기
+		mav.addObject("totalVO",manaService.memspend(statisVO));//5월 충전포,소비포
+		statisVO = monthCal1(statisVO);//4월 넣어주는 과정
+		mav.addObject("month2VO",manaService.memspend(statisVO));//4월
+		statisVO = monthCal1(statisVO);//3월 넣어주는 과정
+		mav.addObject("month1VO",manaService.memspend(statisVO));//3월
+		//회원포인트 리스트 부분
+		AdminPageVO pageVO = new AdminPageVO();
+		pageVO.setSearchKey("");pageVO.setSearchWord("");
+		//총레코드 구하기
+		pageVO.setTotalRecord(csService.spendtotalRecord(pageVO));
+//		//회원 테이블 리스트
+		pageVO.setNum("add_point");//num설정해줘야한다 pageVO에 
+		mav.addObject("list",manaService.mempsendList(pageVO));
+		mav.addObject("pageVO", pageVO);
 		mav.setViewName("admin/spend_mem");
 		return mav;
+	}
+	@RequestMapping(value="/memspendSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> memspendSearch(AdminPageVO pageVO){
+		Map<String, Object> result = new HashMap<String, Object>();
+		//검색어가 있을때
+		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+		pageVO.setNum("add_point");
+		pageVO.setTotalRecord(csService.spendtotalRecord(pageVO));//총레코드구하기
+		pageVO.setSearchKey("ch3.userid");
+		result.put("list",manaService.mempsendList(pageVO));
+		result.put("pageNum",pageVO.getPageNum());
+		result.put("startPageNum",pageVO.getStartPageNum());
+		result.put("totalPage", pageVO.getTotalPage());
+		return result;
+	}
+	@RequestMapping(value="/memspendModal",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> memspendModal(String userid,String modal,AdminPageVO pageVO){
+		Map<String, Object> result = new HashMap<String, Object>();
+		//클릭한 userid, modal1 -> 사용자가 사용한 point 내역
+		if(modal=="modal1" || modal.equals("modal1")) {//modal1 -> 사용자가 사용한 point 내역
+			result.put("list",manaService.mempsendmodal1List(userid));
+		}else {
+			result.put("list",manaService.mempsendmodal2List(userid));
+		}
+		return result;
 	}
 	//셀러 정산============
 	@RequestMapping("/spend_sel")//판매관리
