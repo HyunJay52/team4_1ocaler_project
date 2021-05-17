@@ -164,6 +164,11 @@ public class SellerController {
 
 	@RequestMapping("/sellView")
 	public String selView() {
+		
+		
+		
+		
+		
 		return "deal/sellView";
 	}
 	
