@@ -286,7 +286,8 @@ public class GroupController{
 		
 		if(result>0) {
 			mav.addObject("loc_gu",pageVO.getLoc_gu());
-			if(vo.getUp_cate().equals("한끼미식회")) {
+			mav.addObject("category",pageVO.getCategory());
+			if(pageVO.getCategory().equals("한끼미식회")) {				
 				mav.setViewName("redirect:eatPage");
 			}else {
 				mav.setViewName("redirect:withPage");

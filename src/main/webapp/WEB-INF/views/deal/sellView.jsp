@@ -72,36 +72,54 @@
 			// 가겨모은 배열삭제
 			moneyCollect.splice($('.itemElementDel').index(this),1);
 			console.log(moneyCollect);
-			
-			
-			
+	
     		$("#i_price").val(total);
     		console.log(total);
 			$(this).parent().parent().remove();
 		});
     	
+    	
+    	
     	//옵션 엘리먼트 수량변경
-    	$(document).on('change','.choice',function(){
+   		$(document).on('change','.choice',function(){
+   			
+   			//클릭했을때 그 클릭한 input number의 순서
     		$(".choice").index(this);
     		console.log('몇번쨰니 수량선택기',$(".choice").index(this));
+    		
+    		//클릭한 input number의 수량을 numbers에 저장
        		var numbers = parseInt($(this).val());
+       		console.log(numbers,'수량bb');
        		
+       		
+       		// 현재 적혀있는 가격 [ 클릭하기전에 기존에 적혀있는 가격]
+       		var price = parseInt($(this).parent().next().text());
+       		console.log(price,'원래 적혀있던 값 얼마니');
+       		
+       		//수량변동 후 1개의 가격 * 수량 값
        		var result = numbers*moneyCollect[$(".choice").index(this)];
-       		
-       		//늘어날떈 되는데 줄어들떈 어떻게 해야하지?
-       		
+       		console.log(result,'변경된 수량 곱하기 값 얼마니');
        		
        		
-       		//console.log('토탈값',total = total + result - moneyCollect[$(".choice").index(this)]);
-       		console.log(result,'이건 곱하긱밧');
-    		console.log(numbers,'수량');
-    	});
+       		
+       		//줄어들떈 [ 원래 적혀있던 가격보다 > 변동된 수량 * 1개 가격이 적으면 수량이 줄어들었단의미로 가격을 줄여줌]
+       		if(price>result){
+       			total = total - moneyCollect[$(".choice").index(this)];
+       			
+       		}else{//늘어날때 원래 적혀있던 가격보다 < 변동된 수량 * 1개의 가격이 크므로 가격을 증가시켜줘야함
+       			total = total + result - price;   			
+       		}
+       			
+       		//result값으로 적혀있는 가격 셋팅해줘야함 -> result 값은 변경된 수량 * 1개의 값이므로 가격란에 변경
+       		$(this).parent().next().text(result);
+       		
+       		//총 변경되는 값을 변경해줘야함
+       		$("#i_price").val(total);
+       		console.log('토탈값입니다',total);
+    	}); 
 		
 	});
-	
-	
-		console.log($("input[type=number]::-webkit-outer-spin-button").val(),'sdf');
-		console.log($("input[type=number]::-webkit-inner-spin-button").val(),'asdasdg');
+
 	</script>
 	<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="dealViewMain">
@@ -157,8 +175,8 @@
 								</li>
 							</ul>
 							<div style="padding-left:30px;">
-								<span style="color:#d9d9d9;">(최소주문수량 1개 이상) 위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</span><br/>
-								<span style="color:#d9d9d9;">배송비 3000원 입니다.</span>
+								<span style="color:gray;">(최소주문수량 1개 이상) 위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</span><br/>
+								<span style="color:gray;">배송비 3000원 입니다.</span>
 							</div>
 								<hr/>
 							<div style="overflow:auto;" id="sellItemList">

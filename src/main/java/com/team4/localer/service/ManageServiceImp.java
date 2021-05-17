@@ -120,6 +120,26 @@ public class ManageServiceImp implements ManageService {
 		return manadao.memspend(statisVO);
 	}
 
+	@Override
+	public AdminspendVO memspendCnt(Mem_statisVO statisVO) {
+		return manadao.memspendCnt(statisVO);
+	}
+
+	@Override
+	public List<AdminspendVO> mempsendList(AdminPageVO pageVO) {
+		return manadao.mempsendList(pageVO);
+	}
+
+	@Override
+	public List<AdminspendVO> mempsendmodal1List(String userid) {
+		return manadao.mempsendmodal1List(userid);
+	}
+
+	@Override
+	public List<AdminspendVO> mempsendmodal2List(String userid) {
+		return manadao.mempsendmodal2List(userid);
+	}
+
 
 
 

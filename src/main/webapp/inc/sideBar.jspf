@@ -66,7 +66,7 @@
 
 <div id="searchDiv" style="z-index: 100;">
 	<div id="searchArea">
-		<form>
+		<form method="get" action="sidebar/searchResult">
 			<!-- 
 				카테고리 변수명 지정
 				통합검색 : totalCate

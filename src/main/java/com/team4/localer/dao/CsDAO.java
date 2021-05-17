@@ -10,6 +10,8 @@ import com.team4.localer.vo.ReportVO;
 public interface CsDAO {
 	//총레코드 수 구하기 
 	public int totalRecord(AdminPageVO pageVO);
+	//총레코드 수 구하기 
+	public int spendtotalRecord(AdminPageVO pageVO);
 	//한페이지 레코드 select 하기
 	public List<ReportVO> onePageRecordSelect_rep(AdminPageVO pageVO);
 	//한페이지 레코드 select 하기
@@ -57,5 +59,7 @@ public interface CsDAO {
 	public List<OftenqVO> selectAlloftenQ();
 	//자주하는 질문 조회수 
 	public int oftenqnaCnt(int of_num);
+	//자주하는 질문 검색
+	public List<OftenqVO> searchOftenqView(String setKey, String setWord);
 	
 }
