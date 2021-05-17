@@ -40,4 +40,7 @@ public interface MemberDAO {
 	public String nickNameDoubleCheck(String mem_nick);
 	//mem_post 카운트
 	public int memPostCount(String userid);
+	
+	//이메일 인증
+	public int checkMemEmail(String whichpage, String mem_email);
 }
