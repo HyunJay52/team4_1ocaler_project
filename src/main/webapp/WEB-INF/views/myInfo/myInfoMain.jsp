@@ -44,7 +44,7 @@
 			$.ajax({
 				url : "myInfoMainDeal",
 				data : {"nowNum": 1,
-						"kategorie":"joinus",
+						"kategorie":"mem_share",
 						"dateContent":"j_writedate",
 						"searchDate":"2021-03-01 00:00:00",
 						"searchDate2":"2021-05-31 23:59:59",
