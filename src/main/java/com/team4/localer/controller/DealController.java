@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.DealShareService;
 import com.team4.localer.service.JoinUsService;
 import com.team4.localer.service.LikeItService;
-
+import com.team4.localer.vo.DealPageVO;
 import com.team4.localer.vo.DealShareVO;
 import com.team4.localer.vo.MemberVO;
 
@@ -41,19 +41,38 @@ public class DealController {
 	
 	//동네직구(회원)
 	@RequestMapping("/memberBoard")
-	public ModelAndView memberBoard(DealShareVO vo,HttpServletRequest req,MemberVO memVo,HttpSession session) {
+	public ModelAndView memberBoard(DealShareVO vo,HttpServletRequest req,MemberVO memVo,HttpSession session,DealPageVO pageVO) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		vo.setUserid((String)req.getSession().getAttribute("logId"));
+		vo.setS_gu(req.getParameter("s_gu"));
 		
-		mav.addObject("dealSellList",dealshareService.dealListSelect(vo));
+		System.out.println(pageVO.getS_gu());
+		
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		
+		pageVO.setTotalRecord(dealshareService.dealTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
+		
+		
+		//mav.addObject("dealSellList",dealshareService.dealListSelect(vo)); // 이거를 수정해야하는데
+		
+		mav.addObject("dealSellList",dealshareService.dealPageSelect(pageVO));
 		
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
 		
-		mav.addObject("vo",vo);
+		System.out.println("오늘안에" + pageVO.getPageNum());
+		System.out.println(pageVO.getPageNum()+"<==현재 페이지번호");
+		System.out.println(pageVO.getTotalPage()+"마지막페이지");//마지막페이지
+		System.out.println(pageVO.getOnePageRecord()+"한페이지에 보이는수");
+		System.out.println(pageVO.getLastPageRecord()+"마지막 레코드수");
+		
+		
+		mav.addObject("pageVO",pageVO);
 		mav.setViewName("deal/memberBoard");
 		return mav;
 	}

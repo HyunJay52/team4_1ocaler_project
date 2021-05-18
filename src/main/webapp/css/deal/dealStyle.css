@@ -2,7 +2,8 @@
    
    a:visited { 
    	  color: black; 
-   	  text-decoration: none;}
+   	  text-decoration: none;
+   }
 
    *{font-family: nsr;
    }
@@ -10,12 +11,13 @@
       width:1300px;
       margin:0 auto;
       height: auto;
+      overflow: hidden;
    }
    
    #selMain{
       position:relative; 
       background-color: white;
-      display: none;   
+      display: none; 
    }
    #seltop>li a{
    		font-size: 20px;
@@ -99,7 +101,8 @@
    
    #selBoard{
    	  width:1300px; 
-      height:auto;
+      height:440px;
+    
    }
    
    /* 하나씩보기 */

@@ -76,7 +76,7 @@ public class CommuController {
 		pageVO.setB_gu(pageVO.getB_gu());
 		
 		pageVO.setTotalRecord(boardService.boardTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
-		
+		System.out.println("오늘안에" + pageVO.getPageNum());
 		mav.addObject("commuList",boardService.commuPageSelect(pageVO));
 		mav.addObject("pageVO",pageVO);
 		

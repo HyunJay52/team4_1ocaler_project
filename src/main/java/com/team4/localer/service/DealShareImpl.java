@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.DealShareDAO;
+import com.team4.localer.vo.DealPageVO;
 import com.team4.localer.vo.DealShareVO;
 
 @Service
@@ -56,6 +57,18 @@ public class DealShareImpl implements DealShareService{
 	public DealShareVO dealViewSelectNumX(int num) {
 		// TODO Auto-generated method stub
 		return dealshaerdDAO.dealViewSelectNumX(num);
+	}
+
+	@Override
+	public int dealTotalRecoedCount(DealPageVO vo) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealTotalRecoedCount(vo);
+	}
+
+	@Override
+	public List<DealShareVO> dealPageSelect(DealPageVO vo) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealPageSelect(vo);
 	}
 
 

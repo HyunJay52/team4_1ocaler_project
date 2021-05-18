@@ -10,7 +10,7 @@ public interface BoardDAO {
 	
 	//커뮤 글쓰기
 	public int commuInsert(BoardVO vo);
-	//커뮤 글보기
+	//커뮤 글보기 
 	//public List<BoardVO> commuSelect(BoardVO vo);
 	
 	//커뮤 글보기 (페이징?) - 리스트
@@ -27,9 +27,9 @@ public interface BoardDAO {
 	public int commuDelete(int num, String userid);
 	//커뮤 글수정
 	public int commuUpdate(BoardVO vo);
-	//레시피 게시판
+	//레시피 게시판 -- 안써도됨
 	public List<BoardVO> commuRecipeSelect(BoardVO vo);
-	//자유게시판
+	//자유게시판 -- 안써도됨..
 	public List<BoardVO> commuFreeSelect(BoardVO vo);
 	//조회수 
 	public int hitCount(int num);
