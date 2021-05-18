@@ -170,6 +170,21 @@ public class ManageServiceImp implements ManageService {
 		return manadao.selpsendmodalList(num);
 	}
 
+	@Override
+	public AdminstatisVO statismem(String month) {
+		return manadao.statismem(month);
+	}
+
+	@Override
+	public Mem_statisVO guGroupCount(Mem_statisVO statisVO) {
+		return manadao.guGroupCount(statisVO);
+	}
+
+	@Override
+	public Mem_statisVO cateCount(Mem_statisVO statisVO) {
+		return manadao.cateCount(statisVO);
+	}
+
 
 
 

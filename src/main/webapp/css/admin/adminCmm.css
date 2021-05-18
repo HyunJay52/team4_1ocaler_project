@@ -264,8 +264,8 @@
 	}
 .statisM div{/*수치*/
 	font-family:"nsreb";
-	font-size:32px;
-	color:#024B40;
+	font-size:40px;
+	color:#fd9735;
 	border-right:4px solid #024B40;
 	}
 .statisM li:last-child>div{

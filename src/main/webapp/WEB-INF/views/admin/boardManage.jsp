@@ -116,7 +116,7 @@
 						txt += 		"<td>"+vo.b_writedate+"</td>";
 						txt += 		"<td>"+vo.b_hit+"</td>";
 						txt += 		"<td>"+vo.reportCount+"</td>";
-						txt += "<td><input type='button' class='smallbtn' id='del' title='"+vo.i_num+"' value='글삭제'/>";
+						txt += "<td><input type='button' class='redbtn' id='del' title='"+vo.i_num+"' value='글삭제'/>";
 						txt += "<input type='button' class='smallbtn' id='reply' title='"+vo.i_num+"'value='댓글보기'/>";
 						txt += "</td>";
 					});
@@ -169,7 +169,7 @@
 						txt += 		"<td>"+vo.userid+"</td>";
 						txt += 		"<td>"+vo.g_writedate+"</td>";
 						txt += 		"<td>"+vo.reportCount+"</td>";
-						txt += "<td><input type='button' class='smallbtn' id='del' title='"+vo.i_num+"' value='글삭제'/>";
+						txt += "<td><input type='button' class='redbtn' id='del' title='"+vo.i_num+"' value='글삭제'/>";
 						txt += "<input type='button' class='smallbtn' id='reply' title='"+vo.i_num+"'value='댓글보기'/>";
 						txt += "</td>";
 					});
@@ -282,7 +282,7 @@
 				<td>${vo.userid}</td>
 				<td>${vo.g_writedate}</td>
 				<td>${vo.reportCount}</td>
-				<td><input type="button" class="smallbtn" id="del" title="${vo.num }" value="글삭제"/><input type="button" class="smallbtn" id="reply" title="${vo.num }"value="댓글보기"/>
+				<td><input type="button" class="redbtn" id="del" title="${vo.num }" value="글삭제"/><input type="button" class="smallbtn" id="reply" title="${vo.num }"value="댓글보기"/>
 				</td>
 			</tr>
 		</c:forEach>
