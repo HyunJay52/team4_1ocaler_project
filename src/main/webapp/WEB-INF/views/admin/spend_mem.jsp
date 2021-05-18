@@ -38,7 +38,6 @@
     	//페이지 이동 클릭
   		$(document).on('click', '.clickpage', function(){
   			var txt = $(this).text();
-  			var cate = $("#cate").val();
   			if(txt=="이전"){
   				var nextPage = parseInt($("#pageNum").val())-1;
   				$("#pageNum").val(nextPage);	
@@ -139,9 +138,9 @@
     	  
     	  //======modal2======
     	  //회원거래 클릭시 모달2 창 띄우기
-    	  $(".add").click(function(){
-    		 var userid=$(this).prev().prev().prev().text();
-    		 modalTwo(userid);//모달창 띄우는
+    	  $(document).on('click','.add',function(){
+    		  var userid=$(this).prev().prev().prev().text();
+     		 modalTwo(userid);//모달창 띄우는
     	  });
     	  
     	  function modalTwo(userid){//모달 2 창 띄우는 함수 
@@ -179,8 +178,23 @@
     	  $("input[type='text']").keydown(function(){
     		 if(event.keyCode==13){
     			 event.preventDefault();
-    		 } 
+    		 }
     	  });
+    	  $(".prev").click(function(){
+    		  //이전 버튼 클릭시
+    		  location.href="spend_mem?month="+${monthArr[1]};
+    	  });
+    	  $(".next").click(function(){
+    		  //이전 버튼 클릭시
+    		  var month = parseInt(${monthArr[2]});
+    		  if(month==12){
+    			  location.href="spend_mem?month=1";
+    		  }else{
+    			  month=month+1;
+    			  location.href="spend_mem?month="+month;
+    		  }
+    	  });
+    	  
       });
 </script>
 <div class="main">

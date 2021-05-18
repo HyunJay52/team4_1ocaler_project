@@ -23,6 +23,14 @@
   					where ${searchKey} like #{searchWord} 
   		</if>
 	</select>
+	<select id="selspendtotalRecord" resultType="int">
+		select count(sel1.sel_num) from 
+				(select i.i_num as sel_num, sel.userid as sel_userid, i.i_subject as sel_subject from sell_item i join seller sel on sel.sel_num=i.sel_num) sel1
+				join ordertbl o on o.num(+)=sel1.sel_num where o_date between to_date('21/${month}/01','YY/MM/DD') and to_date(last_day('21/${month}/01'),'YY/MM/DD')
+				<if test="!searchWord.equals('') and searchWord!=null">
+					and ${searchKey} like #{searchWord}
+				</if>
+	</select>
 	<select id="onePageRecordSelect_rep" resultType="com.team4.localer.vo.ReportVO">
 		select * from
 			(select *from
