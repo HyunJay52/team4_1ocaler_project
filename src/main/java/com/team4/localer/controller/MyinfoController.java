@@ -23,9 +23,9 @@ import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoDealVO;
 import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
-import com.team4.localer.vo.OrderVO;
 
 @Controller
 public class MyinfoController {
@@ -81,7 +81,18 @@ public class MyinfoController {
 		}
 		return mav;
 	}
-		
+	//내정보 메인페이지 참여리스트
+	@ResponseBody
+	@RequestMapping("/myInfoMainDeal")
+	public Map<String, Object> myInfoMainDeal(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		vo.setRowNum1(1, 5); 
+		vo.setRowNum2(1, 1, 1, 5);
+		vo.setUserid((String)ses.getAttribute("logId"));
+		map.put("joinList", service.selectMyJoinList(vo));
+		map.put("shareList", service.selectMyShareJoinList(vo.getUserid()));
+		return map;
+	}
 	//내정보 충전 페이지
 	@RequestMapping("/myInfoLoad")
 	public ModelAndView myInfoLoad(HttpSession ses) {
@@ -174,9 +185,12 @@ public class MyinfoController {
 	
 	//회원간 거래 페이지
 	@RequestMapping("/myInfoDeal")
-	public ModelAndView myInfoDeal() {
+	public ModelAndView myInfoDeal(HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
-
+		
+		String userid = ((String)ses.getAttribute("logId"));
+		
+		mav.addObject("vo", service.selectMyCount(userid));
 		mav.setViewName("myInfo/myInfoDeal");
 		return mav;
 	}
@@ -249,9 +263,14 @@ public class MyinfoController {
 	}
 	
 	@RequestMapping("/myInfoFarmerDeal")
-	public String myInfoFarmerDeal() {
+	public ModelAndView myInfoFarmerDeal(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
 		
-		return "myInfo/myInfoFarmerDeal";
+		String userid = ((String)ses.getAttribute("logId"));
+		
+		mav.addObject("vo", service.selectMyCount(userid));
+		mav.setViewName("myInfo/myInfoFarmerDeal");
+		return mav;
 	}
 	
 	@ResponseBody
@@ -287,7 +306,18 @@ public class MyinfoController {
 		result.put("pVO", vo);
 		return result;
 	}
+	//리뷰가 있는지 조회
+	@ResponseBody
+	@RequestMapping("/selectMyReviewCount")
+	public int selectMyReviewCount(HttpSession ses, HttpServletRequest req) {
+		int result = 0;
+		String userid = (String)ses.getAttribute("logId");
+		int num = Integer.parseInt(req.getParameter("num"));
+		result = service.selectMyReviewCount(userid, num);
+		return result;
+	}
 	
+	//리뷰관리 페이지
 	@RequestMapping("/myInfoReview")
 	public String myInfoReview() {
 		return "myInfo/myInfoReview";
@@ -299,11 +329,13 @@ public class MyinfoController {
 	public int writeReview(HttpSession ses, HttpServletRequest req, ItemReviewVO vo) {
 		int result = 0;
 		vo.setUserid((String)ses.getAttribute("logId"));
-		int j_num = Integer.parseInt(req.getParameter("j_num"));
-		
+		String j_num = req.getParameter("j_num");
 		result = service.writeReview(vo);
+		System.out.println("jnum="+j_num);
 		if(result > 0) {
-			result = service.updateReviewStatus(j_num);
+			if(j_num != null && j_num != "") {
+				result = service.updateReviewStatus(Integer.parseInt(j_num));				
+			}
 		}
 		return result;
 	}
@@ -343,9 +375,17 @@ public class MyinfoController {
 		rVO = service.selectMyReview(vo);
 		return rVO;
 	}
+	
+	//나의 활동 페이지
 	@RequestMapping("/myInfoActivity")
-	public String myInfoActivity() {
-		return "myInfo/myInfoActivity";
+	public ModelAndView myInfoActivity(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		String userid = ((String)ses.getAttribute("logId"));
+		
+		mav.addObject("vo", service.selectMyCount(userid));
+		mav.setViewName("myInfo/myInfoActivity");
+		return mav;
 	}
 	@RequestMapping("/myInfoSaleHistory")
 	public String myInfoSaleHistory() {

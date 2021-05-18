@@ -2,13 +2,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 	$(function(){
-		//리뷰버튼 클릭이벤트
-		$(".mainContainer a").click(function(){
-			var title = $(this).text()+"의 상품이 어떠셨나요 ?";
-			$(".modal-title").text(title);
-			console.log($(this).text());
+		function memShareList(){
+			$.ajax({
+				url : "myInfoMainDeal",
+				data : {"rownum":5},
+				dataType : "json",
+				success : function(result){
+					
+				},error : function(e){
+					console.log("error");	
+				}				
 			
-		});
+			});
+		}
+		
 	});
 </script>
 <div class="myinfoBody">
