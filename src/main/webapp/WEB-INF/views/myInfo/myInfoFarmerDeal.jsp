@@ -171,7 +171,7 @@
 					<div class="infoListHeader">
 						<h3>${vo.mem_name}</h3>
 						<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
-						<a href="myInfoSeller"><input type="button" class="btn dealBtn btn-outline-dark" value="Info"/></a>
+						<a href="myInfoCheck"><input type="button" class="btn dealBtn btn-outline-dark" value="Info"/></a>
 					</div>
 					<ul style="font-weight:bold;">
 						<li>참여</li>

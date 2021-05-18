@@ -2,11 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 	$(function(){
+		//회원간 거래 리스트
 		function myInfoReviewList(num){
+			var kategorie = $("#reviewKategorie option:selected").val();
+			console.log("kategorie="+kategorie);
 			$.ajax({
 				url : "myInfoReviewList",
 				data : {"nowNum": num,
-					"kategorie":"joinus",
+					"kategorie": kategorie,
 					"dateContent":"j_writedate",
 					"searchDate":"2021-03-01 00:00:00",
 					"searchDate2":"2021-05-31 23:59:59",
@@ -43,6 +46,7 @@
 			});
 		}
 		myInfoReviewList(1)
+		//상품리뷰 리스트
 		function myInfoItemReviewList(num){
 			$.ajax({
 				url : "myInfoItemReviewList",
@@ -83,6 +87,10 @@
 		}
 		myInfoItemReviewList(1);
 		
+		//셀렉스박스 체인지 이벤트
+		$("#reviewKategorie").change(function(){
+			myInfoReviewList(1);
+		});
 		//회원간 거래 페이징
 		function setShareReviewPaging(sharePVO){
 			console.log(sharePVO);
@@ -159,6 +167,11 @@
 		<div class="reviewTop">
 			<div class="reviewLeft">
 			<h5>회원리뷰</h5>
+				<select name="kategorie" id="reviewKategorie">
+					<option value="mem_share" selected>회원간 거래</option>
+					<option value="grouplocal">모집</option>
+					
+				</select>
 				<table class="myinfoTable2" id="myinfoReviewTable">
 					<tr>
 						<td class="wordCut">제목<br/>(아이디)</td>

@@ -70,7 +70,7 @@
 			select * from joinus join grouplocal on grouplocal.num = joinus.numjoin
 		</if>
 		<if test="kategorie.equals('mem_share')">
-			select * from ${kategorie}
+			select * from ${kategorie} join joinus on joinus.numjoin = mem_share.num	
 		</if>
 		<if test="kategorie.equals('grouplocal')">
 			select * from ${kategorie}
@@ -80,7 +80,6 @@
 		</if>
 		<if test="kategorie.equals('ordertbl')">
 			select * from ${kategorie} join sell_item s on ordertbl.num = s.i_num
-			select * from ${kategorie} join seller on s.sel_num = seller.sel_num 
 		</if>
 		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') 
@@ -211,8 +210,14 @@
 	<select id="selectMyJoinList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoDealVO">
     	select * from(
 		select * from(
-		select j_num, numjoin, j.userid, j_status, mem_share.userid sellerid, j_writedate, s_subject  from joinus j
-        join mem_share on j.numjoin = mem_share.num
+		<if test="kategorie.equals('grouplocal')">
+			select j_num, numjoin, j.userid, j_status, grouplocal.userid sellerid, j_writedate, g_subject  from joinus j			
+		</if>
+		<if test="!kategorie.equals('grouplocal')">
+			select j_num, numjoin, j.userid, j_status, mem_share.userid sellerid, j_writedate, s_subject  from joinus j
+		</if>
+		
+        join ${kategorie} on j.numjoin = ${kategorie}.num
 		where j.userid=#{userid} order by j_status desc)
         where rownum <![CDATA[ <= ]]> #{rowNum1} order by j_status asc)
 		where rownum <![CDATA[ <= ]]> #{rowNum2} order by j_status desc
