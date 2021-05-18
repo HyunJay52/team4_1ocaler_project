@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.BoardDAO;
+import com.team4.localer.vo.BoardPageVO;
 import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.PrevNextVO;
 
@@ -26,11 +27,7 @@ public class BoardImpl implements BoardService{
 		return boardDAO.commuInsert(vo);
 	}
 
-	@Override
-	public List<BoardVO> commuSelect(BoardVO vo) {
-		// TODO Auto-generated method stub
-		return boardDAO.commuSelect(vo);
-	}
+
 
 	@Override
 	public BoardVO commuViewSelect(int num) {
@@ -116,8 +113,17 @@ public class BoardImpl implements BoardService{
 		return boardDAO.likeCount(num);
 	}
 
-	
-	
+	@Override
+	public List<BoardVO> commuPageSelect(BoardPageVO vo) {
+		// TODO Auto-generated method stub
+		return boardDAO.commuPageSelect(vo);
+	}
+
+	@Override
+	public int boardTotalRecoedCount(BoardPageVO vo) {
+		// TODO Auto-generated method stub
+		return boardDAO.boardTotalRecoedCount(vo);
+	}
 
 
 	

@@ -3,6 +3,7 @@ package com.team4.localer.dao;
 import java.util.List;
 
 import com.team4.localer.vo.PrevNextVO;
+import com.team4.localer.vo.BoardPageVO;
 import com.team4.localer.vo.BoardVO;
 
 public interface BoardDAO {
@@ -10,7 +11,16 @@ public interface BoardDAO {
 	//커뮤 글쓰기
 	public int commuInsert(BoardVO vo);
 	//커뮤 글보기
-	public List<BoardVO> commuSelect(BoardVO vo);
+	//public List<BoardVO> commuSelect(BoardVO vo);
+	
+	//커뮤 글보기 (페이징?) - 리스트
+	public List<BoardVO> commuPageSelect(BoardPageVO vo);
+	//커뮤 토탈 레코드수 구하기
+	public int boardTotalRecoedCount(BoardPageVO vo);
+	
+
+	
+	
 	//커뮤 글 하나보기
 	public BoardVO commuViewSelect(int num);
 	//커뮤 글삭제

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.BoardService;
 import com.team4.localer.service.LikeItService;
+import com.team4.localer.vo.BoardPageVO;
 import com.team4.localer.vo.BoardVO;
 
 @Controller
@@ -63,15 +64,23 @@ public class CommuController {
 	
 	//커뮤 게시판보기
 	@RequestMapping("/commuBoard")
-	public ModelAndView commuBoard(BoardVO vo , HttpServletRequest req) {
+	public ModelAndView commuBoard(BoardVO vo , HttpServletRequest req,BoardPageVO pageVO) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("commuList",boardService.commuSelect(vo));
+	//	mav.addObject("commuList",boardService.commuSelect(vo));
 		mav.addObject("like",boardService.likeCount(vo.getNum()));
-		//mav.addObject("vo",vo);
+		
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		pageVO.setB_gu(pageVO.getB_gu());
+		
+		pageVO.setTotalRecord(boardService.boardTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
+		
+		mav.addObject("commuList",boardService.commuPageSelect(pageVO));
+		mav.addObject("pageVO",pageVO);
 		
 		mav.setViewName("community/commuBoard");
-	//	return "community/commuBoard";
 		return mav;
 	}
 	
@@ -91,13 +100,19 @@ public class CommuController {
 	
 	//레시피 게시판 보기
 	@RequestMapping("/commuRecipeBoard")
-	public ModelAndView commuRecipeBoard(BoardVO vo, HttpServletRequest req) {
+	public ModelAndView commuRecipeBoard(BoardVO vo, HttpServletRequest req,BoardPageVO pageVO) {
 		ModelAndView mav =new ModelAndView();
-	
-		
-		mav.addObject("commuList",boardService.commuRecipeSelect(vo));
 		mav.addObject("like",boardService.likeCount(vo.getNum()));
-		mav.addObject("vo",vo);
+
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		
+		pageVO.setTotalRecord(boardService.boardTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
+		
+		mav.addObject("commuList",boardService.commuPageSelect(pageVO));
+		mav.addObject("pageVO",pageVO);
+		
 		mav.setViewName("community/commuRecipeBoard");
 		return mav;
 		
@@ -106,12 +121,20 @@ public class CommuController {
 	//자유게시판 보기
 	
 	@RequestMapping("/commuFreeBoard")
-	public ModelAndView commuFreeBoard(BoardVO vo, HttpServletRequest req) {
+	public ModelAndView commuFreeBoard(BoardVO vo, HttpServletRequest req,BoardPageVO pageVO) {
 		ModelAndView mav =new ModelAndView();
 		
-		mav.addObject("commuList",boardService.commuFreeSelect(vo));
 		mav.addObject("like",boardService.likeCount(vo.getNum()));
-		mav.addObject("vo",vo);
+
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		
+		pageVO.setTotalRecord(boardService.boardTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
+		
+		mav.addObject("commuList",boardService.commuPageSelect(pageVO));
+		mav.addObject("pageVO",pageVO);
+		
 		mav.setViewName("community/commuFreeBoard");
 		return mav;
 	}

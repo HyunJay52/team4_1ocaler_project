@@ -15,7 +15,31 @@ public class BoardPageVO {
 	private String searchKey;//검색키
 	private String searchWord;//검색어
 	
+	private String b_gu;
+	private String loc_gu;
+	private String up_cate;
 	
+	
+	
+	
+	public String getB_gu() {
+		return b_gu;
+	}
+	public void setB_gu(String b_gu) {
+		this.b_gu = b_gu;
+	}
+	public String getLoc_gu() {
+		return loc_gu;
+	}
+	public void setLoc_gu(String loc_gu) {
+		this.loc_gu = loc_gu;
+	}
+	public String getUp_cate() {
+		return up_cate;
+	}
+	public void setUp_cate(String up_cate) {
+		this.up_cate = up_cate;
+	}
 	public int getPageNum() {
 		return pageNum;
 	}

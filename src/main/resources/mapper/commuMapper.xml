@@ -8,13 +8,64 @@
 		insert into board (num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag)
 		values (boardsq.nextval, #{userid}, #{b_gu}, ${up_cate},${down_cate},#{b_subject},#{b_content}, #{b_tag})
 	</insert>
-	<select id ="commuSelect" resultType="com.team4.localer.vo.BoardVO">
-		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
-		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
-    	(select count(*) from reply where num = b.num) repcont,
-    	(select count(*) from likeit where num = numlike) numlike   
-		from board b where  b_gu=#{b_gu} and up_cate=1 order by num desc
+	
+	
+	<select id="boardTotalRecoedCount" resultType="int">
+  		select count(num) from board  where
+  		<if test="up_cate==1">
+  			 b_gu=#{b_gu} and up_cate=${up_cate}
+  		</if>
+  		<if test="up_cate==2">
+  			up_cate=${up_cate}
+  		</if>
+  		 <if test="up_cate==3">
+  			up_cate=${up_cate} 
+  		</if>
+  		<if test="searchWord != null and !searchWord.equals('')">
+  			and ${searchKey} like '%${searchWord}%'
+  		</if>
+  	</select>
+  	
+
+		
+  	<select id="commuPageSelect" resultType="com.team4.localer.vo.BoardVO">
+	    select * from        
+	        (select * from               
+	            (select * from         
+	                (select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
+					to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
+					(select count(*) from reply where num = b.num) repcont,
+    				(select count(*) from likeit where num = numlike) numlike  from board b
+	                
+	                <if test="searchKey != null and searchWord != null and searchKey != '' and searchKey != '' ">
+	                    where ${searchKey} like '%${searchWord}%'and up_cate=${up_cate}
+	                    <if test="up_cate == 1">
+	                      and b_gu=#{b_gu}
+	                    </if>
+	                    
+	                </if> order by num desc)
+	                
+	           <if test="up_cate != null and up_cate != '' ">
+	         	   where up_cate=${up_cate} 
+	         	    
+	         	    <if test="up_cate == 1">
+	                      and b_gu=#{b_gu}
+	                </if>
+	           </if>)
+	                                <!--      현재페이지 * 한페이지출력수 -->
+	        where <![CDATA[rownum<=]]>${pageNum * onePageRecord}  order by num asc)
+	    where <![CDATA[rownum<=]]>
+	                 <!-- 현재페이지가가 총페이지수랑 같으면(마지막페이지라는뜻) = ${마지막페이지레코드{ -->
+	    <if test="pageNum==totalPage">
+	    	${lastPageRecord}
+	    </if>
+	            <!-- 그게 아니고 현재페이지가 총페이지수랑 같지 않으면  ${한페이지출력수} -->
+	    <if test="pageNum!=totalPage">
+	    	${onePageRecord}
+	    </if>
+	    order by num desc
 	</select>
+	
   	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
   		select num, b.userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,
         to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick,
@@ -71,7 +122,7 @@
 		]]>
 	</select>
 	<select id="commuGuSelect"  resultType="int">
-	 	select count(*)gu_select from board where b_gu=#{param1}
+	 	select count(*)gu_select from board where b_gu=#{param1} and up_cate=1
 	</select>
 	<select id="newSelect" resultType="com.team4.localer.vo.BoardVO">
 		 select num, to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate from board where num=#{num}

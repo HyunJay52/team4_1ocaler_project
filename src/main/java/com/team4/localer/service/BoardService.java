@@ -2,7 +2,7 @@ package com.team4.localer.service;
 
 import java.util.List;
 
-
+import com.team4.localer.vo.BoardPageVO;
 import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.PrevNextVO;
 
@@ -10,7 +10,6 @@ public interface BoardService {
 
 	public int commuInsert(BoardVO vo);
 	
-	public List<BoardVO> commuSelect(BoardVO vo);
 	
 	public BoardVO commuViewSelect(int num);
 	
@@ -39,4 +38,12 @@ public interface BoardService {
 	public PrevNextVO lagLeadSelect(int num);
 	
 	public BoardVO likeCount(int num);
+	
+	//커뮤 글보기 (페이징?) - 리스트
+	public List<BoardVO> commuPageSelect(BoardPageVO vo);
+	//커뮤 토탈 레코드수 구하기
+	public int boardTotalRecoedCount(BoardPageVO vo);
+	
+
+	
 }
