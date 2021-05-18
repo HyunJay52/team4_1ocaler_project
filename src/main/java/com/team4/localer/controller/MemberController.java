@@ -170,7 +170,7 @@ public class MemberController {
 			if(returnPwd!=null) {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-				msgHelper.setFrom("addict520@naver.com"); //보내는 사람
+				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
 				msgHelper.setTo(vo.getMem_email()); //받는 사람
 				msgHelper.setSubject(subject); //제목
 				
@@ -613,4 +613,79 @@ public class MemberController {
 		}
 		return mav;
 	}
-}//전체 클래스 끝
+//셀러 활동 정지
+	
+//셀러 탈퇴
+	
+//이메일 인증
+	@RequestMapping(value="/sendVerifiedCode")
+	@ResponseBody
+	public String sendVerifiedCode(String mem_email, String whichpage, HttpServletRequest req, HttpSession ses) {
+		ses.removeAttribute("verifyNum");
+		//페이지 구분값
+		String returnVal = "";
+		
+		UUID random = UUID.randomUUID(); //랜덤번호
+		String uuid = random.toString();
+		
+		String verifyNum = uuid.substring(0, 7);
+		
+		String subject = "1ocaler - 이메일 등록을 위한 인증번호입니다";
+		String content = "";
+		
+		try {
+			int checkEmail=0;
+			if(whichpage.equals("mem")) {
+				checkEmail = service.checkMemEmail(whichpage, mem_email);
+			}else if(whichpage.equals("sel")) {
+				checkEmail = service.checkMemEmail(whichpage, mem_email);
+			}
+			if(checkEmail<=0) {
+				MimeMessage msg = mailSender.createMimeMessage();
+				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
+				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setTo(mem_email); //받는 사람
+				msgHelper.setSubject(subject); //제목
+				
+				content = "인증코드 ? "+verifyNum;
+				
+				msgHelper.setText("text/html;charset=UTF-8", content);
+				mailSender.send(msg); //메일전송
+				
+				//인증코드 저장
+				ses.setAttribute("verifyNum", verifyNum);
+				System.out.println("?????인증코드 ? "+verifyNum);
+				
+				returnVal = "Y";
+				
+			}else {
+				returnVal = "N";
+			}
+		}catch(Exception e) {
+			System.out.println("이메일 인증 에러");
+			e.printStackTrace();
+			returnVal = "N";
+		}
+		return returnVal;
+	}
+//이메일 인증확인
+	@RequestMapping(value= "/sendVerifiedNumCheck", method=RequestMethod.POST)
+	@ResponseBody
+	public String verifyNumHolder(String verifiedNum, HttpServletRequest req, HttpSession ses) {
+		String returnVal = "";
+		
+		String verifyHolder = req.getParameter("verifiedNum"); //입력한 인증번호
+		String verifyKeptNum = (String)ses.getAttribute("verifyNum"); //저장한 인증번호
+		try {
+			if(verifyHolder.equals(verifyKeptNum)) {
+				returnVal = "Y";
+			}else {
+				returnVal = "N";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			returnVal = "N";
+		}
+		return returnVal;
+	}
+}//전체 클래스 끝	

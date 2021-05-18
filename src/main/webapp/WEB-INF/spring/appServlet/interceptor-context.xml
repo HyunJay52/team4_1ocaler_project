@@ -17,6 +17,13 @@
 			<mvc:mapping path="/joinSeller" />
 			<mvc:mapping path="/sellerJoinOk" />
 			<mvc:mapping path="/sellerPwdDoubleCheck"/>
+			<mvc:mapping path="/myInfoSeller"/>
+			<mvc:mapping path="/reportWrite"/>
+			<mvc:mapping path="/cs_repOk"/>
+			<mvc:mapping path="/qnaWrite"/>
+			<mvc:mapping path="/cs_qnaOk"/>
+			<mvc:mapping path="/memberWrite"/>
+			<mvc:mapping path="/memWriteOk"/>
 			<bean class="com.team4.localer.controller.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

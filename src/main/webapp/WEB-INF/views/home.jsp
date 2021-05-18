@@ -97,7 +97,7 @@
 			
 			<ul class="boardText">
 				<c:forEach var="mem" items="${memVO }" begin="1" end="10">
-				<li class="selList" OnClick="location.href='sellView'">
+				<li class="selList" OnClick="location.href='memberView?num=${mem.num}'">
 					<div>
 						<div>
 							<img src="<%=request.getContextPath() %>/img/dealFileImg/${mem.s_img1 }" />
@@ -118,18 +118,18 @@
 		<div class="mdFnt indexSubTitle"><span class="indexSubTitleSpan">오늘의</span> "착한발견"</div>
 		<div class="selBoard">
 			<ul class="boardText">
-				<c:forEach var="i" begin="1" end="10">
+				<c:forEach var="sel" items="${selVO }" begin="1" end="10">
 				<li class="selList" OnClick="location.href='sellView'">
 					<div>
 						<div>
-							<img src="img/deal/food1.jpeg" />
+							<img src="<%=request.getContextPath() %>/img/sellItemInsertPicture/${sel.i_img1 }" />
 						</div>
 						<ul>
-							<li class="wordcut">D.I.Y 오르골 엔틱소품</li>
-							<li><span class="priceSpan">20,000 원</span></li>
-							<li><span class="locationSpan wordCut">염창역</span>, 05/28</li>
-							<li><span class="locationSpan wordCut">염창역</span>, 05/28</li>
-							<li>goguma1234 &nbsp; <img src="common/user.png">&nbsp;&nbsp;</li>
+							<li class="wordcut">${sel.i_subject }</li>
+							<li><span class="priceSpan">${sel.i_price } 원</span></li>
+							<li><span class="locationSpan wordCut">???</span></li>
+							<li>${sel.i_period }</li>
+							<li>${sel.userid } &nbsp; <img src="<%=request.getContextPath() %>/img/sel_prof/${sel.sel_prof }">&nbsp;&nbsp;</li>
 						</ul>
 					</div>
 				</li>
