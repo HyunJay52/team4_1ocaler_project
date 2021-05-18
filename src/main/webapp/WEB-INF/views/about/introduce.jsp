@@ -2,57 +2,73 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 
+<script>
+	document.title = "about us";
+	
+	window.onscroll=function(){bannerMove()};
+	   
+	function bannerMove(){
+	  	var scrollY = window.scrollY;
+	      
+// 		if(scrollY>=400 || scrollY<=500){ // 스크롤 높이가 400
+// 			console.log("??????")
+// 			$("#abtVideo").slideUp(1000, function(){
+// 				$("#abtVideo").css("display", "block");
+// 			})
+// 			//$("#abtVideo").slideUp(1000);
+// 		}
+	}
+      
+</script>
 <div class="aboutDiv">
 	<div id="introDetail">
-		<div>1ocaler 구상계기</div>
-		<div>
-			1인 가구 증가함에 따라 소비패턴의 변화로 소포장 상품 판매의 필요성 증가<br/>
-			1인 가구간의 소통과 변화된 소비패턴에 맞는 시장 구축을 위한 1인 가구 공유 플랫폼 구상
+		<div>1ocal+er 프로젝트 시작</div>
+		<div><img src="<%=request.getContextPath() %>/img/aboutImg/window1.jpg"/></div>
+		<div id="abtIntro">
+				???????
+				?????????????
+				1인가구 만얼;ㅣ
+				
+		</div>
+		
+		<div class="abtVideo">
+			<video src="<%=request.getContextPath() %>/img/aboutImg/dining.mp4" width="800px" height="600px" class="abtVideo" preload="none" autoplay muted loop></video>
+		</div>
+		<div class="exHow">
+			<span>HOW?</span><br/>
+				지역기반 1인가구 플랫폼을 이웃사촌...
+				ㅎㅎㅎ 
 		</div>
 	</div>
 
 	<table id="introTbl">
 		<tbody>
 			<tr>
-				<td colspan="5"><span style="font-size:20px;"><strong>개발자 소개</strong></span></td>
+				<td colspan="5">TEAM "PURBLIC"</td>
 			</tr>
 			<tr>
+				<td><img src="<%=request.getContextPath() %>/img/aboutImg/dragonw.png"/></td>
+				<td><img src="<%=request.getContextPath() %>/img/aboutImg/hj.png"/></td>
 				<td><img src="common/user.png"/></td>
-				<td><img src="common/user.png"/></td>
-				<td><img src="common/user.png"/></td>
-				<td><img src="common/user.png"/></td>
-				<td><img src="common/user.png"/></td>
+				<td><img src="<%=request.getContextPath() %>/img/aboutImg/jisu.jpeg"/></td>
+				<td><img src="<%=request.getContextPath() %>/img/aboutImg/heey.jpeg"/></td>
+			</tr>
+			<tr id="tblName">
+				<td>김용우</td>
+				<td>김현정</td>
+				<td>이용섭</td>
+				<td>이지수</td>
+				<td>신희연</td>
 			</tr>
 			<tr>
-				<td>
-				<p>이름 : 김용우</p>
-	
-				<p>담당 : 모집</p>
-				</td>
-				<td>
-				<p>이름 : 김현정</p>
-	
-				<p>담당 : 메인, 사이드, about, 고객정보</p>
-				</td>
-				<td>
-				<p>이름 : 이용섭</p>
-	
-				<p>담당 : 내정보</p>
-				</td>
-				<td>
-				<p>이름 : 이지수</p>
-	
-				<p>담당 : 관리자</p>
-				</td>
-				<td>
-				<p>이름 : 신희연</p>
-	
-				<p>담당 : 판매, 게시판</p>
-				</td>
+				<td colspan="5" class="tblRole">ROLE</td>
 			</tr>
-			<tr>
-				<td colspan="5">&nbsp;</td>
-			</tr>
+			<tr id="tblRole">
+				<td>가치가장</td> <!-- 리스트로? -->
+				<td>메인</td>
+				<td>내정보</td>
+				<td>관리자</td>
+				<td>게시판</td>
 		</tbody>
 	</table>
 
