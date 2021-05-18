@@ -144,7 +144,7 @@
 					$(".pointList").html("");
 					result.pList.forEach(function(data,idx){
 						var tag = "<li>";
-						if(data.cha_mth <= 1){
+						if(data.cha_mth <= 2){
 							tag += "<div class='pointStatus point-color-green'>적립</div>";
 							tag += "<p class='pointDate'>"+data.po_date+"</p>";
 							if(data.cha_mth == 0){
@@ -157,7 +157,7 @@
 								tag += "<p class='pointItem'>충전포인트 결제(카드)</p>";								
 							}
 							tag += "</li>"
-						}else if(data.cha_mth > 1){
+						}else if(data.cha_mth > 2){
 							tag += "<div class='pointStatus point-color-red point-status-red'>사용</div>";
 							tag += "<p class='pointDate'>"+data.po_date+"</p>";
 							tag += "<span class='pointContent'>포인트 결제</span>";

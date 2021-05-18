@@ -90,4 +90,9 @@
 .table tr:last-child{/*마지막 줄 tr 스타일*/
 	border-bottom:2px solid #3f1785;
 }
-	
+
+/* div 가운데 정렬 */
+.centerDiv {
+	width: 1300px;
+	margin: 0 auto;
+}

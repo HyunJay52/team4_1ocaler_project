@@ -372,7 +372,7 @@ public class AdminManageController {
 		//총레코드 구하기
 		pageVO.setTotalRecord(csService.spendtotalRecord(pageVO));
 //		//회원 테이블 리스트
-		pageVO.setNum("add_point");//num설정해줘야한다 pageVO에 
+		pageVO.setNum("userid");//num설정해줘야한다 pageVO에 
 		mav.addObject("list",manaService.mempsendList(pageVO));
 		mav.addObject("pageVO", pageVO);
 		mav.setViewName("admin/spend_mem");
@@ -384,7 +384,7 @@ public class AdminManageController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		//검색어가 있을때
 		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
-		pageVO.setNum("add_point");
+		pageVO.setNum("userid");
 		pageVO.setTotalRecord(csService.spendtotalRecord(pageVO));//총레코드구하기
 		pageVO.setSearchKey("ch3.userid");
 		result.put("list",manaService.mempsendList(pageVO));
@@ -409,7 +409,59 @@ public class AdminManageController {
 	@RequestMapping("/spend_sel")//판매관리
 	public ModelAndView spend_sel(int month) {
 		ModelAndView mav = new ModelAndView();
+		Mem_statisVO statisVO = new Mem_statisVO();
+		//5월 신규
+		statisVO.setMonth(month);
+		String resultMonth[] = {statisVO.getMonth1(),statisVO.getMonth2(),statisVO.getMonth3()};
+		mav.addObject("monthArr",resultMonth);//3월,4월 5월 넣기
+		//누적 매출, 누적 수익
+		mav.addObject("total",manaService.selspendtotal(statisVO));
+		//3,4,5월 게시글수 넣어주기
+		mav.addObject("boardCnt",manaService.countboard(statisVO));
+		//정산전 정산 후 
+		mav.addObject("spendCnt",manaService.countspend(statisVO));
+		//selspendList
+		AdminPageVO pageVO = new AdminPageVO();
+		String monthStr="";
+		if(month<10) {
+			monthStr="0"+month;
+		}else {
+			monthStr=""+month;
+		}
+		pageVO.setMonth(monthStr);
+		pageVO.setTotalRecord(csService.selspendtotalRecord(pageVO));
+		mav.addObject("list",manaService.selspendList(pageVO));
+		mav.addObject("pageVO",pageVO);
+		//이번달 수익 매출 
+		mav.addObject("month3",manaService.selspendmonth(statisVO));
+		statisVO = monthCal1(statisVO);//4월 넣어주는 과정
+		mav.addObject("month2",manaService.selspendmonth(statisVO));
+		statisVO = monthCal1(statisVO);//3월 넣어주는 과정
+		mav.addObject("month1",manaService.selspendmonth(statisVO));
 		mav.setViewName("admin/spend_sel");
 		return mav;
+	}
+	@RequestMapping(value="/selspendSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selspendSearch(AdminPageVO pageVO){
+		Map<String, Object> result = new HashMap<String, Object>();
+		//검색어가 있을때
+		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
+		pageVO.setTotalRecord(csService.selspendtotalRecord(pageVO));//총레코드구하기
+		
+		pageVO.setSearchKey("sel1."+pageVO.getSearchKey());
+		result.put("list",manaService.selspendList(pageVO));
+		result.put("pageNum",pageVO.getPageNum());
+		result.put("startPageNum",pageVO.getStartPageNum());
+		result.put("totalPage", pageVO.getTotalPage());
+		return result;
+	}
+	@RequestMapping(value="/selspendModal",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selspendModal(int num){
+		Map<String, Object> result = new HashMap<String, Object>();
+		//글번호에 해당하는 ordertbl 리스트	
+		result.put("list",manaService.selpsendmodalList(num));
+		return result;
 	}
 }

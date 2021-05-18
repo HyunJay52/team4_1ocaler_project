@@ -25,10 +25,12 @@
 	href="<%=request.getContextPath()%>/css/aboutCsBoard/aboutBoard.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/aboutCsBoard/csBoard.css" /> 
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/aboutCsBoard/totalSearch.css" /> 
 	
 <html>
 <head>
-<title>1ocaler</title>
+<title></title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
@@ -60,8 +62,7 @@
 	<!-- header menu 부분 -->
 	<div id="pageTop">
 		<div id="logo">
-			<a href="<%=request.getContextPath()%>/"><img
-				src="common/logo_deep_pur.png" />1ocal+er</a>
+			<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath() %>/common/logo_deep_pur.png" />1ocal+er</a>
 		</div>
 		<c:if test="${!logId.equals('admin') }">
 			<div id="topNavi">

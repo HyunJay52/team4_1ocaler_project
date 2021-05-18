@@ -65,7 +65,7 @@
 				</li>
 				<li>이메일</li>
 				<li><input type="text" class="inputDisabled" name="sel_email" id="sel_email" tabindex="6" maxlength="11" value="${myVO.sel_email }" disabled="disabled"/>
-				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">이메일인증</button> <br />
+				<button type="button" id="verifyEmail" class="btn commBtn Mem_lgBtn">이메일인증</button> <br />
 				<span id="checktel"></span></li>
 					
 				<li>주소</li>
@@ -134,3 +134,15 @@
 		});
 	});
 </script>
+
+
+<div id="verifyEmailPop">
+	<div>이메일인증</div>
+	<ul>
+		<li>인증번호를 입력해주세요</li>
+		<li><input type="password" id="verifiedNum"/></li>
+		<li><input type="submit" id="verfiedNumChek" value="확인하기"/></li>
+	</ul>	
+</div>
+
+<script src="<%=request.getContextPath() %>/js/member/selEmailverify.js"></script>

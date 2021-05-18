@@ -7,7 +7,17 @@
 
 
 	<script>
+		
 		$(()=>{
+			$(document).on('keyup','.option_price', function() {
+				var regex= /^[0-9]/g;
+				if (!regex.test($(".option_price").val())) {
+					this.value=this.value.replace(/[^0-9]/g,'');
+					alert('추가 옵션 가격은 숫자만 입력해주세요');
+				}
+				
+			});
+			
 			$(document).ready(function() {
 			    $('#summernote').summernote({
 			    	height: 650,
@@ -15,14 +25,14 @@
 			        tabsize: 2,
 			        disableResizeEditor: true
 			    });
-			  });
-				
+			 });
+					
 			//옵션 추가	
 			tag = '';
 			$(document).on("click",'#optionDiv>div>img[class=optionPlus]', ()=>{
-				tag += '<div>&nbsp;&nbsp; ● <input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/>';
-				tag += '<input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/>';
-				tag += '<input type="number" min="0" class="option_price" name="option_price" placeholder="추가 옵션 가격을 입력해 주세요"/>';
+				tag += '<div>&nbsp;&nbsp; ● <input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" required/>';
+				tag += '<input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요" required/>';
+				tag += '<input type="number" min=0 class="option_price" name="o_price" value=0 placeholder="추가 옵션 가격을 입력해 주세요" required/>';
 				tag += '<img class="optionPlus" style="margin-left:10px;" src="/1ocaler/img/deal/plus.png"/>';
 				tag += '<img class="optionMinus" style="margin-left:10px;" src="/1ocaler/img/deal/minus.png"/></div>';
 				$('#optionDiv').append(tag);
@@ -37,7 +47,47 @@
 			$("#cancelBtn").click(()=>{
 				location.href="selBard";
 			})
+				
 			
+			//유효성 검사
+			$(document).on('submit','#sellWriteFrm',function(){
+				if($("#i_subject").val()==null || $("#i_subject").val()==''){
+					alert('제목을 입력해 주세요!')
+					return false;
+				}
+				if($("#i_cnt").val()==null || $("#i_cnt").val()==''){
+					alert('판매 수량을 입력해 주세요!')
+					return false;
+				}
+				if ($('#summernote').summernote('isEmpty')) {
+					alert('내용을 입력해주세요.');
+					return false;
+				}
+				if($("#i_period").val()==null || $("#i_period").val()==''){
+					alert('판매 종료일을 선택해 주세요!')
+					return false;
+				}
+				if($('#i_price').val()==null || $('#i_price').val()==''){
+					alert('판매 가격을 입력해 주세요!')
+					return false;
+				}
+				if($("#filename1").val()=='' && $("#filename2").val()=='' && $("#filename3").val()=='' ){
+					alert('상품 이미지 1개는 "필수로" 선택해 주세요')
+					return false;
+				}
+				if($(".option_title").val()==null || $(".option_title").val()==''){
+					alert('상품 [옵션]의 타이틀을 입력해주세요')
+					return false;
+				}
+				if($(".option_content").val()==null || $(".option_content").val()==''){
+					alert('상품 [옵션]의 내용을 입력해주세요')
+					return false;
+				} 
+				if($(".option_price").val()==null || $(".option_price").val()==''){
+					alert('상품 [옵션]의 추가 지불금액을 입력해주세요')
+					return false;
+				}
+			});
 			
 		});
 	
@@ -98,7 +148,7 @@
 					</select>
 					</div>
 					<div>
-						&nbsp;&nbsp; ● <input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/><input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/><input type="number" min="0" class="option_price" name="option_price" placeholder="추가 옵션 가격을 입력해 주세요"/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
+						&nbsp;&nbsp; ● <input type="text" id="option_title" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/><input type="text" id="option_content" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/><input type="number" id="option_price" min=0 class="option_price" name="o_price" value=0 placeholder="추가 옵션 가격을 입력해 주세요"/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
 					</div>
 				</div>
 				

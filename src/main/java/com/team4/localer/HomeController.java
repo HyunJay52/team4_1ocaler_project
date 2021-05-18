@@ -1,10 +1,10 @@
 package com.team4.localer;
 
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.DealShareService;
 import com.team4.localer.service.HomeService;
 import com.team4.localer.service.JoinUsService;
+import com.team4.localer.service.SellerService;
 import com.team4.localer.vo.DealShareVO;
 import com.team4.localer.vo.GroupVO;
-import com.team4.localer.vo.MemShareVO;
+import com.team4.localer.vo.SellitemVO;
 
 @Controller
 public class HomeController {
@@ -30,6 +31,8 @@ public class HomeController {
 	JoinUsService joinService;
 	@Autowired
 	DealShareService dealService;
+	@Inject
+	SellerService sellerService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
@@ -42,7 +45,9 @@ public class HomeController {
 		mav.addObject("memVO", memList);
 		
 		//착한발견 리스트
-		
+		SellitemVO sVO = new SellitemVO();
+		List<SellitemVO> selList = sellerService.selectAllitem();
+		mav.addObject("selVO", selList);
 		
 		mav.setViewName("home");
 		

@@ -3,6 +3,9 @@ package com.team4.localer.vo;
 public class MyinfoDealVO {
 	private int num;//회원판매글번호
 	private String userid;
+	
+	private String share_userid;
+	
 	private int s_cate;//카테고리 1: 식료품, 2:생필품
 	private String s_subject;//제목
 	private int s_cnt;//모집인원
@@ -25,6 +28,14 @@ public class MyinfoDealVO {
 	private int numJoin;
 	private String j_status;
 	private String j_writedate;
+	
+	
+	public String getShare_userid() {
+		return share_userid;
+	}
+	public void setShare_userid(String share_userid) {
+		this.share_userid = share_userid;
+	}
 	public int getNum() {
 		return num;
 	}

@@ -78,6 +78,16 @@ $(function(){
 		
 });
 
+//footer javascript
+	$(function(){
+		$("#endAlign>div:last-child").prev().click(function(){
+			location.href="oftenQna";
+		})
+		$("#endAlign>div:last-child").click(function(){
+			location.href="routeUs";
+		})
+	});
+
 //ajax interceptor setting 
 	$(function(){
 		$(document).ajaxSend(function(event, request, setting){

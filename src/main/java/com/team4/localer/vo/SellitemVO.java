@@ -2,7 +2,7 @@ package com.team4.localer.vo;
 
 public class SellitemVO {
 	private String userid;//작성자
-	
+	private String sel_prof; //셀러회원 프로필 사진 
 	
 	private int i_num;//셀러판매글번호
 	private int sel_num;//셀러회원번호
@@ -21,6 +21,18 @@ public class SellitemVO {
 	private int i_hit;
 	private String i_tag;//판매글태그
 
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getSel_prof() {
+		return sel_prof;
+	}
+	public void setSel_prof(String sel_prof) {
+		this.sel_prof = sel_prof;
+	}
 	public int getI_num() {
 		return i_num;
 	}
@@ -117,6 +129,7 @@ public class SellitemVO {
 	public void setI_tag(String i_tag) {
 		this.i_tag = i_tag;
 	}
+
 	
 	
 }
