@@ -7,88 +7,6 @@
 
 <script>
 	document.title="셀러회원가입";
-	
-	$(function(){
-		$("#sellerJoinFrm").submit(function(){
-			if($("#sellerPwd").val()==null || $("#sellerPwd").val()==''){
-				alert("비밀번호를 다시 입력해주세요");
-				$("#sellerPwd").focus();
-				return false;
-			}
-			if($("#pwdDoubleCheck").text()=='N'){
-				alert("비밀번호 확인은 필수입니다");
-				return false;
-			}
-			if($("#sel_name").val()==null || $("#sel_name").val()==''){
-				alert("사업자명은 필수입니다");
-				$("#sel_name").focus();
-				return false;
-			}
-			if($("#company").val()==null || $("#company").val()==''){
-				alert("회사명은 필수입니다");
-				$("#company").focus();
-				return false;
-			}
-			if($("#com_num").val()==null || $("#company").val()==''){
-				alert("사업자번호는 필수입니다");
-				$("#com_num").focus();
-				return false;
-			}
-			if($("#sel_tel").val()==null || $("#sel_tel").val()==''){
-				alert("대표번호를 입력해주세요");
-				$("#sel_tel").focus();
-				return false;
-			}
-			if($("#sel_email").val()==null || $("#sel_email").val()==''){
-				alert("이메일을 입력해주세요");
-				$("#sel_email").focus();
-				return false;
-			}
-			if($("#sel_zip").val()==null || $("#sel_zip").val()==''){
-				alert("우편번호를 입력해주세요");
-				$("#sel_zip").focus();
-				return false;
-			}
-			if($("#sel_addr").val()==null || $("#sel_addr").val()==''){
-				alert("주소를 입력해주세요");
-				$("#sel_addr").focus();
-				return false;
-			}
-			if($("#sel_detail").val()==null || $("#sel_detail").val()==''){
-				alert("상세주소를 입력해주세요");
-				$("#sel_detail").focus();
-				return false;
-			}
-			if($("#acc_name").val()==null || $("#acc_name").val()==''){
-				alert("계좌주의 이름을 입력해주세요");
-				$("#acc_name").focus();
-				return false;
-			}
-			if($("#bank").val()==null || $("#bank").val()==0){
-				alert("거래은행을 선택해주세요");
-				$("#bank").focus();
-				return false;
-			}
-			if($("#account").val()==null || $("#account").val()==''){
-				alert("계좌번호를 입력해주세요");
-				$("#account").focus();
-				return false;
-			}
-			if($("#sel_prof").val()==null || $("#sel_prof").val()==''){
-				alert("프로필 사진을 선택하지 않으시면, 기본 이미지로 지정됩니다");
-				$("#sel_prof").val('user.png');
-				$("#sel_prof").focus();
-				return false;
-			}
-			if($("#sel_content").val()==null || $("#sel_prof").val()==''){
-				$("#sel_content").val("안녕하세요,"+$("#company").val()+"입니다");
-				$("#sel_content").focus();
-				return false;
-			}
-			return true;
-		});
-		
-	});
 </script>
 
 <div id="joinSeller">
@@ -125,7 +43,7 @@
 				</li>
 				
 				<li>이메일</li>
-				<li><input type="text" name="sel_email" id="sel_email" tabindex="7" placeholder="예) 1ocaler@1ocaler.com"/><button type="button" class="btn commBtn lgBtn">이메일 인증</button>
+				<li><input type="text" name="sel_email" id="sel_email" tabindex="7" placeholder="예) 1ocaler@1ocaler.com"/><button type="button" id="verifyEmail" class="btn commBtn lgBtn">이메일 인증</button>
 					<br/><span id="checkSellEmail"></span>
 				</li>
 				
@@ -160,7 +78,7 @@
 								<option value="국민은행">국민은행</option>
 								<option value="카카오뱅크">카카오뱅크</option>
 							</select>
-							<input type="number" name="account" id="account" tabindex="15" placeholder="계좌번호(숫자만 입력해주세요)"/>
+							<input type="text" name="account" id="account" tabindex="15" placeholder="계좌번호(숫자만 입력해주세요)"/>
 							<br/><span id="checkSellAcc"></span>
 						</li>
 					</ul>
@@ -189,6 +107,16 @@
 			<button class="btn seeMoreClass" >가입하기</button>
 		</div>
 	</form>
-	
-	
 </div>
+
+
+<div id="verifyEmailPop">
+	<div>이메일인증</div>
+	<ul>
+		<li>인증번호를 입력해주세요</li>
+		<li><input type="password" id="verifiedNum"/></li>
+		<li><input type="submit" id="verfiedNumChek" value="확인하기"/></li>
+	</ul>	
+</div>
+
+<script src="<%=request.getContextPath() %>/js/member/selEmailverify.js"></script>

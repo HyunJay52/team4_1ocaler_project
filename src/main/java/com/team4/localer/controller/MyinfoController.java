@@ -20,7 +20,11 @@ import com.team4.localer.service.CsService;
 import com.team4.localer.service.ManageService;
 import com.team4.localer.service.MyInfoService;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.ItemReviewVO;
+import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoDealVO;
+import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 
 @Controller
@@ -77,17 +81,31 @@ public class MyinfoController {
 		}
 		return mav;
 	}
-		
+	//내정보 메인페이지 참여리스트
+	@ResponseBody
+	@RequestMapping("/myInfoMainDeal")
+	public Map<String, Object> myInfoMainDeal(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		vo.setRowNum1(1, 5); 
+		vo.setRowNum2(1, 1, 1, 5);
+		vo.setUserid((String)ses.getAttribute("logId"));
+		map.put("joinList", service.selectMyJoinList(vo));
+		map.put("shareList", service.selectMyShareJoinList(vo.getUserid()));
+		return map;
+	}
 	//내정보 충전 페이지
 	@RequestMapping("/myInfoLoad")
 	public ModelAndView myInfoLoad(HttpSession ses) {
 		String myPoint = "0";
 		ModelAndView mav = new ModelAndView();
 		String userid = (String)ses.getAttribute("logId");
-		if(userid != null || userid != "") {
+		if(userid != null && userid != "") {
 			myPoint = service.joinPoint(userid);
 		}
-		System.out.println(myPoint);
+		if(myPoint == null) {
+			myPoint = "0";
+		}
+		System.out.println("mypoint="+myPoint);
 		mav.addObject("myPoint", myPoint);
 		mav.setViewName("myInfo/myInfoLoad");
 		return mav;
@@ -113,8 +131,8 @@ public class MyinfoController {
 		pVO.setSearchWord(searchWord);
 		
 		if(searchDate != null && searchDate != "") {
-			pVO.setSearchDate(searchDate+" 01:00:00");
-			pVO.setSearchDate2(searchDate+" 12:59:59");
+			pVO.setSearchDate(searchDate+" 00:00:00");
+			pVO.setSearchDate2(searchDate+" 23:59:59");
 		}
 		if(searchKey != null && searchKey != "") {
 			if(searchKey.equals("all")) {
@@ -167,9 +185,12 @@ public class MyinfoController {
 	
 	//회원간 거래 페이지
 	@RequestMapping("/myInfoDeal")
-	public ModelAndView myInfoDeal() {
+	public ModelAndView myInfoDeal(HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
-
+		
+		String userid = ((String)ses.getAttribute("logId"));
+		
+		mav.addObject("vo", service.selectMyCount(userid));
 		mav.setViewName("myInfo/myInfoDeal");
 		return mav;
 	}
@@ -181,19 +202,31 @@ public class MyinfoController {
 		vo.setUserid(searchId);
 		vo.setOnePageRecord(5);
 		vo.setOnePageSize(5);
+		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		System.out.println("kategorie="+vo.getKategorie());
-
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		
 		if(vo.getKategorie() == null) {
 			vo.setKategorie("mem_share");
 		}
-		
-		vo.setDateContent("s_writedate");			
+		if(vo.getKategorie().equals("mem_share")) {
+			vo.setDateContent("s_writedate");			
+		}else {
+			vo.setDateContent("j_writedate");
+		}
 
 		if(vo.getSearchWord().equals("") || vo.getSearchWord() == null) {
 			vo.setSearchWord("%%");
+		}else {
+			vo.setSearchWord("%"+vo.getSearchWord()+"%");
 		}
+		System.out.println("nowNum="+vo.getNowNum());
 		System.out.println("kategorie="+vo.getKategorie());
+		System.out.println("key="+vo.getSearchKey());
+		System.out.println("word="+vo.getSearchWord());
+		
 		vo.setTotalRecord(service.myCount(vo));
 		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
@@ -201,23 +234,158 @@ public class MyinfoController {
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
 		
 		System.out.println("dateContent="+vo.getDateContent());
+		
 		result.put("pVO", vo);
 		result.put("list", service.selectMyShare(vo));
 		return result;
 	}
-	
-	@RequestMapping("/myInfoFarmerDeal")
-	public String myInfoFarmerDeal() {
-		return "myInfo/myInfoFarmerDeal";
+	@ResponseBody
+	@RequestMapping("/selectReviewCount")
+	public MyinfoJoinUsVO selectReviewCount(HttpServletRequest req) {
+		MyinfoJoinUsVO vo = new MyinfoJoinUsVO();
+		int num = Integer.parseInt(req.getParameter("num"));
+		
+		vo = service.selectReviewCount(num);
+		System.out.println("joincount="+vo.getJoinCount());
+		System.out.println("reviewcount="+vo.getReviewCount());
+		
+		return vo;
+	}
+	@ResponseBody
+	@RequestMapping("/selectJoinUs")
+	public List<JoinUsVO> selectJoinUs(HttpServletRequest req){
+		List<JoinUsVO> list = new ArrayList<JoinUsVO>();
+		int numJoin = Integer.parseInt(req.getParameter("numJoin"));
+		System.out.println(numJoin);
+		list = service.selectJoinUs(numJoin);
+
+		return list;
 	}
 	
+	@RequestMapping("/myInfoFarmerDeal")
+	public ModelAndView myInfoFarmerDeal(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		String userid = ((String)ses.getAttribute("logId"));
+		
+		mav.addObject("vo", service.selectMyCount(userid));
+		mav.setViewName("myInfo/myInfoFarmerDeal");
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/myFarmerDealSelect")
+	public Map<String, Object> myFarmerDealSelect(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> result = new HashMap<String, Object>();	
+		
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setOnePageRecord(5);
+		vo.setOnePageSize(5);
+		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
+		if(vo.getSearchWord() == null || vo.getSearchWord().equals("")) {
+			vo.setSearchWord("%%");
+		}else {
+			vo.setSearchWord("%"+vo.getSearchWord()+"%");
+		}
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		
+		vo.setTotalRecord(service.myCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+		
+		System.out.println("key="+vo.getSearchKey());
+		System.out.println("word="+vo.getSearchWord());
+		System.out.println("dayCon="+vo.getDateContent());		
+		System.out.println("dey="+vo.getSearchDate());
+		System.out.println("dey2="+vo.getSearchDate2());
+		
+		result.put("list", service.selectOrder(vo));
+		result.put("pVO", vo);
+		return result;
+	}
+	//리뷰가 있는지 조회
+	@ResponseBody
+	@RequestMapping("/selectMyReviewCount")
+	public int selectMyReviewCount(HttpSession ses, HttpServletRequest req) {
+		int result = 0;
+		String userid = (String)ses.getAttribute("logId");
+		int num = Integer.parseInt(req.getParameter("num"));
+		result = service.selectMyReviewCount(userid, num);
+		return result;
+	}
+	
+	//리뷰관리 페이지
 	@RequestMapping("/myInfoReview")
 	public String myInfoReview() {
 		return "myInfo/myInfoReview";
 	}
+	
+	//리뷰쓰기
+	@ResponseBody
+	@RequestMapping("/writeReview")
+	public int writeReview(HttpSession ses, HttpServletRequest req, ItemReviewVO vo) {
+		int result = 0;
+		vo.setUserid((String)ses.getAttribute("logId"));
+		String j_num = req.getParameter("j_num");
+		result = service.writeReview(vo);
+		System.out.println("jnum="+j_num);
+		if(result > 0) {
+			if(j_num != null && j_num != "") {
+				result = service.updateReviewStatus(Integer.parseInt(j_num));				
+			}
+		}
+		return result;
+	}
+	
+	//
+	@ResponseBody
+	@RequestMapping("/joinUpdate")
+	public int joinUpdate(HttpServletRequest req) {
+		int result = 0;
+		int j_num = Integer.parseInt(req.getParameter("j_num"));
+		System.out.println(j_num);
+		result = service.updateJoinStatus(j_num);
+		
+		
+		return result;
+	}
+	
+	//참여신청 취소
+	@ResponseBody
+	@RequestMapping("/joinCancel")
+	public int joinCancel(HttpServletRequest req) {
+		int result = 0;
+		int j_num = Integer.parseInt(req.getParameter("j_num"));
+		System.out.println(j_num);
+		result = service.updateJoinCancel(j_num);
+		
+		return result;
+	}
+	
+	//한 게시글의 내 리뷰 가져오기
+	@ResponseBody
+	@RequestMapping("/selectMyReview")
+	public ItemReviewVO selectMyReview(HttpSession ses, ItemReviewVO vo) {
+		ItemReviewVO rVO = new ItemReviewVO();
+		vo.setUserid((String)ses.getAttribute("logId"));
+		
+		rVO = service.selectMyReview(vo);
+		return rVO;
+	}
+	
+	//나의 활동 페이지
 	@RequestMapping("/myInfoActivity")
-	public String myInfoActivity() {
-		return "myInfo/myInfoActivity";
+	public ModelAndView myInfoActivity(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		String userid = ((String)ses.getAttribute("logId"));
+		
+		mav.addObject("vo", service.selectMyCount(userid));
+		mav.setViewName("myInfo/myInfoActivity");
+		return mav;
 	}
 	@RequestMapping("/myInfoSaleHistory")
 	public String myInfoSaleHistory() {

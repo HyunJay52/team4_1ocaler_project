@@ -3,7 +3,7 @@
 		width:15%;
 	}
 	#farmerDealTbl tr>td:nth-child(1){/*첫번째 열 선택*/
-	
+		width:13%;
 	}
 	#farmerDealTbl tr>td:nth-child(2){/*세번째 열 선택 : 제목부분*/
 		position:relative;
@@ -19,4 +19,8 @@
 		line-height:40px;
 		background-color:#fff;
 	    text-align:center;
+	}
+	.farmerMdOpen{
+		border:none;
+		background-color:#fff;
 	}

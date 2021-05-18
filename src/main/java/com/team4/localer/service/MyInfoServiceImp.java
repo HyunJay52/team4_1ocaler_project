@@ -8,9 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.MyInfoDAO;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.ItemReviewVO;
+import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoCountVO;
+import com.team4.localer.vo.MyinfoDealVO;
+import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
+import com.team4.localer.vo.OrderVO;
 
 @Service
 public class MyInfoServiceImp implements MyInfoService{
@@ -63,6 +69,78 @@ public class MyInfoServiceImp implements MyInfoService{
 	public List<MemShareVO> selectMyShare(MyinfoPageVO vo) {
 		
 		return dao.selectMyShare(vo);
+	}
+
+	@Override
+	public List<JoinUsVO> selectJoinUs(int num) {
+		
+		return dao.selectJoinUs(num);
+	}
+
+	@Override
+	public List<OrderVO> selectOrder(MyinfoPageVO vo) {
+		
+		return dao.selectOrder(vo);
+	}
+
+	@Override
+	public int writeReview(ItemReviewVO vo) {
+		
+		return dao.writeReview(vo);
+	}
+
+	@Override
+	public int updateReviewStatus(int j_num) {
+		
+		return dao.updateReviewStatus(j_num);
+	}
+
+	@Override
+	public int updateJoinStatus(int j_num) {
+		
+		return dao.updateJoinStatus(j_num);
+	}
+
+	@Override
+	public int updateJoinCancel(int j_num) {
+		
+		return dao.updateJoinCancel(j_num);
+	}
+
+	@Override
+	public MyinfoJoinUsVO selectReviewCount(int num) {
+		
+		return dao.selectReviewCount(num);
+	}
+
+	@Override
+	public ItemReviewVO selectMyReview(ItemReviewVO vo) {
+		
+		return dao.selectMyReview(vo);
+	}
+
+	@Override
+	public MyinfoCountVO selectMyCount(String userid) {
+
+		return dao.selectMyCount(userid);
+	}
+
+	@Override
+	public int selectMyReviewCount(String userid, int num) {
+
+		return dao.selectMyReviewCount(userid, num);
+	}
+
+	@Override
+	public List<MyinfoDealVO> selectMyJoinList(MyinfoPageVO vo) {
+
+		return dao.selectMyJoinList(vo);
+	}
+
+	@Override
+	public List<MyinfoDealVO> selectMyShareJoinList(String userid) {
+		
+		return dao.selectMyShareJoinList(userid);
 	}
 
 

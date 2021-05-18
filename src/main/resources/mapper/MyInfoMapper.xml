@@ -26,13 +26,13 @@
 		
 		select * from (
 		select * from (
-		select userid, cha_point, to_char(po_date, 'YYYY-MM-DD HH:MI:SS') po_date, cha_mth from cha_p
+		select userid, cha_point, to_char(po_date, 'YYYY-MM-DD HH24:MI:SS') po_date, cha_mth from cha_p
 		union all
-		select userid, sp_point, to_char(sp_date, 'YYYY-MM-DD HH:MI:SS') sp_date, sp_item from sp_p order by po_date desc)
+		select userid, sp_point, to_char(sp_date, 'YYYY-MM-DD HH24:MI:SS') sp_date, sp_item from sp_p order by po_date desc)
 		<![CDATA[where rownum <=#{rowNum1} and userid = #{userid} ]]>
 			<if test="searchDate != '' and searchDate != null">
-				and po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH:MI:SS'), 'MM'), 'YYYY-MM-DD HH:MI:SS')
-				and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH:MI:SS')),'YYYY-MM-DD HH:MI:SS' )							
+				and po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS'), 'MM'), 'YYYY-MM-DD HH24:MI:SS')
+				and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')),'YYYY-MM-DD HH24:MI:SS' )							
 			</if>
 			<if test="searchKey == 1">
 				<![CDATA[and cha_mth <= #{searchKey}]]>
@@ -49,11 +49,11 @@
 	<select id="pointCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="String">
 		select count(userid) from(
 		select * from (
-		select userid, cha_mth, to_char(po_date,'YYYY-MM-DD HH:MI:SS') po_date from cha_p
+		select userid, cha_mth, to_char(po_date,'YYYY-MM-DD HH24:MI:SS') po_date from cha_p
 		union all
-		select userid, sp_item, to_char(sp_date,'YYYY-MM-DD HH:MI:SS') from sp_p)
-		where po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH:MI:SS'), 'MM'), 'YYYY-MM-DD HH:MI:SS')
-		and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH:MI:SS')),'YYYY-MM-DD HH:MI:SS' ))
+		select userid, sp_item, to_char(sp_date,'YYYY-MM-DD HH24:MI:SS') from sp_p)
+		where po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS'), 'MM'), 'YYYY-MM-DD HH24:MI:SS')
+		and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')),'YYYY-MM-DD HH24:MI:SS' ))
 		where userid=#{userid}
 		<if test="searchKey != null and searchKey == 1">
 		<![CDATA[and cha_mth <= #{searchKey}]]>
@@ -69,21 +69,120 @@
 		<if test="kategorie.equals('joinus')">
 			join mem_share on joinus.numjoin = mem_share.num	
 		</if>
-		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD')
-		and to_date(#{searchDate2},'YYYY-MM-DD') and mem_share.userid=#{userid})
+		<if test="kategorie.equals('ordertbl')">
+			join sell_item s on ordertbl.num = s.i_num
+			join seller on s.sel_num = seller.sel_num 
+		</if>
+		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and ${kategorie}.userid=#{userid})
 		where ${searchKey} like #{searchWord}
 	</select>
 	
-	<select id="selectMyShare" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MemShareVO">
+	<select id="selectMyShare" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoDealVO">
 		select * from(
 		select * from(
 		select * from ${kategorie}
 		<if test="kategorie.equals('joinus')">
 			join mem_share on joinus.numjoin = mem_share.num
 		</if>
-		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD')
-		and to_date(#{searchDate2},'YYYY-MM-DD') and mem_share.userid = #{userid} and ${searchKey} like #{searchWord} order by num desc)
-        <![CDATA[where rownum <= #{rowNum1} order by num asc)]]>
-		<![CDATA[where rownum <= #{rowNum2} order by num desc]]>
+		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and 
+		${kategorie}.userid = #{userid} and 
+		${searchKey} like #{searchWord} order by ${dateContent} desc)
+        <![CDATA[where rownum <= #{rowNum1} order by ${dateContent} asc)]]>
+		<![CDATA[where rownum <= #{rowNum2} order by ${dateContent} desc]]>
 	</select>
+	
+	<select id="selectJoinUs" parameterType="int" resultType="com.team4.localer.vo.MyinfoJoinUsVO">
+		select j_num, j.userid, numjoin, j_status, mem_sub, j_writedate, mem_post, mem_rev 
+		from joinus j join member m on j.userid = m.userid where numjoin = #{param1}
+		order by j_writedate desc
+	</select>
+	
+	<select id="selectOrder" parameterType="com.team4.localer.vo.OrderVO" resultType="com.team4.localer.vo.OrderVO">
+		select * from(
+		select * from(
+		select o_num, seller.userid, s.i_subject, num, o_mtd, o_cnt, o_price, o_date, o_conf, o_status 
+		from ordertbl o join sell_item s on o.num = s.i_num 
+		                join seller on s.sel_num = seller.sel_num 
+		                where o.userid=#{userid} and o_date between to_date(#{searchDate},'YYYY-MM-DD HH24:MI:SS')
+		                and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and s.${searchKey} like #{searchWord}
+		                order by o_date desc)
+		       <![CDATA[where rownum <= #{rowNum1} order by o_date asc)
+		                where rownum <= #{rowNum2} order by o_date desc]]>
+	</select>
+	
+	<insert id="writeReview" parameterType="com.team4.localer.vo.ItemReviewVO">
+		
+		insert into item_review(re_num, userid, num, re_rate, re_content
+		<if test="re_img != null">
+			, re_img
+		</if>
+		)
+		values(itemsq.nextval, #{userid}, #{num}, #{re_rate}, #{re_content}
+		<if test="re_img != null">
+			, #{re_img}
+		</if>
+		)
+	</insert>
+	
+	<update id="updateReviewStatus" parameterType="int">
+		update joinus set j_status = '리뷰완료' where j_num = #{param1}
+	</update>
+	
+	<update id="updateJoinStatus" parameterType="int">
+		update joinus set j_status = '참여승인' where j_num = #{param1}
+	</update> 
+	
+	<update id="updateJoinCancel" parameterType="int">
+		update joinus set j_status = '참여취소' where j_num = #{param1}	
+	</update>
+	
+	<select id="selectReviewCount" parameterType="int" resultType="com.team4.localer.vo.MyinfoJoinUsVO">
+		select count(numjoin) joinCount, 
+		count(case when j_status = '리뷰완료' then 0 end) reviewCount, 
+		count(case when j_status = '참여취소' then 0 end) joinCancel
+		from (
+		select j.userid, j_num, numjoin, j_status, j_writedate 
+		from joinus j join mem_share m on j.numjoin = m.num 
+		where num=#{param1})
+	</select>
+	
+	<select id="selectMyReview" resultType="com.team4.localer.vo.ItemReviewVO" parameterType="com.team4.localer.vo.ItemReviewVO">
+		select * from item_review where userid=#{userid} and num = #{num}
+	</select>
+	
+	<select id="selectMyReviewCount" resultType="int">
+		select count(re_num) count from ordertbl o join item_review i on o.num = i.num 
+		where o.userid=#{param1} and o.num=#{param2}
+	</select>
+	
+	<select id="selectMyCount" resultType="com.team4.localer.vo.MyinfoCountVO">
+		select (
+			select count(userid) from board where userid = #{param1}) as board,(
+			select count(userid) from reply where userid = #{param1}) as reply,(
+			select count(userid) from likeit where userid = #{param1}) as likeit,(
+			select count(userid) from joinus where userid = #{param1}) as joinus,(
+			select count(userid) from mem_share where userid = #{param1}) as mem_share,(
+			select count(userid) from logcount where userid = #{param1}) as logcount,(
+			select count(userid) from grouplocal where userid = #{param1}) as grouplocal,(
+			select mem_name from member where userid = #{param1}) as mem_name
+		from dual
+	</select>
+	<select id="selectMyJoinList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoDealVO">
+    	select * from(
+		select * from(
+		select * from joinus j join mem_share m on j.numjoin = m.num 
+		where j.userid=#{userid} order by j_status desc)
+        where rownum <![CDATA[ <= ]]> #{rowNum1} order by j_status asc)
+		where rownum <![CDATA[ <= ]]> #{rowNum2} order by j_status desc
+    </select>
+    <select id="selectMyShareJoinList" resultType="com.team4.localer.vo.MyinfoDealVO">
+		select * from (
+        select j_num, numjoin, joinus.userid, j_status, j_writedate, num, mem_share.userid share_userid, s_cate, s_subject, s_cnt, s_content, s_img1, s_loc, s_gu, s_price, s_date, s_status, s_writedate, s_hit, s_tag from joinus
+        join mem_share on joinus.numjoin = mem_share.num
+		where mem_share.userid = #{param1} order by j_writedate desc)where rownum <![CDATA[ <= ]]> 4
+   </select>
+    
+    
 </mapper>

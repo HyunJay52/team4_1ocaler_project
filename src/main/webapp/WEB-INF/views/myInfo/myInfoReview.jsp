@@ -2,13 +2,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 	$(function(){
-		//리뷰버튼 클릭이벤트
-		$(".mainContainer a").click(function(){
-			var title = $(this).text()+"의 상품이 어떠셨나요 ?";
-			$(".modal-title").text(title);
-			console.log($(this).text());
+		function memShareList(){
+			$.ajax({
+				url : "myInfoMainDeal",
+				data : {"rownum":5},
+				dataType : "json",
+				success : function(result){
+					
+				},error : function(e){
+					console.log("error");	
+				}				
 			
-		});
+			});
+		}
+		
 	});
 </script>
 <div class="myinfoBody">
@@ -49,16 +56,14 @@
 		</div>
 		<div class="reviewBottom">
 			<div class="dealDateForm">
-				<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
-				<div class="dateFrm"><button class="dayBtn prev">《</button><button class="setMonth dayBtn mdFnt"></button><button class="dayBtn next">》</button></div>
-				<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
-				<input type="date" min="2021-01-01" max="2021-05-31"/>
+				<input type="date" value="2021-05-01" min="2021-03-01" max="2021-05-31"/> ~ 
+				<input type="date" value="2021-05-31" min="2021-03-01" max="2021-05-31"/>
 			</div>
 			<div class="reviewSearchArea">
 				<input type="text" name="searchWord"/>
 				<input type="button" value="검색" id="reviewSearchAreaBtn"/>
 			</div>
-			<div class="reviewList">
+			<div class="myinfoReviewList">
 			<table class="myinfoTable2">
 					<tr>
 						<td>구분</td>
@@ -96,14 +101,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="reviewMd">
-		<div class="modal-dialog modal-lg">
+	<div class="modal fade" id="reviewMd" data-backdrop="static">
+		<div class="modal-dialog modal-lg" data-backdrop="static">
 			<div class="modal-content">
-				<div class="modal-header reviewHeader">
+				<div class="modal-header reviewHeader" data-backdrop="static">
 				<h4 class="modal-title"></h4>
 
 				</div>
-				<div class="modal-body reviewBody">
+				<div class="modal-body reviewBody" data-backdrop="static">
 					<ul>
 						<li><img src="img/myInfo/myDeal/reviewHeart.png"/></li>
 						<li><img src="img/myInfo/myDeal/reviewHeart2.png"/></li>

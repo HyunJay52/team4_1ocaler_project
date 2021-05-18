@@ -46,22 +46,31 @@
 				
 				<c:if test="${vo.up_cate==1}">		
 					<h5>우리동네 이야기 글쓰기</h5>
+					<select id="up_cate" name="up_cate" Readonly >
+						
+						<option value="1"<c:if test='${vo.up_cate==1 }'>selected</c:if>>동네정보공유</option>	
+						
+					</select>
+					
 				</c:if>
 				<c:if test="${vo.up_cate==2}">		
 					<h5>쓱싹레시피 글쓰기</h5>
+					<select id="up_cate" name="up_cate" Readonly >
+						
+						<option value="2"<c:if test='${vo.up_cate==2 }'>selected</c:if>>나만의 레시피</option>			
+						
+					</select>
+					
 				</c:if>
 				<c:if test="${vo.up_cate==3}">		
 					<h5>자유자게 글쓰기</h5>
-				</c:if>
-				
-				<select id="up_cate" name="up_cate" Readonly >
-					<option value="0" Readonly  selected hidden>카테고리</option>
-					<option value="1"<c:if test='${vo.up_cate==1 }'>selected</c:if>>동네정보공유</option>	
-					<option value="2"<c:if test='${vo.up_cate==2 }'>selected</c:if>>나만의 레시피</option>			
-					<option value="3" <c:if test='${vo.up_cate==3 }'>selected</c:if>>자유게시판</option>
-				</select>
-				
+					<select id="up_cate" name="up_cate" Readonly >
+								
+						<option value="3" <c:if test='${vo.up_cate==3 }'>selected</c:if>>자유게시판</option>
+					</select>
 					
+				</c:if>
+
 				<c:if test="${vo.up_cate==1}">		
 					<select id="Edit_down_cate" name="down_cate">
 						<option value="1"> 할인정보</option>

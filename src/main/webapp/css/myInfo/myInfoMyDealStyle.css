@@ -22,17 +22,19 @@
 		position:relative;
 	}
 	.myDealMem{
-   		width:114px;
+   		width:113px;
+   		height:100px;
+    	overflow:auto;
 		position:absolute;
 		top:0;
-		left:124px;
+		left:116px;
 		z-index:200;
 		text-align:center;
 		border:2px solid black;
 	}
 	#myDealToggle{
 		float:right;
-		margin-top:10px;
+		margin-bottom:10px;
 	}
 	.modal-dialog{
 		margin-top:20%;
@@ -45,4 +47,103 @@
 	}
 	#myinfoPaging{
 		margin-top:10px;
+	}
+	#dealSearchKey{
+		height:30px;
+	}
+	.reviewList{
+		text-align:center;
+		padding:20px 30px;
+		overflow:auto;
+	}
+
+	.reviewListHearder>ul>li{
+		background-color:#ddd;
+	}
+	#reviewList>ul>li, .reviewListHearder>ul>li{
+		float:left;
+		width:20%;
+		height:70px;
+		line-height:70px;
+		font-weight:bold;
+   		font-size:16px;
+   		border-bottom:1px solid #ddd;
+	}
+	#reviewList>ul>li:nth-child(5n+2)>button{
+		width:110px;
+		height:50px;
+		font-size:15px;
+	}
+	.imgBtn{
+		font-weight:bold;
+		height:128px;
+		width:130px;
+	}
+	.btnYellow{
+		color:#eded00;
+	}
+	.btnYellow:hover{
+		color:#fff;
+	}
+	.checkJoinMember, .cancelJoinMember{
+		position: absolute;
+	    margin: 0 auto;
+	    width: 500px;
+	    height: 498px;
+	    top: 100px;
+	    left: 150px;
+	    background-color: #fff;
+	    border: 3px solid black;
+	    border-radius: 10%;
+	    text-align: center;
+	    padding: 50px 20px;
+	}
+	.cancelJoinMember{
+		z-index:100;
+	}
+	.modalBackground{
+		color: black;
+	    width: 100%;
+	    height: 100%;
+	    position: absolute;
+	    background: black;
+	    z-index: 0;
+	    opacity: 0.4;
+	   	display:none;
+	}
+	.readMe{
+		height:300px;
+    	width:100%;
+    	margin-bottom:10px;
+	}
+	.cancelJoinBody{
+		width: 100%;
+	    height: 120;
+	    line-height: 70px;
+	}
+	.cancelJoin{
+		width:90px;
+		height:33.5px;
+	}
+	#viewMyReview{
+		padding:20px 50px;
+	}
+	#viewMyReviewForm{
+		overflow:auto;
+	}
+	#viewMyReviewForm>li{
+		float:left;
+		width:100%;
+		height:32px;
+		line-height:32px;
+		text-align:left;
+    	font-size:18px;
+	}
+	#viewMyReviewForm>li:last-child{
+		height:400px;
+		margin-bottom:10px;
+   		border:1px solid #ddd;
+	}
+	#closeMyReview{
+		float:right;
 	}

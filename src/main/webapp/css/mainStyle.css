@@ -271,7 +271,8 @@ body {
 
 .indexSubTitle {
 	font-family: nsr;
-	padding-bottom: 5px
+	padding-bottom: 5px;
+	margin: 10px 0px;
 }
 
 .indexSubTitleSpan {
@@ -318,7 +319,7 @@ body {
 
 .carousel-inner img {
 	width: 100%;
-	height: 400px;
+	height: 600px;
 }
 
 #indexMain {
@@ -399,7 +400,7 @@ body {
 	height: 35px;
 	text-align: left;
 }
-#gachi .indexInnerUl>li:nth-of-type(5), #gachi .indexInnerUl>li:nth-of-type(6) {
+#gachi .indexInnerUl>li:nth-of-type(5) {
 	text-align: right;
 }
 
@@ -408,6 +409,7 @@ body {
 }
 #gachi .indexInnerUl>li:nth-of-type(6){
 	height: 60px; font-size: 15px;
+	text-align: left;
 }
 
 #gachi .gachiPostLoc {
@@ -429,6 +431,7 @@ body {
 	width: 1300px;
 	height: auto;
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 #indexMain .indexInnerUl {
@@ -438,8 +441,8 @@ body {
 }
 
 #indexMain .indexInnerUl>li:last-child>img {
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	border-radius: 70%;
 }
 
@@ -470,7 +473,8 @@ body {
 
 #indexMain .boardText>li>div>div>img {
 	width: 100%;
-	height: 218px;
+	height: 270px;
+	margin-bottom: 10px;
 }
 
 /* - - - - - - - - - - - - 우리직구 스타일 */
@@ -482,69 +486,66 @@ body {
 
 #indexMain .boardText>li>div>div>img {
 	width: 100%;
-	height: 218px;
+	height: 280px;
 }
 
 #indexMain .selBoard {
-	width: 1250px;
-	height: 370px;
-	margin: 0 auto;
+	width: 1300px;
+	height: 450px;
 }
 
 #indexMain .selList {
-	width: 220px;
-	height: 340px;
-	float: left;
-	margin: 5px;
-	border: 1px solid #ddd;
+	width: 240px;
+    height: 470px;
+    float: left;
+    margin: 0px 10px 20px 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
 }
 
 #indexMain .boardText {
-	width: 1200px;
-	margin: 0 auto;
+	width: 1300px; height: 930px;
 }
+
 #indexMain .selList>div>ul li:nth-child(1) {
-	width: 100%;
+	width: 95%;
+	font-family: nsrb;
 	text-align: center;
 	font-size: 18px;
-	font-weight: bold;
-	margin: 5px 0px;
+	margin: 0 auto 10px auto;
 }
 
-#indexMain .selList>div>ul li:nth-child(2) {
-	width: 40%;
-	float: left;
+#indexMain .selList>div>ul li:nth-child(2), #indexMain .selList>div>ul li:nth-child(3) {
+	width: 95%;
 	line-height: 24px;
-}
-
-#indexMain .selList>div>ul li:nth-child(3) {
-	float: left;
-	width: 50%;
-	text-align: right;
-	line-height: 24px;
-	font-size: 18px;
-	font-weight: bold;
-}
-
-#indexMain .selList>div>ul li:nth-child(4) {
-	width: 100%;
-	font-size: 13px;
-	color: gray;
-	text-align: center;
+	font-size: 15px;
+	margin: 0 auto;
 }
 
 #indexMain .selList>div>ul li:nth-child(5) {
 	width: 100%;
-	float: left;
 	text-align: right;
+	margin-top: 15px;
 }
 
-#indexMain .selList>div>ul>li:nth-child(5) img {
-	width: 30px;
-	height: 30px;
+#indexMain .selList>div>ul>li:nth-child(5)>img {
+	width: 50px;
+	height: 50px;
 	text-align: right;
+	border-radius: 70%;
 }
 
 #indexMain .selList:hover {
 	border: 1.5px solid #5f0080;
+}
+
+.priceSpan {
+	font-size: 22px;
+	margin-right: 5px;
+	font-family: nsreb;
+}
+.locationSpan {
+	font-size: 15px;
+	margin-right: 5px;
+	color: orange;
 }

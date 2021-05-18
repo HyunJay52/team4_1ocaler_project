@@ -9,8 +9,9 @@
 	
 	<div id="commumain">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
-	
+			<h3 style="margin-top:80px; margin-bottom:10px; text-align: left;">#커뮤니티 <span style="font-size:16px">| 지역구를 클릭하면 해당 지역 게시판으로 이동합니다.</span></h3>
 			<div id="map">
+				
 				 <img src="img/commu/seoulMap.jpg" usemap="#seoulMap"/>
 			</div>
 			
@@ -33,10 +34,10 @@
 					    <th>조회수</th>
 					    <th>추천수</th>
 					  </tr>
-					 <c:forEach var="vo" items="${commuBor}">
+					 <c:forEach var="vo" items="${commuBor}" varStatus="status">
 					 			
 							  <tr>
-							  	<td>${vo.numselect }</td>
+							  	<td>${status.count }</td>
 							  	<c:if test="${vo.down_cate==1 }">
 							    	<td>할인정보</td>
 							    </c:if>
@@ -48,7 +49,7 @@
 							    <td>${vo.userid }</td>
 							    <td>${vo.b_writedate }</td>
 							    <td>${vo.b_hit}</td>
-							    <td>12</td>
+							    <td> ${vo.numlike }</td>
 							  </tr>
 						  
 					 </c:forEach>
@@ -68,9 +69,9 @@
 						    <th>조회수</th>
 						  </tr>
 						  
-						  <c:forEach var="vo" items="${recipe}">
+						  <c:forEach var="vo" items="${recipe}" varStatus="status1">
 							  <tr>
-							  	<td>${vo.numselect }</td>
+							  	<td>${status1.count }</td>
 							    <td><a href="commuView?num=${vo.num}">${vo.b_subject }</a></td>
 							    <td>${vo.userid }</td>
 							    <td>${vo.b_hit }</td>
@@ -90,9 +91,9 @@
 					    <th>작성자</th>
 					    <th>조회수</th>
 					  </tr>
-					   <c:forEach var="vo" items="${free}">
+					   <c:forEach var="vo" items="${free}" varStatus="status2">
 							  <tr>
-							  	<td>${vo.numselect }</td>
+							  	<td>${status2.count }</td>
 							    <td><a href="commuView?num=${vo.num}">${vo.b_subject }</a></td>
 							    <td>${vo.userid }</td>
 							    <td>${vo.b_hit }</td>

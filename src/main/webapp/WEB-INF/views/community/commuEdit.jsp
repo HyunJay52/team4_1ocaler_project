@@ -53,7 +53,7 @@
 				</c:if>
 			
 				<select id="up_cate" name="up_cate" disabled>
-					<option value="0" <c:if test='${vo.up_cate==0 }'></c:if> >카테고리</option>
+					<option value="0" selected disabled hidden<c:if test='${vo.up_cate==0 }'></c:if> >카테고리</option>
 					<option value="1" <c:if test='${vo.up_cate==1 }'>selected</c:if>>동네정보공유</option>	
 					<option value="2" <c:if test='${vo.up_cate==2 }'>selected</c:if>>나만의 레시피</option>			
 					<option value="3" <c:if test='${vo.up_cate==3 }'>selected</c:if>>자유게시판</option>

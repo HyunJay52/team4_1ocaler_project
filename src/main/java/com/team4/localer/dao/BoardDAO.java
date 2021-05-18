@@ -2,6 +2,7 @@ package com.team4.localer.dao;
 
 import java.util.List;
 
+import com.team4.localer.vo.PrevNextVO;
 import com.team4.localer.vo.BoardVO;
 
 public interface BoardDAO {
@@ -32,4 +33,11 @@ public interface BoardDAO {
 	public BoardVO commuOneSelect(BoardVO vo);
 	//구 개수
 	public int commuGuSelect(String b_gu);
+	//새글
+	public BoardVO newSelect(int num);
+	//이전글 다음글 
+	public PrevNextVO lagLeadSelect(int num);
+	//추천수
+	public BoardVO likeCount(int num);
+	//
 }

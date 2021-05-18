@@ -159,7 +159,7 @@
 				</li>
 
 				<li>인사말</li>
-				<li><textarea name="mem_content" id="mem_content" style="width:318px; height:62px; resize:none"
+				<li><textarea name="mem_content" id="mem_content" style="width:318px; height:62px; padding: 5px; resize:none"
 						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.mem_content }</textarea>
 				</li>
 				<li>연락처</li>
@@ -170,7 +170,7 @@
 				<li>이메일</li>
 				<li><input type="text" name="mem_email" id="mem_email" class="inputDisabled"
 					tabindex="7" value="${myVO.mem_email }" disabled="disabled" placeholder="예) 1ocaler@1ocaler.com" />
-				<button type="button" class="btn commBtn Mem_lgBtn">이메일 인증</button> <br />
+				<button type="button"  id="verifyEmail" class="btn commBtn Mem_lgBtn">이메일 인증</button> <br />
 				<span id="checkemail"></span></li>
 
 				<li>주소</li>
@@ -221,8 +221,8 @@
 				</div>
 				<div class="modal-body" style="display:none" data-backdrop="static">
 					<p class="mdFnt">탈퇴사유 조사</p>
-					<form id="secessionForm" method="post">
-						<select id="selBox" class="selectBox" name="why">
+					<form id="secessionForm" method="post" action="deletMember">
+						<select id="selBox" class="selectBox" name="del_why">
 							<option value="탈퇴 사유">탈퇴 사유</option>
 							<option value="디자인이 마음에 안들어요">디자인이 마음에 안들어요</option>
 							<option value="사용하기 불편해요">사용하기 불편해요</option>
@@ -231,7 +231,7 @@
 							<option value="기타">기타</option>
 						</select>
 						<div style="display:none">
-							<span class="smlFnt">기타 내용 : </span><input type="text" id="detailwhy" class="textBox" name="detailwhy"/>
+							<span class="smlFnt">기타 내용 : </span><input type="text" id="detailwhy" class="textBox" name="del_why"/>
 						</div>
 						<input id="secession" type="button" class="btn commBtn" value="취소"/>
 						<input id="secessionOk" type="button" class="btn cancelBtn" value="등록"/>
@@ -242,5 +242,14 @@
 	
 	</div>
 </div>
-</body>
-</html>
+
+<div id="verifyEmailPop">
+	<div>이메일인증</div>
+	<ul>
+		<li>인증번호를 입력해주세요</li>
+		<li><input type="password" id="verifiedNum"/></li>
+		<li><input type="submit" id="verfiedNumChek" value="확인하기"/></li>
+	</ul>	
+</div>
+
+<script src="<%=request.getContextPath() %>/js/member/memEmailverify.js"></script>

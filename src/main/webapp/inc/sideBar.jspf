@@ -51,22 +51,18 @@
 
 <ul id="sideBar">
 	<li>MENU</li>
-	<li><a href="#"><img src="common/map_000.png" class="imgSize"/></a></li>
-	<li id="showSearch"><a><img src="common/search_000.png" class="imgSize"></a></li>
-<%-- 	<c:if test="${logName==null || logName=='' }"> --%>
-<!-- 		<li><a href="login">로그인</a></li> -->
-<%-- 	</c:if> --%>
+	<li><a href="<%=request.getContextPath() %>/groupPage"><img src="<%=request.getContextPath() %>/common/map_000.png" class="imgSize"/></a></li>
+	<li id="showSearch"><a><img src="<%=request.getContextPath() %>/common/search_000.png" class="imgSize"></a></li>
 	<c:if test="${logName!=null && logName!='' }">
-		<li><a href="#"><img src="common/won_000.png" class="imgSize"/></a></li>
-<!-- 		<li><a href="logOut">로그아웃</a></li> -->
+		<li><a href="myInfoLoad"><img src="<%=request.getContextPath() %>/common/won_000.png" class="imgSize"/></a></li>
 	</c:if>
-	<li class="chatting"><a href="#"><img src="common/chat.png" class="imgSize"/></a></li>
-	<li id="toTop"><a href="#"><img src="common/top_000.png" class="imgSize"/></a></li>
+	<li class="chatting"><a href="#"><img src="<%=request.getContextPath() %>/common/chat.png" class="imgSize"/></a></li>
+	<li id="toTop"><a href="#"><img src="<%=request.getContextPath() %>/common/top_000.png" class="imgSize"/></a></li>
 </ul>
 
 <div id="searchDiv" style="z-index: 100;">
 	<div id="searchArea">
-		<form>
+		<form method="get" action="sidebar/searchResult">
 			<!-- 
 				카테고리 변수명 지정
 				통합검색 : totalCate
@@ -78,7 +74,7 @@
 				쓱싹레시피 : ssgCate
 				자유자게 : freeCate
 			 -->
-			<select id="sideKey">
+			<select id="sideKey" name="sideKey">
 				<option value="totalCate">통합검색</option>
 				<option value="findCate">착한발견</option>
 				<option value="townCate">동네직구</option>
@@ -124,5 +120,3 @@
 	
 </div>
 
-</body>
-</html>

@@ -34,7 +34,11 @@
 		INSERT INTO CHA_P(userid, CHA_POINT, CHA_MTH) VALUES (#{param1}, 3000, 0)
 	</insert>
 	<update id="updateMember" parameterType="com.team4.localer.vo.MemberVO">
-		UPDATE MEMBER SET MEM_NICK=#{mem_nick}, mem_prof=#{mem_prof}, MEM_CONTENT =#{mem_content}, 
+		UPDATE MEMBER SET MEM_NICK=#{mem_nick}, 
+		<if test="mem_prof!=null and mem_prof!='' ">
+			mem_prof=#{mem_prof}, 
+		</if>
+		MEM_CONTENT =#{mem_content}, 
 		MEM_TEL = #{mem_tel}, MEM_EMAIL = #{mem_email}, MEM_ZIP = ${mem_zip}, MEM_ADDR = #{mem_addr}, MEM_DETAIL = #{mem_detail}, LOC_GU = #{loc_gu} 
 		WHERE userid = #{userid}
 	</update>
@@ -45,15 +49,47 @@
 	<insert id="insertSeller" parameterType="com.team4.localer.vo.SellerVO">
 		INSERT INTO SELLER(SEL_NUM, userid, sel_name, company, com_num, sel_tel, sel_email, sel_zip, sel_addr, sel_detail, acc_name, bank, account, sel_prof, sel_content) 
 		VALUES (SELSQ.nextval, #{userid}, #{sel_name}, #{company}, #{com_num}, #{sel_tel}, #{sel_email},  
-		#{sel_zip}, #{sel_addr}, #{sel_detail}, #{acc_name}, #{bank}, ${account}, #{sel_prof}, #{sel_content})
+		#{sel_zip}, #{sel_addr}, #{sel_detail}, #{acc_name}, #{bank}, #{account}, #{sel_prof}, #{sel_content})
 	</insert>
 	<update id="updateMemStatus">
 		UPDATE MEMBER SET MEM_TYPE = 2 WHERE USERID = #{param1}
 	</update>
 	<select id="selectSeller" resultType="com.team4.localer.vo.SellerVO">
 		SELECT * FROM seller WHERE userid=#{param1}
-	</select>		
+	</select>
+	<update id="updateSeller" parameterType="com.team4.localer.vo.SellerVO">
+		UPDATE SELLER SET company=#{company}, 
+		<if test="sel_prof!=null and sel_prof!='' ">
+		 sel_prof=#{sel_prof}, 
+		</if>
+		sel_content = #{sel_content}, 
+		com_num = #{com_num}, sel_tel = #{sel_tel}, sel_email = #{sel_email}, sel_zip = #{sel_zip}, sel_addr = #{sel_addr}, sel_detail = #{sel_detail},
+		acc_name = #{acc_name}, bank = #{bank}, account = #{account} 
+		WHERE userid = #{userid}
+	</update>
+
+	<update id="deleteMember">
+		UPDATE member SET mem_status=4 WHERE userid=#{param1}
+	</update>
+	<update id="updateSellerStatus">
+		UPDATE seller SET sell_status=0 WHERE userid=#{param1}
+	</update>
+	<insert id="insertDelMember" parameterType="com.team4.localer.vo.MemberVO">
+		INSERT INTO delmem_log(userid, del_why) VALUES (#{userid}, #{del_why})
+	</insert>
+	
 	<update id="memPostCount"><!-- 게시글올리면 카운트되는 함수 -->
 		update member set mem_post = mem_post+1 where userid=#{param1}
 	</update>
+	
+	<!-- 이메일 인증용 맵퍼 -->
+	<select id="checkMemEmail" resultType="int">
+		SELECT count(mem_email) FROM 
+		<if test="parma1=='mem'">
+			member WHERE mem_email=#{param2}
+		</if>
+		<if test="parma1=='sel'">
+			seller WHERE sel_email=#{param2}
+		</if>
+	</select>
 </mapper>

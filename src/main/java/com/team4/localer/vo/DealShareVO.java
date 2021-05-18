@@ -13,20 +13,157 @@ public class DealShareVO {
 	private String s_img3;
 	private String s_loc;
 	private String s_gu;
-	private int s_price;
+	//가격
+	private String s_price;
 	private String s_date;
 	private int s_status;
 	private String s_writedate;
 	private int s_hit;
 	private String s_tag;
 	
-	
-	
-	
-	
-	
-	
-		
+
+	private String mem_sub;
+	private String mem_post;
+	private String mem_rev;
+	private String mem_prof;
+	private String mem_nick;
+
+
+
+
+
+	public String getMem_sub() {
+		return mem_sub;
+	}
+
+
+
+
+
+
+
+
+	public void setMem_sub(String mem_sub) {
+		this.mem_sub = mem_sub;
+	}
+
+
+
+
+
+
+
+
+	public String getMem_post() {
+		return mem_post;
+	}
+
+
+
+
+
+
+
+
+	public void setMem_post(String mem_post) {
+		this.mem_post = mem_post;
+	}
+
+
+
+
+
+
+
+
+	public String getMem_rev() {
+		return mem_rev;
+	}
+
+
+
+
+
+
+
+
+	public void setMem_rev(String mem_rev) {
+		this.mem_rev = mem_rev;
+	}
+
+
+
+
+
+
+
+
+	public String getMem_prof() {
+		return mem_prof;
+	}
+
+
+
+
+
+
+
+
+	public void setMem_prof(String mem_prof) {
+		this.mem_prof = mem_prof;
+	}
+
+
+
+
+
+
+
+
+	public String getMem_nick() {
+		return mem_nick;
+	}
+
+
+
+
+
+
+
+
+	public void setMem_nick(String mem_nick) {
+		this.mem_nick = mem_nick;
+	}
+
+
+
+
+
+
+
+
+	public String getS_price() {
+		return s_price;
+	}
+
+
+
+
+
+
+
+
+	public void setS_price(String s_price) {
+		this.s_price = s_price;
+	}
+
+
+
+
+
+
+
+
 	public int getNum() {
 		return num;
 	}
@@ -266,23 +403,6 @@ public class DealShareVO {
 
 
 
-
-
-
-	public int getS_price() {
-		return s_price;
-	}
-
-
-
-
-
-
-
-
-	public void setS_price(int s_price) {
-		this.s_price = s_price;
-	}
 
 
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team4.localer.dao.SellerDAO">
+	<insert id="sellerInsert" parameterType="com.team4.localer.vo.SellitemVO">
+		insert into sell_item(i_num, sel_num, i_subject, i_cnt, i_content, i_img1,
+		<choose>
+			<when test="i_img2!=null and i_img3==null">
+				i_img2,
+			</when>
+			<when test="i_img2!=null and i_img3!=null">
+				i_img2, i_img3,
+			</when>
+		</choose>
+		 i_price, i_ship, i_period, i_status, i_tag)
+		values(boardsq.nextval, (select sel_num from seller where userid=#{userid}),#{i_subject}, #{i_cnt},
+		#{i_content},#{i_img1}
+		<choose>
+			<when test="i_img2!=null and i_img3==null">
+				,#{i_img2}
+			</when>
+			<when test="i_img2!=null and i_img3!=null">
+				,#{i_img2},#{i_img3}
+			</when>
+		</choose>
+		,#{i_price},#{i_ship},to_date(#{i_period},'YYYY-MM-DD'),#{i_status},#{i_tag})
+	</insert>
+	
+
+	<insert id="itemOptionInsert">
+		insert into item_option(opt_num, i_num, option_title, option_content, o_price)
+		values(optsq.nextval, (select i_num from sell_item where sel_num=(select sel_num from seller where userid=#{param1}) and <![CDATA[  rownum <=]]> 1),
+		#{param2},#{param3},#{param4})
+	</insert>
+	
+	<select id="selectAllitem" resultType="com.team4.localer.vo.SellitemVO">
+		SELECT si.i_num, si.sel_num, si.i_subject, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof  
+		FROM SELL_ITEM si JOIN SELLER s ON si.sel_num = s.sel_num WHERE <![CDATA[ sysdate<=si.i_period ]]> ORDER BY si.i_num DESC
+	</select>
+</mapper>

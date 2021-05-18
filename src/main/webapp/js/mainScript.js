@@ -50,9 +50,10 @@ $(function(){
 		});
 		
 		//가치가장 게시판 클릭시 이동 이벤트
-		$("#indexMain>#gachi").children("#gachititle").click(function(){
-			location.href="groupPage";
-		});
+//		$("#indexMain>#gachi").children("#gachititle").click(function(){
+//			location.href="groupPage";
+//		});
+		
 		$(".indexInnerUl").click(function(){
 			alert("ul 클릭함 ");
 			location.href="#";
@@ -76,6 +77,16 @@ $(function(){
 		});
 		
 });
+
+//footer javascript
+	$(function(){
+		$("#endAlign>div:last-child").prev().click(function(){
+			location.href="oftenQna";
+		})
+		$("#endAlign>div:last-child").click(function(){
+			location.href="routeUs";
+		})
+	});
 
 //ajax interceptor setting 
 	$(function(){

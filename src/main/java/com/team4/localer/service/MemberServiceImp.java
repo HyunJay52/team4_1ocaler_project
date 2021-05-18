@@ -78,6 +78,18 @@ public class MemberServiceImp implements MemberService {
 		// 셀러회원 정보 수정
 		return dao.selectSeller(userid);
 	}
+
+	@Override
+	public int updateSeller(SellerVO vo) {
+		// 셀러회원 정보 수정 확인
+		return dao.updateSeller(vo);
+	}
+
+	@Override
+	public int updateSellerStatus(String userid) {
+		// 셀러회원 상태 업데이트
+		return dao.updateSellerStatus(userid);
+	}
 	
 	@Override
 	public String idDoubleCheck(String userid) {
@@ -95,6 +107,24 @@ public class MemberServiceImp implements MemberService {
 	public int memPostCount(String userid) {
 		//회원 포스트 카운트
 		return dao.memPostCount(userid);
+	}
+
+	@Override
+	public int deleteMember(String userid) {
+		// 회원 탈퇴
+		return dao.deleteMember(userid);
+	}
+
+	@Override
+	public int insertDelMember(MemberVO vo) {
+		// 회원 탈퇴 시, 상태 업데이트
+		return dao.insertDelMember(vo);
+	}
+
+	@Override
+	public int checkMemEmail(String whichpage, String mem_email) {
+		//이메일 중복확인 
+		return dao.checkMemEmail(whichpage, mem_email);
 	}
 
 }

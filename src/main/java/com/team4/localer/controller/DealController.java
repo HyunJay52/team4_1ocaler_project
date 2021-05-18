@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +20,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.DealShareService;
+import com.team4.localer.service.JoinUsService;
+import com.team4.localer.service.LikeItService;
+
 import com.team4.localer.vo.DealShareVO;
+import com.team4.localer.vo.MemberVO;
 
 @Controller
 public class DealController {
@@ -28,14 +34,24 @@ public class DealController {
 
 	@Inject
 	DealShareService dealshareService;
+	@Inject
+	JoinUsService joinUsService;
+	@Inject
+	LikeItService likeItService;
 	
 	//동네직구(회원)
 	@RequestMapping("/memberBoard")
-	public ModelAndView memberBoard(DealShareVO vo,HttpServletRequest req) {
+	public ModelAndView memberBoard(DealShareVO vo,HttpServletRequest req,MemberVO memVo,HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		vo.setUserid((String)req.getSession().getAttribute("logId"));
+		
 		mav.addObject("dealSellList",dealshareService.dealListSelect(vo));
+		
+		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
+			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
+		}
 		
 		mav.addObject("vo",vo);
 		mav.setViewName("deal/memberBoard");
@@ -47,6 +63,7 @@ public class DealController {
 	@RequestMapping("/memberWrite")
 	public ModelAndView memberWrite(DealShareVO vo,HttpServletRequest req) {
 		ModelAndView mav =new ModelAndView();
+		
 		mav.setViewName("deal/memberWrite");
 		
 		 return mav;
@@ -112,11 +129,10 @@ public class DealController {
 
 				System.out.println("성공했다");
 				//글쓰고 쓴글로가는거
-	//			DealShareVO vo2 =dealshareService.dealOneselect(vo);
-	//			mav.addObject("vo",vo2);
-	//			mav.addObject("num", vo2.getNum());
-	//			mav.setViewName("redirect:memberView");
-				mav.setViewName("redirect:memberWrite");
+				DealShareVO vo2 =dealshareService.dealOneselect(vo);
+				mav.addObject("vo",vo2);
+				mav.addObject("num", vo2.getNum());
+				mav.setViewName("redirect:memberView");
 			}else {// 실패했을때
 				System.out.println("실패했다");
 				mav.setViewName("redirect:memberWrite");
@@ -138,20 +154,132 @@ public class DealController {
 	}
 	
 	@RequestMapping("/memberView")
-	public ModelAndView memberView() {
+	public ModelAndView memberView(DealShareVO vo,HttpSession session) {
 		ModelAndView mav= new ModelAndView();
+		
+		mav.addObject("vo",dealshareService.dealViewSelect(vo.getNum()));
+		
+		mav.addObject("appNum",joinUsService.getJCount(vo.getNum()));
+		
+		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
+			mav.addObject("joinList",joinUsService.joinSelect((String)session.getAttribute("logId")));
+		}
+		
+		System.out.println(vo.getNum());
+		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
+			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
+		}
+		
+		
 		
 		mav.setViewName("deal/memberView");
 		return mav;
 	}
 	
-
+	//글수정페이지이동
 	@RequestMapping("/memberEdit")
-	public String memeberEdit() {
-		return	"deal/memberEdit";
+	public ModelAndView memeberEdit(int num,Model model) {
+		ModelAndView mav =new ModelAndView();
+		
+		model.addAttribute("vo",dealshareService.dealViewSelectNumX(num));
+		
+		mav.setViewName("deal/memberEdit");
+		return	mav;
+	}
+	
+	//글수정페이지
+	@RequestMapping(value="dealEditOk" , method=RequestMethod.POST)
+	public ModelAndView dealEditOk(DealShareVO vo,HttpServletRequest req,HttpSession ses) {
+		ModelAndView mav= new ModelAndView();
+		
+		//// 사진 수정
+		
+		// 기존 사진 파일
+		String path =ses.getServletContext().getRealPath("/img/dealFileImg");
+		String dealSellPic =req.getParameter("sellImg");
+		
+		//새로업로드할 파일
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		MultipartFile updateImg =mr.getFile("s_img");
+		
+		String editDealFile="";
+		
+		try {
+			if(updateImg!=null) {
+				String orgName = updateImg.getOriginalFilename(); //원파일저장
+				if(orgName!=null &&!orgName.equals("")) {
+					File upImg = new File(path,orgName);
+					int idx = 0 ;
+					while(upImg.exists()) {
+						int dot = orgName.lastIndexOf(".");
+						String fileName = orgName.substring(0,dot);
+						String exeName = orgName.substring(dot+1);
+						
+						upImg =new File(path,fileName+"_"+idx++ + "."+exeName);
+					//파일삭제
+						if(dealSellPic!=null){
+							File delF = new File(path,dealSellPic);
+							delF.delete();
+						}	
+						
+					}
+					updateImg.transferTo(upImg); //파일업로드 
+					editDealFile = upImg.getName(); // 업로드한 파일이름 담기
+				}
+			}
+			vo.setUserid((String)req.getSession().getAttribute("logId"));
+			vo.setS_img1(editDealFile);
+			
+			
+			mav.addObject("num",vo.getNum());
+			
+			System.out.println(vo.getNum());
+			System.out.println(vo.getUserid());
+			System.out.println(vo.getS_img1());
+			
+			if(dealshareService.dealUpdate(vo)>0) {
+				System.out.println("성공");
+				
+				mav.setViewName("redirect:memberBoard");
+			}else {
+				System.out.println("실패");
+				mav.setViewName("redirect:memberEdit");
+			}
+			
+		}catch(Exception e) {
+			System.out.println("사진 수정 업로드 에러에러에러!!!!!!");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	
+		
+		
+				
+		
+		return mav;
 	}
 	
 
+	//글삭제
+	@RequestMapping("/dealDel")
+	public ModelAndView dealDel(HttpServletRequest req,DealShareVO vo) {
+		ModelAndView mav = new ModelAndView();
+		
+		vo.setUserid((String)req.getSession().getAttribute("logId"));
+		vo.setNum(vo.getNum());
+		
+		if(dealshareService.dealSellDelete(vo.getNum(),vo.getUserid())>0) { //성공했을떄
+			System.out.println("성공");
+			mav.setViewName("redirect:memberBoard");
+		}else { // 시래했을떄
+			System.out.println("실패");
+			mav.addObject("num", vo.getNum());
+			mav.setViewName("redirect:memberView");
+		}
+		
+		
+		return mav;
+	}
 	
 
 	

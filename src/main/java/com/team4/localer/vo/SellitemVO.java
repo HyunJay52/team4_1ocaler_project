@@ -2,6 +2,8 @@ package com.team4.localer.vo;
 
 public class SellitemVO {
 	private String userid;//작성자
+	private String sel_prof; //셀러회원 프로필 사진 
+	
 	private int i_num;//셀러판매글번호
 	private int sel_num;//셀러회원번호
 	private String i_subject;
@@ -13,12 +15,24 @@ public class SellitemVO {
 	private String i_img3;
 	private int i_price;//가격
 	private int i_ship;//배송비
-	private String  ship_opt; //배송 옵션
 	private String i_period;//판매기간
 	private int i_status;//판매상태 1.판매중, 2.판매완료
 	private String i_writedate;//등록일
 	private int i_hit;
 	private String i_tag;//판매글태그
+
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getSel_prof() {
+		return sel_prof;
+	}
+	public void setSel_prof(String sel_prof) {
+		this.sel_prof = sel_prof;
+	}
 	public int getI_num() {
 		return i_num;
 	}
@@ -85,12 +99,6 @@ public class SellitemVO {
 	public void setI_ship(int i_ship) {
 		this.i_ship = i_ship;
 	}
-	public String getShip_opt() {
-		return ship_opt;
-	}
-	public void setShip_opt(String ship_opt) {
-		this.ship_opt = ship_opt;
-	}
 	public String getI_period() {
 		return i_period;
 	}
@@ -121,6 +129,7 @@ public class SellitemVO {
 	public void setI_tag(String i_tag) {
 		this.i_tag = i_tag;
 	}
+
 	
 	
 }

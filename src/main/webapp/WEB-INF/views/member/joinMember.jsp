@@ -47,7 +47,7 @@
 				<li>이메일</li>
 				<li><input type="text" name="mem_email" id="mem_email"
 					tabindex="7" placeholder="예) 1ocaler@1ocaler.com" />
-				<button type="button" class="btn commBtn Mem_lgBtn">이메일 인증</button> <br />
+				<button type="button" id="verifyEmail" class="btn commBtn Mem_lgBtn">이메일 인증</button> <br />
 				<span id="checkemail"></span></li>
 
 				<li>주소</li>
@@ -136,3 +136,14 @@
 		</div>
 	</form>
 </div>
+
+<div id="verifyEmailPop">
+	<div>이메일인증</div>
+	<ul>
+		<li>인증번호를 입력해주세요</li>
+		<li><input type="password" id="verifiedNum"/></li>
+		<li><input type="submit" id="verfiedNumChek" value="확인하기"/></li>
+	</ul>	
+</div>
+
+<script src="<%=request.getContextPath() %>/js/member/memEmailverify.js"></script>

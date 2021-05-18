@@ -22,14 +22,85 @@
 <script>
 
 	function boardDel(){
-	if(confirm("삭제하시겠습니까? ")){
+		if(confirm("삭제하시겠습니까? ")){
 		location.href="commuDel?num=${vo.num}";
+		}
 	}
-}
 
-	//댓글시작
+
 	$(function(){
-
+		
+		//좋아요=================================================================================================	
+		if(${logId!=null}){
+			$("#likeLi input[name=num]").on('click',function(){
+				if($(this).is(':checked')){
+					
+					var url = "likeInsert";
+					var params = "numLike="+$(this).val();	
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 추가 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+				}else{
+					var url = "likeDelete";
+					var params = "numLike="+$(this).val();	
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 삭제 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+					
+				}
+			});	
+		}
+		
+		//팝업창 띄우기================================================
+		/*위치설정*/
+		var x = window.innerWidth;
+		var y = window.innerHeight;
+		var width =	$("#WVPProfilePopup").width();
+		var height = $("#WVPProfilePopup").height();
+		console.log(width,height)
+		$("#WVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
+		/*띄우기*/
+		$("#commuImgProf").click(()=>{
+			$("#WVPProfilePopup").css("display","block");
+			
+		});	
+		/*팝업창 닫기*/
+		
+		$('#WVPProfilePopup>div:first-child>span').click(()=>{
+			$("#WVPProfilePopup").css("display","none");
+		});
+		
+		$('#withViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+			if(${logId!=null}){
+				location.href="reportWrite?userid=${vo.userid}"	
+			}else{
+				alert('로그인후 사용할 수 있습니다.');
+				location.href="login";
+			}
+		});
+		/*신고하기*/
+		$('#eatViewPageReportBtn').click(()=>{
+			if(${logId!=null}){
+				location.href="reportWrite?num=${vo.num}"	
+			}else{
+				alert('로그인후 사용할 수 있습니다.');
+				location.href="login";
+			}
+		});
+		
+		//댓글시작
 		//댓글보기
 		
 		function replyList(){
@@ -180,12 +251,12 @@
 					<li>
 						<span style="color: #fff;">
 								<c:if test="${vo.up_cate == 1 }">
-									<a href="commuBoard?b_gu=${logLoc_gu}">
+									<a href="commuBoard?b_gu=${logLoc_gu}&up_cate=1">
 										우리동네이야기
 									</a>	
 								</c:if>	
 								<c:if test="${vo.up_cate == 2 }">
-									<a href="commuBoard?b_gu=${logLoc_gu}">
+									<a href="commuRecipeBoard?up_cate=2">
 										쓱싹레시피
 									</a>	
 								</c:if>
@@ -205,21 +276,32 @@
 						</span>	
 					</li>
 					<li>${vo.b_subject }</li>
-					<li>
-						<img src="common/user.png">
+					<li id = "commuImgProf">
+						<img src="<%=request.getContextPath()%>/img/mem_prof/${vo.mem_prof}">
 						<a href="">${vo.userid }</a>
 					</li>
 					<li>
 						<span>조회수 : ${vo.b_hit } &nbsp; &nbsp; </span>
-						<span>추천수 : 10 </span>					
+						<span>추천수 : ${vo.numlike }</span>					
 					</li>
 					
 					<li> ${vo.b_content }</li>
 					
-					<li>${vo.b_tag }</li>
+					<li>${vo.b_tag }</li> 
+					
+					
 					<li id="likeLi">추천 &nbsp;&nbsp;
-						<input type="checkbox" name="num" id="like" value="1"/>
-						<label for="like"></label>&nbsp;&nbsp;&nbsp;댓글  ${vo.repcont }개
+                           <input class="aaaa" type="checkbox" name="num" id="like${vo.num}" value="${vo.num}" 
+	                           <c:forEach var="likes" items="${likeList}">
+                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
+                           				checked
+                           			</c:if>
+                           		</c:forEach> 
+                           	/>	
+                           <label for="like${vo.num}"></label>	
+						
+						
+						댓글  ${vo.repcont }개
 					
 					</li>
 			
@@ -243,14 +325,23 @@
 		
 		<div id="commuViewpreBtnnext">
 			<div style="border-bottom:1px solid #d9d9d9;color: #181b46; ">
-				<a href=""> 
-					<span style="font-weight: bold;">이전글 :</span> 안녕하세요 
-				</a>
+				<span style="font-weight: bold;">이전글 :</span> 
+				<c:if test="${voSel.prevNo==0 }"> <!-- 이전글 없음 -->
+				   	 ${voSel.prevSubject}
+			   	</c:if>
+			   	<c:if test="${voSel.prevNo>0 }"><!-- 이전글 있음 -->
+			       	<a href="commuView?num=${voSel.prevNo }">${voSel.prevSubject }</a>
+			    </c:if> 
 			</div>
 			<div>
-				<a href=""> 
-					<span style="font-weight: bold;">다음글 :</span> 안녕히계세요 
-				</a>
+				<span style="font-weight: bold;">다음글 :</span> 
+				<c:if test="${voSel.nextNo==0 }">
+			 	   ${voSel.nextSubject}
+			   	</c:if>
+			   	<c:if test="${voSel.nextNo>0 }">
+			        <a href="commuView?num=${voSel.nextNo }">${voSel.nextSubject}</a>
+			   	</c:if><br/>
+				
 			</div>
 		</div>
 		
@@ -270,6 +361,21 @@
 		</div>
 		<div id="commuViewreplyList">
 		
+		</div>
+		
+		<div id="WVPProfilePopup">
+		<div><span>X</span></div>
+		<div><span>활동정보</span></div>
+		<div><img src="<%=request.getContextPath()%>/img/mem_prof/${vo.mem_prof}"></div>
+		<div>
+			<ul>
+				<li><span>${vo.userid }</span></li>
+				<li><span>가입일 : ${vo.mem_sub } </span></li>
+				<li><span>총 게시물 : ${vo.mem_post }개</span></li>
+				<li><span>총 댓글수 : ${vo.mem_rev }개</span></li>
+			</ul>
+		</div>
+		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>
 		</div>
 	</div>
 	

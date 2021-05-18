@@ -24,10 +24,13 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/aboutCsBoard/aboutBoard.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/aboutCsBoard/csBoard.css" />
+	href="<%=request.getContextPath()%>/css/aboutCsBoard/csBoard.css" /> 
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/aboutCsBoard/totalSearch.css" /> 
+	
 <html>
 <head>
-<title>1ocaler</title>
+<title></title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
@@ -59,8 +62,7 @@
 	<!-- header menu 부분 -->
 	<div id="pageTop">
 		<div id="logo">
-			<a href="<%=request.getContextPath()%>/"><img
-				src="common/logo_deep_pur.png" />1ocal+er</a>
+			<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath() %>/common/logo_deep_pur.png" />1ocal+er</a>
 		</div>
 		<c:if test="${!logId.equals('admin') }">
 			<div id="topNavi">
@@ -82,12 +84,12 @@
 					</ul>
 					<ul>
 						<li><a
-							href="withPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">가치가장</a></li>
+							href="withPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>&category=가치가장">가치가장</a></li>
 						<li><a
-							href="eatPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">한끼미식회</a></li>
+							href="eatPage?loc_gu=<c:if test="${logId!=null }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>&category=한끼미식회">한끼미식회</a></li>
 					</ul>
 					<ul>
-						<li><a href="commuBoard">우리동네 이야기</a></li>
+						<li><a href="commuBoard?b_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>&up_cate=1">우리동네 이야기</a></li>
 						<li><a href="commuRecipeBoard?up_cate=2">쓱싹레시피</a></li>
 						<li><a href="commuFreeBoard?up_cate=3">자유자게</a></li>
 					</ul>

@@ -16,8 +16,10 @@ public class SellerVO {
 	private String sel_content;//셀러설명
 	private String bank;//은행명
 	private String acc_name;//계좌주
-	private int account;//계좌번호
+	private String account;
+	//private int account;계좌번호
 	private String sel_date;//셀러 신청일,승인일
+	private int sel_status;//셀러 상태정보 0:탈퇴, 1:활동, 2:정지
 	
 	
 	//판매자 관리 페이지 필요에 의한 변수,,,ㅎ
@@ -115,10 +117,11 @@ public class SellerVO {
 	public void setAcc_name(String acc_name) {
 		this.acc_name = acc_name;
 	}
-	public int getAccount() {
+	
+	public String getAccount() {
 		return account;
 	}
-	public void setAccount(int account) {
+	public void setAccount(String account) {
 		this.account = account;
 	}
 	public String getSel_date() {
@@ -126,6 +129,12 @@ public class SellerVO {
 	}
 	public void setSel_date(String sel_date) {
 		this.sel_date = sel_date;
+	}
+	public int getSell_status() {
+		return sel_status;
+	}
+	public void setSell_status(int sel_status) {
+		this.sel_status = sel_status;
 	}
 	public int getMem_status() {
 		return mem_status;

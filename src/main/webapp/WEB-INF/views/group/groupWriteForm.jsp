@@ -5,7 +5,8 @@
 <link ref="stylesheet" href="<%=request.getContextPath()%>/css/commonStyle.css" type="html/css"/>
 <style>
 	#pageTop{display:none;}
-	#footer{display:none;}
+	#mainFooter{display:none;}
+	#mem_login{display:none;}
 	#groupWriteFormBody{overflow:hidden;}
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	/*버튼*/

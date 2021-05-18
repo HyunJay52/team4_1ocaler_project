@@ -44,12 +44,15 @@
 									<span style="font-weight: bold;"> [${vo.repcont}]</span>
 								</a> 
 									&nbsp;
-								<div id="newImg">N</div>
+									
+								<c:if test="${vo.newDate==0 }">	
+									<div id="newImg">N</div>
+								</c:if>
 							</td>
 							<td>${vo.userid}</td>
 							<td>${vo.b_writedate}</td>
 							<td>${vo.b_hit}</td>
-							<td>${vo.b_hit}</td>
+							<td>${vo.numlike }</td>
 						</tr>
 						<tr style="text-align: left; padding-right: 20px;font-size: 12px;color:gray;">
 							<td colspan="6" style="height: 10px;padding: 0px;padding-top: 0px;">${vo.b_tag }</td>

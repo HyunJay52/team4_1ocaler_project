@@ -4,7 +4,8 @@
 <style>
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	#pageTop{display:none;}
-	#footer{display:none;}
+	#mainFooter{display:none;}
+	#mem_login{display:none;}
 	#eatViewPagebody{overflow:hidden;}
 	/*버튼*/
 	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}
@@ -38,9 +39,9 @@
 				$("#EVPProfilePopup").css("display","none");
 			});
 			/*신고하기*/
-			$('#eatViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+			$('#eatViewPageReportBtn').click(()=>{
 				if(${logId!=null}){
-					location.href="reportWrite?userid=${vo.userid}"	
+					location.href="reportWrite?num=${vo.num}"	
 				}else{
 					alert('로그인후 사용할 수 있습니다.');
 					location.href="login";
@@ -61,7 +62,7 @@
 			//삭제
 			$("#eatViewDeleteBtn").click(()=>{
 				if(confirm('삭제 하시겠습니까?')){
-					location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&up_cate=${vo.up_cate}";
+					location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&category=${vo.up_cate}";
 				}
 			});	
 			//참여하기================================================================================
