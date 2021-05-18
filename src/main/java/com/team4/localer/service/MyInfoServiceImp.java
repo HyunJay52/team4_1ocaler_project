@@ -108,9 +108,9 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	@Override
-	public MyinfoJoinUsVO selectReviewCount(int num) {
+	public MyinfoJoinUsVO selectReviewCount(MyinfoPageVO vo) {
 		
-		return dao.selectReviewCount(num);
+		return dao.selectReviewCount(vo);
 	}
 
 	@Override
@@ -141,6 +141,12 @@ public class MyInfoServiceImp implements MyInfoService{
 	public List<MyinfoDealVO> selectMyShareJoinList(String userid) {
 		
 		return dao.selectMyShareJoinList(userid);
+	}
+
+	@Override
+	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo) {
+
+		return dao.selectItemReviewList(vo);
 	}
 
 

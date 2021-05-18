@@ -26,6 +26,7 @@ import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.MyinfoDealVO;
 import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
+import com.team4.localer.vo.OrderVO;
 
 @Controller
 public class MyinfoController {
@@ -89,9 +90,16 @@ public class MyinfoController {
 	@RequestMapping("/myInfoMainDeal")
 	public Map<String, Object> myInfoMainDeal(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
 		Map<String, Object> map = new HashMap<String, Object>();
-		vo.setRowNum1(1, 5); 
-		vo.setRowNum2(1, 1, 1, 5);
+		
 		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		vo.setTotalRecord(service.myCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+
+		
 		map.put("joinList", service.selectMyJoinList(vo));
 		map.put("shareList", service.selectMyShareJoinList(vo.getUserid()));
 		return map;
@@ -197,6 +205,8 @@ public class MyinfoController {
 		mav.setViewName("myInfo/myInfoDeal");
 		return mav;
 	}
+	
+	//회원간 거래 리스트 조회
 	@ResponseBody
 	@RequestMapping(value="/myDealList", method=RequestMethod.POST)
 	public Map<String, Object> myDealList(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
@@ -214,9 +224,22 @@ public class MyinfoController {
 		if(vo.getKategorie() == null) {
 			vo.setKategorie("mem_share");
 		}
-		if(vo.getKategorie().equals("mem_share")) {
-			vo.setDateContent("s_writedate");			
-		}else {
+		if(vo.getKategorie().equals("mem_share")) {//회원간 거래
+			vo.setDateContent("s_writedate");		
+			//내가 만든 모집글이나 참여글일시
+		}else if(vo.getKategorie().equals("grouplocal") || vo.getKategorie().equals("groupJoinus")){
+			vo.setDateContent("g_writedate");
+			if(vo.getSearchKey().equals("s_subject")) {
+				vo.setSearchKey("g_subject");
+			}else if(vo.getSearchKey().equals("s_content")) {
+				vo.setSearchKey("g_content");
+			}else if(vo.getSearchKey().equals("s_gu")) {
+				vo.setSearchKey("g_gu");
+			}else if(vo.getSearchKey().equals("s_tag")) {
+				vo.setSearchKey("g_tag");
+			}
+		
+		}else{
 			vo.setDateContent("j_writedate");
 		}
 
@@ -235,8 +258,10 @@ public class MyinfoController {
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
-		
+		System.out.println("totalRecord="+vo.getTotalRecord());
 		System.out.println("dateContent="+vo.getDateContent());
+		System.out.println("searchDate1="+vo.getSearchDate());
+		System.out.println("searchDate2="+vo.getSearchDate2());
 		
 		result.put("pVO", vo);
 		result.put("list", service.selectMyShare(vo));
@@ -244,11 +269,12 @@ public class MyinfoController {
 	}
 	@ResponseBody
 	@RequestMapping("/selectReviewCount")
-	public MyinfoJoinUsVO selectReviewCount(HttpServletRequest req) {
+	public MyinfoJoinUsVO selectReviewCount(HttpServletRequest req, MyinfoPageVO pVO) {
 		MyinfoJoinUsVO vo = new MyinfoJoinUsVO();
 		int num = Integer.parseInt(req.getParameter("num"));
-		
-		vo = service.selectReviewCount(num);
+		pVO.setNowNum(num);
+		pVO.setKategorie((String)req.getParameter("kategorie"));
+		vo = service.selectReviewCount(pVO);
 		System.out.println("joincount="+vo.getJoinCount());
 		System.out.println("reviewcount="+vo.getReviewCount());
 		
@@ -324,6 +350,44 @@ public class MyinfoController {
 	@RequestMapping("/myInfoReview")
 	public String myInfoReview() {
 		return "myInfo/myInfoReview";
+	}
+	//리뷰관리 페이지 회원간 리뷰 조회
+	@ResponseBody
+	@RequestMapping("/myInfoReviewList")
+	public Map<String, Object> myInfoReviewList(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		vo.setTotalRecord(service.myCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+
+		
+		map.put("list", service.selectMyJoinList(vo));
+		map.put("sharePVO", vo);
+		return map;
+	}
+	//리뷰관리 페이지 상품 리뷰 조회
+	@ResponseBody
+	@RequestMapping("/myInfoItemReviewList")
+	public Map<String, Object> myInfoItemReviewList(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		vo.setTotalRecord(service.myCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+
+		
+		map.put("itemPVO", vo);
+		map.put("IList", service.selectItemReviewList(vo));
+		return map;
 	}
 	
 	//리뷰쓰기
