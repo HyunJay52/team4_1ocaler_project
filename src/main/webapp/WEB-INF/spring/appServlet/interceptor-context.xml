@@ -17,6 +17,7 @@
 			<mvc:mapping path="/joinSeller" />
 			<mvc:mapping path="/sellerJoinOk" />
 			<mvc:mapping path="/sellerPwdDoubleCheck"/>
+			<mvc:mapping path="/myInfoCheck"/>
 			<mvc:mapping path="/myInfoSeller"/>
 			<mvc:mapping path="/reportWrite"/>
 			<mvc:mapping path="/cs_repOk"/>

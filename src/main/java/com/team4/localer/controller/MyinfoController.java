@@ -75,8 +75,11 @@ public class MyinfoController {
 		if(userid == null) {
 			mav.setViewName("member/login");		
 		}else {
-			mav.addObject("myPoint", service.joinPoint(userid));
-			mav.addObject("myVO", service.setMyinfo(userid));
+			mav.addObject("myPoint", service.joinPoint(userid)); //충전잔액
+			mav.addObject("myVO", service.setMyinfo(userid)); //내 정보
+			//참여현황
+			//QnA
+			//활동 내역ㅌ₩
 			mav.setViewName("myInfo/myInfoMain");
 		}
 		return mav;
