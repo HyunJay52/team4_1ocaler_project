@@ -10,6 +10,8 @@ import com.team4.localer.vo.ReportVO;
 public interface CsService {
 	//총레코드 수 구하기 
 	public int totalRecord(AdminPageVO pageVO);
+	//총레코드 수 구하기 
+	public int spendtotalRecord(AdminPageVO pageVO);
 	//한페이지 레코드 select 하기
 	public List<ReportVO> onePageRecordSelect_rep(AdminPageVO pageVO);
 	//한페이지 레코드 select 하기
@@ -47,4 +49,17 @@ public interface CsService {
 	public List<CsVO> searchOftenq(String searchkey,String text);
 	//1:1 문의 검색
 	public List<CsVO> searchCs(String searchkey, String text);
+
+//뷰 페이지 부분 처리
+	//신고글 insert
+	public int reportInsert(ReportVO vo);
+	//1:1 문의
+	public int csQnaInsert(CsVO vo);
+	//자주하는 질문 전체 선택
+	public List<OftenqVO> selectAlloftenQ();
+	//자주하는 질문 조회수 
+	public int oftenqnaCnt(int of_num);
+	//자주하는 질문 검색
+	public List<OftenqVO> searchOftenqView(String setKey, String setWord);
+		
 }

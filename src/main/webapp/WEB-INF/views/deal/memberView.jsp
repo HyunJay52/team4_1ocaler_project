@@ -6,8 +6,92 @@
 
 
 <script>
+
+		function boardDel(){
+			if(confirm("삭제하시겠습니까? ")){
+				location.href="dealDel?num=${vo.num}";
+			}
+		}
+
 		//지도============================================================================================
 		$(function(){
+			
+			//함께하기================================================================================
+			if(${logId!=null}){
+				$("#eatViewPageJoinBtn").click(()=>{
+					var url = "joinInsert";
+					var params ="num="+$("#eatViewPageJoinBtn").val();
+					console.log(params);
+					$.ajax({
+						url : url,
+						data : params,
+						success:function(result){
+							alert('신청이 완료되었습니다. 응답을 기다려 주세요');
+							$("#eatViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
+							$("#eatViewPageJoinBtn").attr("disabled",true);
+							
+						},error:function(e){
+							console.log('신청실패')
+						}
+					})
+				});
+			}else{
+				$("#eatViewPageJoinBtn").click(()=>{
+					alert('로그인 후 이용해 주세요')
+					location.href="login";
+				});
+			}
+			
+		//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
+		var joinCheck = $("#eatViewPageJoinBtn").attr("disabled");
+			console.log('여기들어옴?');
+			console.log(joinCheck);
+		if(joinCheck=='disabled'){
+			$("#eatViewPageJoinBtn").children("span").text('신청완료');
+			$("#withViewPageJoinBtn").css('background',"#B8B2F4");
+			$("#withViewPageJoinBtn").css('opacity',1);
+		}
+		
+	//지도============================================================================================
+			
+			//팝업창 띄우기================================================
+			/*위치설정*/
+			var x = window.innerWidth;
+			var y = window.innerHeight;
+			var width =	$("#WVPProfilePopup").width();
+			var height = $("#WVPProfilePopup").height();
+			console.log(width,height)
+			$("#WVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
+			/*띄우기*/
+			$("#userImgPop img").click(()=>{
+				$("#WVPProfilePopup").css("display","block");
+				
+			});	
+			/*팝업창 닫기*/
+			
+			$('#WVPProfilePopup>div:first-child>span').click(()=>{
+				$("#WVPProfilePopup").css("display","none");
+			});
+			
+			$('#withViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+				if(${logId!=null}){
+					location.href="reportWrite?userid=${vo.userid}"	
+				}else{
+					alert('로그인후 사용할 수 있습니다.');
+					location.href="login";
+				}
+			});
+			
+			/*신고하기*/
+			$('#eatViewPageReportBtn').click(()=>{
+				if(${logId!=null}){
+					location.href="reportWrite?num=${vo.num}"	
+				}else{
+					alert('로그인후 사용할 수 있습니다.');
+					location.href="login";
+				}
+			});
+			
 			var markers = [];	
 			//지도 검색 키워드 객체 생성
 			var ps = new kakao.maps.services.Places();
@@ -43,7 +127,7 @@
 						
 						markers.push(marker);
 						
-					   var content ='<div class="customOverlay"> 약속장소 </div>'
+					   var content ='<div class="customOverlay"> "${vo.s_loc}"에서 만나요 </div>'
 			                 
 			                var customOverlay = new kakao.maps.CustomOverlay({
 			                     map: map,
@@ -59,7 +143,7 @@
 					
 				//검색한 키워드 값을 내가 text에서입력한 값으로 셋팅해주는 작업
 				function searchPlaces(){
-					var keyword = "가양역2번출구";
+					var keyword = "${vo.s_loc}";
 					console.log(keyword);
 					 if (!keyword.replace(/^\s+|\s+$/g, '')) {
 					        alert('키워드를 입력해주세요!');
@@ -112,32 +196,43 @@
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 		<div id="divAll">
 			<div id="dealImg">
-				<img src="img/deal/Karrot.jpeg"/>
+				<img src="<%=request.getContextPath()%>/img/dealFileImg/${vo.s_img1}"/>
 			</div>
 			<div id="dealInfo">
 				<ul >	
-					<li class="wordcut">당근 같이 나누실 분?</li>
+					<li class="wordcut">
+						${vo.s_subject }
+						<span  style="display: none">${vo.num }</span>
+					</li>
 					<li style="width:100%;">
 						<ul style="margin: 20 0;">
-							<li style="width:50%; line-height:33px;margin:10 0">
-								<img src="common/user.png">&nbsp;&nbsp;
-								<a href="#"> goguma1234</a><hr/>
+							<li style="width:50%; line-height:33px;margin:10 0" id="userImgPop">
+								<img src="<%=request.getContextPath()%>/img/mem_prof/${vo.mem_prof}">&nbsp;&nbsp;
+								<a href="#"> ${vo.userid }</a><hr/>
 							</li>
 							<li style="color: #3f1785;  font-weight: bold;  text-align: right;margin:10 0 ;width: 50%;font-size: 30px;">
-								1,000원 &nbsp; &nbsp;	<hr/>
+								${vo.s_price }원 &nbsp; &nbsp;	<hr/>
 							</li>				
 						</ul>
 					</li>
 					<li>
 						<ul>
 							<li>상품 종류</li>
-							<li>식료품</li>
+							<c:if test="${vo.s_cate==1 }">
+								<li>식료품</li>
+							</c:if>	
+							<c:if test="${vo.s_cate==2 }">
+								<li>생필품</li>
+							</c:if>
+							<c:if test="${vo.s_cate==3 }">
+								<li>기타</li>
+							</c:if>
 						</ul>
 					</li>
 					<li>
 						<ul>
 							<li>거래 위치</li>
-							<li>강서구 등촌역 근처 직거래</li>
+							<li>${vo.s_loc }</li>
 						</ul>
 					</li>
 					<li>
@@ -145,22 +240,25 @@
 							<li>판매 개수</li>
 							<li>
 								<span class="cntJoin">1</span>
-								/5개
+								/${vo.s_cnt }개
 							</li>
 						</ul>
 					</li>
 					<li>
 						<ul>
 							<li>판매 기한</li>
-							<li>2020  / 05 / 28 일 까지</li>
+							<li>${vo.s_date}</li>
 						</ul>
 					</li>
-					<li class="wordcut">#당근 #등촌역 #식품 #야채</li>
+					<li class="wordcut">${vo.s_tag }</li>
 					<li>
-						<form>
-							<input type="button" value="찜하기" class="btn commBtnDeal" style="margin-left: 100px"/>
-							<input type="submit" value="함께해요" class="btn commBtnDeal"/>
-						</form>
+						<input type="button" value="좋아요" class="btn commBtnDeal" style="margin-left: 100px"/>
+					<!-- 	<input type="submit" value="함께해요" class="btn commBtnDeal"/> -->
+						<button type="button" id="eatViewPageJoinBtn" class="btn commBtnDeal" value="${vo.num }"<c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>>
+							<span  id="eatViewPagejoinCheck">
+								함께해요
+							</span>	
+						</button>
 					</li>
 				</ul>
 			</div>
@@ -168,8 +266,7 @@
 		<div id="boardInfo">
 			<ul>
 				<li>
-					당근 나눔하실 분이 계실까요?
-					많이사서.ㅠㅠ 같이 나눠요 직거래 예정인데 연락주세요!
+					${vo.s_content }
 				</li>
 			</ul>		
 		</div>
@@ -187,9 +284,26 @@
 		</div>
 		
 		<div id="editBtn">
-			<button class="btn commBtnEdit " onclick = "location.href = '#' ">삭제</button>
-			<button class="btn commBtnEdit" onclick = "location.href = 'memberEdit' ">수정</button>
+			<button class="btn commBtnEdit " onclick = "location.href = 'javascript:boardDel()' ">삭제</button>
+			<button class="btn commBtnEdit" onclick = "location.href = 'memberEdit?num=${vo.num}' ">수정</button>
 		</div>
+		
+		<div id="WVPProfilePopup">
+		<div><span>X</span></div>
+		<div><span>활동정보</span></div>
+		<div><img src="<%=request.getContextPath()%>/img/mem_prof/${vo.mem_prof}"></div>
+		<div>
+			<ul>
+				<li><span>${vo.userid }</span></li>
+				<li><span>가입일 : ${vo.mem_sub } </span></li>
+				<li><span>총 게시물 : ${vo.mem_post }개</span></li>
+				<li><span>총 댓글수 : ${vo.mem_rev }개</span></li>
+			</ul>
+		</div>
+		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>
+		</div>
+		
+		
 	</div>
 </body>
 </html>

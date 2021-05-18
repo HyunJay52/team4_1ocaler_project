@@ -4,9 +4,6 @@
 <%@ page session="true"%>
 <%@ include file="/inc/sideBar.jspf"%>
 
-<script>
-	document.title = "자주하는 질문";
-</script>
 
 <div class="cs_main">
 	<%@ include file="/inc/csSide.jspf"%>
@@ -21,17 +18,17 @@
 		</ul>
 		<!-- 검색하기 -->
 		<div id="often_searchDiv">
-			<select id="oftenSearchKey" name="oftenSearchKey" class="cs_padding_left">
-				<option>카테고리 선택</option>
-				<option value="mem_qna">회원문의</option>
-				<option value="bor_qna">게시판문의</option>
-				<option value="pay_qna">결제/충전문의</option>
-				<option value="pay_ship">배송문의</option>
-				<option value="etc_qna">기타문의</option>
+			<select id="oftenSearchKey" name="oftenSearchKey" id="ofKey" class="cs_padding_left">
+				<option value="none">카테고리 선택</option>
+				<option value="회원문의">회원문의</option>
+				<option value="게시판문의">게시판문의</option>
+				<option value="충전문의">결제/충전문의</option>
+				<option value="배송문의">배송문의</option>
+				<option value="기타문의">기타문의</option>
 			</select>
-			<input type="text" id="cs_subject" name="cs_subject" class="cs_padding_left" maxlength="100"
+			<input type="text" id="cs_subject" name="ofWord" class="cs_padding_left" maxlength="100"
 				placeholder="검색어를 입력해주세요" />
-			<button class="commBtn often_btn">찾기</button>
+			<button class="commBtn often_btn" id="often_btn">찾기</button>
 		</div>
 		<table id="oftenTbl">
 			<!-- 테이블 헤더-->
@@ -43,56 +40,105 @@
 				</tr>
 			</thead>
 			<tbody id="oftenList">
-				<tr class="question">
-					<td class="number">1</td>
-					<!--a href="javascript:showHideFaq()"  -->
-					<td class="fa1_category">[회원문의]</td>
-					<td class="faq_td"><strong>회원가입은 어떻게 하나요?</strong></td>
-				</tr>
-				<tr class="often_answer">
-					<td class="answer_status">답변</td>
-					<td class="answer_content" colspan="3">
-						"친구들은 제가 상을 받는다고 했지만, 믿지 않았다. 인생을 오래 살아서, 배반을 많이 당해서 그런지 수상을 바라지 않았다"면서 여우조연상 후보에 함께 오른 '힐빌리의 노래' 글렌 클로스가 "진심으로 상을 타기를 바랐다"고 밝혔다.
-						그는 "배우는 편안하게 좋아서 한 게 아니었다. 절실해서 연기를 했고, 정말 먹고 살려고 연기를 했다"며 "그냥 많이 노력했다"고 강조했다.
-						그러면서 "민폐가 되지 않을 때까지 영화 일을 하면 좋겠다고 생각한다"고 계획을 전했다.
-						윤여정은 아카데미를 비롯해 각종 시상식에서 수상할 때마다 좌중을 사로잡은 재치 있는 소감을 내놓은 것에 대해선 "제가 오래 살았고, 수다를 하다 보니 입담이 생겼다"고 말했다.
-					</td>
-				</tr>
-
-				<!-- 임시로 넣은 정보 삭제예정-->
-				<tr>
-					<td>2</td>
-					<td class="fa1_category">[배송문의]</td>
-					<td class="faq_td"><strong>서울 이외의 지역에서 배송받을 수 있나요?</strong></td>
-
-				</tr>
-				<tr class="often_answer">
-					<td class="answer_status">답변</td>
-					<td class="answer_content" colspan="3">
-						"친구들은 제가 상을 받는다고 했지만, 믿지 않았다. 인생을 오래 살아서, 배반을 많이 당해서 그런지 수상을 바라지 않았다"면서 여우조연상 후보에 함께 오른 '힐빌리의 노래' 글렌 클로스가 "진심으로 상을 타기를 바랐다"고 밝혔다.
-						그는 "배우는 편안하게 좋아서 한 게 아니었다. 절실해서 연기를 했고, 정말 먹고 살려고 연기를 했다"며 "그냥 많이 노력했다"고 강조했다.
-						그러면서 "민폐가 되지 않을 때까지 영화 일을 하면 좋겠다고 생각한다"고 계획을 전했다.
-						윤여정은 아카데미를 비롯해 각종 시상식에서 수상할 때마다 좌중을 사로잡은 재치 있는 소감을 내놓은 것에 대해선 "제가 오래 살았고, 수다를 하다 보니 입담이 생겼다"고 말했다.					
-					</td>
-				</tr>
-
+			<!-- 반복물 실행하기 -->
+				<c:forEach var="list" items="${ofq }" varStatus="status">
+					<tr class="question">
+						<td class="number">${status.count }</td>
+						<!--a href="javascript:showHideFaq()"  -->
+						<td class="fa1_category">${list.of_cate }</td>
+						<td class="faq_td"><strong>${list.of_subject }</strong></td>
+						<td><input type="hidden" name="of_num" value="${list.of_num }"/></td>
+					</tr>
+					<tr class="often_answer">
+						<td class="answer_status">답변</td>
+						<td class="answer_content" colspan="3">${list.of_content }</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 </div>
+
+
 <script>
+	document.title = "자주하는 질문";
+	
 	$(function() {
-		//선택한 faq tr열고 닫히기    
-		$("#oftenList .faq_td").click(function() {
-			$(this).parent().next().toggle(
-				function(){
-					$(this).parent().next().addClass('show')
+		$(document).on('click', '#often_btn', function(){
+			var key = $('select[name=oftenSearchKey]').val();
+			var word = $('#cs_subject').val();
+			
+			console.log(key, "----", word)
+			
+			if($("#oftenSearchKey").val()=='none' || $("#oftenSearchKey")==null){
+				alert("카테고리 선택은 필수입니다.");
+				$("#oftenSearchKey").focus();
+				return false;
+			}
+			
+			if($("#cs_subject").val()==null || $("#cs_subject")==''){
+				alert("검색어 입력은 필수입니다.");
+				$("#cs_subject").focus();
+				return false;
+			}
+			
+			var url = "csBoard/searchofteqna";
+			var param = "key="+key+"&word="+word;
+			$.ajax({
+				url: url,
+				data: param,
+				success: function(list){
+					var $list = $(list);
+					console.log(list);
+					var tag='';
+					var cnt = 1;
+					$list.each(function(idx, list){
+							tag += '<tr class="question">'+
+								'<td class="number">'+ cnt++ +'</td>'+
+								'<td class="fa1_category">'+list.cs_cate +'</td>'+
+								'<td class="faq_td"><strong>'+list.cs_subject +'</strong></td>'+
+								'<td><input type="hidden" name="of_num" value="'+list.cs_num +'"/></td>'+
+							'</tr>'	+
+						
+							'<tr class="often_answer">'+
+								'<td class="answer_status">답변</td>'+
+								'<td class="answer_content" colspan="3">'+list.cs_content +'</td>'+
+							'</tr>';
+						
+					})
+					$("#oftenList").html(tag); //html으로 반복문을 찍으면 제일 마지막꺼만 찍히니까, tag에 추가하고 한 번에 추가해주기
 				},
+				error: function(error){
+					console.log(error)
+					alert("검색이 실행되지 않았습니다. 다시 검색해주세요.")
+				}
+			});
+		});
+		
+		//선택한 faq tr열고 닫히기
+		$(document).on('click', '#oftenList .faq_td', function() {
+			var data = $(this).next().children('input').val();
+			
+			$(this).parent().next().toggle(
+				'fast',
 				function(){
+					var url = 'csBoard/oftenqnacnt';
+					var param = 'of_num='+data;
+					$.ajax({
+						url: url,
+						data: param,
+						success: function(result){
+							//조회수 올리기 용
+						}, 
+						error: function(error){
+							console.log(error)	
+						}
+					});
+					
 					$(this).parent().next().addClass('hide')
 				}
 			);
 		});
-
+		
 	});
 </script>

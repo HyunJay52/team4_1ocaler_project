@@ -12,7 +12,8 @@
 		<p class="p_repWrite">고객님의 소중한 의견을 들려주세요.</p>
 		<br/>
 		<form method="post" action="cs_repOk" id="repFrm">
-			<input type="text" id="rep_num" name="num" maxlength="100" placeholder="신고글 번호 받아올 곳"/> <!-- 나중에 hidden으로 변경 -->
+			<input type="text" id="num" name="num" maxlength="100" value=${num } /> <!-- 나중에 hidden으로 변경 -->
+			<input type="text" id="rep_subject" name="rep_subject" maxlength="100" placeholder="제목을 입력해주세요"/>
 			<textarea id="rep_content" name="rep_content" placeholder="신고사유를 입력해주세요"></textarea>
 			<button class="commBtn">신고하기</button>
 		</form>	
@@ -25,8 +26,13 @@
 	$(function(){
 		//유효성 검사
 		$("#repFrm").submit(function(){
-			if($("#rep_num").val()=='' || $("#rep_num").val()==null){
+			if($("#num").val()=='' || $("#num").val()==null){
 				alert("신고글 번호가 없습니다.");
+				return false;
+			}
+			if($("#rep_subject").val()=='' || $("#rep_subject").val()==null){
+				alert("신고글 제목입력은 필수입니다.");
+				$("#rep_subject").focus();
 				return false;
 			}
 			if($("#rep_content").val()=='' || $("#rep_content").val()==null){
@@ -34,6 +40,7 @@
 				$("#rep_content").focus();
 				return false;
 			}
+			alert("신고접수가 완료되었습니다, 빠른 시일내에 처리하도록 노력하겠습니다.");
 			return true;
 		})
 	})

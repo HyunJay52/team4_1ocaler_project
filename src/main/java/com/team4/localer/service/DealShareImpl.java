@@ -33,7 +33,32 @@ public class DealShareImpl implements DealShareService{
 		// TODO Auto-generated method stub
 		return dealshaerdDAO.dealListSelect(vo);
 	}
-	
+
+	@Override
+	public DealShareVO dealViewSelect(int num) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealViewSelect(num);
+	}
+
+	@Override
+	public int dealSellDelete(int num, String userid) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealSellDelete(num, userid);
+	}
+
+	@Override
+	public int dealUpdate(DealShareVO vo) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealUpdate(vo);
+	}
+
+	@Override
+	public DealShareVO dealViewSelectNumX(int num) {
+		// TODO Auto-generated method stub
+		return dealshaerdDAO.dealViewSelectNumX(num);
+	}
+
+
 	
 	
 }

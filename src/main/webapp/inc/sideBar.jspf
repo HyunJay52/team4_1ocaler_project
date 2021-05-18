@@ -51,13 +51,13 @@
 
 <ul id="sideBar">
 	<li>MENU</li>
-	<li><a href="#"><img src="common/map_000.png" class="imgSize"/></a></li>
+	<li><a href="groupPage"><img src="common/map_000.png" class="imgSize"/></a></li>
 	<li id="showSearch"><a><img src="common/search_000.png" class="imgSize"></a></li>
 <%-- 	<c:if test="${logName==null || logName=='' }"> --%>
 <!-- 		<li><a href="login">로그인</a></li> -->
 <%-- 	</c:if> --%>
 	<c:if test="${logName!=null && logName!='' }">
-		<li><a href="#"><img src="common/won_000.png" class="imgSize"/></a></li>
+		<li><a href="myInfoLoad"><img src="common/won_000.png" class="imgSize"/></a></li>
 <!-- 		<li><a href="logOut">로그아웃</a></li> -->
 	</c:if>
 	<li class="chatting"><a href="#"><img src="common/chat.png" class="imgSize"/></a></li>
@@ -66,7 +66,7 @@
 
 <div id="searchDiv" style="z-index: 100;">
 	<div id="searchArea">
-		<form>
+		<form method="get" action="sidebar/searchResult">
 			<!-- 
 				카테고리 변수명 지정
 				통합검색 : totalCate

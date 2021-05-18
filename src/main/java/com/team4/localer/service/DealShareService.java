@@ -11,4 +11,11 @@ public interface DealShareService {
 	
 	public List<DealShareVO> dealListSelect(DealShareVO vo);
 
+	public DealShareVO dealViewSelect(int num);
+	
+	public int dealSellDelete(int num, String userid);
+	
+	public int dealUpdate(DealShareVO vo);
+	
+	public DealShareVO dealViewSelectNumX(int num);
 }

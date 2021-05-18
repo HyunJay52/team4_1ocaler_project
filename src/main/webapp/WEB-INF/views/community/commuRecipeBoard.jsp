@@ -34,7 +34,9 @@
 									<span style="font-weight: bold;"> [${vo.repcont}]</span>
 								</a> 
 									&nbsp;
-								<div id="newImg">N</div>
+								<c:if test="${vo.newDate == 0 }">	
+									<div id="newImg">N</div>
+								</c:if>
 							</td>
 							<td>${vo.userid}</td>
 							<td>${vo.b_writedate}</td>

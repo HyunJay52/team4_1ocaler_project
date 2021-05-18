@@ -160,7 +160,7 @@
 								<option value="국민은행">국민은행</option>
 								<option value="카카오뱅크">카카오뱅크</option>
 							</select>
-							<input type="number" name="account" id="account" tabindex="15" placeholder="계좌번호(숫자만 입력해주세요)"/>
+							<input type="text" name="account" id="account" tabindex="15" placeholder="계좌번호(숫자만 입력해주세요)"/>
 							<br/><span id="checkSellAcc"></span>
 						</li>
 					</ul>

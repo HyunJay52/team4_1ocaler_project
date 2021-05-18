@@ -4,7 +4,8 @@
 <style>
 	ul, li{ margin:0px; padding:0px; list-style-type:none;}
 	#pageTop{display:none;}
-	#footer{display:none;}
+	#mainFooter{display:none;}
+	#mem_login{display:none;}
 	#withViewPageBody{overflow:hidden;}
 	/*버튼*/
 	.commBtn {width: 90px;	color: #3f1785;	border: 1px solid #3f1785;}
@@ -35,9 +36,9 @@
 			$("#WVPProfilePopup").css("display","none");
 		});
 		
-		$('#withViewPageReportBtn').click(()=>{ //글번호 넘겨야해?memberPageVO 보고서 결정하자
+		$('#withViewPageReportBtn').click(()=>{ 
 			if(${logId!=null}){
-				location.href="reportWrite?userid=${vo.userid}"	
+				location.href="reportWrite?num=${vo.num}"
 			}else{
 				alert('로그인후 사용할 수 있습니다.');
 				location.href="login";
@@ -58,7 +59,7 @@
 		//삭제
 		$("#withViewPageDeleteBtn").click(()=>{
 			if(confirm('삭제 하시겠습니까?')){
-				location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&up_cate=${vo.up_cate}";
+				location.href="eatViewPageDel?num=${vo.num}&loc_gu=${pageVO.loc_gu}&category=${vo.up_cate}";
 			}
 		});
 			
@@ -283,7 +284,7 @@
 			<li><img src="<%=request.getContextPath()%>/img/groupImg/cartP.png"/><span> ${vo.up_cate} > ${vo.down_cate }</span></li>
 			<li><span>조회수 : ${vo.g_hit } </span></li>
 			<li><span> ${vo.g_subject }</span></li>
-			<li><img src="<%=request.getContextPath()%>/common/${vo.memberVO.mem_prof}"/></li>
+			<li><img src="<%=request.getContextPath()%>/img/mem_prof/${vo.memberVO.mem_prof}"/></li>
 			<li><div>${vo.memberVO.mem_nick }</div><div>${vo.g_writedate }</div></li>
 			<li>모집인원 : <span> ${appNum }</span> / <span> ${vo.g_cnt } </span></li>
 			

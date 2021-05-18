@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+	*{
+		font-family: nsr; 
+		font-size: 20px;
+		height: auto;
+		
+	}
+	
+	#dealWnEMain{
+		width:1300px;
+		margin:50 auto;
+		height: auto; 
+	}
+	
+	#sellWriteFrm>select{ 
+		height: 40px; 
+		width: 150px; 
+		margin-right: 5px;
+		font-size: 13px;
+		border:1px solid gray;
+		border-radius:5px;
+	
+	}
+	
+	input{
+		margin: 15px 0px;
+	}
+	
+	#i_subject{
+		font-size: 18px; 
+		border: none; 
+		border-bottom: 1px solid gray;
+		width: 1000px;  
+		margin-top: 25px;
+	}
+	
+	#summernote{
+		margin-bottom:20px;
+	}
+	
+	#i_cnt{
+		font-size: 18px; 
+		float:right; 
+		border: none; 
+		border-bottom: 1px solid gray;
+	  	margin-top: 10px;
+	  	text-align: center;
+	}
+	
+	
+
+	#i_period{
+		text-align: center;
+	}
+	#i_period,#gu, #i_price{ 
+		margin-right: 10px;
+		text-align: center;
+		border: none; 
+		border-bottom: 1px solid gray;
+	}
+
+	#i_tag,#loc { 
+		border: none; 
+		border-bottom: 1px solid gray;
+		width: 1300px; 
+	}
+	
+	#btn{ 
+		width: 1300px; 
+		text-align: center;
+	}
+
+	/* 파일 */
+	
+	.file_input_textbox{  
+		border: none; 
+		border-bottom: 1px solid gray; 
+		width:335px;
+		
+	}
+
+	/* 옵션 */
+	.option_title, .option_content, .option_price{
+		width:300px;
+		margin-left:10px;
+	}
+	#optionDiv input{
+		margin:10px;
+	}
+	
+	#i_ship{
+		width:200px;
+		height:30px;
+	}
+
+	/* 버튼 스타일 클래스 모음 */
+	.commBtn {
+		width: 90px;
+		color: #3f1785;
+		border: 1px solid #3f1785;
+	}
+	.commBtn:hover {
+		border: 1px solid #3f1785;
+		background-color: #3f1785;
+		font-weight: bold;
+		color: #fff;
+		font-weight: bold;
+	}
+	.cancelBtn {
+		border: 1px solid #ddd;
+		color: #ddd;
+		width: 90px;
+	}
+	.cancelBtn:hover {
+		background-color: #fff;
+		color: gray;
+	}
+		
+	.confBtn {
+		color: #000;
+		background-color:#f8f8f8;
+		border:1px solid gray;
+		width: 90px;
+	}
+	.confBtn:hover {
+		color: #fff;
+		background: #3f1785;
+	}
+	
+	

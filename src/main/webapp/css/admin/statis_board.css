@@ -1,15 +1,4 @@
 @charset "UTF-8";
-body{
-	font-family:"nsr";
-	}
-#main{
-	margin:0 auto; 
-	padding:0;
-	padding-top:30px;
-	overflow:auto;
-	width:1300px;
-	
-}
 .btitle{
 	font-family:"nsreb";
 	text-align:center;
@@ -48,6 +37,7 @@ body{
 	font-family:"nsreb";
 	font-size:50px;
 }
+
 /*그래프 부분*/
 #chart_div{
 	margin-left:auto;
@@ -58,22 +48,7 @@ body{
 	height:400px;
 }
 
-input[type="button"],
-input[type="date"]{
-	margin:20px;
-}
-input[type="date"]{
-	width:150px;/*너비설정*/
-	padding:6px;/*여백설정*/
-	border:1px solid #3f1785;
-	font-family: inherit;/*폰트상속*/
-}
-select{
-	margin-left:20px;
-}
-table{
-	margin-bottom:20px;
-}
+
 
 
 
