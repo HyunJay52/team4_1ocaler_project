@@ -43,6 +43,17 @@
 		function myInfoMainDeal(){
 			$.ajax({
 				url : "myInfoMainDeal",
+				data : {"nowNum": 1,
+						"kategorie":"joinus",
+						"dateContent":"j_writedate",
+						"searchDate":"2021-03-01 00:00:00",
+						"searchDate2":"2021-05-31 23:59:59",
+						"searchKey":"j_status",
+						"searchWord":"%%",
+						"onePageRecord":3,
+						"onePageSize":3
+						},
+				dataType :"json",
 				success : function(result){
 					var tag = "<tr><td>구분</td><td>제목</td><td>참여자</td><td>날짜</td><td>상태</td></tr>";
 					console.log(result);

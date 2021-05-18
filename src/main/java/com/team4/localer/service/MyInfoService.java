@@ -57,7 +57,7 @@ public interface MyInfoService {
 	public int updateJoinCancel(int j_num);
 	
 	//거래글의 리뷰작성이 완료된 카운트 조회
-	public MyinfoJoinUsVO selectReviewCount(int num);
+	public MyinfoJoinUsVO selectReviewCount(MyinfoPageVO vo);
 	
 	//특정 게시글의 나의 리뷰 조회
 	public ItemReviewVO selectMyReview(ItemReviewVO vo);
@@ -73,6 +73,9 @@ public interface MyInfoService {
 	
 	//내 모집글에 참여한 리스트 5개 조회
 	public List<MyinfoDealVO> selectMyShareJoinList(String userid);
+	
+	//리뷰가능한 상품리스트 조회
+	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
 }
 
 

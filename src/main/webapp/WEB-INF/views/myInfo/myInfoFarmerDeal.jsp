@@ -197,8 +197,8 @@
 		<form method="post" id="myFarmerDealForm" onsubmit="return false;">
 		   <div class="dealBottom">
 			<div class="dealDateForm">
-				<input type="date" name="searchDate" value="2021-05-01" min="2021-01-01" max="2021-05-31"/> ~ 
-				<input type="date" name="searchDate2" value="2021-05-31" min="2021-01-01" max="2021-05-31"/>
+				<input type="date" name="searchDate" value="2021-03-01" min="2021-03-01" max="2021-05-31"/> ~ 
+				<input type="date" name="searchDate2" value="2021-05-31" min="2021-03-01" max="2021-05-31"/>
 			</div>
 			<table class="myinfoTable2" id="farmerDealTbl">
 				
