@@ -41,18 +41,14 @@
 			var g_gu = $(this).children('ul').children('li:first-child').children('input').val();
 			var num = $(this).children('ul').children('li:nth-child(2)').children('input').val();
 			
-			console.log(num, "????", goCate, "???", g_gu)
-			
 			//번호비교하면 페이지 넘어감... 왜 span 값 비교 못함?
 			if(goCate=="한끼미식회"){
 				var addr = 'eatViewPage?num='+num+'&loc_gu='+g_gu+'&category=한끼미식회';
-				console.log(addr, "???????", goCate)
 				location.href= addr;
 			}
 			
 			if(goCate=='가치가장'){
 				//withViewPage?num=242&loc_gu=강서구&category=가치가장
-				console.log( "???????", goCate)
 				location.href='withViewPage?num='+num+'&loc_gu='+g_gu+"&category=가치가장";
 			}
 		})

@@ -1,11 +1,23 @@
 package com.team4.localer.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.team4.localer.service.SidebarService;
+import com.team4.localer.vo.ChatVO;
 
 @Controller
 public class sideBarController {
+	
+	@Inject
+	SidebarService service;
 	
 	@RequestMapping("sidebar/searchResult")
 	public ModelAndView sidebarSearchResul(String sideKey, String sideWord) {
@@ -28,5 +40,14 @@ public class sideBarController {
 			mav.setViewName("sidebar/totalSearch");
 		}
 		return mav;
+	}
+	
+	@RequestMapping("chatting/chatroomList")
+	@ResponseBody
+	public List<ChatVO> chatroomList(HttpSession ses){
+		
+		List<ChatVO> chatList = service.selectChatList((String)ses.getAttribute("logId"));
+		
+		return chatList;
 	}
 }
