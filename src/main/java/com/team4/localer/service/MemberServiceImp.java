@@ -127,4 +127,10 @@ public class MemberServiceImp implements MemberService {
 		return dao.checkMemEmail(whichpage, mem_email);
 	}
 
+	@Override
+	public MemberVO userDetailFind(String userid) {
+		//유저의 정보를 뺴옴
+		return dao.userDetailFind(userid);
+	}
+
 }

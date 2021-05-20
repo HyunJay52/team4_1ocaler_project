@@ -22,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.MemberService;
 import com.team4.localer.service.SellerService;
 import com.team4.localer.vo.Item_optionVO;
+import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
@@ -36,7 +38,8 @@ public class SellerController {
 	SellerService sellerService;
 	@Inject
 	private DataSourceTransactionManager transactionManager;
-	
+	@Inject
+	MemberService memberService;
 	
 	//착한발견 (셀러)
 	@RequestMapping("/selBard")
@@ -203,5 +206,10 @@ public class SellerController {
 		return "deal/sellerInfo";
 	}
 	
-	
+	@RequestMapping("/userDetailFind")
+	@ResponseBody
+	public MemberVO userDetailFind(String userid) {
+		System.out.println(userid+"<--아작스에서 보낸 아이디값");
+		return memberService.userDetailFind(userid);
+	}
 }
