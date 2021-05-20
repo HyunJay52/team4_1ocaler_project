@@ -2,9 +2,9 @@ package com.team4.localer.vo;
 
 public class OrderVO {
 	private int o_num;
-	private String userid;
+	private String userid; //구매자 아이디
 	private int num;
-	private String opt_num;
+	private String opt_str;
 	private int o_mtd;
 	private String card_num;
 	private String card_com;
@@ -17,15 +17,11 @@ public class OrderVO {
 	
 	/////sell_item
 	private String i_subject;
+	private String i_userid; //판매자 아이디
+	private String i_price;//원래가격
+	private String i_img1;
 	
 	
-	
-	public String getI_subject() {
-		return i_subject;
-	}
-	public void setI_subject(String i_subject) {
-		this.i_subject = i_subject;
-	}
 	public int getO_num() {
 		return o_num;
 	}
@@ -44,11 +40,11 @@ public class OrderVO {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getOpt_num() {
-		return opt_num;
+	public String getOpt_str() {
+		return opt_str;
 	}
-	public void setOpt_num(String opt_num) {
-		this.opt_num = opt_num;
+	public void setOpt_str(String opt_str) {
+		this.opt_str = opt_str;
 	}
 	public int getO_mtd() {
 		return o_mtd;
@@ -103,6 +99,33 @@ public class OrderVO {
 	}
 	public void setO_status(String o_status) {
 		this.o_status = o_status;
+	}
+	
+	
+	
+	public String getI_userid() {
+		return i_userid;
+	}
+	public void setI_userid(String i_userid) {
+		this.i_userid = i_userid;
+	}
+	public String getI_price() {
+		return i_price;
+	}
+	public void setI_price(String i_price) {
+		this.i_price = i_price;
+	}
+	public String getI_subject() {
+		return i_subject;
+	}
+	public void setI_subject(String i_subject) {
+		this.i_subject = i_subject;
+	}
+	public String getI_img1() {
+		return i_img1;
+	}
+	public void setI_img1(String i_img1) {
+		this.i_img1 = i_img1;
 	}
 	
 	
