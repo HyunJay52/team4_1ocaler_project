@@ -17,12 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.SellerService;
 import com.team4.localer.vo.Item_optionVO;
+import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
 
@@ -38,14 +40,11 @@ public class SellerController {
 	
 	//착한발견 (셀러)
 	@RequestMapping("/selBard")
-	public String selBard() {
-		
-		
-		
-		
-		
-		
-		return "deal/sellBoard";
+	public ModelAndView selBard() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("itemList",sellerService.selectAllitem());
+		mav.setViewName("deal/sellBoard");
+		return mav;
 	}
 	
 	
@@ -113,30 +112,31 @@ public class SellerController {
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);//트랜잭션호출
 		TransactionStatus status  = transactionManager.getTransaction(def);
-		try {
-			
-			//셀러 게시글 인썰트
-			int result = sellerService.sellerInsert(itemVO);
+	
+		try {		  
+			//셀러 게시글 인썰트 
+			int result = sellerService.sellerInsert(itemVO); 
 			if(result>0) {
-				System.out.println(result+"쿼리문의 실행결과를나타내라!");
-				for(int i=0; i<optionVO.getOption_title().length; i++) {
-					int resul = sellerService.itemOptionInsert((String)req.getSession().getAttribute("logId"), optionVO.getOption_title()[i], optionVO.getOption_content()[i], optionVO.getO_price()[i]);
+				System.out.println(result+"쿼리문의 실행결과를나타내라!"); 
+				for(int i=0; i<optionVO.getOption_titles().length; i++) {
+					int resul = sellerService.itemOptionInsert((String)req.getSession().getAttribute("logId"), optionVO.getOption_titles()[i], optionVO.getOption_contents()[i], optionVO.getO_prices()[i]);
 					if(resul>0) {
 						System.out.println("옵션 등록에 성공했습니다.");
-						mav.addObject("redirect:selBard");
-					}else {
-						System.out.println("실패했네"+resul);
+						mav.setViewName("redirect:selBard");
+					}else { 
+						System.out.println("실패했네"+resul); 
 					}
-				}	
+				} 
 			}else {
-				mav.setViewName("redirect:selWrite");
+				mav.setViewName("redirect:selWrite"); 
 			}
 			transactionManager.commit(status);
-		}catch(Exception e) {
+		}catch(Exception e) {			  
 			System.out.println(e.getMessage()+"에러가 요기있습니다.");
 			e.printStackTrace();
 			mav.setViewName("group/historyBack");
 		}
+		 
 
 		System.out.println(uploadFilename.size()+"파일올린것만큼의 갯수를 잘구하나요?");		
 		System.out.println("============================");
@@ -152,30 +152,50 @@ public class SellerController {
 		System.out.println(itemVO.getI_tag()+"태그");
 		System.out.println(itemVO.getI_ship()+"배송비");
 		System.out.println("============================");
-		System.out.println(optionVO.getOption_title().length+"옵션의 타이틀");
-		System.out.println(optionVO.getOption_content().length+"옵션의 내용");	
-		System.out.println(optionVO.getO_price().length);
-		System.out.println(optionVO.getOption_title_str()+"<<_--- 옵션의 타이틀");
-		System.out.println(optionVO.getOption_content_str()+"<--- 옵션의 내용");
-		System.out.println(optionVO.getO_price_str()+"<<--옵션의 가격");
-
+		System.out.println(optionVO.getOption_title()+"옵션의 타이틀");
+		System.out.println(optionVO.getOption_titles().length);
+		System.out.println(optionVO.getOption_content()+"옵션의 내용");	
+		System.out.println(optionVO.getOption_contents().length);
+		System.out.println(optionVO.getO_price());
 		return mav;
 	}
 
 	@RequestMapping("/sellView")
-	public String selView() {
-		
-		
-		
-		
-		
-		return "deal/sellView";
+	public ModelAndView selView(SellitemVO itemVO, Item_optionVO optionVO) {
+		ModelAndView mav = new ModelAndView();
+	
+		mav.addObject("itemVO",sellerService.selectOnePage(itemVO.getI_num()));	
+		mav.addObject("NOTitle",sellerService.notOverlapOptionTitleSel(itemVO.getI_num())); //옵션대가리
+		mav.setViewName("deal/sellView");
+		return mav;
 	}
 	
+	@RequestMapping("/changeOptions")
+	@ResponseBody
+	public List<Item_optionVO> changeOption(Item_optionVO optionVO){
+		System.out.println(optionVO.getI_num()+"넘버");
+		System.out.println(optionVO.getOption_title()+"타이틀값");
+		return sellerService.changeOptions(optionVO.getOption_title(), optionVO.getI_num());
+	}
 	
 	@RequestMapping("/sellBuy")
-	public String sellBuy() {
-		return "deal/sellBuy";
+	public ModelAndView sellBuy(OrderVO orderVO, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		orderVO.setUserid((String)session.getAttribute("logId"));
+		
+		System.out.println(orderVO.getUserid()+"<--구매자의 userid");
+		System.out.println(orderVO.getO_price()+"<--총가격");
+		System.out.println(orderVO.getO_ship()+"<--배송비");
+		System.out.println(orderVO.getO_cnt()+"<--수량");
+		System.out.println(orderVO.getNum()+"<--현재 게시글번호");
+		System.out.println(orderVO.getOpt_str()+"<--옵션내용들");
+		System.out.println(orderVO.getI_subject()+"<--게시글제목");
+		System.out.println(orderVO.getI_userid()+"<--판매자의 userid");
+		System.out.println(orderVO.getI_price()+"<--원래상품 1개 판매가격");
+		System.out.println(orderVO.getI_img1()+"<--상품 이미지1");
+		mav.addObject("orderVO",orderVO);
+		mav.setViewName("deal/sellBuy");
+		return mav;
 	}
 	
 	@RequestMapping("/sellerInfo")
