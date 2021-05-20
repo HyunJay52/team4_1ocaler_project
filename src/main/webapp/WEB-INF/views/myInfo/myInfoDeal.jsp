@@ -78,7 +78,7 @@
 							
 							if(data.j_status == '리뷰완료'){
 								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.numJoin+"'>리뷰보기</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.num+"'>리뷰보기</button></td>";
 							}else if(data.j_status == '참여취소'){
 								tag += "<td><button class='btn btn-block btn-outline-danger'>취소됨</button></td>";
 								tag += "<td></td>";
@@ -160,7 +160,7 @@
 							
 							if(data.j_status == '리뷰완료'){
 								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.numJoin+"'>리뷰보기</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.num+"'>리뷰보기</button></td>";
 							}else if(data.j_status == '참여취소'){
 								tag += "<td><button class='btn btn-block btn-outline-danger'>취소됨</button></td>";
 								tag += "<td></td>";

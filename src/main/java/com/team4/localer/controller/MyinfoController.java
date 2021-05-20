@@ -355,13 +355,23 @@ public class MyinfoController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		vo.setUserid((String)ses.getAttribute("logId"));
+
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		vo.setTotalRecord(service.myCount(vo));
 		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
-
+		System.out.println("kategorie="+vo.getKategorie());
+		System.out.println("nowNum="+vo.getNowNum());
+		System.out.println("onePageRecord="+vo.getOnePageRecord());
+		System.out.println("totalRecord="+vo.getTotalRecord());
+		System.out.println("dataContentttt="+vo.getDateContent());
+		System.out.println("totalPage="+vo.getTotalPage());
+		System.out.println("key="+vo.getSearchKey());
+		System.out.println("word="+vo.getSearchWord());
+		System.out.println("date="+vo.getSearchDate());
+		System.out.println("date2="+vo.getSearchDate2());
 		
 		map.put("list", service.selectMyJoinList(vo));
 		map.put("sharePVO", vo);
@@ -372,15 +382,20 @@ public class MyinfoController {
 	@RequestMapping("/myInfoItemReviewList")
 	public Map<String, Object> myInfoItemReviewList(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+		if(vo.getKategorie().equals("grouplocal")) {
+			vo.setDateContent("g_writedate");
+		}
+		System.out.println("datecontent="+vo.getDateContent());
+		System.out.println("itemkategorie="+vo.getKategorie());
 		vo.setUserid((String)ses.getAttribute("logId"));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		vo.setTotalRecord(service.myCount(vo));
 		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		
 		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
-
+		
 		
 		map.put("itemPVO", vo);
 		map.put("IList", service.selectItemReviewList(vo));
@@ -404,7 +419,54 @@ public class MyinfoController {
 		return result;
 	}
 	
-	//
+	//내가 쓴 리뷰 리스트 조회
+	@ResponseBody
+	@RequestMapping("/selectMyReviewList")
+	public Map<String, Object> selectMyAllReview(HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setOnePageRecord(5);
+		vo.setOnePageSize(5);
+		System.out.println("reviewsearchkey="+vo.getSearchKey());
+		if(vo.getSearchKey().equals("userid")){
+			vo.setSearchWord("");
+			vo.setSearchKey("item_review.userid");
+		}
+		
+		
+		if(vo.getSearchKey().equals("subject")) {
+			if(vo.getKategorie().equals("mem_share")) {
+				vo.setSearchKey("s_subject");
+			}else if(vo.getKategorie().equals("grouplocal")) {
+				vo.setSearchKey("g_subject");
+			}else if(vo.getKategorie().equals("sell_item")) {
+				vo.setSearchKey("i_subject");
+			}
+		}
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		
+		vo.setSearchWord("%"+vo.getSearchWord()+"%");
+		System.out.println("searchKey="+vo.getSearchKey());
+		System.out.println("nowNum="+vo.getNowNum());
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		vo.setTotalRecord(service.selectMyReviewListCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		System.out.println("reviewtotalrecord="+vo.getTotalRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+		
+		
+		map.put("list", service.selectMyReviewList(vo));
+		map.put("pVO", vo);
+
+		return map;
+	}
+	
+	
+	//joinus 참여상태 업데이트
 	@ResponseBody
 	@RequestMapping("/joinUpdate")
 	public int joinUpdate(HttpServletRequest req) {
@@ -435,11 +497,22 @@ public class MyinfoController {
 	public ItemReviewVO selectMyReview(HttpSession ses, ItemReviewVO vo) {
 		ItemReviewVO rVO = new ItemReviewVO();
 		vo.setUserid((String)ses.getAttribute("logId"));
+		System.out.println("num="+vo.getNum());
+		System.out.println("re_num="+vo.getRe_num());
 		
 		rVO = service.selectMyReview(vo);
 		return rVO;
 	}
-	
+	@ResponseBody
+	@RequestMapping("/reviewUpdate")
+	public int reviewUpdate(HttpSession ses, ItemReviewVO vo) {
+		int result = 0;
+		
+		vo.setUserid((String)ses.getAttribute("logId"));
+		result = service.reviewUpdate(vo);
+		
+		return result;
+	}
 	//나의 활동 페이지
 	@RequestMapping("/myInfoActivity")
 	public ModelAndView myInfoActivity(HttpSession ses) {

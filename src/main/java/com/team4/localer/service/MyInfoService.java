@@ -76,6 +76,15 @@ public interface MyInfoService {
 	
 	//리뷰가능한 상품리스트 조회
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
+	
+	//카테고리별 내 모집글 리뷰 조회
+	public List<ItemReviewVO> selectMyReviewList(MyinfoPageVO vo);
+		
+	//카테고리별 내 모집글 리뷰 카운트
+	public int selectMyReviewListCount(MyinfoPageVO vo);
+	
+	//리뷰수정
+	public int reviewUpdate(ItemReviewVO vo);
 }
 
 

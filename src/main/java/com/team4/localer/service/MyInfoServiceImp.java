@@ -149,6 +149,25 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.selectItemReviewList(vo);
 	}
 
+	@Override
+	public List<ItemReviewVO> selectMyReviewList(MyinfoPageVO vo) {
+
+		return dao.selectMyReviewList(vo);
+	}
+
+	@Override
+	public int selectMyReviewListCount(MyinfoPageVO vo) {
+		
+		return dao.selectMyReviewListCount(vo);
+	}
+
+	@Override
+	public int reviewUpdate(ItemReviewVO vo) {
+		
+		return dao.reviewUpdate(vo);
+	}
+
+
 
 	
 
