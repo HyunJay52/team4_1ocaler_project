@@ -70,8 +70,6 @@ public class DealShareImpl implements DealShareService{
 		// TODO Auto-generated method stub
 		return dealshaerdDAO.dealPageSelect(vo);
 	}
-
-
 	
 	
 }

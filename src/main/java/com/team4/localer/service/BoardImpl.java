@@ -102,9 +102,9 @@ public class BoardImpl implements BoardService{
 	}
 
 	@Override
-	public PrevNextVO lagLeadSelect(int num) {
+	public PrevNextVO lagLeadSelect(BoardPageVO vo) {
 		// TODO Auto-generated method stub
-		return boardDAO.lagLeadSelect(num);
+		return boardDAO.lagLeadSelect(vo);
 	}
 
 	@Override
@@ -123,6 +123,18 @@ public class BoardImpl implements BoardService{
 	public int boardTotalRecoedCount(BoardPageVO vo) {
 		// TODO Auto-generated method stub
 		return boardDAO.boardTotalRecoedCount(vo);
+	}
+
+	@Override
+	public int memwriteCount(String userid) {
+		// TODO Auto-generated method stub
+		return boardDAO.memwriteCount(userid);
+	}
+
+	@Override
+	public int memdeleteCount(String userid) {
+		// TODO Auto-generated method stub
+		return boardDAO.memdeleteCount(userid);
 	}
 
 

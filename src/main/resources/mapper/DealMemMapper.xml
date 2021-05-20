@@ -83,7 +83,5 @@
 		    	${onePageRecord}
 		    </if>
 		    order by num desc
-	</select>
-	
-	
+	</select>	
  </mapper>

@@ -17,11 +17,41 @@ public class BoardPageVO {
 	
 	private String b_gu;
 	private String loc_gu;
-	private String up_cate;
+	private int up_cate;
+	
+	private String userid;
+	
+	private String b_subject;
+	private String b_content;
+	private int num;
 	
 	
 	
 	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getB_subject() {
+		return b_subject;
+	}
+	public void setB_subject(String b_subject) {
+		this.b_subject = b_subject;
+	}
+	public String getB_content() {
+		return b_content;
+	}
+	public void setB_content(String b_content) {
+		this.b_content = b_content;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getB_gu() {
 		return b_gu;
 	}
@@ -34,10 +64,10 @@ public class BoardPageVO {
 	public void setLoc_gu(String loc_gu) {
 		this.loc_gu = loc_gu;
 	}
-	public String getUp_cate() {
+	public int getUp_cate() {
 		return up_cate;
 	}
-	public void setUp_cate(String up_cate) {
+	public void setUp_cate(int up_cate) {
 		this.up_cate = up_cate;
 	}
 	public int getPageNum() {

@@ -1,14 +1,23 @@
 package com.team4.localer.controller;
 
 
+import java.io.File;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -20,6 +29,8 @@ import com.team4.localer.vo.BoardVO;
 @Controller
 public class CommuController {
 	
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
 	@Inject
 	BoardService boardService;
 	@Inject
@@ -70,6 +81,8 @@ public class CommuController {
 	//	mav.addObject("commuList",boardService.commuSelect(vo));
 		mav.addObject("like",boardService.likeCount(vo.getNum()));
 		
+		pageVO.setUserid((String)req.getSession().getAttribute("logId"));
+		
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
 		pageVO.setSearchWord(pageVO.getSearchWord());
@@ -77,6 +90,7 @@ public class CommuController {
 		
 		pageVO.setTotalRecord(boardService.boardTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
 		System.out.println("오늘안에" + pageVO.getPageNum());
+		
 		mav.addObject("commuList",boardService.commuPageSelect(pageVO));
 		mav.addObject("pageVO",pageVO);
 		
@@ -107,6 +121,7 @@ public class CommuController {
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
 		pageVO.setSearchWord(pageVO.getSearchWord());
+		pageVO.setUserid((String)req.getSession().getAttribute("logId"));
 		
 		pageVO.setTotalRecord(boardService.boardTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
 		
@@ -128,6 +143,7 @@ public class CommuController {
 
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setUserid((String)req.getSession().getAttribute("logId"));
 		pageVO.setSearchWord(pageVO.getSearchWord());
 		
 		pageVO.setTotalRecord(boardService.boardTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
@@ -141,23 +157,78 @@ public class CommuController {
 	
 	//커뮤 글쓰기...
 	@RequestMapping(value="/commuWriteOk", method=RequestMethod.POST)
+	@Transactional(rollbackFor= {Exception.class, RuntimeException.class}) 
 	public ModelAndView commuWriteOk(BoardVO vo , HttpServletRequest req) {
-		ModelAndView mav= new ModelAndView();
+		ModelAndView mav= new ModelAndView();   
+		//일단 파일업로드
+
+		String imgPath = req.getSession().getServletContext().getRealPath("/img/recipeImg");
 		
+		//첨부파일
+		MultipartHttpServletRequest deal_img = (MultipartHttpServletRequest)req; // 형변환을 해주고
+		MultipartFile deal_File= deal_img.getFile("b_img"); // 위에서 해줬기 떄문에 할 필요는없음..-> 업로드파일 넣음
+		
+		String uploadImgName = "";
+		
+		if(deal_File != null) {
+			String originName = deal_File.getOriginalFilename();
+			if(!originName.equals("")) {
+				File uploadFile=new File(imgPath,originName);
+				//중복파일
+				int idx = 1;
+				while(uploadFile.exists()) {
+					int lastDot = originName.lastIndexOf(".");
+					String prof_name = originName.substring(0, lastDot);
+					String prof_exe = originName.substring(lastDot+1);
+					//중복파일 이름 수정 
+					uploadFile = new File(imgPath, prof_name+"_"+idx++ +"."+prof_exe);
+				}
+				//파일업로드실행
+				try {
+					deal_File.transferTo(uploadFile);
+				}catch(Exception e ) {
+					System.out.println("사진 업로드 에러에러에러!!!!!!");
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
+				//변경된파일명
+				uploadImgName = uploadFile.getName();
+			}
+		}
 		vo.setUserid((String)req.getSession().getAttribute("logId"));
 		vo.setB_gu((String)req.getSession().getAttribute("logLoc_gu"));
+		vo.setB_img1(uploadImgName);
 		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus status = transactionManager.getTransaction(def);
 		
 		System.out.println(vo.getUserid());
 		System.out.println(vo.getB_gu());
+		System.out.println("이미지가있나없나"+vo.getB_img1());
 		
 		mav.addObject("vo",vo);
-		if(boardService.commuInsert(vo)>0) {
-			BoardVO vo2 = boardService.commuOneSelect(vo);
-			mav.addObject("vo",vo2);
-			mav.addObject("num", vo2.getNum());
-			mav.setViewName("redirect:commuView");
-		}else {
+		
+		try {
+			if(boardService.commuInsert(vo)>0) {
+				
+				//성공하면 
+				transactionManager.commit(status);
+				
+				BoardVO vo2 = boardService.commuOneSelect(vo);
+				
+				mav.addObject("vo",boardService.memwriteCount(vo.getUserid()));
+				mav.addObject("vo",vo2);
+				mav.addObject("num", vo2.getNum());
+				mav.setViewName("redirect:commuView");
+			}else {
+				mav.setViewName("redirect:boardWrite");
+			}
+			
+		}catch(Exception e){
+			System.out.println("게시물쓰기 실패");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 			mav.setViewName("redirect:boardWrite");
 		}
 		return mav;
@@ -165,14 +236,24 @@ public class CommuController {
 	
 	//커뮤 글 보기
 	@RequestMapping("/commuView")
-	public ModelAndView commuView(BoardVO vo,HttpSession session) {
+	public ModelAndView commuView(BoardVO vo,HttpSession session,BoardPageVO pageVO) {
 		ModelAndView mav= new ModelAndView();
 		
 		mav.addObject("vo",boardService.hitCount(vo.getNum()));
 		
 		mav.addObject("vo",boardService.commuViewSelect(vo.getNum()));
 
-		mav.addObject("voSel", boardService.lagLeadSelect(vo.getNum()));
+			
+//		뭐뭐넣어야해?
+		pageVO.setNum(vo.getNum());
+		pageVO.setUp_cate(vo.getUp_cate());
+		vo.setUp_cate(vo.getUp_cate());
+		System.out.println("vo. up_cate?? >"+vo.getUp_cate());
+		
+		mav.addObject("voSel", boardService.lagLeadSelect(pageVO));
+		System.out.println("vo.getnum = >" + pageVO.getNum() );
+		System.out.println("page.getcate = >" + pageVO.getUp_cate() );
+		
 		
 		mav.addObject("like",boardService.likeCount(vo.getNum()));
 		
@@ -184,25 +265,75 @@ public class CommuController {
 	}
 	
 	@RequestMapping("/commuEdit")
-	public String commuEdit(int num,Model model) {
+	public ModelAndView commuEdit(int num,Model model) {
+		ModelAndView mav= new ModelAndView();
 		
 		model.addAttribute("vo",  boardService.commuViewSelect(num));
-		return "community/commuEdit";
+		mav.setViewName("community/commuEdit");
+		return mav;
 	}
 	
 	@RequestMapping(value="/commuEditOk", method=RequestMethod.POST )
-	public ModelAndView commuEditOk(BoardVO vo, HttpServletRequest req) {
+	public ModelAndView commuEditOk(BoardVO vo, HttpServletRequest req,HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
 		
+
+		//// 사진 수정
+		
+		// 기존 사진 파일
+		String path =ses.getServletContext().getRealPath("/img/recipeImg");
+		String dealSellPic =req.getParameter("sellImg");
+		
+		//새로업로드할 파일
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		MultipartFile updateImg =mr.getFile("b_img");
+		
+		String editDealFile="";
+		
+		
+		try {
+		if(updateImg!=null) {
+			String orgName = updateImg.getOriginalFilename(); //원파일저장
+			if(orgName!=null &&!orgName.equals("")) {
+				File upImg = new File(path,orgName);
+				int idx = 0 ;
+				while(upImg.exists()) {
+					int dot = orgName.lastIndexOf(".");
+					String fileName = orgName.substring(0,dot);
+					String exeName = orgName.substring(dot+1);
+					
+					upImg =new File(path,fileName+"_"+idx++ + "."+exeName);
+				//파일삭제
+					if(dealSellPic!=null){
+						File delF = new File(path,dealSellPic);
+						delF.delete();
+					}	
+					
+				}
+				updateImg.transferTo(upImg); //파일업로드 
+				editDealFile = upImg.getName(); // 업로드한 파일이름 담기
+			}
+		}
+		
 		vo.setUserid((String)req.getSession().getAttribute("logId"));
+		vo.setB_img1(editDealFile);
+		
 		mav.addObject("num",vo.getNum());
+		
+		
 		if(boardService.commuUpdate(vo)>0) {
-			
+			System.out.println("성공");
 			mav.setViewName("redirect:commuView");
 		}else {
+			System.out.println("실패");
 			mav.setViewName("redirect:commuEdit");
 		}
 		
+		}catch(Exception e ) {
+			System.out.println("사진 수정 업로드 하지마 하지말라고!!!!!!!");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 		
 		
 		
@@ -220,15 +351,46 @@ public class CommuController {
 		vo.setUserid((String)req.getSession().getAttribute("logId"));
 		vo.setNum(vo.getNum());
 		vo.setB_gu((String)req.getSession().getAttribute("logLoc_gu"));
+		vo.setUp_cate(vo.getUp_cate());
 		
-		System.out.println(vo.getUserid());
-		System.out.println(vo.getNum());
-		
+		System.out.println("아아디 = >"+vo.getUserid());
+		System.out.println("글번호 = > "+vo.getNum());
+		System.out.println("카테고리 = >"+ vo.getUp_cate());
+		System.out.println("지역? = > "+vo.getB_gu());
+		System.out.println("넘버? = > " + vo.getNum());
 		
 		if(boardService.commuDelete(vo.getNum(),vo.getUserid())>0) {
-			mav.addObject("logLoc_gu",vo.getLocgu());
 			
-			mav.setViewName("redirect:commuBoard");
+			mav.addObject("vo",boardService.memdeleteCount(vo.getUserid()));
+				if(vo.getUp_cate()==1) {
+					mav.addObject("num",vo.getNum());
+					mav.addObject("logLoc_gu",vo.getB_gu());
+					mav.addObject("b_gu",vo.getB_gu());
+					mav.addObject("up_cate",vo.getUp_cate());
+					System.out.println("글삭제 성공하고난다음에 1일떄 구랑 카테  - > "+ vo.getB_gu()+"//"+vo.getUp_cate());
+					mav.setViewName("redirect:commuBoard");
+					System.out.println("보드로 넘어갈꺼야?");
+					
+				}
+				if(vo.getUp_cate()==2) {
+					mav.addObject("num",vo.getNum());
+					mav.addObject("up_cate",vo.getUp_cate());
+					System.out.println("글삭제 성공하고난다음에 2일떄 카테 - > "+ vo.getUp_cate());
+					mav.setViewName("redirect:commuRecipeBoard");
+					System.out.println("보드로 넘어갈꺼야?");
+					
+					
+				}
+				if(vo.getUp_cate()==3) {
+					mav.addObject("num",vo.getNum());
+					mav.addObject("up_cate",vo.getUp_cate());
+					System.out.println("글삭제 성공하고난다음에 3일떄 카테  - > "+ vo.getUp_cate());
+					mav.setViewName("redirect:commuFreeBoard");
+					System.out.println("보드로 넘어갈꺼야?");
+					
+				}
+			
+			
 		}else {
 			mav.addObject("num", vo.getNum());
 			mav.setViewName("redirect:commuView");

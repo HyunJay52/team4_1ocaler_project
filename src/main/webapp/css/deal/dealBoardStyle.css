@@ -17,7 +17,7 @@
 		margin: 0px; 
 		padding: 0px;
 		float: left;
-		height: 400px; 
+		height: 450px; 
 	
 	}
 	
@@ -29,14 +29,14 @@
 	}
 	#dealImg ,#sellImg{ 
 		width: 640px; 
-		height: 400px; 
+		height: 450px; 
 		float: left;
 		margin:0 auto; 
 		margin-right: 20;
 	}
 	#dealImg img{ 
 		width: 640px; 
-		height: 400px;
+		height: 450px;
 		border:1px solid rgb(233 233 233);  
 	}
 	
@@ -88,7 +88,7 @@
 	}
 
 	
-	#dealInfo>ul li:nth-child(8){
+	#dealInfo>ul li:nth-child(9){
 		width: 100%;	
 		text-align: center; 
 	}
@@ -103,7 +103,7 @@
 		font-size: 18px;
 		margin: 0px;
 	}
-	#dealInfo>ul li:nth-child(7){
+	#dealInfo>ul li:nth-child(8){
 		text-align: left; 
 		font-size: 14px; 
 		color: gray; 
@@ -128,20 +128,25 @@
 	}
 	
 	.commBtnDeal { 
-		font-size:20px;
 		width: 100px; 
 		margin: -5px 60px;
 		color: #3f1785;
 		border: 1px solid #3f1785;
+		height: 45px;
+		
 
 	}
-	.commBtnDeal:hover {
+/* 	.commBtnDeal:hover {
 		border: 1px solid #3f1785;
 		background-color: #3f1785; 
 		font-weight: bold;
 		color: #fff;
 		font-weight: bold;
 
+	}
+	 */
+	#ViewPagejoinCheck{
+		font-size: 20px;
 	}
 	
 	.commBtnSell { 

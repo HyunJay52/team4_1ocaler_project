@@ -63,7 +63,7 @@
       	<a href="memberBoard?s_cate=3&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">기 타</a>&ensp; 
       </span>
       
-      <div id="commuSearch">
+      <div id="commuSearch" style="height: 30px;">
 				<form method="get" action="memberBoard" id="commuForm">
 					<select name="searchKey">
 						<option value="s_content">내용</option>
@@ -74,7 +74,6 @@
 						<input type="text"name ="searchWord" placeholder=" &nbsp;검색.." id="search"/>
 						<input type="image" id="btn" src="img/deal/icons8.png" style="display:block; float:left; border: 1px solid #000;" /> 
 				</form>
-				
       </div>	         
                   
                
@@ -86,16 +85,16 @@
                         <div id="sellImgDiv">
                            <img src="<%=request.getContextPath()%>/img/dealFileImg/${vo.s_img1}"/>
                            
-                           
-                           <input class="aaaa" type="checkbox" name="numLike" id="like${vo.num}" value="${vo.num}" 
-	                           <c:forEach var="likes" items="${likeList}">
-                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
-                           				checked
-                           			</c:if>
-                           		</c:forEach> 
-                           	/>	
-                           <label for="like${vo.num}"></label>
-
+                           <c:if test="${logId!=null }">
+	                           <input class="aaaa" type="checkbox" name="numLike" id="like${vo.num}" value="${vo.num}" 
+		                           <c:forEach var="likes" items="${likeList}">
+	                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
+	                           				checked
+	                           			</c:if>
+	                           		</c:forEach> 
+	                           	/>	
+	                           <label for="like${vo.num}"></label>
+							</c:if>
                            
                         </div>
                         <ul OnClick="location.href ='memberView?num=${vo.num}'" >   
@@ -120,8 +119,9 @@
          
          <div>
        	
-       	 	<a href="memberWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
-         
+       		<c:if test="${logId !=null }">
+       	 		<a href="memberWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
+ 			</c:if>        
             <ul id="MBPaging">
                <c:if test="${pageVO.pageNum>1}">
 					<li>

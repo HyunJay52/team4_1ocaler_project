@@ -35,7 +35,7 @@ public interface BoardService {
 	
 	public BoardVO newSelect(int num);
 	
-	public PrevNextVO lagLeadSelect(int num);
+	public PrevNextVO lagLeadSelect(BoardPageVO vo);
 	
 	public BoardVO likeCount(int num);
 	
@@ -44,6 +44,8 @@ public interface BoardService {
 	//커뮤 토탈 레코드수 구하기
 	public int boardTotalRecoedCount(BoardPageVO vo);
 	
-
+	public int memwriteCount(String userid);
+	
+	public int memdeleteCount(String userid);
 	
 }

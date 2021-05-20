@@ -30,7 +30,7 @@
 							</td>
 													
 							<td style="float: left ;line-height: 14px;">
-								<a href="commuView?num=${vo.num}">${vo.b_subject} 
+								<a href="commuView?num=${vo.num}&up_cate=2">${vo.b_subject} 
 									<span style="font-weight: bold;"> [${vo.repcont}]</span>
 								</a> 
 									&nbsp;
@@ -83,8 +83,9 @@
 		
 			
 		<div>
-			<a href="commuWrite?up_cate=${pageVO.up_cate}"  class="btn wriBtn"  style="float:right;font-color: #181b46;"> 글쓰기</a>
-			
+			<c:if test="${logId != null }">
+				<a href="commuWrite?up_cate=${pageVO.up_cate}"  class="btn wriBtn"  style="float:right;font-color: #181b46;"> 글쓰기</a>
+			</c:if>
 			<div id="commuSearch">
 				<form method="get" action="commuRecipeBoard" id="commuForm">
 					<input type="hidden" name="up_cate" value="${pageVO.up_cate }"/>

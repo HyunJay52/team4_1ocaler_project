@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.BoardService;
 import com.team4.localer.service.DealShareService;
 import com.team4.localer.service.JoinUsService;
 import com.team4.localer.service.LikeItService;
@@ -38,6 +39,9 @@ public class DealController {
 	JoinUsService joinUsService;
 	@Inject
 	LikeItService likeItService;
+	@Inject
+	BoardService boardservice;
+	
 	
 	//동네직구(회원)
 	@RequestMapping("/memberBoard")
@@ -45,10 +49,11 @@ public class DealController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		vo.setUserid((String)req.getSession().getAttribute("logId"));
+		pageVO.setUserid((String)req.getSession().getAttribute("logId"));
 		vo.setS_gu(req.getParameter("s_gu"));
 		
 		System.out.println(pageVO.getS_gu());
+		System.out.println(pageVO.getUserid());
 		
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
@@ -149,6 +154,8 @@ public class DealController {
 				System.out.println("성공했다");
 				//글쓰고 쓴글로가는거
 				DealShareVO vo2 =dealshareService.dealOneselect(vo);
+				
+				mav.addObject("vo",boardservice.memwriteCount(vo.getUserid()));
 				mav.addObject("vo",vo2);
 				mav.addObject("num", vo2.getNum());
 				mav.setViewName("redirect:memberView");
@@ -290,6 +297,7 @@ public class DealController {
 		if(dealshareService.dealSellDelete(vo.getNum(),vo.getUserid())>0) { //성공했을떄
 			System.out.println("성공");
 			mav.setViewName("redirect:memberBoard");
+			mav.addObject("vo",boardservice.memdeleteCount(vo.getUserid()));
 		}else { // 시래했을떄
 			System.out.println("실패");
 			mav.addObject("num", vo.getNum());

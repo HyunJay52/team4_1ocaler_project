@@ -23,4 +23,6 @@ public interface DealShareService {
 	public DealShareVO dealViewSelectNumX(int num);
 	
 	public int dealTotalRecoedCount(DealPageVO vo);
+	
+	
 }

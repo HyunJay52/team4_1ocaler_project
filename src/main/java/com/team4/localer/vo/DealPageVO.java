@@ -18,7 +18,16 @@ public class DealPageVO {
 	private String s_cate;
 	private String s_gu;
 	
+	private String userid;
 	
+	
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public int getPageNum() {
 		return pageNum;
 	}

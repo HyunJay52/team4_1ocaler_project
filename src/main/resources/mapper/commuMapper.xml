@@ -5,11 +5,11 @@
  
 <mapper namespace="com.team4.localer.dao.BoardDAO">
 	<insert id="commuInsert" parameterType="com.team4.localer.vo.BoardVO" >
-		insert into board (num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag)
-		values (boardsq.nextval, #{userid}, #{b_gu}, ${up_cate},${down_cate},#{b_subject},#{b_content}, #{b_tag})
+		insert into board (num,userid, b_gu, up_cate, down_cate,b_subject, b_content,b_img1,b_tag)
+		values (boardsq.nextval, #{userid}, #{b_gu}, ${up_cate},${down_cate},#{b_subject},#{b_content},#{b_img1}, #{b_tag})
 	</insert>
 	
-	
+	<!-- 커뮤 토탈레코드수구하기? -->
 	<select id="boardTotalRecoedCount" resultType="int">
   		select count(num) from board  where
   		<if test="up_cate==1">
@@ -67,7 +67,7 @@
 	</select>
 	
   	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
-  		select num, b.userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,
+  		select num, b.userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,b_img1,
         to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick,
     	(select count(*) from reply where num = b.num) repcont,
     	(select count(*) from likeit where num = numlike) numlike     
@@ -77,7 +77,11 @@
 		delete from board where num=#{param1} and userid=#{param2}
 	</delete>
 	<update id="commuUpdate">
-		update board set b_subject=#{b_subject}, b_content=#{b_content},b_tag=#{b_tag} where num=#{num} and userid=#{userid}
+		update board set b_subject=#{b_subject}, b_content=#{b_content}, 
+		<if test="b_img1!=null and b_img1!=''">
+			b_img1=#{b_img1},
+		</if>
+		b_tag=#{b_tag} where num=#{num} and userid=#{userid}
 	</update>
 	<select id ="commuRecipeSelect" resultType="com.team4.localer.vo.BoardVO">
 		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
@@ -95,6 +99,12 @@
 	</select>
   	<update id="hitCount">
 		update board set b_hit=b_hit+1 where num=#{param1}
+	</update>
+	<update id="memwriteCount">
+		update member set mem_post=mem_post+1 where userid=#{param1}
+	</update>
+	<update id="memdeleteCount">
+		update member set mem_post=mem_post-1 where userid=#{param1}
 	</update>
 	<select id="recipeSelect" resultType="com.team4.localer.vo.BoardVO" >
 		<![CDATA[ 
@@ -130,12 +140,24 @@
 	<select id="lagLeadSelect" resultType="com.team4.localer.vo.PrevNextVO">
 		select * from( 
 		      select num, 
-		    lag(num,1,0) over (order by num ) prevNo, 
-		    lag(b_subject, 1, '이전글이 없습니다') over(order by num ) prevSubject, 
-		    lead(num,1,0) over (order by num ) nextNO, 
-		    lead(b_subject,1,'다음글이 없습니다.') over (order by num ) nextSubject 
-		    from board order by num)
-		where num=#{param1}
+			    lag(num,1,0) over (order by num ) prevNo, 
+			    lag(b_subject, 1, '이전글이 없습니다') over(order by num ) prevSubject, 
+			    lead(num,1,0) over (order by num ) nextNO, 
+			    lead(b_subject,1,'다음글이 없습니다.') over (order by num ) nextSubject 
+			    from
+			    (select * from
+			        (select * from
+			            (select num,up_cate,userid,b_gu,b_subject,b_content from board)
+			             <if test="searchKey != null and searchWord != null and searchKey != '' and searchKey != '' "> 
+			          		where #{searchKey} like '%${searchWord}%'
+			          	</if>
+			           order by num desc)
+			        <if test="up_cate != null and up_cate != '' ">    
+			     	where up_cate=${up_cate}
+			     	</if>
+			     	)
+			      board order by num)
+		 where num = ${num}
 	</select>
 	<select id="likeCount" resultType="com.team4.localer.vo.BoardVO">
 		select count(*) numlike from likeit where numlike=#{param1}

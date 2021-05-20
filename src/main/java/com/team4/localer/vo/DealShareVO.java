@@ -28,6 +28,15 @@ public class DealShareVO {
 	private String mem_prof;
 	private String mem_nick;
 
+	
+
+
+
+	
+	
+	
+	
+
 
 
 

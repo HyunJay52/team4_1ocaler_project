@@ -46,8 +46,11 @@ public interface BoardDAO {
 	//새글
 	public BoardVO newSelect(int num);
 	//이전글 다음글 
-	public PrevNextVO lagLeadSelect(int num);
+	public PrevNextVO lagLeadSelect(BoardPageVO vo);
 	//추천수
 	public BoardVO likeCount(int num);
-	//
+	//그거... 게시글 +1?
+	public int memwriteCount(String userid);
+	//게시글 -1
+	public int memdeleteCount(String userid);
 }
