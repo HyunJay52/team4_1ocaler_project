@@ -2,6 +2,7 @@ package com.team4.localer.dao;
 
 
 import com.team4.localer.vo.Item_optionVO;
+import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
 import java.util.List;
 
@@ -17,5 +18,8 @@ public interface SellerDAO {
 	
 	public List<Item_optionVO> changeOptions(String option_title, int i_num);//옵션목록바꾸기 아작스
 	
-	
+	//판매자 정보 불러오기
+	public SellerVO sellerInfo(String userid);
+	//판매자 제품 list
+	public List<SellitemVO> sellerItems(String userid);
 }

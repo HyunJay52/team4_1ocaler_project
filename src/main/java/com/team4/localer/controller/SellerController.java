@@ -199,8 +199,12 @@ public class SellerController {
 	}
 	
 	@RequestMapping("/sellerInfo")
-	public String sellerInfo() {
-		return "deal/sellerInfo";
+	public ModelAndView sellerInfo(String userid) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("sellerVO",sellerService.sellerInfo(userid));
+		mav.addObject("list",sellerService.sellerItems(userid));
+		mav.setViewName("deal/sellerInfo");
+		return mav;
 	}
 	
 	

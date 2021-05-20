@@ -7,7 +7,9 @@ public class SellerVO {
 	private String sel_name;//사업자명
 	private String company;//상호명
 	private String com_num;//사업자번호
+	private String com_numStr;
 	private String sel_tel;//고객상담번호
+	private String sel_telStr;
 	private String sel_email;//판매자 이메일
 	private int sel_zip;//우편번호
 	private String sel_addr;//주소
@@ -17,6 +19,7 @@ public class SellerVO {
 	private String bank;//은행명
 	private String acc_name;//계좌주
 	private String account;
+	private int sel_count;//판매자 게시글 개수
 	//private int account;계좌번호
 	private String sel_date;//셀러 신청일,승인일
 	private int sel_status;//셀러 상태정보 0:탈퇴, 1:활동, 2:정지
@@ -27,6 +30,30 @@ public class SellerVO {
 	private int mem_type;//1.일반, 2.셀러
 	private int reportCount;//쌓인신고
 	
+	public String getCom_numStr() {
+		com_numStr=com_num.substring(0,3)+"-";
+		com_numStr+=com_num.substring(3,5)+"-";
+		com_numStr+=com_num.substring(5);
+		return com_numStr;
+	}
+	public void setCom_numStr(String com_numStr) {
+		this.com_numStr = com_numStr;
+	}
+	public String getSel_telStr() {
+		sel_telStr=sel_tel.substring(0,3)+"-";
+		sel_telStr+=sel_tel.substring(3,7)+"-";
+		sel_telStr+=sel_tel.substring(7);
+		return sel_telStr;
+	}
+	public void setSel_telStr(String sel_telStr) {
+		this.sel_telStr = sel_telStr;
+	}
+	public int getSel_count() {
+		return sel_count;
+	}
+	public void setSel_count(int sel_count) {
+		this.sel_count = sel_count;
+	}
 	public int getSel_num() {
 		return sel_num;
 	}

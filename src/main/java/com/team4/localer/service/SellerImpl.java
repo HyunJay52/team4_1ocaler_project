@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.SellerDAO;
 import com.team4.localer.vo.Item_optionVO;
+import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
 
 @Service
@@ -40,6 +41,14 @@ public class SellerImpl implements SellerService {
 	@Override
 	public SellitemVO selectOnePage(int i_num) {		
 		return sellerDAO.selectOnePage(i_num);
+	}
+	@Override
+	public SellerVO sellerInfo(String userid) {
+		return sellerDAO.sellerInfo(userid);
+	}
+	@Override
+	public List<SellitemVO> sellerItems(String userid) {
+		return sellerDAO.sellerItems(userid);
 	}
 	
 	
