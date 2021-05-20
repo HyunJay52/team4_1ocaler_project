@@ -11,12 +11,20 @@ public class AdminPageVO {
 	
 	private int lastPageRecord=15;//마지막 페이지에 남은 레코드 수
 	
-	private String searchKey;//검색키
-	private String searchWord;//검색어
+	private String searchKey="";//검색키
+	private String searchWord="";//검색어
 	
 	private String cate;//검색 카테고리 
 	private String num;//카테고리 num;
+	private String month;//
 	
+	
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
 	public String getCate() {
 		return cate;
 	}

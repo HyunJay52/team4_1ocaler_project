@@ -149,4 +149,9 @@ public class CsServiceImp implements CsService {
 		
 	}
 
+	@Override
+	public int selspendtotalRecord(AdminPageVO pageVO) {
+		return csdao.selspendtotalRecord(pageVO);
+	}
+
 }

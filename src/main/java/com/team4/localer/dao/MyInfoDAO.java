@@ -7,6 +7,8 @@ import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoCountVO;
+import com.team4.localer.vo.MyinfoDealVO;
 import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
@@ -59,4 +61,17 @@ public interface MyInfoDAO {
 	
 	//특정 게시글의 나의 리뷰 조회
 	public ItemReviewVO selectMyReview(ItemReviewVO vo);
+	
+	//유저의 종류별 게시글(좋아요 포함) 카운트 횟수 조회
+	public MyinfoCountVO selectMyCount(String userid);
+	
+	//직거래 글에 대한 회원의 리뷰가 있는지 조회
+	public int selectMyReviewCount(String userid, int num);
+	
+	//내가 참여한 글 조회
+	public List<MyinfoDealVO> selectMyJoinList(MyinfoPageVO vo);
+	
+	//내 모집글에 참여한 리스트 5개 조회
+	public List<MyinfoDealVO> selectMyShareJoinList(String userid);
+
 }

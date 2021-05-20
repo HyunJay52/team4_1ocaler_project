@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.BoardDAO;
 import com.team4.localer.vo.BoardVO;
+import com.team4.localer.vo.PrevNextVO;
 
 @Service
 public class BoardImpl implements BoardService{
@@ -101,6 +102,18 @@ public class BoardImpl implements BoardService{
 	public BoardVO newSelect(int num) {
 		// TODO Auto-generated method stub
 		return boardDAO.newSelect(num);
+	}
+
+	@Override
+	public PrevNextVO lagLeadSelect(int num) {
+		// TODO Auto-generated method stub
+		return boardDAO.lagLeadSelect(num);
+	}
+
+	@Override
+	public BoardVO likeCount(int num) {
+		// TODO Auto-generated method stub
+		return boardDAO.likeCount(num);
 	}
 
 	

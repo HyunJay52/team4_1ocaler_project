@@ -124,6 +124,22 @@
         var chart = new google.visualization.PieChart(document.getElementById('donut_three'));
         chart.draw(data3, options3);
       }
+    $(function(){
+    	$(".prev").click(function(){
+  		  //이전 버튼 클릭시
+  		  location.href="statis_mem?month="+${dataVO.month2};
+  	  });
+  	  $(".next").click(function(){
+  		  //다음 버튼 클릭시
+  		  var month = parseInt(${dataVO.month3});
+  		  if(month==12){
+  			  location.href="statis_mem?month=1";
+  		  }else{
+  			  month=month+1;
+  			  location.href="statis_mem?month="+month;
+  		  }
+  	  });
+    });
 </script>
 <div class="main backcolor">
 	<!--월 이동 부분-->

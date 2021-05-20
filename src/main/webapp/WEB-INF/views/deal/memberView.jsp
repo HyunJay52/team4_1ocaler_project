@@ -15,13 +15,55 @@
 
 		//지도============================================================================================
 		$(function(){
+			//좋아요=================================================================================================	
+			if(${logId!=null}){
+				$("#likeViewJoinBtn").click(()=>{
+					
+						var url = "likeInsert";
+						var params = "numLike="+$("#likeViewJoinBtn").val();
+			
+						
+						console.log(params);
+						console.log("좋아요 눌렀는데");
+						
+						$.ajax({
+							url : url,
+							data : params,
+							success : function(result){
+								console.log(result,"좋아요 추가 성공");
+								//좋아요했다는 걸로 표시해주기?
+								$("#likeViewJoinBtn").css('background',"#B8B2F4");
+							},error :function(request,status,error){
+								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							}
+						})
+					
+				});
+			}else{
+						var url = "likeDelete";
+						var params = "numLike="+$("#likeViewJoinBtn").val();	
+						$.ajax({
+							url : url,
+							data : params,
+							success : function(result){
+								console.log(result,"좋아요 삭제 성공");
+								$("#likeViewJoinBtn").css('background',"#fff");
+							},error :function(request,status,error){
+								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							}
+						})
+						
+					}
+			
+			
+			
 			
 			//함께하기================================================================================
 			if(${logId!=null}){
 				$("#eatViewPageJoinBtn").click(()=>{
 					var url = "joinInsert";
 					var params ="num="+$("#eatViewPageJoinBtn").val();
-					console.log(params);
+					console.log(params+"뭘까?");
 					$.ajax({
 						url : url,
 						data : params,
@@ -252,7 +294,9 @@
 					</li>
 					<li class="wordcut">${vo.s_tag }</li>
 					<li>
-						<input type="button" value="좋아요" class="btn commBtnDeal" style="margin-left: 100px"/>
+						<button type="button" id="likeViewJoinBtn" value=${vo.num } class="btn commBtnDeal" style="margin-left: 100px">
+							좋아요
+						</button>
 					<!-- 	<input type="submit" value="함께해요" class="btn commBtnDeal"/> -->
 						<button type="button" id="eatViewPageJoinBtn" class="btn commBtnDeal" value="${vo.num }"<c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>>
 							<span  id="eatViewPagejoinCheck">

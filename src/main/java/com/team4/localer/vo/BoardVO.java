@@ -17,6 +17,9 @@ public class BoardVO {
 	
 	private String recipe_cate;
 	
+	//좋아요갯수
+	private int numlike;
+	
 	//댓글갯수
 	private int repcont;
 	
@@ -40,6 +43,17 @@ public class BoardVO {
 	private String mem_prof;
 	private String mem_nick;
 	
+
+	
+	
+	public int getNumlike() {
+		return numlike;
+	}
+
+	public void setNumlike(int numlike) {
+		this.numlike = numlike;
+	}
+
 	public int getReportCount() {
 		return reportCount;
 	}

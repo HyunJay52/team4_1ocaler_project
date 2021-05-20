@@ -27,8 +27,41 @@
 		}
 	}
 
-	//댓글시작
+
 	$(function(){
+		
+		//좋아요=================================================================================================	
+		if(${logId!=null}){
+			$("#likeLi input[name=num]").on('click',function(){
+				if($(this).is(':checked')){
+					
+					var url = "likeInsert";
+					var params = "numLike="+$(this).val();	
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 추가 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+				}else{
+					var url = "likeDelete";
+					var params = "numLike="+$(this).val();	
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 삭제 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+					
+				}
+			});	
+		}
 		
 		//팝업창 띄우기================================================
 		/*위치설정*/
@@ -66,6 +99,8 @@
 				location.href="login";
 			}
 		});
+		
+		//댓글시작
 		//댓글보기
 		
 		function replyList(){
@@ -221,7 +256,7 @@
 									</a>	
 								</c:if>	
 								<c:if test="${vo.up_cate == 2 }">
-									<a href="commuFreeBoard?up_cate=2">
+									<a href="commuRecipeBoard?up_cate=2">
 										쓱싹레시피
 									</a>	
 								</c:if>
@@ -247,15 +282,26 @@
 					</li>
 					<li>
 						<span>조회수 : ${vo.b_hit } &nbsp; &nbsp; </span>
-						<span>추천수 : 10 </span>					
+						<span>추천수 : ${vo.numlike }</span>					
 					</li>
 					
 					<li> ${vo.b_content }</li>
 					
-					<li>${vo.b_tag }</li>
+					<li>${vo.b_tag }</li> 
+					
+					
 					<li id="likeLi">추천 &nbsp;&nbsp;
-						<input type="checkbox" name="num" id="like" value="1"/>
-						<label for="like"></label>&nbsp;&nbsp;&nbsp;댓글  ${vo.repcont }개
+                           <input class="aaaa" type="checkbox" name="num" id="like${vo.num}" value="${vo.num}" 
+	                           <c:forEach var="likes" items="${likeList}">
+                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
+                           				checked
+                           			</c:if>
+                           		</c:forEach> 
+                           	/>	
+                           <label for="like${vo.num}"></label>	
+						
+						
+						댓글  ${vo.repcont }개
 					
 					</li>
 			
@@ -279,14 +325,23 @@
 		
 		<div id="commuViewpreBtnnext">
 			<div style="border-bottom:1px solid #d9d9d9;color: #181b46; ">
-				<a href=""> 
-					<span style="font-weight: bold;">이전글 :</span> 안녕하세요 
-				</a>
+				<span style="font-weight: bold;">이전글 :</span> 
+				<c:if test="${voSel.prevNo==0 }"> <!-- 이전글 없음 -->
+				   	 ${voSel.prevSubject}
+			   	</c:if>
+			   	<c:if test="${voSel.prevNo>0 }"><!-- 이전글 있음 -->
+			       	<a href="commuView?num=${voSel.prevNo }">${voSel.prevSubject }</a>
+			    </c:if> 
 			</div>
 			<div>
-				<a href=""> 
-					<span style="font-weight: bold;">다음글 :</span> 안녕히계세요 
-				</a>
+				<span style="font-weight: bold;">다음글 :</span> 
+				<c:if test="${voSel.nextNo==0 }">
+			 	   ${voSel.nextSubject}
+			   	</c:if>
+			   	<c:if test="${voSel.nextNo>0 }">
+			        <a href="commuView?num=${voSel.nextNo }">${voSel.nextSubject}</a>
+			   	</c:if><br/>
+				
 			</div>
 		</div>
 		

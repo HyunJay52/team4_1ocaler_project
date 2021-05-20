@@ -3,6 +3,7 @@ package com.team4.localer.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.team4.localer.service.BoardService;
+import com.team4.localer.service.LikeItService;
 import com.team4.localer.vo.BoardVO;
 
 @Controller
@@ -19,6 +21,9 @@ public class CommuController {
 	
 	@Inject
 	BoardService boardService;
+	@Inject
+	LikeItService likeItService;
+	
 	
 	@RequestMapping("/commuMain")
 	public ModelAndView commuMain(BoardVO vo , HttpServletRequest req) { //커뮤 메인으로 이동
@@ -41,11 +46,14 @@ public class CommuController {
 		}
 		
 		mav.addObject("result",cnt_result);
+		
 		System.out.println(cnt_result.length);
+		
+		
 		mav.addObject("recipe",boardService.recipeSelect(vo));
 		mav.addObject("free",boardService.freeSelect(vo));
 		mav.addObject("commuBor",boardService.commuMainSelect(vo));
-		
+		mav.addObject("like",boardService.likeCount(vo.getNum()));
 		mav.setViewName("community/commuMain");
 		
 		
@@ -59,9 +67,8 @@ public class CommuController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("commuList",boardService.commuSelect(vo));
-		
-	
-		mav.addObject("vo",vo);
+		mav.addObject("like",boardService.likeCount(vo.getNum()));
+		//mav.addObject("vo",vo);
 		
 		mav.setViewName("community/commuBoard");
 	//	return "community/commuBoard";
@@ -89,7 +96,7 @@ public class CommuController {
 	
 		
 		mav.addObject("commuList",boardService.commuRecipeSelect(vo));
-		
+		mav.addObject("like",boardService.likeCount(vo.getNum()));
 		mav.addObject("vo",vo);
 		mav.setViewName("community/commuRecipeBoard");
 		return mav;
@@ -103,7 +110,7 @@ public class CommuController {
 		ModelAndView mav =new ModelAndView();
 		
 		mav.addObject("commuList",boardService.commuFreeSelect(vo));
-		
+		mav.addObject("like",boardService.likeCount(vo.getNum()));
 		mav.addObject("vo",vo);
 		mav.setViewName("community/commuFreeBoard");
 		return mav;
@@ -135,13 +142,20 @@ public class CommuController {
 	
 	//커뮤 글 보기
 	@RequestMapping("/commuView")
-	public ModelAndView commuView(BoardVO vo) {
+	public ModelAndView commuView(BoardVO vo,HttpSession session) {
 		ModelAndView mav= new ModelAndView();
 		
 		mav.addObject("vo",boardService.hitCount(vo.getNum()));
 		
 		mav.addObject("vo",boardService.commuViewSelect(vo.getNum()));
+
+		mav.addObject("voSel", boardService.lagLeadSelect(vo.getNum()));
 		
+		mav.addObject("like",boardService.likeCount(vo.getNum()));
+		
+		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
+			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
+		}	
 		mav.setViewName("community/commuView");
 		return mav;
 	}

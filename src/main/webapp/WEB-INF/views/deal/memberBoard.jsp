@@ -8,7 +8,44 @@
 		#sellImgDiv>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
 		#sellImgDiv>label{position: absolute; height: 30px; right: 20px; top: 4px;}
 	</style>
-
+	
+	<script>
+			
+			$(function(){
+			//좋아요=================================================================================================	
+					if(${logId!=null}){
+						$("#sellImgDiv input[name=numLike]").on('click',function(){
+							if($(this).is(':checked')){
+								
+								var url = "likeInsert";
+								var params = "numLike="+$(this).val();	
+								$.ajax({
+									url : url,
+									data : params,
+									success : function(result){
+										console.log(result,"좋아요 추가 성공");
+									},error :function(request,status,error){
+										 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+									}
+								})
+							}else{
+								var url = "likeDelete";
+								var params = "numLike="+$(this).val();	
+								$.ajax({
+									url : url,
+									data : params,
+									success : function(result){
+										console.log(result,"좋아요 삭제 성공");
+									},error :function(request,status,error){
+										 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+									}
+								})
+								
+							}
+						});	
+					}
+			});	
+	</script>
    
    
    
@@ -34,8 +71,18 @@
                      <div>
                         <div id="sellImgDiv">
                            <img src="<%=request.getContextPath()%>/img/dealFileImg/${vo.s_img1}"/>
-                           <input class="aaaa" type="checkbox" name="numLike" id="like${vo.num}" value="${vo.num}" />
+                           
+                           
+                           <input class="aaaa" type="checkbox" name="numLike" id="like${vo.num}" value="${vo.num}" 
+	                           <c:forEach var="likes" items="${likeList}">
+                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
+                           				checked
+                           			</c:if>
+                           		</c:forEach> 
+                           	/>	
                            <label for="like${vo.num}"></label>
+
+                           
                         </div>
                         <ul OnClick="location.href ='memberView?num=${vo.num}'" >   
                            <li class="wordcut">${vo.s_subject }</li>

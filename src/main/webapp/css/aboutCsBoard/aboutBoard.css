@@ -1,34 +1,85 @@
 @charset "UTF-8";
 
 /* 팀 소개 */
-.aboutDiv>#introDetail {
-	width: 700px;
-	height: 150px;
+#introDetail {
+	width: 1300px;
+	height: auto;
 	margin: 0 auto;
 }
-
+#introDetail>div:nth-child(2), #introDetail>div:nth-child(2)>img {
+	width: 1300px; height: 400px;
+	margin: 0px; padding: 0px;
+}
+#introDetail>div:first-child {
+	margin: 50px 0 10px 0; padding-left: 10px;
+	font-family: nsreb; font-size: 32px;
+	border-bottom: 2px solid #000;
+}
+.exHow>span {
+	font-size: 32px; font-family: nsreb;
+	border-bottom: 5px solid #fec804;
+}
+#abtIntro {
+	width: 1200px; height: 300px;
+	font-size: 22px; margin: 50px;
+}
+#introTbl tr:first-child>td{
+	height: 70px; line-height: 70px;
+	font-size: 28px; font-family: nsreb;
+}
 .aboutDiv>#introTbl tr td {
 	text-align: center;
 }
 
 .aboutDiv>#introTbl tr td>img {
 	text-align: center;
-	width: 200px;
-	padding: 20px;
+	width: 200px; height: 200px;
+	padding: 5px;
+	box-shadow: 5px 5px 5px #fec804;
+	border-radius: 70%;
+	margin: 20px;
 }
 #introTbl {
-	width:1000px; margin: 0 auto;
+	width:1300px; height: 400px;
+	margin-bottom: 200px;
 }
-.
+#introTbl>tbody>tr:nth-child(4) {
+	height: 100px;
+}
+#introTbl>tbody>tr:last-child {
+	height: 200px;
+}
+#tblName {
+	height: 100px;
+}
+#tblName>td {
+	font-size: 22px; font-family: nsreb;
+}
+
 /* 오시는 길 */
 #routeDiv {
-	width: 1000px;
+	width: 1300px;
 	height: 100%;
 	margin: 0 auto;
 }
 #routeDiv>#routeWay {
-	width: 100%;
-	height: 100px;	
+	width: 100%; height: 100px;	
+}
+
+/* class */
+.abtVideo {
+/* 	display: none; */
+	width: 800px; height: 600px;
+	background: pink; float: left;
+	margin-bottom: 200px;
+}
+.exHow {
+	width: 500px; height: 600px; float: left;
+	padding: 100px 50px;
+	margin-bottom: 200px;
+}
+.tblRole {
+	font-size: 22px;
 }
 .routeTitle {
 	font-size: 20px;
@@ -39,7 +90,6 @@
 }
 /* 공통 스타일 */
 .aboutDiv {
-	width: 1300px; height: 100%;
+	width: 1300px; height: auto;
 	margin: 0 auto;
-	padding: 50px;
 }

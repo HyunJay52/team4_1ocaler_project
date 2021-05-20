@@ -26,24 +26,35 @@
 			<div class="dealInfo">
 				<img src="img/myInfo/saver.gif"/>
 				<div class="infoList">
-					<h3>김자바</h3>
+					<div class="infoListHeader">
+						<h3>${vo.mem_name}</h3>
+						<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
+						<a href="myInfoSeller"><input type="button" class="btn dealBtn btn-outline-dark" value="Info"/></a>
+					</div>
+					<ul style="font-weight:bold;">
+						<li>참여</li>
+						<li>모집</li>
+						<li>직거래</li>
+						<li>방문</li>
+						<li>내글</li>
+						<li>댓글</li>
+						<li>좋아요</li>
+					</ul>
 					<ul>
-						<li>참여(10)</li>
-						<li>모집(5)</li>
-						<li>직거래(3)</li>
-						<li>방문(31)</li>
-						<li>내글(5)</li>
-						<li>댓글(21)</li>
-						<li>좋아요(21)</li>
+						<li>${vo.joinus}</li>						
+						<li>${vo.grouplocal}</li>
+						<li>${vo.mem_share }</li>
+						<li>${vo.logcount}</li>
+						<li>${vo.board}</li>
+						<li>${vo.reply}</li>
+						<li>${vo.likeit}</li>
 					</ul>
 				</div>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message" style="float:left"/>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Info"/>
 			</div>
 		</div>
 		<div class="dealBottom">
 			<div class="activityRight">
-				<input type="button" class="btn btn-outline-danger" value="삭제" style="float:right; height:30px; margin-top:10px; line-height:10px"/>
+				<input type="button" class="btn btn-outline-danger" value="삭제" style="float:right; height:30px; margin-bottom:10px; line-height:10px"/>
 				<div class="myActivityForm">
 					<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
 					<input type="date" min="2021-01-01" max="2021-05-31"/>

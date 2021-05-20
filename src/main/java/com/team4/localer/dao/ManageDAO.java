@@ -37,8 +37,21 @@ public interface ManageDAO {
 	public List<AdminspendVO> mempsendmodal1List(String userid);
 	//모달2 list
 	public List<AdminspendVO> mempsendmodal2List(String userid);
-		
-		
+	//======셀러정산=====
+	//누적 매출, 누적수익
+	public AdminspendVO selspendtotal(Mem_statisVO statisVO);
+	//이번달 매출, 수익
+	public AdminspendVO selspendmonth(Mem_statisVO statisVO);
+	//판매 게시글수 3개월 치 select 
+	public AdminspendVO countboard(Mem_statisVO statisVO);
+	//정산 예정, 정산 완료 count
+	public AdminspendVO countspend(Mem_statisVO statisVO);
+	//셀러 list 
+	public List<AdminspendVO> selspendList(AdminPageVO pageVO);
+	//셀러 정산 modal list
+	public List<AdminspendVO> selpsendmodalList(int num);
+	
+	
 	//회원목록 allSelect
 	public List<MemberVO> memberAllSelect(AdminPageVO pageVO);
 	//회원의 신고, 댓글수 count

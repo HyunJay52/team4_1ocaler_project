@@ -3,6 +3,14 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealWriteStyle.css"/>
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> 
 
+<script>
+		$(()=>{
+			$("#cancelBtn").on('click',()=>{
+				history.back();
+			});
+		});
+
+</script>
 
 	<div id="dealWnEMain">
 		<div>
@@ -74,7 +82,7 @@
 				<input type="text" id ="tag"  name="s_tag" placeholder="&ensp;태그를 입력해주세요 &nbsp; #태그를 #입력해 #주세요" />
 				
 	 		 	<div id="btn" >
-		 		 	<input type="submit" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
+		 		 	<input type="button" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
 		 		 	<input type="submit" id="confBtn" class="btn commBtn" value="등록"/>
 		 		 	
 	 		 	</div>
