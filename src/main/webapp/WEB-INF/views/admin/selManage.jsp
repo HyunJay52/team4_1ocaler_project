@@ -103,13 +103,12 @@
 						}else{
 							txt += 		"<td>판매완료</td>";
 						}
-						txt += 		"<td class='wordcut'>"+vo.i_subject+"</td>";
+						txt += 		"<td class='wordcut'><a href='sellView?i_num="+vo.i_num+"'>"+vo.i_subject+"</a></td>";
 						txt += 		"<td>"+vo.i_cnt+"</td>";
 						txt += 		"<td>"+vo.userid+"</td>";
 						txt += 		"<td>"+vo.i_writedate+"</td>";
 						txt += 		"<td>"+vo.i_hit+"</td>";
 						txt += "<td><input type='button' class='redbtn' id='del' title='"+vo.i_num+"' value='글삭제'/>";
-						txt += "<input type='button' class='smallbtn' id='reply' title='"+vo.i_num+"'value='댓글보기'/>";
 						txt += "</td>";
 					});
 					$(".tablea").append(txt);
@@ -183,13 +182,12 @@
 						}else{
 							txt += 		"<td>생필품</td>";
 						}
-						txt += 		"<td class='wordcut'><a href='#'>"+vo.s_subject+"</a></td>";
+						txt += 		"<td class='wordcut'><a href='memberView?num="+vo.num+"'>"+vo.s_subject+"</a></td>";
 						txt += 		"<td>"+vo.s_cnt+"</td>";
 						txt += 		"<td>"+vo.userid+"</td>";
 						txt += 		"<td>"+vo.s_writedate+"</td>";
 						txt += 		"<td>"+vo.reportCnt+"</td>";
 						txt += "<td><input type='button' class='redbtn' id='del' title='"+vo.num+"' value='글삭제'/>";
-						txt += "<input type='button' class='smallbtn' id='reply' title='"+vo.num+"'value='댓글보기'/>";
 						txt += "</td>";
 					});
 					$(".tablea").append(txt);
@@ -289,12 +287,12 @@
 						생필품
 					</c:if>
 				</td>
-				<td class="wordcut"><a href="#">${vo.s_subject}</a></td>
+				<td class="wordcut"><a href="memberView?num=${ vo.num}">${vo.s_subject}</a></td>
 				<td>${ vo.s_cnt}</td>
 				<td>${ vo.userid}</td>
 				<td>${ vo.s_writedate}</td>
 				<td>${ vo.reportCnt}</td>
-				<td><input type="button" class="redbtn" id="del" title="${vo.num }" value="글삭제"/><input type="button" class="smallbtn" id="reply" title="${vo.num }"value="댓글보기"/>
+				<td><input type="button" class="redbtn" id="del" title="${vo.num }" value="글삭제"/>
 				</td>
 			</tr>
 		</c:forEach>

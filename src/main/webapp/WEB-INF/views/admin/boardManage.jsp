@@ -111,13 +111,12 @@
 							txt += 		"<td>자유자게</td>";
 						}
 						txt += 		"<td>"+vo.b_gu+"</td>";
-						txt += 		"<td class='wordcut'>"+vo.b_subject+"</td>";
+						txt += 		"<td class='wordcut'><a href='commuView?num="+vo.num+"'>"+vo.b_subject+"</a></td>";
 						txt += 		"<td>"+vo.userid+"</td>";
 						txt += 		"<td>"+vo.b_writedate+"</td>";
 						txt += 		"<td>"+vo.b_hit+"</td>";
 						txt += 		"<td>"+vo.reportCount+"</td>";
 						txt += "<td><input type='button' class='redbtn' id='del' title='"+vo.i_num+"' value='글삭제'/>";
-						txt += "<input type='button' class='smallbtn' id='reply' title='"+vo.i_num+"'value='댓글보기'/>";
 						txt += "</td>";
 					});
 					$(".tablea").append(txt);
@@ -164,13 +163,12 @@
 						txt += 		"<td>"+vo.num+"</td>";
 						txt += 		"<td>"+vo.up_cate+"</td>";
 						txt += 		"<td>"+vo.down_cate+"</td>";
-						txt += 		"<td class='wordcut'>"+vo.g_subject+"</td>";
+						txt += 		"<td class='wordcut'><a href='withViewPage?num="+vo.num+"'>"+vo.g_subject+"</a></td>";
 						txt += 		"<td>"+vo.g_cnt+"</td>";
 						txt += 		"<td>"+vo.userid+"</td>";
 						txt += 		"<td>"+vo.g_writedate+"</td>";
 						txt += 		"<td>"+vo.reportCount+"</td>";
-						txt += "<td><input type='button' class='redbtn' id='del' title='"+vo.i_num+"' value='글삭제'/>";
-						txt += "<input type='button' class='smallbtn' id='reply' title='"+vo.i_num+"'value='댓글보기'/>";
+						txt += "<td><input type='button' class='redbtn' id='del' title='"+vo.i_num+"' value='글삭제'/></td>";
 						txt += "</td>";
 					});
 					$(".tablea").append(txt);
@@ -277,13 +275,12 @@
 				<td>${vo.num }</td>
 				<td>${vo.up_cate}</td>
 				<td>${vo.down_cate}</td>
-				<td class="wordcut">${vo.g_subject}</td>
+				<td class="wordcut"><a href="withViewPage?num=${vo.num }">${vo.g_subject}</a></td>
 				<td>${vo.g_cnt}</td>
 				<td>${vo.userid}</td>
 				<td>${vo.g_writedate}</td>
 				<td>${vo.reportCount}</td>
-				<td><input type="button" class="redbtn" id="del" title="${vo.num }" value="글삭제"/><input type="button" class="smallbtn" id="reply" title="${vo.num }"value="댓글보기"/>
-				</td>
+				<td><input type="button" class="redbtn" id="del" title="${vo.num }" value="글삭제"/></td>
 			</tr>
 		</c:forEach>
 	</table>
