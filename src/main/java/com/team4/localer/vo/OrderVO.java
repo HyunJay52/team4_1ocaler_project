@@ -16,12 +16,33 @@ public class OrderVO {
 	private String o_status;
 	
 	/////sell_item
+	private int i_num;
 	private String i_subject;
 	private String i_userid; //판매자 아이디
 	private String i_price;//원래가격
 	private String i_img1;
+	private int fu_money;
+	private int hap_money;
 	
 	
+	public int getFu_money() {
+		return fu_money;
+	}
+	public void setFu_money(int fu_money) {
+		this.fu_money = fu_money;
+	}
+	public int getHap_money() {
+		return hap_money;
+	}
+	public void setHap_money(int hap_money) {
+		this.hap_money = hap_money;
+	}
+	public int getI_num() {
+		return i_num;
+	}
+	public void setI_num(int i_num) {
+		this.i_num = i_num;
+	}
 	public int getO_num() {
 		return o_num;
 	}
