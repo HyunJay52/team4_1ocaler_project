@@ -59,8 +59,16 @@
 			tag += "</ul>";
 			$("#myInfoQnAManagementTablePagingArea").append(tag);
 		}
-		
 		setQnAlist(1);
+		
+		//QnA페이징 이벤트
+		$(document).on('click', "#myInfoQnAManagementTablePagingArea>ul>li>button", function(){
+			console.log("페이지 번호="+$(this).val());
+			var num = $(this).val();
+			var kategorie = $("#activitySelectbox option:checked").val();
+
+			setBoardList(num, kategorie);
+		});
 	});
 </script>
 <div class="myinfoBody">
