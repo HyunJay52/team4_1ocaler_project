@@ -63,7 +63,7 @@
 						<td>${OkVO.o_price}원</td>
 					</tr>
 				</table>
-				<label class="myinfoStatisticsLabel mdFnt info-font-weight">5월 정산예정금액 : ${OkVO.o_price}원</label>
+				<label class="myinfoStatisticsLabel mdFnt info-font-weight">${monthArr[2]}월 정산예정금액 : ${OkVO.o_price}원</label>
 			</div>
 			<div class="myinfoStatisticsRight">
 				<div id="barchart_material" style="width: 600px; height: 320px;"></div>
