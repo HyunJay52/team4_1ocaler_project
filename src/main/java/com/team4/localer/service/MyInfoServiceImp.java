@@ -176,5 +176,11 @@ public class MyInfoServiceImp implements MyInfoService{
 		// TODO Auto-generated method stub
 		return dao.reviewUpdate(vo);
 	}
+// 내정보 메인용 서비스 (hj, 2021-05-21)
+	@Override
+	public List<JoinUsVO> selectWaitingJoinList(String userid) {
+		// 참여정보
+		return dao.selectWaitingJoinList(userid);
+	}
 
 }

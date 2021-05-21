@@ -79,8 +79,11 @@ public class MyinfoController {
 			mav.addObject("myPoint", service.joinPoint(userid)); //충전잔액
 			mav.addObject("myVO", service.setMyinfo(userid)); //내 정보
 			//참여현황
+			mav.addObject("myJoin", service.selectWaitingJoinList(userid));
 			//QnA
-			//활동 내역ㅌ₩
+			
+			//활동내역
+			mav.addObject("myAct", service.selectMyCount(userid));
 			mav.setViewName("myInfo/myInfoMain");
 		}
 		return mav;
