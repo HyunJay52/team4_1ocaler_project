@@ -50,6 +50,31 @@
 		$('#searchbtn').click(function(){
 			memberAjax();
 		});
+		//휴먼 회원만 보여주기
+		$(".humem").click(function(){
+			//서치 키, word 변경
+			$("#searchKey").val("mem_status");
+			$("#searchText").val("2");
+			memberAjax();
+		});
+		$(".talmem").click(function(){
+			$("#searchKey").val("mem_status");
+			$("#searchText").val("4");
+			memberAjax();
+		})
+		//탈퇴 회원만 보여주기
+		$(".humem").click(function(){
+			//서치 키, word 변경
+			$("#searchKey").val("mem_status");
+			$("#searchText").val("2");
+			memberAjax();
+		});
+		$(".blackmem").click(function(){
+			$("#searchKey").val("mem_status");
+			$("#searchText").val("3");
+			memberAjax();
+		});
+		
 		function memberAjax(){
 			$.ajax({
 				url: "memListSearch",
@@ -123,7 +148,8 @@
 		}
 	});
 $(function(){
-	//블랙리스트 버튼 클릭시
+	
+	//블랙리스트작은  버튼 클릭시
 	$(document).on('click', '.black', function(){
 		var status = $(this).val();//현재 버튼의 상태
 		var userid = $(this).parent().prev().prev().prev().prev().prev().prev().text();//누른 버튼의 아이디 
@@ -196,42 +222,43 @@ $(function(){
 	<ul class="statisM">
 		<li>
 			총회원수
-			<div>2500</div>
-			<b>▲4% </b>지난주 대비
+			<div>${statis.total }</div>
 		</li>
 		<li>
 			신규회원
-			<div>2500</div>
-			<b>▼4% </b>지난주 대비
+			<div>${statis.new_mem}</div>
 		</li>
 		<li>
 			셀러회원
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.sell_mem}</div>
 		</li>
 		<li>
 			휴면계정
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.hu_mem}</div>
 		</li>
 		<li>
 			탈퇴
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.tal_mem}</div>
 		</li>
 	</ul>
 	<div class="searchDiv">
 		<div class="searchInfo">
 			<form id="memFrm">
-				<select name="searchKey" class="selectcomm">
+				<select name="searchKey" id="searchKey" class="selectcomm">
 					<option value="userid">회원아이디</option>
 					<option value="mem_no">회원 번호</option>
 					<option value="mem_name">회원 이름</option>
+					<option value="mem_status">휴면, 탈퇴, 블랙</option>
 				</select>
-				<input type="text" class="textcomm" name="searchWord"/>
+				<input type="text" class="textcomm" id="searchText" name="searchWord"/>
 				<input type="button" id="searchbtn" class="searchbtn" value="검색"/>
 				<input type="hidden" name="pageNum" id="pageNum"value="1"/>
 			</form>
+		</div>
+		<div class="searchCate">
+			<input type="button" class="searchbtn humem" value="휴먼 회원"/>
+			<input type="button" class="searchbtn talmem" value="탈퇴 회원"/>
+			<input type="button" class="searchbtn blackmem" value="블랙리스트"/>
 		</div>
 	</div>
 	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->

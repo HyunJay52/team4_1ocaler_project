@@ -32,7 +32,7 @@
 			$(document).on("click",'#optionDiv>div>img[class=optionPlus]', ()=>{
 				tag += '<div>&nbsp;&nbsp; ● <input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" required/>';
 				tag += '<input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요" required/>';
-				tag += '<input type="number" min=0 class="option_price" name="o_price" value=0 placeholder="추가 옵션 가격을 입력해 주세요" required/>';
+				tag += '<input type="text" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요" required/>';
 				tag += '<img class="optionPlus" style="margin-left:10px;" src="/1ocaler/img/deal/plus.png"/>';
 				tag += '<img class="optionMinus" style="margin-left:10px;" src="/1ocaler/img/deal/minus.png"/></div>';
 				$('#optionDiv').append(tag);
@@ -110,7 +110,7 @@
 				</select>				
 	 			<br/>
 	 			<input type="text" id="i_subject" name="i_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
-	 			<input type="number" id ="i_cnt" name="i_cnt" placeholder="판매수량"/>
+	 			<input type="number" id ="i_cnt" name="i_cnt" max=100 placeholder="판매수량"/>
 	 			<textarea id="summernote" name="i_content"></textarea>
 
 
@@ -148,7 +148,7 @@
 					</select>
 					</div>
 					<div>
-						&nbsp;&nbsp; ● <input type="text" id="option_title" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/><input type="text" id="option_content" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/><input type="number" id="option_price" min=0 class="option_price" name="o_price" value=0 placeholder="추가 옵션 가격을 입력해 주세요"/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
+						&nbsp;&nbsp; ● <input type="text" id="option_title" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/><input type="text" id="option_content" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/><input type="text" id="option_price" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요"/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
 					</div>
 				</div>
 				

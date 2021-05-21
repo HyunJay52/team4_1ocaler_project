@@ -228,15 +228,20 @@
         join mem_share on joinus.numjoin = mem_share.num
 		where mem_share.userid = #{param1} order by j_writedate desc)where rownum <![CDATA[ <= ]]> 4
    </select>
-    
-   <select id="selectItemReviewList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.OrderVO">
-   select * from(
-   		select * from(
-		select o_num, o.userid, o.num, o_conf, o_date, o_status, s.sel_num, s.i_subject, seller.userid sellerid  
-		from ordertbl o join sell_item s on o.num = s.i_num 
-		join seller on s.sel_num = seller.sel_num
-		where o.userid= #{userid} and o_conf = 2 order by o_date desc)
-        where rownum  <![CDATA[ <= ]]> #{rowNum1} order by o_date asc)
-		where rownum  <![CDATA[ <= ]]> #{rowNum2} order by o_date desc
+
+   <select id="statisTotal" resultType="com.team4.localer.vo.OrderVO">
+	   	select sum(o.o_price) o_price, count(o_num) o_num from 
+				(select i_num from sell_item i join seller sel on sel.sel_num=i.sel_num where sel.userid=#{param1}) num
+				join ordertbl o on o.num=num.i_num 
+				where o_date between to_date('21/${param3}/01','YY/MM/DD') and to_date(last_day('21/${param3}/01'),'YY/MM/DD') 
+				and o_conf=${param2}
    </select>
+   <select id="statisList" resultType="com.team4.localer.vo.OrderVO">
+   		select (o.o_price-2000) as fu_money, (o.o_price+o.o_ship) as hap_money,o.o_num, to_char(o.o_date,'MM/DD') o_date,o.userid,num.i_num,num.i_subject,o.o_cnt, o.o_price, o.o_ship,o.o_conf from 
+			(select i.i_num,i.i_subject from sell_item i join seller sel on sel.sel_num=i.sel_num where sel.userid=#{param1}) num
+			join ordertbl o on o.num=num.i_num 
+			where o_date between to_date('21/${param2}/01','YY/MM/DD') and to_date(last_day('21/${param2}/01'),'YY/MM/DD') 
+			order by o_date
+   </select>
+    
 </mapper>

@@ -27,15 +27,43 @@
 		,#{i_price},#{i_ship},to_date(#{i_period},'YYYY-MM-DD'),#{i_status},#{i_tag})
 	</insert>
 	
-
 	<insert id="itemOptionInsert">
 		insert into item_option(opt_num, i_num, option_title, option_content, o_price)
-		values(optsq.nextval, (select i_num from sell_item where sel_num=(select sel_num from seller where userid=#{param1}) and <![CDATA[  rownum <=]]> 1),
-		#{param2},#{param3},#{param4})
+		values(optsq.nextval, (select i_num from (select * from sell_item where sel_num=(select sel_num from seller where userid=#{param1}) 
+		and <![CDATA[i_writedate<= ]]> sysdate order by i_writedate desc) where <![CDATA[  rownum <=]]>1), #{param2},#{param3},#{param4})	
 	</insert>
+
+	<select id="notOverlapOptionTitleSel" resultType="com.team4.localer.vo.Item_optionVO">
+		select distinct option_title from item_option where i_num=#{param1}	
+	</select>
 	
+	<select id="changeOptions" resultType="com.team4.localer.vo.Item_optionVO">
+		select option_content, o_price from item_option where option_title=#{param1} and i_num=#{param2}
+	</select>
+
+
 	<select id="selectAllitem" resultType="com.team4.localer.vo.SellitemVO">
 		SELECT si.i_num, si.sel_num, si.i_subject, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof  
 		FROM SELL_ITEM si JOIN SELLER s ON si.sel_num = s.sel_num WHERE <![CDATA[ sysdate<=si.i_period ]]> ORDER BY si.i_num DESC
 	</select>
+	
+	
+	<select id="selectOnePage" resultType="com.team4.localer.vo.SellitemVO">
+		select i_num, i_subject, i_content, i_cnt, i_price, to_char(i_writedate,'YYYY-MM-DD') i_writedate, to_char(i_period,'YYYY-MM-DD') i_period, i_ship, s.userid, s.sel_prof 
+		,i_img1, i_img2, i_img3 from sell_item i join seller s on i.sel_num = s.sel_num where i_num=#{param1}
+	</select>
+	<select id="sellerInfo" resultType="com.team4.localer.vo.SellerVO">
+		select count(item.i_num) as sel_count , s.userid,s.sel_lvl,s.company,s.sel_tel,s.sel_name,s.com_num,s.sel_addr,s.sel_prof 
+		from seller s join sell_item item on item.sel_num =s.sel_num
+		where userid=#{param1} group by s.userid, s.sel_lvl, s.company, s.sel_tel, s.sel_name, 
+		s.com_num, s.sel_zip, s.sel_addr, s.sel_prof
+	</select>
+	<select id="sellerItems" resultType="com.team4.localer.vo.SellitemVO">
+		select i_num, i_subject, i_cnt, i_img1,i_price, i_tag 
+			from sell_item i join seller sel on sel.sel_num =i.sel_num where sel.userid=#{param1}
+	</select>
+	
+	
+	
+	
 </mapper>

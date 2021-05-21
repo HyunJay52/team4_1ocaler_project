@@ -43,18 +43,8 @@
 	.myinfoStatisticsTable2 tr:last-child{/*마지막 줄 tr 스타일*/
 		border-bottom:2px solid #3f1785;
 	}
-	.myinfoStatisticsTable2 tr>td{/*전체적인 열 폭조정*/
-		width:33%;
-	}
-	.myinfoStatisticsTable2 tr>td:nth-child(1){/*첫번째 열 선택*/
-		
-	}
-	.myinfoStatisticsTable2 tr>td:nth-child(3){/*세번째 열 선택 : 제목부분*/
-		/* text-align:left; */
-	}
-	.tableSet tr>td{
-		width:7.6%;
-	}
+	
+	
 	.myinfoStatisticsLabel{
 		height:40px;
 		width:100%;
