@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
 
+<!-- 카카오 지도 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script>	
+
 <div class="aboutDiv">
 	<ul class="listNone aboutCenter">
 		<li><span class="routeTitle">오시는 길</span>

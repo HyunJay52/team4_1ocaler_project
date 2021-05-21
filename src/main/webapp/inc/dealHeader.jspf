@@ -6,57 +6,61 @@
 
 <script>
 
-	window.onscroll=function(){bannerMove()};
-	
-	function bannerMove(){
-		//현재스크롤바 위치 
-		var scrollY = window.scrollY;
-		console.log(scrollY);
-		
-		//헤더의 높이 구하기
-		var top = 70;
-		
-		var bar = document.getElementById("selMain").style;
-		
-		if(scrollY>top){ // 스크롤 높이가 top보다 내려갔을떄.
-			bar.top = scrollY-top+"px";
-			$("#selMain").css("display","block");
-			
-		}else { // 스크롤 높이가 top보다 내려가지않았을때,
-			bar.top="0px"; // 원래있는 자리에 있으면됨
-			$("#selMain").css("display","none");
-		}
-	}
-		
+   window.onscroll=function(){bannerMove()};
+   
+   function bannerMove(){
+      //현재스크롤바 위치 
+      var scrollY = window.scrollY;
+      console.log(scrollY);
+      
+      //헤더의 높이 구하기
+      var top =105;
+      
+      var bar = document.getElementById("selMain").style;
+      
+      if(scrollY>top){ // 스크롤 높이가 top보다 내려갔을떄.
+         bar.top = scrollY-top+"px";
+         $("#selMain").css("display","block");
+         
+      }else { // 스크롤 높이가 top보다 내려가지않았을때,
+         bar.top="0px"; // 원래있는 자리에 있으면됨
+         $("#selMain").css("display","none");
+      }
+   }
+   
+   $(()=>{
+      $("#seltop>li").hover(function(){
+         $(this).css('background','#d9d9d9');
+      },function(){
+         $(this).css('background','#fff');
+      });
+      
+      
+   });
+   
+   
 </script>
 
 <div id="selMain">
-			<div id="seltop" >
-				<span><a href="selBard">착한발견 &nbsp;</a></span>
-				 &nbsp;|&nbsp;
-				 <span>&nbsp;<a href="memberBoard">동네직구</a></span>
-			</div>
-		
-			<!-- 카테고리 검색창 -->
-
-			<div style="width:1300px; height: 70px; padding:19px" >
-				<%-- <c:if test="">  --%><!-- 로그인을해서 그 뭐냐 멤버 권한이있다면? -->
-					<a href="selWrite" class="btn commBtn "  style="float:right"> 글쓰기</a>
-				<%-- </c:if> --%>
-				<%-- <c:if test="">  --%><!-- 로그인을해서 그뭐냐 셀러 이있다면? -->
-					<a href="memberWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
-				<%-- </c:if> --%>
-				<div id="selSearch">
-					<form method="post" action="" id="searchForm">
-						<select>
-							<option >카테고리</option>
-							<option value="'">식료품</option>	
-							<option value="'">생필품</option>			
-							<option value="">기타</option>
-						</select>
-							<input type="text"name ="search" placeholder=" &nbsp;검색.." id="search"/>
-							<input type="image" id="btn" src="img/deal/icons8.png" style="display:block; float:left; border: 1px solid #000;" /> 
-					</form>
-				</div>	
-			</div>
-</div>			
+         <ul id="seltop">
+            <li><a href="selBard">착한발견</a></li>
+            <li><a href="memberBoard">동네직구</a></li>            
+         </ul>
+         <hr style="margin:0px; border-top:1px solid #000;"/>   
+      
+         <!-- 카테고리 검색창 -->
+         <div>
+            <div id="selSearch">
+               <form method="post" action="" id="searchForm">
+                  <select>
+                     <option >카테고리</option>
+                     <option value="'">식료품</option>   
+                     <option value="'">생필품</option>         
+                     <option value="">기타</option>
+                  </select>
+                     <input type="text"name ="search" placeholder=" &nbsp;검색.." id="search"/>
+                     <button><img src="<%=request.getContextPath() %>/img/deal/icons8.png"></button> 
+               </form>
+            </div>   
+         </div>
+</div>         

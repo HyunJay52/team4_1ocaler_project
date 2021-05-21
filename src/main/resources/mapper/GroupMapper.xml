@@ -15,27 +15,87 @@
   		values(boardsq.nextval, #{userid}, #{up_cate}, #{down_cate}, #{g_gu}, #{g_subject}, #{g_content}, #{g_cnt}, to_date(#{g_date}, 'YYYY-MM-DD'), to_date(#{g_time},'HH24:MI'), #{g_loc1}, #{g_loc2}, #{g_tag} )
   	<!-- date type을 insert 할떄 to_date로 변경해서 보내야함 -->
   	</insert>
-  
-  	<select id="GroupEatList" resultType="com.team4.localer.vo.GroupVO">
-  		select num, down_cate, g_subject, g_cnt, to_date(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
-  		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='한끼미식회' order by num desc
+  	
+  	
+  	
+	<!-- 모집 리스트 뽑기 -->  
+  	<select id="GroupListAll" resultType="com.team4.localer.vo.GroupVO">
+  		select * from (select * from (select num, userid, down_cate, g_subject, g_cnt, to_char(g_date, 'YYYY-MM-DD') g_date, to_char(g_time, 'HH24:MI') g_time,
+  		 g_loc1, g_tag from grouplocal where g_gu=#{loc_gu} 
+  		 
+  		 
+  		 <if test="category=='한끼미식회'">
+  		 and up_cate=#{category}
+  		 </if>
+  		 <if test="category=='가치가장'">
+  		 and up_cate=#{category}
+  		 </if>
+  		<!-- 검색어가 있을때 -->
+  		 <if test="searchWord != null and !searchWord.equals('')">
+  		 	and ${searchKey} like '%${searchWord}%' order by g_date desc, num desc) 
+  		  <![CDATA[ where rownum <=]]> (${pageNum}*${onePageRecord}) order by g_date, num)
+  		  <![CDATA[ where rownum <=]]>
+  		  	<if test="pageNum==totalPage">
+  		  		${lastPageRecord} order by g_date desc, num desc
+  		  	</if>
+  		  	<if test="pageNum!=totalPage">
+  		  		${onePageRecord} order by g_date desc, num desc
+  		  	</if>
+  		  </if>
+  		  <!-- 검색어가 없을때 -->
+  		  <if test="searchWord == null or searchWord.equals('')">
+  		  	order by g_date desc, num desc)
+  		  <![CDATA[ where rownum <=]]> ${pageNum}*${onePageRecord} order by g_date, num)
+  		  <![CDATA[ where rownum <=]]>
+  		  <if test="pageNum==totalPage">
+  		  		${lastPageRecord} order by g_date desc, num desc
+  		  	</if>
+  		  	<if test="pageNum!=totalPage">
+  		  		${onePageRecord} order by g_date desc, num desc
+  		  	</if>
+  		  </if> 
   	</select>
-  	<select id="GroupWithList" resultType="com.team4.localer.vo.GroupVO">
-  		select num, down_cate, g_subject, g_cnt, to_date(g_date, 'YYYY-MM-DD') g_date,  to_char(g_time, 'HH24:MI') g_time,
-  		 g_loc1, g_tag from grouplocal where g_gu=#{param1} and up_cate='가치가장' order by num desc
-  	</select>
-  
+ 	<!-- 조회수 카운트 -->
   	<update id="hitCount" parameterType="int">
   		update grouplocal set g_hit = g_hit+1 where num=#{param1}
   	</update>
-  
+  	<!-- 선택한 레코드 삭제 -->
   	<delete id="groupRecordDelete">
   		delete from grouplocal where num=#{param1} and userid=#{param2}
   	</delete>
+  	
+  	<!-- 선택한 레코드 업데이트 -->
+  	<update id="groupRecordUpdate">
+  	 	update grouplocal set g_content=#{g_content}, g_subject=#{g_subject}, 
+  	 	g_date=to_date(#{g_date}, 'YYYY-MM-DD'), g_time=to_date(#{g_time},'HH24:MI'),
+		g_cnt=#{g_cnt}, g_loc1=#{g_loc1}
+		 <if test="g_loc2!=null">
+  		 , g_loc2=#{g_loc2}
+  		 </if>
+		 , g_tag=#{g_tag} where num=#{num} and userid=#{userid}
+ 	</update>
+  	
+  	
+  	
+  	
+  	<!-- 해당지역구의 한끼미식회 전체레코드수 구하기 -->
+  	<select id="groupTotalRecoedCount" resultType="int">
+  		select count(num) from grouplocal where g_gu=#{loc_gu} 
+  		<if test="category=='한끼미식회'">
+  			and up_cate=#{category}
+  		</if>
+  		<if test="category=='가치가장'">
+  			and up_cate=#{category}
+  		</if>
+  		 
+  		<if test="searchWord != null and !searchWord.equals('')">
+  			and ${searchKey} like '%${searchWord}%'
+  		</if>
+  	</select>
   
   
   
-  
+  	<!-- 한끼미식회 한페이지 속내용 보기 -->
   	<resultMap type="com.team4.localer.vo.MemberVO" id="memChoice">
   		<result column="mem_nick" property="mem_nick"/>
   		<result column="mem_prof" property="mem_prof"/>
@@ -68,7 +128,7 @@
   		from grouplocal g join member m on g.userid=m.userid where num=${param1}
   	</select> 
   	
-  	
+  	<!-- 가치가장 한페이지 속내용 보기 -->
   	<resultMap type="com.team4.localer.vo.MemberVO" id="memChoice2">
   		<result column="mem_nick" property="mem_nick"/>
   		<result column="mem_prof" property="mem_prof"/>		

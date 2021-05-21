@@ -1,28 +1,4 @@
 @charset "UTF-8";
-body{
-	font-family:"nsr";
-	}
-#main{
-	margin:0 auto; 
-	padding:0;
-	padding-top:30px;
-	overflow:auto;
-	width:1300px;
-	
-}
-form{
-	text-align:center;
-
-}
-input[type="date"]:first-child{
-	/* margin-left:35%; */
-}
-input[type="date"]{
-	width:150px;/*너비설정*/
-	padding:6px;/*여백설정*/
-	border:1px solid #3f1785;
-	font-family: inherit;/*폰트상속*/
-}
 /*그래프차트부분*/
 #chart_div{
 	margin-left:auto;
@@ -31,6 +7,8 @@ input[type="date"]{
 	width:1200px;
 	height:400px;
 }
+
+
 /*월별회원통계추기*/
 .btitle{
 	font-family:"nsreb";
@@ -41,7 +19,11 @@ input[type="date"]{
 	}
 
 /*도넛 차트1*/
-li{
+.donutUl{
+	overflow:auto;
+	margin-bottom:30px;
+}
+.donutUl li{
 	float:left;
 	width:400px;
 	font-size:32px;
@@ -49,7 +31,7 @@ li{
 	padding:0;
 	list-style-type:none;
 }
-ul>li:nth-child(3n+1){
+.donutUl>li:nth-child(3n+1){
 	margin-left:50px;
 }
 

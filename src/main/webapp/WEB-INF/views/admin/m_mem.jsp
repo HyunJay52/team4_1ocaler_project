@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <script>
 	$(function(){
-		//회원 아이디 클릭시 상세 정보 테이블 띄워주는 부분 
-		$('.memid').click(function(){
+		//회원 아이디 클릭시 상세 정보 테이블 띄워주는 부분
+		$(document).on('click', '.memid', function(){
 			var userid = $(this).text();//회원아이디
 			meminfo(userid);
 		});
@@ -32,23 +32,67 @@
 			});
 			$("#meminfo").css("display", "block");
 		}
+		//페이지 이동 클릭
+		$(document).on('click', '.clickpage', function(){
+			var txt = $(this).text();
+			if(txt=="이전"){
+				var nextPage = parseInt($("#pageNum").val())-1;
+				$("#pageNum").val(nextPage);	
+			}else if(txt=="다음"){
+				var nextPage = parseInt($("#pageNum").val())+1;
+				$("#pageNum").val(nextPage);
+			}else{
+				$("#pageNum").val(txt);
+			}
+			memberAjax();
+		});
 		//검색버튼 클릭이벤트 
 		$('#searchbtn').click(function(){
-			var param = $("#memFrm").serialize();
+			memberAjax();
+		});
+		//휴먼 회원만 보여주기
+		$(".humem").click(function(){
+			//서치 키, word 변경
+			$("#searchKey").val("mem_status");
+			$("#searchText").val("2");
+			memberAjax();
+		});
+		$(".talmem").click(function(){
+			$("#searchKey").val("mem_status");
+			$("#searchText").val("4");
+			memberAjax();
+		})
+		//탈퇴 회원만 보여주기
+		$(".humem").click(function(){
+			//서치 키, word 변경
+			$("#searchKey").val("mem_status");
+			$("#searchText").val("2");
+			memberAjax();
+		});
+		$(".blackmem").click(function(){
+			$("#searchKey").val("mem_status");
+			$("#searchText").val("3");
+			memberAjax();
+		});
+		
+		function memberAjax(){
 			$.ajax({
 				url: "memListSearch",
 				type : "POST",
-				data : param,
+				data : $("#memFrm").serialize(),
 				success : function(result){
-					var $result = $(result);
+					var $list = $(result.list);
+					var pagenum = result.pageNum;
+					var start = result.startPageNum;
+					var last = result.totalPage;
 					$(".memlist").remove();//테이블 내용 지우기
 					var txt = "";
-					$result.each(function(idx,vo){//테이블 내용 넣기
+					$.each($list ,function(idx,vo){//테이블 내용 넣기
 						txt += "<tr class='memlist'>";
 						txt +=		"<td>"+vo.mem_no+"</td>";
 						txt +=		"<td class='memid'>"+vo.userid+"</td>";
 						txt +=		"<td>"+vo.mem_name+"</td>";
-						txt +=		"<td>"+vo.mem_addr+"</td>";
+						txt +=		"<td  class='wordcut'>"+vo.mem_addr+"</td>";
 						txt +=		"<td>"+vo.mem_tel+"</td>";
 						txt += "<td><input type='button'";
 						if(vo.mem_status==2){//휴먼일때
@@ -73,14 +117,39 @@
 						txt +="</tr>";
 					});
 					$("#memlistTbl").append(txt);
+					//페이징 부분
+					var link="";
+					$(".clickpage").remove();//기존 페이징 부분 삭제
+					if(pagenum>1){
+						link +="<li  class='clickpage'>이전</li>";	
+					}
+					var lastPg=last;
+					if(lastPg>=start+4){//>11>2+4
+						lastPg=5;
+					}else{
+						lastPg = last-start+1;
+					}
+					for(var i=start;i<=start+lastPg-1;i++){
+						if(pagenum==i){
+							link +="<li  class='clickpage nowPg'>"+i+"</li>";
+						}else{
+							link +="<li  class='clickpage'>"+i+"</li>";	
+						}
+						
+					}
+					if(last>pagenum){
+						link +="<li  class='clickpage'>다음</li>";
+					}
+					$(".link").append(link);
 				},error : function(){
 					alert("데이터 가져오기 실패");
 				}
 			});
-		});
+		}
 	});
 $(function(){
-	//블랙리스트 버튼 클릭시
+	
+	//블랙리스트작은  버튼 클릭시
 	$(document).on('click', '.black', function(){
 		var status = $(this).val();//현재 버튼의 상태
 		var userid = $(this).parent().prev().prev().prev().prev().prev().prev().text();//누른 버튼의 아이디 
@@ -119,13 +188,13 @@ $(function(){
 		var userid = $(this).parent().prev().prev().prev().prev().text();//누른 버튼의 아이디
 		if(status=='휴면회원'){
 			if(confirm('휴면상태를 정지하시겠습니까?')){//1.정상, 2.휴면, 3.블랙,4.탈퇴  -->
-				memUpdate(userid,'mem_type',1);
+				memUpdate(userid,'mem_status',1);
 				$(this).val('정상회원');
 				$(this).removeClass().addClass('spuplebtn rest');	
 			}
 		}else{
 			if(confirm("휴면처리 하시겠습니까?")){
-				memUpdate(userid,'mem_type',2);
+				memUpdate(userid,'mem_status',2);
 				$(this).val('휴면회원');
 				$(this).removeClass().addClass('smallbtn rest');	
 			}
@@ -150,43 +219,48 @@ $(function(){
 </script>
 <div class="main">
 	<div class="title">일반회원관리</div>
-	<ul class="statis">
+	<ul class="statisM">
 		<li>
 			총회원수
-			<div>2500</div>
-			<b>▲4% </b>지난주 대비
+			<div>${statis.total }</div>
 		</li>
 		<li>
 			신규회원
-			<div>2500</div>
-			<b>▼4% </b>지난주 대비
+			<div>${statis.new_mem}</div>
 		</li>
 		<li>
 			셀러회원
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.sell_mem}</div>
 		</li>
 		<li>
 			휴면계정
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.hu_mem}</div>
 		</li>
 		<li>
 			탈퇴
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.tal_mem}</div>
 		</li>
 	</ul>
-	
-	<form id="memFrm">
-		<select name="searchkey" class="selectcomm">
-			<option value="userid">회원아이디</option>
-			<option value="mem_no">회원 번호</option>
-			<option value="mem_name">회원 이름</option>
-		</select>
-		<input type="text" class="textcomm" name="searchword"/>
-		<input type="button" id="searchbtn" class="searchbtn" value="검색"/>
-	</form>	
+	<div class="searchDiv">
+		<div class="searchInfo">
+			<form id="memFrm">
+				<select name="searchKey" id="searchKey" class="selectcomm">
+					<option value="userid">회원아이디</option>
+					<option value="mem_no">회원 번호</option>
+					<option value="mem_name">회원 이름</option>
+					<option value="mem_status">휴면, 탈퇴, 블랙</option>
+				</select>
+				<input type="text" class="textcomm" id="searchText" name="searchWord"/>
+				<input type="button" id="searchbtn" class="searchbtn" value="검색"/>
+				<input type="hidden" name="pageNum" id="pageNum"value="1"/>
+			</form>
+		</div>
+		<div class="searchCate">
+			<input type="button" class="searchbtn humem" value="휴먼 회원"/>
+			<input type="button" class="searchbtn talmem" value="탈퇴 회원"/>
+			<input type="button" class="searchbtn blackmem" value="블랙리스트"/>
+		</div>
+	</div>
 	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->
 	<table id="meminfo" class="tablea">
 		<colgroup>
@@ -239,7 +313,7 @@ $(function(){
 				<td>${vo.mem_no }</td>
 				<td class="memid">${vo.userid }</td>
 				<td>${vo.mem_name }</td>
-				<td>${vo.mem_addr }</td>
+				<td  class="wordcut">${vo.mem_addr }</td>
 				<td>${vo.mem_tel }</td>
 				<!-- 휴면인지 아닌지 mem_status 1.정상, 2.휴면, 3.블랙,4.탈퇴  -->
 				<c:if test="${vo.mem_status==2 }"><!-- 휴면일때 -->
@@ -263,5 +337,24 @@ $(function(){
 			</tr>
 		</c:forEach>
 	</table>
-
+	<ul class="link">
+		<!-- 이전버튼 -->
+		<c:if test="${pageVO.pageNum>1 }">
+			<li class="clickpage">이전</li>
+		</c:if>
+		<!-- 페이지 번호              1부터                            5까지   -->
+         <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
+            <c:if test="${p<=pageVO.totalPage}">              
+            	<c:if test="${p==pageVO.pageNum }">
+            		<li class="clickpage nowPg" >${p}</li> 
+            	</c:if>
+            	<c:if test="${p!=pageVO.pageNum }">
+            		<li class="clickpage" >${p}</li>  
+            	</c:if>
+            </c:if>
+         </c:forEach>
+         <c:if test="${pageVO.totalPage>pageVO.pageNum }">
+			<li class="clickpage">다음</li>
+		</c:if>
+	</ul>
 </div>

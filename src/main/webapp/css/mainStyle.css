@@ -1,363 +1,551 @@
 @charset "UTF-8";
 /* 기본세팅 */
- 	*{
-        margin: 0px; padding: 0px; font-family: nsr;
-    }
-    body{
-        width: 100%;
-    }
-/* 헤더 스타일 */    
-    #pageTop{
-        width: 100%;
-        height: 70px;
-        font-family: nsb;
-        border-bottom: 2px solid #3f1785;
-    }
-    #pageTop a:active, #pageTop a:link, #pageTop a:visited, 
-    #sideBar a:active, #sideBar a:link, #sideBar a:visited 
-    {
-        color: #000;
-        text-decoration: none;
-    }    
-    #pageTop a:hover {
-        color: #fff;
-        font-weight: bold;
-        text-decoration: overline;
-    }
-    #pageTop .aLogin:hover {
-       color: #3f1785;
-       font-weight: bold;
-    }
-    #logo{
-        width: 10%; height: 70px;
-        text-align: center;
-        float: left;
-    }
-    #logo>a>img {
-    	width: 70px; height: 70px;
-    	margin-top: 5px;
-    }
-    #navi{
-        width: 80%; height: 70px;
-        text-align: center;
-        float: left;
-        margin:0px; 
-    }
-    #navi>li{
-        width: 150px; height: 70px;
-        margin: 0px; padding: 0px;
-        list-style-type: none;
-        float: left;
-        line-height: 70px;
-        font-size: 19px;
-    }
-    #navi>li>ul{
-		display: none;	
-		width: 100%;
-		background-color: #fff;
-		border-bottom: 1px solid #3f1785;
-		border-left: 1px solid #3f1785;
-		border-right: 1px solid #3f1785;
-        position: relative;
-    }
-    #navi ul>li{
-        list-style-type: none;
-        height: 60px; line-height: 60px; text-align: center;
-        font-size: 15px;
-        font-family: 'Nanum Gothic', sans-serif;
-    }
-  
-/* 내 메뉴 버튼 부분 */ 
-	#myMenu {
-		width: 10%; height: 70px; float: left;
-	}  
-	#topLogin {
-		width: 100%; height: 70px; line-height: 70px; text-align: center;
-	}
-	#afterLogin {
-		width: 100%; height: 70px;
-		font-size: 14px; padding: 15px;
-	}
-	#afterLogin>div:nth-child(1) {
-		width: 80%; float: left; margin-right: 5px;
-	}
-	#afterLogin>div:nth-child(2) {
-		padding-top: 5px; 
-	}
-	#afterLogin:last-child img {
-		width: 25px; height: 25px;
-	}
-/* sidebar style */
-	#sideBar{
-		width: 30px;
-		height: 500px;
-		text-align: center;
-		position: fixed; top: 61.5%; right: 20px;
-	}
-	#sideBar li{
-		margin-bottom: 10px;
-		list-style-type: none;
-		width: 30px;
-		height: 30px;
-	}
-	#sideBar li:nth-of-type(3){
-		margin-bottom: 20px;
-	}
-	#sideBar li:nth-of-type(4)>a, #sideBar li:nth-of-type(5)>a{
-		display: block;
-		width: 60px;
-		height: 30px;
-		line-height: 30px;
-		text-align: center;
-	}
-	#sideBar li:nth-of-type(5)>a {
-		display: block;
-		margin-right: 50px;	
-	}
-	
-/* sidebar style */
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: nsr;
+}
 
-	
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 클래스 */	
-/* navi 슬라이드 클래스 */	
-	.resquick_content{
-/*        border: 1px solid #fff; */
-       padding: 2% 14%;
-       position: relative;
-       z-index: 1;
-       -webkit-transition: all 0.4s;
-       -moz-transition: all 0.4s;
-       -ms-transition: all 0.4s;
-       -o-transition: all 0.4s;
-       transition: all 0.4s;
-   }
-   .resquick_content:after {
-       content: "";
-       width: 0%;
-       height: 100%;
-       top: 0;
-       position: absolute;
-       left: 0;
-       -webkit-transition: all 0.4s;
-       -moz-transition: all 0.4s;
-       -ms-transition: all 0.4s;
-       -o-transition: all 0.4s;
-       transition: all 0.4s;
-       background: #571fb8;
-   }
-   .resquick_content:hover {
-       color: #3f1785;
-   }
-   .resquick_content:hover:after {
-       width: 100%;
-       z-index: -1;
-   }
-   
+body {
+	width: 100%;
+}
+/* top - header style */
+#mem_login {
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
+	text-align: right;
+	background-color: #5f0080;
+	color: #fff;
+}
+
+#mem_login a {
+	color: #fff;
+	margin-right: 10px;
+}
+
+#mem_login a:hover {
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	font-weight: 900;
+	padding-bottom: 2px;
+	border-bottom: 1px solid #fff;
+}
+
+#pageTop {
+	widht: 100%; height: 70px;
+	border-bottom: 1px solid #ddd;
+	background-color: #fff;
+}
+
+#pageTop a {
+	color: #000;
+}
+#topNavi {
+	width: 1700px;
+}
+#navi {
+	width: 1300px;
+	height: 70px;
+	text-align: center;
+	float: left;
+	margin: 0px;
+}
+#navi>li {
+	width: 200px;
+	height: 70px;
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	float: left;
+	line-height: 70px;
+}
+#navi>li a {
+	font-size: 19px;	
+}
+#navi a:hover {
+	color: #181b46;
+	text-decoration: none;
+	font-weight: 800;
+	padding-left: 5px;
+	border-left: 3px solid #3b3a73;
+}
+#topSubMenu {
+	display: none;
+}
+#topSubMenu>ul {
+	width: 200px; height: 200px; list-style-type: none;
+	float: left;
+}
+#topSubMenu>ul:first-child {
+	margin-left: 280px;
+}
+#topSubMenu>ul>li {
+	width: 200px; height: 60px; line-height: 60px;
+	text-align: center;
+}
+#topSubMenu>ul>li a {
+	font-size: 16px;
+}
+#topSubMenu>ul>li a:hover {
+	color: #181b46;
+	text-decoration: none;
+	padding-left: 5px;
+	border-left: 3px solid #3b3a73;
+}	
+#logo {
+	width: 280px;
+	height: 70px;
+	font-size: 25px;
+	float: left;
+}
+
+#logo img {
+	width: 70px;
+	height: 70px;
+	margin: 0 auto;
+}
+
+/* sidebar style */
+#sideBar {
+	width: 60px;
+	height: auto;
+	text-align: center;
+	position: fixed; z-index: 100;
+	top: 55%;
+	right: 20px;
+	background-color: #fec804;
+	opacity: 75%;
+	border-radius: 5px;
+}
+
+#sideBar li {
+	margin: 0px;
+	padding: 0px;
+	width: 60px;
+	height: 50px;
+	line-height: 50px;
+	list-style-type: none;
+	border-bottom: 1px solid #000;
+}
+
+#sideBar li:first-child {
+	font-weight: bold;
+}
+
+#sideBar li:last-child {
+	border-bottom: 0px solid #000;
+}
+/*pop up 스타일*/
+#searchDiv {
+	width: 100%;
+	height: 100%;
+	background-color: #ddd;
+	position: absolute; /*좌표 설정을 위해서*/
+	top: 0px;
+	left: 0px;
+	opacity: 90%;
+	display: none;
+	opacity: 90%; /*검색화면 초기 세팅*/
+}
+
+#searchArea {
+	position: relative;
+	top: 40%;
+	text-align: center;
+}
+
+#sideKey {
+	width: 160px;
+	height: 40px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	padding-left: 10px;
+}
+
+#sideWord {
+	width: 400px;
+	height: 40px;
+	padding-left: 10px;
+	margin-left: -1px;
+}
+
+#goSearch {
+	width: 100px;
+	height: 40px;
+	color: #fff;
+	background-color: #5f0080;
+	border: none;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+#close {
+	line-height: 38px;
+	margin-left: 10px;
+	font-size: 22px;
+	vertical-align: bottom;
+}
+
+#sidebarTag {
+	width: auto;
+	margin: 0 auto;
+}
+
+#sidebarTag table td {
+	padding-right: 20px;
+}
+
+#sidebarTag table td:last-child {
+	padding-right: 0px;
+}
+
+/* side bar - 채팅 div */
+#chatDiv {
+	width: 250px; height: 350px;
+	z-index: 100; display: none;
+	position: fixed; top: 32%; right: 42px;
+	border-radius: 3px; background-color: #fff; opacity: 95%;
+}
+#chatDiv>hr {
+	margin: 0px; margin-bottom: 1px; 
+}
+.chatTitle > span {
+	float: right; font-family: nsreb; padding-right: 20px;
+}
+#chatList {
+	width: 250px; height: auto;
+}
+#chatList>li {
+	width: 250px; height: 40px; line-height: 40px; border-bottom: 1px solid #ddd;
+}
+#chat_box {
+
+}
+#chat_box, #chat_box:div:first-child {
+	width: 250px; height: auto;
+	display: none;
+}
+#showMsg {
+	display: none; padding: 5px; white-space: normal;
+}
+.chat_input {
+	position: absolute; display: none;
+    top: 315px;
+    margin: 2px;
+}
+.chat_input>input {
+	width: 196px;
+    height: 30px;
+    padding: 0 5px;
+}
+.chat_input>button {
+	width: 50px;
+    height: 30px;
+}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 클래스 */
+/* navi 슬라이드 클래스 */
+
+
 /* sideBar class */
-	.imgSize {
-		width: 25px; height: 25px;
-	}
-	.textRotate {
-		-webkit-transform:rotate(90deg);
-		-moz-transform:rotate(90deg);
-		-ms-transform:rotate(90deg);
-		-o-transform:rotate(90deg);
-	}
-
+.imgSize {
+	width: 25px;
+	height: 25px;
+}
+.chatTitle {
+	width: 100%; height: 20px; margin: 8px;
+	font-family: nsreb; 
+}
+.chat_input {
+	position: absolute;
+    top: 315px;
+    margin: 2px;
+}
 /* index class*/
 .indexBoardTitle {
-	font-family: nsreb; margin: 30px
+	font-family: nsreb;
+	margin: 30px 0px;
 }
+
 .indexSubTitle {
-	font-family: nsr; padding-bottom: 5px
+	font-family: nsr;
+	padding-bottom: 5px;
+	margin: 10px 0px;
 }
+
 .indexSubTitleSpan {
 	font-size: 18px;
 }
-.gachiPost
+/* - - - - - - - - - - - - - - - - - footer style  */
+#mainFooter {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	border-top: 1px solid #ddd;
+	background-color: #f8f8f8;
+	color: #000;
+}
+#endAlign{
+	width: 800px; height: 150px;
+	margin: 0 auto;	padding-top: 30px;
+}
+#endAlign>div:first-child{
+	width: 100px; height: 100px;
+	border-right: 2px solid gray;
+	margin: 0px 30px;
+	float: left;
+}
+#endAlign ul {
+	float: left; height: 100%; margin-right: 100px;
+}
+#endAlign ul>li {
+	margin: 10px 0;
+}	
+#endAlign .nsreb {
+	float:left; margin: 10px; text-align: center; color: #fff;
+	width: 60px; height: 60px; line-height: 60px; 
+	font-size: 17px; background: gray; border-radius: 70%;
+}
+/* - - - - - - - - - - - - - - - - - index style  */
+#sliderDiv {
+	width: 100%;
+}
 
-/* - - - - - - - - - - - - - - - - - index style  */	
-	#sliderDiv {
-		width: 100%;
-	}
-	#slider {
-		width: 100%;
-		margin-top: 50px;
-	}
-	.carousel-inner img{
-		width: 100%; height: 400px;
-	}
-	#indexMain {
-		width: 1300px; height: auto;
-		margin: 0px auto;
-	}
-	#indexMain>div {
-		margin-top: 100px;
-	}
-	#sell, #sell ul, #sell>ul li, #gachi, #gachi>ul, #sggSak, #sggSak>ul {
-		text-align: center;
-	}
-	#sell>ul, #gachi>ul, #sggSak>ul {
-		text-align: center;
-	}
-	#sell>ul li, #gachi>ul li {
-		display: inline-block;
-	}
-	#sell>ul li {
-		width: 220px; height: 300px; border: 1px solid #ddd;
-	}
-	#gachi>ul>li {
-		width: 220px; height: 250px; border: 1px solid #000; margin: 5px;
-	}
-	#sggSak>ul li img {
-	 	width: 100%; height: 100%;
-	 	border-radius: 10%;
-	 	opacity: 90%;
-	}
-	#sggSak>ul li {
-		width: 200px; height: 200px;
-		margin: 5px;
-		display: inline-block;
-	}
-	#gachi .indexInnerUl>li{
-		width: 200px;
-		height: 40px; line-height: 40px;
-		padding-left: 5px; padding-right: 5px;
-	}
-	#gachi .indexInnerUl>li:nth-of-type(1) {
-		margin-top: 10px;
-	}
-	#gachi .indexInnerUl>li:nth-of-type(2) {
-		height: 50px; line-height: 50px;
-	}
-	#gachi .indexInnerUl>li:nth-of-type(2), #gachi .indexInnerUl>li:nth-of-type(3), #gachi .innerUl>li:nth-of-type(4){
-		height: 35px;
-		text-align: left;
-	}
-	#gachi .indexInnerUl>li:nth-of-type(5), #gachi .indexInnerUl>li:nth-of-type(6){
-		text-align: right;
-	}
-	#gachi .indexInnerUl>li:nth-of-type(5) {
-		padding-right: 10px;
-	}
-	#gachi .gachiPostImg {
-		width: 30px;
-	}
-	#gachi .gachiPostLoc {
-		width: 15px; margin-bottom: 5px;
-	}
-	#gachi .gachiPoastTitle {
-		font-size: 18px; font-weight: bold;
-	}
-	#indexMain .indexListNone {
-		list-style-type: none;
-		width: 1250px;
-	}
-	#indexMain .indexDivWidth {
-		width: 1300px; height: auto;
-		margin: 0 auto;
-	}
-	#indexMain .indexInnerUl {
-		width: 200px; height: auto;
-		margin: auto;
-	}
-	#indexMain .indexInnerUl>li:last-child>img {
-		width: 30px; height: 30px;
-		border-radius: 70%;
-	}
-	#gachi .gachiPostTitle img, #gachi .gachiPostTitle div {
-		margin-top: 10px;
-		float: left;
-	}
-	#gachi .gachiPostTitle img {
-		margin-left: 35px;
-	}
-	#indexMain .cntJoin {
-		font-size: 22px; font-weight:bold; color: #3f1785;
-	}
-	#indexMain .sliderIndi {
-		margin: 0 auto;
-		width: 700px; height: 40px; 
-	}
-	#indexMain .carousel-control-prev, #indexMain .carousel-control-next {
-		width: 100px;
-	}
-	#indexMain .boardText>li>div>div>img {
-		width: 100%;
-		height: 218px;
-	}
-	
+#slider {
+	width: 100%;
+}
+
+.carousel-inner img {
+	width: 100%;
+	height: 600px;
+}
+
+#indexMain {
+	width: 1300px;
+	height: auto;
+	margin: 0px auto;
+}
+
+#sell, #gachi, #sggSak {
+	padding: 100px 0px;
+}
+
+#sell, #sell ul, #sell>ul li, #gachi, #gachi>ul, #sggSak, #sggSak>ul {
+	text-align: center;
+}
+
+#sell>ul, #gachi>ul, #sggSak>ul {
+	text-align: center;
+}
+
+#sell>ul li, #gachi>ul li {
+	display: inline-block;
+}
+
+#sell>ul li {
+	width: 220px;
+	height: 300px;
+	border: 1px solid #000;
+}
+
+#gachi>ul>li {
+	width: 235px;
+	height: auto;
+	margin: 10px;
+	box-shadow: 3px 3px 3px #ddd;
+}
+.test {
+	font-size: 18px;
+}
+#sggSak>div:first-child {
+	width: 1300px;
+	border-bottom:1px solid #ddd;
+}
+#sggSak>ul li img {
+	width: 100%;
+	height: 100%;
+	border-radius: 10%;
+	opacity: 90%;
+}
+
+#sggSak>ul li {
+	width: 200px;
+	height: 200px;
+	margin: 5px;
+	display: inline-block;
+}
+
+#gachi .indexInnerUl>li {
+	width: 220px;
+	height: 45px;
+	line-height: 45px;
+	padding: 0px 15px;
+}
+
+#gachi .indexInnerUl>li:nth-of-type(1) {
+	width: 218px; margin-bottom: 10px;
+	background-color: #9edae3;
+	color: #fff;
+}
+
+#gachi .indexInnerUl>li:nth-of-type(2) {
+	font-family: nsreb; font-size: 16px;
+}
+#gachi .indexInnerUl>li:nth-of-type(3) {
+	text-align: center; height: 30px; margin-top: 10px;
+}
+#gachi .indexInnerUl>li:nth-of-type(2), #gachi .innerUl>li:nth-of-type(4) {
+	height: 35px;
+	text-align: left;
+}
+#gachi .indexInnerUl>li:nth-of-type(5) {
+	text-align: right;
+}
+
+#gachi .indexInnerUl>li:nth-of-type(5) {
+	height: 40px; line-height: 40px;
+}
+#gachi .indexInnerUl>li:nth-of-type(6){
+	height: 60px; font-size: 15px;
+	text-align: left;
+}
+
+#gachi .gachiPostLoc {
+	width: 15px;
+	margin-bottom: 5px;
+}
+
+#gachi .gachiPoastTitle {
+	font-size: 18px;
+	font-family: nsreb;
+}
+
+#indexMain .indexListNone {
+	list-style-type: none;
+	width: 1300px;
+}
+
+#indexMain .indexDivWidth {
+	width: 1300px;
+	height: auto;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#indexMain .indexInnerUl {
+	width: 200px;
+	height: auto;
+	margin: auto;
+}
+
+#indexMain .indexInnerUl>li:last-child>img {
+	width: 50px;
+	height: 50px;
+	border-radius: 70%;
+}
+
+#gachi .gachiPostTitle img, #gachi .gachiPostTitle div {
+	margin-top: 10px;
+	float: left;
+}
+
+#gachi .gachiPostTitle img {
+	margin-left: 35px;
+}
+
+#indexMain .cntJoin {
+	font-size: 22px;
+	font-weight: bold;
+	color: #fa622f;
+}
+
+#indexMain .sliderIndi {
+	margin: 0 auto;
+	width: 700px;
+	height: 40px;
+}
+
+#indexMain .carousel-control-prev, #indexMain .carousel-control-next {
+	width: 100px;
+}
+
+#indexMain .boardText>li>div>div>img {
+	width: 100%;
+	height: 270px;
+	margin-bottom: 10px;
+}
+
 /* - - - - - - - - - - - - 우리직구 스타일 */
-	#indexMain ul, #indexMain li {
-		margin: 0px;
-		padding: 0px;
-		list-style-type: none;
-	}
-	#indexMain .boardText>li>div>div>img {
-		width: 100%;
-		height: 218px;
-	}
-	
-	#indexMain .selBoard {
-		width: 1250px;
-		height: 370px;
-		margin: 0 auto;
-	}
-	
-	#indexMain .selList {
-		width: 220px;
-		height: 340px;
-		float: left;
-		margin: 5px;
-		border: 1px solid gray;
-	}
-	
-	#indexMain .boardText {
-		width: 1200px;
-		margin: 0 auto;
-	}
-	#indexMain .selList>div>ul li:nth-child(1) {
-		width: 100%;
-		text-align: center;
-		font-size: 18px;
-		font-weight: bold;
-	}
-	
-	#indexMain .selList>div>ul li:nth-child(2) {
-		width: 40%;
-		float: left;
-		line-height: 24px;
-	}
-	
-	#indexMain .selList>div>ul li:nth-child(3) {
-		float: left;
-		width: 50%;
-		text-align: right;
-		line-height: 24px;
-		font-size: 18px;
-		font-weight: bold;
-		color: #3f1785;
-	}
-	
-	#indexMain .selList>div>ul li:nth-child(4) {
-		width: 100%;
-		font-size: 13px;
-		color: gray;
-		text-align: center;
-	}
-	
-	#indexMain .selList>div>ul li:nth-child(5) {
-		width: 100%;
-		float: left;
-		text-align: right;
-	}
-	
-	#indexMain .selList>div>ul>li:nth-child(5) img {
-		width: 30px;
-		height: 30px;
-		text-align: right;
-	}
-	#indexMain .selList:hover {
-		border: 3px solid #3f1785;
-	}
-	
+#indexMain ul, #indexMain li {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+#indexMain .boardText>li>div>div>img {
+	width: 100%;
+	height: 280px;
+}
+
+#indexMain .selBoard {
+	width: 1300px;
+	height: 450px;
+}
+
+#indexMain .selList {
+	width: 240px;
+    height: 470px;
+    float: left;
+    margin: 0px 10px 20px 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+#indexMain .boardText {
+	width: 1300px; height: 930px;
+}
+
+#indexMain .selList>div>ul li:nth-child(1) {
+	width: 95%;
+	font-family: nsrb;
+	text-align: center;
+	font-size: 18px;
+	margin: 0 auto 10px auto;
+}
+
+#indexMain .selList>div>ul li:nth-child(2), #indexMain .selList>div>ul li:nth-child(3) {
+	width: 95%;
+	line-height: 24px;
+	font-size: 15px;
+	margin: 0 auto;
+}
+
+#indexMain .selList>div>ul li:nth-child(5) {
+	width: 100%;
+	text-align: right;
+	margin-top: 15px;
+}
+
+#indexMain .selList>div>ul>li:nth-child(5)>img {
+	width: 50px;
+	height: 50px;
+	text-align: right;
+	border-radius: 70%;
+}
+
+#indexMain .selList:hover {
+	border: 1.5px solid #5f0080;
+}
+
+.priceSpan {
+	font-size: 22px;
+	margin-right: 5px;
+	font-family: nsreb;
+}
+.locationSpan {
+	font-size: 15px;
+	margin-right: 5px;
+	color: orange;
+}

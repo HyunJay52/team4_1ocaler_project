@@ -3,57 +3,114 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commu/communityBoardStyle.css"/>
 
 
-
-
-	<div id="body">
-		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
-		<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
+	<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
+	<%@ include file="/inc/commuHeader.jspf" %> <!-- 사이드 메뉴 include -->
+	<div id="coummuBoardMain">
+		
+	
 						
-		<h1>로컬커뮤니티</h1>
+		<h3 style="margin-top:50px;">#우리동네이야기 <span style="font-size:16px">| 동네 주민들과 여러 정보를 나눠보아요</span></h3>
+		
 
-		<div id="center">
-			<c:forEach var="i" begin="1" end="6">
-				<ul id ="boardList">
-					<li>
-						<div>2021.04.25</div>
-						<div><span>조회수 : </span> 192 &nbsp;&nbsp;  <span>좋아요 :</span> 11 &nbsp;&nbsp; <span> 댓글 :</span> 40 개</div>	 
-					</li>
-					<li>
-						<div><a href="commuView">서대문구 혼밥하기 좋은 곳 아시나요?</a></div>
-						<div>
-							<div><img src="common/user.png"/><a href="#"> 서쪽마녀</a></div>
-						</div>
-					</li>
-					<li>
-						#서대문구 #혼밥 #식당 #음식 #맛있는거 #추천 #동네맛집	
-					</li>
-				</ul>
-			</c:forEach>
+		<div id="coummuBoardMaincenter">
+		
+				<table cellpadding="0" cellspacing="0" style="width:1300px ;height: 300px;" class="table">
+					<tbody>
+						<tr height="41px">
+							<th>카테고리</th>
+							<th>제목</th>
+							<th>아이디</th>
+							<th>작성일</th>
+							<th>조회수</th>
+							<th>좋아요</th>
+						</tr>	
+						
+						<c:forEach var="vo" items="${commuList }">
+						<tr>
+							<c:if test="${vo.down_cate == 1 }">
+								<td>
+									할인정보
+								</td>
+							</c:if>
+							<c:if test="${vo.down_cate == 2 }">
+								<td>
+									도움구해요
+								</td>
+							</c:if>
+							
+						
+							<td style="float: left ;line-height: 14px;">
+								<a href="commuView?num=${vo.num}&up_cate=1">${vo.b_subject} 
+									<span style="font-weight: bold;"> [${vo.repcont}]</span>
+								</a> 
+									&nbsp;
+									
+								<c:if test="${vo.newDate==0 }">	
+									<div id="newImg">N</div>
+								</c:if>
+							</td>
+							<td>${vo.userid}</td>
+							<td>${vo.b_writedate}</td>
+							<td>${vo.b_hit}</td>
+							<td>${vo.numlike }</td>
+						</tr>
+						<tr style="text-align: left; padding-right: 20px;font-size: 12px;color:gray;">
+							<td colspan="6" style="height: 10px;padding: 0px;padding-top: 0px;">${vo.b_tag }</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			
+			
+		
 			
 		</div>
-			
-			
-		<div id ="pageNum">
-			<ul class="pagination pagination-sm" >
-			 	<li class="page-item"><a href="#" class="page-link"> << </a></li>
-			 	<li class="page-item"><a href="#" class="page-link">1</a></li>
-			 	<li class="page-item"><a href="#" class="page-link">2</a></li>
-			 	<li class="page-item "><a href="#" class="page-link">3</a></li>
-			 	<li class="page-item"><a href="#" class="page-link">4</a></li>
-			 	<li class="page-item"><a href="#" class="page-link">5</a></li>
-			 	<li class="page-item "><a href="#" class="page-link"> >> </a></li>
-			</ul>
-		</div>
-			
-		<div style="width:1300px; height: 70px; padding:19px" >
-			<a href="commuWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
+				
+		<ul id="MBPaging">
+               <c:if test="${pageVO.pageNum>1}">
+					<li>
+						<a href='commuBoard?b_gu=${pageVO.b_gu }&pageNum=${pageVO.pageNum-1}&up_cate=1<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>'>이전</a></li>
+				</c:if>
+				<c:if test="${pageVO.pageNum<=1}">
+					<li>이전</li>
+				</c:if>
+				<c:forEach var="p" begin="${pageVO.startPageNum }" end="${pageVO.startPageNum+pageVO.onePageNum-1 }">
+					<c:if test="${p<=pageVO.totalPage }">
+						<c:if test="${p==pageVO.pageNum }">
+						<!-- 현재페이지일떄 -->
+							<li style="background-color:#d9d9d9"><a href="commuBoard?b_gu=${pageVO.b_gu}&pageNum=${p}&up_cate=1<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+						<c:if test="${p!=pageVO.pageNum }">
+						<!-- 현재페이지가 아닐때 -->
+							<li><a href="commuBoard?b_gu=${pageVO.b_gu }&pageNum=${p}&up_cate=1<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+					</c:if>		
+				</c:forEach>			
+				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+					<li>
+						<a href="commuBoard?b_gu=${pageVO.b_gu }&pageNum=${pageVO.pageNum+1}&up_cate=1<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">다음</a></li>
+				</c:if>	
+				<c:if test="${pageVO.pageNum==pageVO.totalPage || pageVO.totalPage==0}">
+					<li>다음</li>
+				</c:if>	
+            </ul>	
+		
+			 	
+		<div>
+		
+			<c:if test="${logId != null }">
+				<a href="commuWrite?up_cate=${pageVO.up_cate}"  class="btn wriBtn"  style="float:right;font-color: #181b46;"> 글쓰기</a>
+			</c:if>
 			<div id="commuSearch">
-				<form method="post" action="" id="commuForm">
-					<select>
-						<option value="'">내용</option>	
-						<option value="'">작성자</option>			
+				<form method="get" action="commuBoard" id="commuForm">
+					<input type="hidden" name="b_gu" value="${pageVO.b_gu }"/>
+					<input type="hidden" name="up_cate" value="${pageVO.up_cate }"/>
+					<select name="searchKey">
+						<option value="b_content">내용</option>
+						<option value="b_subject">제목</option>		
+						<option value="userid">작성자</option>			
 					</select>
-						<input type="text"name ="search" placeholder=" &nbsp;검색.." id="search"/>
+						<input type="text"name ="searchWord" placeholder=" &nbsp;검색.." id="search"/>
 						<input type="image" id="btn" src="img/deal/icons8.png" style="display:block; float:left; border: 1px solid #000;" /> 
 				</form>
 			</div>	

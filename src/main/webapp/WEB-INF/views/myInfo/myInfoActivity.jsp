@@ -26,36 +26,45 @@
 			<div class="dealInfo">
 				<img src="img/myInfo/saver.gif"/>
 				<div class="infoList">
-					<h3>김자바</h3>
+					<div class="infoListHeader">
+						<h3>${vo.mem_name}</h3>
+						<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
+						<a href="myInfoCheck"><input type="button" class="btn dealBtn btn-outline-dark" value="Info"/></a>
+					</div>
+					<ul style="font-weight:bold;">
+						<li>참여</li>
+						<li>모집</li>
+						<li>직거래</li>
+						<li>방문</li>
+						<li>내글</li>
+						<li>댓글</li>
+						<li>좋아요</li>
+					</ul>
 					<ul>
-						<li>참여(10)</li>
-						<li>모집(5)</li>
-						<li>직거래(3)</li>
-						<li>방문(31)</li>
-						<li>내글(5)</li>
-						<li>댓글(21)</li>
-						<li>좋아요(21)</li>
+						<li>${vo.joinus}</li>						
+						<li>${vo.grouplocal}</li>
+						<li>${vo.mem_share }</li>
+						<li>${vo.logcount}</li>
+						<li>${vo.board}</li>
+						<li>${vo.reply}</li>
+						<li>${vo.likeit}</li>
 					</ul>
 				</div>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
-				<input type="button" class="btn dealBtn btn-outline-dark" value="Info"/>
 			</div>
 		</div>
 		<div class="dealBottom">
-			<div class="activityLeft">
-				<ul>
-					<li>나의 작성글</li>
-					<li>나의 댓글</li>
-					<li>나의 Q&A</li>
-				</ul>
-			</div>
 			<div class="activityRight">
-				<input type="button" class="btn btn-outline-danger" value="삭제" style="float:right; margin-right:40px;"/>
-				<div class="dealDateForm">
-					<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
-					<div class="myActivityDateFrm"><button class="dayBtn prev">《</button><button class="setMonth dayBtn mdFnt"></button><button class="dayBtn next">》</button></div>
-					<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
-					<input type="date" min="2021-01-01" max="2021-05-31"/>
+				<input type="button" class="btn btn-outline-danger" value="삭제" style="float:right; height:30px; margin-bottom:10px; line-height:10px"/>
+				<div class="myActivityForm">
+					<input type="date" name="searchDate" value="2021-03-01" min="2021-03-01" max="2021-05-31"/> ~ 
+					<input type="date" name="searchDate2" value="2021-05-31" min="2021-03-01" max="2021-05-31"/>
+					<div class="activitySelect">
+						<select id="activitySelectbox">
+							<option value="">나의 작성글</option>
+							<option value="">나의 댓글</option>
+							<option value="">나의 Q&A</option>
+						</select>
+					</div>
 				</div>
 				
 				<table class="myinfoTable2" id="activityTbl">

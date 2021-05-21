@@ -2,11 +2,26 @@ package com.team4.localer.dao;
 
 import java.util.List;
 
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.CsVO;
 import com.team4.localer.vo.OftenqVO;
 import com.team4.localer.vo.ReportVO;
 
 public interface CsDAO {
+	//총레코드 수 구하기 
+	public int totalRecord(AdminPageVO pageVO);
+	//총레코드 수 구하기 
+	public int spendtotalRecord(AdminPageVO pageVO);
+	//총레코드 수 구하기 
+	public int selspendtotalRecord(AdminPageVO pageVO);
+	//한페이지 레코드 select 하기
+	public List<ReportVO> onePageRecordSelect_rep(AdminPageVO pageVO);
+	//한페이지 레코드 select 하기
+	public List<CsVO> onePageRecordSelect_cs(AdminPageVO pageVO);
+	//한페이지 레코드 select 하기
+	public List<OftenqVO> onePageRecordSelect_of(AdminPageVO pageVO);
+	//고객문의 미답변 글목록
+	public List<CsVO> csTblSelect();
 	//고객문의 글 전체목록
 	public List<CsVO> boardAllSelect();
 	//고객문의 글 1개 출력
@@ -36,4 +51,17 @@ public interface CsDAO {
 	public List<CsVO> searchOftenq(String searchkey,String text);
 	//1:1 문의 검색
 	public List<CsVO> searchCs(String searchkey, String text);
+	
+//뷰페이지 부분 
+	//신고글 insert
+	public int reportInsert(ReportVO vo);
+	//1:1 질문 insert
+	public int csQnaInsert(CsVO vo);
+	//자주하는 질문 전체 선택
+	public List<OftenqVO> selectAlloftenQ();
+	//자주하는 질문 조회수 
+	public int oftenqnaCnt(int of_num);
+	//자주하는 질문 검색
+	public List<OftenqVO> searchOftenqView(String setKey, String setWord);
+	
 }

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.GroupDAO;
-
+import com.team4.localer.vo.GroupPageVO;
 import com.team4.localer.vo.GroupVO;
 
 @Service
@@ -27,15 +27,6 @@ public class GroupServiceImpl implements GroupService{
 			return groupDAO.groupBigMartInsert(vo);
 		}
 
-		@Override
-		public List<GroupVO> GroupEatList(String loc_gu) {			
-			return groupDAO.GroupEatList(loc_gu);
-		}
-
-		@Override
-		public List<GroupVO> GroupWithList(String loc_gu) {			
-			return groupDAO.GroupWithList(loc_gu);
-		}
 
 		@Override
 		public GroupVO eatViewPageResult(int num) {
@@ -57,6 +48,24 @@ public class GroupServiceImpl implements GroupService{
 			return groupDAO.groupRecordDelete(num, userid);
 		}
 
+	
+
+		@Override
+		public List<GroupVO> GroupListAll(GroupPageVO pageVO) {
+			return groupDAO.GroupListAll(pageVO);
+		}
+
+		@Override
+		public int groupTotalRecoedCount(GroupPageVO pageVO) {
+			return groupDAO.groupTotalRecoedCount(pageVO);
+		}
+
+		@Override
+		public int groupRecordUpdate(GroupVO vo) {
+			return groupDAO.groupRecordUpdate(vo);
+		}
+
+	
 
 	
 		

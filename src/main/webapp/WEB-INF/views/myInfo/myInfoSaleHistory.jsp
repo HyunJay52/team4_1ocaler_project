@@ -25,7 +25,7 @@
 			<div class="saleHistoryBottom">
 				<h3>today's update</h3>
 				<div id="saleHistoryList">
-					<h5 class="saleHistoryHeader">>>판매현황</h5>
+					<h5 class="saleHistoryHeader"><a href="myInfoSalesManagement">>>판매현황</a></h5>
 					<table class="myinfoSaleHistoryTable2">
 						<tr>
 							<td>신규주문</td>
@@ -42,7 +42,7 @@
 					</table>
 				</div>
 				<div id="productList">
-					<h5 class="saleHistoryHeader">>>상품현황</h5>
+					<h5 class="saleHistoryHeader"><a href="myInfoProductManagement">>>상품현황</a></h5>
 					<table class="myinfoSaleHistoryTable2">
 						<tr>
 							<td>판매 중</td>
@@ -59,7 +59,7 @@
 					</table>
 				</div>
 				<div id="calculateList">
-					<h5 class="saleHistoryHeader">>>정산현황</h5>
+					<h5 class="saleHistoryHeader"><a href="myInfoStatistics">>>정산현황</a></h5>
 					<table class="myinfoSaleHistoryTable2">
 						<tr>
 							<td>구매확정 전</td>

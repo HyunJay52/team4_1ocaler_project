@@ -20,7 +20,7 @@
 				<li><input type="text" name="userid" id="userid" tabindex="1"
 					placeholder="아이디를 입력해주세요" />
 				<button type="button" class="btn commBtn Mem_lgBtn" tabindex="2" id="idOverlapBtn">중복검사</button>
-					<span id="idOverlap">N</span> <br />
+					<span id="idOverlap">N</span> <br/>
 				<span id="checkid"></span></li>
 
 				<li>비밀번호</li>
@@ -39,7 +39,7 @@
 				<span id="checkname"></span></li>
 
 				<li>연락처</li>
-				<li><input type="text" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11"
+				<li><input type="number" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11"
 					placeholder="예) 01012341234" />
 				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
 				<span id="checktel"></span></li>
@@ -47,13 +47,13 @@
 				<li>이메일</li>
 				<li><input type="text" name="mem_email" id="mem_email"
 					tabindex="7" placeholder="예) 1ocaler@1ocaler.com" />
-				<button type="button" class="btn commBtn Mem_lgBtn">이메일 인증</button> <br />
+				<button type="button" id="verifyEmail" class="btn commBtn Mem_lgBtn">이메일 인증</button> <br />
 				<span id="checkemail"></span></li>
 
 				<li>주소</li>
 				<li>
 					<button type="button" tabindex="8" class="btn commBtn Mem_lgBtn findAddr" onclick="javascript:openKakaoPost()">
-						<img src="common/search_fff.png" id="joinSearchAddrImg">우리동네 찾기
+						<img src="common/search_000.png" id="joinSearchAddrImg">우리동네 찾기
 					</button>
 					<ul id="addrInput">
 						<li><input type="text" name="mem_zip" id="mem_zip"
@@ -73,12 +73,38 @@
 				</li>
 				<li>활동지역</li>
 				<li>
-					<input type="text" name="loc_gu" id="loc_gu" tabindex="12" placeholder="ㅇㅇ구로 입력해주세요" />
-					<img src="img/indexImg/bo_pin.png" id="locImg"/>
+					<select id="loc_gu" name="loc_gu" tabindex="12">
+								<option value="0"> = = = = = = = = 지역선택 = = = = = = = = </option>
+								<option value="강서구">강서구</option>
+								<option value="양천구">양천구</option>
+								<option value="구로구">구로구</option>
+								<option value="영등포구">영등포구</option>
+								<option value="금천구">금천구</option>
+								<option value="동작구">동작구</option>
+								<option value="관악구">관악구</option>
+								<option value="서초구">서초구</option>
+								<option value="강남구">강남구</option>
+								<option value="송파구">송파구</option>
+								<option value="강동구">강동구</option>
+								<option value="마포구">마포구</option>
+								<option value="용산구">용산구</option>
+								<option value="서대문구">서대문구</option>
+								<option value="중구">중구</option>
+								<option value="성동구">성동구</option>
+								<option value="광진구">광진구</option>
+								<option value="종로구">종로구</option>
+								<option value="동대문구">동대문구</option>
+								<option value="성북구">성북구</option>
+								<option value="중랑구">중랑구</option>
+								<option value="은평구">은평구</option>
+								<option value="강북구">강북구</option>
+								<option value="노원구">노원구</option>
+								<option value="도봉구">도봉구</option>
+					</select>
+<!-- 					<img src="img/indexImg/bo_pin.png" id="join_locImg"/> -->
 				</li>
 			</ul>
-			<button type="button" id="seeMore" class="btn commBtn Mem_lgBtn"
-				style="width: 700px; height: 40px; display: block; margin: 0 auto;">더보기</button>
+			<button type="button" id="seeMore" class="btn seeMoreClass" >더보기</button>
 		</div>
 		<div>추가정보</div>
 		<div id="setProfile">
@@ -106,7 +132,18 @@
 				<li><textarea name="mem_content" id="mem_content"
 						maxlength="200" placeholder="최대 200자"></textarea> 
 			</ul>
-			<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">가입하기</button>
+			<button type="submit" class="btn seeMoreClass">가입하기</button>
 		</div>
 	</form>
 </div>
+
+<div id="verifyEmailPop">
+	<div>이메일인증</div>
+	<ul>
+		<li>인증번호를 입력해주세요</li>
+		<li><input type="password" id="verifiedNum"/></li>
+		<li><input type="submit" id="verfiedNumChek" value="확인하기"/></li>
+	</ul>	
+</div>
+
+<script src="<%=request.getContextPath() %>/js/member/memEmailverify.js"></script>

@@ -17,9 +17,15 @@ public class MemberVO {
 	private String last_login;
 	private String mem_nick;
 	private String mem_prof;
+	private String getMem_prof;
 	private String mem_content;
 	private int mem_type;
 	private int mem_status;
+	
+	//탈퇴회원 용 vo
+	private String del_why;
+	private String del_writedate;
+	
 	public int getMem_no() {
 		return mem_no;
 	}
@@ -116,6 +122,13 @@ public class MemberVO {
 	public void setMem_prof(String mem_prof) {
 		this.mem_prof = mem_prof;
 	}
+	
+	public String getGetMem_prof() {
+		return getMem_prof;
+	}
+	public void setGetMem_prof(String getMem_prof) {
+		this.getMem_prof = getMem_prof;
+	}
 	public String getMem_content() {
 		return mem_content;
 	}
@@ -133,5 +146,19 @@ public class MemberVO {
 	}
 	public void setMem_status(int mem_status) {
 		this.mem_status = mem_status;
+	}
+	
+	//탈퇴회원용
+	public String getDel_why() {
+		return del_why;
+	}
+	public void setDel_why(String del_why) {
+		this.del_why = del_why;
+	}
+	public String getDel_writedate() {
+		return del_writedate;
+	}
+	public void setDel_writedate(String del_writedate) {
+		this.del_writedate = del_writedate;
 	}
 }

@@ -8,12 +8,12 @@
 
 #joinMem div:nth-child(odd) {
 	width: 700px;
-	height: 50px;
+	height: 70px;
 	line-height: 50px;
-	margin-top: 10px;
+/* 	margin-top: 10px; */
 	font-size: 25px;
 	text-align: center;
-	border-bottom: 3px solid #3f1785;
+	border-bottom: 2px solid #000;
 }
 
 #joinMem>form ul {
@@ -29,11 +29,11 @@
 
 #memJoinFrm>#basicInfo {
 	width: 700px;
-	margin: 20px auto;
+	margin: 40px auto;
 }
 
-#memJoinFrm>#setProfile ul {
-	height: 360px;
+#setProfile>#prof_ul {
+	height: 360px; margin: 40px 0px;
 }
 
 #memJoinFrm>#basicInfo input, form>#setProfile input {
@@ -50,7 +50,13 @@
 	border-radius: 3px;
 	border: 1px solid #ddd;
 }
-
+#basicInfo .seeMoreClass, #setProfile .seeMoreClass{
+	width: 700px; background-color: #5f0080;
+	color: #fff; font-size: 17px;
+}
+#basicInfo .seeMoreClass:hover,  #setProfile .seeMoreClass:hover {
+	font-family: nsreb;
+}
 #setProfile>button:first-child {
 	width: 320px;
 	display: block;
@@ -114,9 +120,11 @@
 	margin-left: -25px;
 	margin-right: 5px;
 }
-
-#locImg {
-	width: 45px;
+#loc_gu {
+	width: 320px; height: 50px; padding: 0 15px; border-radius: 3px; border: 1px solid #ddd; font-size: 16px; 
+}
+#join_locImg {
+	width: 40px; height: 40px;
 	padding-left: 5px;
 }
 /*      button     class       */
@@ -124,18 +132,18 @@
 	width: 120px;
 	height: 45px;
 	margin-left: 10px;
-	border: 1px solid #3f1785;
-	color: #3f1785;
+	border: 1px solid #3b3a73;
+	color: #3b3a73;
 }
 
 #memJoinFrm .Mem_lgBtn:hover {
-	color: #fff;
-	font-weight: bold;
+	color: #3b3a73; background-color: #fff;
+	font-family: nsreb;
 }
 
 #memJoinFrm .lgA:hover {
 	margin-top: 20px;
-	color: #000;
+	color: #fff;
 	text-decoration: none;
 }
 
@@ -146,7 +154,7 @@
 
 #loginContainer {
 	width: 1300px;
-	height: 84%;
+	height: auto;
 	text-align: center;
 	margin: 0 auto;
 }
@@ -186,14 +194,12 @@
 .Mem_input-file-button {
 	padding: 3px 15px;
 	margin-top: 70px;
-	border: none;
 	font-size: 16px;
 	width: 95px;
 	text-align: center;
-	background-color: 3f1785;
-	border-radius: 5px;
-	color: white;
+	border-radius: 5px; border: 1px solid #3f1785;
 	cursor: pointer;
+	color: #3f1785; background-color: #fff;
 }
 
 /* 로그인 페이지 */
@@ -206,8 +212,8 @@
 	color: #212529;
     margin-left: 190px;
 }
-#socialLogin {
-	display: none;
+#login_section>p {
+	margin-top: 50px;
 }
 #naverIdLogin img {
 	margin-bottom: 5px;
@@ -226,15 +232,255 @@
 #login_section .mem_lgBtn {
 		width: 320px; height: 50px;
 		margin-top: 5px;
-		border: 1px solid #3f1785;
-		color: #3f1785;
+		border: 1px solid #bdbdbf;
+		color: #bdbdbf;
 	}
-#login_section .mem_lgBtn:hover {
-		color: #fff;
-		font-weight: bold;
-	}
+#login_section>form>ul li:nth-child(4)>button {
+	background-color: #5f0080;
+	color: #fff;
+}	
+/* #login_section .mem_lgBtn:hover { */
+/* 		color: #fff; */
+/* 		font-weight: bold; */
+/* 	} */
 #login_section .mem_lgA:hover {
 		margin-top: 20px;
 		color: #000;
 		text-decoration: none;
 	}
+#nickOverlap, #idOverlap{
+	display: none;
+}
+/* - - - - - - - - - - - - - - - - - - - - 셀러회원 스타일 */
+	#joinSeller {
+		width: 1300px; height: auto;
+		margin: 100px auto;
+	}
+	#joinSeller div:nth-child(odd) {
+		width: 700px; height: 50px; line-height: 50px;
+		margin-top: 10px;
+		font-size: 25px;
+		text-align: center;
+		border-bottom: 2px solid #000;
+	}
+	#joinSeller>form ul {
+		width: 700px; height: 600px;
+		margin: 0;
+	}
+	#sellerJoinFrm {
+		width: 700px;
+		margin: 0 auto;
+	}
+	#sellerJoinFrm>#basicInfo {
+		width: 700px; 
+		margin: 20px auto;
+	}
+	#sellerJoinFrm>#setProfile ul {
+		height: 300px;
+	}
+	#sellerJoinFrm>#basicInfo input, #sellerJoinFrm>#setProfile input {
+		width: 320px; height: 50px; padding: 0 15px; border-radius: 3px; border: 1px solid #ddd;
+	}
+	#sellerJoinFrm #sel_content {
+		width: 320px; height: 150px;
+		border-radius: 3px; border: 1px solid #ddd;
+	}
+	#setProfile>button:first-child {
+		width: 320px; display: block; argin: 0 auto; font-size: 20px;
+	}
+	#joinSeller>form>div>ul>li {
+		float: left;
+		list-style-type: none;
+		width: 27%; height: 75px;
+	}
+	#joinSeller>form>div>ul>li:nth-child(odd) {
+		font-family: nsreb; font-size: 18px; padding-left: 70px; line-height: 50px;
+		
+	}
+	#joinSeller>form>div>ul>li:nth-child(even) {
+		width: 72%;
+	}	
+		#joinSeller #addrInput, #joinSeller #bankInput {
+		display: none;
+		width: 100%; height: 200px;
+	}
+	#joinSeller #addrInput>li, #joinSeller #bankInput>li {
+		list-style-type: none;
+		margin-bottom: 10px;
+	}
+	#joinSeller #addrInput>li:first-child {
+		float:left;
+	}
+
+	#setProfile, #joinSeller div:nth-child(3) {
+		display: none;
+	}
+	#bank {
+		width: 160px;
+	    height: 50px;
+	    border-radius: 5px;
+	    border-bottom-left-radius: 5px;
+	    padding-left: 10px;
+	    border: 1px solid #ddd;
+	}
+		/*      button     class       */
+	#joinSeller .lgBtn {
+		width: 120px; height: 50px;
+		margin-left: 10px;
+		border: 1px solid #3f1785;
+		color: #3f1785;
+	}
+	#joinSeller .lgBtn:hover {
+		color: #fff;
+		font-weight: bold;
+	}
+	#joinSeller .lgA:hover{
+		margin-top: 20px;
+		color: #000;
+		text-decoration: none;
+	}
+	#joinSeller .findAddr, #joinSeller .addBank {
+		width: 320px; margin: 0;
+	}
+	#joinSeller .profImg {
+		width: 100px; height: 100px; border: none; border-radius: 70%;
+	}
+	#joinSeller .input-file-button{
+		padding: 3px 15px;
+		margin-top: 70px; border: none;
+		font-size: 16px;
+    	width: 95px;
+		text-align: center;
+		background-color: 3f1785;
+		border-radius: 5px;
+		color: white;
+		cursor: pointer;
+	}
+/* - - - - - - - - - - - - - - - - - - - - 아이디 비밀번호 찾기 */	
+#searchMem {
+	width: 1300px; height: auto;
+	overflow: auto;
+	margin: 150px auto;
+}
+#searchMemIndex, #searchMemId, #searchMemPwd, #inputVerifiedNum {
+	width: 1300px; height: auto;
+}
+#searchMemIndex>div:first-child {
+	width: 1300px; height: 50px;
+	text-align: center;
+}
+#searchMemIndex>ul {
+	width: 480px; height: 250px;
+	margin: 50px auto;
+}
+#searchMemIndex>ul li {
+	width:200px; height: 200px; 
+	float:left; line-height: 200px;
+	display: block;
+	margin: 20px;
+	text-align: center; font-size: 22px;
+	border-radius: 70%;
+	background-color: #ddd; color: #fff;
+}
+#searchMemIndex>ul li:hover {
+	background-color: #fff; color: black;
+	border: 3px solid #fec804;
+	opacity: 80%;
+}
+
+#searchMemId, #searchMemPwd, #inputVerifiedNum {
+	display: none;
+}
+#searchMemId form, #searchMemPwd form {
+	
+	margin: 0 auto;
+}
+/* 아이디 찾기, 비밀번호 찾기  */
+#searchId, #searchPwd {
+	width: 600px; height: auto;
+	margin: 0 auto;
+}
+#searchId>div:first-child, #searchPwd>div:first-child {
+	width: 600px; height: 30px; line-height: 30px;
+	font-family: nsreb; font-size: 22px; text-align: center;
+}
+#searchId>ul, #searchPwd>ul, #verifiedUl {
+	list-style-type: none; width: 420px;
+	height: 230px; margin: 10px auto;
+}
+#searchId>ul {
+	height: 170px;
+}
+#searchId>ul>li, #searchPwd>ul>li {
+	float: left; height: 40px; line-height: 40px; margin: 10px;
+}
+#searchId>ul>li:nth-child(even) input,
+#searchPwd>ul>li:nth-child(even) input {
+	padding: 5px;
+}	
+#searchId>ul>li:nth-child(odd),
+#searchPwd>ul>li:nth-child(odd) {
+	width: 80px;
+	font-family: nsreb; font-size: 18px; text-align: center;
+}
+#searchId>ul>li:nth-child(even),
+#searchPwd>ul>li:nth-child(even) {
+	width: 300px;
+}
+#searchId>ul>li:last-child>input,
+#searchPwd>ul>li:last-child>input,
+#verifiedUl>li:last-child>button {
+	width: 400px; line-height: 40px; 
+	border: 1.5px solid #5f0080; border-radius: 5px; color: #5f0080; background: #fff;
+}
+#searchId>ul>li:last-child>input:hover,
+#searchPwd>ul>li:last-child>input:hover,
+#verifiedUl>li:last-child>button:hover {
+	background-color: #5f0080; color: #fff;
+}
+#searchId input, #searchPwd input {
+	width: 300px; height: 40px;
+}	
+#goSearchPwd, #goSearchId {
+	width: 600px; height: 30px; line-height: 30px; cursor: pointer;
+	text-align: center; font-family: nsrb; font-size: 16px; color: #ddd;
+}
+#goSearchPwd:hover, #goSearchId:hover {
+	text-decoration: underline; color: gray;
+}
+#verifiedUl>li {
+	width: 420px; height: 50px; line-height: 50px; 
+	text-align: center; list-style-type: none;
+}
+#verifiedUl>li:first-child {
+	font-family: nsrb; font-size: 17px;
+}
+#verifiedUl input {
+	width:400px; height: 40px; padding: 5px;
+}
+
+/* 이메일 인증 스타일 */
+#verifyEmailPop {
+	width: 300px; height: 300px; border: 1px solid #000; border-radius: 5px; box-shadow: 3px 3px 3px gray;
+	position: absolute; top: 600px; left: 560px; background-color: #fff;
+	display: none;
+}
+#verifyEmailPop>div{
+	width: 298px; height: 30px; line-height: 30px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+	text-align: center; margin: 0 auto;
+	background: #ddd;
+}
+#verifyEmailPop>ul {
+	width: 300px; height: 200px;
+	margin: 45px 0 0 0; list-style-type: none;
+}
+#verifyEmailPop>ul>li {
+	width: 300px; height: 50px; line-height: 50px;
+	text-align: center;
+}
+#verifyEmailPop>ul>li:nth-child(2)>input {
+	padding: 5px;
+}
+#verifyEmailPop>ul>li>input {
+	width: 200px; height: 40px; line-height: 40px;
+}

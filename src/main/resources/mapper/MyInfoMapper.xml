@@ -4,13 +4,330 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team4.localer.dao.MyInfoDAO">
+	
+	<select id="setMyinfo" resultType="com.team4.localer.vo.MemberVO">
+		select * from member where userid=#{param1}
+	</select>
 	<select id="goMyinfopage" resultType="com.team4.localer.vo.MemberVO">
-			select * from member where userid=#{userid} and userpwd=#{userpwd}
+		select * from member where userid=#{userid} and userpwd=#{userpwd}
+	</select>
+	
+	<insert id="pointCharge" parameterType="com.team4.localer.vo.Cha_pVO">
+		insert into cha_p(userid, cha_point, cha_mth)
+		values(#{userid}, #{cha_point}, #{cha_mth})
+	</insert>
+	
+	<select id="joinPoint" resultType="String">
+		select sum(cha_point) from cha_p c join member m on c.userid=m.userid 
+		where m.userid = #{param1}
 	</select>
 
+	<select id="allPointSelect" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.Cha_pVO">
+		
+		select * from (
+		select * from (
+		select userid, cha_point, to_char(po_date, 'YYYY-MM-DD HH24:MI:SS') po_date, cha_mth from cha_p
+		union all
+		select userid, sp_point, to_char(sp_date, 'YYYY-MM-DD HH24:MI:SS') sp_date, sp_item from sp_p order by po_date desc)
+		<![CDATA[where rownum <=#{rowNum1} and userid = #{userid} ]]>
+			<if test="searchDate != '' and searchDate != null">
+				and po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS'), 'MM'), 'YYYY-MM-DD HH24:MI:SS')
+				and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')),'YYYY-MM-DD HH24:MI:SS' )							
+			</if>
+			<if test="searchKey == 1">
+				<![CDATA[and cha_mth <= #{searchKey}]]>
+			</if>
+			<if test="searchKey == 2">
+				<![CDATA[and cha_mth >= #{searchKey}]]>
+			</if>		
+			order by po_date asc)
+			<![CDATA[where rownum<=#{rowNum2} ]]>
+			order by po_date desc
+		
+	</select>
+	
+	<select id="pointCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="String">
+		select count(userid) from(
+		select * from (
+		select userid, cha_mth, to_char(po_date,'YYYY-MM-DD HH24:MI:SS') po_date from cha_p
+		union all
+		select userid, sp_item, to_char(sp_date,'YYYY-MM-DD HH24:MI:SS') from sp_p)
+		where po_date between to_char(trunc(to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS'), 'MM'), 'YYYY-MM-DD HH24:MI:SS')
+		and to_char(last_day(to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')),'YYYY-MM-DD HH24:MI:SS' ))
+		where userid=#{userid}
+		<if test="searchKey != null and searchKey == 1">
+		<![CDATA[and cha_mth <= #{searchKey}]]>
+		</if>
+		<if test="searchKey != null and searchKey == 2">
+		<![CDATA[and cha_mth >= #{searchKey}]]>
+		</if>
+	</select>
+	
+	<select id="myCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="int">
+		select count(num) from(
+		
+		<if test="kategorie.equals('groupJoinus')">
+			select * from joinus join grouplocal on grouplocal.num = joinus.numjoin
+		</if>
+		<if test="kategorie.equals('mem_share')">
+			select * from ${kategorie} join joinus on joinus.numjoin = mem_share.num	
+		</if>
+		<if test="kategorie.equals('grouplocal')">
+			select * from ${kategorie} join joinus on joinus.numjoin = grouplocal.num
+		</if>
+		<if test="kategorie.equals('joinus')">
+			select * from ${kategorie} join mem_share on joinus.numjoin = mem_share.num	
+		</if>
+		<if test="kategorie.equals('ordertbl')">
+			select * from ${kategorie} join sell_item on ordertbl.num = sell_item.i_num
+		</if>
+		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') 
+		<if test="kategorie.equals('groupJoinus')">
+			and joinus.userid=#{userid})
+		</if>
+		<if test="kategorie.equals('mem_share')">
+			and joinus.userid=#{userid})
+		</if>
+		<if test="kategorie.equals('ordertbl')">
+			and ${kategorie}.userid=#{userid})
+		</if>
+		<if test="kategorie.equals('joinus')">
+			and ${kategorie}.userid=#{userid})
+		</if>
+		<if test="kategorie.equals('grouplocal')">
+			and joinus.userid=#{userid})
+		</if>
+		where ${searchKey} like #{searchWord}
+	</select>
+	
+	<select id="selectMyShare" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoDealVO">
+		select * from(
+		select * from(
 
+		<if test="kategorie.equals('groupJoinus')">
+			select j_num, numjoin, joinus.userid, grouplocal.userid sellerid, j_status, j_writedate, num, g_gu, up_cate, down_cate, g_subject, g_writedate  from joinus join grouplocal on grouplocal.num = joinus.numjoin
+		</if>
+		<if test="kategorie.equals('joinus')">
+			select * from ${kategorie} join mem_share on joinus.numjoin = mem_share.num
+		</if>
+		<if test="kategorie.equals('mem_share')">
+			select * from ${kategorie} join joinus on joinus.numjoin = mem_share.num
+		</if>
+		<if test="kategorie.equals('grouplocal')">
+			select num, g_gu, up_cate, down_cate, grouplocal.userid, g_subject, g_writedate from ${kategorie}
+		</if>
+		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and 
+		<if test="!kategorie.equals('groupJoinus')">
+			${kategorie}.userid=#{userid} and
+			${searchKey} like #{searchWord} order by ${dateContent} desc)
+	        <![CDATA[where rownum <= #{rowNum1} order by ${dateContent} asc)]]>
+			<![CDATA[where rownum <= #{rowNum2} order by ${dateContent} desc]]>			
+		</if>
+		<if test="kategorie.equals('groupJoinus')">
+			joinus.userid = #{userid} and
+			${searchKey} like #{searchWord} order by j_writedate desc)
+	        <![CDATA[where rownum <= #{rowNum1} order by j_writedate asc)]]>
+			<![CDATA[where rownum <= #{rowNum2} order by j_writedate desc]]>
+		</if>
 
+	</select>
+	
+	<select id="selectJoinUs" parameterType="int" resultType="com.team4.localer.vo.MyinfoJoinUsVO">
+		select j_num, j.userid, numjoin, j_status, mem_sub, j_writedate, mem_post, mem_rev 
+		from joinus j join member m on j.userid = m.userid where numjoin = #{param1}
+		order by j_writedate desc
+	</select>
+	
+	<select id="selectOrder" parameterType="com.team4.localer.vo.OrderVO" resultType="com.team4.localer.vo.OrderVO">
+		select * from(
+		select * from(
+		select o_num, seller.userid, s.i_subject, num, o_mtd, o_cnt, o_price, o_date, o_conf, o_status 
+		from ordertbl o join sell_item s on o.num = s.i_num 
+		                join seller on s.sel_num = seller.sel_num 
+		                where o.userid=#{userid} and o_date between to_date(#{searchDate},'YYYY-MM-DD HH24:MI:SS')
+		                and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and s.${searchKey} like #{searchWord}
+		                order by o_date desc)
+		       <![CDATA[where rownum <= #{rowNum1} order by o_date asc)
+		                where rownum <= #{rowNum2} order by o_date desc]]>
+	</select>
+	
+	<insert id="writeReview" parameterType="com.team4.localer.vo.ItemReviewVO">
+		
+		insert into item_review(re_num, userid, num, re_rate, re_content
+		<if test="re_img != null">
+			, re_img
+		</if>
+		)
+		values(itemsq.nextval, #{userid}, #{num}, #{re_rate}, #{re_content}
+		<if test="re_img != null">
+			, #{re_img}
+		</if>
+		)
+	</insert>
+	
+	<update id="updateReviewStatus" parameterType="int">
+		update joinus set j_status = '리뷰완료' where j_num = #{param1}
+	</update>
+	
+	<update id="updateJoinStatus" parameterType="int">
+		update joinus set j_status = '참여승인' where j_num = #{param1}
+	</update> 
+	
+	<update id="updateJoinCancel" parameterType="int">
+		update joinus set j_status = '참여취소' where j_num = #{param1}	
+	</update>
+	
+	<select id="selectReviewCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoJoinUsVO">
+		select count(numjoin) joinCount, 
+		count(case when j_status = '리뷰완료' then 0 end) reviewCount, 
+		count(case when j_status = '참여취소' then 0 end) joinCancel
+		from (
+		select j.userid, j_num, numjoin, j_status, j_writedate 
+		from joinus j 
+		<if test="kategorie.equals('grouplocal')">
+			join grouplocal g on j.numjoin = g.num 
+		</if>
+		<if test="!kategorie.equals('grouplocal')">
+			join mem_share m on j.numjoin = m.num
+		</if>
+			where num=#{nowNum})
+	</select>
+	
+	<select id="selectMyReview" resultType="com.team4.localer.vo.ItemReviewVO" parameterType="com.team4.localer.vo.ItemReviewVO">
+		select * from item_review where userid=#{userid} and
+		<if test="num != 0">
+			 num = #{num}		
+		</if>
+		<if test="re_num != 0">
+			 re_num = #{re_num}		
+		</if>
+	
+	</select>
+	
+	<select id="selectMyReviewCount" resultType="int">
+		select count(re_num) count from ordertbl o join item_review i on o.num = i.num 
+		where o.userid=#{param1} and o.num=#{param2}
+	</select>
+	
+	<select id="selectMyCount" resultType="com.team4.localer.vo.MyinfoCountVO">
+		select (
+			select count(userid) from board where userid = #{param1}) as board,(
+			select count(userid) from reply where userid = #{param1}) as reply,(
+			select count(userid) from likeit where userid = #{param1}) as likeit,(
+			select count(userid) from joinus where userid = #{param1}) as joinus,(
+			select count(userid) from mem_share where userid = #{param1}) as mem_share,(
+			select count(userid) from logcount where userid = #{param1}) as logcount,(
+			select count(userid) from grouplocal where userid = #{param1}) as grouplocal,(
+			select mem_name from member where userid = #{param1}) as mem_name
+		from dual
+	</select>
+	<select id="selectMyJoinList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoDealVO">
+    	select * from(
+		select * from(
+		<if test="kategorie.equals('grouplocal')">
+			select j_num, numjoin, j.userid, j_status, grouplocal.userid sellerid, j_writedate, g_subject, g_writedate  from joinus j			
+		</if>
+		<if test="!kategorie.equals('grouplocal')">
+			select j_num, numjoin, j.userid, j_status, ${kategorie}.userid sellerid, j_writedate, s_subject  from joinus j
+		</if>
+		
+        join ${kategorie} on j.numjoin = ${kategorie}.num
+		where j.userid=#{userid} and ${searchKey} like #{searchWord} order by j_writedate desc)
+        where rownum <![CDATA[ <= ]]> #{rowNum1} order by j_writedate asc)
+		where rownum <![CDATA[ <= ]]> #{rowNum2} order by j_writedate desc
+    </select>
+    <select id="selectMyShareJoinList" resultType="com.team4.localer.vo.MyinfoDealVO">
+		select * from (
+        select j_num, numjoin, joinus.userid, j_status, j_writedate, num, mem_share.userid share_userid, s_cate, s_subject, s_cnt, s_content, s_img1, s_loc, s_gu, s_price, s_date, s_status, s_writedate, s_hit, s_tag from joinus
+        join mem_share on joinus.numjoin = mem_share.num
+		where mem_share.userid = #{param1} order by j_writedate desc)where rownum <![CDATA[ <= ]]> 4
+   </select>
+   <select id="statisTotal" resultType="com.team4.localer.vo.OrderVO">
+	   	select sum(o.o_price) o_price, count(o_num) o_num from 
+				(select i_num from sell_item i join seller sel on sel.sel_num=i.sel_num where sel.userid=#{param1}) num
+				join ordertbl o on o.num=num.i_num 
+				where o_date between to_date('21/${param3}/01','YY/MM/DD') and to_date(last_day('21/${param3}/01'),'YY/MM/DD') 
+				and o_conf=${param2}
+   </select>
+   <select id="statisList" resultType="com.team4.localer.vo.OrderVO">
+   		select (o.o_price-2000) as fu_money, (o.o_price+o.o_ship) as hap_money,o.o_num, to_char(o.o_date,'MM/DD') o_date,o.userid,num.i_num,num.i_subject,o.o_cnt, o.o_price, o.o_ship,o.o_conf from 
+			(select i.i_num,i.i_subject from sell_item i join seller sel on sel.sel_num=i.sel_num where sel.userid=#{param1}) num
+			join ordertbl o on o.num=num.i_num 
+			where o_date between to_date('21/${param2}/01','YY/MM/DD') and to_date(last_day('21/${param2}/01'),'YY/MM/DD') 
+			order by o_date
+   </select>
+    
 
-
-
+   <select id="selectItemReviewList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.OrderVO">
+   select * from(
+   		select * from(
+		select o_num, o.userid, o.num, o_conf, o_date, o_status, s.sel_num, s.i_subject, seller.userid sellerid  
+		from ordertbl o join sell_item s on o.num = s.i_num 
+		join seller on s.sel_num = seller.sel_num
+		where o.userid= #{userid} and o_conf = 2 order by o_date desc)
+        where rownum  <![CDATA[ <= ]]> #{rowNum1} order by o_date asc)
+		where rownum  <![CDATA[ <= ]]> #{rowNum2} order by o_date desc
+   </select>
+   <select id="selectMyReviewList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.ItemReviewVO">
+		select * from (
+		select * from (
+		<if test="kategorie.equals('mem_share')">
+			select re_num, item_review.userid, item_review.num, re_rate, mem_share.userid sellerid, s_subject re_subject, re_content, item_review.re_writedate 
+			from item_review 
+			join joinus on item_review.num = joinus.numjoin 
+			join mem_share on joinus.numjoin = mem_share.num 
+		</if>
+		<if test="kategorie.equals('grouplocal')">
+			select re_num, item_review.userid, item_review.num, re_rate, re_content, g_subject re_subject, re_writedate, grouplocal.userid sellerid
+			from item_review 
+			join joinus on item_review.num = joinus.numjoin 
+			join grouplocal on joinus.numjoin = grouplocal.num
+		</if>
+		<if test="kategorie.equals('sell_item')">
+			select re_num, item_review.userid, item_review.num, re_rate, i_subject re_subject, seller.userid sellerid , item_review.re_writedate, re_content
+			from item_review 
+			join ordertbl on item_review.num = ordertbl.num 
+			join sell_item on ordertbl.num = sell_item.i_num 
+			join seller on seller.sel_num = sell_item.sel_num 
+		</if>
+		where item_review.userid=#{userid} and re_writedate between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+		and ${searchKey} like #{searchWord}
+		order by re_writedate desc)
+		where rownum <![CDATA[ <= ]]> #{rowNum1} order by re_writedate asc)
+		where rownum <![CDATA[ <= ]]> #{rowNum2} order by re_writedate desc
+				
+   </select>
+   
+   <select id="selectMyReviewListCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="int">
+   		select count(re_num) from (
+   		<if test="kategorie.equals('mem_share')">
+			select re_num, item_review.userid, item_review.num, re_rate, mem_share.userid sellerid, s_subject, re_content, item_review.re_writedate 
+			from item_review 
+			join joinus on item_review.num = joinus.numjoin 
+			join mem_share on joinus.numjoin = mem_share.num 
+		</if>
+		<if test="kategorie.equals('grouplocal')">
+			select re_num, item_review.userid, item_review.num, re_rate, re_content, g_subject, re_writedate, grouplocal.userid sellerid
+			from item_review 
+			join joinus on item_review.num = joinus.numjoin 
+			join grouplocal on joinus.numjoin = grouplocal.num
+		</if>
+   		<if test="kategorie.equals('sell_item')">
+			select re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid sellerid , item_review.re_writedate, re_content
+			from item_review 
+			join ordertbl on item_review.num = ordertbl.num 
+			join sell_item on ordertbl.num = sell_item.i_num 
+			join seller on seller.sel_num = sell_item.sel_num
+		</if>
+		where item_review.userid=#{userid} and re_writedate between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+		and ${searchKey} like #{searchWord})
+   </select>
+   
+   <update id="reviewUpdate" parameterType="com.team4.localer.vo.ItemReviewVO">
+		update item_review set re_rate = #{re_rate}, re_content = #{re_content} , re_writedate = sysdate where re_num =  #{re_num} and userid=#{userid}
+   </update>
 </mapper>

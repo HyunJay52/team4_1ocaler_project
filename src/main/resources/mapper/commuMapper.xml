@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.team4.localer.dao.BoardDAO">
+	<insert id="commuInsert" parameterType="com.team4.localer.vo.BoardVO" >
+		insert into board (num,userid, b_gu, up_cate, down_cate,b_subject, b_content,b_img1,b_tag)
+		values (boardsq.nextval, #{userid}, #{b_gu}, ${up_cate},${down_cate},#{b_subject},#{b_content},#{b_img1}, #{b_tag})
+	</insert>
+	
+	<!-- 커뮤 토탈레코드수구하기? -->
+	<select id="boardTotalRecoedCount" resultType="int">
+  		select count(num) from board  where
+  		<if test="up_cate==1">
+  			 b_gu=#{b_gu} and up_cate=${up_cate}
+  		</if>
+  		<if test="up_cate==2">
+  			up_cate=${up_cate}
+  		</if>
+  		 <if test="up_cate==3">
+  			up_cate=${up_cate} 
+  		</if>
+  		<if test="searchWord != null and !searchWord.equals('')">
+  			and ${searchKey} like '%${searchWord}%'
+  		</if>
+  	</select>
+  	
+
+		
+  	<select id="commuPageSelect" resultType="com.team4.localer.vo.BoardVO">
+	    select * from        
+	        (select * from               
+	            (select * from         
+	                (select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
+					to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
+					(select count(*) from reply where num = b.num) repcont,
+    				(select count(*) from likeit where num = numlike) numlike  from board b
+	                
+	                <if test="searchKey != null and searchWord != null and searchKey != '' and searchKey != '' ">
+	                    where ${searchKey} like '%${searchWord}%'and up_cate=${up_cate}
+	                    <if test="up_cate == 1">
+	                      and b_gu=#{b_gu}
+	                    </if>
+	                    
+	                </if> order by num desc)
+	                
+	           <if test="up_cate != null and up_cate != '' ">
+	         	   where up_cate=${up_cate} 
+	         	    
+	         	    <if test="up_cate == 1">
+	                      and b_gu=#{b_gu}
+	                </if>
+	           </if>)
+	                                <!--      현재페이지 * 한페이지출력수 -->
+	        where <![CDATA[rownum<=]]>${pageNum * onePageRecord}  order by num asc)
+	    where <![CDATA[rownum<=]]>
+	                 <!-- 현재페이지가가 총페이지수랑 같으면(마지막페이지라는뜻) = ${마지막페이지레코드{ -->
+	    <if test="pageNum==totalPage">
+	    	${lastPageRecord}
+	    </if>
+	            <!-- 그게 아니고 현재페이지가 총페이지수랑 같지 않으면  ${한페이지출력수} -->
+	    <if test="pageNum!=totalPage">
+	    	${onePageRecord}
+	    </if>
+	    order by num desc
+	</select>
+	
+  	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
+  		select num, b.userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag, b_writedate ,b_hit,b_img1,
+        to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick,
+    	(select count(*) from reply where num = b.num) repcont,
+    	(select count(*) from likeit where num = numlike) numlike     
+		from board b join member m on b.userid=m.userid  where  num=${num} 
+  	</select>
+  	<delete id="commuDelete" >
+		delete from board where num=#{param1} and userid=#{param2}
+	</delete>
+	<update id="commuUpdate">
+		update board set b_subject=#{b_subject}, b_content=#{b_content}, 
+		<if test="b_img1!=null and b_img1!=''">
+			b_img1=#{b_img1},
+		</if>
+		b_tag=#{b_tag} where num=#{num} and userid=#{userid}
+	</update>
+	<select id ="commuRecipeSelect" resultType="com.team4.localer.vo.BoardVO">
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate, 'YYYY.MM.DD') b_writedate ,b_hit,
+		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
+    	(select count(*) from reply where num = b.num) repcont,
+    	(select count(*) from likeit where num = numlike) numlike       	 
+		from board b where up_cate=2  order by num desc
+	</select>
+	<select id ="commuFreeSelect" resultType="com.team4.localer.vo.BoardVO">
+		select num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,to_char(b_writedate,'YYYY.MM.DD') b_writedate ,b_hit,
+		to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate, 
+    	(select count(*) from reply where num = b.num) repcont,
+    	(select count(*) from likeit where num = numlike) numlike       	  
+		from board b where up_cate=3  order by num desc
+	</select>
+  	<update id="hitCount">
+		update board set b_hit=b_hit+1 where num=#{param1}
+	</update>
+	<update id="memwriteCount">
+		update member set mem_post=mem_post+1 where userid=#{param1}
+	</update>
+	<update id="memdeleteCount">
+		update member set mem_post=mem_post-1 where userid=#{param1}
+	</update>
+	<select id="recipeSelect" resultType="com.team4.localer.vo.BoardVO" >
+		<![CDATA[ 
+		SELECT num,userid, b_gu, up_cate, B_SUBJECT, B_WRITEDATE , to_char(B_WRITEDATE, 'YYYY/MM/DD') AS B_WRITEDATE , B_HIT FROM (SELECT * FROM board WHERE UP_CATE =3  ORDER BY b_hit DESC) WHERE rownum<6
+		]]>
+	</select>
+	<select id="freeSelect" resultType="com.team4.localer.vo.BoardVO" >
+		<![CDATA[ 
+		SELECT num,userid, b_gu, up_cate, B_SUBJECT, B_WRITEDATE , to_char(B_WRITEDATE, 'YYYY/MM/DD') AS B_WRITEDATE , B_HIT FROM (SELECT * FROM board WHERE UP_CATE =2  ORDER BY b_hit DESC) WHERE rownum<6
+		]]>
+	</select>
+	<select id="commuMainSelect" resultType="com.team4.localer.vo.BoardVO" >
+		<![CDATA[
+		SELECT num,userid, b_gu, up_cate,down_cate, B_SUBJECT, B_WRITEDATE , to_char(B_WRITEDATE, 'YYYY/MM/DD') AS B_WRITEDATE , B_HIT, 
+		(select count(*) from likeit where num = numlike) numlike
+		FROM (SELECT * FROM board WHERE UP_CATE =1  ORDER BY b_hit DESC) WHERE rownum<6
+		]]>
+	</select>
+	<select id="commuOneSelect"  resultType="com.team4.localer.vo.BoardVO">
+		<![CDATA[ 
+			SELECT num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit , repcont FROM 
+			(select b.num,userid, b_gu, up_cate, down_cate,b_subject, b_content ,b_tag,b_writedate,b_hit ,
+    	    (select count(*) from reply where num = b.num) AS repcont  
+         	from board b where userid=#{userid} order by num DESC) WHERE rownum<2 
+		]]>
+	</select>
+	<select id="commuGuSelect"  resultType="int">
+	 	select count(*)gu_select from board where b_gu=#{param1} and up_cate=1
+	</select>
+	<select id="newSelect" resultType="com.team4.localer.vo.BoardVO">
+		 select num, to_date(sysdate,'YYYY.MM.DD') - to_date(b_writedate,'YYYY.MM.DD') newDate from board where num=#{num}
+	</select>
+	<select id="lagLeadSelect" resultType="com.team4.localer.vo.PrevNextVO">
+		select * from( 
+		      select num, 
+			    lag(num,1,0) over (order by num ) prevNo, 
+			    lag(b_subject, 1, '이전글이 없습니다') over(order by num ) prevSubject, 
+			    lead(num,1,0) over (order by num ) nextNO, 
+			    lead(b_subject,1,'다음글이 없습니다.') over (order by num ) nextSubject 
+			    from
+			    (select * from
+			        (select * from
+			            (select num,up_cate,userid,b_gu,b_subject,b_content from board)
+			             <if test="searchKey != null and searchWord != null and searchKey != '' and searchKey != '' "> 
+			          		where #{searchKey} like '%${searchWord}%'
+			          	</if>
+			           order by num desc)
+			        <if test="up_cate != null and up_cate != '' ">    
+			     	where up_cate=${up_cate}
+			     	</if>
+			     	)
+			      board order by num)
+		 where num = ${num}
+	</select>
+	<select id="likeCount" resultType="com.team4.localer.vo.BoardVO">
+		select count(*) numlike from likeit where numlike=#{param1}
+	</select>
+</mapper>

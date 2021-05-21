@@ -1,73 +1,148 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- 주소 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+	document.title = "내정보(판매자)";
+	
+	$(function(){
+		//moreSellerInfo 더보기 이벤트
+		var moreSellerInfo = false;
+		$("#moreSellerInfo").click(function(){
+			if(moreSellerInfo == false){
+				$(this).css('display', 'none');
+				$(".editOn").css('display', 'block');
+				$(".inputDisabled").attr('disabled', false);
+				//$("#sel_prof").attr('readyonly', false);
+				moreSellerInfo = true;
+			}else{
+				if(confirm("수정을 취소하시겠습니까?")){
+						
+				}else{
+					return false;
+				}
+				$(".editOn").css('display', 'none');	
+				$(".inputDisabled").attr('disabled', true);
+				moreSellerInfo = false;								
+			}
+		});
+	});	
+</script>
+
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
-	<div class="myinfoContainer">
-		<h2>판매관리 - 판매자 정보</h2>
-		<div class="sellerBasicInfo">
-			<h3 class="info-font-weight">기본정보</h3>
-			<form method="post">
-				<ul class="sellerInfoList">
-					<li>아이디</li>
-					<li>test</li>
-					<li>사업자명</li>
-					<li><input type="text" name="userid" value="김자바" class="sellerInputDisplay" disabled/></li>
-					<li>회사명</li>
-					<li><input type="text" name="userid" value="김자바의 스윗포테이토" class="sellerInputDisplay" disabled/></li>
-					<li>사업자번호</li>
-					<li><input type="text" name="userid" value="123-12-12345" class="sellerInputDisplay" disabled/></li>
-					<li><h3>대표 이미지</h3><label class="btn btn-outline-dark sellerImgLabel" for="imgFile">사진 선택</label></li>
-					<li><img src="<%=request.getContextPath()%>/img/myInfo/delivery/box.png" class="sellerInfoImg"></li>
-					<li><input id="imgFile" name="file" type="file" class="editOn" style="display:none; border:none;"/></li>
-				</ul>
-				<hr/>
-				<div class="sellerInfoEditBtnForm">
-					<input type="reset" class="btn commBtn sellerBtn" style="float:left" value="취소"/>
-					<button class="btn commBtn sellerBtn" value="EDIT">수정하기</button>			
-				</div>
-			</form>
-		</div>
-		<div class="sellerDetailInfo">
-			<h3 class="info-font-weight">상세정보</h3>
-			<form method="post">
-				<ul class="sellerInfoList">
-					<li>전화번호</li>
-					<li>031-1234-1234</li>
-					<li>고객상담 번호</li>
-					<li>010-1234-0099</li>
-					<li>회사명</li>
-					<li>김자바의 스윗포테이토</li>
-					<li>주소</li>
-					<li><input type="text" name="ziocide" value="77001" class="sellerZipcodeForm sellerInputDisplay" maxlength='5' disabled/><button class="btn commBtn sellerBtnDisplay">주소찾기</button></li>
-					<li><input type="text" name="ziocide" value="강원도 원주시" class="sellerInputDisplay" disabled/></li>					
-					<li>반품지 주소<input type="checkbox" class="sellerBtnDisplay"/></li>
-					<li><input type="text" name="ziocide" value="77001" class="sellerZipcodeForm sellerInputDisplay" maxlength='5' disabled/><button class="btn commBtn sellerBtnDisplay">주소찾기</button></li>
-					<li><input type="text" name="ziocide" value="강원도 원주시" class="sellerInputDisplay" disabled/></li>					
-				</ul>
-				<button class="btn commBtn sellerBtn sellerBtnDisplay" style="float:right">수정</button>			
-			</form>
-		</div>
-		<div class="sellerAccountInfo">
-			<h3 class="info-font-weight">계좌정보</h3>
-			<div class="sellerAccountInfoCenter">
-				<select class="sellerAccountInfoForm">
-					<option value="기업은행">기업은행</option>
-					<option value="우리은행">우리은행</option>
-					<option value="국민은행">국민은행</option>
-					<option value="하나은행">하나은행</option>
-					<option value="신한은행">신한은행</option>
-					<option value="SC제일은행">SC제일은행</option>
-					<option value="한국씨티은행">한국씨티은행</option>
-					<option value="농협은행">농협은행</option>
-				</select>
-				<input type="text" name="bank" class="sellerAccountInfoForm"/>
-				<button class="btn btn-outline-dark sellerBtn" style="float:right; margin:10px;">계좌인증</button>
+	<form method="post" action="myinfoSellerOk" id="myinfoSellerFrm" enctype="multipart/form-data">
+		<div class="basicMyinfo">
+		<div class="basicMyinfoHeader">판매자 정보</div>
+			<ul>
+				<li>대표 이미지</li>
+				<li class="memheightAuto">
+					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
+						<img src="<%=request.getContextPath()%>/img/sel_prof/${myVO.sel_prof}"
+							id="previewImg" class="profImg form-control-file border"
+							alt="upload image" />
+					</div> <label class="Mem_input-file-button" for="sel_prof"> 사진수정 </label> 
+					<input type="file" name="profFile" accept="image/*" id="sel_prof"
+					style="display: none; margin-top: 70px; border: none;" />
+				</li>
+				
+				<li>아이디</li>
+				<li><input type="text" name="userid" id="userid" tabindex="1" value="${myVO.userid }" disabled/></li>
+				<li>사업자명</li>
+				<li><input type="text" name="sel_name" id="sel_name"tabindex="5" value="${myVO.sel_name }" disabled/></li>
+				<li>회사명</li>
+				<li>
+					<input type="text" class="inputDisabled" name="company" id="company" value="${myVO.company }" disabled="disabled" placeholder="회사명을 입력해주세요" />
+				</li>
+				<li>사업자 번호</li>
+				<li>
+					<input type="text" class="inputDisabled" name="com_num" id="com_num" tabindex="6" maxlength="11" value="${myVO.com_num }" disabled="disabled"/>
+				</li>
+				<li>고객상담번호</li>
+				<li>
+					<input type="text" class="inputDisabled" name="sel_tel" id="sel_tel" tabindex="6" maxlength="11" value="${myVO.sel_tel }" disabled="disabled"/>
+				</li>
+				<li>이메일</li>
+				<li><input type="text" class="inputDisabled" name="sel_email" id="sel_email" tabindex="6" maxlength="11" value="${myVO.sel_email }" disabled="disabled"/>
+				<button type="button" id="verifyEmail" class="btn commBtn Mem_lgBtn">이메일인증</button> <br />
+				<span id="checktel"></span></li>
+					
+				<li>주소</li>
+				<li style="height:200px">
+					<ul class="myifoAddrInput">
+						<li><input type="text" class="inputDisabled" name="sel_zip" id="sel_zip" value="${myVO.sel_zip }" disabled="disabled"
+							tabindex="9" />
+						<button type="button" class="btn commBtn Mem_lgBtn inputDisabled" onclick="javascript:openKakaoPost()">재검색</button></li>
+						<li><input type="text" class="inputDisabled" name="sel_addr" id="sel_addr" value="${myVO.sel_addr }" disabled="disabled"
+							tabindex="10" /></li>
+						<li><input type="text" class="inputDisabled" name="sel_detail" id="sel_detail" value="${myVO.sel_detail }" disabled="disabled"
+							tabindex="11" />
+						</li>
+						<li>
+							<div id="joinAddrWrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:absolute">
+							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>계좌정보</li>
+				<li>
+					<ul id="bankInput"  style="height: auto;">
+						<li><input type="text" name="acc_name" id="acc_name" class="inputDisabled" value="${myVO.acc_name }"/>
+							<br/><span id="checkSellAccName"></span>
+						</li>
+						<li><!-- bank -->
+							<select id="bank" name="bank" class="inputDisabled">
+								<option value="0">은행선택</option>
+								<option value="신한은행">신한은행</option>
+								<option value="기업은행">기업은행</option>
+								<option value="하나은행">하나은행</option>
+								<option value="국민은행">국민은행</option>
+								<option value="카카오뱅크">카카오뱅크</option>
+							</select>
+							<input type="number" name="account" id="account" class="inputDisabled" value="${myVO.account }"/>
+							<br/><span id="checkSellAcc"></span>
+						</li>
+					</ul>
+				</li>
+				<li>인사말</li>
+				<li><textarea name="sel_content" id="mem_content" style="width:318px; height:62px; padding: 5px; resize:none"
+						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.sel_content }</textarea>
+				</li>
+								
+			</ul>
+			
+			<button type="button" id="moreSellerInfo" class="btn commBtn Mem_lgBtn"
+				style="width: 320px; height: 40px; display: block; margin: 0 auto;">수정하기</button>
+			<div class="editOn" id="sellerEditOn">
+				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정</button>
+				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
+			</div>
+			<div style="text-align:center; margin-bottom:20px">
+				<button type="button" class="btn commBtn" style="width:320px">셀러활동 중단</button>
+				<br/><button type="button" class="btn cancelBtn" style="width:320px" data-target="#myinfoMd" data-toggle="modal">셀러 탈퇴</button>
 			</div>
 		</div>
-		<div class="sellerBtnForm">
-			<button class="btn commBtn btn-lg sellerBtn">셀러활동 중단</button>
-			<button class="btn commBtn btn-lg sellerBtn">셀러 탈퇴</button>
-			
-		</div>
-	</div>
+	</form>
 </div>
+<script>
+	$(()=>{
+		$("#moreSellerInfo").click(function(){
+			$(this).css('display', 'none');
+			$("#sellerEditOn").css('display', 'block');
+		});
+	});
+</script>
+
+
+<div id="verifyEmailPop">
+	<div>이메일인증</div>
+	<ul>
+		<li>인증번호를 입력해주세요</li>
+		<li><input type="password" id="verifiedNum"/></li>
+		<li><input type="submit" id="verfiedNumChek" value="확인하기"/></li>
+	</ul>	
+</div>
+
+<script src="<%=request.getContextPath() %>/js/member/selEmailverify.js"></script>

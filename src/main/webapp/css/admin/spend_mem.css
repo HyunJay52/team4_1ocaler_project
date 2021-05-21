@@ -1,45 +1,35 @@
 @charset "UTF-8";
-body{
-	font-family:"nsr";
-	}
-#main{
-	position:relative;
-	margin:0 auto; 
-	padding:0;
-	padding-top:30px;
-	overflow:auto;
-	width:1300px;
-	
-}
+
 #doublediv{
 	overflow:auto;
 }
+.tablediv{
+	width:40%;
+	overflow:auto;
+	float:left;
+}
 .t_spend{
 	float:left;
-	width:40%;
+	width:100%;
 	margin-left:0;
 	margin-right:0;
 	margin-top:20px;
-	margin-bottom:20px;
 	font-size:22px;
+	text-align:center;
 }
 .t_spend tr{
 	text-align:center;
-    height:80px;
+    height:50px;
     border:1px solid #ddd;
+    background-color:rgb(243,245,248,0.3);
 }
 .t_spend td{
 	border-right:1px solid #ddd;
 }
 .t_spend tr:nth-child(2n+1){
-	background-color:rgb(204,181,242,0.3);
+	background-color:rgb(243,245,248);
 }
-.t_spend tr:last-child{
-	background-color:#fff;
-	text-align:right;
-	font-family:"nsrb";
-	padding-right:20px;
-}
+
 /*차트 부분*/
 #chart_div{
 	float:left;
@@ -54,21 +44,17 @@ body{
 #nodiv{
 	margin:20px;
 }
-/*이전월 다음달 버튼*/
-.pnBtn{
-	float:left;
-	width:30px;
-	height:30px;
-	border-radius:10px;
-	border:1px solid #3f1785;
-	background-color:#fff;
-	color:#3f1785;
-	font-size:22px;
-	font-family: inherit;
+
+/*검색 부분*/
+#formdiv{
+	width:100%;
+	text-align: center;
 }
-.pnBtn:hover{
-	background-color:#3f1785;
-	color:#fff;
+.spendtext{
+	width:400px;
+	margin:10px;
+	padding:7px;
+	border:1px solid gray;
 }
 .alignright{
 	float:right;
@@ -80,6 +66,7 @@ body{
 	float:left;
 	width:40px;
 	height:30px;
+	
 	text-align:center;
 	border-radius:10px;
 	background-color:rgb(204,181,242,0.3);
@@ -88,14 +75,21 @@ body{
 	position:absolute;
 	left:100px;
 	top:100px;
+	overflow-y: scroll;
+	height:400px;
 }
 #moTwo{
 	position:absolute;
 	right:100px;
 	top:100px;
+	overflow-y: scroll;
+	height:400px;
 }
 
-
+#topsubject{
+	font-size: 22px;
+    font-weight: bold;
+}
 
 
 

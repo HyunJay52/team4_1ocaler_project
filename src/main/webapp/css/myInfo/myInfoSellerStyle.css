@@ -53,13 +53,14 @@
 		margin-right:5px;
 	}
 	.sellerAccountInfoForm{
-		height:40px;
+		height:46px;
 	}
 	.sellerBtnForm{
 		text-align:center;
 	}
 	.sellerBtn{
-		width:150px;
+		width:60%;
+		
 	}
 	.sellerBtnDisplay{
 		display:none;
@@ -67,4 +68,10 @@
 	.sellerInputDisplay{
 		border:none;
 		background-color:#fff;
+	}
+	#sellerEditOn{
+		margin:20px 0;
+	}
+	.myinfoSellerOtherBtn{
+		width:320px;
 	}

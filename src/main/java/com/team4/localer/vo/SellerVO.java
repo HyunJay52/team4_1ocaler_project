@@ -7,21 +7,53 @@ public class SellerVO {
 	private String sel_name;//사업자명
 	private String company;//상호명
 	private String com_num;//사업자번호
+	private String com_numStr;
 	private String sel_tel;//고객상담번호
-	private String sel_zip;//우편번호
+	private String sel_telStr;
+	private String sel_email;//판매자 이메일
+	private int sel_zip;//우편번호
 	private String sel_addr;//주소
 	private String sel_detail;//상세주소
 	private String sel_prof;//셀러프로필
 	private String sel_content;//셀러설명
-	private String back;//은행명
+	private String bank;//은행명
 	private String acc_name;//계좌주
-	private int account;//계좌번호
+	private String account;
+	private int sel_count;//판매자 게시글 개수
+	//private int account;계좌번호
 	private String sel_date;//셀러 신청일,승인일
+	private int sel_status;//셀러 상태정보 0:탈퇴, 1:활동, 2:정지
+	
 	
 	//판매자 관리 페이지 필요에 의한 변수,,,ㅎ
 	private int mem_status;//1.정상, 2.휴면, 3.블랙,
 	private int mem_type;//1.일반, 2.셀러
 	private int reportCount;//쌓인신고
+	
+	public String getCom_numStr() {
+		com_numStr=com_num.substring(0,3)+"-";
+		com_numStr+=com_num.substring(3,5)+"-";
+		com_numStr+=com_num.substring(5);
+		return com_numStr;
+	}
+	public void setCom_numStr(String com_numStr) {
+		this.com_numStr = com_numStr;
+	}
+	public String getSel_telStr() {
+		sel_telStr=sel_tel.substring(0,3)+"-";
+		sel_telStr+=sel_tel.substring(3,7)+"-";
+		sel_telStr+=sel_tel.substring(7);
+		return sel_telStr;
+	}
+	public void setSel_telStr(String sel_telStr) {
+		this.sel_telStr = sel_telStr;
+	}
+	public int getSel_count() {
+		return sel_count;
+	}
+	public void setSel_count(int sel_count) {
+		this.sel_count = sel_count;
+	}
 	public int getSel_num() {
 		return sel_num;
 	}
@@ -64,10 +96,16 @@ public class SellerVO {
 	public void setSel_tel(String sel_tel) {
 		this.sel_tel = sel_tel;
 	}
-	public String getSel_zip() {
+	public String getSel_email() {
+		return sel_email;
+	}
+	public void setSel_email(String sel_email) {
+		this.sel_email = sel_email;
+	}
+	public int getSel_zip() {
 		return sel_zip;
 	}
-	public void setSel_zip(String sel_zip) {
+	public void setSel_zip(int sel_zip) {
 		this.sel_zip = sel_zip;
 	}
 	public String getSel_addr() {
@@ -94,11 +132,11 @@ public class SellerVO {
 	public void setSel_content(String sel_content) {
 		this.sel_content = sel_content;
 	}
-	public String getBack() {
-		return back;
+	public String getBank() {
+		return bank;
 	}
-	public void setBack(String back) {
-		this.back = back;
+	public void setBank(String bank) {
+		this.bank = bank;
 	}
 	public String getAcc_name() {
 		return acc_name;
@@ -106,10 +144,11 @@ public class SellerVO {
 	public void setAcc_name(String acc_name) {
 		this.acc_name = acc_name;
 	}
-	public int getAccount() {
+	
+	public String getAccount() {
 		return account;
 	}
-	public void setAccount(int account) {
+	public void setAccount(String account) {
 		this.account = account;
 	}
 	public String getSel_date() {
@@ -117,6 +156,12 @@ public class SellerVO {
 	}
 	public void setSel_date(String sel_date) {
 		this.sel_date = sel_date;
+	}
+	public int getSell_status() {
+		return sel_status;
+	}
+	public void setSell_status(int sel_status) {
+		this.sel_status = sel_status;
 	}
 	public int getMem_status() {
 		return mem_status;

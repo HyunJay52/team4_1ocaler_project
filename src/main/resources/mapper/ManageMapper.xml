@@ -3,15 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team4.localer.dao.ManageDAO">
-	<select id="memAllSelect" resultType="com.team4.localer.vo.MemberVO">
-  		select mem_no, userid, mem_name, mem_addr, mem_tel, mem_status, mem_type
-  		from member 
-  		<if test="param1 ==null || param1==''">
-  			where mem_status != 4
-  		</if>
-  		<if test="param1 !=null and param1!='' ">
-  			where ${param1} like #{param2} 
-  		</if>
+	<select id="memberAllSelect" resultType="com.team4.localer.vo.MemberVO">
+  		select * from
+			(select *from
+				(select mem_no, userid, mem_name, mem_addr, mem_tel, mem_status, mem_type from ${cate}
+				<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+					where ${searchKey} like #{searchWord}
+				</if>
+				order by ${num} desc)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+					where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc		
   	</select>
   	<select id="memInfoCount" resultType="int">
   		select count(userid) from ${param2} where userid=#{param1}
@@ -25,6 +33,398 @@
   	</update>
   	<!-- 셀러관리 페이지 부분 -->
   	<select id="sellerAllSelect" resultType="com.team4.localer.vo.SellerVO">
-  		select sel_num,userid,sel_lvl
+  		select * from
+			(select *from
+				(select s.sel_num, s.userid ,s.sel_name, s.sel_addr,s.sel_detail, s.sel_lvl,s.sel_tel, 
+				   m.mem_status, m.mem_type 
+				   from seller s join member m on s.userid = m.userid 
+				<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+					where ${searchKey} like #{searchWord}
+				</if>
+				order by ${num} desc)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+					where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc	
+  	</select>
+  	<select id="sellerDetailInfo" resultType="com.team4.localer.vo.AdminstatisVO">
+  		select s.i_num, s.i_subject, to_char(s.i_writedate,'YYYY/MM/DD') i_writedate, 
+				count(case when o.o_conf=1 then 1 end) o_conf1,
+				count(case when o.o_conf=2 then 1 end) o_conf2, 
+				sum(case when o.o_conf=2 then o.o_price else 0 end) price_total
+				from sell_item s, ordertbl o where s.i_num = o.num
+		group by i_num,s.sel_num, s.i_subject, s.i_writedate
+		having s.sel_num=#{param1}
+  	</select>
+  	<select id="memShareAllSelect" resultType="com.team4.localer.vo.MemShareVO">
+  		select * from
+			(select *from
+				(select m.num , m.s_cate ,m.s_subject ,m.s_cnt ,m.userid , 
+				to_char(m.s_writedate,'YYYY/MM/DD') s_writedate, count(case when r.num=m.num then 1 end) reportCount
+				from mem_share m, report r 
+				<if test="!searchWord.equals('') and searchWord!=null">
+					where ${searchKey} like #{searchWord}
+				</if>
+				group by m.num, m.s_cate,m.s_subject,m.s_cnt,m.userid, m.s_writedate
+				order by num desc
+			)
+			where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+			where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc
+  	</select>
+  	<select id="sellerBoardSelect" resultType="com.team4.localer.vo.SellitemVO">
+	  	select * from
+			(select *from
+				(select i.i_num, i.i_status, i.i_subject,i.i_cnt, s.userid ,to_char(i.i_writedate, 'YYYY/MM/DD') i_writedate,i.i_hit
+		from sell_item i join seller s on i.sel_num = s.sel_num
+			<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색어가 있을때 -->
+					where ${searchKey} like #{searchWord}
+			</if>
+			order by ${num} desc)
+			where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+			where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc
+  	</select>
+  	<delete id="selManageDel">
+  		delete from ${param2} where ${param3}=${param1}
+  	</delete>
+  	<select id="boardManageAllSelect" resultType="com.team4.localer.vo.GroupVO">
+  		select * from
+			(select *from
+				(select g.num,g.up_cate,g.down_cate,g.g_subject,g.g_cnt,g.userid, 
+			  		to_char(g.g_writedate,'YYYY-MM-DD') g_writedate, 
+			  		count(case when r.num=g.num then 1 end) reportCount
+				from grouplocal g, report r 
+				<if test="!searchWord.equals('') and searchWord!=null">
+					where ${searchKey} like #{searchWord}
+				</if>
+				group by g.num,g.up_cate,g.down_cate,g.g_subject,g.g_cnt,g.userid, g.g_writedate
+				order by g.num desc
+			)
+			where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+			where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc
+  	</select>
+  	<select id="cumuManageListSearch" resultType="com.team4.localer.vo.BoardVO">
+  		select * from
+			(select *from
+				(select b.num, b.up_cate, b.b_gu,b.b_subject,b.userid,b.b_hit,
+  					to_char(b.b_writedate,'YYYY-MM-DD') b_writedate, count(case when r.num=b.num then 1 end) reportCount
+					from board b, report r 
+					<if test="!searchWord.equals('') and searchWord!=null">
+						where ${searchKey} like #{searchWord}
+					</if>
+					group by b.num, b.up_cate, b.b_gu, b.b_subject, b.userid, b.b_writedate, b.b_hit
+			  		order by b.num desc
+			)
+			where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
+			where rownum <![CDATA[<=]]>
+					<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+						${lastPageRecord}
+					</if>
+					<if test="pageNum != totalPage">
+						${onePageRecord}
+					</if>
+					order by ${num} desc
+  	</select>
+  	<select id="selManageStatis" resultType="com.team4.localer.vo.AdminstatisVO">
+  		select
+			(select count(num) from mem_share)+
+			(select count(i_num) from sell_item) price_total,
+			(select count(case when s_status=1 then 1 end) from mem_share)
+			+(select count(case when i_status=1 then 1 end) from sell_item) o_conf1,
+			(select count(case when s_status=2 then 1 end) from mem_share)
+			+(select count(case when i_status=2 then 1 end) from sell_item) o_conf2
+			from dual
+  	</select>
+  	<select id="boardManageStatis" resultType="com.team4.localer.vo.AdminstatisVO">
+  		select 
+		    (select count(*)  from grouplocal) o_conf1,
+		    (select count(*)  from board) o_conf2,
+		    (select count(*)  from sell_item)
+		    +(select count(*) from mem_share) price_total 
+		    from dual
+  	</select>
+  	<select id="loginNum" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select 
+		(select count(*) from logcount 
+		where logdate between to_date('21-${month1}-01','YY-MM-DD')
+		              and to_date('21-${month1}-${last1}','YY-MM-DD')) loginmem1,
+		(select count(*) from logcount 
+		where logdate between to_date('21-${month2}-01','YY-MM-DD')
+		              and to_date('21-${month2}-${last2}','YY-MM-DD')) loginmem2,
+		(select count(*) from logcount 
+		where logdate between to_date('21-${month3}-01','YY-MM-DD')
+		              and to_date('21-${month3}-${last3}','YY-MM-DD')) loginmem3,<!-- 로그인수 count -->
+		(select count(userid) from member 
+		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month1}-${last1}','YY-MM-DD')) totalmem1,<!-- 총 회원수 count -->
+		    (select count(userid) from member 
+		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month2}-${last2}','YY-MM-DD')) totalmem2,
+		    (select count(userid) from member 
+		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month3}-${last3}','YY-MM-DD')) totalmem3
+		from dual
+  	</select>
+  	<select id="newmem" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select 
+		    (select count(userid) from member 
+		        where mem_status=1 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
+		        and to_date('21-${month1}-${last1}','YY-MM-DD')) loginmem1,
+		    (select count(userid) from member 
+		        where mem_status=1 and  mem_sub between to_date('21-${month2}-01','YY-MM-DD') 
+		        and to_date('21-${month2}-${last2}','YY-MM-DD')) loginmem2,
+		    (select count(userid) from member 
+		        where mem_status=1 and  mem_sub between to_date('21-${month3}-01','YY-MM-DD') 
+		        and to_date('21-${month3}-${last3}','YY-MM-DD')) loginmem3,
+		    (select count(userid) from seller --<!-- 신규 셀러회원수 -->
+		        where  sel_date between to_date('21-03-01','YY-MM-DD') 
+		        and to_date('21-03-31','YY-MM-DD')) totalmem1,
+		    (select count(userid) from seller 
+		        where sel_date between to_date('21-04-01','YY-MM-DD') 
+		        and to_date('21-04-30','YY-MM-DD')) totalmem2,
+		    (select count(userid) from seller 
+		        where sel_date between to_date('21-05-01','YY-MM-DD') 
+		        and to_date('21-05-31','YY-MM-DD')) totalmem3
+		from dual
+  	</select>
+  	<select id="guLoginCount" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select 
+			    count(case when loc_gu='강서구' then 1 end) gu1 ,
+			    count(case when loc_gu='구로구' then 1 end) gu2 ,
+			    count(case when loc_gu='금천구' then 1 end) gu3 ,
+			    count(case when loc_gu='관악구' then 1 end) gu4 ,
+			    count(case when loc_gu='강남구' then 1 end) gu5 ,
+			    count(case when loc_gu='강동구' then 1 end) gu6 ,
+			    count(case when loc_gu='용산구' then 1 end) gu7 ,
+			    count(case when loc_gu='중구' then 1 end) gu8 ,
+			    count(case when loc_gu='광진구' then 1 end) gu9 ,
+			    count(case when loc_gu='동대문구' then 1 end) gu10 ,
+			    count(case when loc_gu='중랑구' then 1 end) gu11 ,
+			    count(case when loc_gu='은평구' then 1 end) gu12 ,
+			    count(case when loc_gu='강북구' then 1 end) gu13 ,
+			    count(case when loc_gu='노원구' then 1 end) gu14 ,
+			    count(case when loc_gu='도봉구' then 1 end) gu15 ,
+			    count(case when loc_gu='양천구' then 1 end) gu16 ,
+			    count(case when loc_gu='영등포구' then 1 end) gu17 ,
+			    count(case when loc_gu='동작구' then 1 end) gu18 ,
+			    count(case when loc_gu='서초구' then 1 end) gu19 ,
+			    count(case when loc_gu='송파구' then 1 end) gu20 ,
+			    count(case when loc_gu='마포구' then 1 end) gu21 ,
+			    count(case when loc_gu='서대문구' then 1 end) gu22 ,
+			    count(case when loc_gu='성동구' then 1 end) gu23 ,
+			    count(case when loc_gu='종로구' then 1 end) gu24 ,
+			    count(case when loc_gu='성북구' then 1 end) gu25
+			    from logcount where  logdate
+			    between to_date('21-${month3}-01','YY-MM-DD') and to_date('21-${month3}-${last3}','YY-MM-DD')
+  	</select>
+  	<select id="subCount" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select count(case when mem_type =1 then 1 end) loginmem1,<!-- 일반회원수 --> 
+		       count(case when mem_type =2 then 1 end) loginmem2,<!-- 셀러회원수 -->
+		       count(case when mem_status =1 then 1 end) totalmem1, <!-- 일반 -->
+      		   count(case when mem_status =2 then 1 end) totalmem2 <!-- 휴면 -->
+		from member where mem_sub
+		between to_date('21-03-01','YY-MM-DD') 
+		        and to_date('21-${month3}-${last3}','YY-MM-DD')
+  	
+  	</select>
+  	<select id="boardStatis" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select
+		    (select count(*) from board 
+		        where b_writedate 
+		        between to_date('2021-${month3}-01','YYYY-MM-DD')
+		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) boardcnt,
+		    (select count(*) from sell_item
+		        where i_writedate 
+		        between to_date('2021-${month3}-01','YYYY-MM-DD')
+		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) sell_itemcnt,
+		    (select count(*) from grouplocal
+		        where g_writedate 
+		        between to_date('2021-${month3}-01','YYYY-MM-DD')
+		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) grouplocalcnt,
+		    (select count(*) from mem_share
+		        where s_writedate 
+		        between to_date('2021-${month3}-01','YYYY-MM-DD')
+		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) mem_sharecnt
+		from dual 
+  	</select>
+  	<select id="memspend" resultType="com.team4.localer.vo.AdminspendVO">
+		select 
+		    (select sum(cha_point) from cha_p
+		    where po_date <![CDATA[<=]]>to_date(last_day('21/${month3}/01'),'YY/MM/DD')) totalcharge,
+		    (select sum(sp_point)from sp_p
+		    where sp_date <![CDATA[<=]]>to_date(last_day('21/${month3}/01'),'YY/MM/DD')) totalspend,
+		     (select sum(cha_point) from cha_p
+		    where po_date between to_date('21/${month3}/01','YY/MM/DD') 
+		    and to_date(last_day('21/${month3}/01'),'YY/MM/DD')) chargemoney,
+		    (select sum(sp_point)from sp_p
+		    where sp_date between to_date('21/${month3}/01','YY/MM/DD') 
+		    and to_date(last_day('21/${month3}/01'),'YY/MM/DD')) spendmoney
+		from dual
+  	</select>
+  	<select id="memspendCnt" resultType="com.team4.localer.vo.AdminspendVO">
+  		select count(cha_point) chargecnt , count(case when cha_mth=1 then 1 end) cardcnt,
+			count(case when cha_mth=2 then 1 end) moneycnt from cha_p
+			where po_date between to_date('21/${month3}/01','YY/MM/DD')
+				        and to_date(last_day('21/${month3}/01'),'YY/MM/DD')
+  	</select>
+  	<select id="mempsendList" resultType="com.team4.localer.vo.AdminspendVO">
+  		 select * from
+			(select *from
+				(select ch3.userid, ch3.charge_point, ch3.spend_point, sum(sp2.sp_point) as add_point from 
+					 (select ch2.userid, ch2.charge_point,ch2.spend_point ,mem.num from
+					 (select ch.userid, ch.charge_point, sum(sp.sp_point) as spend_point from
+					 (select userid,sum(cha_point) as charge_point  from cha_p group by userid) ch 
+					 join sp_p sp on sp.userid(+)=ch.userid
+					 group by ch.userid, ch.charge_point) ch2 join mem_share mem on mem.userid(+)=ch2.userid) ch3 
+					 join sp_p sp2 on sp2.sp_item(+)=ch3.num 
+					 
+					 <if test="!searchWord.equals('') and searchWord!=null">
+						where ${searchKey} like #{searchWord}
+					</if>
+					 
+					 group by ch3.userid, ch3.charge_point,ch3. spend_point
+  					 order by ${num} 
+  					)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} desc)
+					where rownum <![CDATA[<=]]>
+							<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+								${lastPageRecord}
+							</if>
+							<if test="pageNum != totalPage">
+								${onePageRecord}
+							</if>
+							order by ${num} 
+  	</select>
+  	<select id="mempsendmodal1List" resultType="com.team4.localer.vo.AdminspendVO">
+  		select sp.sp_item as item_num, mem.s_subject as sel_subject, mem.userid as sel_userid, sp.sp_point as spend_point,sp.sp_date sp_date from sp_p sp
+		join mem_share mem on mem.num=sp.sp_item where sp.userid=#{param1}
+		union all
+		select sp.sp_item as item_num, item.i_subject as sel_subject, item.sel_userid, sp.sp_point as spend_point, sp.sp_date sp_date from 
+		(select i.i_num, i.sel_num , i.i_subject, mem.userid as sel_userid from sell_item i join seller mem on mem.sel_num =i.sel_num) item join sp_p sp
+		on sp.sp_item = item.i_num where sp.userid=#{param1} order by sp_date desc
+  	</select>
+  	<select id="mempsendmodal2List" resultType="com.team4.localer.vo.AdminspendVO">
+  		select mem.num as item_num, mem.s_subject as sel_subject , sp.userid as sel_userid, sp.sp_point as add_point, sp.sp_date 
+		from mem_share mem join sp_p sp on sp.sp_item = mem.num where mem.userid=#{param1} order by sp_point
+  	</select>
+  	<select id="selspendtotal" resultType="com.team4.localer.vo.AdminspendVO">
+  		select sum(rec_money) totalsale,count(o_num)*2000  totalmoney from receipt
+			where conf_date <![CDATA[<=]]>to_date(last_day('21/${month3}/01'),'YY/MM/DD')
+  	</select>
+  	<select id="selspendmonth" resultType="com.team4.localer.vo.AdminspendVO">
+  		select sum(rec_money)  monthsale,count(o_num)*2000 monthmoney from receipt 
+				where conf_date between to_date('21/${month3}/01','YY/MM/DD')
+                and to_date(last_day('21/${month3}/01'),'YY/MM/DD')
+  	</select>
+  	<select id="countboard" resultType="com.team4.localer.vo.AdminspendVO">
+  		select 
+			(select count(i_num) from sell_item 
+			where i_writedate between to_date('21/${month1}/01','YY/MM/DD')
+			                and to_date(last_day('21/${month1}/01'),'YY/MM/DD'))month1,
+			                (select count(i_num) from sell_item 
+			where i_writedate between to_date('21/${month2}/01','YY/MM/DD')
+			                and to_date(last_day('21/${month2}/01'),'YY/MM/DD'))month2,
+			(select count(i_num) from sell_item 
+			where i_writedate between to_date('21/${month3}/01','YY/MM/DD')
+			                and to_date(last_day('21/${month3}/01'),'YY/MM/DD'))month3
+		from dual
+  	</select>
+  	<select id="countspend" resultType="com.team4.localer.vo.AdminspendVO">
+  		select count(case when rec_date<![CDATA[>]]>  to_date(last_day('21/${month3}/01'),'YY/MM/DD') then 1 end) sp_be, 
+		count(case when rec_date<![CDATA[<]]> to_date(last_day('21/${month3}/01'),'YY/MM/DD') then 1 end) sp_af from receipt
+  	</select>
+  	<select id="selspendList" resultType="com.team4.localer.vo.AdminspendVO">
+  		select * from
+			(select *from
+				(select sel1.sel_num, sel1.sel_userid, sel1.sel_subject, sum(o.o_cnt) as sel_cnt,sum(o_price) as sel_price, sum(o.o_cnt)*2000 as fee,sum(o_price)-sum(o.o_cnt)*2000 as remoney from 
+					(select i.i_num as sel_num, sel.userid as sel_userid, i.i_subject as sel_subject from sell_item i join seller sel on sel.sel_num=i.sel_num) sel1
+					join ordertbl o on o.num(+)=sel1.sel_num where o_date between to_date('21/${month}/01','YY/MM/DD') and to_date(last_day('21/${month}/01'),'YY/MM/DD')
+					<if test="!searchWord.equals('') and searchWord!=null">
+						and ${searchKey} like #{searchWord}
+					</if>
+					group by sel1.sel_num, sel1.sel_userid, sel1.sel_subject order by sel_num desc
+					)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by sel_num desc)
+					where rownum <![CDATA[<=]]>
+							<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+								${lastPageRecord}
+							</if>
+							<if test="pageNum != totalPage">
+								${onePageRecord}
+							</if>
+							order by sel_num
+  	</select>
+  	<select id="selpsendmodalList" resultType="com.team4.localer.vo.AdminspendVO">
+  		select num ,userid,o_cnt,o_price,o_date from ordertbl where o_conf=2 and num=${parma1}
+  	</select>
+  	<select id="statismem" resultType="com.team4.localer.vo.AdminstatisVO">
+  		select count(mem_no) as total, 
+		       count(case when mem_sub>=to_date('${param1}','YY/MM/DD')then 1 end) as new_mem,
+		       count(case when mem_type=2 then 1 end) as sell_mem,
+		       count(case when mem_status=2 then 1 end) as hu_mem,
+		       count(case when mem_status=4 then 1 end) as tal_mem
+		from member	
+  	</select>
+  	<select id="guGroupCount" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select 
+			    count(case when g_gu='강서구' then 1 end) gu1 ,
+			    count(case when g_gu='구로구' then 1 end) gu2 ,
+			    count(case when g_gu='금천구' then 1 end) gu3 ,
+			    count(case when g_gu='관악구' then 1 end) gu4 ,
+			    count(case when g_gu='강남구' then 1 end) gu5 ,
+			    count(case when g_gu='강동구' then 1 end) gu6 ,
+			    count(case when g_gu='용산구' then 1 end) gu7 ,
+			    count(case when g_gu='중구' then 1 end) gu8 ,
+			    count(case when g_gu='광진구' then 1 end) gu9 ,
+			    count(case when g_gu='동대문구' then 1 end) gu10 ,
+			    count(case when g_gu='중랑구' then 1 end) gu11 ,
+			    count(case when g_gu='은평구' then 1 end) gu12 ,
+			    count(case when g_gu='강북구' then 1 end) gu13 ,
+			    count(case when g_gu='노원구' then 1 end) gu14 ,
+			    count(case when g_gu='도봉구' then 1 end) gu15 ,
+			    count(case when g_gu='양천구' then 1 end) gu16 ,
+			    count(case when g_gu='영등포구' then 1 end) gu17 ,
+			    count(case when g_gu='동작구' then 1 end) gu18 ,
+			    count(case when g_gu='서초구' then 1 end) gu19 ,
+			    count(case when g_gu='송파구' then 1 end) gu20 ,
+			    count(case when g_gu='마포구' then 1 end) gu21 ,
+			    count(case when g_gu='서대문구' then 1 end) gu22 ,
+			    count(case when g_gu='성동구' then 1 end) gu23 ,
+			    count(case when g_gu='종로구' then 1 end) gu24 ,
+			    count(case when g_gu='성북구' then 1 end) gu25
+			    from grouplocal where  g_date
+			    between to_date('21-${month3}-01','YY-MM-DD') and to_date(last_day('21-${month3}-01'),'YY-MM-DD')
+  	</select>
+  	<select id="cateCount" resultType="com.team4.localer.vo.Mem_statisVO">
+  		select  count(case when up_cate=1 then 1 end) totalmem1,
+				count(case when up_cate=2 then 1 end) totalmem2,
+				count(case when up_cate=3 then 1 end) totalmem3 from board 
+				where b_writedate between to_date('21/${month3}/01','YY/MM/DD')
+				    and to_date(last_day('21/${month3}/01'),'YY/MM/DD')
   	</select>
 </mapper>

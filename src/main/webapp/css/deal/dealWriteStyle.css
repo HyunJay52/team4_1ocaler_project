@@ -1,47 +1,106 @@
 @charset "UTF-8";
 
-	*{font-family: nsr; font-size: 20px;
+	*{
+		font-family: nsr; 
+		font-size: 20px;
+		height: auto;
+		
 	}
-	#body{overflow:auto;width:1300px;margin:50 auto;
-		height: 1000px; 
-	}
-	
-	select{ height: 30px; width: 150px; margin-right: 5px;
-	border: none;
-	
-	}
-	
-	input{margin: 15px 0px;
-	}
-	
-	#subject{font-size: 25px; border: none; border-bottom: 1px solid gray;
-	width: 1000px;  margin-top: 10px;
+	#dealWnEMain{
+	/* 	overflow:auto; */
+		width:1300px;
+		margin:50 auto;
+		height: auto; 
 	}
 	
-	#cnt{font-size: 25px; float:right; border: none; border-bottom: 1px solid gray;
-	  margin-top: 10px;
+	#dealWnEMain>div>form select{ 
+		height: 30px; 
+		width: 150px; 
+		margin-right: 5px;
+		font-size: 13px;
+		/* border: none */;
+	
 	}
 	
-	#cnt::-webkit-input-placeholder ,#gu::-webkit-input-placeholder ,#loc::-webkit-input-placeholder,#price::-webkit-input-placeholder{
+	input{
+		margin: 15px 0px;
+	}
+	
+	#subject{
+		font-size: 25px; 
+		border: none; 
+		border-bottom: 1px solid gray;
+		width: 1000px;  
+		margin-top: 10px;
+	}
+	
+	#cnt{
+		font-size: 25px; 
+		float:right; 
+		border: none; 
+		border-bottom: 1px solid gray;
+	  	margin-top: 10px;
+	  	text-align: center;
+	}
+	
+	#cnt::-webkit-input-placeholder ,#gu::-webkit-input-placeholder ,#price::-webkit-input-placeholder,
+	#i_ship1::-webkit-input-placeholder ,#i_ship2::-webkit-input-placeholder {
 		  text-align: center;
 	}
-
-	#date{text-align: center;
+	
+	#i_ship1,#i_ship2{
+		 display: none;
 	}
-	#date,#gu, #loc, #price{ margin-right: 10px;text-align: center;border: none; border-bottom: 1px solid gray;
+
+	#date{
+		text-align: center;
+	}
+	#date,#gu, #price,#i_ship1,#i_ship2{ 
+		margin-right: 10px;
+		text-align: center;
+		border: none; 
+		border-bottom: 1px solid gray;
 	}
 
-	#tag{ border: none; border-bottom: 1px solid gray;width: 1200px; 
+	#tag,#loc { 
+		border: none; 
+		border-bottom: 1px solid gray;
+		width: 1300px; 
 	}
 	
-	#btn{ width: 1300px; text-align: center;
+	#btn{ 
+		width: 1300px; 
+		text-align: center;
 	}
 	
 	/* 파일 */
 	
-	.file_input_textbox{  border: none; border-bottom: 1px solid gray; width:700px;
+	.file_input_textbox{  
+		border: none; 
+		border-bottom: 1px solid gray; 
+		width:700px;
 		
 	}
+
+	#dealSellImg, .dealSellerImg{
+	    width: 500px;
+   		height: 400px;
+    	border: none;
+	
+	}
+	
+	.deal_input-file-button {
+	    padding: 3px 15px;
+
+	    font-size: 16px;
+	    width: 95px;
+	    text-align: center;
+	    border-radius: 5px;
+	    border: 1px solid #3f1785;
+	    cursor: pointer;
+	    color: #3f1785;
+	    background-color: #fff;
+}
 
 	/* input[type="submit"]{
 	color:#3f1785;
@@ -79,6 +138,17 @@
 	.confBtn:hover {
 		color: #fff;
 		background: #B8B2F4;
+	}
+	
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+	}
+	
+	#cke_content,#s_content {
+		height: 500px;
+		width: 1300px
 	}
 	
 	

@@ -1,24 +1,22 @@
 @charset "UTF-8";
-	.activityLeft{
-		float:left;
-		width:110px;
-		border:1px solid #ddd;
-		height:320px;
-		margin-top:50px;
+	.activitySelect{
+		float:right;	
 	}
-	.activityLeft li{
-		height:40px;
+	#activitySelectbox{
+		width:106px;
+		height:30px;
 	}
 	.activityRight{
 		float:right;
-		width:790px;
-		padding-right:50px;
-		
+	}
+	.myActivityForm{
+		width:430px;
+		float:left;
 	}
 	.myActivityDateFrm{
 		position:absolute;
 		top:5px;
-  	  	left:170px;
+  	  	left:60px;
   	 	height:40px;
 		width:110px;
 		line-height:40px;

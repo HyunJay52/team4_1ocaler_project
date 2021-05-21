@@ -1,55 +1,261 @@
 @charset "UTF-8";
 
-	*{font-family: nsr;
+	*{
+		font-family: nsr;
+		text-overflow: ellipsis;
+		white-space: nowrap
 	}
-	#main{overflow:auto;width:1300px;margin:0 auto;
-	height: 1000px ;
+	
+	
+	a:visited{ 
+		color: #181b46; 
 	}
- 	#map { width: 1300px;height: 650px; text-align: center;
+	a:link { 
+		color:#181b46; 
+	}
+	a:active{
+		color:#181b46;
+	}
+	a:hover{
+		color:#181b46;
+	}
+
+	#commumain{
+		overflow:auto;
+		width:1300px;
+		margin:0 auto;
+		height: atuo ;
+	}
+ 	#map { 
+ 		margin-top:0px;
+ 		/* margin-bottom:70px; */
+ 		width: 1300px;
+ 		height: 650px; 
+ 		text-align: center;
 	} 
 		
-	#map img{width: 1000px; height: 650px; 
+	#map img{
+		width: 1000px; 
+		height: 650px; 
 	}
 	
-	#board{ width:1300px; text-align: center;/*  margin-left: 50px; */
-	}
-	#localBoard{width: 433px;float: left;
-	}
-	#recipeBoard{width: 433px;float: left;
-	}
-	#freeBoard{width: 433px;float: left;
+	
+	
+	/* 테이블 시작 */
+	
+	#commuboard{ 
+		width:1300px; 
+		text-align: center;/*  margin-left: 50px; */
+		margin-top:50px; 
+		color:#000;
 	}
 	
-
-
-  /*테이블 css  */
-	.table {width:96%;margin:0 auto;padding:0}
-    .table tr{/*테이블 목록*/
-    	border-bottom:1px solid rgb(227,227,227); 
+	#commuboard a:visited { 
+		color: black; 
+		text-decoration: none;
+	}
+	
+	
+	
+	/* 쓱싹레시피 */
+	#recipeBoard{
+		width: 630px;
+		float: left;
+		margin-right:40px;
+		
+		margin-bottom: 150px;
+	}
+	
+	#recipeBoard>.table {
+		width:100%;
+		margin:0 auto;
+		margin-top:20px;
+		padding:0
+	}
+    #recipeBoard>.table tr{/*테이블 목록*/
+    	
     	text-align:center;
     	height:40px;
+    	
     }
-	.table tr:first-child{/*첫번째 테이블 목차*/
+	#recipeBoard>.table tr:first-child{/*첫번째 테이블 목차*/
 		text-align:center;
-		background-color:#3f1785;
-		color:#fff; font-weight:bold;
+		background-color: #fff;
+    	color: #000;
+		font-weight:bold;
 	}
-	.table tr:last-child{/*마지막 줄 tr 스타일*/
-		border-bottom:2px solid #3f1785;
+	
+	#recipeBoard>.table th{
+		border-top:2px solid #181b46;
+		border-bottom:1px solid #181b46; 
 	}
-	.table tr>td{width:10%;}/*전체적인 열 폭조정*/
-	.table tr>td:nth-child(1){width:50%; /*첫번째 열 선택*/}
-	.table tr>td:nth-child(2){width:30%; /*첫번째 열 선택*/}
-	.table tr>td:nth-child(3){width:20%;/*세번째 열 선택 : 제목부분*/
+	#recipeBoard>.table tr:last-child{/*마지막 줄 tr 스타일*/
+		border-bottom:2px solid #181b46;
+	}
+	#recipeBoard>.table tr>td{width:10%;}/*전체적인 열 폭조정*/
+	#recipeBoard>.table tr>td:nth-child(1){
+		width:7%; /*첫번째 열 선택*/
+	}
+	#recipeBoard>.table tr>td:nth-child(2){
+		width:43%; /*첫번째 열 선택*/
+		text-align: left;
+	}
+	#recipeBoard>.table tr>td:nth-child(3){
+		width:30%; /*첫번째 열 선택*/
+	}
+	#recipeBoard>.table tr>td:nth-child(4){
+		width:20%;/*세번째 열 선택 : 제목부분*/
+		/* width:50%; *//* text-align:left; */
+	}
+	
+
+	
+	/* 자유게시판 */
+	#freeBoard{
+		width: 630px;
+		float: left;
+		margin-bottom: 150px;
+	}
+	
+	#freeBoard>.table {
+		width:100%;
+		margin:0 auto;
+		margin-top:20px;
+		padding:0
+	}
+    #freeBoard>.table tr{/*테이블 목록*/
+    	border-bottom:1px solid #181b46;
+    	text-align:center;
+    	height:40px;
+    
+    }
+    
+    #freeBoard>.table th{
+		border-top:2px solid #181b46;
+		border-bottom:1px solid #181b46; 
+	}
+	#freeBoard>.table tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color: #fff;
+    	color: #000;
+		font-weight:bold;
+	}
+	#freeBoard>.table tr:last-child{/*마지막 줄 tr 스타일*/
+		border-bottom:2px solid #181b46;
+	}
+	#freeBoard>.table tr>td{width:10%;}/*전체적인 열 폭조정*/
+	#freeBoard>.table tr>td:nth-child(1){
+		width:7%; /*첫번째 열 선택*/
+		
+	}
+	#freeBoard>.table tr>td:nth-child(2){
+		width:43%; /*첫번째 열 선택*/
+		text-align: left;	
+	}
+	#freeBoard>.table tr>td:nth-child(3){
+		width:30%; /*첫번째 열 선택*/
+	}
+	#freeBoard>.table tr>td:nth-child(4){width:20%;/*세번째 열 선택 : 제목부분*/
 		/* width:50%; *//* text-align:left; */
 	}
 	
 	
+	/* 우리동네이야기 */
+	#localBoard{
+		width: 1300px;
+		float: left;
+		margin: 100px 0px;
+		
+	}
+	#localBoard>.table {
+		width:100%;
+		margin:0 auto;
+		margin-top:20px;
+		padding:0
+	}
+    #localBoard>.table tr{/*테이블 목록*/
+    	border-bottom:1px solid #181b46; 
+    	text-align:center;
+    	height:40px;
+    	background-color: #fff;
+    }
+	#localBoard>.table tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		border-bottom:1px solid #181b46; 
+		color:#000; 
+		font-weight:bold;
+	}
+	#localBoard>.table th{
+		border-top:2px solid #181b46;
+		border-bottom:1px solid #181b46; 
+	}
+	
+	#localBoard>.table tr:last-child{
+		border-bottom:2px solid #181b46;/*마지막 줄 tr 스타일*/
+	}
+	#localBoard>.table tr>td{
+		/* width:10%;전체적인 열 폭조정 */
+	}
+	#localBoard>.table tr>td:nth-child(1){	
+		width:5%; /*첫번째 열 선택*/
+		color: rgb(0 104 208);
+	}
+	#localBoard>.table tr:nth-child(2)>td:nth-child(1){
+		color: rgb(0 104 208);
+	}
+	
+	
+	#localBoard>.table tr>td:nth-child(2){	
+		width:10%; /*첫번째 열 선택*/
+	}
+	#localBoard>.table tr>td:nth-child(3){
+		width:10%; /*첫번째 열 선택*/
+	}
+	#localBoard>.table tr>td:nth-child(4){
+		width:35%;/*세번째 열 선택 : 제목부분*//* width:50%; *//* text-align:left; */
+		text-align: left;
+	}
+	#localBoard>.table tr>td:nth-child(5){
+		width:10%;
+		
+	}
+	#localBoard>.table tr>td:nth-child(6){
+		width:10%;
+		
+	}
+	#localBoard>.table tr>td:nth-child(7){
+		width:10%;
+		
+	}
+	#localBoard>.table tr>td:nth-child(8){
+		width:10%;
+		
+	}
+
+	
 	/* 탑헤더? */
 	
-	#commutop{ height: 70px;width:1300px; line-height: 70px;
-	text-align: center; border-bottom:1px solid #3f1785;
-	 font-size: 25px; 
+	#commuHeaderMain{
+		position:relative; 
+      	background-color: white;
+     	display: none;  
+     	border-bottom:1px solid #181b46;
+     	
+	}
+	
+	
+	#commutop{ 
+		height: 70px;
+		width:1300px; 
+		line-height: 70px;
+		text-align: center; 
+		
+	 	font-size: 25px; 
+	 	margin: 0 auto;
+	}
+	#commutop div{
+		width: 33%;
+		float: left;
 	}
 	
 	#commutop a:active, #commutop a:link, #commutop a:visited{
@@ -62,24 +268,36 @@
         font-weight: bold;
         text-decoration: underline;
     }
-	#commuSearch{width: 320px; margin:0 auto;
-	height: 70px;
+	#commuSearch{
+		width: 320px; 
+		margin:0 auto;
+		height: 70px;
 	}
 	
-	#search{float:left;border:1px solid black;  border-right: none;
-	height: 30px;
+	#search{
+		float:left;
+		border:1px solid black;  
+		border-right: none;
+		height: 30px;
 	}
-	#btn{  width:30px; height: 30px ; padding: 2px
+	#btn{  
+		width:30px; 
+		height: 30px ; 
+		padding: 2px
 	}		
-	select{height: 30px ; border:1px solid black;float:left; margin-right: 4px }
+	select{
+		height: 30px ; 
+		border:1px solid black;
+		float:left; 
+		margin-right: 4px }
 	
 	
 	/* 버튼 스타일 클래스 모음 */
 
 	a:active, a:link, a:visited {
-    color:#3f1785;
-    text-decoration: none;
-    font-family: 'Nanum Gothic', sans-serif;
+	    color:#181b46;
+	    text-decoration: none;
+	    font-family: 'Nanum Gothic', sans-serif;
 }
 
 	.commBtn {
@@ -105,7 +323,7 @@
 	}
 		
 	.confBtn {
-		background: #3f1785;
+		`ground: #3f1785;
 		color: #fff;
 		width: 90px;
 	}

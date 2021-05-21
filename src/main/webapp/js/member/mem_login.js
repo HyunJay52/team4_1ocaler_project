@@ -5,9 +5,6 @@
 		$("#loginBtn").click(function(){
 			$("#login_section").submit(function(){
 				//로그인 상태 유지 확인
-				if($("checkbox").val()=='stay'){
-					alert("로그인 상태 유지합니다 ~");
-				}
 				if($("#userid").val()===""){
 					alert("아이디를 입력해주세요.");
 					$("#userid").focus();
@@ -22,12 +19,6 @@
 			});
 		});
 		
-		$("#login_section").children('p').click(function(){
-			$("#socialLogin").slideDown(500);
-		});
-		$("#signupBtn").click(function(){
-			location.href="joinMember";
-		});
 	});
 	
 //	네이버아디디로로그인 초기화 Script 
@@ -47,15 +38,15 @@
 //	카카오아이디로로그인 초기화 Script 
         //<![CDATA[
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('d4ac434ad90579b218d8e00cf709e965');
+//        Kakao.init('d4ac434ad90579b218d8e00cf709e965');
         // 카카오 로그인 버튼을 생성합니다.
-        Kakao.Auth.createLoginButton({
-            container: '#kakao-login-btn',
-            success: function (authObj) {
-                alert(JSON.stringify(authObj));
-            },
-            fail: function (err) {
-                alert(JSON.stringify(err));
-            }
-        });
+//        Kakao.Auth.createLoginButton({
+//            container: '#kakao-login-btn',
+//            success: function (authObj) {
+//                alert(JSON.stringify(authObj));
+//            },
+//            fail: function (err) {
+//                alert(JSON.stringify(err));
+//            }
+//        });
       //]]>
