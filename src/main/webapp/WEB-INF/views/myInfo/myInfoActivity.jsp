@@ -111,7 +111,6 @@
 		//페이징
 		function setMyinfoBoardPaging(pVO){
 			console.log(pVO);
-			console.log("상품페이징 시작")
 			$("#myinfoBoardPagingArea").html("");
 			var tag = '<ul class="pagination justify-content-center">';
 			if(pVO.nowNum > 1){
@@ -151,7 +150,6 @@
 			}else if(val == "qna"){
 				var tag = "<option value='i_subject'>상품제목</option>";
 					tag += "<option value='q_content'>질문내용</option>";
-					tag += "<option value='q_answer'>답변</option>";
 					
 			}
 			$("#boardSearchKey").html(tag);

@@ -541,7 +541,7 @@ public class MyinfoController {
 			vo.setDateContent("b_writedate");
 		}else if(vo.getKategorie().equals("reply")) {
 			vo.setDateContent("rep_date");
-		}else if(vo.getKategorie().equals("qna")){
+		}else if(vo.getKategorie().equals("qna") || vo.getKategorie().equals("seller")){
 			vo.setDateContent("q_writedate");			
 		}
 		
@@ -612,5 +612,11 @@ public class MyinfoController {
 	@RequestMapping("/myInfoReviewManagement")
 	public String myInfoReviewManagement() {
 		return "myInfo/myInfoReviewManagement";
+	}
+	
+	@RequestMapping("/myInfoQnAManagement")
+	public String myInfoQnAManagement() {
+		
+		return "myInfo/myInfoQnAManagement";
 	}
 }
