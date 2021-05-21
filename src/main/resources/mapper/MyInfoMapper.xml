@@ -352,6 +352,11 @@
 			join sell_item on qna.num = sell_item.i_num 
         	join seller on sell_item.sel_num = seller.sel_num
 		</if>
+		<if test="kategorie.equals('seller')">
+		    select q_num, num, qna.userid, seller.userid sellerid, q_status, q_content, q_writedate, q_answer, q_adate, i_num, i_subject from qna 
+			join sell_item on qna.num = sell_item.i_num 
+        	join seller on sell_item.sel_num = seller.sel_num
+		</if>
 		where ${kategorie}.userid=#{userid} and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
 		
@@ -368,7 +373,11 @@
 		<if test="kategorie.equals('qna')">
 			join sell_item on qna.num = sell_item.i_num
 		</if>
-		where userid= #{userid} and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		<if test="kategorie.equals('seller')">
+			join sell_item on seller.sel_num = sell_item.sel_num 
+			join qna on qna.num = sell_item.i_num
+		</if>
+		where ${kategorie}.userid= #{userid} and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
 		
 		and ${searchKey} like #{searchWord}

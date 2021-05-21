@@ -25,3 +25,6 @@
 		width:200px;
 		margin-top:10px;
 	}
+	#myInfoQnAManagementTable tr>td:nth-child(1){
+		width:5%;
+	}

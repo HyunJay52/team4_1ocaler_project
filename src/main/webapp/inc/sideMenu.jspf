@@ -107,7 +107,7 @@
 			}else if($(this).text() == '후기'){
 				location.href="myInfoReviewManagement";
 			}else if($(this).text() == 'QnA관리'){
-				location.href="";
+				location.href="myInfoQnAManagement";
 			}
 		});
 		
