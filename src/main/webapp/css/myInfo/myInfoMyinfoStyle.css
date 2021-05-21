@@ -70,11 +70,11 @@
 	.commBtn {
 		width: 90px;
 		color: #3f1785;
-		border: 1px solid #3f1785;
+		border: 1px solid #5f0080;
 	}
 	.commBtn:hover {
-		border: 1px solid #3f1785;
-		background-color: #3f1785;
+		border: 1px solid #5f0080;
+		background-color: #5f0080;
 		font-weight: bold;
 		color: #fff;
 		font-weight: bold;
@@ -85,8 +85,8 @@
 		width: 90px;
 	}
 	.cancelBtn:hover {
-		background-color: #fff;
-		color: gray;
+		color: #ddd;
+		font-family: nsreb;
 	}
 		
 	.confBtn {
@@ -102,11 +102,11 @@
 		margin-top:20%;
 	}
 	.myinfoModal-content{
-		height:240px;
+		height:220px;
 	}
 	.myinfoModal-body{
-		text-align:center;
-		padding:40px;
+		border-radius: 10px;		
+		padding:30px;
 	}
 	.selectBox{
 		width:400px; 

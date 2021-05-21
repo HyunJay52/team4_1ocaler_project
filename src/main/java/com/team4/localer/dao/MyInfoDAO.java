@@ -78,6 +78,7 @@ public interface MyInfoDAO {
 	public OrderVO statisTotal(String userid,int cate,String month);//미확정 개수, 금액
 	//통계list
 	public List<OrderVO> statisList(String userid,String month);
+
 	//리뷰가능한 상품리스트 조회
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
 	
@@ -89,4 +90,9 @@ public interface MyInfoDAO {
 	
 	//리뷰수정
 	public int reviewUpdate(ItemReviewVO vo);
+	
+// 내정보 메인용 서비스 (hj, 2021-05-21)
+	//참여정보 
+	public List<JoinUsVO> selectWaitingJoinList(String userid);
+
 }
