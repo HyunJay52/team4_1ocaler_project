@@ -1,0 +1,171 @@
+@charset "UTF-8";
+
+
+ul,li,body{
+	margin:0px; 
+	padding:0px;
+	list-style-type:none;
+}
+#showMainFrm{
+	width:1000px;
+	margin:0 auto;
+}
+
+#showMainFrm>span:first-child{
+	font-size:1.75em;
+	display:inline-block;
+	margin:50px 0px 0px 0px;
+
+}
+
+#liner{
+	/*Horizontal*/
+	/* #5f99da */
+	background: repeating-linear-gradient(-45deg, #e06772, #e06772 5px, #5f99da 5px, #5f99da 10px); 
+	background-position: bottom;
+	background-size: 17px 6px;
+	background-repeat: repeat-x;
+	margin:0px 0px 10px 0px;
+	height:4px;
+
+}
+#showInnerFrm>div:first-child>span:first-child{
+	margin: 50 0 0 15px;
+    display: inline-block;
+    color: #571fb8;
+    font-weight: bold;
+    font-size: 2em;
+}
+#showInnerFrm>div:first-child>span:nth-child(2){
+	display: inline-block;
+    font-weight: bold;
+    font-size: 2em;
+}
+#innerLiner{
+	margin: 10px auto;
+}
+
+#showMainFrm>div:nth-of-type(2){
+	width:1000px;
+	overflow:auto;	
+	margin-top:30px;
+}
+#showMainFrm>div:nth-of-type(2)>div:first-of-type{
+	width:600px;	
+	float:left;
+}
+
+#showMainFrm>div:nth-of-type(2)>div:nth-of-type(2){
+	width:400px;	
+	float:left;
+	
+}
+
+#shipMemo>li{
+	float:left;
+	width:400px;
+	line-height:40px;
+}
+#shipMemo>li:nth-child(2n+1){
+	width:200px;
+	padding-left:20px;	
+	font-weight:bold;
+}
+#shipMemo>li:nth-child(3), #itemMemo>li:nth-child(4){
+	height:auto;
+}
+
+
+
+#itemMemo>li{
+	float:left;
+	height:40px;
+	width:140px;
+	line-height:40px;
+}
+#itemMemo>li:first-child{
+	width:400px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	font-weight:bold;
+}
+
+#itemMemo>li:nth-child(2n+3){
+	width: 260px;
+
+}
+#itemMemo>li:nth-child(2n+2){
+	font-weight: bold;
+}
+
+#cashMemo>li{
+	float:left;
+	height:40px;
+	width:140px;
+	line-height:40px;
+}
+
+#cashMemo>li:first-child{
+	width:400px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	font-weight:bold;
+}
+
+#cashMemo>li:nth-child(2n+3){
+	width: 260px;
+	text-align:right;
+	padding-right:40px;
+
+}
+#cashMemo>li:nth-child(2n+2){
+	font-weight: bold;
+}
+
+.commBtn {
+	width: 120px;
+	color: #3f1785;
+	border: 1px solid #3f1785;
+}
+
+.commBtn:hover {
+	border: 1px solid #3f1785;
+	background-color: #3f1785;
+	font-weight: bold;
+	color: #fff;
+	font-weight: bold;
+}
+
+.cancelBtn {
+	border: 1px solid #ddd;
+	color: #ddd;
+	width: 90px;
+}
+
+.cancelBtn:hover {
+	background-color: #fff;
+	color: gray;
+}
+
+.confBtn {
+	background: #3f1785;
+	color: #fff;
+	width: 90px;
+}
+
+.confBtn:hover {
+	color: #fff;
+	background: #B8B2F4;
+}
+
+
+#btnFrm{
+	text-align:center;
+}
+#btnFrm>input{
+	margin:40px;
+	width:200px;
+	
+}
