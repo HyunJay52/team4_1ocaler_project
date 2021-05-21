@@ -108,9 +108,9 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	@Override
-	public MyinfoJoinUsVO selectReviewCount(int num) {
+	public MyinfoJoinUsVO selectReviewCount(MyinfoPageVO vo) {
 		
-		return dao.selectReviewCount(num);
+		return dao.selectReviewCount(vo);
 	}
 
 	@Override
@@ -152,6 +152,29 @@ public class MyInfoServiceImp implements MyInfoService{
 	public List<OrderVO> statisList(String userid, String month) {
 		return dao.statisList(userid, month);
 	}
+	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo) {
+
+		return dao.selectItemReviewList(vo);
+	}
+
+	@Override
+	public List<ItemReviewVO> selectMyReviewList(MyinfoPageVO vo) {
+
+		return dao.selectMyReviewList(vo);
+	}
+
+	@Override
+	public int selectMyReviewListCount(MyinfoPageVO vo) {
+		
+		return dao.selectMyReviewListCount(vo);
+	}
+
+	@Override
+	public int reviewUpdate(ItemReviewVO vo) {
+		
+		return dao.reviewUpdate(vo);
+	}
+
 
 
 	

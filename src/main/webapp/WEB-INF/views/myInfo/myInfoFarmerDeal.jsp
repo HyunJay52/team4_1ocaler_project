@@ -171,7 +171,7 @@
 					<div class="infoListHeader">
 						<h3>${vo.mem_name}</h3>
 						<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
-						<a href="myInfoSeller"><input type="button" class="btn dealBtn btn-outline-dark" value="Info"/></a>
+						<a href="myInfoCheck"><input type="button" class="btn dealBtn btn-outline-dark" value="Info"/></a>
 					</div>
 					<ul style="font-weight:bold;">
 						<li>참여</li>
@@ -197,8 +197,8 @@
 		<form method="post" id="myFarmerDealForm" onsubmit="return false;">
 		   <div class="dealBottom">
 			<div class="dealDateForm">
-				<input type="date" name="searchDate" value="2021-05-01" min="2021-01-01" max="2021-05-31"/> ~ 
-				<input type="date" name="searchDate2" value="2021-05-31" min="2021-01-01" max="2021-05-31"/>
+				<input type="date" name="searchDate" value="2021-03-01" min="2021-03-01" max="2021-05-31"/> ~ 
+				<input type="date" name="searchDate2" value="2021-05-31" min="2021-03-01" max="2021-05-31"/>
 			</div>
 			<table class="myinfoTable2" id="farmerDealTbl">
 				

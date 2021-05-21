@@ -23,13 +23,46 @@ public class MyinfoDealVO {
 	private String s_tag;//태그
 	private int reportCnt;//해당 게시글에 대한 신고 횟수
 	
-	/////
+	//joinus
 	private int j_num;
-	private int numJoin;
+	private int numjoin;
 	private String j_status;
 	private String j_writedate;
 	
+	//판매자 아이디
+	private String sellerid;
 	
+	//group
+	private String g_subject;
+	private String g_writedate;
+	private String g_gu;
+	
+	
+	
+	public String getG_subject() {
+		return g_subject;
+	}
+	public void setG_subject(String g_subject) {
+		this.g_subject = g_subject;
+	}
+	public String getG_writedate() {
+		return g_writedate;
+	}
+	public void setG_writedate(String g_writedate) {
+		this.g_writedate = g_writedate;
+	}
+	public String getG_gu() {
+		return g_gu;
+	}
+	public void setG_gu(String g_gu) {
+		this.g_gu = g_gu;
+	}
+	public String getSellerid() {
+		return sellerid;
+	}
+	public void setSellerid(String sellerid) {
+		this.sellerid = sellerid;
+	}
 	public String getShare_userid() {
 		return share_userid;
 	}
@@ -150,11 +183,11 @@ public class MyinfoDealVO {
 	public void setJ_num(int j_num) {
 		this.j_num = j_num;
 	}
-	public int getNumJoin() {
-		return numJoin;
+	public int getNumjoin() {
+		return numjoin;
 	}
-	public void setNumJoin(int numJoin) {
-		this.numJoin = numJoin;
+	public void setNumjoin(int numjoin) {
+		this.numjoin = numjoin;
 	}
 	public String getJ_status() {
 		return j_status;
