@@ -1,6 +1,7 @@
 package com.team4.localer.vo;
 
 public class OrderVO {
+
 	private int o_num;
 	private String userid; //구매자 아이디
 	private int num;
@@ -16,22 +17,22 @@ public class OrderVO {
 	private String o_status;
 	
 	/////sell_item
-	private int i_num;
+
 	private String i_subject;
 	private String i_userid; //판매자 아이디
-	//private String i_price;//원래가격
 	private String i_img1;
 	private int fu_money;
 	private int hap_money;
 
 	private String sel_prof; //셀러회원 프로필 사진 
+
+	private int i_num;//셀러판매글번호
+
 	
-	//private int i_num;//셀러판매글번호
 	private int sel_num;//셀러회원번호
 	private String i_gu;//활동지역
 	private int i_cnt;//판매수량
 	private String i_content;//내용
-	//private String i_img1;
 	private String i_img2;
 	private String i_img3;
 	private int i_price;//가격
@@ -40,10 +41,12 @@ public class OrderVO {
 	private int i_status;//판매상태 1.판매중, 2.판매완료
 	private String i_writedate;//등록일
 	private int i_hit;
-	private String i_tag;//판매글태그
-	
+	private String i_tag;//판매글태그	
 	//판매상품 판매자 아이디
-	private String sellerid;
+	private String sellerid;//myinfo에서 사용
+	
+	//리뷰가 있는지 확인
+	private int reviewCount;
 
 	public int getO_num() {
 		return o_num;
@@ -149,14 +152,6 @@ public class OrderVO {
 		this.o_status = o_status;
 	}
 
-	public int getI_num() {
-		return i_num;
-	}
-
-	public void setI_num(int i_num) {
-		this.i_num = i_num;
-	}
-
 	public String getI_subject() {
 		return i_subject;
 	}
@@ -203,6 +198,14 @@ public class OrderVO {
 
 	public void setSel_prof(String sel_prof) {
 		this.sel_prof = sel_prof;
+	}
+
+	public int getI_num() {
+		return i_num;
+	}
+
+	public void setI_num(int i_num) {
+		this.i_num = i_num;
 	}
 
 	public int getSel_num() {
@@ -317,7 +320,13 @@ public class OrderVO {
 		this.sellerid = sellerid;
 	}
 
-	
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
 	
 	
 }

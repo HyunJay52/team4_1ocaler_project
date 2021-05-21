@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.MyInfoDAO;
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
@@ -173,6 +174,16 @@ public class MyInfoServiceImp implements MyInfoService{
 	public int reviewUpdate(ItemReviewVO vo) {
 		
 		return dao.reviewUpdate(vo);
+	}
+
+	@Override
+	public int managementCount(AdminPageVO pageVO) {
+		return dao.managementCount(pageVO);
+	}
+
+	@Override
+	public List<OrderVO> manageList(AdminPageVO pageVO) {
+		return dao.manageList(pageVO);
 	}
 
 
