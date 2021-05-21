@@ -3,6 +3,7 @@ package com.team4.localer.dao;
 
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.Item_optionVO;
+import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.SellitemVO;
 import java.util.List;
@@ -19,6 +20,10 @@ public interface SellerDAO {
 	
 	public List<Item_optionVO> changeOptions(String option_title, int i_num);//옵션목록바꾸기 아작스
 	
+	//판매자 정보 불러오기
+	public SellerVO sellerInfo(String userid);
+	//판매자 제품 list
+	public List<SellitemVO> sellerItems(String userid);
 	public Cha_pVO findChaSpPoint(String userid); // 해당 유저의 cha 합계 sp 합계불러오기
 	
 	public int sellerOrderInsert(OrderVO orderVO);//ordertbl (주문 인설트)
