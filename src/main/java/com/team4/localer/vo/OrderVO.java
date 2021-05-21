@@ -16,22 +16,16 @@ public class OrderVO {
 	private String o_status;
 	
 	/////sell_item
-	private int i_num;
-	private String i_subject;
 	private String i_userid; //판매자 아이디
-	//private String i_price;//원래가격
-	private String i_img1;
-	private int fu_money;
-	private int hap_money;
-
-	private String sel_prof; //셀러회원 프로필 사진 
-	
-	//private int i_num;//셀러판매글번호
+	//
+	private String i_subject;
+	private String sel_prof; //셀러회원 프로필 사진 	
+	private int i_num;//셀러판매글번호
 	private int sel_num;//셀러회원번호
 	private String i_gu;//활동지역
 	private int i_cnt;//판매수량
 	private String i_content;//내용
-	//private String i_img1;
+	private String i_img1;
 	private String i_img2;
 	private String i_img3;
 	private int i_price;//가격
@@ -43,6 +37,11 @@ public class OrderVO {
 	private String i_tag;//판매글태그	
 	//판매상품 판매자 아이디
 	private String sellerid;
+	
+	//지수씨
+	private int fu_money;
+	private int hap_money;
+
 
 	public int getO_num() {
 		return o_num;
