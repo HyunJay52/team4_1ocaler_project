@@ -59,7 +59,7 @@
 					</table>
 				</div>
 				<div id="calculateList">
-					<h5 class="saleHistoryHeader"><a href="myInfoStatistics">>>정산현황</a></h5>
+					<h5 class="saleHistoryHeader"><a href="myInfoStatistics?month=5">>>정산현황</a></h5>
 					<table class="myinfoSaleHistoryTable2">
 						<tr>
 							<td>구매확정 전</td>

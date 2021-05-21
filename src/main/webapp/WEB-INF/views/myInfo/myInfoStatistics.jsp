@@ -29,8 +29,8 @@
 	});
 	$(document).ready(function(){
 		$("#totalSale").text(totalsale+"원");
-		$("#fee").text("총 수수료 : "+(${OkVO.o_num}*2000)+"원");
-		$("#fusale").text("총 순매출 : "+(totalsale-${OkVO.o_num}*2000)+"원");
+		$("#fee").text("총 수수료 : "+${OkVO.i_img1}+"원");
+		$("#fusale").text("총 순매출 : "+(totalsale-${OkVO.i_img1})+"원");
 	});
 </script>
 <div class="myinfoBody">
@@ -134,7 +134,7 @@
 							<td>취소/환불</td>
 						</c:if>
 						<td>${vo.hap_money}</td>
-						<td>2000</td>
+						<td>${vo.i_img1}</td>
 						<td>${vo.fu_money }</td>
 					</tr>
 				</c:forEach>
