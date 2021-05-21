@@ -48,7 +48,6 @@ public class BoardVO {
 	private String b_img1;
 	
 	
-	
 	public String getB_img1() {
 		return b_img1;
 	}

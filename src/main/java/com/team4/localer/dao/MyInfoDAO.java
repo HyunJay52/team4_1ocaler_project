@@ -57,7 +57,7 @@ public interface MyInfoDAO {
 	public int updateJoinCancel(int j_num);
 	
 	//거래글의 참여인원 카운트, 리뷰작성이 완료된 카운트 조회후 vo로 리턴
-	public MyinfoJoinUsVO selectReviewCount(int num);
+	public MyinfoJoinUsVO selectReviewCount(MyinfoPageVO vo);
 	
 	//특정 게시글의 나의 리뷰 조회
 	public ItemReviewVO selectMyReview(ItemReviewVO vo);
@@ -78,4 +78,15 @@ public interface MyInfoDAO {
 	public OrderVO statisTotal(String userid,int cate,String month);//미확정 개수, 금액
 	//통계list
 	public List<OrderVO> statisList(String userid,String month);
+	//리뷰가능한 상품리스트 조회
+	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
+	
+	//카테고리별 내 모집글 리뷰 조회
+	public List<ItemReviewVO> selectMyReviewList(MyinfoPageVO vo);
+	
+	//카테고리별 내 모집글 리뷰 카운트
+	public int selectMyReviewListCount(MyinfoPageVO vo);
+	
+	//리뷰수정
+	public int reviewUpdate(ItemReviewVO vo);
 }

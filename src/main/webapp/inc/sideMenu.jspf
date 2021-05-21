@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMainStyle.css?ver=2"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStyle.css?ver=19"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyActivityStyle.css?ver=1"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=3"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=10"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoLoadStyle.css?ver=7"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyDealStyle.css?ver=13"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoFarmerDealStyle.css?ver=2"/>
@@ -48,10 +48,10 @@
 				
 			});
 			$("#sideMenu").html(tag);
-			//if(${logType != 2}){
-			//	$("#menuBtn2").css('display', 'none');
-			//	$("#menu2").css('display', 'none');
-			//}
+			if(${logType != 2}){
+				$("#menuBtn2").css('display', 'none');
+				$("#menu2").css('display', 'none');
+			}
 		}	
 		
 		//토글 버튼 이벤트(보류함)

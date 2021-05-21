@@ -58,7 +58,7 @@
 		//리스트 불러오기
 		function setDealList(page){
 			var kategorie = $("#myDealToggle>input[name='kategorie']").attr('title');
-			
+			console.log("kategorie="+kategorie);
 			$.ajax({
 				url : "myDealList",
 				data : $("#myDealForm").serialize()+"&kategorie="+kategorie+"&nowNum="+page,
@@ -69,7 +69,7 @@
 					result.list.forEach(function(data,idx){
 						
 						//내가 참여한 리스트일 경우
-						if(data.j_num != null && data.j_num > 0){
+						if(kategorie == 'joinus'){
 							tag += "<tr>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.j_writedate+"</td>";
@@ -78,7 +78,7 @@
 							
 							if(data.j_status == '리뷰완료'){
 								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.numJoin+"'>리뷰보기</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.num+"'>리뷰보기</button></td>";
 							}else if(data.j_status == '참여취소'){
 								tag += "<td><button class='btn btn-block btn-outline-danger'>취소됨</button></td>";
 								tag += "<td></td>";
@@ -95,7 +95,7 @@
 							tag += "</tr>";
 							
 						//내가 개설한 리스트일 경우
-						}else if(data.j_num == 0){
+						}else if(kategorie == 'mem_share'){
 							var joinCount = 0;
 							var reviewCount = 0;
 							
@@ -107,7 +107,9 @@
 							tag += "<td><button class='btn btn-block btn-outline-dark dealModalOpen' data-target='#myDealMd' data-toggle='modal' value='"+data.num+"'>참여회원</button></td>";
 							$.ajax({
 								url : "selectReviewCount",
-								data : {"num": data.num},
+								data : {"num": data.num,
+										"kategorie":"joinus"
+										},
 								dataType : 'json',
 								async : false,
 								success : function(result){
@@ -121,6 +123,58 @@
 							});				
 							
 							tag += "</tr>";									
+						}else if(kategorie == 'grouplocal'){//내가 개설한 모집글
+							var joinCount = 0;
+							var reviewCount = 0;
+							
+							tag += "<tr>";
+							tag += "<td>"+data.userid+"</td>";
+							tag += "<td>"+data.g_writedate+"</td>";
+							tag += "<td>"+data.g_subject+"</td>";
+							tag += "<td>"+data.g_gu+"</td>";
+							tag += "<td><button class='btn btn-block btn-outline-dark dealModalOpen' data-target='#myDealMd' data-toggle='modal' value='"+data.num+"'>참여회원</button></td>";
+							$.ajax({
+								url : "selectReviewCount",
+								data : {"num": data.num,
+										"kategorie":"grouplocal"	
+										},
+								dataType : 'json',
+								async : false,
+								success : function(result){
+									console.log(result);
+									console.log("reviewcount="+result.reviewCount);
+									console.log("joincount="+result.joinCount);
+									tag += "<td>"+result.reviewCount+"/"+(result.joinCount-result.joinCancel)+"명</td>";	
+								},error : function(e){
+									console.log("리뷰완료 조회 실패");
+								}
+							});				
+							
+							tag += "</tr>";	
+						}else if(kategorie == 'groupJoinus'){ //내가 참여한 모집글
+							tag += "<tr>";
+							tag += "<td>"+data.sellerid+"</td>";
+							tag += "<td>"+data.g_writedate+"</td>";
+							tag += "<td>"+data.g_subject+"</td>";
+							tag += "<td>"+data.g_gu+"</td>";
+							
+							if(data.j_status == '리뷰완료'){
+								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger getMyReview' data-target='#myJoinDealMd' data-toggle='modal' value='"+data.num+"'>리뷰보기</button></td>";
+							}else if(data.j_status == '참여취소'){
+								tag += "<td><button class='btn btn-block btn-outline-danger'>취소됨</button></td>";
+								tag += "<td></td>";
+							}else if(data.j_status == '참여승인'){
+								tag += "<td><button class='btn btn-block btn-outline-primary'>"+data.j_status+"</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";
+							}else if(data.j_status == '참여완료'){
+								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
+							}else{//참여신청
+								tag += "<td><button class='btn btn-block btn-light btn-outline-dark'>"+data.j_status+"</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
+							}
+							tag += "</tr>";
 						}
 						
 					});
@@ -171,6 +225,7 @@
 		//참여회원보기 이벤트
 		$(document).on('click', '.dealModalOpen', function(){
 			var num = $(this).val();
+			$(".cancelJoinMember").css('display','none');
 			setJoinList(num);
 		});
 		
@@ -497,11 +552,14 @@
 		<form method="post" id="myDealForm" onsubmit="return false;">
 		<div class="dealBottom">
 			<div id="myDealToggle">
-				<input type="button" class="btn commBtn btn-outline-dark" title="joinus" value="참여한"/>
-				<input type="button" style="background-color:#3f1785; color:#fff;" class="btn commBtn btn-outline-dark" title="mem_share" name="kategorie" value="개설한"/>
+				<input type="button" class="btn commBtn btn-outline-dark" title="joinus" value="거래 참여"/>
+				<input type="button" style="background-color:#3f1785; color:#fff;" class="btn commBtn btn-outline-dark" title="mem_share" name="kategorie" value="거래 개설"/>
+				<input type="button" class="btn commBtn btn-outline-dark" title="groupJoinus" value="모집 참여"/>
+				<input type="button" class="btn commBtn btn-outline-dark" title="grouplocal" value="모집 개설"/>
+				
 			</div>
 			<div class="dealDateForm">
-				<input type="date" value="2021-05-01" id="dealDate" name="searchDate" min="2021-03-01" max="2021-05-31"/> ~ 
+				<input type="date" value="2021-03-01" id="dealDate" name="searchDate" min="2021-03-01" max="2021-05-31"/> ~ 
 				<input type="date" value="2021-05-31" id="dealDate2" name="searchDate2" min="2021-03-01" max="2021-05-31"/>
 			</div>
 			

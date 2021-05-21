@@ -56,3 +56,60 @@
 		width:50px;
 		height:50px;
 	}
+	#itemListPaging, #shareListPaging{
+		margin-top:10px;
+	}
+	.reviewLeft>h5{
+		float:left;
+	}
+	.reviewLeft>select, .dealDateForm>select{
+		float:right;
+		height:27px;
+    	width:100px;
+	}
+	.reviewSearchArea>select{
+		height:30px;
+    	width:100px;
+	}
+	#myinfoMyReviewTable{
+		width:100%;
+		margin:0 auto;
+		padding:0;
+	}
+	#myinfoMyReviewTable tr{/*테이블 목록*/
+		border-bottom:1px solid rgb(227,227,227); 
+		text-align:center;
+		height:40px;
+    }
+	#myinfoMyReviewTable tr:first-child{/*첫번째 테이블 목차*/
+		text-align:center;
+		background-color:#3f1785;
+		color:#fff; 
+		font-weight:bold;
+	}
+	#myinfoMyReviewTable tr:last-child{/*마지막 줄 tr 스타일*/
+		border-bottom:2px solid #3f1785;
+	}
+	#myinfoMyReviewTable tr>td{/*전체적인 열 폭조정*/
+		width:16%;
+	}
+	#myinfoMyReviewTable tr>td:nth-child(1){
+		width:10%;
+	}
+	#myinfoMyReviewTable tr>td:nth-child(2){/*세번째 열 선택 : 제목부분*/
+		width:5%;
+	}
+
+	#myinfoMyReviewTable tr>td:nth-child(5){/*세번째 열 선택 : 제목부분*/
+		width:7%;
+	}
+	#myinfoMyReviewTable tr>td:last-child{/*세번째 열 선택 : 제목부분*/
+		width:8%;
+	}
+	#reviewUpdate, #WriteReview{
+		float:right;
+		margin-left:3px;	
+	}
+	#reviewUpdate{
+		display:none;
+	}
