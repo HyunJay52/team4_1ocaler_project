@@ -24,11 +24,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.localer.service.MemberService;
 import com.team4.localer.service.SellerService;
+import com.team4.localer.service.ShipService;
+import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.Item_optionVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
+import com.team4.localer.vo.ShipVO;
+import com.team4.localer.vo.Sp_pVO;
 
 
 @Controller
@@ -40,6 +44,8 @@ public class SellerController {
 	private DataSourceTransactionManager transactionManager;
 	@Inject
 	MemberService memberService;
+	@Inject
+	ShipService shipService;
 	
 	//착한발견 (셀러)
 	@RequestMapping("/selBard")
@@ -201,6 +207,36 @@ public class SellerController {
 		return mav;
 	}
 	
+	
+	@RequestMapping("/orderShipCashInsert")
+	public ModelAndView orderShipInsert(OrderVO orderVO, Cha_pVO chaVO, Sp_pVO spVO, ShipVO shipVO) {
+		ModelAndView mav = new ModelAndView();
+		
+		int result = sellerService.sellerOrderInsert(orderVO);
+		//배송테이블 값셋팅
+		shipVO.setBuyer(orderVO.getUserid()); //상품을 구매한사람
+		shipVO.setShip_cnt(orderVO.getO_cnt()); //cnt 셋팅
+		
+		System.out.println(result+"<----1이면성공 아니면 실패");	
+		if(result>0) {
+			int resl = shipService.shipInsert(shipVO);
+			System.out.println(resl+"<---이것도 1이 나와야 성공임");
+		}
+		if(orderVO.getO_mtd()==2) {
+			//-> 포인트 이동이 있어야 한다.
+			//판매자의 cha_p 에다가 o_price 만큼 insert
+			int cha_result = sellerService.cha_pointInsert(shipVO.getSender(), orderVO.getO_price(), 3);
+			System.out.println(cha_result +"<--1나오면 cha_point 인설트 성공");
+			//구매자의 sp_p 에다가 o_price 만큼 insert
+			int sp_result = sellerService.sp_pointInsert(orderVO.getUserid(), orderVO.getO_price(), orderVO.getNum());
+			System.out.println(sp_result+"<-- 1나오면 sp_point 인설트 성공");
+		}
+		return mav;
+	}
+	
+	
+	
+	
 	@RequestMapping("/sellerInfo")
 	public String sellerInfo() {
 		return "deal/sellerInfo";
@@ -212,4 +248,16 @@ public class SellerController {
 		System.out.println(userid+"<--아작스에서 보낸 아이디값");
 		return memberService.userDetailFind(userid);
 	}
+	
+	@RequestMapping("/findChaSpPoint")
+	@ResponseBody
+	public Cha_pVO findChaSpPoint(String userid) {
+		return sellerService.findChaSpPoint(userid);
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.team4.localer.dao.ShipDAO">
+ 	<insert id="shipInsert" parameterType="com.team4.localer.vo.ShipVO">
+ 		insert into ship(o_num, buyer, sender, getter, ship_zip, ship_addr, ship_detail, ship_tel,
+ 		 <if test='ship_msg!=null and !ship_msg.equals("") '>
+ 		 	ship_msg, 
+ 		 </if>
+ 		 ship_cnt)
+		values((select o_num from (select * from ordertbl where userid=#{buyer} and <![CDATA[ o_date<=sysdate ]]> order by o_date desc) where  <![CDATA[ rownum<=1 ]]>),
+		#{buyer},#{sender},#{getter},#{ship_zip},#{ship_addr},#{ship_detail},#{ship_tel},
+		<if test='ship_msg!=null and !ship_msg.equals("")'>
+			#{ship_msg},
+		</if>
+		#{ship_cnt})
+ 	</insert>
+ 
+ 
+ </mapper>

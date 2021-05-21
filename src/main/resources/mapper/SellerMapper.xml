@@ -54,6 +54,25 @@
 	</select>
 	
 	
+	<select id="findChaSpPoint" resultType="com.team4.localer.vo.Cha_pVO">
+		select
+  			 (select sum(cha_point) from cha_p where userid=#{param1}) as cha_point,
+   			 (select nvl(sum(sp_point),0) from sp_p where userid=#{param1}) as sp_point
+		from dual
+	</select>
+	
+	<insert id="sellerOrderInsert" parameterType="com.team4.localer.vo.OrderVO">
+		insert into ordertbl(o_num, userid, num, opt_str, o_mtd, o_cnt, o_price, o_ship) values(ordersq.nextval, #{userid}, #{num}, #{opt_str}, #{o_mtd}, #{o_cnt}, #{o_price}, #{o_ship})
+	</insert>
+	
+	
+	<insert id="cha_pointInsert">
+		insert into cha_p(userid, cha_point, cha_mth) values(#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	<insert id="sp_pointInsert">
+		insert into sp_p(userid, sp_point, sp_item) values(#{param1}, #{param2}, #{param3})
+	</insert>
 	
 	
 	

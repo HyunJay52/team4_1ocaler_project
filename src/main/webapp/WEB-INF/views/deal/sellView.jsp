@@ -14,7 +14,6 @@
 
 
 	<script>
-
 	$(function(){
 		$(".slider").bxSlider({
 			auto:true,
@@ -224,7 +223,7 @@
     		})//ajax end   		
     	})  	
     	
-    	
+    	 
     	$("#sellBuyFrm").submit(function(){
     		if($("#o_price").val()==0 || $("#i_cnt").val()==0){
     			alert('제품을 선택하고 구매하기를 눌러주세요');
@@ -232,10 +231,15 @@
     		}
     	});
     	
+     	$("#selvBackBtn").click(function(){
+     		location.href="selBard";
+     	});
+     	
+     	
     	
 	});
 
-	</script>
+	</script>	
 	<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="dealViewMain">
 		<div style="overflow:auto;">
@@ -332,7 +336,7 @@
 						</div>
 						
 						<div id="submitCancleBtn">
-							<input type="button" value="취소" class="btn commBtnSell"/>
+							<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
 							<input type="submit" value="구매하기" class="btn commBtnSell"/>
 						</div>
 						<input type='hidden' name="num" value="${itemVO.i_num }">
