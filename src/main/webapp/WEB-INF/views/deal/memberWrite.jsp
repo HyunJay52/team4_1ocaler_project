@@ -11,11 +11,11 @@
 		
 		
 		$(document).on('submit','#memWrite',function(){
-			if($("#s_cate").val()==0 ){
+			if($("#s_cate").val()==null || $("#s_cate").val()=='' ){
 				alert('카테고리를 선택해주세요')
 				return false;
 			}
-			if($("#s_status").val()==0 ){
+			if($("#s_status").val()==null || $("#s_status").val()=='' ){
 				alert('판매상태를 선택해주세요')
 				return false;
 			}
@@ -53,14 +53,14 @@
 			<h4 >동네직구 글쓰기 </h4>
 			
 			<form method="post" action="memWriteOk" enctype="multipart/form-data" id="memWrite">
-				<select name="s_cate">
-					<option selected disabled hidden value="0" >카테고리</option>
+				<select name="s_cate" id="s_cate">
+					<option selected disabled hidden  >카테고리</option>
 					<option value="1">식료품</option>	
 					<option value="2">생필품</option>			
 					<option value="3">기타</option>
 				</select>		
-				<select name="s_status">
-					<option selected disabled hidden value="0"> 판매상태</option>
+				<select name="s_status" id ="s_status">
+					<option selected disabled hidden> 판매상태</option>
 					<option value="1">판매중</option>	
 					<option value="2">판매완료</option>			
 				</select>				
