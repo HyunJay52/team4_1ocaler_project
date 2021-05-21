@@ -76,6 +76,8 @@
 			$("#WVPProfilePopup").css("display","block");
 			
 		});	
+	
+		
 		/*팝업창 닫기*/
 		
 		$('#WVPProfilePopup>div:first-child>span').click(()=>{
@@ -117,28 +119,33 @@
 					var tag ="<ul>";
 					
 					$result.each(function(idx,obj){
-						tag+= "<li><div><a href='#'><h5>"+obj.userid+"</h5></a> &emsp;("+obj.rep_date+")</div>";
-						
+						/* 아이디 댓글 날짜 */
+						tag+= "<li><div><h5>"+obj.userid+"</h5>&emsp;("+obj.rep_date+")</div>";
+					
+						/* 로그인되어있을때, 수정이랑 삭제 버튼보이기 */
 						if(obj.userid =="${logId}"){
 							tag+= "<div><input type='button' class='btn replycommBtn' value='수정' /> &ensp;";
-		                    tag+= "<input type='button' class='btn replycommBtn' value='삭제' title='"+obj.rep_num+"' /></div><br/>"; 	
+		                    tag+= "<input type='button' class='btn replycommBtn' value='삭제' title='"+obj.rep_num+"' /></div>"; 	
 						}else{
-							
+							tag+= "<div></div>";
 							
 						}
-						  tag+= "<br/><div>"+ obj.rep_content+"</div>";
-						  
-						  
-						  
+						  tag+= "<div id='replyContent'>"+ obj.rep_content+"</div>";
+				 
 						   //수정폼 보여주기
 		                  if(obj.userid=="${logId}"){
-		                     tag += "<div style='display:none;'>";
+		                     tag += "<div style='display:none' id='replyEdit'>";
 		                     tag += "<form method ='post'>";
-		                     tag += "<textarea name='rep_content'style='width:500px;height:80px;'>"+obj.rep_content+"</textarea>";
+		                     tag += "<textarea name='rep_content'style='width:1200px;height:auto;magin:0 auto;'>"+obj.rep_content+"</textarea>";
+		                     tag += "<input type='hidden' name='rep_num' value='"+obj.rep_num+"'/>";
 		                     tag += "<input type='submit' value='수정하기'/>" ;
-		                     tag += "<input type='hidden' name='num' value='"+obj.rep_num+"'/>";
+		                     
 		                     tag+="</form></div>";
-		                  }
+		                    
+		                  }else {
+		                	
+						}
+						   
 
 						  tag+= "</li>";
 						  
@@ -217,14 +224,17 @@
 	
 			replyList();
 		
-		
+		//댓글 수정폼이 이상해진것같은데...
         $(document).on('click','#commuViewreplyList input[value=수정]',function(){
-            
-            $("#commuViewreplyList>ul>li>div:nth-child(1)").css("display", "block"); 
-            $("#commuViewreplyList>ul>li>div:nth-child(2)").css("display", "none"); 
-            
-            $(this).parent().css("display", "none");
-            $(this).parent().next().css("display", "block");
+        	
+          $("#commuViewreplyList>ul>li>div:nth-child(2)").css("display", "none"); 
+         //   $("#commuViewreplyList>ul>li>div:nth-child(4)").css("display", "block"); 
+           
+         
+            // 세번쨰 네번쨰를 선탹해야한다고...
+            $(this).parent().next().css("display", "none");// 원래내용..?
+            $(this).parent().next().next().css("display", "block"); //수정내용..
+     
          });
 	})
 	

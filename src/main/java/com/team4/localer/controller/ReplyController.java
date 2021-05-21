@@ -61,7 +61,11 @@ public class ReplyController {
 		vo.setUserid((String)req.getSession().getAttribute("logId"));
 			
 		int cnt = replyservice.replyUpdate(vo);
-			
+		System.out.println("cnt"+cnt);
+		System.out.println("아이디"+ vo.getUserid());
+		System.out.println("s내용..? -> " +vo.getRep_content());
+		System.out.println("댓글번호번호- >" +vo.getRep_num());
+		
 		return cnt+"";
 	}
 		
