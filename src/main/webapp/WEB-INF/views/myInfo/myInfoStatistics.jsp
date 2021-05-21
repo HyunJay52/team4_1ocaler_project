@@ -43,7 +43,7 @@
 			<div class="myinfoStatisticsLeft">
 				<table class="myinfoStatisticsTable2 info-font-weight mdFnt">
 					<tr>
-						<td style="height:70px;">5월 총매출 현황</td>
+						<td style="height:70px;">${monthArr[2]}월 총매출 현황</td>
 					</tr>
 					<tr>	
 						<td id="totalSale"></td>				
@@ -69,11 +69,32 @@
 				<div id="barchart_material" style="width: 600px; height: 320px;"></div>
 			</div>
 		</div>
+<script>
+	$(function(){
+		var month =  parseInt(${monthArr[2]});
+		$(".prev").click(function(){
+			if(month==1){
+				month=12;
+			}else{
+				month-=1;
+			}
+			location.href="myInfoStatistics?month="+month;
+		});
+		$(".next").click(function(){
+			if(month==12){
+				month=1;
+			}else{
+				month+=1;
+			}
+			location.href="myInfoStatistics?month="+month;
+		});
+	});
+</script>
 		<div class="myinfoStatisticsBottom">
 			<div class="myinfoStatisticsBottomHeader">
 				<div class="dealDateForm">
 					<input type="date" min="2021-01-01" max="2021-05-31" class="date"/>
-					<div class="myDealFrm"><button class="dayBtn prev">《</button><button class="dayBtn setMonth mdFnt"></button><button class="dayBtn next">》</button></div>
+					<div class="myDealFrm"><input type="button" class="dayBtn prev"value="《"/>${monthArr[2]}월<input type="button" class="dayBtn next"value="》"/></div>
 				</div>
 				<div class="myinfoStatisticsLabel mdFnt info-font-weight">
 					<label id="fee"></label>
