@@ -80,6 +80,20 @@
     	  $("#searchBtn").click(function(){
     		  sellerAjax();
     	  });
+    		//페이지 이동 클릭
+    		$(document).on('click', '.clickpage', function(){
+    			var txt = $(this).text();
+    			if(txt=="이전"){
+    				var nextPage = parseInt($("#pageNum").val())-1;
+    				$("#pageNum").val(nextPage);	
+    			}else if(txt=="다음"){
+    				var nextPage = parseInt($("#pageNum").val())+1;
+    				$("#pageNum").val(nextPage);
+    			}else{
+    				$("#pageNum").val(txt);
+    			}
+    			sellerAjax();
+    		});
     	  function sellerAjax(){
     		  $.ajax({
   				type : "POST",

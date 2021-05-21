@@ -99,7 +99,6 @@ public class AdminManageController {
 		pageVO.setSearchWord("");
 		//총레코드 구하기
 		pageVO.setTotalRecord(csService.totalRecord(pageVO));
-		System.out.println("totalRecord"+pageVO.getTotalRecord());
 		//회원목록가져오기 
 		mav.addObject("list",manaService.sellerAllSelect(pageVO));
 		mav.addObject("pageVO",pageVO);
@@ -464,7 +463,7 @@ public class AdminManageController {
 		//검색어가 있을때
 		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
 		pageVO.setTotalRecord(csService.selspendtotalRecord(pageVO));//총레코드구하기
-		
+		System.out.println("총레코드 개수:"+csService.selspendtotalRecord(pageVO));
 		pageVO.setSearchKey("sel1."+pageVO.getSearchKey());
 		result.put("list",manaService.selspendList(pageVO));
 		result.put("pageNum",pageVO.getPageNum());

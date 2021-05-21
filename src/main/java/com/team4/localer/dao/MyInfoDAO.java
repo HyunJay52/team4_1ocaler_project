@@ -90,5 +90,9 @@ public interface MyInfoDAO {
 	
 	//리뷰수정
 	public int reviewUpdate(ItemReviewVO vo);
+	
+// 내정보 메인용 서비스 (hj, 2021-05-21)
+	//참여정보 
+	public List<JoinUsVO> selectWaitingJoinList(String userid);
 
 }
