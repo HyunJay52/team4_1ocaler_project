@@ -4,7 +4,7 @@
 	$(function(){
 
 		//리스트 세팅
-		function setList(page){
+		function setFarmerDealList(page){
 			$.ajax({
 				url : "myFarmerDealSelect",
 				data : $("#myFarmerDealForm").serialize()+"&nowNum="+page,
@@ -13,37 +13,23 @@
 					console.log(result);
 					result.list.forEach(function(data,idx){
 						tag += "<tr><td>"+data.o_date+"</td>";
-						$.ajax({
-							url : "selectMyReviewCount",
-							data : {"num":data.num},
-							dataType : "json",
-							async : false,
-							success : function(result){
-								console.log("reviewCount="+result);
-								if(result == 0){
-									tag += "<td><button data-target='#farmerDealMd' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>"+data.i_subject+"</button></td>";
-									tag += "<td>"+data.userid+"</td>";
-									tag += "<td>"+data.o_price+"</td>";
-									tag += "<td>리뷰없음</td>";
-								}else{
-									tag += "<td><button data-target='' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>"+data.i_subject+"</button></td>";
-									tag += "<td>"+data.userid+"</td>";
-									tag += "<td>"+data.o_price+"</td>";
-									tag += "<td>리뷰작성함</td>";								
-								}
-							}, error : function(e){
-								console.log("error");
-							}
-						});
-
-
+						console.log("reviewCount="+data.reviewCount);
+						if(data.reviewCount == 0){
+							tag += "<td><button data-target='#farmerDealMd' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>"+data.i_subject+"</button></td>";
+							tag += "<td>"+data.userid+"</td>";
+							tag += "<td>"+data.o_price+"</td>";
+							tag += "<td>리뷰없음</td>";
+						}else{
+							tag += "<td><button data-target='' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>"+data.i_subject+"</button></td>";
+							tag += "<td>"+data.userid+"</td>";
+							tag += "<td>"+data.o_price+"</td>";
+							tag += "<td>리뷰작성함</td>";								
+						}
 						if(data.o_conf == 1){
 							tag += "<td>주문대기</td>";
 						}else{
 							tag += "<td>주문확정</td>";							
-						}
-						
-					
+						}			
 						tag += "</tr>";
 						
 					});
@@ -54,7 +40,7 @@
 				}
 			});
 		}
-		setList(1);
+		setFarmerDealList(1);
 		//페이징
 		function setFarmerDealPaging(pVO){
 			console.log(pVO);
@@ -130,7 +116,7 @@
 		$("#myFarmerDealSearch").click(function(){
 			var searchWord = $(this).prev().val();
 			console.log(searchWord);
-			setList(1);
+			setFarmerDealList(1);
 			$(this).prev().val("");
 		});
 		
@@ -138,9 +124,10 @@
 		$(document).on('click', '#myinfoFarmerDealPaging>ul>li>button', function(){
 			var nowNum = $(this).val(); //현제 페이지
 			console.log("nownum="+nowNum)
-			setList(nowNum);			
+			setFarmerDealList(nowNum);			
 		});
 		
+		//파머리뷰 작성
 		function writeFarmerReview(data, re_rate){
 			$.ajax({				
 				url : "writeReview",
@@ -149,7 +136,7 @@
 					alert("리뷰가 작성되었습니다.");
 					$("#farmerDealMd").hide();
 					$('.modal-backdrop').hide();
-					setList(1);
+					setFarmerDealList(1);
 				}, error : function(e){
 					console.log("error");
 				}

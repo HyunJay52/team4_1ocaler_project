@@ -32,6 +32,7 @@ public class MyinfoDealVO {
 	//판매자 아이디
 	private String sellerid;
 	
+	
 	//group
 	private String g_subject;
 	private String g_writedate;

@@ -26,18 +26,20 @@
 					result.list.forEach(function(data, idx){
 						if(kategorie == 'mem_share'){
 							console.log("idx="+idx);
+							console.log("kategorie="+kategorie);
 							index = idx;
-							tag += "<td class='wordCut' style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>"+data.s_subject+"</td>";
+							tag += "<td class='wordCut'>"+data.s_subject+"</td>";
 							tag += "<td>"+data.sellerid+"</td>";
 							tag += "<td>"+data.j_writedate+"</td>";
 							tag += "<td><button class='btn btn-primary reviewButton' title='"+data.j_num+"' value='"+data.numjoin+"' data-target='#reviewMd' data-toggle='modal'>리뷰쓰기</button></td>";							
 							tag += "</tr>";
 						}else if(kategorie == 'grouplocal'){
 							console.log("idx="+idx);
+
 							index = idx;
 							tag += "<td class='wordCut'>"+data.g_subject+"</td>";
 							tag += "<td>"+data.sellerid+"</td>";
-							tag += "<td>"+data.g_writedate+"</td>";
+							tag += "<td>"+data.j_writedate+"</td>";
 							tag += "<td><button class='btn btn-primary reviewButton' title='"+data.j_num+"' value='"+data.numjoin+"' data-target='#reviewMd' data-toggle='modal'>리뷰쓰기</button></td>";							
 							tag += "</tr>";
 						}
@@ -80,19 +82,10 @@
 					var index = 0;
 					var count = 0;
 					result.IList.forEach(function(data, idx){
-					$.ajax({
-						url : "selectMyReviewCount",
-						data : {"num" : data.num},
-						dataType : "json",
-						async : false,
-						success : function(result){
-							console.log("o_num="+data.num+"reviewCount="+result);
-							count = result;
-						}, error : function(){
-							console.log("reviewCount error");
-						}
-					});
-					if(count == 0){
+						console.log("o_num="+data.num+"reviewCount="+data.reviewCount);
+						index = idx;
+						
+					if(data.reviewCount == 0){
 						tag += "<td class='wordCut'>"+data.i_subject+"</td>";
 						tag += "<td>"+data.sellerid+"</td>";
 						tag += "<td>"+data.o_date+"</td>";
@@ -284,6 +277,8 @@
 					$("#reviewWriteForm")[0].reset();
 					$('.modal-backdrop').remove();
 					$("#reviewMd").hide();
+					setMyAllReview(1);
+					
 				},error : function(e){
 					console.log("error");
 				}
