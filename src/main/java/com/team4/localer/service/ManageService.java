@@ -60,6 +60,13 @@ public interface ManageService {
 	public MemberVO memOneSelect(String userid);
 	//회원 관리 페이지 회원 정보 수정 
 	public int memberManageUpdate(String userid,String cate,int status);
+	//회원 통계 부분
+	public AdminstatisVO statismem(String month);
+	//모집게시판 지역구별 count
+	public Mem_statisVO guGroupCount(Mem_statisVO statisVO);
+	//자유게시판 카테고리 count 
+	public Mem_statisVO cateCount(Mem_statisVO statisVO);
+	
 	
 	//셀러관리 페이지 
 	//셀러 list Select 

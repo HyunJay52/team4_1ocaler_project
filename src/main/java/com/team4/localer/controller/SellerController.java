@@ -17,14 +17,22 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.MemberService;
 import com.team4.localer.service.SellerService;
+import com.team4.localer.service.ShipService;
+import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.Item_optionVO;
+import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
+import com.team4.localer.vo.ShipVO;
+import com.team4.localer.vo.Sp_pVO;
 
 
 @Controller
@@ -34,18 +42,18 @@ public class SellerController {
 	SellerService sellerService;
 	@Inject
 	private DataSourceTransactionManager transactionManager;
-	
+	@Inject
+	MemberService memberService;
+	@Inject
+	ShipService shipService;
 	
 	//착한발견 (셀러)
 	@RequestMapping("/selBard")
-	public String selBard() {
-		
-		
-		
-		
-		
-		
-		return "deal/sellBoard";
+	public ModelAndView selBard() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("itemList",sellerService.selectAllitem());
+		mav.setViewName("deal/sellBoard");
+		return mav;
 	}
 	
 	
@@ -113,30 +121,31 @@ public class SellerController {
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);//트랜잭션호출
 		TransactionStatus status  = transactionManager.getTransaction(def);
-		try {
-			
-			//셀러 게시글 인썰트
-			int result = sellerService.sellerInsert(itemVO);
+	
+		try {		  
+			//셀러 게시글 인썰트 
+			int result = sellerService.sellerInsert(itemVO); 
 			if(result>0) {
-				System.out.println(result+"쿼리문의 실행결과를나타내라!");
-				for(int i=0; i<optionVO.getOption_title().length; i++) {
-					int resul = sellerService.itemOptionInsert((String)req.getSession().getAttribute("logId"), optionVO.getOption_title()[i], optionVO.getOption_content()[i], optionVO.getO_price()[i]);
+				System.out.println(result+"쿼리문의 실행결과를나타내라!"); 
+				for(int i=0; i<optionVO.getOption_titles().length; i++) {
+					int resul = sellerService.itemOptionInsert((String)req.getSession().getAttribute("logId"), optionVO.getOption_titles()[i], optionVO.getOption_contents()[i], optionVO.getO_prices()[i]);
 					if(resul>0) {
 						System.out.println("옵션 등록에 성공했습니다.");
-						mav.addObject("redirect:selBard");
-					}else {
-						System.out.println("실패했네"+resul);
+						mav.setViewName("redirect:selBard");
+					}else { 
+						System.out.println("실패했네"+resul); 
 					}
-				}	
+				} 
 			}else {
-				mav.setViewName("redirect:selWrite");
+				mav.setViewName("redirect:selWrite"); 
 			}
 			transactionManager.commit(status);
-		}catch(Exception e) {
+		}catch(Exception e) {			  
 			System.out.println(e.getMessage()+"에러가 요기있습니다.");
 			e.printStackTrace();
 			mav.setViewName("group/historyBack");
 		}
+		 
 
 		System.out.println(uploadFilename.size()+"파일올린것만큼의 갯수를 잘구하나요?");		
 		System.out.println("============================");
@@ -152,36 +161,107 @@ public class SellerController {
 		System.out.println(itemVO.getI_tag()+"태그");
 		System.out.println(itemVO.getI_ship()+"배송비");
 		System.out.println("============================");
-		System.out.println(optionVO.getOption_title().length+"옵션의 타이틀");
-		System.out.println(optionVO.getOption_content().length+"옵션의 내용");	
-		System.out.println(optionVO.getO_price().length);
-		System.out.println(optionVO.getOption_title_str()+"<<_--- 옵션의 타이틀");
-		System.out.println(optionVO.getOption_content_str()+"<--- 옵션의 내용");
-		System.out.println(optionVO.getO_price_str()+"<<--옵션의 가격");
-
+		System.out.println(optionVO.getOption_title()+"옵션의 타이틀");
+		System.out.println(optionVO.getOption_titles().length);
+		System.out.println(optionVO.getOption_content()+"옵션의 내용");	
+		System.out.println(optionVO.getOption_contents().length);
+		System.out.println(optionVO.getO_price());
 		return mav;
 	}
 
 	@RequestMapping("/sellView")
-	public String selView() {
-		
-		
-		
-		
-		
-		return "deal/sellView";
+	public ModelAndView selView(SellitemVO itemVO, Item_optionVO optionVO) {
+		ModelAndView mav = new ModelAndView();
+	
+		mav.addObject("itemVO",sellerService.selectOnePage(itemVO.getI_num()));	
+		mav.addObject("NOTitle",sellerService.notOverlapOptionTitleSel(itemVO.getI_num())); //옵션대가리
+		mav.setViewName("deal/sellView");
+		return mav;
 	}
 	
+	@RequestMapping("/changeOptions")
+	@ResponseBody
+	public List<Item_optionVO> changeOption(Item_optionVO optionVO){
+		System.out.println(optionVO.getI_num()+"넘버");
+		System.out.println(optionVO.getOption_title()+"타이틀값");
+		return sellerService.changeOptions(optionVO.getOption_title(), optionVO.getI_num());
+	}
 	
 	@RequestMapping("/sellBuy")
-	public String sellBuy() {
-		return "deal/sellBuy";
+	public ModelAndView sellBuy(OrderVO orderVO, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		orderVO.setUserid((String)session.getAttribute("logId"));
+		
+		System.out.println(orderVO.getUserid()+"<--구매자의 userid");
+		System.out.println(orderVO.getO_price()+"<--총가격");
+		System.out.println(orderVO.getO_ship()+"<--배송비");
+		System.out.println(orderVO.getO_cnt()+"<--수량");
+		System.out.println(orderVO.getNum()+"<--현재 게시글번호");
+		System.out.println(orderVO.getOpt_str()+"<--옵션내용들");
+		System.out.println(orderVO.getI_subject()+"<--게시글제목");
+		System.out.println(orderVO.getI_userid()+"<--판매자의 userid");
+		System.out.println(orderVO.getI_price()+"<--원래상품 1개 판매가격");
+		System.out.println(orderVO.getI_img1()+"<--상품 이미지1");
+		mav.addObject("orderVO",orderVO);
+		mav.setViewName("deal/sellBuy");
+		return mav;
 	}
 	
-	@RequestMapping("/sellerInfo")
-	public String sellerInfo() {
-		return "deal/sellerInfo";
+	
+	@RequestMapping("/orderShipCashInsert")
+	public ModelAndView orderShipInsert(OrderVO orderVO, Cha_pVO chaVO, Sp_pVO spVO, ShipVO shipVO) {
+		ModelAndView mav = new ModelAndView();
+		
+		int result = sellerService.sellerOrderInsert(orderVO);
+		//배송테이블 값셋팅
+		shipVO.setBuyer(orderVO.getUserid()); //상품을 구매한사람
+		shipVO.setShip_cnt(orderVO.getO_cnt()); //cnt 셋팅
+		
+		System.out.println(result+"<----1이면성공 아니면 실패");	
+		if(result>0) {
+			int resl = shipService.shipInsert(shipVO);
+			System.out.println(resl+"<---이것도 1이 나와야 성공임");
+		}
+		if(orderVO.getO_mtd()==2) {
+			//-> 포인트 이동이 있어야 한다.
+			//판매자의 cha_p 에다가 o_price 만큼 insert
+			int cha_result = sellerService.cha_pointInsert(shipVO.getSender(), orderVO.getO_price(), 3);
+			System.out.println(cha_result +"<--1나오면 cha_point 인설트 성공");
+			//구매자의 sp_p 에다가 o_price 만큼 insert
+			int sp_result = sellerService.sp_pointInsert(orderVO.getUserid(), orderVO.getO_price(), orderVO.getNum());
+			System.out.println(sp_result+"<-- 1나오면 sp_point 인설트 성공");
+		}
+		return mav;
 	}
+	
+	
+	
+	
+	@RequestMapping("/sellerInfo")
+	public ModelAndView sellerInfo(String userid) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("sellerVO",sellerService.sellerInfo(userid));
+		mav.addObject("list",sellerService.sellerItems(userid));
+		mav.setViewName("deal/sellerInfo");
+		return mav;
+	}
+	
+	@RequestMapping("/userDetailFind")
+	@ResponseBody
+	public MemberVO userDetailFind(String userid) {
+		System.out.println(userid+"<--아작스에서 보낸 아이디값");
+		return memberService.userDetailFind(userid);
+	}
+	
+	@RequestMapping("/findChaSpPoint")
+	@ResponseBody
+	public Cha_pVO findChaSpPoint(String userid) {
+		return sellerService.findChaSpPoint(userid);
+	}
+	
+	
+	
+	
 	
 	
 }

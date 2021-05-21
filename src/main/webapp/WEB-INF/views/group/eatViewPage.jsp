@@ -221,6 +221,7 @@
 
 			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 			        map.setCenter(coords);
+			        map.setLevel(9);
 			    } 
 			});    			
 			//마커지우는용도
@@ -302,7 +303,7 @@
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.memberVO.mem_sub } </span></li>
 				<li><span>총 게시물 : ${vo.memberVO.mem_post }개</span></li>
-				<li><span>총 댓글수 : ${vo.memberVO.mem_rev }개</span></li>
+				<li><span>회원등급 : ${vo.memberVO.mem_rev }/100</span></li>
 			</ul>
 		</div>
 		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>

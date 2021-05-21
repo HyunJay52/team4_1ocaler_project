@@ -145,6 +145,14 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	@Override
+	public OrderVO statisTotal(String userid, int cate, String month) {
+		return dao.statisTotal(userid, cate, month);
+	}
+
+	@Override
+	public List<OrderVO> statisList(String userid, String month) {
+		return dao.statisList(userid, month);
+	}
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo) {
 
 		return dao.selectItemReviewList(vo);

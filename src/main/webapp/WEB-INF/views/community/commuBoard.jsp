@@ -40,7 +40,7 @@
 							
 						
 							<td style="float: left ;line-height: 14px;">
-								<a href="commuView?num=${vo.num}">${vo.b_subject} 
+								<a href="commuView?num=${vo.num}&up_cate=1">${vo.b_subject} 
 									<span style="font-weight: bold;"> [${vo.repcont}]</span>
 								</a> 
 									&nbsp;
@@ -67,25 +67,50 @@
 		</div>
 				
 		<ul id="MBPaging">
-               <li>이전</li>
-               <li>1</li>
-               <li>2</li>
-               <li>3</li>
-               <li>4</li>
-               <li>5</li>
-               <li>다음</li>
+               <c:if test="${pageVO.pageNum>1}">
+					<li>
+						<a href='commuBoard?b_gu=${pageVO.b_gu }&pageNum=${pageVO.pageNum-1}&up_cate=1<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>'>이전</a></li>
+				</c:if>
+				<c:if test="${pageVO.pageNum<=1}">
+					<li>이전</li>
+				</c:if>
+				<c:forEach var="p" begin="${pageVO.startPageNum }" end="${pageVO.startPageNum+pageVO.onePageNum-1 }">
+					<c:if test="${p<=pageVO.totalPage }">
+						<c:if test="${p==pageVO.pageNum }">
+						<!-- 현재페이지일떄 -->
+							<li style="background-color:#d9d9d9"><a href="commuBoard?b_gu=${pageVO.b_gu}&pageNum=${p}&up_cate=1<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+						<c:if test="${p!=pageVO.pageNum }">
+						<!-- 현재페이지가 아닐때 -->
+							<li><a href="commuBoard?b_gu=${pageVO.b_gu }&pageNum=${p}&up_cate=1<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+						</c:if>
+					</c:if>		
+				</c:forEach>			
+				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+					<li>
+						<a href="commuBoard?b_gu=${pageVO.b_gu }&pageNum=${pageVO.pageNum+1}&up_cate=1<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">다음</a></li>
+				</c:if>	
+				<c:if test="${pageVO.pageNum==pageVO.totalPage || pageVO.totalPage==0}">
+					<li>다음</li>
+				</c:if>	
             </ul>	
 		
-			
+			 	
 		<div>
-			<a href="commuWrite?up_cate=${vo.up_cate}"  class="btn wriBtn"  style="float:right;font-color: #181b46;"> 글쓰기</a>
+		
+			<c:if test="${logId != null }">
+				<a href="commuWrite?up_cate=${pageVO.up_cate}"  class="btn wriBtn"  style="float:right;font-color: #181b46;"> 글쓰기</a>
+			</c:if>
 			<div id="commuSearch">
-				<form method="post" action="" id="commuForm">
-					<select>
-						<option value="'">내용</option>	
-						<option value="'">작성자</option>			
+				<form method="get" action="commuBoard" id="commuForm">
+					<input type="hidden" name="b_gu" value="${pageVO.b_gu }"/>
+					<input type="hidden" name="up_cate" value="${pageVO.up_cate }"/>
+					<select name="searchKey">
+						<option value="b_content">내용</option>
+						<option value="b_subject">제목</option>		
+						<option value="userid">작성자</option>			
 					</select>
-						<input type="text"name ="search" placeholder=" &nbsp;검색.." id="search"/>
+						<input type="text"name ="searchWord" placeholder=" &nbsp;검색.." id="search"/>
 						<input type="image" id="btn" src="img/deal/icons8.png" style="display:block; float:left; border: 1px solid #000;" /> 
 				</form>
 			</div>	

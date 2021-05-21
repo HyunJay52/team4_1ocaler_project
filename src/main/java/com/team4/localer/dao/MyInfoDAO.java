@@ -75,6 +75,10 @@ public interface MyInfoDAO {
 	//내 모집글에 참여한 리스트 5개 조회
 	public List<MyinfoDealVO> selectMyShareJoinList(String userid);
 	
+	//==통계부분====
+	public OrderVO statisTotal(String userid,int cate,String month);//미확정 개수, 금액
+	//통계list
+	public List<OrderVO> statisList(String userid,String month);
 	//리뷰가능한 상품리스트 조회
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
 	

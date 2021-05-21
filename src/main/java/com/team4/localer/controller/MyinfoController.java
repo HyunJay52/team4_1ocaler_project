@@ -576,8 +576,32 @@ public class MyinfoController {
 		return "myInfo/myInfoSalesManagement";
 	}
 	@RequestMapping("/myInfoStatistics")
-	public String myInfoStatistics() {
-		return "myInfo/myInfoStatistics";
+	public ModelAndView myInfoStatistics(HttpSession ses,int month) {
+		ModelAndView mav = new ModelAndView();
+		String userid = ((String)ses.getAttribute("logId"));
+		String monthStr = monthStr(month+1);
+		mav.addObject("notOkVO",service.statisTotal(userid,1,monthStr));
+		mav.addObject("OkVO",service.statisTotal(userid,2,monthStr));
+		mav.addObject("list",service.statisList(userid,monthStr));
+		//한달전 매출
+		mav.addObject("month1VO", service.statisTotal(userid, 2, monthStr(month)));
+		//두달전 매출
+		mav.addObject("month2VO", service.statisTotal(userid, 2, monthStr(month-1)));
+		String monthArr[] = {monthStr(month-1),monthStr(month),monthStr(month+1)};
+		mav.addObject("monthArr",monthArr);
+		mav.setViewName("myInfo/myInfoStatistics");
+		return mav;
+	}
+	public String monthStr(int month) {
+		String monthStr;
+		if(month==1) {
+			monthStr="12";
+		}else if(month-1<10) {
+			monthStr = "0"+(month-1);
+		}else {
+			monthStr = ""+(month-1);
+		}
+		return monthStr;
 	}
 	@RequestMapping("/myInfoReviewManagement")
 	public String myInfoReviewManagement() {

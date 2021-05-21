@@ -25,7 +25,8 @@
 		overflow:auto;
 		width:1300px;
 		margin:50 auto;
-		height: 688.5px; 
+		overflow:auto;
+		overflow-x:hidden;
 	}
 	
 	#infoSeller{

@@ -1,74 +1,32 @@
 package com.team4.localer.vo;
 
-public class BoardPageVO {
+public class DealPageVO {
 
 	private int pageNum=1;// 현재 페이지
-	private int onePageNum=10;// 한페이지당 페이지 번호 수 
-	private int onePageRecord=10;// 한페이지당 레코드수	
+	private int onePageNum=16;// 한페이지당 페이지 번호 수 
+	private int onePageRecord=16;// 한페이지당 레코드수	
 
 	private int totalRecord;// 총레코드수
 	private int totalPage;// 마지막 페이지, 총페이지수
 	private int startPageNum=1;// 시작페이지
 	
-	private int lastPageRecord=10;// 마지막 페이지의 남은 레코드수
+	private int lastPageRecord=16;// 마지막 페이지의 남은 레코드수
 	
 	private String searchKey;//검색키
 	private String searchWord;//검색어
 	
-	private String b_gu;
-	private String loc_gu;
-	private int up_cate;
+	private String s_cate;
+	private String s_gu;
 	
 	private String userid;
 	
-	private String b_subject;
-	private String b_content;
-	private int num;
 	
 	
-	
-	
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
-	public String getB_subject() {
-		return b_subject;
-	}
-	public void setB_subject(String b_subject) {
-		this.b_subject = b_subject;
-	}
-	public String getB_content() {
-		return b_content;
-	}
-	public void setB_content(String b_content) {
-		this.b_content = b_content;
-	}
 	public String getUserid() {
 		return userid;
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
-	}
-	public String getB_gu() {
-		return b_gu;
-	}
-	public void setB_gu(String b_gu) {
-		this.b_gu = b_gu;
-	}
-	public String getLoc_gu() {
-		return loc_gu;
-	}
-	public void setLoc_gu(String loc_gu) {
-		this.loc_gu = loc_gu;
-	}
-	public int getUp_cate() {
-		return up_cate;
-	}
-	public void setUp_cate(int up_cate) {
-		this.up_cate = up_cate;
 	}
 	public int getPageNum() {
 		return pageNum;
@@ -102,11 +60,10 @@ public class BoardPageVO {
 		
 		//마지막 페이지 레코드수
 		if(totalRecord%onePageRecord==0) {
-			lastPageRecord = onePageRecord; // 10개의 게시물
+			lastPageRecord = onePageRecord; // 
 		}else {
 			lastPageRecord = totalRecord%onePageRecord; // 남은 레코드수
 		}
-		
 		
 	}
 	public int getTotalPage() {
@@ -139,6 +96,19 @@ public class BoardPageVO {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
+	public String getS_cate() {
+		return s_cate;
+	}
+	public void setS_cate(String s_cate) {
+		this.s_cate = s_cate;
+	}
+	public String getS_gu() {
+		return s_gu;
+	}
+	public void setS_gu(String s_gu) {
+		this.s_gu = s_gu;
+	}
 	
-
+	
+	
 }

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/m_sel.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
 	$(function(){
 		//검색버튼 클릭이벤트 
@@ -23,15 +24,20 @@
 			}
 			sellerAjax();
 		});
-		
+		//==모달==
 		//아이디 클릭시 회원정보 테이블 띄워주는 곳 
 		$('.memid').click(function(){
 			var userid = $(this).text();//회원아이디
 			var sel_num = $(this).prev().text();
 			meminfo(userid);
 			selinfo(sel_num);
+			$("#detailinfo").css("display","block");
+			$("#topsubject").text(userid+"님의 회원정보");
 		});
-		
+		 $("#detailinfo").draggable();
+		 $(".cbtn").click(function(){
+	   		  $("#detailinfo").css("display","none");
+	   	  });
 		function meminfo(userid){//ajax로 데이터 가져오기
 			$.ajax({
 				type : "POST",
@@ -111,7 +117,6 @@
 							txt += "<td><input type='button' class='spuplebtn rest'value='정상회원'></td>";
 						}
 						txt += "<td><input type='button' class='spuplebtn seller'value='권한박탈'></td>";
-						txt += "<td><input type='button' class='spuplebtn edit'value='수정'></td>";
 						txt += "</tr>";
 					});
 					$("#sellerList").append(txt);
@@ -229,28 +234,23 @@
 	<ul class="statisM">
 		<li>
 			총회원수
-			<div>2500</div>
-			<b>▲4% </b>지난주 대비
+			<div>${statis.total }</div>
 		</li>
 		<li>
 			신규회원
-			<div>2500</div>
-			<b>▼4% </b>지난주 대비
+			<div>${statis.new_mem}</div>
 		</li>
 		<li>
 			셀러회원
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.sell_mem}</div>
 		</li>
 		<li>
 			휴면계정
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.hu_mem}</div>
 		</li>
 		<li>
 			탈퇴
-			<div>2500</div>
-			<b>4% </b>지난주 대비
+			<div>${statis.tal_mem}</div>
 		</li>
 	</ul>
 	<div class="searchDiv">
@@ -267,61 +267,6 @@
 			</form>
 		</div>
 	</div>
-	
-	<!-- 회원 정보 테이블 이름클릭시 보이도록 설정  -->
-	<table id="meminfo" class="tablea">
-		<colgroup>
-			   <col width="100" />
-               <col width="100" />
-               <col width="200" />
-               <col width="100" />
-               <col width="250" />
-               <col width="200" />
-           </colgroup> 
-		<tr>
-			<td>아이디</td>
-			<td>게시물</td>
-			<td>댓글</td>
-			<td>등급</td>
-			<td>가입날짜</td>
-			<td>누적신고</td>
-		</tr>
-		<tr class='memdetailTbl'>
-			<td>10</td>
-			<td>40</td>
-			<td>5</td>
-			<td>2021.01.01</td>
-			<td>88</td>
-		</tr>
-	</table>
-	<!-- 셀러정보 테이블 -->
-	<table id="selinfo" class="tablea">
-		<colgroup>
-              <col width="200" />
-              <col width="300" />
-              <col width="300" />
-              <col width="200" />
-              <col width="300" />
-              <col width="300" />
-         </colgroup> 
-		<tr>
-			<td>번호</td>
-			<td>제목</td>
-			<td>구매 확정</td>
-			<td>구매 확정전</td>
-			<td>작성날짜</td>
-			<td>판매금액</td>
-		</tr>
-		<tr class="seldetail">
-			<td>101</td>
-			<td>감자</td>
-			<td>130/10</td>
-			<td>goguma</td>
-			<td>2021.01.20</td>
-			<td>10000</td>
-		</tr>
-	</table>
-
 	<table id="sellerList"class="tablea" >
 		 <colgroup>
                <col width="5%" />
@@ -333,7 +278,6 @@
                <col width="8%" />
                <col width="9%" />
                <col width="9%" />
-               <col width="5%"/>
             </colgroup>
 		<tr>
 			<td>번호</td>
@@ -345,7 +289,6 @@
 			<td>블랙리스트</td>
 			<td>휴면상태</td>
 			<td>셀러권한</td>
-			<td>정보수정</td>
 		</tr>
 		<c:forEach var="vo" items="${list}">
 			<tr class="selList">
@@ -369,8 +312,6 @@
 					<td><input type="button" class="spuplebtn rest"value="정상회원"></td>
 				</c:if>
 				<td><input type="button" class="spuplebtn seller"value="권한박탈"></td>
-				
-				<td><input type="button" class="spuplebtn edit"value="수정"></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -394,4 +335,52 @@
 			<li class="clickpage">다음</li>
 		</c:if>
 	</ul>
+	
+	
+	
+	<div id="detailinfo">
+	<div id="topsubject"></div>
+		<div>
+			<table class="tablea" id="meminfo">
+				<colgroup>
+					   <col width="100" />
+		               <col width="100" />
+		               <col width="200" />
+		               <col width="100" />
+		               <col />
+		               <col width="200" />
+		           </colgroup> 
+				<tr>
+					<td>아이디</td>
+					<td>게시물</td>
+					<td>댓글</td>
+					<td>등급</td>
+					<td>가입날짜</td>
+					<td>누적신고</td>
+				</tr>
+			</table>
+		</div>
+		<!-- 셀러정보 테이블 -->
+		<div id="table2">
+			<table class="tablea" id="selinfo">
+				<colgroup>
+		              <col width="200" />
+		              <col width="300" />
+		              <col width="300" />
+		              <col width="200" />
+		              <col width="300" />
+		              <col width="300" />
+		         </colgroup> 
+				<tr>
+					<td>번호</td>
+					<td>제목</td>
+					<td>구매 확정</td>
+					<td>구매 확정전</td>
+					<td>작성날짜</td>
+					<td>판매금액</td>
+				</tr>
+			</table>
+		</div>
+		<div class="cbtn">닫기</div>
+	</div>
 </div>

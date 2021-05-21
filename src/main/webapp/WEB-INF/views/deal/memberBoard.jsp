@@ -54,14 +54,27 @@
    
    
    <div id="dealMnSMain">
- 
+ 	
       
       <h3 style="margin-top:50px;">#동네직구 <span style="font-size:20px">| 지역 주민들과 나눔</span></h3>
       <span style="display: inline-block; font-size:20px; float:right; margin-bottom: 6px;">
-      	<a href="memberBoard?s_cate=1">식료품</a>&ensp;<span style="font-size:10px; ">|</span>&nbsp;
-      	<a href="memberBoard?s_cate=2">생필품</a>&ensp;<span style="font-size:10px; ">|</span>&ensp; 
-      	<a href="memberBoard?s_cate=3">기 타</a>&ensp; 
+      	<a href="memberBoard?s_cate=1&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">식료품</a>&ensp;<span style="font-size:10px; ">|</span>&nbsp;
+      	<a href="memberBoard?s_cate=2&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">생필품</a>&ensp;<span style="font-size:10px; ">|</span>&ensp; 
+      	<a href="memberBoard?s_cate=3&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">기 타</a>&ensp; 
       </span>
+      
+      <div id="commuSearch" style="height: 30px;">
+				<form method="get" action="memberBoard" id="commuForm">
+					<select name="searchKey">
+						<option value="s_content">내용</option>
+						<option value="s_subject">제목</option>		
+						<option value="s_gu">지역검색</option>
+						<option value="userid">작성자</option>			
+					</select>
+						<input type="text"name ="searchWord" placeholder=" &nbsp;검색.." id="search"/>
+						<input type="image" id="btn" src="img/deal/icons8.png" style="display:block; float:left; border: 1px solid #000;" /> 
+				</form>
+      </div>	         
                   
                
          <div id="selBoard" >
@@ -72,16 +85,16 @@
                         <div id="sellImgDiv">
                            <img src="<%=request.getContextPath()%>/img/dealFileImg/${vo.s_img1}"/>
                            
-                           
-                           <input class="aaaa" type="checkbox" name="numLike" id="like${vo.num}" value="${vo.num}" 
-	                           <c:forEach var="likes" items="${likeList}">
-                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
-                           				checked
-                           			</c:if>
-                           		</c:forEach> 
-                           	/>	
-                           <label for="like${vo.num}"></label>
-
+                           <c:if test="${logId!=null }">
+	                           <input class="aaaa" type="checkbox" name="numLike" id="like${vo.num}" value="${vo.num}" 
+		                           <c:forEach var="likes" items="${likeList}">
+	                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
+	                           				checked
+	                           			</c:if>
+	                           		</c:forEach> 
+	                           	/>	
+	                           <label for="like${vo.num}"></label>
+							</c:if>
                            
                         </div>
                         <ul OnClick="location.href ='memberView?num=${vo.num}'" >   
@@ -106,16 +119,36 @@
          
          <div>
        	
-       	 	<a href="memberWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
-         
+       		<c:if test="${logId !=null }">
+       	 		<a href="memberWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
+ 			</c:if>        
             <ul id="MBPaging">
-               <li>이전</li>
-               <li>1</li>
-               <li>2</li>
-               <li>3</li>
-               <li>4</li>
-               <li>5</li>
-               <li>다음</li>
+               <c:if test="${pageVO.pageNum>1}">
+					<li>
+						<a href='memberBoard?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>'>이전</a></li>
+				</c:if>
+				<c:if test="${pageVO.pageNum<=1}">
+					<li>이전</li>
+				</c:if>
+				<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
+					<c:if test="${p<=pageVO.totalPage}">
+						<c:if test="${p==pageVO.pageNum}">
+						<!-- 현재페이지일떄 -->
+							<li style="background-color:#d9d9d9"><a href="memberBoard?pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a></li>
+						</c:if>
+						<c:if test="${p!=pageVO.pageNum}">
+						<!-- 현재페이지가 아닐때 -->
+							<li><a href="memberBoard?pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a></li>
+						</c:if>
+					</c:if>		
+				</c:forEach>			
+				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+					<li>
+						<a href="memberBoard?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">다음</a></li>
+				</c:if>	
+				<c:if test="${pageVO.pageNum==pageVO.totalPage || pageVO.totalPage==0}">
+					<li>다음</li>
+				</c:if>	
             </ul>
             
             

@@ -92,4 +92,10 @@
 			seller WHERE sel_email=#{param2}
 		</if>
 	</select>
+	
+	<select id="userDetailFind" resultType="com.team4.localer.vo.MemberVO">
+		select mem_name, mem_tel, mem_zip, mem_addr, mem_detail from member where userid=#{param1}
+	</select>
+	
+	
 </mapper>
