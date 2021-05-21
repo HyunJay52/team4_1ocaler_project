@@ -8,54 +8,58 @@
 				if($("#o_mtd option:selected").val()=="1"){
 					console.log("들어오냐..22");
 					$("#cardPay").css("display","block");
-					$("#cashPay").css("display","none");
 					$("#pointPay").css("display","none");
 					
 				}
 				if($("#o_mtd option:selected").val()=="2"){
-					console.log("들어오냐..33");
-					$("#cashPay").css("display","block");
-					$("#cardPay").css("display","none");
-					$("#pointPay").css("display","none");
-				}
-				if($("#o_mtd option:selected").val()=="3"){
-					console.log("들어오냐..44");
-					$("#cashPay").css("display","none");
+					console.log("들어오냐..22");
 					$("#cardPay").css("display","none");
 					$("#pointPay").css("display","block");
 				}
-				if($("#o_mtd option:selected").val()=="0"){
-					console.log("들어오냐..55");
-					$("#cardPay").css("display","none");
-					$("#cashPay").css("display","none");
-					$("#pointPay").css("display","none");
-				}
 			});
+			
+			$("#showSellerInfo").click(function(){
+				location.href="sellerInfo?userid=${orderVO.i_userid }";
+			});
+			$("#sellItemShow").click(function(){
+				location.href="sellView?i_num=${orderVO.num}";
+			});
+	
 		});
 	</script>
 
 	<div id="main">
 		<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
+		<div class='sellBuyTitle'>구매상품정보</div>
 		<form>
 			<div id="center">
 				<div>	
-					<h4 style="width: 1100px;">구매 상품 정보</h4>
 					<ul id="boardList">
 					
 						<li>상품정보</li>
-						<li>판매자</li>
+						<li>수량</li>
 						<li>배송비</li>
-						<li>상품금액</li>	
+						<li>총 금액</li>	
 	
 						<li>
-							<div>D.I.Y 오르골 만들기</div>
-							<div> 옵션 : 혼자 만들기...</div>
+							<div><img id='sellItemShow' src="<%=request.getContextPath()%>/img/sellItemInsertPicture/${orderVO.i_img1}"></div>
+							<div>
+								<div style='height:238px; display:flex; flex-direction:column; justify-content: space-around;'>
+									<div style="font-weight:bold; font-size:1.25em; text-align:center;">${orderVO.i_subject }
+									<span id='showSellerInfo' style="border:1px solid gray; font-size:14.75px; border-radius:5px; padding:3px; color:yellow; background:#571fb8">판매자:${orderVO.i_userid }</span><br/>
+									<span> 기본가격 : ${orderVO.i_price }원</span><br/>
+									<span>옵션 : ${orderVO.opt_str }</span></div>
+								</div>	
+							</div>
 						</li>
-						<li>goguma1234</li>
-						<li>무료 배송</li>
-						<li>20,000</li>	
+						<li>${orderVO.o_cnt }EA</li>
+						<li>${orderVO.o_ship }원</li>
+						<li>${orderVO.o_price+orderVO.o_ship }원</li>	
 					</ul>
 				</div>
+				
+				<div class='sellBuyTitle'>배송지 정보</div>
+				
 				<div id="DeliveryAddr">
 					<div>
 						<h4 style="display: inline;">배송지 정보 &ensp;  </h4>
@@ -78,10 +82,9 @@
 					<div id="paySelect">
 						<h4 style="display: inline;">결제 방법 &emsp;   </h4>
 						<select name="o_mtd" id="o_mtd">
-							<option value="0">결제선택</option>
+							<option selected disabled hidden>결제선택</option>
 							<option value="1">카드결제</option>
-							<option value="2">무통장입금</option>
-							<option value="3">포인트결제</option>
+							<option value="2">포인트결제</option>
 						</select>
 					</div>
 					
@@ -103,19 +106,6 @@
 						<h5>&nbsp;C&ensp;V&ensp;C&nbsp;&nbsp;</h5> &emsp;&emsp;
 						<input type ="text" id = "cvc" name="cvc"/>
 						
-					</div>
-					
-					<div id="cashPay">
-
-						<h5 style="display: inline;">신한은행</h5> &ensp;
-							<h6 style="display: inline;">1004-127-000000</h6>
-						<br/>
-						<h5 style="padding-left:2px;">예&nbsp;금&nbsp;주&ensp;</h5> &ensp;1ocaler
-						<br/>
-						<br/>
-						<span style="color:gray; font-size: 14px; padding: 0px">입금 후 입금 확인 및 주문 완료까지는 5 ~ 10 분 정도 소요됩니다.<br/>
-						확인이 되지 않은 경우에는 판매자나, 고객센터로 연락부탁드립니다.</span>
-					
 					</div>
 					
 					<div id="pointPay">

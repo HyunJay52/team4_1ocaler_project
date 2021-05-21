@@ -6,38 +6,6 @@
 	margin-top:30px;
 	margin-bottom:20px;
 	}
-
-.statis{ /*ul style*/
-		margin:10 auto;
-		padding:0;
-		width:100%;
-		list-style-type:none;
-		background-color:rgb(252,252,254);
-		font-family:"nsrb";
-		font-size:32px;
-		margin-bottom:30px;
-		overflow:auto;
-		}
-.statis>li{
-	margin:10px auto;
-	padding:0;
-	width:25%;
-	color:#3f1785;
-	float:left;
-	text-align:center;
-}
-.statis>li:nth-child(1){
-	margin-left:25%;
-}
-.statis>li:nth-child(2){/*중간선긋기*/
-	border-left:3px solid rgb(63,23,133,0.7);
-	
-}
-.statis div{
-	font-family:"nsreb";
-	font-size:50px;
-}
-
 /*그래프 부분*/
 #chart_div{
 	margin-left:auto;
@@ -49,7 +17,55 @@
 }
 
 
-
+.statisUl{ /*ul style*/
+	margin:0 auto;
+	width:100%;
+	overflow:auto;
+	list-style-type:none;
+	background-color:rgb(243,245,248,0.5);
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	padding-top:10px;
+	padding-bottom:10px;
+	text-align:center;
+	}
+.statisUl>li{
+	margin-top:10px;
+	margin-bottom:10px;
+	float:left;
+	width:20%;
+	color:#024B40;
+	font-family:"nsrb";
+	font-size:16px;
+	
+	}
+.statisUl>li:nth-child(1){/*중간선긋기*/
+	margin-left:30%;
+}
+.statisUl>li:nth-child(2){/*중간선긋기*/
+	border-left:3px solid #024B40;
+}
+.statisUl div{
+	font-family:"nsreb";
+	font-size:50px;
+}
+/*도넛 차트1*/
+.donutUl{
+	overflow:auto;
+	margin-bottom:30px;
+}
+.donutUl li{
+	float:left;
+	width:400px;
+	font-size:32px;
+	text-align:center;
+	padding:0;
+	list-style-type:none;
+}
+.donutUl>li:nth-child(3n+1){
+	margin-left:50px;
+}
 
 
 

@@ -11,8 +11,44 @@ public class AdminstatisVO {
 	private int o_conf1;//구매확정 전
 	private int o_conf2;//구매확정후 
 	private int price_total;//구매확정 가격 합산 
+	//회원관리 부분 통계 
+	private int total;
+	private int new_mem;
+	private int sell_mem;
+	private int hu_mem;
+	private int tal_mem;
 	
 	
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public int getNew_mem() {
+		return new_mem;
+	}
+	public void setNew_mem(int new_mem) {
+		this.new_mem = new_mem;
+	}
+	public int getSell_mem() {
+		return sell_mem;
+	}
+	public void setSell_mem(int sell_mem) {
+		this.sell_mem = sell_mem;
+	}
+	public int getHu_mem() {
+		return hu_mem;
+	}
+	public void setHu_mem(int hu_mem) {
+		this.hu_mem = hu_mem;
+	}
+	public int getTal_mem() {
+		return tal_mem;
+	}
+	public void setTal_mem(int tal_mem) {
+		this.tal_mem = tal_mem;
+	}
 	public int getI_num() {
 		return i_num;
 	}

@@ -107,8 +107,8 @@
 					<li><a href="main">HOME<span id=line></span></a></li>
 					<li><a href="m_mem">회원관리</a></li>
 					<li><a href="selManage">게시글관리</a></li>
-					<li><a href="statis_mem">통계</a></li>
-					<li><a href="spend_mem">정산 관리</a></li>
+					<li><a href="statis_mem?month=5">통계</a></li>
+					<li><a href="spend_mem?month=5">정산 관리</a></li>
 				</ul>
 				<div id="topSubMenu">
 					<ul>

@@ -21,24 +21,24 @@
                   
          <div id="selBoard" >
             <ul id="boardText">
-               <c:forEach var="i" begin="1" end="10">
+               <c:forEach var="itemVO" items="${itemList }">
                   <li id="selList">
-                     <div  OnClick="location.href ='sellView'">
+                     <div  OnClick="location.href ='sellView?i_num=${itemVO.i_num}'">
                         <div id="sellImgDiv">
-                           <img src="img/deal/div.jfif"/>
+                           <img src="<%=request.getContextPath()%>/img/sellItemInsertPicture/${itemVO.i_img1}"/>
                         </div>
                         <ul>   
-                           <li class="wordcut">D.I.Y 오르골 엔틱소품</li>
+                           <li class="wordcut">${itemVO.i_subject }</li>
                            
                            <li>
                               <span class="cntJoin">&nbsp;&nbsp;5</span>
-                              /160개
+                              /${itemVO.i_cnt }개
                            </li>
-                           <li>20,000원</li>
-                           <li class="wordcut">#오르골 #DIY #엔틱소품 #소품</li>
+                           <li>${itemVO.i_price}원</li>
+                           <li class="wordcut">${itemVO.i_tag }</li>
                            <li>
-                              goguma1234 &nbsp;
-                              <img src="common/user.png">&nbsp;&nbsp;
+                              ${itemVO.userid } &nbsp;
+                              <img src="<%=request.getContextPath()%>/img/mem_prof/${itemVO.sel_prof}">&nbsp;&nbsp;
                            </li>
                         </ul>
                      </div>
@@ -48,7 +48,6 @@
          </div>
          
          <div>
-
          	<c:if test='${logType==2 }'>
          		<a href="selWrite" class="btn commBtn "  style="float:right"> 글쓰기</a>
          	</c:if>

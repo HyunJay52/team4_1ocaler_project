@@ -139,15 +139,15 @@
 }
 	
 .redBtn{
-	background:rgb(183,15,23,0.9);
+	background:#fff;
 	border:1px solid rgb(183,15,23,0.9);
-	color:#fff;
+	color:rgb(183,15,23,0.9);
 	width:70px;
 	padding:2px;
 }
 .redBtn:hover{
-	color:rgb(183,15,23);
-	background:#fff;
+	color:#fff;
+	background:rgb(183,15,23,0.9);
 }
 /*모달부분*/
 .modaldiv>div{
@@ -264,8 +264,8 @@
 	}
 .statisM div{/*수치*/
 	font-family:"nsreb";
-	font-size:32px;
-	color:#024B40;
+	font-size:40px;
+	color:#fd9735;
 	border-right:4px solid #024B40;
 	}
 .statisM li:last-child>div{

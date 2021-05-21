@@ -143,6 +143,16 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.selectMyShareJoinList(userid);
 	}
 
+	@Override
+	public OrderVO statisTotal(String userid, int cate, String month) {
+		return dao.statisTotal(userid, cate, month);
+	}
+
+	@Override
+	public List<OrderVO> statisList(String userid, String month) {
+		return dao.statisList(userid, month);
+	}
+
 
 	
 

@@ -103,13 +103,12 @@
 			}else if($(this).text() == '배송관리'){
 				location.href="myInfoShippingManagement";
 			}else if($(this).text() == '통계'){
-				location.href="myInfoStatistics";
+				location.href="myInfoStatistics?month=5";
 			}else if($(this).text() == '후기'){
 				location.href="myInfoReviewManagement";
 	
 			}
 		});
-		
 		
 		//메뉴 세팅
 		setMenu();

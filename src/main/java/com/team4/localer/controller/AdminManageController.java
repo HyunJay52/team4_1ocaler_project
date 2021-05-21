@@ -1,5 +1,6 @@
 package com.team4.localer.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -43,12 +44,18 @@ public class AdminManageController {
 		//회원목록가져오기 
 		mav.addObject("list",manaService.memberAllSelect(pageVO));
 		mav.addObject("pageVO",pageVO);
+		//현재 날짜 
+		Calendar oCalendar = Calendar.getInstance( );  // 현재 날짜/시간 등의 각종 정보 얻기
+		SimpleDateFormat sdf = new SimpleDateFormat("YY-MM");
+		String month = sdf.format(oCalendar.getTime());
+		month+="-01";
+		mav.addObject("statis",manaService.statismem(month));
 		mav.setViewName("admin/m_mem");
 		return mav;
 	}
 	@RequestMapping(value="/memListSearch",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> memListSearch(AdminPageVO pageVO){
+	public Map<String, Object> memListSearch(AdminPageVO pageVO,String cate){
 		Map<String, Object> result = new HashMap<String, Object>();
 		pageVO.setSearchWord("%"+pageVO.getSearchWord()+"%");
 		pageVO.setNum("mem_no");
@@ -83,7 +90,7 @@ public class AdminManageController {
 		return manaService.memberManageUpdate(userid,cate,status);
 	}
 	//===========셀러관리페이지
-	@RequestMapping("/m_sel")//회원관리-일반회원 
+	@RequestMapping("/m_sel")//회원관리-셀러회원 
 	public ModelAndView m_sel(AdminPageVO pageVO) {
 		ModelAndView mav = new ModelAndView();
 		pageVO.setNum("sel_num");
@@ -96,6 +103,12 @@ public class AdminManageController {
 		//회원목록가져오기 
 		mav.addObject("list",manaService.sellerAllSelect(pageVO));
 		mav.addObject("pageVO",pageVO);
+		//현재 날짜 
+		Calendar oCalendar = Calendar.getInstance( );  // 현재 날짜/시간 등의 각종 정보 얻기
+		SimpleDateFormat sdf = new SimpleDateFormat("YY-MM");
+		String month = sdf.format(oCalendar.getTime());
+		month+="-01";
+		mav.addObject("statis",manaService.statismem(month));
 		mav.setViewName("admin/m_sel");
 		return mav;
 	}
@@ -329,6 +342,9 @@ public class AdminManageController {
 		statisVO.setMonth(month);
 		String resultMonth[] = {statisVO.getMonth1(),statisVO.getMonth2(),statisVO.getMonth3()};
 		mav.addObject("monthArr",resultMonth);
+		//지역구별 모집게시판 글 등록순
+		mav.addObject("guVO",manaService.guGroupCount(statisVO));
+		mav.addObject("cateVO",manaService.cateCount(statisVO));
 		mav.addObject("month3",manaService.boardStatis(statisVO));
 		//4월 신규
 		statisVO = monthCal1(statisVO);//4월 넣어주는 과정

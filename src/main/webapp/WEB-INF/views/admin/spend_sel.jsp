@@ -29,6 +29,52 @@
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+    //==도넛그래프
+      function drawChart1() {
+
+          var data = google.visualization.arrayToDataTable([
+            ['지역구', '방문자수'],
+            ['강서구',${guVO.gu1}],
+            ['구로구',${guVO.gu2}],
+            ['금천구',${guVO.gu3}],
+            ['관악구',${guVO.gu4}],
+            ['강남구',${guVO.gu5}],
+            ['강동구',${guVO.gu6}],
+            ['용산구',${guVO.gu7}],
+            ['중구',${guVO.gu8}],
+            ['광진구',${guVO.gu9}],
+            ['동대문구',${guVO.gu10}],
+            ['중랑구',${guVO.gu11}],
+            ['은평구',${guVO.gu12}],
+            ['강북구',${guVO.gu13}],
+            ['노원구',${guVO.gu14}],
+            ['도봉구',${guVO.gu15}],
+            ['양천구',${guVO.gu16}],
+            ['영등포구',${guVO.gu17}],
+            ['동작구',${guVO.gu18}],
+            ['서초구',${guVO.gu19}],
+            ['송파구',${guVO.gu20}],
+            ['마포구',${guVO.gu21}],
+            ['서대문구',${guVO.gu22}],
+            ['성동구',${guVO.gu23}],
+            ['종로구',${guVO.gu24}],
+            ['성북구',${guVO.gu25}],          
+          ]);
+
+          var options = {
+            title : '지역별이용률',
+            width: 400,
+         	  height: 400,
+            pieHole: 0.3,
+            pieSliceTextStyle: {
+              color: 'white'
+            },
+            pieSliceText : 'label',
+            legend: 'none',
+          };
+          var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+          chart.draw(data, options);
+        }
       $(function(){
     	  //검색버튼 클릭시
     	  $("#searchBtn").click(function(){
@@ -91,7 +137,6 @@
     	  $(document).on('click','.popup',function(){
     		  var num = $(this).prev().prev().text();
     		  var txt =$("#topsubject").text($(this).text());
-    		  alert("글제목"+txt);
     		  modalOne(num);
     	  });
     	  
