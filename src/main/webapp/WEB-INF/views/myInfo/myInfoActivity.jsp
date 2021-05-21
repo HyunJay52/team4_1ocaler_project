@@ -29,7 +29,7 @@
 					<div class="infoListHeader">
 						<h3>${vo.mem_name}</h3>
 						<input type="button" class="btn dealBtn btn-outline-dark" value="Send Message"/>
-						<a href="myInfoSeller"><input type="button" class="btn dealBtn btn-outline-dark" value="Info"/></a>
+						<a href="myInfoCheck"><input type="button" class="btn dealBtn btn-outline-dark" value="Info"/></a>
 					</div>
 					<ul style="font-weight:bold;">
 						<li>참여</li>
@@ -56,8 +56,8 @@
 			<div class="activityRight">
 				<input type="button" class="btn btn-outline-danger" value="삭제" style="float:right; height:30px; margin-bottom:10px; line-height:10px"/>
 				<div class="myActivityForm">
-					<input type="date" min="2021-01-01" max="2021-05-31"/> ~ 
-					<input type="date" min="2021-01-01" max="2021-05-31"/>
+					<input type="date" name="searchDate" value="2021-03-01" min="2021-03-01" max="2021-05-31"/> ~ 
+					<input type="date" name="searchDate2" value="2021-05-31" min="2021-03-01" max="2021-05-31"/>
 					<div class="activitySelect">
 						<select id="activitySelectbox">
 							<option value="">나의 작성글</option>

@@ -9,6 +9,22 @@ public class ItemReviewVO {
 	private String re_img;
 	private String re_writedate;
 	
+	private String re_subject; //각 상품들의 제목을 re_subject로 담는다
+	private String sellerid;
+
+	public String getRe_subject() {
+		return re_subject;
+	}
+	public void setRe_subject(String re_subject) {
+		this.re_subject = re_subject;
+	}
+	public String getSellerid() {
+		return sellerid;
+	}
+	public void setSellerid(String sellerid) {
+		this.sellerid = sellerid;
+	}
+
 	public int getRe_num() {
 		return re_num;
 	}

@@ -144,6 +144,12 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	@Override
+	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo) {
+
+		return dao.selectItemReviewList(vo);
+	}
+	
+	@Override
 	public OrderVO statisTotal(String userid, int cate, String month) {
 		return dao.statisTotal(userid, cate, month);
 	}
@@ -153,8 +159,22 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.statisList(userid, month);
 	}
 
+	@Override
+	public List<ItemReviewVO> selectMyReviewList(MyinfoPageVO vo) {
+		// TODO Auto-generated method stub
+		return dao.selectMyReviewList(vo);
+	}
 
-	
+	@Override
+	public int selectMyReviewListCount(MyinfoPageVO vo) {
+		// TODO Auto-generated method stub
+		return dao.selectMyReviewListCount(vo);
+	}
 
+	@Override
+	public int reviewUpdate(ItemReviewVO vo) {
+		// TODO Auto-generated method stub
+		return dao.reviewUpdate(vo);
+	}
 	
 }
