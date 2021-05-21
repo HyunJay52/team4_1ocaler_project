@@ -3,6 +3,8 @@ package com.team4.localer.service;
 
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.Item_optionVO;
+
+import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.SellitemVO;
 
@@ -20,6 +22,12 @@ public interface SellerService {
 	
 	public List<Item_optionVO> notOverlapOptionTitleSel(int i_num);// 옵션 타이틀 목록 중복제거값 가져오기
 	public List<Item_optionVO> changeOptions(String option_title, int i_num);//옵션목록바꾸기 아작스
+
+	//판매자 정보 불러오기
+	public SellerVO sellerInfo(String userid);
+	//판매자 제품 list
+	public List<SellitemVO> sellerItems(String userid);
+
 	
 	public Cha_pVO findChaSpPoint(String userid); // 해당 유저의 cha 합계 sp 합계불러오기
 	
