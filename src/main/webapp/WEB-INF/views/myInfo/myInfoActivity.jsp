@@ -111,7 +111,6 @@
 		//페이징
 		function setMyinfoBoardPaging(pVO){
 			console.log(pVO);
-			console.log("상품페이징 시작")
 			$("#myinfoBoardPagingArea").html("");
 			var tag = '<ul class="pagination justify-content-center">';
 			if(pVO.nowNum > 1){
