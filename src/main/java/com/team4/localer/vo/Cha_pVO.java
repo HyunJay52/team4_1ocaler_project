@@ -6,6 +6,8 @@ public class Cha_pVO {
 	private String po_date;
 	private int cha_mth;
 	
+	private int sp_point;
+	
 	public String getUserid() {
 		return userid;
 	}
@@ -30,6 +32,14 @@ public class Cha_pVO {
 	public void setCha_mth(int cha_mth) {
 		this.cha_mth = cha_mth;
 	}
+	public int getSp_point() {
+		return sp_point;
+	}
+	public void setSp_point(int sp_point) {
+		this.sp_point = sp_point;
+	}	
+	
+	
 	
 	
 }

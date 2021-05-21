@@ -40,7 +40,8 @@ public interface MemberService {
 	public String nickNameDoubleCheck(String mem_nick);
 	//mem_post 카운트
 	public int memPostCount(String userid);
-	
+	//member의 주소 연락처 이름 가져오기
+	public MemberVO userDetailFind(String userid);
 
 	//이메일 인증
 	public int checkMemEmail(String whichpage, String mem_email);

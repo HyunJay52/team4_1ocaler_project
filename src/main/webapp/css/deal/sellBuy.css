@@ -28,7 +28,7 @@
 	 }
 	 #center>div:first-child{
 	 	overflow: auto;
-	 	margin-bottom:px;
+	 	margin-bottom:70px;
 	 }
 
 	#boardList{
@@ -106,9 +106,14 @@
 	
 	
 	/*배송지*/
+	.spanSubtitle{
+		font-weight: bold;
+   		margin: 0 20px;
+	}
+	
 	#center>div:nth-child(3){
-	width: 1100px;
- 	height: auto;
+	width: 1300px;
+ 	overflow:auto;
  
  	}
 	#DeliveryAddr{
@@ -123,102 +128,72 @@
 	
 	#addr{
 		margin-top: 10px;
+		margin-bottom:70px;
 	}
 
 	
 	
-	#buyer{
-		font-size: 20px; 
+	#getter{
+		font-size: 16px; 
 		border: none; 
 		border-bottom: 1px solid gray;
-		width:200px;  
+		width:230px;  
 		margin-top: 10px;
 		font-weight: normal;
 	
 	}
 	#ship_tel{
-		font-size: 20px; 
+		font-size: 16px; 
 		border: none; 
 		border-bottom: 1px solid gray;
-		width:200px;  
+		width:230px;  
 		margin-top: 10px;
 		font-weight: normal;
 	}
 	#ship_zip{
-		font-size: 20px; 
+		font-size: 16px; 
 		border: none; 
 		border-bottom: 1px solid gray;
-		width:200px;  
+		width:230px;  
 		margin-top: 10px;
 		font-weight: normal;
 	
 	}
 	#ship_addr{
-		font-size: 20px; 
+		font-size: 16px; 
 		border: none; 
 		border-bottom: 1px solid gray;
 		width:700px;  
 		margin-top: 10px;
 		font-weight: normal;
-		margin-left: 177px;
+		margin-left: 150px;
 	}
 	#ship_detail{
-		font-size: 20px; 
+		font-size: 16px; 
 		border: none; 
 		border-bottom: 1px solid gray;
 		width:700px;  
 		margin-top: 10px;
 		font-weight: normal;
-		margin-left: 177px;
+		margin-left: 150px;
 	}
 	
-	#ship_zip::-webkit-input-placeholder {
-		  text-align: center;
-	}
-	
-	#ship_addr::-webkit-input-placeholder, #ship_detail::-webkit-input-placeholder {
+	#ship_addr::-webkit-input-placeholder, #ship_detail::-webkit-input-placeholder, #ship_zip::-webkit-input-placeholder  {
 		  padding-left: 20px;
 		  text-align: left;
 	}
-	 
 
-
-
-	
 	#paySelect{
-		width: 1100px;
-		height: 20px;
-		margin:40 0;
+		width: 1300px;
 		float: left;
-		padding-bottom: 50px;
 	}
-	
-	#cardPay{
-		display:none;
-		width: 1100px;
-		height: 200px;
-		padding: 0px;
-		float: left;
-		padding-left: 100;
-	}
-	
-	#cashPay{
-		display:none;
-		width: 1100px;
-		height: 200px;
-		padding: 0px;
-		float: left;
-		padding-left: 100;
-		
-	}
-	
+
 	#pointPay{
 		display:none;
-		width: 1100px;
-		height: 200px;
+		width: 1300px;
 		padding: 0px;
 		float: left;
-		padding-left: 250;
+		margin:10px 0px;
 	}
  	#finalBtn{
  		width: 1300px;
@@ -226,40 +201,43 @@
  		float: left;
  		margin-top: 50px; 
  	}
-
- 	
-
- 	#card_num{
-		font-size: 20px; 
-		border: none; 
-		border-bottom: 1px solid gray;
-		width:80px;  
-		margin-top: 10px;
-		font-weight: normal;
 	
-	}
-	#cvc{
+	.point{
 		font-size: 20px; 
 		border: none; 
 		border-bottom: 1px solid gray;
-		width:80px;  
-		margin-top: 10px;
-		font-weight: normal;
-	}
-	
-	#point{
-		font-size: 20px; 
-		border: none; 
-		border-bottom: 1px solid gray;
-		width:170px;  
+		width:200px;  
 		margin-top: 10px;
 		font-weight: normal;
 		text-align: right;
 		padding-right: 10px;
 	}
 	
-
+	.sellItemShow{
+		font-weight:bold;
+		font-size:1.25em;
+		text-align:center;
+	}
 	
+	#showSellerInfo{
+		border:1px solid gray;
+		font-size:14.75px;
+		border-radius:5px;
+		padding:3px;
+		color:yellow;
+		background:#571fb8;
+		padding:5px
+	}
+	
+	#zipSearch{
+		margin-left:10px;
+	}
+	
+	#ship_msg{
+		width:1155px;
+		height:100px;
+		resize:none;
+	}
 	/* 버튼 스타일 클래스 모음 */
 
 	a:active, a:visited {
