@@ -3,23 +3,6 @@
 <%@ page session="true" %>
 <script src="http://localhost:82/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-<style>
-/* 	#showMsg { */
-/* 		overflow-y: scroll; width:250px; height: 251px; */
-/* 	} */
-/* 	.chatList { */
-/* 		width: 230px; */
-/* 	    height: auto; */
-/* 	    overflow: auto; */
-/* 	} */
-/* 	.chatMyspan { */
-/* 		background:#5f0080; color: #fff; float:right; margin: 3px 0px; padding: 3px; border-radius: 5px; font-family: nsrb */
-/* 	} */
-	
-/* 	.chatOtherSpan { */
-/* 		background:#fec804; text-align:right;  margin: 3px 0px; padding: 3px; border-radius: 5px; font-family: nsrb */
-/* 	} */
-</style>
 <script>
 	$(document).ready(function(){
 		
@@ -30,11 +13,16 @@
 		
 		//채팅방 창 팝업
 		$(document).on('click', "#chat_box>div:first-child", function(){
-			$("#chatList").css({display: "block"});
-			$("#showMsg").css({display:"none"});
-			$(".chat_input").css({display:"none"});
-			$("#chat_box").css({display:"none"});
-			$("#chat_box>div:first-child").css({display:"none"});
+			
+// 			if('{logId}'==null) {
+// 				alert('로그인시 이용가능합니다.');
+// 			}else {
+				$("#chatList").css({display: "block"});
+				$("#showMsg").css({display:"none"});
+				$(".chat_input").css({display:"none"});
+				$("#chat_box").css({display:"none"});
+				$("#chat_box>div:first-child").css({display:"none"});
+// 			}
 		});
 		
 		//채팅 할 상대 리스트에 추가 
