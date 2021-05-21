@@ -4,7 +4,7 @@
 	$(function(){
 
 		//리스트 세팅
-		function setList(page){
+		function setFarmerDealList(page){
 			$.ajax({
 				url : "myFarmerDealSelect",
 				data : $("#myFarmerDealForm").serialize()+"&nowNum="+page,

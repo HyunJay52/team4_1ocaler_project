@@ -18,7 +18,6 @@ public class OrderVO {
 	/////sell_item
 	private String i_subject;
 	private String sel_prof; //셀러회원 프로필 사진 
-	
 	private int i_num;//셀러판매글번호
 	private int sel_num;//셀러회원번호
 	private String i_gu;//활동지역
@@ -36,10 +35,26 @@ public class OrderVO {
 	private String i_tag;//판매글태그
 	
 	//판매상품 판매자 아이디
-	private String sellerid;
+	private String sellerid;//myinfo에서 사용
+	private String i_userid;
+	
+	//리뷰가 있는지 확인
+	private int reviewCount;
 	
 	
 	
+	public String getI_userid() {
+		return i_userid;
+	}
+	public void setI_userid(String i_userid) {
+		this.i_userid = i_userid;
+	}
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
 	public String getSellerid() {
 		return sellerid;
 	}

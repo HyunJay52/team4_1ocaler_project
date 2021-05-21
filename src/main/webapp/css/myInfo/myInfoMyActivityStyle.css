@@ -7,7 +7,7 @@
 		height:30px;
 	}
 	.activityRight{
-		float:right;
+		
 	}
 	.myActivityForm{
 		width:430px;
@@ -31,6 +31,27 @@
 	#activityTbl tr>td:nth-child(1){
 		width:5%;/*첫번째 열 선택*/
 	}
-	#activityTbl tr>td:nth-child(4){/*세번째 열 선택 : 제목부분*/
-		width:35%;
+	#activityTbl tr>td:nth-child(2){
+		width:10%;
+	}
+	#activityTbl tr>td>a, #activityTbl tr>td>p{
+		white-space:nowrap;
+   		overflow:hidden;
+   	 	text-overflow:ellipsis;
+   	 	margin:0;
+	}
+	#activityTbl tr>td:nth-child(4)>a, #activityTbl tr>td:nth-child(5)>p{
+		width:200px;
+	}
+	#activityTbl tr>td:nth-child(6){/*세번째 열 선택 : 제목부분*/
+		width:8%;
+	}
+	#activityTbl tr>td:nth-child(7){/*세번째 열 선택 : 제목부분*/
+		width:8%;
+	}
+	#myBoardDelete{
+		float:right; 
+		height:30px;
+		margin-bottom:10px; 
+		line-height:10px
 	}
