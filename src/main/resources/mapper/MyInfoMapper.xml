@@ -73,22 +73,31 @@
 			select * from ${kategorie} join joinus on joinus.numjoin = mem_share.num	
 		</if>
 		<if test="kategorie.equals('grouplocal')">
-			select * from ${kategorie}
+			select * from ${kategorie} join joinus on joinus.numjoin = grouplocal.num
 		</if>
 		<if test="kategorie.equals('joinus')">
 			select * from ${kategorie} join mem_share on joinus.numjoin = mem_share.num	
 		</if>
 		<if test="kategorie.equals('ordertbl')">
-			select * from ${kategorie} join sell_item s on ordertbl.num = s.i_num
+			select * from ${kategorie} join sell_item on ordertbl.num = sell_item.i_num
 		</if>
 		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') 
 		<if test="kategorie.equals('groupJoinus')">
 			and joinus.userid=#{userid})
 		</if>
-		<if test="!kategorie.equals('groupJoinus')">
+		<if test="kategorie.equals('mem_share')">
+			and joinus.userid=#{userid})
+		</if>
+		<if test="kategorie.equals('ordertbl')">
 			and ${kategorie}.userid=#{userid})
-		</if>	
+		</if>
+		<if test="kategorie.equals('joinus')">
+			and ${kategorie}.userid=#{userid})
+		</if>
+		<if test="kategorie.equals('grouplocal')">
+			and joinus.userid=#{userid})
+		</if>
 		where ${searchKey} like #{searchWord}
 	</select>
 	
@@ -103,10 +112,10 @@
 			select * from ${kategorie} join mem_share on joinus.numjoin = mem_share.num
 		</if>
 		<if test="kategorie.equals('mem_share')">
-			select * from ${kategorie}
+			select * from ${kategorie} join joinus on joinus.numjoin = mem_share.num
 		</if>
 		<if test="kategorie.equals('grouplocal')">
-			select num, g_gu, up_cate, down_cate, userid, g_subject, g_writedate from ${kategorie}
+			select num, g_gu, up_cate, down_cate, grouplocal.userid, g_subject, g_writedate from ${kategorie}
 		</if>
 		where ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') and 
@@ -183,11 +192,18 @@
 		<if test="!kategorie.equals('grouplocal')">
 			join mem_share m on j.numjoin = m.num
 		</if>
-		where num=#{nowNum})
+			where num=#{nowNum})
 	</select>
 	
 	<select id="selectMyReview" resultType="com.team4.localer.vo.ItemReviewVO" parameterType="com.team4.localer.vo.ItemReviewVO">
-		select * from item_review where userid=#{userid} and num = #{num}
+		select * from item_review where userid=#{userid} and
+		<if test="num != 0">
+			 num = #{num}		
+		</if>
+		<if test="re_num != 0">
+			 re_num = #{re_num}		
+		</if>
+	
 	</select>
 	
 	<select id="selectMyReviewCount" resultType="int">
@@ -211,16 +227,16 @@
     	select * from(
 		select * from(
 		<if test="kategorie.equals('grouplocal')">
-			select j_num, numjoin, j.userid, j_status, grouplocal.userid sellerid, j_writedate, g_subject  from joinus j			
+			select j_num, numjoin, j.userid, j_status, grouplocal.userid sellerid, j_writedate, g_subject, g_writedate  from joinus j			
 		</if>
 		<if test="!kategorie.equals('grouplocal')">
-			select j_num, numjoin, j.userid, j_status, mem_share.userid sellerid, j_writedate, s_subject  from joinus j
+			select j_num, numjoin, j.userid, j_status, ${kategorie}.userid sellerid, j_writedate, s_subject  from joinus j
 		</if>
 		
         join ${kategorie} on j.numjoin = ${kategorie}.num
-		where j.userid=#{userid} order by j_status desc)
-        where rownum <![CDATA[ <= ]]> #{rowNum1} order by j_status asc)
-		where rownum <![CDATA[ <= ]]> #{rowNum2} order by j_status desc
+		where j.userid=#{userid} and ${searchKey} like #{searchWord} order by j_writedate desc)
+        where rownum <![CDATA[ <= ]]> #{rowNum1} order by j_writedate asc)
+		where rownum <![CDATA[ <= ]]> #{rowNum2} order by j_writedate desc
     </select>
     <select id="selectMyShareJoinList" resultType="com.team4.localer.vo.MyinfoDealVO">
 		select * from (
@@ -228,6 +244,7 @@
         join mem_share on joinus.numjoin = mem_share.num
 		where mem_share.userid = #{param1} order by j_writedate desc)where rownum <![CDATA[ <= ]]> 4
    </select>
+
 
    <select id="statisTotal" resultType="com.team4.localer.vo.OrderVO">
 	   	select sum(o.o_price) o_price, count(o_num) o_num from 
@@ -244,4 +261,77 @@
 			order by o_date
    </select>
     
+
+
+   <select id="selectItemReviewList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.OrderVO">
+   select * from(
+   		select * from(
+		select o_num, o.userid, o.num, o_conf, o_date, o_status, s.sel_num, s.i_subject, seller.userid sellerid  
+		from ordertbl o join sell_item s on o.num = s.i_num 
+		join seller on s.sel_num = seller.sel_num
+		where o.userid= #{userid} and o_conf = 2 order by o_date desc)
+        where rownum  <![CDATA[ <= ]]> #{rowNum1} order by o_date asc)
+		where rownum  <![CDATA[ <= ]]> #{rowNum2} order by o_date desc
+   </select>
+   <select id="selectMyReviewList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.ItemReviewVO">
+		select * from (
+		select * from (
+		<if test="kategorie.equals('mem_share')">
+			select re_num, item_review.userid, item_review.num, re_rate, mem_share.userid sellerid, s_subject re_subject, re_content, item_review.re_writedate 
+			from item_review 
+			join joinus on item_review.num = joinus.numjoin 
+			join mem_share on joinus.numjoin = mem_share.num 
+		</if>
+		<if test="kategorie.equals('grouplocal')">
+			select re_num, item_review.userid, item_review.num, re_rate, re_content, g_subject re_subject, re_writedate, grouplocal.userid sellerid
+			from item_review 
+			join joinus on item_review.num = joinus.numjoin 
+			join grouplocal on joinus.numjoin = grouplocal.num
+		</if>
+		<if test="kategorie.equals('sell_item')">
+			select re_num, item_review.userid, item_review.num, re_rate, i_subject re_subject, seller.userid sellerid , item_review.re_writedate, re_content
+			from item_review 
+			join ordertbl on item_review.num = ordertbl.num 
+			join sell_item on ordertbl.num = sell_item.i_num 
+			join seller on seller.sel_num = sell_item.sel_num 
+		</if>
+		where item_review.userid=#{userid} and re_writedate between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+		and ${searchKey} like #{searchWord}
+		order by re_writedate desc)
+		where rownum <![CDATA[ <= ]]> #{rowNum1} order by re_writedate asc)
+		where rownum <![CDATA[ <= ]]> #{rowNum2} order by re_writedate desc
+				
+   </select>
+   
+   <select id="selectMyReviewListCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="int">
+   		select count(re_num) from (
+   		<if test="kategorie.equals('mem_share')">
+			select re_num, item_review.userid, item_review.num, re_rate, mem_share.userid sellerid, s_subject, re_content, item_review.re_writedate 
+			from item_review 
+			join joinus on item_review.num = joinus.numjoin 
+			join mem_share on joinus.numjoin = mem_share.num 
+		</if>
+		<if test="kategorie.equals('grouplocal')">
+			select re_num, item_review.userid, item_review.num, re_rate, re_content, g_subject, re_writedate, grouplocal.userid sellerid
+			from item_review 
+			join joinus on item_review.num = joinus.numjoin 
+			join grouplocal on joinus.numjoin = grouplocal.num
+		</if>
+   		<if test="kategorie.equals('sell_item')">
+			select re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid sellerid , item_review.re_writedate, re_content
+			from item_review 
+			join ordertbl on item_review.num = ordertbl.num 
+			join sell_item on ordertbl.num = sell_item.i_num 
+			join seller on seller.sel_num = sell_item.sel_num
+		</if>
+		where item_review.userid=#{userid} and re_writedate between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+		and ${searchKey} like #{searchWord})
+   </select>
+   
+   <update id="reviewUpdate" parameterType="com.team4.localer.vo.ItemReviewVO">
+		update item_review set re_rate = #{re_rate}, re_content = #{re_content} , re_writedate = sysdate where re_num =  #{re_num} and userid=#{userid}
+   </update>
+
 </mapper>
