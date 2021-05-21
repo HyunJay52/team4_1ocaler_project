@@ -27,8 +27,8 @@
 <script>
 	var menuTitle = ['내 정보','참여내역','판매관리'];
 	var subMenu = [ ['내 정보','충전하기','배송내역'],
-					['회원간 거래','파머 직거래','리뷰 관리','나의 활동','후기'],
-					['판매내역','판매자 정보','상품관리','판매/결제관리','배송관리','통계']		
+					['회원간 거래','파머 직거래','리뷰 관리','나의 활동'],
+					['판매내역','판매자 정보','상품관리','판매/결제관리','배송관리','통계','QnA관리']		
 				  ]
 	
 	$(function(){
@@ -106,7 +106,8 @@
 				location.href="myInfoStatistics";
 			}else if($(this).text() == '후기'){
 				location.href="myInfoReviewManagement";
-	
+			}else if($(this).text() == 'QnA관리'){
+				location.href="";
 			}
 		});
 		

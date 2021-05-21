@@ -155,6 +155,7 @@
 					
 			}
 			$("#boardSearchKey").html(tag);
+			setBoardList(1, val);
 		});
 		
 		//페이징 이벤트
