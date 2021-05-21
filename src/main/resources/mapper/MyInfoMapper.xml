@@ -246,7 +246,7 @@
    </select>
 
    <select id="statisTotal" resultType="com.team4.localer.vo.OrderVO">
-	   	select sum(o.o_price) o_price, count(o_num) o_num from 
+	   	select sum(o.o_price) o_price, count(o_num) o_num, sum(o.o_cnt*2000) as i_img1  from 
 				(select i_num from sell_item i join seller sel on sel.sel_num=i.sel_num where sel.userid=#{param1}) num
 				join ordertbl o on o.num=num.i_num 
 				where o_date between to_date('21/${param3}/01','YY/MM/DD') and to_date(last_day('21/${param3}/01'),'YY/MM/DD') 
@@ -254,7 +254,7 @@
    </select>
 
    <select id="statisList" resultType="com.team4.localer.vo.OrderVO">
-   		select (o.o_price-2000) as fu_money, (o.o_price+o.o_ship) as hap_money,o.o_num, to_char(o.o_date,'MM/DD') o_date,o.userid,num.i_num,num.i_subject,o.o_cnt, o.o_price, o.o_ship,o.o_conf from 
+   		select (2000*o.o_cnt) as i_img1, (o.o_price-2000*o.o_cnt) as fu_money, (o.o_price+o.o_ship) as hap_money,o.o_num, to_char(o.o_date,'MM/DD') o_date,o.userid,num.i_num,num.i_subject,o.o_cnt, o.o_price, o.o_ship,o.o_conf from 
 			(select i.i_num,i.i_subject from sell_item i join seller sel on sel.sel_num=i.sel_num where sel.userid=#{param1}) num
 			join ordertbl o on o.num=num.i_num 
 			where o_date between to_date('21/${param2}/01','YY/MM/DD') and to_date(last_day('21/${param2}/01'),'YY/MM/DD') 
