@@ -24,26 +24,25 @@ public class OrderVO {
    private int fu_money;
    private int hap_money;
 
-   private String sel_prof; //셀러회원 프로필 사진 
-   
-   //private int i_num;//셀러판매글번호
-   private int sel_num;//셀러회원번호
-   private String i_gu;//활동지역
-   private int i_cnt;//판매수량
-   private String i_content;//내용
-   //private String i_img1;
-   private String i_img2;
-   private String i_img3;
-   private int i_price;//가격
-   private int i_ship;//배송비
-   private String i_period;//판매기간
-   private int i_status;//판매상태 1.판매중, 2.판매완료
-   private String i_writedate;//등록일
-   private int i_hit;
-   private String i_tag;//판매글태그
-   
-   //판매상품 판매자 아이디
-   private String sellerid;
+	private String sel_prof; //셀러회원 프로필 사진 
+	
+	//private int i_num;//셀러판매글번호
+	private int sel_num;//셀러회원번호
+	private String i_gu;//활동지역
+	private int i_cnt;//판매수량
+	private String i_content;//내용
+	//private String i_img1;
+	private String i_img2;
+	private String i_img3;
+	private int i_price;//가격
+	private int i_ship;//배송비
+	private String i_period;//판매기간
+	private int i_status;//판매상태 1.판매중, 2.판매완료
+	private String i_writedate;//등록일
+	private int i_hit;
+	private String i_tag;//판매글태그	
+	//판매상품 판매자 아이디
+	private String sellerid;
 
    public int getO_num() {
       return o_num;

@@ -47,6 +47,58 @@
 		});
 	};
 	
+/* 	function payment(){
+		var userid = '${logId}';
+		var username = '${logName}';
+		var payStatus = "card"
+		console.log(payStatus);
+		IMP.request_pay({
+		    pg : 'html5_inicis', // version 1.1.0부터 지원.
+		    pay_method : payStatus,
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '카드 결제',
+		    amount : '${orderVO.o_price+orderVO.o_ship }',
+		    buyer_email : 'test@localer.com',
+		    buyer_name : username,
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			        msg += '결제수단 : ' + rsp.pay_method;
+			        msg += '결제상태 : ' + rsp.status;
+			        msg += '결제시간 : ' + rsp.paid_at;
+			        
+
+			        var params = $("#orderFrm").serialize();		
+			        
+			        $.ajax({
+			        	type : 'POST',				 	//post방식
+			        	url : 'orderShipCashInsert',		//전송할 url
+			        	data : params,					// 데이터
+			        	success : function(result){
+			        		console.log("충전완료");
+			        	}, error : function(e){
+			        		console.log("충전실패");
+			        	}
+			        });
+			       
+			        alert("결제가 완료되었습니다.");
+			        
+			       
+		    } else {
+		        msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		    return rsp.success;
+		});
+	}; */
+	
 
 		$(()=>{
 			$("select[name=o_mtd]").change(()=>{
