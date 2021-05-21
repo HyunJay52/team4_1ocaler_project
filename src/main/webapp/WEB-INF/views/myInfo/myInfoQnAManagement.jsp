@@ -8,14 +8,14 @@
 				data : $("#myinfoQnAForm").serialize()+"&nowNum="+num,
 				success : function(result){
 					console.log(result);
-					var tag = "<tr><td>번호</td><td>상품명</td><td>질문 작성일</td>";
-						tag += "<td>질문자</td><td>답변상태</td><td>내용</td></tr>";
+					var tag = "<tr><td>번호</td><td>상품명</td><td>질문자</td>";
+						tag += "<td>질문 작성일</td><td>답변상태</td><td>내용</td></tr>";
 					result.list.forEach(function(data,idx){
 						tag += "<tr>";
 						tag += "<td>"+data.q_num+"</td>";
 						tag += "<td>"+data.i_subject+"</td>" 
-						tag += "<td>"+data.q_writedate+"</td>";
 						tag += "<td>"+data.userid+"</td>"
+						tag += "<td>"+data.q_writedate+"</td>";
 						if(data.answer != null){
 							tag += "<td>답변완료</td>";
 							tag += "<td><button class='btn commBtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>답변보기</button></td>"; 
@@ -107,7 +107,7 @@
 		</div>
 	</div>
 	<div class="modal fade mdFnt" id="myInfoQnAManagementMd">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content ">
 				<div class="modal-header ">
 				<h4 class="modal-title">QnA</h4>

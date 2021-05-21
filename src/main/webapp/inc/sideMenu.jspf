@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoProductManagementStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStatisticsStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewManagementStyle.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoShippingManagementStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoShippingManagementStyle.css?ver=2"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css" type="text/css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="<%=request.getContextPath() %>/plugin/jquery.easing.1.3.js"></script>
