@@ -99,13 +99,25 @@
 				}
 			});
 		}
-		myInfoMainDeal();
+		//myInfoMainDeal();
 		
 		$("#myprof").click(function(){
 			alert("내 정보 페이지로 이동합니다");
 			location.href="myInfoCheck"
 		})
 	});
+
+	//hj script 2021.05.21
+	$(function(){
+		//$('#myinfoMainDealTable td').children('button[class=joincnfbtn] ').click(function(){
+		$('button[class=joincnfbtn] ').click(function(){
+			alert('승인대기 클릭!');
+			var xxx = $(this).children('button').text();
+			console.log(xxx);
+		})
+								
+	});
+	
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody"> 
@@ -134,8 +146,8 @@
 		<div class="myinfoTop">
 			<h3>내 등급</h3>
 			<ul class="myinfoTopCount">
-				<li>방문&nbsp;(100)</li>
-				<li>작성글&nbsp;(20)</li>
+				<li>방문&nbsp;(${myAct.logcount })</li>
+				<li>작성글&nbsp;(${myAct.board + myAct.mem_share + myAct.grouplocal })</li>
 				<li>후기평가&nbsp;(70%)</li>
 			</ul>
 			<div id="grade">
@@ -158,7 +170,32 @@
 				<span class="myinfoHeader mdFnt info-font-weight">&nbsp;&nbsp;참여현황</span>
 				<a href="myInfoDeal" style="float:right">더보기</a>
 				<table class="myinfoTable2" id="myinfoMainDealTable">
+					<tr><td>구분</td><td>제목</td><td>참여자</td><td>날짜</td><td>상태</td></tr>
 					
+					<c:forEach var="join" items="${myJoin }" begin='1' end='10' >
+						<tr>
+						<c:if test="${join.auth==logId }">
+							<td>나의 참여</td>
+							<td>(${join.up_cate })${join.title }<input type='hidden' value='${join.j_num }'/></td>
+							<td>${join.userid }</td>
+							<td>${join.j_writedate }</td>
+							<td><button class='joincnfbtn btn btn-info btn-block '>승인대기</button></td>
+						</c:if>
+						<c:if test="${join.auth!=logId }">
+							<td>나의 모집</td>
+							<td>(${join.up_cate })${join.title }<input type='hidden' value='${join.j_num }'/></td>
+							<td>${join.auth }</td>
+							<td>${join.j_writedate }</td>
+							<c:if test="${join.j_status=='참여취소' }">
+								<td><button class='btn btn-danger btn-block'>${join.j_status }</button></td>
+							</c:if>
+							
+							<c:if test="${join.j_status!='참여취소' }">
+								<td><button class='btn btn-primary btn-block'>${join.j_status }</button></td>
+							</c:if>
+						</c:if>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 			

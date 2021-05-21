@@ -14,15 +14,17 @@
 		//채팅방 창 팝업
 		$(document).on('click', "#chat_box>div:first-child", function(){
 			
-// 			if('{logId}'==null) {
-// 				alert('로그인시 이용가능합니다.');
-// 			}else {
+			var logId = '${logId}';
+ 			if(logId=='') {
+				console.log('asdkfjlasdjfklajsdfkljas;dlfjklasdfjlaks;d');
+				alert('로그인시 이용가능합니다.');
+			}else {
 				$("#chatList").css({display: "block"});
 				$("#showMsg").css({display:"none"});
 				$(".chat_input").css({display:"none"});
 				$("#chat_box").css({display:"none"});
 				$("#chat_box>div:first-child").css({display:"none"});
-// 			}
+			}
 		});
 		
 		//채팅 할 상대 리스트에 추가 

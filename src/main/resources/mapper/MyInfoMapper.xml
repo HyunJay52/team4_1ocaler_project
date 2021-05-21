@@ -218,7 +218,7 @@
 			select count(userid) from likeit where userid = #{param1}) as likeit,(
 			select count(userid) from joinus where userid = #{param1}) as joinus,(
 			select count(userid) from mem_share where userid = #{param1}) as mem_share,(
-			select count(userid) from logcount where userid = #{param1}) as logcount,(
+			SELECT count(LOGDATE) FROM (SELECT DISTINCT to_char(LOGDATE, 'YYYY-MM-DD') AS LOGDATE, USERID FROM logcount WHERE userid = #{param1})) as logcount,(
 			select count(userid) from grouplocal where userid = #{param1}) as grouplocal,(
 			select mem_name from member where userid = #{param1}) as mem_name
 		from dual
@@ -245,7 +245,6 @@
 		where mem_share.userid = #{param1} order by j_writedate desc)where rownum <![CDATA[ <= ]]> 4
    </select>
 
-
    <select id="statisTotal" resultType="com.team4.localer.vo.OrderVO">
 	   	select sum(o.o_price) o_price, count(o_num) o_num from 
 				(select i_num from sell_item i join seller sel on sel.sel_num=i.sel_num where sel.userid=#{param1}) num
@@ -253,6 +252,7 @@
 				where o_date between to_date('21/${param3}/01','YY/MM/DD') and to_date(last_day('21/${param3}/01'),'YY/MM/DD') 
 				and o_conf=${param2}
    </select>
+
    <select id="statisList" resultType="com.team4.localer.vo.OrderVO">
    		select (o.o_price-2000) as fu_money, (o.o_price+o.o_ship) as hap_money,o.o_num, to_char(o.o_date,'MM/DD') o_date,o.userid,num.i_num,num.i_subject,o.o_cnt, o.o_price, o.o_ship,o.o_conf from 
 			(select i.i_num,i.i_subject from sell_item i join seller sel on sel.sel_num=i.sel_num where sel.userid=#{param1}) num
@@ -261,7 +261,6 @@
 			order by o_date
    </select>
     
-
 
    <select id="selectItemReviewList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.OrderVO">
    select * from(
@@ -334,4 +333,17 @@
 		update item_review set re_rate = #{re_rate}, re_content = #{re_content} , re_writedate = sysdate where re_num =  #{re_num} and userid=#{userid}
    </update>
 
+<!-- sql by hj 2021.05.21 -->
+	<select id="selectWaitingJoinList" resultType="com.team4.localer.vo.JoinUsVO">
+		SELECT userid, auth, j_status, up_cate, j_num, title, j_writedate FROM (
+		SELECT j.j_num AS j_num, j.userid AS userid, j.j_status, j.j_writedate, bo_tbl.title AS title, auth, bo_tbl.up_cate AS up_cate FROM 
+			(SELECT J_NUM, NUMJOIN, USERID, J_STATUS, J_WRITEDATE FROM JOINUS) j 
+		JOIN 
+			(
+			SELECT num, userid AS auth, up_cate , g_subject AS title FROM GROUPLOCAL g
+			UNION all
+			SELECT num, userid AS auth, CAST (S_CATE AS varchar2(10)) , s_subject FROM MEM_SHARE ms ) bo_tbl 
+			ON j.numjoin = bo_tbl.num ) 
+		WHERE userid=#{param1 } OR auth = #{param1 } ORDER BY j_writedate DESC
+	</select>   
 </mapper>
