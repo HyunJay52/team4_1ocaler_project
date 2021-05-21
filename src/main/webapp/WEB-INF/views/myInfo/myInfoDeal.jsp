@@ -391,9 +391,11 @@
 		
 		//리뷰쓰기 취소 이벤트
 		$(document).on('click', '#cancelReview', function(){
+			console.log("cancel");
 			$(".reviewBody").css('display', 'none');
 			$(".reviewList").css('display', 'block');
 		});
+	
 		
 		//리뷰 점수 이벤트
 		$(document).on('click', '.imgBtn', function(){

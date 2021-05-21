@@ -8,6 +8,7 @@ import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoBoardVO;
 import com.team4.localer.vo.MyinfoCountVO;
 import com.team4.localer.vo.MyinfoDealVO;
 import com.team4.localer.vo.MyinfoJoinUsVO;
@@ -79,6 +80,7 @@ public interface MyInfoDAO {
 	public OrderVO statisTotal(String userid,int cate,String month);//미확정 개수, 금액
 	//통계list
 	public List<OrderVO> statisList(String userid,String month);
+
 	//==판매관리 부분===
 	//레코드 개수 
 	public int managementCount(AdminPageVO pageVO);
@@ -86,6 +88,7 @@ public interface MyInfoDAO {
 	public List<OrderVO> manageList(AdminPageVO pageVO);
 	
 	
+
 	//리뷰가능한 상품리스트 조회
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
 	
@@ -97,4 +100,15 @@ public interface MyInfoDAO {
 	
 	//리뷰수정
 	public int reviewUpdate(ItemReviewVO vo);
+	
+	//내가 작성한 작성글, 댓글, QnA 불러오기
+	public List<MyinfoBoardVO> selectMyBoard(MyinfoPageVO vo);
+		
+	//내가 작성한 작성글, 댓글, QnA Count
+	public int selectMyBoardCount(MyinfoPageVO vo);
+	
+// 내정보 메인용 서비스 (hj, 2021-05-21)
+	//참여정보 
+	public List<JoinUsVO> selectWaitingJoinList(String userid);
+
 }

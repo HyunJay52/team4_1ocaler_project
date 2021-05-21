@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,12 +36,16 @@ public class HomeController {
 	SellerService sellerService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home() {
+	public ModelAndView home(HttpSession ses) {
 		System.out.println("서비스 문제 해결 ^^ 행벅");
 		ModelAndView mav = new ModelAndView();
 		
 		//동네직구 리스트
 		DealShareVO dVO = new DealShareVO();
+		String loc_gu = (String)ses.getAttribute("logLoc_gu");
+		if(loc_gu!=null) {
+			dVO.setS_gu(loc_gu);
+		}
 		List<DealShareVO> memList = dealService.dealListSelect(dVO);
 		mav.addObject("memVO", memList);
 		

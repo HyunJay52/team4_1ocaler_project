@@ -7,7 +7,8 @@
 		insert into reply(rep_num, num, rep_content, userid) values(boardsq.nextval,#{num},#{rep_content},#{userid})
 	</insert>
 	<select id="replyList" resultType="com.team4.localer.vo.ReplyVO">
- 		select rep_num, rep_content,userid, rep_date from reply where num=#{param1} order by rep_num 
+ 		select rep_num,rep_content, r.userid, rep_date,  mem_prof , m.userid
+		from reply r join member m on r.userid= m.userid  where num=#{param1} order by rep_num 
  	</select>
  	<delete id="replyDel">
  		delete from reply where rep_num=#{rep_num} and userid=#{userid} 
