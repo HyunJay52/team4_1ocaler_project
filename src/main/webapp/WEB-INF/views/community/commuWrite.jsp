@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commu/communityWriteStyle.css"/>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> 
 
 <script>
@@ -31,6 +34,17 @@
 		$("#cancelBtn").on('click',()=>{
 			history.back();
 		});
+		
+		$(document).ready(function() {
+		    $('#summernote').summernote({
+		    	height: 600,
+		    	placeholder: '내용을 입력해주세요.',
+		        tabsize: 2,
+		        disableResizeEditor: true
+		    });
+		 });
+		
+		
 	});
 	
 	
@@ -42,7 +56,7 @@
 
 	<div id="commueWnEmain">
 		<div>
-			<form method="post" action="commuWriteOk" >
+			<form method="post" action="commuWriteOk"enctype="multipart/form-data" >
 				
 				<c:if test="${vo.up_cate==1}">		
 					<h5>우리동네 이야기 글쓰기</h5>
@@ -91,15 +105,57 @@
 	 			<c:if test="${vo.up_cate==1 }">
 	 				<input type="text" id ="cnt" name="b_gu" value="${logLoc_gu}" style="text-align: center;" readonly/>
 	 			</c:if>
-	 			<textarea name="b_content" id ="content" > 내용을 입력해주세요. </textarea>
-	 			<script>CKEDITOR.replace("b_content");</script>
+	 			<!-- <textarea name="b_content" id ="content" > 내용을 입력해주세요. </textarea>
+	 			<script>CKEDITOR.replace("b_content");</script> -->
+	 			
+	 			<textarea id="summernote" name="b_content"></textarea>
 	 			
 	 			<br/>
 
 				<input type="text" id ="tag"  name="b_tag" placeholder="&nbsp;&nbsp;태그를 입력해주세요 &nbsp; #태그를 #입력해 #주세요" />
 				
+				
+				<br/>
+				
+				
+				<c:if test="${vo.up_cate==2}">
+				<span style="font:bold;display: inline-block;margin-top: 25px;"> 메인에 등록될 사진파일을 선택해주세요.
+					<label class="deal_input-file-button" for="b_img1"> 사진 선택 </label> 
+				</span><br/>
+				 
+				 
+			
+					<div style="border: none; width: 1300px; height: 400px; margin-right: 10px; float: left;">
+						<img src="img/deal/color.jpg"	id="dealSellImg" class="dealSellerImg form-control-file border" alt="upload image" />
+					</div> 
+					<input type="file" name="b_img" accept="image/*" id="b_img1"style="display: none; margin-top: 70px; border: none;" />
+	
+					<script>
+							//상품 사진
+							$("#b_img1").on('change', function() {
+								readURL(this);
+							});
+							
+							function readURL(input) {
+								if (input.files && input.files[0]) {
+									var reader = new FileReader();
+							
+									reader.onload = function(e) {
+										$('#dealSellImg').attr('src', e.target.result);
+									}
+							
+									reader.readAsDataURL(input.files[0]);
+								}
+						};
+			
+				
+					</script>
+				</c:if>
+				
+					
+				<br/>
 
-	 		 	<div id="btn">
+	 		 	<div id="btn" >
 		 		 	<input type="button" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
 		 		 	<input type="submit" id="confBtn" class="btn confBtn" value="등록"/>
 	 		 	</div>

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.BoardDAO;
+import com.team4.localer.vo.BoardPageVO;
 import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.PrevNextVO;
 
@@ -26,11 +27,7 @@ public class BoardImpl implements BoardService{
 		return boardDAO.commuInsert(vo);
 	}
 
-	@Override
-	public List<BoardVO> commuSelect(BoardVO vo) {
-		// TODO Auto-generated method stub
-		return boardDAO.commuSelect(vo);
-	}
+
 
 	@Override
 	public BoardVO commuViewSelect(int num) {
@@ -105,9 +102,9 @@ public class BoardImpl implements BoardService{
 	}
 
 	@Override
-	public PrevNextVO lagLeadSelect(int num) {
+	public PrevNextVO lagLeadSelect(BoardPageVO vo) {
 		// TODO Auto-generated method stub
-		return boardDAO.lagLeadSelect(num);
+		return boardDAO.lagLeadSelect(vo);
 	}
 
 	@Override
@@ -116,8 +113,29 @@ public class BoardImpl implements BoardService{
 		return boardDAO.likeCount(num);
 	}
 
-	
-	
+	@Override
+	public List<BoardVO> commuPageSelect(BoardPageVO vo) {
+		// TODO Auto-generated method stub
+		return boardDAO.commuPageSelect(vo);
+	}
+
+	@Override
+	public int boardTotalRecoedCount(BoardPageVO vo) {
+		// TODO Auto-generated method stub
+		return boardDAO.boardTotalRecoedCount(vo);
+	}
+
+	@Override
+	public int memwriteCount(String userid) {
+		// TODO Auto-generated method stub
+		return boardDAO.memwriteCount(userid);
+	}
+
+	@Override
+	public int memdeleteCount(String userid) {
+		// TODO Auto-generated method stub
+		return boardDAO.memdeleteCount(userid);
+	}
 
 
 	

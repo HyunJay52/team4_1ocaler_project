@@ -80,7 +80,7 @@
 					</ul>
 					<ul>
 						<li><a href="selBard">착한발견</a></li>
-						<li><a href="memberBoard">동네직구</a></li>
+						<li><a href="memberBoard?s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">동네직구</a></li>
 					</ul>
 					<ul>
 						<li><a

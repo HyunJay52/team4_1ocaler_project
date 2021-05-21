@@ -5,6 +5,14 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealBoardStyle.css"/>
 
 
+<style>
+		.aaaa[type=checkbox]{ display:none; }
+ 		#likeBtnInput input[name=numLike] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
+		#likeBtnInput input[name=numLike]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
+		#likeBtnInput label{ height: 30px; right: 20px; top: 4px;}
+</style>
+	
+
 <script>
 
 		function boardDel(){
@@ -17,60 +25,52 @@
 		$(function(){
 			//좋아요=================================================================================================	
 			if(${logId!=null}){
-				$("#likeViewJoinBtn").click(()=>{
-					
+				$("#likeBtnInput input[name=numLike]").on('click',function(){
+					if($(this).is(':checked')){
+						
 						var url = "likeInsert";
-						var params = "numLike="+$("#likeViewJoinBtn").val();
-			
-						
-						console.log(params);
-						console.log("좋아요 눌렀는데");
-						
+						var params = "numLike="+$(this).val();	
 						$.ajax({
 							url : url,
 							data : params,
 							success : function(result){
 								console.log(result,"좋아요 추가 성공");
-								//좋아요했다는 걸로 표시해주기?
-								$("#likeViewJoinBtn").css('background',"#B8B2F4");
 							},error :function(request,status,error){
 								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 							}
 						})
-					
-				});
-			}else{
+					}else{
 						var url = "likeDelete";
-						var params = "numLike="+$("#likeViewJoinBtn").val();	
+						var params = "numLike="+$(this).val();	
 						$.ajax({
 							url : url,
 							data : params,
 							success : function(result){
 								console.log(result,"좋아요 삭제 성공");
-								$("#likeViewJoinBtn").css('background',"#fff");
 							},error :function(request,status,error){
 								 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 							}
 						})
 						
 					}
-			
+				});	
+			}
 			
 			
 			
 			//함께하기================================================================================
 			if(${logId!=null}){
-				$("#eatViewPageJoinBtn").click(()=>{
+				$("#ViewPageJoinBtn").click(()=>{
 					var url = "joinInsert";
-					var params ="num="+$("#eatViewPageJoinBtn").val();
+					var params ="num="+$("#ViewPageJoinBtn").val();
 					console.log(params+"뭘까?");
 					$.ajax({
 						url : url,
 						data : params,
 						success:function(result){
 							alert('신청이 완료되었습니다. 응답을 기다려 주세요');
-							$("#eatViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
-							$("#eatViewPageJoinBtn").attr("disabled",true);
+							$("#ViewPageJoinBtn").children("span").text('신청완료');//이거는 아작스로 바꿔준거고
+							$("#ViewPageJoinBtn").attr("disabled",true);
 							
 						},error:function(e){
 							console.log('신청실패')
@@ -78,20 +78,23 @@
 					})
 				});
 			}else{
-				$("#eatViewPageJoinBtn").click(()=>{
+				$("#ViewPageJoinBtn").click(()=>{
 					alert('로그인 후 이용해 주세요')
 					location.href="login";
 				});
+				
+	
 			}
 			
 		//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
-		var joinCheck = $("#eatViewPageJoinBtn").attr("disabled");
+		var joinCheck = $("#ViewPageJoinBtn").attr("disabled");
 			console.log('여기들어옴?');
 			console.log(joinCheck);
 		if(joinCheck=='disabled'){
-			$("#eatViewPageJoinBtn").children("span").text('신청완료');
-			$("#withViewPageJoinBtn").css('background',"#B8B2F4");
-			$("#withViewPageJoinBtn").css('opacity',1);
+			$("#ViewPageJoinBtn").children("span").text('신청완료');
+			$("#ViewPageJoinBtn").css('background',"rgb(254 214 67)");
+			$("#ViewPageJoinBtn").css('color',"#181b46");
+			$("#ViewPageJoinBtn").css('border',"1px solid rgb(254 214 67)");
 		}
 		
 	//지도============================================================================================
@@ -105,10 +108,11 @@
 			console.log(width,height)
 			$("#WVPProfilePopup").css("top",y/2-height/2).css("left",x/2-width/2);
 			/*띄우기*/
-			$("#userImgPop img").click(()=>{
+			$("#userImgPop").click(()=>{
 				$("#WVPProfilePopup").css("display","block");
 				
 			});	
+			
 			/*팝업창 닫기*/
 			
 			$('#WVPProfilePopup>div:first-child>span').click(()=>{
@@ -244,6 +248,8 @@
 				<ul >	
 					<li class="wordcut">
 						${vo.s_subject }
+						
+									
 						<span  style="display: none">${vo.num }</span>
 					</li>
 					<li style="width:100%;">
@@ -292,14 +298,32 @@
 							<li>${vo.s_date}</li>
 						</ul>
 					</li>
+					<li>
+						<ul>
+							<li>좋아요 </li>
+							<li id ="likeBtnInput">
+								<c:if test="${logId==null }">
+									로그인 후 이용해주세요.
+								</c:if>
+								 <c:if test="${logId!=null }">
+		                           <input class="aaaa" type="checkbox" name="numLike" id="like${vo.num}" value="${vo.num}" 
+			                           <c:forEach var="likes" items="${likeList}">
+		                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
+		                           				checked
+		                           			</c:if>
+		                           		</c:forEach> 
+		                           	/>	
+		                           <label for="like${vo.num}"></label>
+								</c:if>
+							</li>
+						</ul>
+					</li>
 					<li class="wordcut">${vo.s_tag }</li>
 					<li>
-						<button type="button" id="likeViewJoinBtn" value=${vo.num } class="btn commBtnDeal" style="margin-left: 100px">
-							좋아요
-						</button>
+						
 					<!-- 	<input type="submit" value="함께해요" class="btn commBtnDeal"/> -->
-						<button type="button" id="eatViewPageJoinBtn" class="btn commBtnDeal" value="${vo.num }"<c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>>
-							<span  id="eatViewPagejoinCheck">
+						<button type="button" id="ViewPageJoinBtn" class="btn commBtnDeal" value="${vo.num }"<c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>>
+							<span  id="ViewPagejoinCheck">
 								함께해요
 							</span>	
 						</button>
@@ -328,8 +352,10 @@
 		</div>
 		
 		<div id="editBtn">
-			<button class="btn commBtnEdit " onclick = "location.href = 'javascript:boardDel()' ">삭제</button>
-			<button class="btn commBtnEdit" onclick = "location.href = 'memberEdit?num=${vo.num}' ">수정</button>
+			<c:if test="${vo.userid==logId}">
+				<button class="btn commBtnEdit " onclick = "location.href = 'javascript:boardDel()' ">삭제</button>
+				<button class="btn commBtnEdit" onclick = "location.href = 'memberEdit?num=${vo.num}' ">수정</button>
+			</c:if>	
 		</div>
 		
 		<div id="WVPProfilePopup">
@@ -341,7 +367,7 @@
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.mem_sub } </span></li>
 				<li><span>총 게시물 : ${vo.mem_post }개</span></li>
-				<li><span>총 댓글수 : ${vo.mem_rev }개</span></li>
+				<li><span>회원등급 : ${vo.mem_rev }개</span></li>
 			</ul>
 		</div>
 		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>

@@ -44,8 +44,18 @@ public class BoardVO {
 	private String mem_nick;
 	
 
+	// 그거.. 음....썸네일사진
+	private String b_img1;
 	
 	
+	public String getB_img1() {
+		return b_img1;
+	}
+
+	public void setB_img1(String b_img1) {
+		this.b_img1 = b_img1;
+	}
+
 	public int getNumlike() {
 		return numlike;
 	}

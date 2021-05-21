@@ -23,7 +23,7 @@
 
 	function boardDel(){
 		if(confirm("삭제하시겠습니까? ")){
-		location.href="commuDel?num=${vo.num}";
+		location.href="commuDel?num=${vo.num}&up_cate=${vo.up_cate}";
 		}
 	}
 
@@ -243,8 +243,11 @@
 		
 		<div id="commuViewcenter">
 			<div>
-				<a href="javascript:boardDel()"><button class="btn commBtn ">삭제</button></a>
-				<button class="btn commBtn" onclick = "location.href = 'commuEdit?num=${vo.num}' ">수정</button>
+				<c:if test="${vo.userid==logId}">
+				
+					<a href="javascript:boardDel()"><button class="btn commBtn ">삭제</button></a>
+					<button class="btn commBtn" onclick = "location.href = 'commuEdit?num=${vo.num}' ">수정</button>
+				</c:if>	
 			</div>
 			<div id="commuViewboard">
 				<ul>
@@ -278,7 +281,7 @@
 					<li>${vo.b_subject }</li>
 					<li id = "commuImgProf">
 						<img src="<%=request.getContextPath()%>/img/mem_prof/${vo.mem_prof}">
-						<a href="">${vo.userid }</a>
+						${vo.userid }
 					</li>
 					<li>
 						<span>조회수 : ${vo.b_hit } &nbsp; &nbsp; </span>
@@ -291,21 +294,23 @@
 					
 					
 					<li id="likeLi">추천 &nbsp;&nbsp;
-                           <input class="aaaa" type="checkbox" name="num" id="like${vo.num}" value="${vo.num}" 
-	                           <c:forEach var="likes" items="${likeList}">
-                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
-                           				checked
-                           			</c:if>
-                           		</c:forEach> 
-                           	/>	
-                           <label for="like${vo.num}"></label>	
-						
+						<c:if test="${logId != null }">
+	                           <input class="aaaa" type="checkbox" name="num" id="like${vo.num}" value="${vo.num}" 
+		                           <c:forEach var="likes" items="${likeList}">
+	                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
+	                           				checked
+	                           			</c:if>
+	                           		</c:forEach> 
+	                           	/>	
+	                           <label for="like${vo.num}"></label>	
+						</c:if>
 						
 						댓글  ${vo.repcont }개
 					
 					</li>
 			
 					 	<span  style="display: none">${vo.num }</span>
+					 	<span  style="display: none">${vo.up_cate}</span>
 					
 				</ul>			
 			</div>
@@ -330,7 +335,7 @@
 				   	 ${voSel.prevSubject}
 			   	</c:if>
 			   	<c:if test="${voSel.prevNo>0 }"><!-- 이전글 있음 -->
-			       	<a href="commuView?num=${voSel.prevNo }">${voSel.prevSubject }</a>
+			       	<a href="commuView?num=${voSel.prevNo }&up_cate=${vo.up_cate}">${voSel.prevSubject }</a>
 			    </c:if> 
 			</div>
 			<div>
@@ -339,7 +344,7 @@
 			 	   ${voSel.nextSubject}
 			   	</c:if>
 			   	<c:if test="${voSel.nextNo>0 }">
-			        <a href="commuView?num=${voSel.nextNo }">${voSel.nextSubject}</a>
+			        <a href="commuView?num=${voSel.nextNo }&up_cate=${vo.up_cate}">${voSel.nextSubject}</a>
 			   	</c:if><br/>
 				
 			</div>
@@ -347,17 +352,18 @@
 		
 
 		<div id="commuViewreply">
-			
-			<form method="post" id="commuViewreplyFrm">
-				<div>
-					<h4>COMMENT</h4>
-					<input type="hidden" name="num" value="${vo.num }"/>
-		        	<textarea placeholder="자신의 의견을 간단히 적어주세요." name="rep_content" id="rep_content"></textarea>
-		        </div>
-		        <div>
-		        	<input type="submit" value="댓글 달기" class="btn confBtn" id="replyBtn"/>
-		        </div>	
-			</form>
+			<c:if test="${logId != null}">
+				<form method="post" id="commuViewreplyFrm">
+					<div>
+						<h4>COMMENT</h4>
+						<input type="hidden" name="num" value="${vo.num }"/>
+			        	<textarea placeholder="자신의 의견을 간단히 적어주세요." name="rep_content" id="rep_content"></textarea>
+			        </div>
+			        <div>
+			        	<input type="submit" value="댓글 달기" class="btn confBtn" id="replyBtn"/>
+			        </div>	
+				</form>
+			</c:if>	
 		</div>
 		<div id="commuViewreplyList">
 		
@@ -372,7 +378,7 @@
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.mem_sub } </span></li>
 				<li><span>총 게시물 : ${vo.mem_post }개</span></li>
-				<li><span>총 댓글수 : ${vo.mem_rev }개</span></li>
+				<li><span>회원등급 : ${vo.mem_rev }개</span></li>
 			</ul>
 		</div>
 		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>

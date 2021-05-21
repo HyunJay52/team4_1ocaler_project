@@ -19,10 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.BoardService;
 import com.team4.localer.service.DealShareService;
 import com.team4.localer.service.JoinUsService;
 import com.team4.localer.service.LikeItService;
-
+import com.team4.localer.vo.DealPageVO;
 import com.team4.localer.vo.DealShareVO;
 import com.team4.localer.vo.MemberVO;
 
@@ -38,22 +39,45 @@ public class DealController {
 	JoinUsService joinUsService;
 	@Inject
 	LikeItService likeItService;
+	@Inject
+	BoardService boardservice;
+	
 	
 	//동네직구(회원)
 	@RequestMapping("/memberBoard")
-	public ModelAndView memberBoard(DealShareVO vo,HttpServletRequest req,MemberVO memVo,HttpSession session) {
+	public ModelAndView memberBoard(DealShareVO vo,HttpServletRequest req,MemberVO memVo,HttpSession session,DealPageVO pageVO) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		vo.setUserid((String)req.getSession().getAttribute("logId"));
+		pageVO.setUserid((String)req.getSession().getAttribute("logId"));
+		vo.setS_gu(req.getParameter("s_gu"));
 		
-		mav.addObject("dealSellList",dealshareService.dealListSelect(vo));
+		System.out.println(pageVO.getS_gu());
+		System.out.println(pageVO.getUserid());
+		
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		
+		pageVO.setTotalRecord(dealshareService.dealTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
+		
+		
+		//mav.addObject("dealSellList",dealshareService.dealListSelect(vo)); // 이거를 수정해야하는데
+		
+		mav.addObject("dealSellList",dealshareService.dealPageSelect(pageVO));
 		
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
 		
-		mav.addObject("vo",vo);
+		System.out.println("오늘안에" + pageVO.getPageNum());
+		System.out.println(pageVO.getPageNum()+"<==현재 페이지번호");
+		System.out.println(pageVO.getTotalPage()+"마지막페이지");//마지막페이지
+		System.out.println(pageVO.getOnePageRecord()+"한페이지에 보이는수");
+		System.out.println(pageVO.getLastPageRecord()+"마지막 레코드수");
+		
+		
+		mav.addObject("pageVO",pageVO);
 		mav.setViewName("deal/memberBoard");
 		return mav;
 	}
@@ -130,6 +154,8 @@ public class DealController {
 				System.out.println("성공했다");
 				//글쓰고 쓴글로가는거
 				DealShareVO vo2 =dealshareService.dealOneselect(vo);
+				
+				mav.addObject("vo",boardservice.memwriteCount(vo.getUserid()));
 				mav.addObject("vo",vo2);
 				mav.addObject("num", vo2.getNum());
 				mav.setViewName("redirect:memberView");
@@ -271,6 +297,7 @@ public class DealController {
 		if(dealshareService.dealSellDelete(vo.getNum(),vo.getUserid())>0) { //성공했을떄
 			System.out.println("성공");
 			mav.setViewName("redirect:memberBoard");
+			mav.addObject("vo",boardservice.memdeleteCount(vo.getUserid()));
 		}else { // 시래했을떄
 			System.out.println("실패");
 			mav.addObject("num", vo.getNum());

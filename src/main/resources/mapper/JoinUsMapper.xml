@@ -19,4 +19,9 @@
   		<select id="getJCount" resultType="int">
   			select count(j_status) from joinus where j_status='참여승인' and numjoin=#{param1}
   		</select>
+  		<select id="dealLikeCountSelect" resultType="com.team4.localer.vo.JoinUsVO">
+		select count(*) likeCount from likeit where userid = #{userid} and like_num=${like_num}	
+	</select>
+  		
+  		
   </mapper>
