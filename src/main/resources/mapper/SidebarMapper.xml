@@ -4,7 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team4.localer.dao.SideBarDAO">
 	<select id="selectChatList" resultType="com.team4.localer.vo.ChatVO">
-		SELECT * FROM chatroom WHERE r_name LIKE '%${param1}%'
+		SELECT * FROM chatroom WHERE r_name LIKE '%${param1}%' ORDER BY r_writedate desc
 	</select>
-
+	
+	<select id="selectChatroomNum" resultType="int">
+		SELECT r_num FROM chatroom WHERE r_name=#{param1} 
+	</select>
+	
+	<select id="selectChatmsgList" resultType="com.team4.localer.vo.ChatVO">
+		SELECT * FROM chatmsg WHERE r_num = ${param1} ORDER BY c_writedate
+	</select>
+	
 </mapper>

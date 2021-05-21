@@ -3,10 +3,12 @@ package com.team4.localer.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,5 +51,19 @@ public class sideBarController {
 		List<ChatVO> chatList = service.selectChatList((String)ses.getAttribute("logId"));
 		
 		return chatList;
+	}
+	
+	@RequestMapping(value="chatting/chatprevMsg", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ChatVO> chatprevMsg(HttpServletRequest req){
+		String userid = req.getParameter("userid");
+		String chatRoomName = req.getParameter("chatRoomName");
+		//채팅방 검색 > 채팅방 번호 받아오기
+		int r_num = service.selectChatroomNum(chatRoomName);
+		System.out.println(r_num+" < < < < < < < < < < < < < < < < 채팅방 번호");
+		//채팅방 번호로 대화 목록 가져오기
+		List<ChatVO> msgList = service.selectChatmsgList(r_num);
+		
+		return msgList;
 	}
 }

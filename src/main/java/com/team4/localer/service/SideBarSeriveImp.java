@@ -19,6 +19,18 @@ public class SideBarSeriveImp implements SidebarService {
 		// 채팅방 리스트 불러오기
 		return dao.selectChatList(userid);
 	}
+
+	@Override
+	public int selectChatroomNum(String chatRoomName) {
+		// 선택된 채팅방 번호 내용 가져오기
+		return dao.selectChatroomNum(chatRoomName);
+	}
+
+	@Override
+	public List<ChatVO> selectChatmsgList(int r_num) {
+		// 선택된 채팅방 내용 가져오기
+		return dao.selectChatmsgList(r_num);
+	}
 	
 	
 }

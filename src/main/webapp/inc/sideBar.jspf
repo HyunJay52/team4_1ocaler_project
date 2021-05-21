@@ -3,6 +3,23 @@
 <%@ page session="true" %>
 <script src="http://localhost:82/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<style>
+/* 	#showMsg { */
+/* 		overflow-y: scroll; width:250px; height: 251px; */
+/* 	} */
+/* 	.chatList { */
+/* 		width: 230px; */
+/* 	    height: auto; */
+/* 	    overflow: auto; */
+/* 	} */
+/* 	.chatMyspan { */
+/* 		background:#5f0080; color: #fff; float:right; margin: 3px 0px; padding: 3px; border-radius: 5px; font-family: nsrb */
+/* 	} */
+	
+/* 	.chatOtherSpan { */
+/* 		background:#fec804; text-align:right;  margin: 3px 0px; padding: 3px; border-radius: 5px; font-family: nsrb */
+/* 	} */
+</style>
 <script>
 	$(document).ready(function(){
 		
@@ -25,12 +42,11 @@
 			alert("회원정보에서 채팅하기 클릭함");	
 			
 			getterID = $("#WVPProfilePopup>div").children('ul').children('li:first-child').text();
-			console.log(getterID);
 
 			$("#chatDiv").css({display: "block"});
 			
 			$("#chatList").append(
-				'<li>'+getterID+'<input type="text" value="'+getterID+'"</li>'
+				'<li>'+getterID+'<input type="hidden" value="'+getterID+'"</li>'
 			);
 			
 			$("#WVPProfilePopup").css({display: "none"});
@@ -46,7 +62,6 @@
 				url: 'chatting/chatroomList',	
 				data: 'userid=${logId}',
 				success: function(result) {
-					console.log(result);
 					$list = $(result);
 					$list.each(function(idx, list){
 						var r_name = list.r_name
@@ -56,14 +71,14 @@
 							var listName1 = rArr[0]; 
 							console.log('1. ',listName1);
 							$("#chatList").append(
-									'<li>'+listName1+'<input type="text" value="'+r_name+'"</li>'
+									'<li>'+listName1+'<input type="hidden" value="'+r_name+'"</li>'
 							);
 						}
 						if(rArr[1]!='${logId}'){
 							var listName2 = rArr[1];
 							console.log('2. ',listName2);
 							$("#chatList").append(
-									'<li>'+listName2+'<input type="text" value="'+r_name+'"</li>'
+									'<li>'+listName2+'<input type="hidden" value="'+r_name+'"</li>'
 							);
 						}
 					})
@@ -85,16 +100,10 @@
 		
 		//대화상대 선택하기
 		$(document).on('click', "#chatList>li", function(){
-			
-			alert("대화상대선택");
-			senderID = '${logId }';
-			console.log('????????????????',senderID)
-			
 			var chatListName = $("#chatList>li").children('input').val();
-			console.log(chatListName);
 			
 			// 채팅용 function > 소켓 접속
-			socket = io.connect("http://192.168.0.30:82");
+			socket = io.connect("http://localhost:82");
 			
 			//방생성용 if문 
 			if(chatListName.indexOf('+') != -1){
@@ -103,13 +112,10 @@
 				if('${logId }' != null) {
 					senderID = '${logId }';
 				}
-				console.log("$ $ $ $ $ $ $ ")
-				console.log(getterID);
-				console.log(senderID);
-				
-				socket.emit('join', getterID+"+"+senderID); //방생성
+				chatListName = getterID+"+"+senderID;
+				socket.emit('join', chatListName); //방생성
 			}
-			console.log(chatListName.indexOf('+'));;
+			console.log(chatListName.indexOf('+'));
 			
 			$("#chatList").css({display: "none"});
 			$("#showMsg").css({display:"block"});
@@ -117,9 +123,42 @@
 			$("#chat_box").css({display:"block"});
 			$("#chat_box>div:first-child").css({display:"block"});
 			
+			//이전 대화 가져오기
+			$.ajax({
+				url: 'chatting/chatprevMsg',
+				data: 'userid=${logId}&chatRoomName='+encodeURIComponent(chatListName),
+				type: 'post',
+				success: function(result){
+					$msgList = $(result);
+					$msgList.each(function(idx, msgList){
+						if('${logId }'==msgList.sender){
+							$("#showMsg").append("<li class='chatList'><span class='chatMyspan'>"+msgList.msg+"</span></li>");
+						}else if('${logId }'!=msgList.sender){
+							$("#showMsg").append("<li class='chatList'><span class='chatOtherSpan'>"+msgList.sender+" > "+msgList.msg+"</span></li>");
+						}
+					});
+					$("#showMsg").scrollTop($('#showMsg')[0].scrollHeight);
+				},
+				error: function(error){
+					console.log(error);
+				}
+			});
+			console.log(chatListName,"< 최종 채팅방 ");
+			
 			//서버에서 보낸 메세지 처리 함수
 			socket.on('echo', function(msg){
-				$("#showMsg").append(msg+"<br/>");
+				var splitP = msg.indexOf('>');
+				var userid = msg.substr(0, splitP-1);
+				var usermsg = msg.substr(splitP+2);
+				
+				if('${logId}'==userid){
+					$("#showMsg").append("<li class='chatList'><span class='chatMyspan'>"+usermsg+"</span></li>");	
+				}else if('${logId}'!=userid){
+					$("#showMsg").append("<li class='chatList'><span class='chatOtherSpan'>"+msg+"</span></li>");
+				}else {
+					$("#showMsg").append(msg+'<br/>')
+				}
+				$("#showMsg").scrollTop($('#showMsg')[0].scrollHeight);
 			});
 		});
 		
@@ -127,9 +166,7 @@
 		$("#msg_process").click(function(){
 			var sendM =  $("#msg").val();
 			if(sendM != ''){
-				//$("#showMsg").append(senderID+" : "+sendM+"<br/>");
 				socket.emit('sendMsg',  '${logId} > '+sendM);
-				console.log("보낼 메세지 > ", $("#msg").val());
 				$("#msg").val(""); //초기화
 				$("#msg").focus(); //초기화
 			}
@@ -139,12 +176,6 @@
 				msg_process.click();
 			}	
 		});
-		
-		//서버에서 메세지 보내기
-// 		socket.on('sendMsg', function(data){
-// 			console.log(data);
-// 			$("#showMsg").append(data+"<br/>");
-// 		});
 		
 	});
 </script>
@@ -206,14 +237,16 @@
 	<div class="chatTitle">TALK <span id="chatClose">✕</span></div>
 	<hr/>
 	<ul id="chatList">
-		<li>user1</li>
+		<!-- 채팅방 리스트 -->
 	</ul>
 	
 	<div id="chat_box">
 		<div>←</div>
-		<div id="showMsg"></div>
+		<ul id="showMsg">
+			<!-- 채팅 내용 보여주는 곳 -->
+		</ul>
 		<div class="chat_input">
-		<input type="text" id="msg"/><button id="msg_process">전송</button>
+			<input type="text" id="msg"/><button id="msg_process">전송</button>
 		</div>
 	</div>
 	
