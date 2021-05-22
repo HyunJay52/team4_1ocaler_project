@@ -3,6 +3,10 @@
 * {
 	list-style-type: none;
 	font-family: nsr;
+	text-overflow:ellipsis; 
+	white-space:nowrap;
+
+
 }
 
 #dealViewMain {

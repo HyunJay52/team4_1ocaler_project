@@ -135,10 +135,10 @@
 						   //수정폼 보여주기
 		                  if(obj.userid=="${logId}"){
 		                     tag += "<div style='display:none' id='replyEdit'>";
-		                     tag += "<form method ='post'>";
-		                     tag += "<textarea name='rep_content'style='width:1200px;height:auto;magin:0 auto;'>"+obj.rep_content+"</textarea>";
+		                     tag += "<form method ='post'><span style='margin-left: 37px;display: inline-block;vertical-align: top;'>↳</span>";
+		                     tag += "<textarea name='rep_content'style='width:1170px;margin-left: 9px;'>"+obj.rep_content+"</textarea>";
 		                     tag += "<input type='hidden' name='rep_num' value='"+obj.rep_num+"'/>";
-		                     tag += "<input type='submit' value='수정하기'/>" ;
+		                     tag += "<input type='submit' class='btn editBtn' value='수정하기'/>" ;
 		                     
 		                     tag+="</form></div>";
 		                    

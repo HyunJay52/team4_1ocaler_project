@@ -59,12 +59,23 @@ public class DealController {
 		pageVO.setSearchKey(pageVO.getSearchKey());
 		pageVO.setSearchWord(pageVO.getSearchWord());
 		
+		
+		
 		pageVO.setTotalRecord(dealshareService.dealTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
 		
 		
 		//mav.addObject("dealSellList",dealshareService.dealListSelect(vo)); // 이거를 수정해야하는데
 		
+		mav.addObject("appNum", joinUsService.getJCount(pageVO.getNum()));
 		mav.addObject("dealSellList",dealshareService.dealPageSelect(pageVO));
+		
+		
+		System.out.println("페이징테스트 카테 " + pageVO.getS_cate());
+		System.out.println("페이징테스트 구'" +pageVO.getS_gu());
+		
+		System.out.println("조인웅앵웅할 번호" +pageVO.getNum());
+	
+		
 		
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
@@ -184,7 +195,7 @@ public class DealController {
 		ModelAndView mav= new ModelAndView();
 		
 		mav.addObject("vo",dealshareService.dealViewSelect(vo.getNum()));
-		
+	
 		mav.addObject("appNum",joinUsService.getJCount(vo.getNum()));
 		
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {

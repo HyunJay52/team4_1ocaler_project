@@ -269,8 +269,8 @@
         text-decoration: underline;
     }
 	#commuSearch{
-		width: 320px; 
-		margin:0 auto;
+		width: 400px; 
+		margin-left: 0;
 		height: 70px;
 	}
 	
@@ -278,15 +278,17 @@
 		float:left;
 		border:1px solid black;  
 		border-right: none;
-		height: 30px;
+		height: 35px;
+    	width: 256px;
 	}
 	#btn{  
-		width:30px; 
-		height: 30px ; 
+		width: 35px;
+    	height: 35px;
 		padding: 2px
 	}		
 	select{
-		height: 30px ; 
+		width: 100px;
+		height: 35px ; 
 		border:1px solid black;
 		float:left; 
 		margin-right: 4px }
@@ -331,6 +333,5 @@
 		color: #fff;
 		background: #B8B2F4;
 }
-	
-	
+
 	
