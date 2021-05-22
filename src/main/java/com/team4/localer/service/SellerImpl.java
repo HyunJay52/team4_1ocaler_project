@@ -39,7 +39,10 @@ public class SellerImpl implements SellerService {
 	public List<Item_optionVO> changeOptions(String option_title, int i_num) {
 		return sellerDAO.changeOptions(option_title, i_num);
 	}
-	
+	@Override
+	public List<Item_optionVO> optionSelectAll(int i_num) {
+		return sellerDAO.optionSelectAll(i_num);
+	}
 	
 	@Override
 	public SellitemVO selectOnePage(int i_num) {		
@@ -77,6 +80,7 @@ public class SellerImpl implements SellerService {
 	public int recentlyOrderNum(String userid) {
 		return sellerDAO.recentlyOrderNum(userid);
 	}
+
 	
 	
 	

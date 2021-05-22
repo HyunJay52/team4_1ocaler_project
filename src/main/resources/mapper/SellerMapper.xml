@@ -40,6 +40,10 @@
 	<select id="changeOptions" resultType="com.team4.localer.vo.Item_optionVO">
 		select option_content, o_price from item_option where option_title=#{param1} and i_num=#{param2}
 	</select>
+	
+	<select id="optionSelectAll" resultType="com.team4.localer.vo.Item_optionVO">
+		select option_title, option_content, o_price from item_option where i_num=#{param1}
+	</select>
 
 
 	<select id="selectAllitem" resultType="com.team4.localer.vo.SellitemVO">

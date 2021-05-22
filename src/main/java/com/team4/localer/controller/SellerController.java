@@ -185,6 +185,12 @@ public class SellerController {
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println(i_num+"<--ㅁ ㅝ나오긴하니");
+		//1개 게시글 내용 불러오기 
+		mav.addObject("modifyVO",sellerService.selectOnePage(i_num));
+		//해당 게시글번호에 해당하는 옵션 다 불러오기
+		mav.addObject("optionList",sellerService.optionSelectAll(i_num));
+		System.out.println(sellerService.optionSelectAll(i_num).size());
+		
 		
 		mav.setViewName("deal/modifySellView");
 		return mav;	

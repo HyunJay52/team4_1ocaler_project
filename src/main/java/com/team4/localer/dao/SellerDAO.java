@@ -20,7 +20,7 @@ public interface SellerDAO {
 	
 	public List<Item_optionVO> notOverlapOptionTitleSel(int i_num);// 옵션 타이틀 목록 중복제거값 가져오기	
 	public List<Item_optionVO> changeOptions(String option_title, int i_num);//옵션목록바꾸기 아작스
-	
+	public List<Item_optionVO> optionSelectAll(int i_num);//해당 게시글에 대한 모든 옵션내용 불러오기
 
 	
 	public SellerVO sellerInfo(String userid);//판매자 정보 불러오기	
