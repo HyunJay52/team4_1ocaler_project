@@ -12,6 +12,7 @@ import com.team4.localer.vo.Item_optionVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.SellitemVO;
+import com.team4.localer.vo.ShipVO;
 
 @Service
 public class SellerImpl implements SellerService {
@@ -67,6 +68,14 @@ public class SellerImpl implements SellerService {
 	@Override
 	public int sp_pointInsert(String userid, int sp_point, int sp_item) {
 		return sellerDAO.sp_pointInsert(userid, sp_point, sp_item);
+	}
+	@Override
+	public ShipVO orderCompl(int o_num) {
+		return sellerDAO.orderCompl(o_num);
+	}
+	@Override
+	public int recentlyOrderNum(String userid) {
+		return sellerDAO.recentlyOrderNum(userid);
 	}
 	
 	

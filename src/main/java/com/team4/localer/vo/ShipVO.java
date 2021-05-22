@@ -18,6 +18,15 @@ public class ShipVO {
 	private String ship_date; //발송일
 	private String ship_msg; //요청사항
 	private int ship_cnt; //배송수량
+	
+	//ordertbl
+	private int o_price;
+	private int o_ship;
+	private String opt_str;
+	//sell_item
+	private String i_subject;
+	
+	
 	public int getO_num() {
 		return o_num;
 	}
@@ -108,8 +117,34 @@ public class ShipVO {
 	public void setShip_cnt(int ship_cnt) {
 		this.ship_cnt = ship_cnt;
 	}
+	public int getO_price() {
+		return o_price;
+	}
+	public void setO_price(int o_price) {
+		this.o_price = o_price;
+	}
+	public int getO_ship() {
+		return o_ship;
+	}
+	public void setO_ship(int o_ship) {
+		this.o_ship = o_ship;
+	}
+	public String getOpt_str() {
+		return opt_str;
+	}
+	public void setOpt_str(String opt_str) {
+		this.opt_str = opt_str;
+	}
+	public String getI_subject() {
+		return i_subject;
+	}
+	public void setI_subject(String i_subject) {
+		this.i_subject = i_subject;
+	}
 	
 
+	
+	
 
 
 }

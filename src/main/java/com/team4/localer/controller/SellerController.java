@@ -203,6 +203,7 @@ public class SellerController {
 		System.out.println(orderVO.getI_userid()+"<--판매자의 userid");
 		System.out.println(orderVO.getI_price()+"<--원래상품 1개 판매가격");
 		System.out.println(orderVO.getI_img1()+"<--상품 이미지1");
+		mav.addObject("memberVO",memberService.userDetailFind(orderVO.getUserid()));
 		mav.addObject("orderVO",orderVO);
 		mav.setViewName("deal/sellBuy");
 		return mav;
@@ -227,7 +228,7 @@ public class SellerController {
 			System.out.println(result+"<----1이면성공 아니면 실패");	
 			if(result>0) {
 				int resl = shipService.shipInsert(shipVO);
-				mav.addObject("o_num",orderVO.getNum());
+				mav.addObject("o_num",sellerService.recentlyOrderNum(orderVO.getUserid())); //num이아니라 o_num을 보내줘야하네 o_num을 선탣ㄱ해야해
 				mav.setViewName("redirect:ShowCompl");
 				System.out.println(resl+"<---이것도 1이 나와야 성공임");
 			}
@@ -250,6 +251,34 @@ public class SellerController {
 	}
 	
 	
+	@RequestMapping("/sendShowCompl")
+	@ResponseBody
+	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
+	public int sendShowCompl(OrderVO orderVO, Cha_pVO chaVO, Sp_pVO spVO, ShipVO shipVO) {
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);//트랜잭션호출
+		TransactionStatus status  = transactionManager.getTransaction(def);
+		
+		int o_num = 0;
+		try {
+			int result = sellerService.sellerOrderInsert(orderVO);
+			//배송테이블 값셋팅
+			shipVO.setBuyer(orderVO.getUserid()); //상품을 구매한사람
+			shipVO.setShip_cnt(orderVO.getO_cnt()); //cnt 셋팅
+			
+			System.out.println(result+"<----1이면성공 아니면 실패");	
+			if(result>0){
+				int resl = shipService.shipInsert(shipVO);
+				o_num = sellerService.recentlyOrderNum(orderVO.getUserid()); 
+				System.out.println(resl+"<---이것도 1이 나와야 성공임");
+			}
+			transactionManager.commit(status);
+		}catch(Exception e) {			  
+			System.out.println(e.getMessage()+"에러가 요기있습니다.");
+			e.printStackTrace();
+		}
+		return o_num;
+	}
 	
 	
 	@RequestMapping("/sellerInfo")
@@ -265,7 +294,7 @@ public class SellerController {
 	@RequestMapping("/ShowCompl")
 	public ModelAndView ShowCompl(int o_num) {
 		ModelAndView mav = new ModelAndView();
-		
+		mav.addObject("complVO",sellerService.orderCompl(o_num));
 		mav.setViewName("deal/showCompl");
 		return mav;
 	}

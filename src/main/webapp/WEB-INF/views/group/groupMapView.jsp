@@ -53,6 +53,7 @@
 		})
 </script>
 <body id="groupMapViewBody">
+<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 <div id="groupMapViewMap" style="width:2500px; height:1500px; position:relative; overflow:hidden;"></div>
 	
 	<!-- showFrm접기펴기 -->	

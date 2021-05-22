@@ -84,5 +84,15 @@
 	</insert>
 	
 	
+	<select id="recentlyOrderNum" resultType="int">
+	select o_num from (select * from ordertbl where userid=#{param1} and <![CDATA[ o_date<=sysdate ]]> order by o_date desc) where <![CDATA[ rownum<=1 ]]>
+	</select>
+	
+	<select id="orderCompl" resultType="com.team4.localer.vo.ShipVO">
+		select s.o_num, s.getter, to_char(s.b_date,'YYYY-MM-DD HH24:MI') b_date, s.ship_tel, s.ship_zip, s.ship_addr, s.ship_detail, s.ship_msg,
+		o.o_price, o.o_ship, o.opt_str, i.i_subject from ship s join ordertbl o on s.o_num=o.o_num
+		join sell_item i on o.num=i.i_num where o.o_num=#{param1}
+	</select>
+	
 	
 </mapper>
