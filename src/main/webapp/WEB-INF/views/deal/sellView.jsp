@@ -165,8 +165,6 @@
        			total = total + result - price;   			
        		}
        		
-       		
-       		
 			//수량 및 총수량 계산시 --> 누르고난 다음의 수량과 , 원래 저장되있던 수량을 비교하여 배열 및 총수량 계산  		
        		if(count[$(".choice").index(this)]<numbers){
        			count[$(".choice").index(this)] = count[$(".choice").index(this)]+1
@@ -183,15 +181,6 @@
        		console.log(counts,"<-- 총수량 계산중");
        		console.log(count,"<-- 수량 배열");
        		console.log(total,"<--총가격 계산");
-       		
-
-       		
-       		
-       		
-       		
-       			
-       		
-       		
        		
        		//총 변경되는 값을 변경해줘야함
        		$("#i_price").val(total);
@@ -234,6 +223,10 @@
      		location.href="selBard";
      	});
      	
+     	$("#modifyBtn").click(function(){
+     		
+     		location.href="modifySellView?i_num=${itemVO.i_num }";
+     	});
      	
     	
 	});
@@ -334,9 +327,17 @@
 						</div>
 						
 						<div id="submitCancleBtn">
-							<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
-							<input type="submit" value="구매하기" class="btn confBtn"/>
+							<c:if test="${logId!=itemVO.userid }">
+								<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
+								<input type="submit" value="구매하기" class="btn confBtn"/>
+							</c:if>
+							<c:if test="${logId==itemVO.userid }">
+								<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
+								<input type="button" id="modifyBtn" value="수정하기" class="btn confBtn"/>
+							</c:if>
+							
 						</div>
+						
 						<input type='hidden' name="num" value="${itemVO.i_num }">
 						<input type='hidden' id="opt_str" name='opt_str' value=''>
 						<input type='hidden' name='i_userid' value="${itemVO.userid }">

@@ -180,6 +180,20 @@ public class SellerController {
 		return mav;
 	}
 	
+	@RequestMapping("/modifySellView")
+	public ModelAndView modifySellView(int i_num) {
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println(i_num+"<--ㅁ ㅝ나오긴하니");
+		
+		mav.setViewName("deal/modifySellView");
+		return mav;	
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("/changeOptions")
 	@ResponseBody
 	public List<Item_optionVO> changeOption(Item_optionVO optionVO){

@@ -340,7 +340,10 @@
 	padding: 0;
 }
 /* ------리뷰 */
-
+#i_ship::-webkit-outer-spin-button, #i_ship::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+    margin: 0;
+}
 /* 페이징 */
 #pageNum {
 	padding-left: 42%;

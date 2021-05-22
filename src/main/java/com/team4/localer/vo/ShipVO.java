@@ -19,11 +19,11 @@ public class ShipVO {
 	private String ship_msg; //요청사항
 	private int ship_cnt; //배송수량
 	
-	//ordertbl
+	//ordertbl //WOOO 추가함
 	private int o_price;
 	private int o_ship;
 	private String opt_str;
-	//sell_item
+	//sell_item   //WOOO 추가함
 	private String i_subject;
 	
 	
