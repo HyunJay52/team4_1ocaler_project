@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- 전화인증 api -->
 <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
@@ -133,10 +133,10 @@
 			<ul>
 				<li>프로필 사진</li>
 				<li class="memheightAuto">
-					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
+					<div style="border: none; width: 180px; height: 180px; margin-right: 10px; float: left;">
 						<img src="<%=request.getContextPath()%>/img/mem_prof/${myVO.mem_prof}"
 							id="previewImg" class="profImg form-control-file border"
-							alt="upload image" />
+							alt="upload image" style="height:100%" />
 					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진수정 </label> 
 					<input type="file" name="profFile" accept="image/*" id="mem_prof" 
 					style="display: none; margin-top: 70px; border: none;" />

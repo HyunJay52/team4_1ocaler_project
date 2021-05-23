@@ -403,8 +403,9 @@
 		</if>
 		where ${kategorie}.userid=#{userid} and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
-		
-		and ${searchKey} like #{searchWord} 
+		<if test="searchKey != null">
+			and ${searchKey} like #{searchWord} 
+		</if>
 		<if test="searchKey2 != null">
 			<if test="!searchKey2.equals('all')">
 				and q_answer ${searchKey2}			
@@ -427,8 +428,10 @@
 		</if>
 		where ${kategorie}.userid= #{userid} and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+		<if test="searchKey != null">
+			and ${searchKey} like #{searchWord}		
+		</if>
 		
-		and ${searchKey} like #{searchWord}
 		<if test="searchKey2 != null">
 			<if test="!searchKey2.equals('all')">
 				and q_answer ${searchKey2}			
@@ -440,13 +443,40 @@
 		select * from qna 
 		join sell_item on qna.num = sell_item.i_num 
 		join seller on sell_item.sel_num = seller.sel_num 
-		where q_num = #{param1} and seller.userid = #{param2}
+		where q_num = #{param1} 
+		<if test="param3.equals('qna')">
+			and ${param3}.userid = #{param2}
+		</if>
+		<if test="!param3.equals('qna')">
+			and seller.userid = #{param2}		
+		</if>
 	</select>
 	
 	<update id="QnAAnswerWrite" parameterType="com.team4.localer.vo.QnAVO">
 		update qna set q_answer = #{q_answer}, q_adate = sysdate where q_num = #{q_num}
 	</update>
 	
+	<select id="selectProductList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.SellitemVO">
+		select * from (
+		select * from ( 
+		select i_num, i_subject, i_cnt, i_content, i_img1, i_img2, i_img3, i_price, i_ship, i_period, i_status, i_writedate, i_hit, i_tag, 
+		(select count(o_num) from sell_item join ordertbl o on i.i_num = o.num where o.o_conf = 2) orderCount,
+		(select sum(o_price) from sell_item join ordertbl o on i.i_num = o.num where o.o_conf = 2) revenue
+		from sell_item i join seller s on i.sel_num = s.sel_num where s.userid= #{userid} 
+		and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		    and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+		    and ${searchKey} like #{searchWord}
+		    order by ${dateContent} desc)
+		    where rownum <![CDATA[ <= ]]> #{rowNum1} order by ${dateContent} asc)
+		    where rownum <![CDATA[ <= ]]> #{rowNum2} order by ${dateContent} desc
+	</select>
+	<select id="selectProductListCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="int">
+		select count(i_num)
+	    from sell_item i join seller s on i.sel_num = s.sel_num where s.userid=#{userid} 
+	    and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+	    and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+	    and ${searchKey} like #{searchWord}
+	</select> 
 <!-- sql by hj 2021.05.21 -->
 	<select id="selectWaitingJoinList" resultType="com.team4.localer.vo.JoinUsVO">
 		SELECT userid, auth, j_status, up_cate, j_num, title, j_writedate FROM (

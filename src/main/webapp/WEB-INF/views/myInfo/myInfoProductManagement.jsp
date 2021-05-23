@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script>
+	$(function(){
+		function setProductList(num){
+			$.ajax({
+				url : "selectProductList",
+				data : $("#myinfoProductForm").serialize()+"&nowNum="+num,
+				success : function(result){
+					console.log(result);
+					
+				},error : function(e){
+					console.log("error");	
+				}
+			});
+		}
+		setProductList(1);
+	});
+</script>
+
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">
@@ -20,26 +38,26 @@
 					<li><label>기간선택</label></li>
 					<li><label>검색</label></li>					
 				</ul>
+				<form method="post" id="myinfoProductForm" onsubmit="return false;">
 				<div class="productManagementLabelCenter">
 					<ul>
-						<li><input type="checkbox"/>총 등록상품</li>
-						<li><input type="checkbox"/>판매중</li>
-						<li><input type="checkbox"/>판매완료</li>
-						<li><input type="checkbox"/>종료예정</li>
-						<li><input type="checkbox"/>판매중단</li>
+						<li><input type="checkbox" name="searchKey2"/>총 등록상품</li>
+						<li><input type="checkbox" name="searchKey2"/>판매중</li>
+						<li><input type="checkbox" name="searchKey2"/>판매완료</li>
+						<li><input type="checkbox" name="searchKey2"/>종료예정</li>
+						<li><input type="checkbox" name="searchKey2"/>판매중단</li>
 					</ul>
 					<div class="productManagementLabelCenterDiv">
-						<input type="date"/>~
-						<input type="date"/>
-						<input type="button" value="7일" class="btn commBtn productManagementBtn"/>
-						<input type="button" value="1개월" class="btn commBtn productManagementBtn"/>
-						<input type="button" value="3개월" class="btn commBtn productManagementBtn"/>
+						<input type="date" name="searchDate" value="2021-03-01" min="2021-03-01" max="2021-05-31"/>~
+						<input type="date" name="searchDate2" value="2021-05-31" min="2021-03-01" max="2021-05-31"/>
 					</div>
 					<div class="productManagementLabelCenterDiv">
-						<input type="text" name="search"/>
+						<input type="hidden" name="searchKey" value="i_subject"/>
+						<input type="text" name="searchWord"/>
 						<input type="button" value="검색" class="btn commBtn productManagementBtn"/>
 					</div>				
-				</div>				
+				</div>
+				</form>				
 			</div>
 		</div>
 		<div class="myInfoProductManagementBottom">

@@ -9,18 +9,21 @@
 				data : $("#myBoardListForm").serialize()+"&nowNum="+num,
 				success : function(result){
 					console.log(result);
-					var tag = "<tr><td><input type='checkbox' class='allCheckboxSelect'/></td>";
+					var tag = "<tr>";
 						if(kategorie == 'board'){
+							tag += "<td><input type='checkbox' class='allCheckboxSelect'/></td>";
 							tag += "<td>날짜</td><td>분류</td><td>제목</td><td>조회수</td><td>댓글수</td></tr>";
 						}else if(kategorie == 'reply'){
+							tag += "<td><input type='checkbox' class='allCheckboxSelect'/></td>";
 							tag += "<td>날짜</td><td>분류</td><td>글제목</td><td>댓글내용</td><td>조회수</td><td>댓글수</td></tr>";
 						}else if(kategorie == 'qna'){
 							tag += "<td>문의날짜</td><td>판매자</td><td>상품제목</td><td>문의내용</td><td>공개여부</td><td>상태</td></tr>";
 						}
 					var index = 0;
 						result.list.forEach(function(data, idx){
-							tag += "<tr><td><input type='checkbox'/></td>";
+							tag += "<tr>";
 							if(kategorie == 'board'){
+								tag += "<td><input type='checkbox'/></td>";
 								tag += "<td>"+data.b_writedate+"</td>";
 								if(data.up_cate == 1){//동내정보
 									tag += "<td>동내정보</td>";
@@ -34,6 +37,7 @@
 								tag += "<td>"+data.reply+"</td>";
 								
 							}else if(kategorie == 'reply'){
+								tag += "<td><input type='checkbox'/></td>";
 								tag += "<td>"+data.rep_date+"</td>";
 								if(data.up_cate == 1){//동내정보
 									tag += "<td>동내정보</td>";
@@ -50,7 +54,7 @@
 							}else if(kategorie == 'qna'){
 								tag += "<td>"+data.q_writedate+"</td>";
 								tag += "<td>"+data.sellerid+"</td>";
-								tag += "<td>"+data.i_subject+"</td>";
+								tag += "<td><a href='sellView?i_num="+data.i_num+"'>"+data.i_subject+"</a></td>";
 								tag += "<td>"+data.q_content+"</td>";
 								if(data.q_status == 1){
 									tag += "<td>공개</td>";									
@@ -58,14 +62,10 @@
 									tag += "<td>비공개</td>";									
 								}
 								if(data.q_answer != null){
-									tag += "<td><button class='btn btn-primary'>답변완료</button></td>";									
+									tag += "<td><button class='btn btn-primary activityQnAView' data-target='#myInfoActivityQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>답변완료</button></td>";									
 								}else{
 									tag += "<td>답변없음</td>";
-								}
-							
-								
-								
-								
+								}	
 							}
 							tag += "</tr>";
 							index = idx;
@@ -73,7 +73,7 @@
 						
 						if(index < 7){
 							for(var i = index; i < 7; i++){
-								tag += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+								tag += "<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
 							}							
 						}
 						
@@ -164,6 +164,41 @@
 			setBoardList(num, kategorie);
 		});
 		
+		//답변보기 버튼
+		$(document).on("click", ".activityQnAView", function(){
+			var q_num = $(this).val();
+			console.log("q_num="+q_num);
+			setActivityQnAContent(q_num);
+		});
+		
+		//qna 내용 불러오기
+		function setActivityQnAContent(q_num){
+			$.ajax({
+				url : "setQnA",
+				data : {"q_num": q_num,
+						"searchKey": "qna"
+						},
+				dataType : "json",
+				success : function(result){
+					console.log(result);
+					var tag = "<li>작성자 : "+result.userid+"</li>";
+					tag += "<li>등록일 : "+result.q_writedate+"</li>";
+					if(result.q_status == 1){
+						tag += "<li>공개여부 : 공개</li>";						
+					}else if(result.q_status == 2){
+						tag += "<li>공개여부 : 비공개</li>";							
+					}
+					tag += "<li class='viewQnAContent'>"+result.q_content+"</li>";
+					tag += "<li class='qnaAnswerHead'>답변</li>";
+					tag += "<li class='viewQnAContent'>"+result.q_answer+"</li>";
+				
+					//$("#activityQnATextarea").val(result.q_content);
+					$("#viewActivityQnA").html(tag);
+				}, error : function(e){
+					console.log("qna불러오기 실패");
+				}
+			});
+		}
 	});
 </script>
 	
@@ -241,6 +276,42 @@
 				</div>
 			</div>
 			</form>
+		</div>
+	</div>
+	<div class="modal fade mdFnt" id="myInfoActivityQnAManagementMd"  data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content" style="height:600px">
+				<div class="modal-header ">
+				<h4 class="modal-title">QnA</h4>
+
+				</div>
+				<div class="modal-body" style="text-align:right; overflow:auto">
+					<ul id="viewActivityQnA">
+						
+					</ul>
+					<ul>
+						<li>
+							<button class="btn btn-outline-dark btn-lg" data-dismiss="modal">닫기</button>
+						</li>
+					</ul>
+				</div>
+				<!-- 질문 수정이 가능할 경우
+				<div class="myinfoQnAModalBackground"></div>
+				<form method="post" id="QnAEditForm" onsubmit="return false">
+					<div class="myinfoQnAAnswerArea">
+						<h3>질문 수정</h3>
+						<ul>
+							<li style="display:none"><input type="hidden" id="qnaEditNum" name="q_num" value=""/></li>
+							<li>
+								<textarea style="width:100%; height:340px; resize:none" id="activityQnATextarea"name="q_content" placeholder="질문을 입력해주세요"></textarea>
+								<button class="btn btn-outline-dark btn-lg qnaEditBtn">질문등록</button>
+								<button class="btn btn-outline-dark btn-lg qnaEditCancelBtn">등록취소</button>
+							</li>						
+						</ul>
+					</div>
+				</form>
+				 -->
+			</div>
 		</div>
 	</div>
 </div>

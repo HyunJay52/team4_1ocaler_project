@@ -35,6 +35,7 @@ import com.team4.localer.vo.MyinfoPageVO;
 
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellitemVO;
 
 
 
@@ -574,16 +575,21 @@ public class MyinfoController {
 		return map;
 	}
 	
+	//qna 데이터 하나 불러오기
 	@ResponseBody
-	@RequestMapping("/setQnA")
+	@RequestMapping("/setQnA")	
 	public QnAVO setQnA(HttpSession ses, HttpServletRequest req) {
 		QnAVO vo =  new QnAVO();
 		String userid = (String)ses.getAttribute("logId");
 		int q_num = Integer.parseInt(req.getParameter("q_num"));
-		vo = service.setQnA(q_num, userid);
+		String searchKey = (String)req.getParameter("searchKey");
+		vo = service.setQnA(q_num, userid, searchKey);
+		System.out.println("q_num="+q_num+"id="+userid);
+		System.out.println("vo="+vo);
 		return vo;
 	}
 	
+	//qna 답변쓰기
 	@ResponseBody
 	@RequestMapping("/QnAAnswerWrite")
 	public int QnAAnswerWrite(HttpSession ses, QnAVO vo) {
@@ -592,6 +598,32 @@ public class MyinfoController {
 		result = service.QnAAnswerWrite(vo);
 		
 		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/selectProductList")
+	public Map<String, Object> selectProductList(HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setOnePageRecord(7);
+		vo.setOnePageSize(5);
+		
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		vo.setDateContent("i_writedate");
+		vo.setSearchWord("%"+vo.getSearchWord()+"%");
+		
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		vo.setTotalRecord(service.selectProductListCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+		
+		map.put("list", service.selectProductList(vo));
+		map.put("pVO", vo);
+		
+		return map;
 	}
 	@RequestMapping("/myInfoSaleHistory")
 	public String myInfoSaleHistory() {

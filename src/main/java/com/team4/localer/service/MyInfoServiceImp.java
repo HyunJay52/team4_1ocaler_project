@@ -20,6 +20,7 @@ import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellitemVO;
 
 @Service
 public class MyInfoServiceImp implements MyInfoService{
@@ -199,9 +200,9 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	@Override
-	public QnAVO setQnA(int q_num, String userid) {
+	public QnAVO setQnA(int q_num, String userid, String searchKey) {
 
-		return dao.setQnA(q_num, userid);
+		return dao.setQnA(q_num, userid, searchKey);
 	}
 	
 	@Override
@@ -210,12 +211,26 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.QnAAnswerWrite(vo);
 	}
 	
-// 내정보 메인용 서비스 (hj, 2021-05-21)
+	@Override
+	public List<SellitemVO> selectProductList(MyinfoPageVO vo) {
+		
+		return dao.selectProductList(vo);
+	}
+
+	@Override
+	public int selectProductListCount(MyinfoPageVO vo) {
+		
+		return dao.selectProductListCount(vo);
+	}
+
+	// 내정보 메인용 서비스 (hj, 2021-05-21)
 	@Override
 	public List<JoinUsVO> selectWaitingJoinList(String userid) {
 		// 참여정보
 		return dao.selectWaitingJoinList(userid);
 	}
+
+
 
 
 

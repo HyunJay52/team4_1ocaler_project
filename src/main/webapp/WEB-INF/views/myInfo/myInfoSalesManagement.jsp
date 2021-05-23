@@ -9,7 +9,7 @@
 				<ul class="managementHeader"> 
 					<li>판매중 : 3개</li>
 					<li>당일주문 : 20개</li>
-					<li>결제완려 : 14개</li>
+					<li>결제완료 : 14개</li>
 					<li>결제대기 : 6개</li>
 					<li>취소/환불 : 0개</li>
 				</ul>

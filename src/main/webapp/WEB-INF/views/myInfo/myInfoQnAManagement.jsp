@@ -75,7 +75,9 @@
 		function setQnAContent(q_num){
 			$.ajax({
 				url : "setQnA",
-				data : {"q_num": q_num},
+				data : {"q_num": q_num,
+						"searchKey":"none"
+						},
 				dataType : "json",
 				success : function(result){
 					console.log(result);

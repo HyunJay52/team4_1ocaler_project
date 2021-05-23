@@ -24,6 +24,21 @@ public class SellitemVO {
 	private int i_hit;
 	private String i_tag;//판매글태그
 
+	private int orderCount;
+	private int revenue;
+	
+	public int getOrderCount() {
+		return orderCount;
+	}
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}
+	public int getRevenue() {
+		return revenue;
+	}
+	public void setRevenue(int revenue) {
+		this.revenue = revenue;
+	}
 	public String getI_priceStr() {
 		i_priceStr = NumberFormat.getInstance().format(i_price);
 		return i_priceStr;

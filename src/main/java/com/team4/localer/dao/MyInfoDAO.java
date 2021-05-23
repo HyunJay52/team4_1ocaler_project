@@ -15,6 +15,7 @@ import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellitemVO;
 
 public interface MyInfoDAO {
 	//내 정보 조회
@@ -109,10 +110,16 @@ public interface MyInfoDAO {
 	public int selectMyBoardCount(MyinfoPageVO vo);
 	
 	//특정 QnA 불러오기
-	public QnAVO setQnA(int q_num, String userid);
+	public QnAVO setQnA(int q_num, String userid, String searchKey);
 	
 	//QnA 답변 쓰기
 	public int QnAAnswerWrite(QnAVO vo);
+	
+	//상품관리 리스트 조회
+	public List<SellitemVO> selectProductList(MyinfoPageVO vo);
+	
+	//상품관리 리스트 카운트
+	public int selectProductListCount(MyinfoPageVO vo);
 	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	//참여정보 
