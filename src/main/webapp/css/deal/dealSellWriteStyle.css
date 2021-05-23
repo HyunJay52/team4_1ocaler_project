@@ -84,7 +84,9 @@
 	}
 	#file>div{
 		width:425px;
+		height:61px;
 		float:left;
+		
 	}
 	#file>div>div:first-child{
 		font-size: 25px;
@@ -108,6 +110,36 @@
 	#i_ship{
 		width:200px;
 		height:30px;
+	}
+	#spanTitle{
+	margin-top:20px;
+	}
+	#spanTitle>span{
+		display:inline-block;
+		width:300px;
+		font-size:16px;
+		text-align:center;
+	}
+	#spanTitle>span:nth-child(1){
+		background-color: #67ad5b;
+	    color: #fff;
+	    border-radius: 10px;
+	    padding: 10px;
+	    margin-left: 10px;
+	}
+	#spanTitle>span:nth-child(2){
+		background-color:#3d8ab6;
+		color: #fff;
+	    border-radius: 10px;
+	    padding: 10px;
+	    margin-left: 20px;
+	}
+	#spanTitle>span:nth-child(3){	
+		background-color:#555555;
+		color: #fff;
+	    border-radius: 10px;
+	    padding: 10px;
+	    margin-left: 20px;
 	}
 
 	/* 버튼 스타일 클래스 모음 */

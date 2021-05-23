@@ -211,6 +211,41 @@
     		})//ajax end   		
     	})  	
     	
+		//좋아요	
+		if(${logId!=null}){
+			$("#sellLike").on('click',function(){
+				if($("#sellLike").is(':checked')){			
+					var url = "likeInsert";
+					var params = "numLike="+$("#sellLike").val();	
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 추가 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+				}else{
+					var url = "likeDelete";
+					var params = "numLike="+$("#sellLike").val();
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 삭제 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+					
+				}
+			});	
+		}//좋아요 end
+    	
+    	
+    	
+    	
     	 
     	$("#sellBuyFrm").submit(function(){
     		if($("#o_price").val()==0 || $("#i_cnt").val()==0){
@@ -223,11 +258,15 @@
      		location.href="selBard";
      	});
      	
-     	$("#modifyBtn").click(function(){
-     		
+     	$("#modifyBtn").click(function(){	
      		location.href="modifySellView?i_num=${itemVO.i_num }";
      	});
      	
+     	$("#deleteBtn").click(function(){
+     		if(confirm('해당 게시글을 삭제하시겠습니까?')){
+     			location.href="deleteSellView?i_num=${itemVO.i_num }&userid=${itemVO.userid}";
+     		}
+     	})
     	
 	});
 
@@ -267,8 +306,9 @@
 					<div id="sellInfo">	
 						<div> 
 							<input type="text" id="i_subject" name="i_subject" value="${itemVO.i_subject }" readonly>
-							<input class="facker" type="checkbox" name="numLike" id="sellLike" value="" /><label for="sellLike"></label>
+							<input class="facker" type="checkbox" name="numLike" id="sellLike" value="${itemVO.i_num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==itemVO.i_num && logId==likes.userid }">checked</c:if></c:forEach>/><label for="sellLike"></label>
 						</div>
+						
 						<div>
 						
 							<ul>
@@ -332,12 +372,13 @@
 								<input type="submit" value="구매하기" class="btn confBtn"/>
 							</c:if>
 							<c:if test="${logId==itemVO.userid }">
-								<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
+								<input type="button" id="deleteBtn"  value="삭제하기" class="btn commBtnSell"/>
 								<input type="button" id="modifyBtn" value="수정하기" class="btn confBtn"/>
 							</c:if>
 							
 						</div>
 						
+						<input type='hidden' name="userid" value="${itemVO.userid}">
 						<input type='hidden' name="num" value="${itemVO.i_num }">
 						<input type='hidden' id="opt_str" name='opt_str' value=''>
 						<input type='hidden' name='i_userid' value="${itemVO.userid }">

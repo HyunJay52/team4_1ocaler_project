@@ -29,8 +29,8 @@
 	href="<%=request.getContextPath()%>/css/aboutCsBoard/totalSearch.css" /> 
 
 
-<script src="http://localhost:82/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<!-- <script src="http://localhost:82/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script> -->
 
 <html>
 <head>

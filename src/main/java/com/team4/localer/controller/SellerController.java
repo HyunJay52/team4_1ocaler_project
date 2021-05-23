@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.dao.SellerDAO;
+import com.team4.localer.service.LikeItService;
 import com.team4.localer.service.MemberService;
 import com.team4.localer.service.SellerService;
 import com.team4.localer.service.ShipService;
@@ -46,6 +48,8 @@ public class SellerController {
 	MemberService memberService;
 	@Inject
 	ShipService shipService;
+	@Inject
+	LikeItService likeItService;
 	
 	//착한발견 (셀러)
 	@RequestMapping("/selBard")
@@ -171,11 +175,16 @@ public class SellerController {
 	}
 
 	@RequestMapping("/sellView")
-	public ModelAndView selView(SellitemVO itemVO, Item_optionVO optionVO) {
+	public ModelAndView selView(SellitemVO itemVO, Item_optionVO optionVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 	
+		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
+			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
+		}
+		
 		mav.addObject("itemVO",sellerService.selectOnePage(itemVO.getI_num()));	
 		mav.addObject("NOTitle",sellerService.notOverlapOptionTitleSel(itemVO.getI_num())); //옵션대가리
+		
 		mav.setViewName("deal/sellView");
 		return mav;
 	}
@@ -205,21 +214,166 @@ public class SellerController {
 		mav.addObject("optionList",sellerService.optionSelectAll(i_num));
 		System.out.println(sellerService.optionSelectAll(i_num).size());
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		mav.setViewName("deal/modifySellView");
 		return mav;	
 	}
 	
+	@RequestMapping(value="/sellModifyOk", method=RequestMethod.POST)
+	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
+	public ModelAndView sellModifyOk(SellitemVO itemVO, Item_optionVO optionVO, HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		
+		String path = req.getSession().getServletContext().getRealPath("/img/sellItemInsertPicture");
+		
+		SellitemVO fileItemVO =	sellerService.getFiles(itemVO.getI_num());
+		List<String> selFile = new ArrayList<String>();
+		
+		selFile.add(fileItemVO.getI_img1());
+		if(fileItemVO.getI_img2()!=null && !fileItemVO.getI_img2().equals("")) {
+			selFile.add(fileItemVO.getI_img2());
+		}
+		if(fileItemVO.getI_img3()!=null && !fileItemVO.getI_img3().equals("")) {
+			selFile.add(fileItemVO.getI_img3());
+		}
+		
+		String delFile[] = req.getParameterValues("delFile");
+		/* System.out.println(delFile.length+"<--길이"); */
+			
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		List<MultipartFile> list =  mr.getFiles("i_imgName");
+		
+		List<String> newUpload = new ArrayList<String>();
+		if(newUpload!= null && list.size()>0) { //새로 업로드 된 파일이 있는경우
+			for(MultipartFile mf : list) {
+				if(mf!=null) {
+					String orgname = mf.getOriginalFilename();
+					if(orgname!=null && !orgname.equals("")) {
+						File ff = new File(path, orgname);
+						int i = 0;
+						while(ff.exists()) {
+							int pnt = orgname.indexOf(".");
+							String firstName = orgname.substring(0,pnt);
+							String extName = orgname.substring(pnt+1);
+							
+							ff = new File(path, firstName+"_"+i++ +"."+extName);
+						} //while end///
+						
+						try {
+							mf.transferTo(ff);
+						}catch(Exception e) {
+							System.out.println("업로드~~에러발생"+e.getMessage());
+							e.printStackTrace();
+						}
+						newUpload.add(ff.getName());
+					}
+				}//if end (mf)
+			}//for end
+		}//if end newupload
+		
+		//DB선택 파일 목록에서 삭제한 파일명 지우기
+		if(delFile!=null) {
+			for(String delName : delFile) {
+				selFile.remove(delName);
+			}
+		}
+		
+		//DB선택파일목록에 새로 업로드된 파일명 추가
+		for(String newFile:newUpload) {
+			selFile.add(newFile);
+		}
+		
+		itemVO.setI_img1(selFile.get(0));
+		if(selFile.size()==2) {
+			itemVO.setI_img2(selFile.get(1));
+		}else if(selFile.size()==3) {
+			itemVO.setI_img2(selFile.get(1));
+			itemVO.setI_img3(selFile.get(2));
+		}
+		
+		itemVO.setUserid((String)req.getSession().getAttribute("logId"));
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);//트랜잭션호출
+		TransactionStatus status  = transactionManager.getTransaction(def);
+		
+		System.out.println(itemVO.getI_subject()+"제목");
+		System.out.println(itemVO.getI_cnt()+"판매갯수");
+		System.out.println(itemVO.getI_content()+"내용");
+		System.out.println(itemVO.getI_img1()+"이미지1");
+		System.out.println(itemVO.getI_img2()+"이미지2");
+		System.out.println(itemVO.getI_img3()+"이미지3");
+		System.out.println(itemVO.getI_price()+"가격");
+		System.out.println(itemVO.getI_period()+"기간");
+		System.out.println(itemVO.getI_status()+"상태");
+		System.out.println(itemVO.getI_tag()+"태그");
+		System.out.println(itemVO.getI_ship()+"배송비");
+		
+		try {
+			int result = sellerService.sellViewUpdate(itemVO);
+			System.out.println(result+"<--결과가 어떻게나옴?result값");
+			mav.addObject("i_num",itemVO.getI_num());
+			if(result>0){//수정 성공			
+				//삭제파일 지우기
+				if(delFile!=null) {
+					for(String dFile : delFile) {
+						try {
+							File dFileObj = new File(path, dFile);
+							dFileObj.delete();
+						}catch(Exception e) {
+							System.out.println(e.getMessage()+"......");
+							e.printStackTrace();
+						}
+					}
+				}
+				sellerService.optionDelete(itemVO.getI_num());	
+				for(int i=0; i<optionVO.getOption_titles().length; i++) {
+					sellerService.repeatOptionIsert(itemVO.getI_num(), optionVO.getOption_titles()[i], optionVO.getOption_contents()[i], optionVO.getO_prices()[i]);	
+					System.out.println("옵션 다시 인설트 성공");
+				} 
+				mav.setViewName("redirect:sellView");
+			}else {
+				System.out.println("수정 실패");	
+				if(newUpload.size()>0) {
+					for(String newFile : newUpload) {
+						try {
+							File dFileObj = new File(path, newFile);
+							dFileObj.delete();
+						}catch(Exception e) {
+							System.out.println(e.getMessage()+"에러발생..");
+							e.printStackTrace();
+						}
+					}
+				}
+				mav.setViewName("redirect:modifySellView");
+			}
+			transactionManager.commit(status);
+		}catch(Exception e) {
+			System.out.println(e.getMessage()+"에러가 요기있습니다.");
+			e.printStackTrace();
+			mav.setViewName("group/historyBack");
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/deleteSellView")
+	public ModelAndView deleteSellView(int i_num, String userid, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(userid+"<--뭔데");
+		System.out.println((String)session.getAttribute("logId")+"<--이건또");
+		if(userid.equals((String)session.getAttribute("logId"))) {
+			int result = sellerService.deleteSellView(i_num);
+			if(result>0) {
+				System.out.println("삭제 성공");
+				mav.setViewName("redirect:selBard");
+			}else {
+				System.out.println("삭제 실패");
+				mav.addObject("itemVO",i_num);
+				mav.setViewName("redirect:sellView");
+			}		
+		}else {
+			System.out.println("해당 게시글의 작성자가 아닙니다");
+		}
+		return mav;
+	}
 	
 	
 	
@@ -324,12 +478,12 @@ public class SellerController {
 		return o_num;
 	}
 	
-	
+
 	@RequestMapping("/sellerInfo")
 	public ModelAndView sellerInfo(String userid) {
 		ModelAndView mav = new ModelAndView();
-//		mav.addObject("sellerVO",sellerService.sellerInfo(userid));
-//		mav.addObject("list",sellerService.sellerItems(userid));
+		mav.addObject("sellerVO",sellerService.sellerInfo(userid));
+		mav.addObject("list",sellerService.sellerItems(userid));
 		mav.setViewName("deal/sellerInfo");
 		return mav;
 	}

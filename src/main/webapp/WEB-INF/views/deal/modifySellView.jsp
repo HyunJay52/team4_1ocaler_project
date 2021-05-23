@@ -25,12 +25,14 @@
 			        tabsize: 2,
 			        disableResizeEditor: true
 			    });
+			    
+			    $("#optionDivs>div:first-child>img[class=optionMinus]").css("display","none");
 			 });
 					
 			//옵션 추가	
 			tag = '';
 			$(document).on("click",'#optionDiv>div>img[class=optionPlus]', ()=>{
-				tag += '<div>&nbsp;&nbsp; ● <input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" required/>';
+				tag += '<div><input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" required/>';
 				tag += '<input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요" required/>';
 				tag += '<input type="text" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요" required/>';
 				tag += '<img class="optionPlus" style="margin-left:10px;" src="/1ocaler/img/deal/plus.png"/>';
@@ -71,10 +73,7 @@
 					alert('판매 가격을 입력해 주세요!')
 					return false;
 				}
-				if($("#filename1").val()=='' && $("#filename2").val()=='' && $("#filename3").val()=='' ){
-					alert('상품 이미지 1개는 "필수로" 선택해 주세요')
-					return false;
-				}
+				
 			});
 			
 			//파일삭제
@@ -88,6 +87,8 @@
 					
 				});
 			});
+			
+			
 			
 		});
 	
@@ -130,14 +131,14 @@
 					<div>
 						<div>▶ [IMG_File] ${modifyVO.i_img1} <b>X</b></div>
 						<input type="hidden" name="" value="${modifyVO.i_img1}"/>
-						<input type="hidden" name ="i_imgName" id="filename1" style="display:none"onchange="javascript: document.getElementById('fileName1').value = this.value"/>
+						<input type="hidden" name ="i_imgName" id="filename1" style="display:none"onchange="javascript: document.getElementById('fileName1').value = this.value" required/>
 						<input type="hidden" id="fileName1" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
 						<label class="btn confBtn" for ="filename1" style="font-size:15px ;height: 39px; display:none; ">파일등록</label>
 					</div>
 					
 					<div>
 						<c:if test="${modifyVO.i_img2!=null && modifyVO.i_img2!=''}"> <!-- 두번째 첨부파일이있을경우 -->
-							<div>▶ [IMG_File] ${vo.filename2 } <b>X</b></div>
+							<div>▶ [IMG_File] ${modifyVO.i_img2} <b>X</b></div>
 							<input type="hidden" name="" value="${modifyVO.i_img2 }"/>
 							<input type="hidden" name ="i_imgName"id="filename2" style="display:none"onchange="javascript: document.getElementById('fileName2').value = this.value"/>
 							<input type="hidden" id="fileName2" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
@@ -153,13 +154,14 @@
 					
 					<div>
 						<c:if test="${modifyVO.i_img3!=null && modifyVO.i_img3!=''}"> <!-- 세번째 첨부파일이있을경우 -->
-							<div>▶ [IMG_File] ${vo.filename2 } <b>X</b></div>
+							<div>▶ [IMG_File] ${modifyVO.i_img3} <b>X</b></div>
+							<input type="hidden" name="" value="${modifyVO.i_img3 }"/>
 							<input type="hidden" name ="i_imgName"id="filename3" style="display:none"onchange="javascript: document.getElementById('fileName3').value = this.value"/>
 							<input type="hidden" id="fileName3" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
-							<label class="btn confBtn" for ="filename3" style="font-size:15px ;height: 39px; display:none;  ">파일등록</label>
+							<label class="btn confBtn" for ="filename3" style="font-size:15px ;height: 39px; display:none; ">파일등록</label>
 						</c:if>
 						
-						<c:if test="${modifyVO.i_img3==null || modifyVO.i_img3==''}"> <!-- 세번째 첨부파일이없을경우 -->
+						<c:if test="${modifyVO.i_img3==null || modifyVO.i_img3==''}"> <!-- 두번째 첨부파일이없을경우 -->
 							<input type="file" name ="i_imgName"id="filename3" style="display:none"onchange="javascript: document.getElementById('fileName3').value = this.value"/>
 							<input type="text" id="fileName3" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  >
 							<label class="btn confBtn" for ="filename3" style="font-size:15px ;height: 39px ">파일등록</label>
@@ -167,20 +169,6 @@
 					</div>
 				</div>
 				
-				
-				
-				<%-- <input type="file" name ="i_imgName"  style="display:none" onchange="javascript: document.getElementById('fileName1').value = this.value" value="${modifyVO.i_img1}"/>
-				<input type="text" id="fileName1" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요." value="${modifyVO.i_img1 }"  >
-				<label class="btn confBtn" for ="filename1" style="font-size:15px ;height: 39px ">파일등록</label>
-				
-				<input type="file" name ="i_imgName"  style="display:none"onchange="javascript: document.getElementById('fileName2').value = this.value" value="${modifyVO.i_img2}" />
-				<input type="text" id="fileName2" class="file_input_textbox" readonly="readonly" placeholder="&nbsp;&nbsp;파일을 선택해주세요." value="${modifyVO.i_img2 }" >
-				<label class="btn confBtn" for ="filename2" style="font-size:15px ;height: 39px ">파일등록</label>
-				
-				<input type="file" name ="i_imgName"  style="display:none"onchange="javascript: document.getElementById('fileName3').value = this.value" value="${modifyVO.i_img3}" />
-				<input type="text" id="fileName3" class="file_input_textbox" readonly="readonly"placeholder="&nbsp;&nbsp;파일을 선택해주세요."  value="${modifyVO.i_img3 }">
-				<label class="btn confBtn" for ="filename3" style="font-size:15px ;height: 39px ">파일등록</label>
-				 --%>
 				<span style="font-weight:bold; display:inline-block; margin:25px 0px 0px 0px;"> ▶ 상품 옵션을 입력해 주세요</span><span style="font-size:16px;"> (옵션명과 옵션 내용을 필수로 입력해 주세요)</span><br/>
 				
 				<div id="optionDiv">
@@ -190,10 +178,10 @@
 						<option value="0"    <c:if test="${modifyVO.i_ship==0 }">selected</c:if>>무료배송</option>						
 					</select>
 					</div>
-					<div>
-						
+					<div id="spanTitle"><span>[ 옵션명 : EX) 색상, 사이즈, 세트 ]</span><span>[ 옵션내용 : EX) 빨강, 파랑, 90, 95 ]</span><span>[ 추가 가격 : EX) 0, 100, 500, 1000 ]</span></div>
+					<div id="optionDivs">	
 						<c:forEach var="optionVO" items="${optionList }">
-						&nbsp;&nbsp; ●	<input type="text" id="option_title" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" value="${optionVO.option_title }" required/><input type="text" id="option_content" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요" value="${optionVO.option_content }" required/><input type="text" id="option_price" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요" value="${optionVO.o_price }" required/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
+						<div><input type="text" id="option_title" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" value="${optionVO.option_title }" required/><input type="text" id="option_content" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요" value="${optionVO.option_content }" required/><input type="text" id="option_price" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요" value="${optionVO.o_price }" required/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><img class="optionMinus" style="margin-left:10px;" src="/1ocaler/img/deal/minus.png"/></div>
 						</c:forEach>	
 					</div>
 				</div>
@@ -202,7 +190,7 @@
 		 		 	<input type="button" id="cancelBtn" class="btn cancelBtn" value="취소"/>&nbsp;&nbsp;
 		 		 	<input type="submit" id="modifyBtn" class="btn commBtn" value="수정완료"/>	
 	 		 	</div>
-
+				<input type="hidden" name="i_num" value="${modifyVO.i_num}">
 			</form>
 		</div>
 	</div>

@@ -80,7 +80,28 @@ public class SellerImpl implements SellerService {
 	public int recentlyOrderNum(String userid) {
 		return sellerDAO.recentlyOrderNum(userid);
 	}
+	@Override
+	public SellitemVO getFiles(int i_num) {
+		return sellerDAO.getFiles(i_num);
+	}
+	@Override
+	public int sellViewUpdate(SellitemVO itemVO) {
+		return sellerDAO.sellViewUpdate(itemVO);
+	}
+	@Override
+	public int optionDelete(int i_num) {
+		return sellerDAO.optionDelete(i_num);
+	}
+	@Override
+	public int repeatOptionIsert(int i_num, String option_title, String option_content, String o_price) {
+		return sellerDAO.repeatOptionIsert(i_num, option_title, option_content, o_price);
+	}
+	@Override
+	public int deleteSellView(int i_num) {
+		return sellerDAO.deleteSellView(i_num);
+	}
 
+	
 	
 	
 	

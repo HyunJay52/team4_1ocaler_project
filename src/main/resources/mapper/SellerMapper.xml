@@ -32,6 +32,12 @@
 		values(optsq.nextval, (select i_num from (select * from sell_item where sel_num=(select sel_num from seller where userid=#{param1}) 
 		and <![CDATA[i_writedate<= ]]> sysdate order by i_writedate desc) where <![CDATA[  rownum <=]]>1), #{param2},#{param3},#{param4})	
 	</insert>
+	
+	<insert id="repeatOptionIsert">
+		insert into item_option(opt_num, i_num, option_title, option_content, o_price) 
+		values(optsq.nextval, #{param1}, #{param2}, #{param3}, #{param4})
+	</insert>
+
 
 	<select id="notOverlapOptionTitleSel" resultType="com.team4.localer.vo.Item_optionVO">
 		select distinct option_title from item_option where i_num=#{param1}	
@@ -100,5 +106,26 @@
 		join sell_item i on o.num=i.i_num where o.o_num=#{param1}
 	</select>
 	
+	<select id="getFiles" resultType="com.team4.localer.vo.SellitemVO">
+		select i_img1, i_img2, i_img3 from sell_item where i_num=#{param1}
+	</select>
 	
+
+	
+	<update id="sellViewUpdate" parameterType="com.team4.localer.vo.SellitemVO">
+		update sell_item set i_status=#{i_status}, i_subject=#{i_subject}, i_cnt=#{i_cnt}, i_content=#{i_content}
+		, i_period=to_date(#{i_period},'YYYY-MM-DD'), i_price=#{i_price}, i_tag=#{i_tag}, i_ship=#{i_ship}, i_img1=#{i_img1}
+		,i_img2=#{i_img2, jdbcType=VARCHAR}, i_img3=#{i_img3, jdbcType=VARCHAR}
+		where sel_num=(select sel_num from seller where userid=#{userid})  and i_num=#{i_num}
+	</update>
+	
+	<delete id="optionDelete" parameterType="int">
+		delete from item_option where i_num=#{param1} 
+	</delete>
+
+	<delete id="deleteSellView">
+		delete from sell_item where i_num=#{param1}
+	</delete>
+	
+
 </mapper>
