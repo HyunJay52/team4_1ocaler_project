@@ -2,7 +2,6 @@
 
 	*{
 		font-family: nsr; 
-		font-size: 20px;
 		height: auto;
 		
 	}
@@ -11,6 +10,7 @@
 		width:1300px;
 		margin:50 auto;
 		height: auto; 
+		font-size: 20px;
 	}
 	
 	#dealWnEMain>div>form select{ 
@@ -54,18 +54,21 @@
 
 	#date{
 		text-align: center;
+			font-size: 20px;
 	}
 	#date,#gu, #price,#i_ship1,#i_ship2{ 
 		margin-right: 10px;
 		text-align: center;
 		border: none; 
 		border-bottom: 1px solid gray;
+			font-size: 20px;
 	}
 
 	#tag,#loc { 
 		border: none; 
 		border-bottom: 1px solid gray;
 		width: 1300px; 
+			font-size: 20px;
 	}
 	
 	#btn{ 
@@ -149,6 +152,10 @@
 	#cke_content,#s_content {
 		height: 500px;
 		width: 1300px
+	}
+	
+	#content{
+		
 	}
 	
 	

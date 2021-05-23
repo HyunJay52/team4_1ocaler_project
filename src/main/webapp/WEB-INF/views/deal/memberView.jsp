@@ -7,9 +7,12 @@
 
 <style>
 		.aaaa[type=checkbox]{ display:none; }
- 		#likeBtnInput input[name=numLike] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
-		#likeBtnInput input[name=numLike]:checked + label { background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png"); }
-		#likeBtnInput label{ height: 30px; right: 20px; top: 4px;}
+ 		#likeBtnInput input[name=numLike] + label {margin:0px; display: inline-block; cursor: pointer; line-height: 0px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/groupImg/likeE.png") left/22px no-repeat; }
+		#likeBtnInput input[name=numLike]:checked + label {
+		 background-image: url("<%=request.getContextPath()%>/img/groupImg/likeF.png");
+		 line-height: 0px; }
+		#likeBtnInput label{ height: 30px; right: 20px; top: 4px;margin:0px;line-height: 0px; 
+		}
 </style>
 	
 
@@ -93,7 +96,7 @@
 		if(joinCheck=='disabled'){
 			$("#ViewPageJoinBtn").children("span").text('신청완료');
 			$("#ViewPageJoinBtn").css('background',"rgb(254 214 67)");
-			$("#ViewPageJoinBtn").css('color',"#181b46");
+			$("#ViewPageJoinBtn").css('color',"#222");
 			$("#ViewPageJoinBtn").css('border',"1px solid rgb(254 214 67)");
 		}
 		
@@ -254,11 +257,11 @@
 					</li>
 					<li style="width:100%;">
 						<ul style="margin: 20 0;">
-							<li style="width:50%; line-height:33px;margin:10 0" id="userImgPop">
+							<li style="width:40%; line-height:24px;margin:13 0" id="userImgPop">
 								<img src="<%=request.getContextPath()%>/img/mem_prof/${vo.mem_prof}">&nbsp;&nbsp;
-								<a href="#"> ${vo.userid }</a><hr/>
+								${vo.userid }<hr/>
 							</li>
-							<li style="color: #3f1785;  font-weight: bold;  text-align: right;margin:10 0 ;width: 50%;font-size: 30px;">
+							<li style="color: orange;  font-weight: bold;  text-align: right;margin:10 0 ;width: 60%;font-size: 30px;">
 								${vo.s_price }원 &nbsp; &nbsp;	<hr/>
 							</li>				
 						</ul>
@@ -287,7 +290,7 @@
 						<ul>
 							<li>판매 개수</li>
 							<li>
-								<span class="cntJoin">1</span>
+								<span class="cntJoin"> ${appNum }</span>
 								/${vo.s_cnt }개
 							</li>
 						</ul>
@@ -301,7 +304,7 @@
 					<li>
 						<ul>
 							<li>좋아요 </li>
-							<li id ="likeBtnInput">
+							<li id ="likeBtnInput" style="line-height:0px;">
 								<c:if test="${logId==null }">
 									로그인 후 이용해주세요.
 								</c:if>
@@ -322,7 +325,7 @@
 					<li>
 						
 					<!-- 	<input type="submit" value="함께해요" class="btn commBtnDeal"/> -->
-						<button type="button" id="ViewPageJoinBtn" class="btn commBtnDeal" value="${vo.num }"<c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>>
+						<button type="button" id="ViewPageJoinBtn" class="btn withCommBtnDeal" value="${vo.num }"<c:forEach var="joins" items="${joinList}"><c:if test="${joins.numJoin==vo.num && logId==joins.userid }">disabled</c:if></c:forEach>>
 							<span  id="ViewPagejoinCheck">
 								함께해요
 							</span>	
@@ -339,11 +342,11 @@
 			</ul>		
 		</div>
 		
-		<div id="dealMap">
-			<span style="margin: 90 10;"> 약속 장소</span>
+		<div id="dealMap" style="margin-top: 37px;">
+			<span style="margin: 1px;font-size: 26px;"> 약속 장소</span>
 			
 			
-			<div id="map">
+			<div id="map" style="margin-top:10px;">
 			
 			
 			</div>

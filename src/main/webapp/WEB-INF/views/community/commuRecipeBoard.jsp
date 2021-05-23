@@ -12,7 +12,7 @@
 		<h3 style="margin-top:50px;">#쓱싹레시피 <span style="font-size:16px">| 쉽고 간편한 요리를 공유해보세요 </span></h3>
 
 		<div id="coummuBoardMaincenter">
-			<table cellpadding="0" cellspacing="0" style="width:1300px ;height: 300px;" class="table">
+			<table cellpadding="0" cellspacing="0" style="width:1300px ;" class="table">
 					<tbody>
 						<tr height="41px">
 							<th>글번호</th>
@@ -44,7 +44,7 @@
 							<td> ${vo.numlike }</td>
 						</tr>
 						<tr style="text-align: left; padding-right: 20px;font-size: 12px;color:gray;">
-							<td colspan="6" style="height: 10px;padding: 0px;padding-top: 0px;">${vo.b_tag }</td>
+							<td id ="tag" colspan="6">${vo.b_tag }</td>
 						</tr>
 						</c:forEach>
 					</tbody>

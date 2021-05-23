@@ -11,7 +11,7 @@
 					console.log(result);
 					var tag = "<tr><td><input type='checkbox' class='allCheckboxSelect'/></td>";
 						if(kategorie == 'board'){
-							tag += "<td>날짜</td><td>분류</td><td>제목</td><td>내용</td><td>조회수</td><td>댓글수</td></tr>";
+							tag += "<td>날짜</td><td>분류</td><td>제목</td><td>조회수</td><td>댓글수</td></tr>";
 						}else if(kategorie == 'reply'){
 							tag += "<td>날짜</td><td>분류</td><td>글제목</td><td>댓글내용</td><td>조회수</td><td>댓글수</td></tr>";
 						}else if(kategorie == 'qna'){
@@ -30,7 +30,6 @@
 									tag += "<td>자유자게</td>";
 								}
 								tag += "<td><a href='commuView?num="+data.num+"'>"+data.b_subject+"</a></td>";
-								tag += "<td>"+data.b_content+"</td>";
 								tag += "<td>"+data.b_hit+"</td>";
 								tag += "<td>"+data.reply+"</td>";
 								

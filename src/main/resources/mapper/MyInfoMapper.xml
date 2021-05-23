@@ -335,6 +335,44 @@
    <update id="reviewUpdate" parameterType="com.team4.localer.vo.ItemReviewVO">
 		update item_review set re_rate = #{re_rate}, re_content = #{re_content} , re_writedate = sysdate where re_num =  #{re_num} and userid=#{userid}
    </update>
+   <select id="managementCount" resultType="int">
+   		select count(*)from
+			(select *from 
+			(select *from 
+			(select sel_num from seller where userid=#{userid}) seller 
+			join sell_item item on item.sel_num= seller.sel_num) item_num
+			join ordertbl ord on ord.num=item_num.i_num) detail join ship s on s.o_num(+)=detail.o_num 
+			where detail.o_date between to_date('21/05/01','YY/MM/DD') and to_date(last_day('21/05/01'),'YY/MM/DD') 
+			<if test="!searchWord.equals('') and searchWord!=null"><!-- 검색을 고려한 if문 -->
+  					and ${searchKey} like #{searchWord} 
+  			</if>
+			order by detail.o_date
+   </select>
+   <select id="manageList" resultType="com.team4.localer.vo.OrderVO">
+   		select * from
+			(select *from
+				(select detail.o_num, detail.i_subject, detail.i_price, to_char(detail.o_date,'MM/DD') o_date, detail.o_conf, detail.userid,s.shipping as i_img1 from
+					(select ord.o_num, item_num.i_subject, item_num.i_price, ord.o_date, ord.o_conf, ord.userid from 
+					(select *from 
+					(select sel_num from seller where userid=#{userid}) seller 
+					join sell_item item on item.sel_num= seller.sel_num) item_num
+					join ordertbl ord on ord.num=item_num.i_num) detail join ship s on s.o_num(+)=detail.o_num 
+					where detail.o_date between to_date('21/05/01','YY/MM/DD') and to_date(last_day('21/05/01'),'YY/MM/DD') 
+					 <if test="!searchWord.equals('') and searchWord!=null">
+						and ${searchKey} like #{searchWord}
+					</if>
+					order by detail.o_date)
+					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by o_date desc)
+					where rownum <![CDATA[<=]]>
+							<if test="pageNum == totalPage"><!-- 현재페이지 == 총페이지 -->
+								${lastPageRecord}
+							</if>
+							<if test="pageNum != totalPage">
+								${onePageRecord}
+							</if>
+							order by o_date
+   </select>
+
    
    <select id="selectMyBoard" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoBoardVO">
 		select * from (
@@ -386,7 +424,17 @@
 	
 		)
    </select>
-
+	<select id="setQnA" resultType="com.team4.localer.vo.QnAVO">
+		select * from qna 
+		join sell_item on qna.num = sell_item.i_num 
+		join seller on sell_item.sel_num = seller.sel_num 
+		where q_num = #{param1} and seller.userid = #{param2}
+	</select>
+	
+	<update id="QnAAnswerWrite" parameterType="com.team4.localer.vo.QnAVO">
+		update qna set q_answer = #{q_answer}, q_adate = sysdate where q_num = #{q_num}
+	</update>
+	
 <!-- sql by hj 2021.05.21 -->
 	<select id="selectWaitingJoinList" resultType="com.team4.localer.vo.JoinUsVO">
 		SELECT userid, auth, j_status, up_cate, j_num, title, j_writedate FROM (
@@ -400,4 +448,5 @@
 			ON j.numjoin = bo_tbl.num ) 
 		WHERE userid=#{param1 } OR auth = #{param1 } ORDER BY j_writedate DESC
 	</select>   
+
 </mapper>

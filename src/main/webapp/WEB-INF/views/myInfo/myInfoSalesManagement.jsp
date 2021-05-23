@@ -45,13 +45,6 @@
 			<ul>
 				<li><input type="button" value="주문 : 14건" class="btn commBtn myInfoProductManagementBottomBtn"/></li>
 			</ul>
-			<select id="shipSelectbox">
-				<option value="5개 보기">5개 보기</option>
-				<option value="10개 보기">10개 보기</option>
-				<option value="15개 보기">15개 보기</option>
-				<option value="20개 보기">20개 보기</option>
-				
-			</select>
 			<table class="myInfoProductManagementTable2">
 				<tr>
 					<td>번호</td>
@@ -62,69 +55,25 @@
 					<td>결제방법</td>
 					<td>주문인</td>							
 				</tr>
-				<tr>
-					<td>14</td>
-					<td>감자</td>
-					<td>10,000 원</td>
-					<td>2021.04.11</td>
-					<td>배송중</td>
-					<td>무통장</td>
-					<td>test</td>							
-				</tr>
-				<tr>
-					<td>13</td>
-					<td>감자</td>
-					<td>10,000 원</td>
-					<td>2021.04.11</td>
-					<td>배송완료</td>
-					<td>주문확정</td>
-					<td>test2</td>							
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				<c:forEach var="vo" items="${list }">
+					<tr>
+						<td>${vo.o_num}</td>
+						<td>${vo.i_subject}</td>
+						<td>${vo.i_price}</td>
+						<td>${vo.o_date}</td>
+						<td>${vo.i_img1}</td>
+						<c:if test="${vo.o_conf==1 }">
+							<td>주문미확정</td>
+						</c:if>
+						<c:if test="${vo.o_conf==2 }">
+							<td>주문확정</td>
+						</c:if>
+						<c:if test="${vo.o_conf==3 }">
+							<td>취소/반품</td>
+						</c:if>
+						<td>${vo.userid}</td>						
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</div>

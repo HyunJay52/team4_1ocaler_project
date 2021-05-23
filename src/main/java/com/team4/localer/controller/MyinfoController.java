@@ -1,6 +1,8 @@
 package com.team4.localer.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,15 +21,22 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.CsService;
 import com.team4.localer.service.ManageService;
 import com.team4.localer.service.MyInfoService;
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemberVO;
+
 import com.team4.localer.vo.MyinfoBoardVO;
 import com.team4.localer.vo.MyinfoDealVO;
+
 import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
+
 import com.team4.localer.vo.OrderVO;
+import com.team4.localer.vo.QnAVO;
+
+
 
 @Controller
 public class MyinfoController {
@@ -217,8 +226,8 @@ public class MyinfoController {
 		Map<String, Object> result = new HashMap<String, Object>();	
 		String searchId = (String)ses.getAttribute("logId");
 		vo.setUserid(searchId);
-		vo.setOnePageRecord(5);
-		vo.setOnePageSize(5);
+		vo.setOnePageRecord(10);
+		vo.setOnePageSize(10);
 		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		System.out.println("kategorie="+vo.getKategorie());
@@ -312,7 +321,7 @@ public class MyinfoController {
 		Map<String, Object> result = new HashMap<String, Object>();	
 		
 		vo.setUserid((String)ses.getAttribute("logId"));
-		vo.setOnePageRecord(5);
+		vo.setOnePageRecord(10);
 		vo.setOnePageSize(5);
 		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		if(vo.getSearchWord() == null || vo.getSearchWord().equals("")) {
@@ -535,7 +544,7 @@ public class MyinfoController {
 		
 		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
 		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
-		
+		System.out.println("qnaKey="+vo.getSearchKey());
 
 		if(vo.getKategorie().equals("board")) {
 			vo.setDateContent("b_writedate");
@@ -564,6 +573,25 @@ public class MyinfoController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/setQnA")
+	public QnAVO setQnA(HttpSession ses, HttpServletRequest req) {
+		QnAVO vo =  new QnAVO();
+		String userid = (String)ses.getAttribute("logId");
+		int q_num = Integer.parseInt(req.getParameter("q_num"));
+		vo = service.setQnA(q_num, userid);
+		return vo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/QnAAnswerWrite")
+	public int QnAAnswerWrite(HttpSession ses, QnAVO vo) {
+		int result = 0;
+		
+		result = service.QnAAnswerWrite(vo);
+		
+		return result;
+	}
 	@RequestMapping("/myInfoSaleHistory")
 	public String myInfoSaleHistory() {
 		return "myInfo/myInfoSaleHistory";
@@ -578,8 +606,23 @@ public class MyinfoController {
 		return "myInfo/myInfoShippingManagement";
 	}
 	@RequestMapping("/myInfoSalesManagement")
-	public String myInfoSalesManagement() {
-		return "myInfo/myInfoSalesManagement";
+	public ModelAndView myInfoSalesManagement(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		AdminPageVO pageVO = new AdminPageVO();
+		//현재 날짜 
+		Calendar oCalendar = Calendar.getInstance( );  // 현재 날짜/시간 등의 각종 정보 얻기
+		SimpleDateFormat sdf = new SimpleDateFormat("YY-MM");
+		String month = sdf.format(oCalendar.getTime());
+		month+="-01";
+		pageVO.setMonth(month);//현재 21/05월 /01일을 세팅
+		pageVO.setSearchKey("");
+		pageVO.setSearchWord("");
+		pageVO.setUserid((String)(ses.getAttribute("logId")));
+		pageVO.setTotalRecord(service.managementCount(pageVO));
+		mav.addObject("list",service.manageList(pageVO));
+		mav.setViewName("myInfo/myInfoSalesManagement");
+		return mav;
 	}
 	@RequestMapping("/myInfoStatistics")
 	public ModelAndView myInfoStatistics(HttpSession ses,int month) {
