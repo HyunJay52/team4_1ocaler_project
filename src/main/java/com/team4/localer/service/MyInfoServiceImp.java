@@ -217,6 +217,12 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.selectWaitingJoinList(userid);
 	}
 
+	@Override
+	public List<QnAVO> selectAllmyqna(String userid) {
+		// qna 가져오기
+		return dao.selectAllmyqna(userid);
+	}
+
 
 
 }

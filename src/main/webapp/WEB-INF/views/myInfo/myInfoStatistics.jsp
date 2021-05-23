@@ -33,6 +33,7 @@
 		$("#fusale").text("총 순매출 : "+(totalsale-${OkVO.i_img1})+"원");
 	});
 </script>
+<%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->	
 	<div class="myinfoContainer">

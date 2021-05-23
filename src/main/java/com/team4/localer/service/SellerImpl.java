@@ -80,6 +80,13 @@ public class SellerImpl implements SellerService {
 	public int recentlyOrderNum(String userid) {
 		return sellerDAO.recentlyOrderNum(userid);
 	}
+	
+//판매관리 메인 2021.05.23 hj
+	@Override
+	public List<Integer> myInfoCountSale(String userid) {
+		// 판매자 메인, 상품현황 카운트
+		return sellerDAO.myInfoCountSale(userid);
+	}
 
 	
 	

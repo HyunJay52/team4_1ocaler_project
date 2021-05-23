@@ -128,7 +128,7 @@
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">
 		<form method="post" action="myinfoUpdate" id="myinfoFrm" enctype="multipart/form-data">
-		<div class="basicMyinfoHeader">내 정보</div>
+		<div class="basicMyinfoHeader" style="margin-bottom: 30px;">내 정보</div>
 		<div class="basicMyinfo">
 			<ul>
 				<li>프로필 사진</li>

@@ -16,6 +16,17 @@
 		padding:10px 0;
 		text-align:center;
 	}
+	.saleHistoryTop>ul, .saleHistoryTop>ul>li{
+		width: 260px;
+	}
+	.saleHistoryTop>ul>li:first-child {
+		height: 50px; line-height: 50px;
+		font-size: 18px; font-family: nsrb;
+	}
+	.saleHistoryTop>ul>li:last-child {
+		height: 70px; line-height: 70px;
+		font-size: 20px;
+	}
 	.saleHistoryBottom{
 		margin-top:50px;
 	}
@@ -23,24 +34,24 @@
 		font-size:16px;
 	}
 	.saleHistorySpan{
-		font-weight:bold;
-		font-size:46px;
+		font-family: nsreb;
+		font-size:26px;
 		text-align:center;
+		margin-right: 5px;
 		
 	}
 	.saleHistoryHeader{
-		margin:50px 0 5px 40px;
-		font-weight:bold;
+		margin: 50px 10px 15px 10px;	
 	}
-	#saleGrade li{
-		float:left;
-		width:30%;
+	.saleHistoryHeader>a {
+		font-size: 22px; font-family: nsrb;
 	}
 	.myinfoSaleHistoryTable2 {
 		width:100%;
 		margin:0 auto;
 		padding:0;
 		height:200px;
+		border-bottom: 1px solid #ddd;
 	}
 	.myinfoSaleHistoryTable2 tr{/*테이블 목록*/
 		border-bottom:1px solid rgb(227,227,227); 
@@ -50,13 +61,13 @@
 	.myinfoSaleHistoryTable2 tr:first-child{/*첫번째 테이블 목차*/
 		text-align:center;
 		background-color:rgb(78,190,154,0.1);
-		color:#3f1785; 
-		font-weight:bold;
+		color: gray;
+		font-family: nsreb;
 	}
 	.myinfoSaleHistoryTable2 tr:last-child{/*마지막 줄 tr 스타일*/
 		border-bottom:2px solid #3f1785;
 	}
 	.myinfoSaleHistoryTable2 tr>td{/*전체적인 열 폭조정*/
 		width:25%;
-		font-size:20px;
+		font-size: 22px;
 	}

@@ -263,6 +263,7 @@
 		
 	});
 </script>
+<%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">

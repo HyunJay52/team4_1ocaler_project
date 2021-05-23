@@ -4,7 +4,7 @@
 
 <div id="mainFooter">
 	<div id="endAlign">
-		<div><a href="<%=request.getContextPath() %>/"><img src="common/logo_000.png" style="width:50px"></a>1ocl+er</div>
+		<div><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath() %>/common/realfinallogo.png" style="width: 150px; height: 70px;" /></a></div>
 		<ul>
 			<li class="smlFnt">Copyright © 2021 Purplic Company B.C. All rights reserved.</li>
 			<li class="smlFnt">서울 마포구 백범로 23 거구빌딩</li>

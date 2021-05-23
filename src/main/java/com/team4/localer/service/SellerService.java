@@ -36,4 +36,7 @@ public interface SellerService {
 	
 	public int recentlyOrderNum(String userid);//가장최근 주문한 주문번호 가져오기
 	public ShipVO orderCompl(int o_num);//주문완료 내역 가져오기
+
+//판매관리 메인 2021.05.23 hj
+	public List<Integer> myInfoCountSale(String userid);
 }

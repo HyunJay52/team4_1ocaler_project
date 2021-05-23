@@ -98,5 +98,18 @@
 		join sell_item i on o.num=i.i_num where o.o_num=#{param1}
 	</select>
 	
+<!-- seller index by hj 2021.05.23 -->
+	<select id="myInfoCountSale" resultType="int">
+	<![CDATA[
+		SELECT count(i_num) as cnt FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_status=1 AND i_period>=sysdate
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_period>=sysdate+7
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_status=2
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_period<=sysdate AND i_status=2
+	]]>
+	</select>
+
 	
 </mapper>
