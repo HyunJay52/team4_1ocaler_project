@@ -27,10 +27,13 @@
 		color:#181b46;
 	}
 	#commuViewMain{
-		/* overflow:auto; */
+		overflow:auto; 
 		width:1300px;
 		margin:80 auto;
-		height: 1000px ;
+		height: auto ;
+	}
+	#commuImgProf img{
+		border-radius: 70%;
 	}
 		
 	/* 게시글 */
@@ -102,6 +105,8 @@
 	 	
 	 }
 	 
+
+	 
 	 #commuViewpreBtnnext{
 	 	width: 1300px;
 	 	float: left;
@@ -147,6 +152,7 @@
 	
 	/* 댓글 */
 	
+	/* 뷰페이지 댓글 */
 	#commuViewreply{
 		width:1300px;
 		margin: 100 auto;
@@ -160,6 +166,8 @@
  		text-align: left;
  	}
  	
+ 	
+ 	/* 코멘트, 자신의의견을 간단힞 ㅓㄱ어주세요 */
  	#commuViewreply>form div:nth-child(1){
  		width:1300px;
  		float: left;
@@ -168,6 +176,7 @@
  		padding: 0;
  		
  	}
+ 	/* 댓글달기 */
  	#commuViewreply>form div:nth-child(2){
  	
  		margin-top:16px;
@@ -176,44 +185,80 @@
  		text-align: right;
  	}
  	
+ 	/* 댓글적는곳 */
  	#rep_content{
  		width:1300px;
  		padding-left: 10px;
  		float: center;
  	}
+ 	
+ 	/* 댓글 나오는 리스트 */
+ 	
  	#commuViewreplyList{
- 		background-color: #f8f8f8;
- 		margin-top: 40;
+ 		margin-top:40px;
  		width:1300px;
  		float: left;
+ 		
  	}
  	
+ 	
+ 	/* 댓글 아이디 나오는크기 */
  	#commuViewreplyList h5{
  		display: inline;
  		padding-left:10px; 
  		
  	}
-	
+ 	
+ 	
+ 	#commuViewreplyList>ul>li{
+ 		height: auto;
+ 	
+ 	}
+ 	
+ 	/* 댓글 아이디 날짜나오는곳 */
  	#commuViewreplyList>ul>li div:nth-child(1){
  		margin:0px;
  		margin-top:10px;
  		width:700px;
  		float: left;
+ 		height: 35px;
  		
  	}
+ 	
+ 	/* 댓글 버튼 */
  	#commuViewreplyList>ul>li div:nth-child(2){
  		margin:0px;
  		margin-top:10px;
  		text-align: right;
  		float: left;
  		width:600px;
+ 		height: 35px;
+ 		
  	}
- 
- 	#commuViewreplyList>ul>li div:nth-child(3){
+ 	/* 댓글내용 */
+ 	#replyContent{
  		width:1300px;
  		float: left;
- 		text-align: left;
- 		border-bottom: 1px solid #d9d9d9;
+ 		height: auto;
+ 		margin: 0px;
+ 		margin-bottom:5px;
+ 		padding-left: 15px;
+ 		padding-bottom:10px;
+ 		border-bottom: 1px solid lightgray;
+ 		
+ 		
+ 	}
+ 	#replyEdit{
+ 		float: left;
+ 		border-bottom: 1px solid lightgray;
+
+ 	}
+ 	#replyEdit form{
+ 		margin-bottom: 10px;
+ 		
+ 	}
+ 	#replyEdit h4{
+ 		display: inline;
  	}
  		
 /* 	input[type="submit"]{
@@ -286,6 +331,22 @@
 		color: #fff;
 		background: rgb(0 128 64);
 }
+	.editBtn{
+		color: #343a40;
+	    border-color: #343a40;
+	    width: 64px;
+	    font-size: 13px;
+	    padding: 4px;
+	    margin-left: 8px;
+    	margin-top: -20px;
+
+	}
+
+	.editBtn:hover {
+	    color: #fff;
+	    background-color: #343a40;
+	    border-color: #343a40;
+	}
 	
 	
 	

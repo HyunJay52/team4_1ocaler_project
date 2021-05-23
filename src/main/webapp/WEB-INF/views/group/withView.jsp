@@ -108,7 +108,7 @@
 			var container = document.getElementById("withViewMap"),
 				options = {
 					center : new kakao.maps.LatLng(33.450701,126.570667),
-					level : 7
+					level : 6
 				};
 			var map = new kakao.maps.Map(container, options);
 
@@ -251,6 +251,7 @@
 </script>
 </head>
 <body id="withViewBody">
+<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="withViewMap" style="width:2000px; height:1100px; position:relative; overflow:hidden;"></div>
 	
 	<!-- withViewShowFrm접기펴기 -->	

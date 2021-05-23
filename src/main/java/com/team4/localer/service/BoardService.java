@@ -48,4 +48,8 @@ public interface BoardService {
 	
 	public int memdeleteCount(String userid);
 	
+//Index page 2021.05.23
+	public List<BoardVO> selectIndexRecipe();
+	
+	
 }

@@ -17,6 +17,7 @@
 			var charge = parseInt($(this).attr("title"));
 			var nowCharge = parseInt($(".load").val());
 			nowCharge += charge;
+			var toStringMoney = nowCharge.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 			$(".load").val(nowCharge);
 			setMoney(nowCharge);
 		});
@@ -34,14 +35,7 @@
 			setMoney(0);
 			$(".load").val(0);
 		});
-		//입력 이벤트 세팅
-		$(".load").on("keyup", function(){
-			if($(this).val()== "" || $(this).val() < 0){
-				$(this).val("0");
-			}
-			var charge = parseInt($(".load").val());
-			setMoney(charge);
-		});
+
 
 		//결제수단 이벤트
 		$("#chargeBtn").on("click", function(){
@@ -269,6 +263,7 @@
 		
 	});
 </script>
+<%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">

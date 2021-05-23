@@ -7,33 +7,36 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.MyInfoDAO;
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
 import com.team4.localer.vo.MemberVO;
+import com.team4.localer.vo.MyinfoBoardVO;
 import com.team4.localer.vo.MyinfoCountVO;
 import com.team4.localer.vo.MyinfoDealVO;
 import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
+import com.team4.localer.vo.QnAVO;
 
 @Service
 public class MyInfoServiceImp implements MyInfoService{
-	@Inject
-	MyInfoDAO dao;
-	
-	@Override
-	public MemberVO setMyinfo(String userid) {
+   @Inject
+   MyInfoDAO dao;
+   
+   @Override
+   public MemberVO setMyinfo(String userid) {
 
-		return dao.setMyinfo(userid);
-	}
-	
-	@Override
-	public MemberVO goMyinfopage(MemberVO vo) {
-		
-		return dao.goMyinfopage(vo);
-	}
+      return dao.setMyinfo(userid);
+   }
+   
+   @Override
+   public MemberVO goMyinfopage(MemberVO vo) {
+      
+      return dao.goMyinfopage(vo);
+   }
 
 	@Override
 	public String joinPoint(String userid) {
@@ -175,9 +178,51 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.reviewUpdate(vo);
 	}
 
+	@Override
+	public int managementCount(AdminPageVO pageVO) {
+		return dao.managementCount(pageVO);
+	}
 
+	@Override
+	public List<OrderVO> manageList(AdminPageVO pageVO) {
+		return dao.manageList(pageVO);
+	}
 
+	public List<MyinfoBoardVO> selectMyBoard(MyinfoPageVO vo) {
+		return dao.selectMyBoard(vo);
+	}
+
+	@Override
+	public int selectMyBoardCount(MyinfoPageVO vo) {
+		
+		return dao.selectMyBoardCount(vo);
+	}
+
+	@Override
+	public QnAVO setQnA(int q_num, String userid) {
+
+		return dao.setQnA(q_num, userid);
+	}
 	
-
+	@Override
+	public int QnAAnswerWrite(QnAVO vo) {
+		
+		return dao.QnAAnswerWrite(vo);
+	}
 	
+// 내정보 메인용 서비스 (hj, 2021-05-21)
+	@Override
+	public List<JoinUsVO> selectWaitingJoinList(String userid) {
+		// 참여정보
+		return dao.selectWaitingJoinList(userid);
+	}
+
+	@Override
+	public List<QnAVO> selectAllmyqna(String userid) {
+		// qna 가져오기
+		return dao.selectAllmyqna(userid);
+	}
+
+
+
 }

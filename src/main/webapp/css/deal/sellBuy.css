@@ -106,9 +106,12 @@
 	
 	
 	/*배송지*/
-	.spanSubtitle{
+ 	.spanSubtitle{
 		font-weight: bold;
-   		margin: 0 20px;
+   		padding-left:50px;
+	} 
+	.boldFont{	
+		font-weight: bold;	
 	}
 	
 	#center>div:nth-child(3){
@@ -125,60 +128,56 @@
 		margin: 0 auto;
 		margin: 9 0;
 	}
+
+	#shipSpot{
+		overflow:auto;
+		margin:15px 0px;
+		border:1px solid gray;
+	}
 	
-	#addr{
-		margin-top: 10px;
-		margin-bottom:70px;
+	#shipSpot input{
+		height:35px;
+		width: 200px;
+		margin:7.5px 0px;
+	}
+	
+	#shipSpot>li{
+		width:250px;
+		float:left;
+		height:50px;
+		line-height:50px;
+		border-top:1px solid gray;
+	}
+	#shipSpot>li:nth-child(2n+1){
+		background-color:#f4f4f4;
+		border-right:1px solid gray;
+		text-align:center;
+	}
+	#shipSpot>li:nth-child(2n+2){
+		width:1048px;	
+		padding-left:30px;
+	}
+	#shipSpot>li:nth-child(1), #shipSpot>li:nth-child(2){
+		border-top:none;
+	}
+	#shipSpot>li:nth-child(5){
+		height:135.3px
+	}
+	#shipSpot>li:nth-child(6){
+		height: auto;
+	}
+	
+	#shipSpot>li:nth-child(6) input{
+		margin:5px 10px 5px 0px;
+	}
+	#shipSpot>li:nth-child(6)>div:nth-child(1)>input:nth-child(2){
+		width:140px;
+	}
+	#shipSpot>li:nth-child(6)>div:nth-child(2)>input, #shipSpot>li:nth-child(6)>div:nth-child(3)>input, #shipSpot>li:nth-child(8)>input{
+		width:800px;
 	}
 
-	
-	
-	#getter{
-		font-size: 16px; 
-		border: none; 
-		border-bottom: 1px solid gray;
-		width:230px;  
-		margin-top: 10px;
-		font-weight: normal;
-	
-	}
-	#ship_tel{
-		font-size: 16px; 
-		border: none; 
-		border-bottom: 1px solid gray;
-		width:230px;  
-		margin-top: 10px;
-		font-weight: normal;
-	}
-	#ship_zip{
-		font-size: 16px; 
-		border: none; 
-		border-bottom: 1px solid gray;
-		width:230px;  
-		margin-top: 10px;
-		font-weight: normal;
-	
-	}
-	#ship_addr{
-		font-size: 16px; 
-		border: none; 
-		border-bottom: 1px solid gray;
-		width:700px;  
-		margin-top: 10px;
-		font-weight: normal;
-		margin-left: 150px;
-	}
-	#ship_detail{
-		font-size: 16px; 
-		border: none; 
-		border-bottom: 1px solid gray;
-		width:700px;  
-		margin-top: 10px;
-		font-weight: normal;
-		margin-left: 150px;
-	}
-	
-	#ship_addr::-webkit-input-placeholder, #ship_detail::-webkit-input-placeholder, #ship_zip::-webkit-input-placeholder  {
+	#ship_addr::-webkit-input-placeholder, #ship_detail::-webkit-input-placeholder, #ship_zip::-webkit-input-placeholder, #ship_msg::-webkit-input-placeholder  {
 		  padding-left: 20px;
 		  text-align: left;
 	}
@@ -186,6 +185,11 @@
 	#paySelect{
 		width: 1300px;
 		float: left;
+	}
+	
+	#paySelect>select{
+		height: 33px;
+    	padding-top: 6px;
 	}
 
 	#pointPay{
@@ -229,15 +233,7 @@
 		padding:5px
 	}
 	
-	#zipSearch{
-		margin-left:10px;
-	}
-	
-	#ship_msg{
-		width:1155px;
-		height:100px;
-		resize:none;
-	}
+
 	/* 버튼 스타일 클래스 모음 */
 
 	a:active, a:visited {
@@ -279,8 +275,12 @@
 	.confBtn:hover {
 		color: #fff;
 		background: #B8B2F4;
-}
-	
+	}
+	.ChargeBtn{
+		background: #2c75f0;
+		color: #fff;
+		width: 90px;
+	}
 	
 	
 

@@ -20,8 +20,16 @@ public class MyinfoPageVO {
 	private String kategorie;
 	private String dateContent;
 	
+	private String searchKey2;
 	
 	
+	
+	public String getSearchKey2() {
+		return searchKey2;
+	}
+	public void setSearchKey2(String searchKey2) {
+		this.searchKey2 = searchKey2;
+	}
 	public String getDateContent() {
 		return dateContent;
 	}

@@ -26,18 +26,20 @@
 					result.list.forEach(function(data, idx){
 						if(kategorie == 'mem_share'){
 							console.log("idx="+idx);
+							console.log("kategorie="+kategorie);
 							index = idx;
-							tag += "<td class='wordCut' style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>"+data.s_subject+"</td>";
+							tag += "<td class=''>"+data.s_subject+"</td>";
 							tag += "<td>"+data.sellerid+"</td>";
 							tag += "<td>"+data.j_writedate+"</td>";
 							tag += "<td><button class='btn btn-primary reviewButton' title='"+data.j_num+"' value='"+data.numjoin+"' data-target='#reviewMd' data-toggle='modal'>리뷰쓰기</button></td>";							
 							tag += "</tr>";
 						}else if(kategorie == 'grouplocal'){
 							console.log("idx="+idx);
+
 							index = idx;
 							tag += "<td class='wordCut'>"+data.g_subject+"</td>";
 							tag += "<td>"+data.sellerid+"</td>";
-							tag += "<td>"+data.g_writedate+"</td>";
+							tag += "<td>"+data.j_writedate+"</td>";
 							tag += "<td><button class='btn btn-primary reviewButton' title='"+data.j_num+"' value='"+data.numjoin+"' data-target='#reviewMd' data-toggle='modal'>리뷰쓰기</button></td>";							
 							tag += "</tr>";
 						}
@@ -80,20 +82,11 @@
 					var index = 0;
 					var count = 0;
 					result.IList.forEach(function(data, idx){
-					$.ajax({
-						url : "selectMyReviewCount",
-						data : {"num" : data.num},
-						dataType : "json",
-						async : false,
-						success : function(result){
-							console.log("o_num="+data.num+"reviewCount="+result);
-							count = result;
-						}, error : function(){
-							console.log("reviewCount error");
-						}
-					});
-					if(count == 0){
-						tag += "<td class='wordCut'>"+data.i_subject+"</td>";
+						console.log("o_num="+data.num+"reviewCount="+data.reviewCount);
+						index = idx;
+						
+					if(data.reviewCount == 0){
+						tag += "<td class=''>"+data.i_subject+"</td>";
 						tag += "<td>"+data.sellerid+"</td>";
 						tag += "<td>"+data.o_date+"</td>";
 						tag += "<td><button class='btn btn-primary reviewButton' value='"+data.num+"' data-target='#reviewMd' data-toggle='modal'>리뷰쓰기</button></td>";											
@@ -284,6 +277,8 @@
 					$("#reviewWriteForm")[0].reset();
 					$('.modal-backdrop').remove();
 					$("#reviewMd").hide();
+					setMyAllReview(1);
+					
 				},error : function(e){
 					console.log("error");
 				}
@@ -411,21 +406,23 @@
 		});
 	});
 </script>
+<%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">
 		<h3>리뷰 관리<span class="smlFnt"> 리뷰작성은 구매 확정 후 한달 내로 작성하실 수 있습니다.</span></h3>
 		<div class="reviewTop">
 			<div class="reviewLeft">
-			<h5>회원리뷰</h5>
+			<h4>회원리뷰</h4>
 				<select name="kategorie" id="reviewKategorie">
 					<option value="mem_share" selected>회원간 거래</option>
 					<option value="grouplocal">모집</option>
 					
 				</select>
-				<table class="myinfoTable2" id="myinfoReviewTable">
+				<table class="myinfoReviewTable" id="myinfoReviewTable">
 					<tr>
-						<td class="wordCut">제목<br/>(아이디)</td>
+						<td>제목</td>
+						<td>아이디</td>
 						<td>날짜</td>
 						<td>리뷰</td>
 					</tr>
@@ -435,10 +432,11 @@
 				</div>
 			</div>
 			<div class="reviewRight">
-				<h5>상품리뷰</h5>
-				<table class="myinfoTable2" id="myinfoItemReviewTable">
+				<h4>상품리뷰</h4>
+				<table class="myinfoReviewTable" id="myinfoItemReviewTable">
 					<tr>
-						<td class="wordCut">제목<br/>(아이디)</td>
+						<td>제목</td>
+						<td>아이디</td>
 						<td>날짜</td>
 						<td>리뷰</td>
 					</tr>
@@ -449,6 +447,7 @@
 			</div>
 		</div>
 		<div class="reviewBottom">
+			<h4>작성된 리뷰목록</h4>	
 			<form method="post" id="selectMyReviewListForm" onsubmit="return false;">
 			<div class="dealDateForm" style="width:400px;">
 				<input type="date" name="searchDate" value="2021-03-01" min="2021-03-01" max="2021-05-31"/> ~ 
@@ -474,8 +473,8 @@
 					<tr>
 						<td>구분</td>
 						<td>상태</td>					
-						<td class="wordCut">제목<br/>아이디</td>
-						<td class="wordCut">내용</td>
+						<td>제목<br/>아이디</td>
+						<td>내용</td>
 						<td>날짜</td>
 						<td>수정</td>
 					</tr>

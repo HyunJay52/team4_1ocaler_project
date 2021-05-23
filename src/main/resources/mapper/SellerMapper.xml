@@ -40,6 +40,10 @@
 	<select id="changeOptions" resultType="com.team4.localer.vo.Item_optionVO">
 		select option_content, o_price from item_option where option_title=#{param1} and i_num=#{param2}
 	</select>
+	
+	<select id="optionSelectAll" resultType="com.team4.localer.vo.Item_optionVO">
+		select option_title, option_content, o_price from item_option where i_num=#{param1}
+	</select>
 
 
 	<select id="selectAllitem" resultType="com.team4.localer.vo.SellitemVO">
@@ -84,5 +88,28 @@
 	</insert>
 	
 	
+	<select id="recentlyOrderNum" resultType="int">
+	select o_num from (select * from ordertbl where userid=#{param1} and <![CDATA[ o_date<=sysdate ]]> order by o_date desc) where <![CDATA[ rownum<=1 ]]>
+	</select>
+	
+	<select id="orderCompl" resultType="com.team4.localer.vo.ShipVO">
+		select s.o_num, s.getter, to_char(s.b_date,'YYYY-MM-DD HH24:MI') b_date, s.ship_tel, s.ship_zip, s.ship_addr, s.ship_detail, s.ship_msg,
+		o.o_price, o.o_ship, o.opt_str, i.i_subject from ship s join ordertbl o on s.o_num=o.o_num
+		join sell_item i on o.num=i.i_num where o.o_num=#{param1}
+	</select>
+	
+<!-- seller index by hj 2021.05.23 -->
+	<select id="myInfoCountSale" resultType="int">
+	<![CDATA[
+		SELECT count(i_num) as cnt FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_status=1 AND i_period>=sysdate
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_period>=sysdate+7
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_status=2
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_period<=sysdate AND i_status=2
+	]]>
+	</select>
+
 	
 </mapper>

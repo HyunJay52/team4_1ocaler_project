@@ -47,8 +47,61 @@
 		});
 	};
 	
-
+		var msg ="";
+		//결제 api 식별코드 세팅
+		var IMP = window.IMP;
+		IMP.init('imp45051525');
+		
+		function payment(){
+			var userid = '${logId}';
+			var username = '${logName}';
+			var payStatus = "card"
+			console.log(payStatus);
+			IMP.request_pay({
+			    pg : 'html5_inicis', // version 1.1.0부터 지원.
+			    pay_method : payStatus,
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '카드 결제',
+			    amount : '${orderVO.o_price+orderVO.o_ship }',
+			    buyer_email : 'test@localer.com',
+			    buyer_name : username,
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : '서울특별시 강남구 삼성동',
+			    buyer_postcode : '123-456'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        msg += '결제수단 : ' + rsp.pay_method;
+				        msg += '결제상태 : ' + rsp.status;
+				        msg += '결제시간 : ' + rsp.paid_at;
+ 				        var params = $("#orderFrm").serialize();				        
+				        $.ajax({
+				        	type : 'POST',				 	//post방식
+				        	url : 'sendShowCompl',		//전송할 url
+				        	data : params,					// 데이터
+				        	success : function(result){
+				        		console.log('성공 아작스');
+				        		console.log(result,"<---o_num와넘어와라");
+			        			location.href="ShowCompl?o_num="+result;  					        		
+				        	}, error : function(e){
+				        		console.log('실패',e)
+				        	}
+				        });  
+				        alert("결제가 완료되었습니다.");
+			    } else {
+			        msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			    return rsp.success;			    
+			});
+		};
 		$(()=>{
+			
+			
 			$("select[name=o_mtd]").change(()=>{
 				console.log("들어오냐..11");
 				if($("#o_mtd option:selected").val()=="1"){
@@ -128,18 +181,9 @@
 			location.href="myInfoLoad";
 		});	
 		
-		
-		$("#ship_msg").keyup(function(){
-			var numbers = $("#ship_msg").val().length;
-			$("#typingCount").text(numbers);
-			console.log(numbers);
-		});
-		
-		
-		
-		
-		//유효성검사
-		$(document).on('submit','#orderFrm',function(){
+
+		//유효성검사		
+		$(document).on('click','#orderBtns',function(){
 			if($("#o_mtd option:selected").val()==1){
 				if($("#newAddr").val()=="" && $("#memAddr").val()==""){
 					alert('배송지를 선택해 주세요');
@@ -161,11 +205,11 @@
 					alert('우편번호 검색을 통해 배송지 주소를 입력해 주세요');
 			        return false;
 				}
-				
-				//아작스
-				
-				return false;
 	
+				payment();
+				return false;
+			
+				
 			}else if($("#o_mtd option:selected").val()==2){
 				if($("#remaining_point").val()<0){
 					alert('현재 포인트가 부족합니다 충전후 이용해 주십시오.')
@@ -191,24 +235,30 @@
 					alert('우편번호 검색을 통해 배송지 주소를 입력해 주세요');
 			        return false;
 				}
-	
+				$("#orderFrm").submit();
 			}else{
 				alert('결제방법을 선택해 주세요')
 				return false;
 			}
-		});
+		})
 		
 		
 		
 			$("#selbBackBtn").click(function(){
 				history.back();
 			});
-		
-		
-		
-		
-		
-		
+
+			
+			$("input[type=radio]").click(function(){
+				if($("#memAddr").is(":checked")){
+					$("#zipSearch").attr("disabled",true);
+				}else{
+					console.log($("#newAddr").val());
+					$("#zipSearch").attr("disabled",false);
+				}
+			})
+			
+			
 		
 		
 		
@@ -250,8 +300,8 @@
 				
 				<div id="pay">
 					<div id="paySelect">
-						<span style="font-size:18px; font-weight:bold; margin-right:20px;">결제 방법 &emsp;</span>
-						<select style="height:20px;" name="o_mtd" id="o_mtd">
+						<span style="font-size:24px; font-weight:bold; margin-right:20px;">결제 방법 &emsp;</span>
+						<select name="o_mtd" id="o_mtd">
 							<option selected disabled hidden>결제선택</option>
 							<option value="1">카드결제</option>
 							<option value="2">포인트결제</option>
@@ -260,7 +310,7 @@
 
 					<div id="pointPay">
 						<span class="spanSubtitle"> 현재 포인트 &emsp; &nbsp;:&ensp; &nbsp;</span>
-						<input type="text" class="point" id ="now_point"  /><span style="font-size:16px; font-weight:bold">원</span><input type="button" id="pointCharge" class="btn confBtn" style="margin-left:12px;" value="충전하기" ><br/>
+						<input type="text" class="point" id ="now_point"  /><span style="font-size:16px; font-weight:bold">원</span><input type="button" id="pointCharge" class="btn ChargeBtn" style="margin-left:12px;" value="충전하기" ><br/>
 						
 						<span class="spanSubtitle"> 차감 포인트 &emsp; &nbsp;:&ensp; &nbsp;</span>
 						<input type="text" class="point" id ="sp_point" name="sp_point"  /><span style="font-size:16px; font-weight:bold">원</span>		<br/>
@@ -271,22 +321,28 @@
 				<hr/>
 				<div id="DeliveryAddr">
 					<div>
-						<span style="font-size:18px; font-weight:bold; margin-right:20px;"> 배송지 선택 &ensp;</span>
-						<span>기본 배송지&nbsp; :&nbsp;</span> <input type="radio" id="memAddr" name="gener" value="1"> &ensp;
+						<span style="font-size:24px; font-weight:bold; margin-right:20px;"> 배송지 선택 &ensp;</span>
+						<span>기본 배송지&nbsp; :&nbsp;</span> <input type="radio" id="memAddr" name="gener" value="1" checked> &ensp;
 						<span>신규 배송지&nbsp; : &nbsp;</span> <input type="radio" id="newAddr" name="gener" value="2">
 						<br/>
 						
-						<div id="addr">
-							 <span class="spanSubtitle"> 수 &ensp; 령 &ensp; 인 &emsp; &nbsp;:&ensp; &nbsp;</span> <input type="text" id ="getter" name="getter" /><br/>
-							 <span class="spanSubtitle"> 연 &ensp; 락 &ensp; 처 &emsp; &nbsp;:&ensp; &nbsp;</span> <input type="text" id ="ship_tel" name="ship_tel" maxlength=11 placeholder='  " - " 없이 연락처를 입력해 주세요' /><br/>
-							 <span class="spanSubtitle"> 배송지 주소 &nbsp; &ensp;  :&ensp; &nbsp;</span> 
-							 <input type="text" id ="ship_zip" name="ship_zip"  placeholder="우편번호" readonly/>
-							 <input type="button" value="우편번호 검색" id="zipSearch" class="btn commBtn" onclick="findAddr()"/><br/>
-							 <input type="text" id ="ship_addr" name="ship_addr" placeholder="주소" readonly /><br/>
-							 <input type="text" id ="ship_detail" name="ship_detail" placeholder="상세주소를 입력해주세요."/><br/>
-							 <div style="text-align:right;">(글자수 세기 : <span id="typingCount">0 </span> / 1000)</div>
-							 <div style="display:inline-block; float:left"><span class="spanSubtitle"> 요&nbsp;청&nbsp;사&nbsp;항 &emsp; &nbsp;:&ensp; &nbsp;</span></div><textarea name="ship_msg" id="ship_msg" maxlength=1000 ></textarea>
-						</div>	 
+						<ul id="shipSpot">		
+							<li><span class=boldFont>수령인</span></li>
+							<li><input type="text" id ="getter" name="getter" value="${memberVO.mem_name}" /></li>
+							
+							<li><span class="boldFont">연락처</span></li>
+							<li><input type="text" id ="ship_tel" name="ship_tel" maxlength=11 placeholder='  " - " 없이 연락처를 입력해 주세요' value="${memberVO.mem_tel }" /></li>
+							
+							<li><span class="boldFont">배송지 주소</span> </li>
+							<li>
+								<div><input type="text" id ="ship_zip" name="ship_zip"  placeholder="우편번호"  value="${memberVO.mem_zip}" readonly/><input type="button" value="우편번호 검색" id="zipSearch" class="btn commBtn" onclick="findAddr()" disabled/></div>
+								<div><input type="text" id ="ship_addr" name="ship_addr" placeholder="주소" value="${memberVO.mem_addr }" readonly /><br/></div>
+								<div><input type="text" id ="ship_detail" name="ship_detail" placeholder="상세주소를 입력해주세요." value="${memberVO.mem_detail }"/><br/></div>
+							</li>
+							
+							<li><span class="boldFont">요청사항</span></li>
+							<li><input type="text" name="ship_msg" id="ship_msg" maxlength=100 placeholder="요청 사항을 입력해 주세요(100자이내)" /></li>
+						</ul>  
 					 </div>
 				</div>
 				
@@ -302,7 +358,7 @@
 				
 				<div id="finalBtn">
 					<input id="selbBackBtn" type="button" value="주문취소" class="btn cancelBtn" /> &emsp; &emsp;
-					<input type="submit" value="주문하기" class="btn confBtn"/>
+					<input type="button" id="orderBtns" value="주문하기" class="btn confBtn"/>
 				</div>
 			</div>
 		</form>

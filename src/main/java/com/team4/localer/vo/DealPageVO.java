@@ -20,8 +20,17 @@ public class DealPageVO {
 	
 	private String userid;
 	
+	private int num;
 	
 	
+	
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getUserid() {
 		return userid;
 	}

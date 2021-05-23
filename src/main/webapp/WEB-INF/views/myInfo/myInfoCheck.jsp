@@ -5,51 +5,35 @@
 
 %>
 <style>
-	#loginContainer {
-		width: 1300px; height: auto;
-		text-align: center;
-		margin: 0 auto;
-	}
 	#login_section {
 		width: 400px; height: auto;
-		padding-top: 110px; padding-bottom: 110px;
 		margin: 0 auto;
 	}
 	#login_section ul li {
 		list-style-type: none;
-		
+		margin-bottom: 5px;
 	}
-	.btnSize {
-		width: 100px;
-		height: 50px;
-	}
-	.inputSize {
-		width: 320px; height: 50px;
-		padding: 10px;
-		border: 1px solid #ddd;
-		border-radius: 5px;
-	}
-	.cbSize {
+	#login_section>div {
+		text-align: center;
 		margin-bottom: 10px;
-		padding-left: 200px;
 	}
-	.lgBtn {
-		width: 320px; height: 50px;
-		margin-top: 5px;
-		border: 1px solid #3f1785;
-		color: #3f1785;
+	#login_section ul li>button {
+		width: 400px; height: 40px; 
 	}
-	.lgBtn:hover {
-		color: #fff;
+	#login_section ul li>button:hover {
 		font-weight: bold;
 	}
-	.lgA:hover{
-		margin-top: 20px;
-		color: #000;
-		text-decoration: none;
+	#login_section ul li:nth-child(2)>button {
+		background: #5f0080; color: #fff;
 	}
-	#mainFooter, .footerLine{
-		display:none;
+	#login_section ul li:last-child>button {
+		border: 1px solid #ddd;
+	}
+	.inputSize {
+		width: 400px; height: 50px;
+		padding: 5px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
 	}
 </style>
 <script>
@@ -69,17 +53,22 @@
 		});
 	});
 </script>
-<div id="loginContainer">
+<%@ include file="/inc/sideBar.jspf" %>
+<div class="myinfoBody"> 
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	
-	<div id="login_section">
-		<span class="lgFnt">개인정보 보호를 위해<br/>비밀번호를 재확인합니다.</span>
-		<form method="post" action="myInfo" id="passwordCheckForm"> <!-- loginConfrim -->
-			<ul>
-				<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
-				<li><button id="loginBtn" class="btn commBtn lgBtn" tabindex="4" style="width:320px">확인</button></li>
-				<li><button type="button" id="signupBtn" class="btn commBtn lgBtn" tabindex="5" style="width:320px">취소</button></li>
-			</ul>
-		</form>
+	<div class="myinfoContainer">
+		<div id="login_section">
+			<div>
+				개인정보 보호를 위해서 비밀번호를 다시 입력해주세요
+			</div>
+			<form method="post" action="myInfo" id="passwordCheckForm"> <!-- loginConfrim -->
+				<ul>
+					<li><input type="password" name="userpwd" id="userpwd" tabindex="2" placeholder=" 비밀번호" class="inputSize"/></li>
+					<li><button id="loginBtn" class="btn" tabindex="4" >확인</button></li>
+					<li><button type="button" id="signupBtn" class="btn" tabindex="5" >취소</button></li>
+				</ul>
+			</form>
+		</div>
 	</div>
 </div>

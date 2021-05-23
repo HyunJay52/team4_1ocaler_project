@@ -106,8 +106,6 @@
 			tag += "</select>";
 			
 			$("#emailForm").html(tag);
-			
-
 		}
 		
 		//지역 세팅
@@ -130,7 +128,7 @@
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">
 		<form method="post" action="myinfoUpdate" id="myinfoFrm" enctype="multipart/form-data">
-		<div class="basicMyinfoHeader">내 정보</div>
+		<div class="basicMyinfoHeader" style="margin-bottom: 30px;">내 정보</div>
 		<div class="basicMyinfo">
 			<ul>
 				<li>프로필 사진</li>
@@ -202,8 +200,8 @@
 			<button type="button" id="moreInfo" class="btn commBtn Mem_lgBtn"
 				style="width: 320px; height: 40px; display: block; margin: 0 auto;">수정하기</button>
 			<div class="editOn" id="editOn">
-				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정</button>
-				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
+				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; color: #fff; font-family:nsreb; background:#5f0080; display: block; margin: 5 auto;">수정</button>
+				<button type="reset" class="btn cancelBtn " style="width: 320px; display: block; margin: 5 auto;">취소</button>			
 			</div>
 		</div>
 	</form>
@@ -216,8 +214,8 @@
 		<div class="modal-dialog" data-backdrop="static" style="margin-top:20%">
 			<div class="modal-content" data-backdrop="static" style="height:240px">
 				<div class="modal-body" data-backdrop="static" style="text-align:center; padding:40px;">
-					<p class="mdFnt">탈퇴하시겠습니까?</p><br/>
-					<input id="modalClose" type="button" class="btn commBtn" data-dismiss="modal" value="아니오"/><input type="button" class="btn cancelBtn" value="네"/>
+					<p>아직 놓치신 동네정보가 많으신데,<br/>정말 탈퇴를 원하시나요?</p><br/>
+					<input id="modalClose" type="button" class="btn commBtn" data-dismiss="modal" value="아니오"/>&nbsp;&nbsp;&nbsp;<input type="button" class="btn cancelBtn" value="네"/>
 				</div>
 				<div class="modal-body" style="display:none" data-backdrop="static">
 					<p class="mdFnt">탈퇴사유 조사</p>

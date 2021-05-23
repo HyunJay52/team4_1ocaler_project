@@ -391,9 +391,11 @@
 		
 		//리뷰쓰기 취소 이벤트
 		$(document).on('click', '#cancelReview', function(){
+			console.log("cancel");
 			$(".reviewBody").css('display', 'none');
 			$(".reviewList").css('display', 'block');
 		});
+	
 		
 		//리뷰 점수 이벤트
 		$(document).on('click', '.imgBtn', function(){
@@ -515,6 +517,7 @@
 		}
 	});
 </script>
+<%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">

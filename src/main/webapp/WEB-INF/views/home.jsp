@@ -15,7 +15,6 @@
 			data: {'g_gu': g_gu},
 			type : 'post',
 			success: function(result){
-				console.log(result);
 				var $result = $(result); //ajax 결과값 변수에 담음
 				var idx = 10;
 				$result.each(function(idx, list){
@@ -41,18 +40,14 @@
 			var g_gu = $(this).children('ul').children('li:first-child').children('input').val();
 			var num = $(this).children('ul').children('li:nth-child(2)').children('input').val();
 			
-			console.log(num, "????", goCate, "???", g_gu)
-			
 			//번호비교하면 페이지 넘어감... 왜 span 값 비교 못함?
 			if(goCate=="한끼미식회"){
 				var addr = 'eatViewPage?num='+num+'&loc_gu='+g_gu+'&category=한끼미식회';
-				console.log(addr, "???????", goCate)
 				location.href= addr;
 			}
 			
 			if(goCate=='가치가장'){
 				//withViewPage?num=242&loc_gu=강서구&category=가치가장
-				console.log( "???????", goCate)
 				location.href='withViewPage?num='+num+'&loc_gu='+g_gu+"&category=가치가장";
 			}
 		})
@@ -92,7 +87,7 @@
 	<div id="sell" class="indexDivWidth">
 		<div id="selltitle" class="lgFnt indexBoardTitle">우리직구</div>
 		
-		<div class="mdFnt indexSubTitle"><img src="common/map_000.png" style="width: 25px; margin-right: 5px;">동네직구</div>
+		<div class="mdFnt indexSubTitle" style="margin-top: 50px"><img src="common/map_000.png" style="width: 25px; margin-right: 5px;">동네직구</div>
 		<div class="selBoard">
 			
 			<ul class="boardText">
@@ -115,20 +110,21 @@
 			</ul>
 		</div>
 		
-		<div class="mdFnt indexSubTitle"><span class="indexSubTitleSpan">오늘의</span> "착한발견"</div>
+		<div class="mdFnt indexSubTitle" style="margin-top: 80px"><span class="indexSubTitleSpan">오늘의</span> "착한발견"</div>
 		<div class="selBoard">
 			<ul class="boardText">
 				<c:forEach var="sel" items="${selVO }" begin="1" end="10">
-				<li class="selList" OnClick="location.href='sellView'">
+				<li class="selList" OnClick="location.href='sellView?i_num=${sel.i_num}'">
 					<div>
 						<div>
 							<img src="<%=request.getContextPath() %>/img/sellItemInsertPicture/${sel.i_img1 }" />
 						</div>
 						<ul>
 							<li class="wordcut">${sel.i_subject }</li>
-							<li><span class="priceSpan">${sel.i_price } 원</span></li>
+							<li><span class="priceSpan"><fmt:formatNumber type="number" maxFractionDigits="3" value="${sel.i_price }" /> 원</span></li>
 							<li><span class="locationSpan wordCut">???</span></li>
 							<li>${sel.i_period }</li>
+<%-- 							<li><fmt:formatDate value="${sel.i_period }" type="date" /></li> --%>
 							<li>${sel.userid } &nbsp; <img src="<%=request.getContextPath() %>/img/sel_prof/${sel.sel_prof }">&nbsp;&nbsp;</li>
 						</ul>
 					</div>
@@ -139,7 +135,7 @@
 	</div>
 	
 	<div id="gachi" class="indexDivWidth">
-		<div id="gachititle" class="lgFnt indexBoardTitle"><span style="font-size: 14px; color: gray;">동네에서 찾는 이웃사촌</span><br/>가치가장</div>
+		<div id="gachititle" class="lgFnt indexBoardTitle" style="border-bottom: 1px solid #ddd;"><span style="font-size: 14px; color: gray;">동네에서 찾는 이웃사촌</span><br/>가치가장</div>
 		<ul id="gachiIndex" class="indexListNone">
 			<!-- 반복문이 들어 갈 자리 -->
 		</ul>
@@ -148,21 +144,11 @@
 	<div id="sggSak" class="indexDivWidth" style="margin-bottom: 100px;">
 		<div class="lgFnt indexBoardTitle"><span style="font-size: 14px; color: gray;">오늘뭐해먹지?</span><br/>#쓱싹레시피</div>
 		<ul class="indexListNone">
-			<li><a href="commuBoard"><img src="img/indexImg/food1.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food2.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food3.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food1.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food2.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food3.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
+		<!-- commuView?num=1027&up_cate=2 -->
+			<c:forEach var="bVO" items="${bVO }" begin='0' end='12'>
+				<li><a href="commuView?num=${bVO.num }&up_cate=2"><img src="<%=request.getContextPath() %>/img/receipeImg/${bVO.b_img1 }"/></a></li>
+			</c:forEach>
 		</ul>
 	</div>
 	
-<!-- 	<div style="width:350px; height: 700px; background-color: pink; float:left; margin-right: 20px;"></div> -->
-<!-- 	<div style="width:900px; height: 700px; background-color: yellow; float:left; "></div> -->
 </div>

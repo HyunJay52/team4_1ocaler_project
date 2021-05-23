@@ -57,6 +57,12 @@
 }
 
 /* 오시는 길 */
+#followMe{
+	display:inline-block;
+	margin:50px 0px 10px 0px;
+	font-size:1.75em;
+	border-bottom:3px solid gray;
+}
 #routeDiv {
 	width: 1300px;
 	height: 100%;
@@ -64,6 +70,37 @@
 }
 #routeDiv>#routeWay {
 	width: 100%; height: 100px;	
+}
+#innerContent{
+	overflow:auto;
+	width:1300px;
+	margin-top:20px;
+}
+#innerContent>ul>li{
+	height:45px;
+	line-height:45px;
+	font-size:18px;
+	border-top:1px solid gray;
+	padding-left:20px;
+}
+#innerContent>ul>li:nth-child(2n+1){
+	font-weight:bold;
+	background-color:#f5f5f5;	
+}
+#innerContent>ul>li:nth-child(2n+2){
+	font-size:16px;
+}
+
+#innerContent>ul>li:last-child{
+	border-bottom:1px solid gray;
+	margin-bottom:100px;
+}
+#infoWindow{
+	background:#fff;
+	padding:10px;
+	border:1px solid gray;
+	border-radius:10px;
+	margin-top:-90px
 }
 
 /* class */

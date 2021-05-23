@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.BoardService;
 import com.team4.localer.service.DealShareService;
 import com.team4.localer.service.HomeService;
 import com.team4.localer.service.JoinUsService;
 import com.team4.localer.service.SellerService;
+import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.DealShareVO;
 import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.SellitemVO;
@@ -33,14 +36,20 @@ public class HomeController {
 	DealShareService dealService;
 	@Inject
 	SellerService sellerService;
+	@Inject
+	BoardService boardService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home() {
+	public ModelAndView home(HttpSession ses) {
 		System.out.println("서비스 문제 해결 ^^ 행벅");
 		ModelAndView mav = new ModelAndView();
 		
 		//동네직구 리스트
 		DealShareVO dVO = new DealShareVO();
+		String loc_gu = (String)ses.getAttribute("logLoc_gu");
+		if(loc_gu!=null) {
+			dVO.setS_gu(loc_gu);
+		}
 		List<DealShareVO> memList = dealService.dealListSelect(dVO);
 		mav.addObject("memVO", memList);
 		
@@ -48,6 +57,11 @@ public class HomeController {
 		SellitemVO sVO = new SellitemVO();
 		List<SellitemVO> selList = sellerService.selectAllitem();
 		mav.addObject("selVO", selList);
+		
+		//쓱싹 레시피 리스트
+		BoardVO bVO = new BoardVO();
+		List<BoardVO> bList = boardService.selectIndexRecipe();
+		mav.addObject("bVO", bList);
 		
 		mav.setViewName("home");
 		

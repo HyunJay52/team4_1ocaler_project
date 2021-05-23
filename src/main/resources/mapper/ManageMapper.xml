@@ -367,7 +367,7 @@
 					<if test="!searchWord.equals('') and searchWord!=null">
 						and ${searchKey} like #{searchWord}
 					</if>
-					group by sel1.sel_num, sel1.sel_userid, sel1.sel_subject order by sel_num desc
+					group by sel1.sel_num, sel1.sel_userid, sel1.sel_subject order by sel_num 
 					)
 					where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by sel_num desc)
 					where rownum <![CDATA[<=]]>

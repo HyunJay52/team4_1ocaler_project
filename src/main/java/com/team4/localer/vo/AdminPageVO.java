@@ -17,8 +17,14 @@ public class AdminPageVO {
 	private String cate;//검색 카테고리 
 	private String num;//카테고리 num;
 	private String month;//
+	private String userid;
 	
-	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getMonth() {
 		return month;
 	}

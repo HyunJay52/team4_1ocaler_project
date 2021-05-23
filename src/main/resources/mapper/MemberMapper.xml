@@ -5,7 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team4.localer.dao.MemberDAO">
 	<select id="memLogin" resultType="com.team4.localer.vo.MemberVO">
-		select userid, mem_name, mem_nick, loc_gu, mem_type from member where userid=#{param1} and userpwd=#{param2}
+		select userid, mem_name, mem_nick, loc_gu, mem_type, mem_prof from member where userid=#{param1} and userpwd=#{param2}
 	</select>
 	<insert id="logCount" parameterType="String">
 		INSERT INTO LOGCOUNT(userid, loc_gu) VALUES (#{param1}, #{param2})

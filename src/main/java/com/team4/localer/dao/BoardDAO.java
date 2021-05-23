@@ -53,4 +53,7 @@ public interface BoardDAO {
 	public int memwriteCount(String userid);
 	//게시글 -1
 	public int memdeleteCount(String userid);
+	
+//Index page 2021.05.23
+	public List<BoardVO> selectIndexRecipe();
 }

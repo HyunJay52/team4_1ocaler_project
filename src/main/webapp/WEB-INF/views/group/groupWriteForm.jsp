@@ -321,6 +321,7 @@
 </script> 	
 </head>
 <body id="groupWriteFormBody">
+<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="groupWriteFormMap" style="width:2000px; height:1200px; position:relative; overflow:hidden;"></div>
 	
 	<!-- 맨위 폼 -->
