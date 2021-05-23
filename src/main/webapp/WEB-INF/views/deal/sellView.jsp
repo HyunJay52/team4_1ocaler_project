@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealSellViewStyle.css"/>
 <style>
-
 	.facker[type=checkbox]{ display:none; }
 	#sellInfo>div:first-child>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/deal/sellLikeE.png") left/22px no-repeat; }
 	#sellInfo>div:first-child>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/deal/sellLikeF.png"); }
@@ -166,8 +165,6 @@
        			total = total + result - price;   			
        		}
        		
-       		
-       		
 			//수량 및 총수량 계산시 --> 누르고난 다음의 수량과 , 원래 저장되있던 수량을 비교하여 배열 및 총수량 계산  		
        		if(count[$(".choice").index(this)]<numbers){
        			count[$(".choice").index(this)] = count[$(".choice").index(this)]+1
@@ -184,15 +181,6 @@
        		console.log(counts,"<-- 총수량 계산중");
        		console.log(count,"<-- 수량 배열");
        		console.log(total,"<--총가격 계산");
-       		
-
-       		
-       		
-       		
-       		
-       			
-       		
-       		
        		
        		//총 변경되는 값을 변경해줘야함
        		$("#i_price").val(total);
@@ -235,6 +223,10 @@
      		location.href="selBard";
      	});
      	
+     	$("#modifyBtn").click(function(){
+     		
+     		location.href="modifySellView?i_num=${itemVO.i_num }";
+     	});
      	
     	
 	});
@@ -288,7 +280,7 @@
 								<li><span style="font-weight:bold; font-size:18px;">${itemVO.i_writedate } ~ ${itemVO.i_period }</span></li>
 								<li> 판매자</li>
 								<li>
-									<a href="sellerInfo?userid=${itemVO.userid }"><span style="font-size:16px;">${itemVO.userid }</span><img style="width:35px; height:35px; margin-left:10px;" src="<%=request.getContextPath() %>/img/sel_prof/${itemVO.sel_prof}"/></a>
+									<a href="sellerInfo?userid=${itemVO.userid }"><span style="font-size:16px;">${itemVO.userid }</span><img style="width:35px; height:35px; margin-left:10px; border-radius:100px;" src="<%=request.getContextPath() %>/img/sel_prof/${itemVO.sel_prof}"/></a>
 								</li>
 							</ul>
 								<hr style="margin-top: -9px;"/>
@@ -321,9 +313,8 @@
 							<hr/>
 							
 							<div style="float:left; width:350px;">
-								<span style="font-size:1.75em; color:gray; font-weight:bold; padding-left:20px;">총상품 금액(</span>
-								<input type='number'  id='i_cnt' name='o_cnt' value=0 readonly>
-								<span style="font-size:1.75em; color:gray; font-weight:bold;">EA)</span>
+								<span style="font-size:1.75em; color:gray; font-weight:bold; padding-left:20px;">총상품 금액</span>
+								<input type='number'  id='i_cnt' name='o_cnt' value=0 style="display:none;" readonly>
 							</div>
 							<div style="float:left; width:250px; height:36px;">
 								<input type="number" id="i_price" name="o_price" value="0" readonly/>
@@ -336,9 +327,17 @@
 						</div>
 						
 						<div id="submitCancleBtn">
-							<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
-							<input type="submit" value="구매하기" class="btn commBtnSell"/>
+							<c:if test="${logId!=itemVO.userid }">
+								<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
+								<input type="submit" value="구매하기" class="btn confBtn"/>
+							</c:if>
+							<c:if test="${logId==itemVO.userid }">
+								<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
+								<input type="button" id="modifyBtn" value="수정하기" class="btn confBtn"/>
+							</c:if>
+							
 						</div>
+						
 						<input type='hidden' name="num" value="${itemVO.i_num }">
 						<input type='hidden' id="opt_str" name='opt_str' value=''>
 						<input type='hidden' name='i_userid' value="${itemVO.userid }">
@@ -351,7 +350,7 @@
 				
 		<!-- 1 -->
 		<div class="locationBar" id="locationBar">
-			<div id="sellDetailShow" style="border-bottom: 3px solid gray;">
+			<div id="sellDetailShow" style="border-bottom: 3px solid navy;">
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div>
@@ -374,7 +373,7 @@
 			<div>
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
-			<div id="sellReviewChk" style="border-bottom: 3px solid gray;">
+			<div id="sellReviewChk" style="border-bottom: 3px solid navy;">
 				<a href="#sellReviewChk">리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</a>
 			</div>
 			<div>
@@ -421,7 +420,7 @@
 			<div>
 				<a href="#sellReviewChk">리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</a>
 			</div>
-			<div id="sellQusetion" style="border-bottom: 3px solid gray;">
+			<div id="sellQusetion" style="border-bottom: 3px solid navy;">
 				<a href="#sellQusetion">Q&A (4)</a>	
 			</div>
 		</div>

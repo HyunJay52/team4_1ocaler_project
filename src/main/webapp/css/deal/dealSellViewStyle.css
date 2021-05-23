@@ -242,22 +242,20 @@
 	margin-top: 6px;
 	placeholder: 수량
 }
-
+#submitCancleBtn{
+	margin-bottom:60px;
+}
 #submitCancleBtn>input {
 	width: 300px;
 	height: 35px;
 	margin: 20px 9px;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-
-
 /* 중간페이지 이동*/
 #locationBar a {
 	color: gray;
+	font-size:1.4em;
+	font-weight:bold;
 	text-decoration: none;
 }
 
@@ -335,6 +333,8 @@ input::-webkit-inner-spin-button {
 #oneReview li>div:nth-of-type(1)>img {
 	float: right;
 	margin-right: 10px;
+	height: 25px;
+    margin-top: -2px;
 }
 
 #pic>img {
@@ -344,7 +344,10 @@ input::-webkit-inner-spin-button {
 	padding: 0;
 }
 /* ------리뷰 */
-
+#i_ship::-webkit-outer-spin-button, #i_ship::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+    margin: 0;
+}
 /* 페이징 */
 #pageNum {
 	padding-left: 42%;
