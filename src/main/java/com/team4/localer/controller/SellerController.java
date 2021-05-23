@@ -187,9 +187,33 @@ public class SellerController {
 		System.out.println(i_num+"<--ㅁ ㅝ나오긴하니");
 		//1개 게시글 내용 불러오기 
 		mav.addObject("modifyVO",sellerService.selectOnePage(i_num));
+		System.out.println(i_num+"<--글번호");
+		System.out.println(sellerService.selectOnePage(i_num).getI_status()+"<--1");
+		System.out.println(sellerService.selectOnePage(i_num).getI_subject()+"<--2");
+		System.out.println(sellerService.selectOnePage(i_num).getI_cnt()+"<--3");
+		System.out.println(sellerService.selectOnePage(i_num).getI_content()+"<--4");
+		System.out.println(sellerService.selectOnePage(i_num).getI_period()+"<--5");
+		System.out.println(sellerService.selectOnePage(i_num).getI_price()+"<--6");
+		System.out.println(sellerService.selectOnePage(i_num).getI_tag()+"<--7");
+		
+		System.out.println(sellerService.selectOnePage(i_num).getI_img1()+"<--8");
+		System.out.println(sellerService.selectOnePage(i_num).getI_img2()+"<--9");
+		System.out.println(sellerService.selectOnePage(i_num).getI_img3()+"<--10");
+		
+		System.out.println(sellerService.selectOnePage(i_num).getI_ship()+"<--11");
 		//해당 게시글번호에 해당하는 옵션 다 불러오기
 		mav.addObject("optionList",sellerService.optionSelectAll(i_num));
 		System.out.println(sellerService.optionSelectAll(i_num).size());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		mav.setViewName("deal/modifySellView");

@@ -53,9 +53,11 @@
 	
 	
 	<select id="selectOnePage" resultType="com.team4.localer.vo.SellitemVO">
-		select i_num, i_subject, i_content, i_cnt, i_price, to_char(i_writedate,'YYYY-MM-DD') i_writedate, to_char(i_period,'YYYY-MM-DD') i_period, i_ship, s.userid, s.sel_prof 
+		select i_num, i_subject, i_content, i_cnt, i_price, to_char(i_writedate,'YYYY-MM-DD') i_writedate, to_char(i_period,'YYYY-MM-DD') i_period, i_status, i_ship, s.userid, s.sel_prof 
 		,i_img1, i_img2, i_img3 from sell_item i join seller s on i.sel_num = s.sel_num where i_num=#{param1}
 	</select>
+	
+	
 	<select id="sellerInfo" resultType="com.team4.localer.vo.SellerVO">
 		select count(item.i_num) as sel_count , s.userid,s.sel_lvl,s.company,s.sel_tel,s.sel_name,s.com_num,s.sel_addr,s.sel_prof 
 		from seller s join sell_item item on item.sel_num =s.sel_num

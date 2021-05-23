@@ -70,6 +70,9 @@
 		width: 1300px; 
 		text-align: center;
 	}
+	#btn>*{
+		width:200px;
+	}
 
 	/* 파일 */
 	
@@ -79,6 +82,19 @@
 		width:335px;
 		
 	}
+	#file>div{
+		width:425px;
+		float:left;
+	}
+	#file>div>div:first-child{
+		font-size: 25px;
+	    padding-top: 13px;
+	    padding-left: 52px;
+	}
+	#file label, #file input{
+		float:left;
+	}
+	
 
 	/* 옵션 */
 	.option_title, .option_content, .option_price{
