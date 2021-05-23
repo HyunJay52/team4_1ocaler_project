@@ -86,7 +86,7 @@
 				location.href="myInfoDelivery";
 			}else if($(this).text() == '회원간 거래'){
 				location.href="myInfoDeal";
-			}else if($(this).text() == '파머 직거래'){
+			}else if($(this).text() == '착한발견 거래'){
 				location.href="myInfoFarmerDeal";
 			}else if($(this).text() == '리뷰 관리'){
 				location.href="myInfoReview";

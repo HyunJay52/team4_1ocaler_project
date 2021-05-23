@@ -136,7 +136,8 @@
 			</ul>
 			<ul id="myPointShip">
 				<li class="profileHeadfont">나의 포인트</li>
-				<li><span>${myPoint }&nbsp;원</span></li>
+
+				<li><span><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPoint}" />&nbsp;원</span></li>
 				<li><a href="myInfoLoad">충전하러가기</a></li>
 				<li class="profileHeadfont">배송상태<span>update</span> <!-- 배송상태 업데이트 안되면 색상 #ddd로 바꾸기 -->
 				</li>

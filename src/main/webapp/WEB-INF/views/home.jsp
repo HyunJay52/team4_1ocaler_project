@@ -115,14 +115,14 @@
 		<div class="selBoard">
 			<ul class="boardText">
 				<c:forEach var="sel" items="${selVO }" begin="1" end="10">
-				<li class="selList" OnClick="location.href='sellView'">
+				<li class="selList" OnClick="location.href='sellView?i_num=${sel.i_num}'">
 					<div>
 						<div>
 							<img src="<%=request.getContextPath() %>/img/sellItemInsertPicture/${sel.i_img1 }" />
 						</div>
 						<ul>
 							<li class="wordcut">${sel.i_subject }</li>
-							<li><span class="priceSpan">${sel.i_price } 원</span></li>
+							<li><span class="priceSpan"><fmt:formatNumber type="number" maxFractionDigits="3" value="${sel.i_price }" /> 원</span></li>
 							<li><span class="locationSpan wordCut">???</span></li>
 							<li>${sel.i_period }</li>
 							<li>${sel.userid } &nbsp; <img src="<%=request.getContextPath() %>/img/sel_prof/${sel.sel_prof }">&nbsp;&nbsp;</li>
@@ -144,18 +144,10 @@
 	<div id="sggSak" class="indexDivWidth" style="margin-bottom: 100px;">
 		<div class="lgFnt indexBoardTitle"><span style="font-size: 14px; color: gray;">오늘뭐해먹지?</span><br/>#쓱싹레시피</div>
 		<ul class="indexListNone">
-			<li><a href="commuBoard"><img src="img/indexImg/food1.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food2.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food3.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food1.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food2.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food3.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food4.jpeg"/></a></li>
-			<li><a href="commuBoard"><img src="img/indexImg/food5.jpeg"/></a></li>
+		<!-- commuView?num=1027&up_cate=2 -->
+			<c:forEach var="bVO" items="${bVO }" begin='1' end='12'>
+				<li><a href="commuView?num=${bVO.num }&up_cate=2"><img src="<%=request.getContextPath() %>/img/receipeImg/${bVO.b_img1 }"/></a></li>
+			</c:forEach>
 		</ul>
 	</div>
 	
