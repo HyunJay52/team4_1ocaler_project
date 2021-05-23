@@ -215,8 +215,12 @@
 			select count(userid) from mem_share where userid = #{param1}) as mem_share,(
 			SELECT count(LOGDATE) FROM (SELECT DISTINCT to_char(LOGDATE, 'YYYY-MM-DD') AS LOGDATE, USERID FROM logcount WHERE userid = #{param1})) as logcount,(
 			select count(userid) from grouplocal where userid = #{param1}) as grouplocal,(
-			select mem_name from member where userid = #{param1}) as mem_name
-		from dual
+			select mem_name from member where userid = #{param1}) as mem_name,(
+			select count(q_num) from qna  
+			join sell_item on qna.num = sell_item.i_num 
+			join seller on sell_item.sel_num = seller.sel_num 
+			where seller.userid= #{param1}) as qna
+			from dual
 	</select>
 	<select id="selectMyJoinList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.MyinfoDealVO">
     	select * from(
@@ -401,7 +405,11 @@
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
 		
 		and ${searchKey} like #{searchWord} 
-
+		<if test="searchKey2 != null">
+			<if test="!searchKey2.equals('all')">
+				and q_answer ${searchKey2}			
+			</if>
+		</if>
 		order by ${dateContent} desc)
 		where rownum <![CDATA[ <= ]]> #{rowNum1} order by ${dateContent} asc)
 		where rownum <![CDATA[ <= ]]> #{rowNum2} order by ${dateContent} desc	   		
@@ -421,7 +429,11 @@
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
 		
 		and ${searchKey} like #{searchWord}
-	
+		<if test="searchKey2 != null">
+			<if test="!searchKey2.equals('all')">
+				and q_answer ${searchKey2}			
+			</if>
+		</if>
 		)
    </select>
 	<select id="setQnA" resultType="com.team4.localer.vo.QnAVO">

@@ -18,14 +18,15 @@
 						tag += "<td>"+data.q_writedate+"</td>";
 						if(data.q_answer != null){
 							tag += "<td>답변완료</td>";
-							tag += "<td><button class='btn commBtn viewQnABtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>답변보기</button></td>"; 
+							tag += "<td><button class='btn commBtn viewQnABtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>내용보기</button></td>"; 
 						}else{
 							tag += "<td>답변 대기중</td>";
-							tag += "<td><button class='btn commBtn qnaBtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>답변하기</button></td>"; 
+							tag += "<td><button class='btn commBtn qnaBtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>내용보기</button></td>"; 
 						}
 					
 					});
 					$("#myInfoQnAManagementTable").html(tag);
+					$("#qnaCount").html("QnA : "+result.count.qna+"건");
 					setMyinfoQnAManagementPaging(result.pVO);
 				}, error : function(e){
 					console.log("error");
@@ -86,7 +87,10 @@
 						tag += "<li>공개여부 : 비공개</li>";							
 					}
 					tag += "<li class='viewQnAContent'>"+result.q_content+"</li>";
-					
+					if(result.q_answer != null){
+						tag += "<li class='qnaAnswerHead'>답변</li>";
+						tag += "<li class='viewQnAContent'>"+result.q_answer+"</li>";
+					}
 					$("#qnaTextarea").val(result.q_answer);
 					$("#viewQnA").html(tag);
 				}, error : function(e){
@@ -158,6 +162,9 @@
 					if(result > 0){					
 						alert("답변이 등록되었습니다.");
 						$("#myInfoQnAManagementMd").modal("hide");
+						var num = $("#myInfoQnAManagementTablePagingArea>ul>li.active>button").val();
+						console.log("nowNum="+num);
+						setQnAlist(num);
 					}
 					$(".myinfoQnAModalBackground").css('display','none');
 					$(".myinfoQnAAnswerArea").css('display','none');
@@ -173,6 +180,11 @@
 			setQnAlist(1);		
 		});
 		
+		//체크박스 
+		$(".productManagementLabelCenter>ul>li>input").change(function(){
+			$(".productManagementLabelCenter>ul>li>input").prop('checked', false);
+			$(this).prop('checked', true)
+		});
 	});
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
@@ -190,8 +202,9 @@
 				<form method="post" id="myinfoQnAForm" onsubmit="return false;">
 				<div class="productManagementLabelCenter">
 					<ul>
-						<li><input name="searchKey" type="checkbox" value="null "/>답변대기</li>
-						<li><input type="checkbox"/>답변완료</li>
+						<li><input name="searchKey2" type="checkbox" value="all" checked/>전체</li>
+						<li><input name="searchKey2" type="checkbox" value="is null "/>답변대기</li>
+						<li><input name="searchKey2" type="checkbox" value="is not null"/>답변완료</li>
 					</ul>
 					<div class="productManagementLabelCenterDiv">
 						<input type="date" name="searchDate" value="2021-03-01" min="2021-03-01" max="2021-05-31"/>~
@@ -209,7 +222,7 @@
 		</div>
 		<div class="myInfoProductManagementBottom">
 			<ul>
-				<li><button class="btn commBtn myInfoProductManagementBottomBtn">QnA : 14건</button></li>
+				<li><button class="btn commBtn myInfoProductManagementBottomBtn" id="qnaCount">QnA : 14건</button></li>
 			</ul>
 			<table class="myInfoProductManagementTable2" id="myInfoQnAManagementTable">
 
@@ -226,7 +239,7 @@
 				<h4 class="modal-title">QnA</h4>
 
 				</div>
-				<div class="modal-body" style="text-align:right">
+				<div class="modal-body" style="text-align:right; overflow:auto">
 					<ul id="viewQnA">
 						
 					</ul>

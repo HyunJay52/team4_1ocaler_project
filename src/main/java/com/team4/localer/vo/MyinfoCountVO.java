@@ -8,9 +8,17 @@ public class MyinfoCountVO {
 	private int mem_share;
 	private int logcount;
 	private int grouplocal;
-	
+	private int qna;
 	private String mem_name;
 	
+	
+	
+	public int getQna() {
+		return qna;
+	}
+	public void setQna(int qna) {
+		this.qna = qna;
+	}
 	public String getMem_name() {
 		return mem_name;
 	}
