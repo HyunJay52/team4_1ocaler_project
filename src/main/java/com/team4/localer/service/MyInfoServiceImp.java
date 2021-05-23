@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.MyInfoDAO;
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
@@ -177,8 +178,16 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	@Override
-	public List<MyinfoBoardVO> selectMyBoard(MyinfoPageVO vo) {
+	public int managementCount(AdminPageVO pageVO) {
+		return dao.managementCount(pageVO);
+	}
 
+	@Override
+	public List<OrderVO> manageList(AdminPageVO pageVO) {
+		return dao.manageList(pageVO);
+	}
+
+	public List<MyinfoBoardVO> selectMyBoard(MyinfoPageVO vo) {
 		return dao.selectMyBoard(vo);
 	}
 

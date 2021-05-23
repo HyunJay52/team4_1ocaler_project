@@ -2,6 +2,7 @@ package com.team4.localer.service;
 
 import java.util.List;
 
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
@@ -79,6 +80,14 @@ public interface MyInfoService {
 	public OrderVO statisTotal(String userid,int cate,String month);//미확정 개수, 금액
 	//통계list
 	public List<OrderVO> statisList(String userid,String month);
+
+	//==판매관리 부분===
+	//레코드 개수 
+	public int managementCount(AdminPageVO pageVO);
+	//판매관리 리스트 
+	public List<OrderVO> manageList(AdminPageVO pageVO);
+	
+	
 
 	//리뷰가능한 상품리스트 조회
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
