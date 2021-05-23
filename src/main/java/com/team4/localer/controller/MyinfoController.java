@@ -395,7 +395,7 @@ public class MyinfoController {
 		
 		
 		map.put("itemPVO", vo);
-		//map.put("IList", service.selectItemReviewList(vo));
+		map.put("IList", service.selectItemReviewList(vo));
 		return map;
 	}
 	
