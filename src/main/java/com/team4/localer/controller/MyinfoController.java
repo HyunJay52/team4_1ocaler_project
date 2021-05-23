@@ -544,7 +544,7 @@ public class MyinfoController {
 		
 		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
 		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
-		System.out.println("qnaKey="+vo.getSearchKey());
+		System.out.println("qnaKey2="+vo.getSearchKey2());
 
 		if(vo.getKategorie().equals("board")) {
 			vo.setDateContent("b_writedate");
@@ -569,6 +569,7 @@ public class MyinfoController {
 		
 		map.put("list", service.selectMyBoard(vo));
 		map.put("pVO", vo);
+		map.put("count", service.selectMyCount(vo.getUserid()));
 		
 		return map;
 	}
