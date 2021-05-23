@@ -19,6 +19,9 @@
 	.saleHistoryBottom{
 		margin-top:50px;
 	}
+	.saleHistoryBottom a{
+		font-size:16px;
+	}
 	.saleHistorySpan{
 		font-weight:bold;
 		font-size:46px;
@@ -37,6 +40,7 @@
 		width:100%;
 		margin:0 auto;
 		padding:0;
+		height:200px;
 	}
 	.myinfoSaleHistoryTable2 tr{/*테이블 목록*/
 		border-bottom:1px solid rgb(227,227,227); 
@@ -45,8 +49,8 @@
     }
 	.myinfoSaleHistoryTable2 tr:first-child{/*첫번째 테이블 목차*/
 		text-align:center;
-		background-color:#3f1785;
-		color:#fff; 
+		background-color:rgb(78,190,154,0.1);
+		color:#3f1785; 
 		font-weight:bold;
 	}
 	.myinfoSaleHistoryTable2 tr:last-child{/*마지막 줄 tr 스타일*/
@@ -54,4 +58,5 @@
 	}
 	.myinfoSaleHistoryTable2 tr>td{/*전체적인 열 폭조정*/
 		width:25%;
+		font-size:20px;
 	}

@@ -386,7 +386,17 @@
 	
 		)
    </select>
-
+	<select id="setQnA" resultType="com.team4.localer.vo.QnAVO">
+		select * from qna 
+		join sell_item on qna.num = sell_item.i_num 
+		join seller on sell_item.sel_num = seller.sel_num 
+		where q_num = #{param1} and seller.userid = #{param2}
+	</select>
+	
+	<update id="QnAAnswerWrite" parameterType="com.team4.localer.vo.QnAVO">
+		update qna set q_answer = #{q_answer}, q_adate = sysdate where q_num = #{q_num}
+	</update>
+	
 <!-- sql by hj 2021.05.21 -->
 	<select id="selectWaitingJoinList" resultType="com.team4.localer.vo.JoinUsVO">
 		SELECT userid, auth, j_status, up_cate, j_num, title, j_writedate FROM (
