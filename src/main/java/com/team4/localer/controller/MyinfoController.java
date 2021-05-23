@@ -33,6 +33,10 @@ import com.team4.localer.vo.MyinfoDealVO;
 import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 
+import com.team4.localer.vo.OrderVO;
+import com.team4.localer.vo.QnAVO;
+
+
 
 @Controller
 public class MyinfoController {
@@ -222,8 +226,8 @@ public class MyinfoController {
 		Map<String, Object> result = new HashMap<String, Object>();	
 		String searchId = (String)ses.getAttribute("logId");
 		vo.setUserid(searchId);
-		vo.setOnePageRecord(5);
-		vo.setOnePageSize(5);
+		vo.setOnePageRecord(10);
+		vo.setOnePageSize(10);
 		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		System.out.println("kategorie="+vo.getKategorie());
@@ -317,7 +321,7 @@ public class MyinfoController {
 		Map<String, Object> result = new HashMap<String, Object>();	
 		
 		vo.setUserid((String)ses.getAttribute("logId"));
-		vo.setOnePageRecord(5);
+		vo.setOnePageRecord(10);
 		vo.setOnePageSize(5);
 		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		if(vo.getSearchWord() == null || vo.getSearchWord().equals("")) {
@@ -540,7 +544,7 @@ public class MyinfoController {
 		
 		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
 		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
-		
+		System.out.println("qnaKey="+vo.getSearchKey());
 
 		if(vo.getKategorie().equals("board")) {
 			vo.setDateContent("b_writedate");
@@ -569,6 +573,25 @@ public class MyinfoController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/setQnA")
+	public QnAVO setQnA(HttpSession ses, HttpServletRequest req) {
+		QnAVO vo =  new QnAVO();
+		String userid = (String)ses.getAttribute("logId");
+		int q_num = Integer.parseInt(req.getParameter("q_num"));
+		vo = service.setQnA(q_num, userid);
+		return vo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/QnAAnswerWrite")
+	public int QnAAnswerWrite(HttpSession ses, QnAVO vo) {
+		int result = 0;
+		
+		result = service.QnAAnswerWrite(vo);
+		
+		return result;
+	}
 	@RequestMapping("/myInfoSaleHistory")
 	public String myInfoSaleHistory() {
 		return "myInfo/myInfoSaleHistory";

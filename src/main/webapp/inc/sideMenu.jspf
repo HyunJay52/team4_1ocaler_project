@@ -3,18 +3,19 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMainStyle.css?ver=2"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStyle.css?ver=19"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyActivityStyle.css?ver=4"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=14"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoLoadStyle.css?ver=7"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=17"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoLoadStyle.css?ver=8"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyDealStyle.css?ver=13"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoFarmerDealStyle.css?ver=2"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoDeliveryStyle.css?ver=4"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoSaleHistoryStyle.css?ver=1"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoDeliveryStyle.css?ver=5"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoSaleHistoryStyle.css?ver=2"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyinfoStyle.css?ver=3"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoSellerStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoProductManagementStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStatisticsStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewManagementStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoShippingManagementStyle.css?ver=2"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoQnAManagementStyle.css?ver=5"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css" type="text/css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="<%=request.getContextPath() %>/plugin/jquery.easing.1.3.js"></script>
@@ -28,7 +29,7 @@
 	var menuTitle = ['내 정보','참여내역','판매관리'];
 	var subMenu = [ ['내 정보','충전하기','배송내역'],
 					['회원간 거래','착한발견 거래','리뷰 관리','나의 활동','후기'],
-					['판매내역','판매자 정보','상품관리','판매/결제관리','배송관리','통계']		
+					['판매내역','판매자 정보','상품관리','판매/결제관리','배송관리','통계','QnA관리']		
 				  ]
 	
 	$(function(){

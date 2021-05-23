@@ -87,7 +87,9 @@
 	}
 	.load{
 		width:100%;
-		padding:0px 6px;	
+		padding:0px 6px;
+		text-align:right;
+		background-color:#fff;
 	}
 	.pointList{
 		width:100%;

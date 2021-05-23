@@ -16,13 +16,14 @@
 						tag += "<td>"+data.i_subject+"</td>" 
 						tag += "<td>"+data.userid+"</td>"
 						tag += "<td>"+data.q_writedate+"</td>";
-						if(data.answer != null){
+						if(data.q_answer != null){
 							tag += "<td>답변완료</td>";
-							tag += "<td><button class='btn commBtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>답변보기</button></td>"; 
+							tag += "<td><button class='btn commBtn viewQnABtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>답변보기</button></td>"; 
 						}else{
 							tag += "<td>답변 대기중</td>";
-							tag += "<td><button class='btn commBtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>답변하기</button></td>"; 
+							tag += "<td><button class='btn commBtn qnaBtn' data-target='#myInfoQnAManagementMd' data-toggle='modal' value='"+data.q_num+"'>답변하기</button></td>"; 
 						}
+					
 					});
 					$("#myInfoQnAManagementTable").html(tag);
 					setMyinfoQnAManagementPaging(result.pVO);
@@ -65,10 +66,113 @@
 		$(document).on('click', "#myInfoQnAManagementTablePagingArea>ul>li>button", function(){
 			console.log("페이지 번호="+$(this).val());
 			var num = $(this).val();
-			var kategorie = $("#activitySelectbox option:checked").val();
 
-			setBoardList(num, kategorie);
+			setQnAlist(num);
 		});
+		
+		//qna 내용 불러오기
+		function setQnAContent(q_num){
+			$.ajax({
+				url : "setQnA",
+				data : {"q_num": q_num},
+				dataType : "json",
+				success : function(result){
+					console.log(result);
+					var tag = "<li>작성자 : "+result.userid+"</li>";
+					tag += "<li>등록일 : "+result.q_writedate+"</li>";
+					if(result.q_status == 1){
+						tag += "<li>공개여부 : 공개</li>";						
+					}else if(result.q_status == 2){
+						tag += "<li>공개여부 : 비공개</li>";							
+					}
+					tag += "<li class='viewQnAContent'>"+result.q_content+"</li>";
+					
+					$("#qnaTextarea").val(result.q_answer);
+					$("#viewQnA").html(tag);
+				}, error : function(e){
+					console.log("qna불러오기 실패");
+				}
+			});
+		}
+		
+		//답변보기 모달내용 세팅
+		$(document).on('click' , '.qnaBtn', function(){
+			var q_num = $(this).val();
+			setQnAContent(q_num);
+			$(".answerBtn").attr('value', $(this).val());
+		});
+		//답변 완료된 경우 답변보기
+		$(document).on('click', '.viewQnABtn', function(){
+			var q_num = $(this).val();
+			setQnAContent(q_num);
+
+			$(".answerEditBtn").attr('value', $(this).val());
+			$(".answerEditBtn").css('display', 'initial');
+			$(".answerBtn").css('display','none');
+		});
+		//답변쓰기 버튼클릭
+		$(".answerBtn").click(function(){
+			$(".myinfoQnAModalBackground").css('display','block');
+			$(".myinfoQnAAnswerArea").css('display','block');
+			$(".myinfoQnAAnswerArea>h3").text("답변 쓰기");
+			$("#qnaWriteNum").attr('value', $(this).val());
+
+		});
+		//답변수정 버튼클릭
+		$(".answerEditBtn").click(function(){
+			$(".myinfoQnAModalBackground").css('display','block');
+			$(".myinfoQnAAnswerArea").css('display','block');
+			$(".myinfoQnAAnswerArea>h3").text("답변 수정");
+			$("#qnaWriteNum").attr('value', $(this).val());
+
+		});
+		//모달 닫기
+		$(".answerCancelBtn").click(function(){
+			$(".answerEditBtn").css('display','none');
+			$(".answerBtn").css('display','initial');
+		});
+		//답변쓰기 취소버튼 클릭
+		$(".answerWriteCancelBtn").click(function(){
+			$(".myinfoQnAModalBackground").css('display','none');
+			$(".myinfoQnAAnswerArea").css('display','none');
+			$("#answerWriteForm")[0].reset();
+		});
+		
+		//답변쓰기 이벤트
+		$(".answerWriteBtn").click(function(){
+			if($(".myinfoQnAAnswerArea>ul>li>textarea").val() == '' || $(".myinfoQnAAnswerArea>ul>li>textarea").val() == null){
+				alert("답변을 입력해주세요");
+			}else{
+				if(confirm("답변을 작성하시겠습니까?")){
+					answerWrite();					
+				}
+			}
+		});
+		
+		//답변 수정하기
+		function answerWrite(){
+			$.ajax({
+				url : "QnAAnswerWrite",
+				data : $("#answerWriteForm").serialize(),
+				success : function(result){
+					if(result > 0){					
+						alert("답변이 등록되었습니다.");
+						$("#myInfoQnAManagementMd").modal("hide");
+					}
+					$(".myinfoQnAModalBackground").css('display','none');
+					$(".myinfoQnAAnswerArea").css('display','none');
+					$("#answerWriteForm")[0].reset();
+				}, error : function(e){
+					console.log("답변작성 실패");
+				}
+			})
+		}
+		
+		//검색버튼
+		$(".QnAManagementBtn").click(function(){
+			setQnAlist(1);		
+		});
+		
 	});
 </script>
 <div class="myinfoBody">
@@ -85,7 +189,7 @@
 				<form method="post" id="myinfoQnAForm" onsubmit="return false;">
 				<div class="productManagementLabelCenter">
 					<ul>
-						<li><input type="checkbox"/>답변대기</li>
+						<li><input name="searchKey" type="checkbox" value="null "/>답변대기</li>
 						<li><input type="checkbox"/>답변완료</li>
 					</ul>
 					<div class="productManagementLabelCenterDiv">
@@ -96,7 +200,7 @@
 						<input type="hidden" name="kategorie" value="seller"/>
 						<input type="hidden" name="searchKey" value="q_content"/>
 						<input type="text" name="searchWord"/>
-						<input type="button" value="검색" class="btn commBtn productManagementBtn"/>
+						<input type="button" value="검색" class="btn commBtn QnAManagementBtn"/>
 					</div>				
 				</div>	
 				</form>			
@@ -114,25 +218,39 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade mdFnt" id="myInfoQnAManagementMd">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content ">
+	<div class="modal fade mdFnt" id="myInfoQnAManagementMd"  data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content" style="height:600px">
 				<div class="modal-header ">
 				<h4 class="modal-title">QnA</h4>
 
 				</div>
-				<div class="modal-body">
-					<ul>
+				<div class="modal-body" style="text-align:right">
+					<ul id="viewQnA">
 						
-					
+					</ul>
+					<ul>
 						<li>
-							<textarea class=" mdFnt" name="shipNum" placeholder=" "></textarea>
-						</li>
-						<li><button class="btn btn-outline-dark btn-lg">답변완료</button>
-							<button class="btn btn-outline-dark btn-lg" data-dismiss="modal">취소</button>
+							<button class="btn btn-outline-dark btn-lg answerBtn">답변쓰기</button>
+							<button class="btn btn-outline-dark btn-lg answerEditBtn">답변수정</button>
+							<button class="btn btn-outline-dark btn-lg answerCancelBtn" data-dismiss="modal">취소</button>
 						</li>
 					</ul>
 				</div>
+				<div class="myinfoQnAModalBackground"></div>
+				<form method="post" id="answerWriteForm" onsubmit="return false">
+					<div class="myinfoQnAAnswerArea">
+						<h3>답변 쓰기</h3>
+						<ul>
+							<li style="display:none"><input type="hidden" id="qnaWriteNum" name="q_num" value=""/></li>
+							<li>
+								<textarea style="width:100%; height:340px; resize:none" id="qnaTextarea"name="q_answer" placeholder="답변을 입력해주세요"></textarea>
+								<button class="btn btn-outline-dark btn-lg answerWriteBtn">답변등록</button>
+								<button class="btn btn-outline-dark btn-lg answerWriteCancelBtn">등록취소</button>
+							</li>						
+						</ul>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
