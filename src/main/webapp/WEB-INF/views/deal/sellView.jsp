@@ -279,13 +279,20 @@
      	
      	//QNA관련   	
      	$(document).on('click','#QNAFrmBtn',function(){
-     		console.log(("#q_content").val(),"<--뭐가나오느데")
-  			if($("#q_content").val()==null || $("#q_content").val()==""){
-  				alert("내용을 작성한 후 질문등록 버튼을 눌러주세요 ");
-  			}else{
-  				alert("됬찌");
-  			}
+     		if($("#q_content").val()==null || $("#q_content").val()==''){
+     			alert('질문내용 작성 후 질문하기 버튼을 눌러주세요');
+     		}else{
+     			var url = "QNAInsert";
+     			var params = $("#QNAFrm").serialize();	
+     			
+     		}
      	});
+     	
+     	
+     	$("#btnClose").click(function(){
+     		$("#popup").css("display","none");
+     	});
+     	
 	});
 
 	</script>	
@@ -530,7 +537,7 @@
 					<textarea name="q_content" id="q_content" placeholder="질문을 등록해주세요."></textarea>
 				</div>
 				<div>	
-					<button class="btn cancelBtn"  id="btnClose">취소</button>
+					<input type="button" class="btn cancelBtn" id="btnClose" value="취소">
 					<input id="QNAFrmBtn" type="button" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
 				</div>
 			</form>
