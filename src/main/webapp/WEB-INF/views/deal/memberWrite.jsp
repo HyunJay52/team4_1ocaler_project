@@ -1,13 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealWriteStyle.css"/>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> 
 
 <script>
 		$(()=>{
 			$("#cancelBtn").on('click',()=>{
 				history.back();
-			});
+			});	
+			$(document).ready(function() {
+			    $('#summernote').summernote({
+			    	height: 600,
+			    	placeholder: '내용을 입력해주세요.',
+			        tabsize: 2,
+			        disableResizeEditor: true
+			    });
+			 });
+			
 		
 		
 		$(document).on('submit','#memWrite',function(){
@@ -23,7 +35,7 @@
 				alert('제목을 입력해 주세요!')
 				return false;
 			}
-			if($("#content").val()==null || $("#content").val()==''){
+			if($("#summernote").val()==null || $("#summernote").val()==''){
 				alert('내용을 입력해주세요')
 				return false;
 			}		
@@ -67,8 +79,12 @@
 	 			<br/>
 	 			<input type="text" id ="subject" name="s_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
 	 			<input type="number" id ="cnt" name="s_cnt" placeholder="모집인원"/>
-	 			<textarea name="s_content" id ="content" placeholder="내용을 입력해주세요."></textarea>
-	 			<script>CKEDITOR.replace("s_content");</script>
+	 			
+	 			<textarea id="summernote" name="s_content"></textarea>
+	 			
+	 			
+	 			<!-- <textarea name="s_content" id ="content" placeholder="내용을 입력해주세요."></textarea>
+	 			<script>CKEDITOR.replace("s_content");</script> -->
 	 			
 	 		
 	 			<span style="font:bold;">판매기한 &ensp; : &ensp;</span>

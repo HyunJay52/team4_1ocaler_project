@@ -12,7 +12,7 @@
 		<h3 style="margin-top:50px;">#자유게시판 <span style="font-size:16px">| 자유롭게 의견을 나눠보세요 </span></h3>
 
 		<div id="coummuBoardMaincenter">
-				<table cellpadding="0" cellspacing="0" style="width:1300px ;height: 300px;" class="table">
+				<table cellpadding="0" cellspacing="0" style="width:1300px ;" class="table">
 					<tbody>
 						<tr height="41px">
 							<th>글번호</th>
@@ -44,7 +44,7 @@
 							<td> ${vo.numlike }</td>
 						</tr>
 						<tr style="text-align: left; padding-right: 20px;font-size: 12px;color:gray;">
-							<td colspan="6" style="height: 10px;padding: 0px;padding-top: 0px;">${vo.b_tag }</td>
+							<td id ="tag" colspan="6">${vo.b_tag }</td>
 						</tr>
 						</c:forEach>
 					</tbody>

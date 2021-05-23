@@ -328,5 +328,4 @@ public class OrderVO {
 		this.reviewCount = reviewCount;
 	}
 	
-	
 }

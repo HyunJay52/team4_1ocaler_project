@@ -57,23 +57,30 @@
  	
       
       <h3 style="margin-top:50px;">#동네직구 <span style="font-size:20px">| 지역 주민들과 나눔</span></h3>
-      <span style="display: inline-block; font-size:20px; float:right; margin-bottom: 6px;">
-      	<a href="memberBoard?s_cate=1&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">식료품</a>&ensp;<span style="font-size:10px; ">|</span>&nbsp;
-      	<a href="memberBoard?s_cate=2&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">생필품</a>&ensp;<span style="font-size:10px; ">|</span>&ensp; 
-      	<a href="memberBoard?s_cate=3&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">기 타</a>&ensp; 
-      </span>
       
-      <div id="commuSearch" style="height: 30px;">
-				<form method="get" action="memberBoard" id="commuForm">
-					<select name="searchKey">
-						<option value="s_content">내용</option>
-						<option value="s_subject">제목</option>		
-						<option value="s_gu">지역검색</option>
-						<option value="userid">작성자</option>			
-					</select>
-						<input type="text"name ="searchWord" placeholder=" &nbsp;검색.." id="search"/>
-						<input type="image" id="btn" src="img/deal/icons8.png" style="display:block; float:left; border: 1px solid #000;" /> 
-				</form>
+      
+      
+   
+      <div id="commuSearch" style="height: auto; width:1300px;">
+		  <div style="float:left; margin-bottom: 6px; width: 30%;height:58px;line-height: 3.8;">		      
+	         <span style="display: inline-block; font-size:20px; margin-left:12px">
+		      	<a href="memberBoard?s_cate=1&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">식료품</a>&ensp;<span style="font-size:10px; ">|</span>&nbsp;
+		      	<a href="memberBoard?s_cate=2&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">생필품</a>&ensp;<span style="font-size:10px; ">|</span>&ensp; 
+		      	<a href="memberBoard?s_cate=3&s_gu=<c:if test="${logName!=null && logName!='' }">${logLoc_gu }</c:if><c:if test="${logId==null }">강서구</c:if>">기 타</a>&ensp; 
+		      </span>
+	      </div>
+	      <div style="float:left; margin-bottom: 6px; width: 70%; text-align: right;">
+			<form method="get" action="memberBoard" id="commuForm">
+				<select name="searchKey">
+					<option value="s_content">내용</option>
+					<option value="s_subject">제목</option>		
+					<option value="s_gu">지역검색</option>
+					<option value="userid">작성자</option>			
+				</select>
+					<input type="text"name ="searchWord" placeholder=" &nbsp;검색.." id="search"/>
+					<input type="image" id="btn" src="img/deal/icons8.png" style="display:block; float:left;margin-top: 21; border: 1px solid #000;" /> 
+			</form>
+		</div>	
       </div>	         
                   
                
@@ -101,7 +108,7 @@
                            <li class="wordcut">${vo.s_subject }</li>
                            
                            <li style="text-align: center; font-size: 20px">
-                              <span class="cntJoin">3</span>
+                              <span class="cntJoin">${appNum}</span>
                               /${vo.s_cnt } 개
                            </li>
                            <li>${vo.s_price }원</li>
@@ -125,7 +132,7 @@
             <ul id="MBPaging">
                <c:if test="${pageVO.pageNum>1}">
 					<li>
-						<a href='memberBoard?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>'>이전</a></li>
+						<a href='memberBoard?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if><c:if test="${pageVO.s_gu!=null && pageVO.s_gu!=''}">&s_gu=${pageVO.s_gu}</c:if><c:if test="${pageVO.s_cate!=null && pageVO.s_cate!=''}">&s_cate=${pageVO.s_cate}</c:if>'>이전</a></li>
 				</c:if>
 				<c:if test="${pageVO.pageNum<=1}">
 					<li>이전</li>
@@ -134,17 +141,17 @@
 					<c:if test="${p<=pageVO.totalPage}">
 						<c:if test="${p==pageVO.pageNum}">
 						<!-- 현재페이지일떄 -->
-							<li style="background-color:#d9d9d9"><a href="memberBoard?pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a></li>
+							<li style="background-color:#d9d9d9"><a href="memberBoard?pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if><c:if test="${pageVO.s_gu!=null && pageVO.s_gu!=''}">&s_gu=${pageVO.s_gu}</c:if><c:if test="${pageVO.s_cate!=null && pageVO.s_cate!=''}">&s_cate=${pageVO.s_cate}</c:if>">${p}</a></li>
 						</c:if>
 						<c:if test="${p!=pageVO.pageNum}">
 						<!-- 현재페이지가 아닐때 -->
-							<li><a href="memberBoard?pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a></li>
+							<li><a href="memberBoard?pageNum=${p}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if><c:if test="${pageVO.s_gu!=null && pageVO.s_gu!=''}">&s_gu=${pageVO.s_gu}</c:if><c:if test="${pageVO.s_cate!=null && pageVO.s_cate!=''}">&s_cate=${pageVO.s_cate}</c:if>">${p}</a></li>
 						</c:if>
 					</c:if>		
 				</c:forEach>			
 				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
 					<li>
-						<a href="memberBoard?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">다음</a></li>
+						<a href="memberBoard?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if><c:if test="${pageVO.s_gu!=null && pageVO.s_gu!=''}">&s_gu=${pageVO.s_gu}</c:if><c:if test="${pageVO.s_cate!=null && pageVO.s_cate!=''}">&s_cate=${pageVO.s_cate}</c:if>">다음</a></li>
 				</c:if>	
 				<c:if test="${pageVO.pageNum==pageVO.totalPage || pageVO.totalPage==0}">
 					<li>다음</li>

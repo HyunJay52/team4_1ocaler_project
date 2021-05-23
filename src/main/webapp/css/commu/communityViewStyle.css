@@ -27,10 +27,13 @@
 		color:#181b46;
 	}
 	#commuViewMain{
-		/* overflow:auto; */
+		overflow:auto; 
 		width:1300px;
 		margin:80 auto;
-		height: 1000px ;
+		height: auto ;
+	}
+	#commuImgProf img{
+		border-radius: 70%;
 	}
 		
 	/* 게시글 */
@@ -195,6 +198,7 @@
  		margin-top:40px;
  		width:1300px;
  		float: left;
+ 		
  	}
  	
  	
@@ -240,15 +244,22 @@
  		margin-bottom:5px;
  		padding-left: 15px;
  		padding-bottom:10px;
- 		border-bottom: 1px solid rgb(252 212 65);
+ 		border-bottom: 1px solid lightgray;
  		
  		
  	}
  	#replyEdit{
  		float: left;
+ 		border-bottom: 1px solid lightgray;
 
  	}
- 	
+ 	#replyEdit form{
+ 		margin-bottom: 10px;
+ 		
+ 	}
+ 	#replyEdit h4{
+ 		display: inline;
+ 	}
  		
 /* 	input[type="submit"]{
 		text-align: right;
@@ -320,6 +331,22 @@
 		color: #fff;
 		background: rgb(0 128 64);
 }
+	.editBtn{
+		color: #343a40;
+	    border-color: #343a40;
+	    width: 64px;
+	    font-size: 13px;
+	    padding: 4px;
+	    margin-left: 8px;
+    	margin-top: -20px;
+
+	}
+
+	.editBtn:hover {
+	    color: #fff;
+	    background-color: #343a40;
+	    border-color: #343a40;
+	}
 	
 	
 	
