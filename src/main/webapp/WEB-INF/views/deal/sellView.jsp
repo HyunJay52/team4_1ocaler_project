@@ -268,6 +268,24 @@
      		}
      	})
     	
+     	
+     	
+     	
+     	
+     	
+     	
+     	
+     	
+     	
+     	//QNA관련   	
+     	$(document).on('click','#QNAFrmBtn',function(){
+     		console.log(("#q_content").val(),"<--뭐가나오느데")
+  			if($("#q_content").val()==null || $("#q_content").val()==""){
+  				alert("내용을 작성한 후 질문등록 버튼을 눌러주세요 ");
+  			}else{
+  				alert("됬찌");
+  			}
+     	});
 	});
 
 	</script>	
@@ -502,20 +520,18 @@
 		
 		<!-- Q&A 팝업 div -->	
 		<div id="popup" style="z-index: 99;">
-			<form method="post" action ="">
+			<form id="QNAFrm" method="post">
 				<div class="checks etrans">
 					<h4 style="color:#000">질문을 등록해주세요.</h4> &emsp;
-					<input type="checkbox" name="q_status" value="1" id="ex_chk3" class="cbBtn">
-					<label for="ex_chk3" > 공개 </label> &emsp;
-	     			<input type="checkbox" name="q_status" value="2" id="ex_chk4" class="cbBtn">
-					<label for="ex_chk4"> 비공개 </label>
+					<input type="checkbox" name="q_status" value="1" id="ex_chk3" class="cbBtn" checked><label for="ex_chk3" > 공개 </label> &emsp;
+	     			<input type="checkbox" name="q_status" value="2" id="ex_chk4" class="cbBtn"><label for="ex_chk4"> 비공개 </label>
 	     		</div>
 				<div>
-					<textarea name="q_content" id="content" placeholder="질문을 등록해주세요."></textarea>
+					<textarea name="q_content" id="q_content" placeholder="질문을 등록해주세요."></textarea>
 				</div>
 				<div>	
 					<button class="btn cancelBtn"  id="btnClose">취소</button>
-					<input type="submit" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
+					<input id="QNAFrmBtn" type="button" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
 				</div>
 			</form>
 		</div>
