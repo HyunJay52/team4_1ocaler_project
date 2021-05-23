@@ -70,24 +70,37 @@
 		height: 70px;
 	}
 	
+	
+	#btn{  
+		width:37px; 
+		height: 37px ; 
+		padding: 2px
+	}		
+	/* 검색 */
+	
+	#commuForm{
+	    margin-left: 247px;
+	}
+	select{
+		
+		height: 37px ; 
+		border:1px solid black;
+		float:left; 
+		
+		width: 100;
+	   margin-right: 12;
+	    margin-top: 21;
+	}
+		
 	#search{
 		float:left;
 		border:1px solid black;  
 		border-right: none;
-		height: 30px;
-	}
-	#btn{  
-		width:30px; 
-		height: 30px ; 
-		padding: 2px
-	}		
-	select{
-		height: 30px ; 
-		border:1px solid black;
-		float:left; 
-		margin-right: 4px }
-		
-		
+		height: 37px;
+	    width: 500px;
+	    margin-top: 21;
+	  
+	}	
    #selSearch input[type=text]{
       height:40px;
       width:800px;
@@ -110,6 +123,7 @@
    	  	height: 248px;
    	  	margin-bottom: 10px;
    	  	border-bottom: 1px solid gray;
+   	  	
    } 
    
    #sellImgDiv img{
@@ -126,8 +140,8 @@
    
    #selBoard{
    	  width:1300px; 
-      height:440px;
-    
+      height:550px;
+   	  margin-top: 90px;
    }
    
    /* 하나씩보기 */
@@ -168,11 +182,12 @@
        white-space:nowrap;
        overflow:hidden;
        text-overflow:ellipsys;
+       margin-top:5px;
      }
      .cntJoin {
        font-size: 22px;
        font-weight: bold;
-       color: #3f1785;
+       color: red;
    }
    
    /* 상품내용 */
@@ -196,6 +211,7 @@
       padding-left: 15px;
       margin : 8 0 ;
    }
+  /*  가격 */
    #selList>div>ul li:nth-child(3){
       float: left;
       width: 50%;
@@ -203,15 +219,15 @@
       line-height: 26px;
       font-size: 23px;
       font-weight: bold;
-      color: #3f1785;
-      margin : 8 0 ;
+      color: orange;
+      margin : 10 0 ;
    }
    #selList>div>ul li:nth-child(4){
       width: 100%;
       font-size: 13px;
       color:gray;
       text-align: center;
-      margin : 6 0 ;
+      margin : 4 0 ;
    }
    #selList>div>ul li:nth-child(5){
       width: 100%;
@@ -219,24 +235,32 @@
       text-align: right;
       line-height: 40px;
    }
+   
+   /* 플필이미지 */
    #selList>div>ul>li:nth-child(5) img{
       width: 40px;
       height: 40px;
       text-align: right;
       margin: 0px;
       padding: 0px;
+      border-radius: 70%;
       
    }
    #selList:hover{
       border: 1px solid #571fb8;
    }
    
-   
+   span a:link{
+   	    color: #222;
+    	text-decoration: none;
+   		font-family: 'Nanum Gothic', sans-serif;
+    	font-size: 16px;
+   }
     
    /* 버튼 스타일 클래스 모음 */
 
    a:active, a:link, a:visited {
-    color:#3f1785;
+    color:#222;
     text-decoration: none;
     font-family: 'Nanum Gothic', sans-serif;
 }

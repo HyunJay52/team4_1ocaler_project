@@ -87,6 +87,11 @@
   		margin-top: -8px;
 	}
 
+	/* 유저아이디 */
+	#userImgPop img {
+		border-radius: 70%;
+		
+	}
 	
 	#dealInfo>ul li:nth-child(9){
 		width: 100%;	
@@ -94,21 +99,25 @@
 	}
 	
 	#dealInfo>ul>li>ul li:nth-child(1){ 
-		width: 30%; 
+		width: 40%; 
 		font-size: 18px;
 		margin: 0px;
 	}
 	#dealInfo>ul>li>ul li:nth-child(2){ 
-		width: 70%; 
+		width: 60%; 
 		font-size: 18px;
 		margin: 0px;
 	}
+	
+	/* x태그 */
 	#dealInfo>ul li:nth-child(8){
-		text-align: left; 
+		text-align: center; 
 		font-size: 14px; 
 		color: gray; 
-		margin: 7px 0px;
-		padding-left: 30px;
+		margin-bottom:13px;
+		
+		
+		
 	}
 
 	.commBtn { 
@@ -127,9 +136,9 @@
 		font-weight: bold;
 	}
 	
-	.commBtnDeal { 
-		width: 100px; 
-		margin: -5px 60px;
+	.withCommBtnDeal { 
+		width: 550px; 
+		margin:11px 60px;
 		color: #3f1785;
 		border: 1px solid #3f1785;
 		height: 45px;
@@ -215,7 +224,7 @@
    	#boardInfo{ 
    		width: 1300px; 
    		margin: 25px 0px; 
-   		height:100px;
+   		height:auto;
    		float: left;
    		padding:10px;
    		border: 1px solid #fff;
@@ -736,3 +745,11 @@
 	  text-align: center;
 	  border: 1px solid #3f1785;
 }  	
+
+
+
+#WVPProfilePopup>div:nth-child(5)>button {
+    float: left;
+    display: block;
+    margin: 15px -53px 10px 88px;
+}
