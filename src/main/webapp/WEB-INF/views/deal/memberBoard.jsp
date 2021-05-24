@@ -108,7 +108,7 @@
                            <li class="wordcut">${vo.s_subject }</li>
                            
                            <li style="text-align: center; font-size: 20px">
-                              <span class="cntJoin">${appNum}</span>
+                              <span class="cntJoin">${vo.dealjoinCnt}</span>
                               /${vo.s_cnt } 개
                            </li>
                            <li>${vo.s_price }원</li>

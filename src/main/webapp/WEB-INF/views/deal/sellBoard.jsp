@@ -99,7 +99,7 @@ $(function(){
                           <li class="wordcut">${itemVO.i_subject }</li>
                           
                           <li>
-                             <span class="cntJoin">&nbsp;&nbsp;5</span>
+                             <span class="cntJoin">&nbsp;&nbsp; ${pageVO.selljoinCnt }</span>
                              /${itemVO.i_cnt }개
                           </li>
                           <li>${itemVO.i_price}원</li>

@@ -22,9 +22,17 @@ public class DealPageVO {
 	
 	private int num;
 	
+	private int selljoinCnt;
 	
 	
 	
+	
+	public int getSelljoinCnt() {
+		return selljoinCnt;
+	}
+	public void setSelljoinCnt(int selljoinCnt) {
+		this.selljoinCnt = selljoinCnt;
+	}
 	public int getNum() {
 		return num;
 	}

@@ -20,7 +20,23 @@
 			    });
 			 });
 			
+		$(document).on('keyup','#cnt', function() {
+			var regex= /^[0-9]/g;
+			if (!regex.test($("#cnt").val())) {
+				this.value=this.value.replace(/[^0-9]/g,'');
+				alert('모집인원은 숫자만 입력해주세요');
+			}
+			
+		});
 		
+		$(document).on('keyup','#price', function() {
+			var regex= /^[0-9]/g;
+			if (!regex.test($("#price").val())) {
+				this.value=this.value.replace(/[^0-9]/g,'');
+				alert('판매가격은 숫자만 입력해주세요');
+			}
+			
+		});
 		
 		$(document).on('submit','#memWrite',function(){
 			if($("#s_cate").val()==null || $("#s_cate").val()=='' ){
@@ -35,14 +51,21 @@
 				alert('제목을 입력해 주세요!')
 				return false;
 			}
-			if($("#summernote").val()==null || $("#summernote").val()==''){
-				alert('내용을 입력해주세요')
-				return false;
-			}		
 			if($("#cnt").val()==null || $("#cnt").val()==''){
 				alert('모집 인원을 입력해 주세요!')
 				return false;
 			}
+			
+			if($("#summernote").val()==null || $("#summernote").val()==''){
+				alert('내용을 입력해주세요')
+				return false;
+			}	
+		
+			if($("#date").val()==null || $("#date").val()==''){
+				alert('날짜를 입력해 주세요!')
+				return false;
+			}
+			
 		
 			if($('#price').val()==null || $('#price').val()==''){
 				alert('판매 가격을 입력해 주세요!')
@@ -50,6 +73,15 @@
 			}
 			if($("#s_img1").val()=='' ){
 				alert('상품 이미지 1개를 선택해 주세요')
+				return false;
+			}
+			if($('#loc').val()==null || $('#loc').val()==''){
+				alert('약속 장소를 입력해 주세요!')
+				return false;
+			}
+			
+			if($('#tag').val()==null || $('#tag').val()==''){
+				alert('태그를 입력해 주세요!')
 				return false;
 			}
 		
@@ -62,7 +94,7 @@
 	<div id="dealWnEMain">
 		<div>
 		
-			<h4 >동네직구 글쓰기 </h4>
+			<h3 style="margin-bottom: 24px;	color:gray;">동네직구 글쓰기 </h3>
 			
 			<form method="post" action="memWriteOk" enctype="multipart/form-data" id="memWrite">
 				<select name="s_cate" id="s_cate">
@@ -77,7 +109,7 @@
 					<option value="2">판매완료</option>			
 				</select>				
 	 			<br/>
-	 			<input type="text" id ="subject" name="s_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />
+	 			<input type="text" id ="subject" name="s_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요."  style="margin-bottom:25px;"/>
 	 			<input type="number" id ="cnt" name="s_cnt" placeholder="모집인원"/>
 	 			
 	 			<textarea id="summernote" name="s_content"></textarea>

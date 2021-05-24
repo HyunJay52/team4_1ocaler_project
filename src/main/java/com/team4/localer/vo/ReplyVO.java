@@ -8,10 +8,30 @@ public class ReplyVO {
 	private String rep_date;
 	
 	
+	private int newDate;
 	
 	
 	
 	
+	
+	public int getNewDate() {
+		return newDate;
+	}
+
+
+
+
+
+
+	public void setNewDate(int newDate) {
+		this.newDate = newDate;
+	}
+
+
+
+
+
+
 	public int getNum() {
 		return num;
 	}
