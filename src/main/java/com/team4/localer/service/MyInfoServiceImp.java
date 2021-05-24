@@ -210,6 +210,12 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.QnAAnswerWrite(vo);
 	}
 	
+//	QNA 글쓰기(WOW)
+	@Override
+	public int QnaQuestionInsert(QnAVO vo) {
+		return dao.QnaQuestionInsert(vo);
+	}
+
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	@Override
 	public List<JoinUsVO> selectWaitingJoinList(String userid) {
@@ -222,7 +228,6 @@ public class MyInfoServiceImp implements MyInfoService{
 		// qna 가져오기
 		return dao.selectAllmyqna(userid);
 	}
-
 
 
 }
