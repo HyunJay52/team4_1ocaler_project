@@ -29,12 +29,12 @@
 		});
 	});	
 </script>
-
+<%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<form method="post" action="myinfoSellerOk" id="myinfoSellerFrm" enctype="multipart/form-data">
 		<div class="basicMyinfo">
-		<div class="basicMyinfoHeader">판매자 정보</div>
+		<div class="basicMyinfoHeader" style="margin-bottom: 30px;">판매자 정보</div>
 			<ul>
 				<li>대표 이미지</li>
 				<li class="memheightAuto">
@@ -87,7 +87,7 @@
 					</ul>
 				</li>
 				<li>계좌정보</li>
-				<li>
+				<li style="height: auto">
 					<ul id="bankInput"  style="height: auto;">
 						<li><input type="text" name="acc_name" id="acc_name" class="inputDisabled" value="${myVO.acc_name }"/>
 							<br/><span id="checkSellAccName"></span>
@@ -107,7 +107,7 @@
 					</ul>
 				</li>
 				<li>인사말</li>
-				<li><textarea name="sel_content" id="mem_content" style="width:318px; height:62px; padding: 5px; resize:none"
+				<li style="height: auto;"><textarea name="sel_content" id="mem_content" style="width:320px; height:150px; padding: 5px; resize:none; border: 1px solid #ddd"
 						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.sel_content }</textarea>
 				</li>
 								
@@ -116,12 +116,12 @@
 			<button type="button" id="moreSellerInfo" class="btn commBtn Mem_lgBtn"
 				style="width: 320px; height: 40px; display: block; margin: 0 auto;">수정하기</button>
 			<div class="editOn" id="sellerEditOn">
-				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정</button>
-				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
+				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">수정</button>
+				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">취소</button>			
 			</div>
 			<div style="text-align:center; margin-bottom:20px">
-				<button type="button" class="btn commBtn" style="width:320px">셀러활동 중단</button>
-				<br/><button type="button" class="btn cancelBtn" style="width:320px" data-target="#myinfoMd" data-toggle="modal">셀러 탈퇴</button>
+				<button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;">셀러활동 중단</button>
+				<br/><button type="button" class="btn cancelBtn" style="width:320px;  height:45px; margin: 5px auto;" data-target="#myinfoMd" data-toggle="modal">셀러 탈퇴</button>
 			</div>
 		</div>
 	</form>

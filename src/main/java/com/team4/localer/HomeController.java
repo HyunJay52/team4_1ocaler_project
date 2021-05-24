@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.BoardService;
 import com.team4.localer.service.DealShareService;
 import com.team4.localer.service.HomeService;
 import com.team4.localer.service.JoinUsService;
 import com.team4.localer.service.SellerService;
+import com.team4.localer.vo.BoardVO;
 import com.team4.localer.vo.DealShareVO;
 import com.team4.localer.vo.GroupVO;
 import com.team4.localer.vo.SellitemVO;
@@ -34,6 +36,8 @@ public class HomeController {
 	DealShareService dealService;
 	@Inject
 	SellerService sellerService;
+	@Inject
+	BoardService boardService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(HttpSession ses) {
@@ -53,6 +57,11 @@ public class HomeController {
 		SellitemVO sVO = new SellitemVO();
 		List<SellitemVO> selList = sellerService.selectAllitem();
 		mav.addObject("selVO", selList);
+		
+		//쓱싹 레시피 리스트
+		BoardVO bVO = new BoardVO();
+		List<BoardVO> bList = boardService.selectIndexRecipe();
+		mav.addObject("bVO", bList);
 		
 		mav.setViewName("home");
 		

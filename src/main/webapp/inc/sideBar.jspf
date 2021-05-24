@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
+<<<<<<< HEAD
 <script src="http://localhost:82/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
 // 	$(document).ready(function(){
+=======
+
+<!-- <script>
+	$(document).ready(function(){
+>>>>>>> refs/remotes/origin/totalMergeTest
 		
 // 		var socket;
 		
@@ -167,8 +173,13 @@
 // 			}	
 // 		});
 		
+<<<<<<< HEAD
 // 	});
 </script>
+=======
+	});
+</script> -->
+>>>>>>> refs/remotes/origin/totalMergeTest
 
 <ul id="sideBar">
 	<li>MENU</li>
@@ -241,4 +252,3 @@
 	</div>
 	
 </div>
-

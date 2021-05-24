@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/deal/dealSellViewStyle.css"/>
 <style>
-
 	.facker[type=checkbox]{ display:none; }
 	#sellInfo>div:first-child>input[type=checkbox] + label { display: inline-block; cursor: pointer; line-height: 22px; padding-left: 22px; background: url("<%=request.getContextPath()%>/img/deal/sellLikeE.png") left/22px no-repeat; }
 	#sellInfo>div:first-child>input[type=checkbox]:checked + label { background-image: url("<%=request.getContextPath()%>/img/deal/sellLikeF.png"); }
@@ -166,8 +165,6 @@
        			total = total + result - price;   			
        		}
        		
-       		
-       		
 			//수량 및 총수량 계산시 --> 누르고난 다음의 수량과 , 원래 저장되있던 수량을 비교하여 배열 및 총수량 계산  		
        		if(count[$(".choice").index(this)]<numbers){
        			count[$(".choice").index(this)] = count[$(".choice").index(this)]+1
@@ -184,15 +181,6 @@
        		console.log(counts,"<-- 총수량 계산중");
        		console.log(count,"<-- 수량 배열");
        		console.log(total,"<--총가격 계산");
-       		
-
-       		
-       		
-       		
-       		
-       			
-       		
-       		
        		
        		//총 변경되는 값을 변경해줘야함
        		$("#i_price").val(total);
@@ -223,6 +211,41 @@
     		})//ajax end   		
     	})  	
     	
+		//좋아요	
+		if(${logId!=null}){
+			$("#sellLike").on('click',function(){
+				if($("#sellLike").is(':checked')){			
+					var url = "likeInsert";
+					var params = "numLike="+$("#sellLike").val();	
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 추가 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+				}else{
+					var url = "likeDelete";
+					var params = "numLike="+$("#sellLike").val();
+					$.ajax({
+						url : url,
+						data : params,
+						success : function(result){
+							console.log(result,"좋아요 삭제 성공");
+						},error :function(request,status,error){
+							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						}
+					})
+					
+				}
+			});	
+		}//좋아요 end
+    	
+    	
+    	
+    	
     	 
     	$("#sellBuyFrm").submit(function(){
     		if($("#o_price").val()==0 || $("#i_cnt").val()==0){
@@ -235,8 +258,52 @@
      		location.href="selBard";
      	});
      	
+     	$("#modifyBtn").click(function(){	
+     		location.href="modifySellView?i_num=${itemVO.i_num }";
+     	});
      	
+     	$("#deleteBtn").click(function(){
+     		if(confirm('해당 게시글을 삭제하시겠습니까?')){
+     			location.href="deleteSellView?i_num=${itemVO.i_num }&userid=${itemVO.userid}";
+     		}
+     	})
     	
+     	
+     	
+     	
+     	
+     	
+     	
+     	
+     	
+     	
+     	//QNA관련   	
+     	$(document).on('click','#QNAFrmBtn',function(){
+     		if($("#q_content").val()==null || $("#q_content").val()==''){
+     			alert('질문내용 작성 후 질문하기 버튼을 눌러주세요');
+     		}else{
+     			var url = "QNAInsert";
+     			var params = $("#QNAFrm").serialize();	
+     			
+     			$.ajax({
+     				url:url,
+     				data:params,
+     				success:function(result){
+     					alert('성공');
+     					$("#q_content").val("");
+     					$("#q_content").css("display","none");
+     				},error:function(e){
+     					alert('실패');
+     				}
+     			})
+     		}
+     	});
+     	
+     	
+     	$("#btnClose").click(function(){
+     		$("#popup").css("display","none");
+     	});
+     	
 	});
 
 	</script>	
@@ -275,8 +342,9 @@
 					<div id="sellInfo">	
 						<div> 
 							<input type="text" id="i_subject" name="i_subject" value="${itemVO.i_subject }" readonly>
-							<input class="facker" type="checkbox" name="numLike" id="sellLike" value="" /><label for="sellLike"></label>
+							<input class="facker" type="checkbox" name="numLike" id="sellLike" value="${itemVO.i_num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==itemVO.i_num && logId==likes.userid }">checked</c:if></c:forEach>/><label for="sellLike"></label>
 						</div>
+						
 						<div>
 						
 							<ul>
@@ -288,7 +356,7 @@
 								<li><span style="font-weight:bold; font-size:18px;">${itemVO.i_writedate } ~ ${itemVO.i_period }</span></li>
 								<li> 판매자</li>
 								<li>
-									<a href="sellerInfo?userid=${itemVO.userid }"><span style="font-size:16px;">${itemVO.userid }</span><img style="width:35px; height:35px; margin-left:10px;" src="<%=request.getContextPath() %>/img/sel_prof/${itemVO.sel_prof}"/></a>
+									<a href="sellerInfo?userid=${itemVO.userid }"><span style="font-size:16px;">${itemVO.userid }</span><img style="width:35px; height:35px; margin-left:10px; border-radius:100px;" src="<%=request.getContextPath() %>/img/sel_prof/${itemVO.sel_prof}"/></a>
 								</li>
 							</ul>
 								<hr style="margin-top: -9px;"/>
@@ -321,9 +389,8 @@
 							<hr/>
 							
 							<div style="float:left; width:350px;">
-								<span style="font-size:1.75em; color:gray; font-weight:bold; padding-left:20px;">총상품 금액(</span>
-								<input type='number'  id='i_cnt' name='o_cnt' value=0 readonly>
-								<span style="font-size:1.75em; color:gray; font-weight:bold;">EA)</span>
+								<span style="font-size:1.75em; color:gray; font-weight:bold; padding-left:20px;">총상품 금액</span>
+								<input type='number'  id='i_cnt' name='o_cnt' value=0 style="display:none;" readonly>
 							</div>
 							<div style="float:left; width:250px; height:36px;">
 								<input type="number" id="i_price" name="o_price" value="0" readonly/>
@@ -336,9 +403,18 @@
 						</div>
 						
 						<div id="submitCancleBtn">
-							<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
-							<input type="submit" value="구매하기" class="btn commBtnSell"/>
+							<c:if test="${logId!=itemVO.userid }">
+								<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
+								<input type="submit" value="구매하기" class="btn confBtn"/>
+							</c:if>
+							<c:if test="${logId==itemVO.userid }">
+								<input type="button" id="deleteBtn"  value="삭제하기" class="btn commBtnSell"/>
+								<input type="button" id="modifyBtn" value="수정하기" class="btn confBtn"/>
+							</c:if>
+							
 						</div>
+						
+						<input type='hidden' name="userid" value="${itemVO.userid}">
 						<input type='hidden' name="num" value="${itemVO.i_num }">
 						<input type='hidden' id="opt_str" name='opt_str' value=''>
 						<input type='hidden' name='i_userid' value="${itemVO.userid }">
@@ -351,7 +427,7 @@
 				
 		<!-- 1 -->
 		<div class="locationBar" id="locationBar">
-			<div id="sellDetailShow" style="border-bottom: 3px solid gray;">
+			<div id="sellDetailShow" style="border-bottom: 3px solid navy;">
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div>
@@ -374,7 +450,7 @@
 			<div>
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
-			<div id="sellReviewChk" style="border-bottom: 3px solid gray;">
+			<div id="sellReviewChk" style="border-bottom: 3px solid navy;">
 				<a href="#sellReviewChk">리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</a>
 			</div>
 			<div>
@@ -421,7 +497,7 @@
 			<div>
 				<a href="#sellReviewChk">리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</a>
 			</div>
-			<div id="sellQusetion" style="border-bottom: 3px solid gray;">
+			<div id="sellQusetion" style="border-bottom: 3px solid navy;">
 				<a href="#sellQusetion">Q&A (4)</a>	
 			</div>
 		</div>
@@ -462,21 +538,20 @@
 		
 		<!-- Q&A 팝업 div -->	
 		<div id="popup" style="z-index: 99;">
-			<form method="post" action ="">
+			<form id="QNAFrm" method="post">
 				<div class="checks etrans">
 					<h4 style="color:#000">질문을 등록해주세요.</h4> &emsp;
-					<input type="checkbox" name="q_status" value="1" id="ex_chk3" class="cbBtn">
-					<label for="ex_chk3" > 공개 </label> &emsp;
-	     			<input type="checkbox" name="q_status" value="2" id="ex_chk4" class="cbBtn">
-					<label for="ex_chk4"> 비공개 </label>
+					<input type="checkbox" name="q_status" value="1" id="ex_chk3" class="cbBtn" checked><label for="ex_chk3" > 공개 </label> &emsp;
+	     			<input type="checkbox" name="q_status" value="2" id="ex_chk4" class="cbBtn"><label for="ex_chk4"> 비공개 </label>
 	     		</div>
 				<div>
-					<textarea name="q_content" id="content" placeholder="질문을 등록해주세요."></textarea>
+					<textarea name="q_content" id="q_content" placeholder="질문을 등록해주세요."></textarea>
 				</div>
 				<div>	
-					<button class="btn cancelBtn"  id="btnClose">취소</button>
-					<input type="submit" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
+					<input type="button" class="btn cancelBtn" id="btnClose" value="취소">
+					<input id="QNAFrmBtn" type="button" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
 				</div>
+				<input type="hidden" name="num" value="${itemVO.i_num }">
 			</form>
 		</div>
 		

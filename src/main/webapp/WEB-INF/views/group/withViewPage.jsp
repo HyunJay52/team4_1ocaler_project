@@ -66,7 +66,7 @@
 			
 			
 		//참여하기=================================================================	
-		if(${logId!=null}){
+			if(${logId!=null}){
 			$("#withViewPageJoinBtn").click(()=>{
 				var url = "joinInsert";
 				var params = "num="+$("#withViewPageJoinBtn").val();
@@ -91,14 +91,18 @@
 		}
 		
 		//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
-		var joinCheck = $("#withViewPageJoinBtn").attr("disabled");
+		var joinCheck = $("#withViewPageJoinBtn").prop("disabled");
 		console.log(joinCheck);
-		if(joinCheck=='disabled'){
+		if((${appNum==vo.g_cnt } && joinCheck==false) || (${appNum==vo.g_cnt } && joinCheck==true) ){
+			$("#withViewPageJoinBtn").children("span").text('모집종료');
+			$("#withViewPageJoinBtn").css('background',"#B8B2F4");
+			$("#withViewPageJoinBtn").css('opacity',1);
+			$("#eatViewPageJoinBtn").attr("disabled",true);
+		}else if(${appNum!=vo.g_cnt } && joinCheck==true){
 			$("#withViewPageJoinBtn").children("span").text('신청완료');
 			$("#withViewPageJoinBtn").css('background',"#B8B2F4");
 			$("#withViewPageJoinBtn").css('opacity',1);
-			
-			
+			$("#withViewPageJoinBtn").attr("disabled",true);
 		}				
 		//지도============================================================================================
 		var markers = [];	
@@ -262,6 +266,7 @@
 
 </head>
 <body id="withViewPageBody">
+<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="withViewPageMap" style="width:2000px; height:1200px; position:relative; overflow:hidden;"></div>
 	
 	<!-- 맨위 폼 -->

@@ -2,6 +2,7 @@ package com.team4.localer.dao;
 
 import java.util.List;
 
+import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
@@ -13,6 +14,7 @@ import com.team4.localer.vo.MyinfoDealVO;
 import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
+import com.team4.localer.vo.QnAVO;
 
 public interface MyInfoDAO {
 	//내 정보 조회
@@ -80,6 +82,14 @@ public interface MyInfoDAO {
 	//통계list
 	public List<OrderVO> statisList(String userid,String month);
 
+	//==판매관리 부분===
+	//레코드 개수 
+	public int managementCount(AdminPageVO pageVO);
+	//판매관리 리스트 
+	public List<OrderVO> manageList(AdminPageVO pageVO);
+	
+	
+
 	//리뷰가능한 상품리스트 조회
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
 	
@@ -98,8 +108,23 @@ public interface MyInfoDAO {
 	//내가 작성한 작성글, 댓글, QnA Count
 	public int selectMyBoardCount(MyinfoPageVO vo);
 	
+	//특정 QnA 불러오기
+	public QnAVO setQnA(int q_num, String userid);
+	
+	//QnA 답변 쓰기
+	public int QnAAnswerWrite(QnAVO vo);
+	
+	// QnA 글쓰기 (21-05-24 WOW)
+	public int QnaQuestionInsert(QnAVO vo);
+	
+	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	//참여정보 
 	public List<JoinUsVO> selectWaitingJoinList(String userid);
+	//qna 리스트 
+	public List<QnAVO> selectAllmyqna(String userid);
 
+	
+	
+	
 }

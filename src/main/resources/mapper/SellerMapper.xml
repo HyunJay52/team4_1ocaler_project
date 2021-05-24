@@ -32,6 +32,12 @@
 		values(optsq.nextval, (select i_num from (select * from sell_item where sel_num=(select sel_num from seller where userid=#{param1}) 
 		and <![CDATA[i_writedate<= ]]> sysdate order by i_writedate desc) where <![CDATA[  rownum <=]]>1), #{param2},#{param3},#{param4})	
 	</insert>
+	
+	<insert id="repeatOptionIsert">
+		insert into item_option(opt_num, i_num, option_title, option_content, o_price) 
+		values(optsq.nextval, #{param1}, #{param2}, #{param3}, #{param4})
+	</insert>
+
 
 	<select id="notOverlapOptionTitleSel" resultType="com.team4.localer.vo.Item_optionVO">
 		select distinct option_title from item_option where i_num=#{param1}	
@@ -39,6 +45,10 @@
 	
 	<select id="changeOptions" resultType="com.team4.localer.vo.Item_optionVO">
 		select option_content, o_price from item_option where option_title=#{param1} and i_num=#{param2}
+	</select>
+	
+	<select id="optionSelectAll" resultType="com.team4.localer.vo.Item_optionVO">
+		select option_title, option_content, o_price from item_option where i_num=#{param1}
 	</select>
 
 
@@ -49,9 +59,11 @@
 	
 	
 	<select id="selectOnePage" resultType="com.team4.localer.vo.SellitemVO">
-		select i_num, i_subject, i_content, i_cnt, i_price, to_char(i_writedate,'YYYY-MM-DD') i_writedate, to_char(i_period,'YYYY-MM-DD') i_period, i_ship, s.userid, s.sel_prof 
+		select i_num, i_subject, i_content, i_cnt, i_price, to_char(i_writedate,'YYYY-MM-DD') i_writedate, to_char(i_period,'YYYY-MM-DD') i_period, i_status, i_ship, s.userid, s.sel_prof 
 		,i_img1, i_img2, i_img3 from sell_item i join seller s on i.sel_num = s.sel_num where i_num=#{param1}
 	</select>
+	
+	
 	<select id="sellerInfo" resultType="com.team4.localer.vo.SellerVO">
 		select count(item.i_num) as sel_count , s.userid,s.sel_lvl,s.company,s.sel_tel,s.sel_name,s.com_num,s.sel_addr,s.sel_prof 
 		from seller s join sell_item item on item.sel_num =s.sel_num
@@ -83,7 +95,6 @@
 		insert into sp_p(userid, sp_point, sp_item) values(#{param1}, #{param2}, #{param3})
 	</insert>
 	
-	
 	<select id="sellTotalRecoedCount" resultType="int">
   		select count(i_num) from
 	            (SELECT si.i_num, si.sel_num, si.i_subject,si.i_content, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof  
@@ -113,5 +124,51 @@
 	</select>	
   	
 	
+
+	<select id="recentlyOrderNum" resultType="int">
+	select o_num from (select * from ordertbl where userid=#{param1} and <![CDATA[ o_date<=sysdate ]]> order by o_date desc) where <![CDATA[ rownum<=1 ]]>
+	</select>
+
 	
+	<select id="orderCompl" resultType="com.team4.localer.vo.ShipVO">
+		select s.o_num, s.getter, to_char(s.b_date,'YYYY-MM-DD HH24:MI') b_date, s.ship_tel, s.ship_zip, s.ship_addr, s.ship_detail, s.ship_msg,
+		o.o_price, o.o_ship, o.opt_str, i.i_subject from ship s join ordertbl o on s.o_num=o.o_num
+		join sell_item i on o.num=i.i_num where o.o_num=#{param1}
+	</select>
+	
+<!-- seller query by ww 2021.05.23 -->
+	<select id="getFiles" resultType="com.team4.localer.vo.SellitemVO">
+		select i_img1, i_img2, i_img3 from sell_item where i_num=#{param1}
+	</select>
+	
+	<update id="sellViewUpdate" parameterType="com.team4.localer.vo.SellitemVO">
+		update sell_item set i_status=#{i_status}, i_subject=#{i_subject}, i_cnt=#{i_cnt}, i_content=#{i_content}
+		, i_period=to_date(#{i_period},'YYYY-MM-DD'), i_price=#{i_price}, i_tag=#{i_tag}, i_ship=#{i_ship}, i_img1=#{i_img1}
+		,i_img2=#{i_img2, jdbcType=VARCHAR}, i_img3=#{i_img3, jdbcType=VARCHAR}
+		where sel_num=(select sel_num from seller where userid=#{userid})  and i_num=#{i_num}
+	</update>
+	
+	<delete id="optionDelete" parameterType="int">
+		delete from item_option where i_num=#{param1} 
+	</delete>
+
+	<delete id="deleteSellView">
+		delete from sell_item where i_num=#{param1}
+	</delete>
+	
+<!-- seller index by hj 2021.05.23 -->
+	<select id="myInfoCountSale" resultType="int">
+	<![CDATA[
+		SELECT count(i_num) as cnt FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_status=1 AND i_period>=sysdate
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_period>=sysdate+7
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_status=2
+		UNION ALL 
+		SELECT count(i_num) FROM SELL_ITEM WHERE SEL_NUM = (SELECT sel_num FROM seller WHERE userid=#{param1}) AND i_period<=sysdate AND i_status=2
+	]]>
+	</select>
+
+
+
 </mapper>

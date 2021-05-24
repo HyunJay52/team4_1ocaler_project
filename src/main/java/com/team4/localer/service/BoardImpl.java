@@ -137,6 +137,13 @@ public class BoardImpl implements BoardService{
 		return boardDAO.memdeleteCount(userid);
 	}
 
+//Index page 2021.05.23
+	@Override
+	public List<BoardVO> selectIndexRecipe() {
+		// 인덱스 페이지용
+		return boardDAO.selectIndexRecipe();
+	}
+
 
 	
 

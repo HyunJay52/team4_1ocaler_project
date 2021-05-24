@@ -13,6 +13,7 @@ import com.team4.localer.vo.Item_optionVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.SellitemVO;
+import com.team4.localer.vo.ShipVO;
 
 @Service
 public class SellerImpl implements SellerService {
@@ -39,7 +40,10 @@ public class SellerImpl implements SellerService {
 	public List<Item_optionVO> changeOptions(String option_title, int i_num) {
 		return sellerDAO.changeOptions(option_title, i_num);
 	}
-	
+	@Override
+	public List<Item_optionVO> optionSelectAll(int i_num) {
+		return sellerDAO.optionSelectAll(i_num);
+	}
 	
 	@Override
 	public SellitemVO selectOnePage(int i_num) {		
@@ -79,8 +83,41 @@ public class SellerImpl implements SellerService {
 		// TODO Auto-generated method stub
 		return sellerDAO.sellTotalRecoedCount(vo);
 	}
+	public ShipVO orderCompl(int o_num) {
+		return sellerDAO.orderCompl(o_num);
+	}
+	@Override
+	public int recentlyOrderNum(String userid) {
+		return sellerDAO.recentlyOrderNum(userid);
+	}
 	
+	@Override
+	public SellitemVO getFiles(int i_num) {
+		return sellerDAO.getFiles(i_num);
+	}
+	@Override
+	public int sellViewUpdate(SellitemVO itemVO) {
+		return sellerDAO.sellViewUpdate(itemVO);
+	}
+	@Override
+	public int optionDelete(int i_num) {
+		return sellerDAO.optionDelete(i_num);
+	}
+	@Override
+	public int repeatOptionIsert(int i_num, String option_title, String option_content, String o_price) {
+		return sellerDAO.repeatOptionIsert(i_num, option_title, option_content, o_price);
+	}
+	@Override
+	public int deleteSellView(int i_num) {
+		return sellerDAO.deleteSellView(i_num);
+	}
 	
+//판매관리 메인 2021.05.23 hj
+	@Override
+	public List<Integer> myInfoCountSale(String userid) {
+		// 판매자 메인, 상품현황 카운트
+		return sellerDAO.myInfoCountSale(userid);
+	}
 	
 	
 }

@@ -94,7 +94,8 @@ public class MemberController {
 	}	
 // 로그아웃
 	@RequestMapping("/logOut")
-	public String logOut(HttpServletRequest req, HttpServletResponse res) {
+	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse res) {
+		ModelAndView mav = new ModelAndView();
 		//쿠키 삭제
 		Cookie[] cookies = req.getCookies();
 		if(cookies!=null) {
@@ -110,7 +111,9 @@ public class MemberController {
 		}
 		req.getSession().invalidate(); //쿠키삭제하고 세션 삭제해야함
 		
-		return "home";
+		mav.setViewName("redirect:/");
+		
+		return mav;
 	}
 //아이디 비밀번호 찾기
 	@RequestMapping("/searchIdnPwd")

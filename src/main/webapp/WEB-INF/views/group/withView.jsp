@@ -108,7 +108,7 @@
 			var container = document.getElementById("withViewMap"),
 				options = {
 					center : new kakao.maps.LatLng(33.450701,126.570667),
-					level : 7
+					level : 6
 				};
 			var map = new kakao.maps.Map(container, options);
 
@@ -251,6 +251,7 @@
 </script>
 </head>
 <body id="withViewBody">
+<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
 	<div id="withViewMap" style="width:2000px; height:1100px; position:relative; overflow:hidden;"></div>
 	
 	<!-- withViewShowFrm접기펴기 -->	
@@ -311,7 +312,7 @@
 					<span>${vo.g_subject }</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소"/>${vo.g_loc1 }</div><!-- g_loc1 값을 가져온다. -->
-					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>1 / ${vo.g_cnt }명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
+					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>${vo.g_joinCnt } / ${vo.g_cnt }명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/writer.png" title="모집인원"/>${vo.userid }</div>
 					<div>${vo.g_tag }</div><!-- 태그값을 가지고온다. -->
 					<input type="hidden" name="num" value="${vo.num }" id="WVnum"/>
