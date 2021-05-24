@@ -449,4 +449,12 @@
 		WHERE userid=#{param1 } OR auth = #{param1 } ORDER BY j_writedate DESC
 	</select>   
 
+
+<!-- QNA QuestionInsert WOWWOW -->
+	<insert id="QnaQuestionInsert" parameterType="com.team4.localer.vo.QnAVO">
+		insert into QNA(q_num, num, userid, q_status, q_content)
+		values(qsq.nextval, #{num}, #{userid}, #{q_status}, #{q_content})
+	</insert>
+	
+
 </mapper>

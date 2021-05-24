@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,12 +26,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.dao.SellerDAO;
 import com.team4.localer.service.LikeItService;
 import com.team4.localer.service.MemberService;
+import com.team4.localer.service.MyInfoService;
 import com.team4.localer.service.SellerService;
 import com.team4.localer.service.ShipService;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.Item_optionVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.OrderVO;
+import com.team4.localer.vo.QnAVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
 import com.team4.localer.vo.ShipVO;
@@ -50,7 +53,8 @@ public class SellerController {
 	ShipService shipService;
 	@Inject
 	LikeItService likeItService;
-	
+	@Inject
+	MyInfoService myinfoService;
 	//착한발견 (셀러)
 	@RequestMapping("/selBard")
 	public ModelAndView selBard() {
@@ -517,7 +521,12 @@ public class SellerController {
 	}
 	
 	
-	
+	@RequestMapping("/QNAInsert")
+	@ResponseBody
+	public String QnaQuestionInsert(QnAVO qnaVO, HttpSession session) {
+		qnaVO.setUserid((String)session.getAttribute("logId"));	
+		return myinfoService.QnaQuestionInsert(qnaVO)+"";
+	}
 	
 	
 	

@@ -217,6 +217,12 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.selectWaitingJoinList(userid);
 	}
 
+//	QNA 글쓰기(WOW)
+	@Override
+	public int QnaQuestionInsert(QnAVO vo) {
+		return dao.QnaQuestionInsert(vo);
+	}
+
 
 
 }

@@ -285,6 +285,17 @@
      			var url = "QNAInsert";
      			var params = $("#QNAFrm").serialize();	
      			
+     			$.ajax({
+     				url:url,
+     				data:params,
+     				success:function(result){
+     					alert('성공');
+     					$("#q_content").val("");
+     					$("#q_content").css("display","none");
+     				},error:function(e){
+     					alert('실패');
+     				}
+     			})
      		}
      	});
      	
@@ -540,6 +551,7 @@
 					<input type="button" class="btn cancelBtn" id="btnClose" value="취소">
 					<input id="QNAFrmBtn" type="button" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
 				</div>
+				<input type="hidden" name="num" value="${itemVO.i_num }">
 			</form>
 		</div>
 		
