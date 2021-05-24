@@ -9,7 +9,7 @@
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
-
+      function setComma(num) {     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
@@ -114,9 +114,9 @@
 						txt +=	"<td>"+vo.sel_userid +"</td>";
 						txt +=	"<td class='popup wordcut' style='cursor:pointer'>"+vo.sel_subject +"</td>";
 						txt +=	"<td>"+vo.sel_cnt +"</td>";
-						txt +=	"<td>"+vo.sel_price +"</td>";
-						txt +=	"<td>"+vo.fee +"</td>";
-						txt +=	"<td>"+vo.remoney +"</td>";
+						txt +=	"<td>"+setComma(vo.sel_price)+"</td>";
+						txt +=	"<td>"+setComma(vo.fee)+"</td>";
+						txt +=	"<td>"+setComma(vo.remoney)+"</td>";
 						txt +="</tr>";
 					});
 					$(".selListTbl").append(txt);
@@ -169,7 +169,7 @@
 		    						txt+="<td>"+vo.num+"</td>";
 		    						txt+="<td class='wordcut'>"+vo.userid+"</td>";
 		    						txt+="<td>"+vo.o_cnt+"</td>";
-		    						txt+="<td>"+vo.o_price+"</td>";
+		    						txt+="<td>"+setComma(vo.o_price)+"</td>";
 		    						txt+="<td>"+vo.o_date+"</td>";
 	  						txt+="</tr>";
 	  					});
@@ -262,6 +262,7 @@
 			<input type="hidden" name="month" value="${pageVO.month }"/>
 		</form>
 	</div>
+	제목 클릭시 판매 상세내역 확인
 	<table class="tablea selListTbl" >
 		<tr>
 			<td>번호</td>

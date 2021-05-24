@@ -109,7 +109,7 @@
   		select * from
 			(select *from
 				(select g.num,g.up_cate,g.down_cate,g.g_subject,g.g_cnt,g.userid, 
-			  		to_char(g.g_writedate,'YYYY-MM-DD') g_writedate, 
+			  		to_char(g.g_writedate,'YY/MM/DD') g_writedate, 
 			  		count(case when r.num=g.num then 1 end) reportCount
 				from grouplocal g, report r 
 				<if test="!searchWord.equals('') and searchWord!=null">
@@ -132,7 +132,7 @@
   		select * from
 			(select *from
 				(select b.num, b.up_cate, b.b_gu,b.b_subject,b.userid,b.b_hit,
-  					to_char(b.b_writedate,'YYYY-MM-DD') b_writedate, count(case when r.num=b.num then 1 end) reportCount
+  					to_char(b.b_writedate,'YYYY/MM/DD') b_writedate, count(case when r.num=b.num then 1 end) reportCount
 					from board b, report r 
 					<if test="!searchWord.equals('') and searchWord!=null">
 						where ${searchKey} like #{searchWord}
@@ -171,45 +171,45 @@
   	<select id="loginNum" resultType="com.team4.localer.vo.Mem_statisVO">
   		select 
 		(select count(*) from logcount 
-		where logdate between to_date('21-${month1}-01','YY-MM-DD')
-		              and to_date('21-${month1}-${last1}','YY-MM-DD')) loginmem1,
+		where logdate between to_date('21/${month1}/01','YY/MM/DD')
+		              and to_date('21/${month1}/${last1}','YY/MM/DD')) loginmem1,
 		(select count(*) from logcount 
-		where logdate between to_date('21-${month2}-01','YY-MM-DD')
-		              and to_date('21-${month2}-${last2}','YY-MM-DD')) loginmem2,
+		where logdate between to_date('21/${month2}/01','YY/MM/DD')
+		              and to_date('21/${month2}/${last2}','YY/MM/DD')) loginmem2,
 		(select count(*) from logcount 
-		where logdate between to_date('21-${month3}-01','YY-MM-DD')
-		              and to_date('21-${month3}-${last3}','YY-MM-DD')) loginmem3,<!-- 로그인수 count -->
+		where logdate between to_date('21/${month3}/01','YY/MM/DD')
+		              and to_date('21/${month3}/${last3}','YY/MM/DD')) loginmem3,<!-- 로그인수 count -->
 		(select count(userid) from member 
-		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
-		        and to_date('21-${month1}-${last1}','YY-MM-DD')) totalmem1,<!-- 총 회원수 count -->
+		        where mem_status !=4 and mem_sub between to_date('21/${month1}/01','YY/MM/DD') 
+		        and to_date('21/${month1}/${last1}','YY/MM/DD')) totalmem1,<!-- 총 회원수 count -->
 		    (select count(userid) from member 
-		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
-		        and to_date('21-${month2}-${last2}','YY-MM-DD')) totalmem2,
+		        where mem_status !=4 and mem_sub between to_date('21/${month1}/01','YY/MM/DD') 
+		        and to_date('21/${month2}/${last2}','YY/MM/DD')) totalmem2,
 		    (select count(userid) from member 
-		        where mem_status !=4 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
-		        and to_date('21-${month3}-${last3}','YY-MM-DD')) totalmem3
+		        where mem_status !=4 and mem_sub between to_date('21/${month1}/01','YY/MM/DD') 
+		        and to_date('21/${month3}/${last3}','YY/MM/DD')) totalmem3
 		from dual
   	</select>
   	<select id="newmem" resultType="com.team4.localer.vo.Mem_statisVO">
   		select 
 		    (select count(userid) from member 
-		        where mem_status=1 and mem_sub between to_date('21-${month1}-01','YY-MM-DD') 
-		        and to_date('21-${month1}-${last1}','YY-MM-DD')) loginmem1,
+		        where mem_status=1 and mem_sub between to_date('21/${month1}/01','YY/MM/DD') 
+		        and to_date('21/${month1}/${last1}','YY/MM/DD')) loginmem1,
 		    (select count(userid) from member 
-		        where mem_status=1 and  mem_sub between to_date('21-${month2}-01','YY-MM-DD') 
-		        and to_date('21-${month2}-${last2}','YY-MM-DD')) loginmem2,
+		        where mem_status=1 and  mem_sub between to_date('21/${month2}/01','YY/MM/DD') 
+		        and to_date('21/${month2}/${last2}','YY/MM/DD')) loginmem2,
 		    (select count(userid) from member 
-		        where mem_status=1 and  mem_sub between to_date('21-${month3}-01','YY-MM-DD') 
-		        and to_date('21-${month3}-${last3}','YY-MM-DD')) loginmem3,
-		    (select count(userid) from seller --<!-- 신규 셀러회원수 -->
-		        where  sel_date between to_date('21-03-01','YY-MM-DD') 
-		        and to_date('21-03-31','YY-MM-DD')) totalmem1,
+		        where mem_status=1 and  mem_sub between to_date('21/${month3}/01','YY/MM/DD') 
+		        and to_date('21/${month3}/${last3}','YY/MM/DD')) loginmem3,
+		    (select count(userid) from seller <!-- 신규 셀러회원수 -->
+		        where  sel_date between to_date('21/03/01','YY/MM/DD') 
+		        and to_date('21/03/31','YY/MM/DD')) totalmem1,
 		    (select count(userid) from seller 
-		        where sel_date between to_date('21-04-01','YY-MM-DD') 
-		        and to_date('21-04-30','YY-MM-DD')) totalmem2,
+		        where sel_date between to_date('21/04/01','YY/MM/DD') 
+		        and to_date('21/04/30','YY/MM/DD')) totalmem2,
 		    (select count(userid) from seller 
-		        where sel_date between to_date('21-05-01','YY-MM-DD') 
-		        and to_date('21-05-31','YY-MM-DD')) totalmem3
+		        where sel_date between to_date('21/05/01','YY/MM/DD') 
+		        and to_date('21/05/31','YY/MM/DD')) totalmem3
 		from dual
   	</select>
   	<select id="guLoginCount" resultType="com.team4.localer.vo.Mem_statisVO">
@@ -240,7 +240,7 @@
 			    count(case when loc_gu='종로구' then 1 end) gu24 ,
 			    count(case when loc_gu='성북구' then 1 end) gu25
 			    from logcount where  logdate
-			    between to_date('21-${month3}-01','YY-MM-DD') and to_date('21-${month3}-${last3}','YY-MM-DD')
+			    between to_date('21/${month3}/01','YY/MM/DD') and to_date('21/${month3}/${last3}','YY/MM/DD')
   	</select>
   	<select id="subCount" resultType="com.team4.localer.vo.Mem_statisVO">
   		select count(case when mem_type =1 then 1 end) loginmem1,<!-- 일반회원수 --> 
@@ -248,28 +248,28 @@
 		       count(case when mem_status =1 then 1 end) totalmem1, <!-- 일반 -->
       		   count(case when mem_status =2 then 1 end) totalmem2 <!-- 휴면 -->
 		from member where mem_sub
-		between to_date('21-03-01','YY-MM-DD') 
-		        and to_date('21-${month3}-${last3}','YY-MM-DD')
+		between to_date('21/03/01','YY/MM/DD') 
+		        and to_date('21/${month3}/${last3}','YY/MM/DD')
   	
   	</select>
   	<select id="boardStatis" resultType="com.team4.localer.vo.Mem_statisVO">
   		select
 		    (select count(*) from board 
 		        where b_writedate 
-		        between to_date('2021-${month3}-01','YYYY-MM-DD')
-		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) boardcnt,
+		        between to_date('2021/${month3}/01','YYYY/MM/DD')
+		        and to_date('2021/${month3}/${last3}','YYYY/MM/DD')) boardcnt,
 		    (select count(*) from sell_item
 		        where i_writedate 
-		        between to_date('2021-${month3}-01','YYYY-MM-DD')
-		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) sell_itemcnt,
+		        between to_date('2021/${month3}/01','YYYY/MM/DD')
+		        and to_date('2021/${month3}/${last3}','YYYY/MM-DD')) sell_itemcnt,
 		    (select count(*) from grouplocal
 		        where g_writedate 
-		        between to_date('2021-${month3}-01','YYYY-MM-DD')
-		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) grouplocalcnt,
+		        between to_date('2021-${month3}/01','YYYY/MM-DD')
+		        and to_date('2021-${month3}/${last3}','YYYY/MM/DD')) grouplocalcnt,
 		    (select count(*) from mem_share
 		        where s_writedate 
-		        between to_date('2021-${month3}-01','YYYY-MM-DD')
-		        and to_date('2021-${month3}-${last3}','YYYY-MM-DD')) mem_sharecnt
+		        between to_date('2021/${month3}/01','YYYY/MM/DD')
+		        and to_date('2021/${month3}/${last3}','YYYY/MM/DD')) mem_sharecnt
 		from dual 
   	</select>
   	<select id="memspend" resultType="com.team4.localer.vo.AdminspendVO">
@@ -418,7 +418,7 @@
 			    count(case when g_gu='종로구' then 1 end) gu24 ,
 			    count(case when g_gu='성북구' then 1 end) gu25
 			    from grouplocal where  g_date
-			    between to_date('21-${month3}-01','YY-MM-DD') and to_date(last_day('21-${month3}-01'),'YY-MM-DD')
+			    between to_date('21/${month3}/01','YY/MM/DD') and to_date(last_day('21/${month3}/01'),'YY/MM/DD')
   	</select>
   	<select id="cateCount" resultType="com.team4.localer.vo.Mem_statisVO">
   		select  count(case when up_cate=1 then 1 end) totalmem1,
