@@ -14,13 +14,13 @@
 		<div>
 			<h4 >동네직구 글수정 </h4>
 			<form method="post" action="dealEditOk" enctype="multipart/form-data">
-				<select>
+				<select name="s_cate">
 					<option selected disabled hidden>카테고리</option>
 					<option value="1" <c:if test='${vo.s_cate==1 }'>selected</c:if> >식료품</option>	
 					<option value="2" <c:if test='${vo.s_cate==2 }'>selected</c:if> >생필품</option>			
 					<option value="3"<c:if test='${vo.s_cate==3 }'>selected</c:if> >기타</option>
 				</select>		
-				<select>
+				<select name="s_status">
 					<option selected disabled hidden > 판매상태</option>
 					<option value="1" <c:if test='${vo.s_status==1 }'>selected</c:if> >판매중</option>	
 					<option value="2" <c:if test='${vo.s_status==2 }'>selected</c:if> >판매완료</option>			

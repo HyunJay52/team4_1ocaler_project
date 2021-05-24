@@ -2,6 +2,7 @@ package com.team4.localer.service;
 
 
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.DealPageVO;
 import com.team4.localer.vo.Item_optionVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.OrderVO;
@@ -15,6 +16,9 @@ public interface SellerService {
 	public int sellerInsert(SellitemVO itemVO); //셀러 게시글 등록
 	public int itemOptionInsert(String userid, String option_title, String option_content, String o_price); // 아이템 옵션 인설트
 	public List<SellitemVO> selectAllitem();//착한발견 리스트 불러오기
+	
+	public List<SellitemVO> sellPageSelect(DealPageVO vo);
+	public int sellTotalRecoedCount (DealPageVO vo);
 	
 	public SellitemVO selectOnePage(int i_num);//1개 게시글 가져오기
 	

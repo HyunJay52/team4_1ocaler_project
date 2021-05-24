@@ -22,10 +22,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.localer.service.JoinUsService;
+import com.team4.localer.service.LikeItService;
 import com.team4.localer.service.MemberService;
 import com.team4.localer.service.SellerService;
 import com.team4.localer.service.ShipService;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.DealPageVO;
 import com.team4.localer.vo.Item_optionVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.OrderVO;
@@ -46,13 +49,35 @@ public class SellerController {
 	MemberService memberService;
 	@Inject
 	ShipService shipService;
+	@Inject
+	JoinUsService joinUsService;
+	@Inject
+	LikeItService likeItService;
 	
-	//착한발견 (셀러)
+	//착한발견 (셀러) -- 희연 수정
 	@RequestMapping("/selBard")
-	public ModelAndView selBard() {
+	public ModelAndView selBard(DealPageVO pageVO, HttpSession session ) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(sellerService.selectAllitem().size()+"<---- size 몇개니");
-		mav.addObject("itemList",sellerService.selectAllitem());
+		  
+//		System.out.println(sellerService.selectAllitem().size()+"<---- size 몇개니");
+//		mav.addObject("itemList",sellerService.selectAllitem());
+		
+		
+		
+		pageVO.setPageNum(pageVO.getPageNum());
+		pageVO.setSearchKey(pageVO.getSearchKey());
+		pageVO.setSearchWord(pageVO.getSearchWord());
+		
+		
+		pageVO.setTotalRecord(sellerService.sellTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함
+		mav.addObject("appNum", joinUsService.getJCount(pageVO.getNum())); // 좋아요.
+		mav.addObject("itemList",sellerService.sellPageSelect(pageVO)); // 딜리스트..
+		
+		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
+			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
+		}
+		mav.addObject("pageVO",pageVO);
+		
 		mav.setViewName("deal/sellBoard");
 		return mav;
 	}
