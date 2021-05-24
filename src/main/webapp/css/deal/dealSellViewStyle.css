@@ -135,7 +135,9 @@
 	width: 640px;
 	float: left;
 }
-
+#sellInfo>div:nth-child(2){
+	overflow:auto;
+}
 #i_subject{
 	font-size: 1.75em;
 	width: 592px;
