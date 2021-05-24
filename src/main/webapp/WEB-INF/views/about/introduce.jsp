@@ -20,6 +20,7 @@
 	}
       
 </script>
+<%@ include file="/inc/sideBar.jspf" %>
 <div class="aboutDiv">
 	<div id="introDetail">
 		<div>1ocal+er 프로젝트 시작</div>
@@ -50,7 +51,7 @@
 				<td><img src="<%=request.getContextPath() %>/img/aboutImg/dragonw.png"/></td>
 				<td><img src="<%=request.getContextPath() %>/img/aboutImg/hj.png"/></td>
 				<td><img src="common/user.png"/></td>
-				<td><img src="<%=request.getContextPath() %>/img/aboutImg/jisu.jpeg"/></td>
+				<td><img src="<%=request.getContextPath() %>/img/aboutImg/jisu.png"/></td>
 				<td><img src="<%=request.getContextPath() %>/img/aboutImg/heey.jpeg"/></td>
 			</tr>
 			<tr id="tblName">

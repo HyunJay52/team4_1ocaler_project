@@ -6,6 +6,7 @@
 <!-- 카카오 지도 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac851f467c13907926d8947cf1a053f4&libraries=services"></script>	
 
+<%@ include file="/inc/sideBar.jspf" %>
 <div class="aboutDiv">
 	<span id="followMe">오시는 길</span>
 	<div id="routeMap" style="width: 1300px; height: 350px;"></div>

@@ -211,6 +211,7 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.QnAAnswerWrite(vo);
 	}
 	
+
 	@Override
 	public List<SellitemVO> selectProductList(MyinfoPageVO vo) {
 		
@@ -224,12 +225,26 @@ public class MyInfoServiceImp implements MyInfoService{
 	}
 
 	// 내정보 메인용 서비스 (hj, 2021-05-21)
+
+//	QNA 글쓰기(WOW)
+	@Override
+	public int QnaQuestionInsert(QnAVO vo) {
+		return dao.QnaQuestionInsert(vo);
+	}
+
+// 내정보 메인용 서비스 (hj, 2021-05-21)
+
 	@Override
 	public List<JoinUsVO> selectWaitingJoinList(String userid) {
 		// 참여정보
 		return dao.selectWaitingJoinList(userid);
 	}
 
+	@Override
+	public List<QnAVO> selectAllmyqna(String userid) {
+		// qna 가져오기
+		return dao.selectAllmyqna(userid);
+	}
 
 
 

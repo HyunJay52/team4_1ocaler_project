@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team4.localer.service.CsService;
 import com.team4.localer.service.ManageService;
 import com.team4.localer.service.MyInfoService;
+import com.team4.localer.service.SellerService;
 import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.ItemReviewVO;
@@ -47,6 +48,10 @@ public class MyinfoController {
 	ManageService manaService;
 	@Inject
 	CsService csService;
+	
+//2021.05.23 hj
+	@Inject
+	SellerService sellerService;
 	
 	//비밀번호 재확인 페이지
 	@RequestMapping("/myInfoCheck")
@@ -92,9 +97,10 @@ public class MyinfoController {
 			//참여현황
 			mav.addObject("myJoin", service.selectWaitingJoinList(userid));
 			//QnA
-			
+			mav.addObject("qnaVO", service.selectAllmyqna(userid));
 			//활동내역
 			mav.addObject("myAct", service.selectMyCount(userid));
+			
 			mav.setViewName("myInfo/myInfoMain");
 		}
 		return mav;
@@ -599,6 +605,7 @@ public class MyinfoController {
 		
 		return result;
 	}
+
 	
 	@ResponseBody
 	@RequestMapping("/selectProductList")
@@ -625,9 +632,20 @@ public class MyinfoController {
 		
 		return map;
 	}
+
+//판매관리 메인 2021.05.23 hj
+
 	@RequestMapping("/myInfoSaleHistory")
-	public String myInfoSaleHistory() {
-		return "myInfo/myInfoSaleHistory";
+	public ModelAndView myInfoSaleHistory(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		String userid = (String)ses.getAttribute("logId");
+		
+		List<Integer> saleCount = sellerService.myInfoCountSale(userid);
+		System.out.println(">>>> list >>>> "+saleCount.size());
+		mav.addObject("saleCount", saleCount);
+		mav.setViewName("myInfo/myInfoSaleHistory");
+		return mav;
 	}
 	@RequestMapping("/myInfoProductManagement")
 	public String myInfoProductManagement(){

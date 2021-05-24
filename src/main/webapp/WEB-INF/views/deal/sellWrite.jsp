@@ -30,7 +30,7 @@
 			//옵션 추가	
 			tag = '';
 			$(document).on("click",'#optionDiv>div>img[class=optionPlus]', ()=>{
-				tag += '<div>&nbsp;&nbsp; ● <input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" required/>';
+				tag += '<div><input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" required/>';
 				tag += '<input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요" required/>';
 				tag += '<input type="text" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요" required/>';
 				tag += '<img class="optionPlus" style="margin-left:10px;" src="/1ocaler/img/deal/plus.png"/>';
@@ -147,8 +147,9 @@
 						<option value="0">무료배송</option>						
 					</select>
 					</div>
+					<div id="spanTitle"><span>[ 옵션명 : EX) 색상, 사이즈, 세트 ]</span><span>[ 옵션내용 : EX) 빨강, 파랑, 90, 95 ]</span><span>[ 추가 가격 : EX) 0, 100, 500, 1000 ]</span></div>
 					<div>
-						&nbsp;&nbsp; ● <input type="text" id="option_title" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/><input type="text" id="option_content" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/><input type="text" id="option_price" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요"/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
+						<input type="text" id="option_title" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요"/><input type="text" id="option_content" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요"/><input type="text" id="option_price" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요"/><img class="optionPlus" style="margin-left:10px;" src="<%=request.getContextPath() %>/img/deal/plus.png"/><br/>
 					</div>
 				</div>
 				

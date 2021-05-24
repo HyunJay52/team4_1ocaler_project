@@ -121,8 +121,18 @@ public interface MyInfoDAO {
 	//상품관리 리스트 카운트
 	public int selectProductListCount(MyinfoPageVO vo);
 	
+	// QnA 글쓰기 (21-05-24 WOW)
+	public int QnaQuestionInsert(QnAVO vo);
+	
+
+	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	//참여정보 
 	public List<JoinUsVO> selectWaitingJoinList(String userid);
+	//qna 리스트 
+	public List<QnAVO> selectAllmyqna(String userid);
 
+	
+	
+	
 }

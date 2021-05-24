@@ -162,4 +162,9 @@
 	<select id="likeCount" resultType="com.team4.localer.vo.BoardVO">
 		select count(*) numlike from likeit where numlike=#{param1}
 	</select>
+	
+<!-- index by hj 2021.05.23 -->
+	<select id="selectIndexRecipe" resultType="com.team4.localer.vo.BoardVO">
+		select * from board where up_cate=2 and <![CDATA[rownum<=12]]> order by b_hit desc 
+	</select>
 </mapper>

@@ -75,3 +75,6 @@
 	.myinfoSellerOtherBtn{
 		width:320px;
 	}
+	#bankInput>li {
+		margin-bottom: 10px;
+	}

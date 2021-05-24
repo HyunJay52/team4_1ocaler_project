@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <script>
 	$(function(){
 		function setProductList(num){
@@ -71,6 +72,10 @@
 		});
 	});
 </script>
+=======
+
+<%@ include file="/inc/sideBar.jspf" %>
+>>>>>>> refs/remotes/origin/totalMergeTest
 
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->

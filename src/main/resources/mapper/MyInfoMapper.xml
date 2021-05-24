@@ -490,5 +490,19 @@
 			ON j.numjoin = bo_tbl.num ) 
 		WHERE userid=#{param1 } OR auth = #{param1 } ORDER BY j_writedate DESC
 	</select>   
+	
+	<select id="selectAllmyqna" resultType="com.team4.localer.vo.QnAVO">
+		SELECT q_num, num, sel.userid AS sellerid, q_status, q_content, to_char(q_writedate, 'YYYY/MM/DD') AS q_writedate , q_answer, to_char(q_adate, 'YYYY/MM/DD') AS q_adate
+		FROM QNA q2, (SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel 
+		WHERE q2.num=sel.i_num and q2.userid=#{param1 } ORDER BY q_writedate desc
+	</select>
+
+
+<!-- QNA QuestionInsert WOWWOW -->
+	<insert id="QnaQuestionInsert" parameterType="com.team4.localer.vo.QnAVO">
+		insert into QNA(q_num, num, userid, q_status, q_content)
+		values(qsq.nextval, #{num}, #{userid}, #{q_status}, #{q_content})
+	</insert>
+	
 
 </mapper>
