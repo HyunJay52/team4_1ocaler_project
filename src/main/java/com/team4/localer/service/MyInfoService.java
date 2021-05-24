@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.ItemReviewPageVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
@@ -129,7 +130,7 @@ public interface MyInfoService {
 	public List<QnAVO> selectAllmyqna(String userid);
 	
 // 해당 게시글 리뷰 불러오기(2021-05-24 WOW)
-	public List<ItemReviewVO> selectSellItemReview(int num);
+	public List<ItemReviewVO> selectSellItemReview(ItemReviewPageVO reviewVO);
 	
 // 해당 게시글 총리뷰수/ re_date 1 갯수 구하기(2021-05-24 WOW)
 	public List<ItemReviewVO> selectAllReDate(int num);

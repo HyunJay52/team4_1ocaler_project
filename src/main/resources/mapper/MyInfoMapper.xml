@@ -489,9 +489,23 @@
 		FROM QNA q2, (SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel 
 		WHERE q2.num=sel.i_num AND sel.i_num=#{param1} ORDER BY Q_WRITEDATE desc
 	</select>
+	
 <!-- QNA selectSellItemRiew WOWOW -->
-	<select id="selectSellItemReview" resultType="com.team4.localer.vo.ItemReviewVO">
-		select userid, to_date(re_writedate,'YYYY-MM-DD') re_writedate, re_rate, re_content from item_review where num=#{param1}
+	<select id="selectSellItemReview" parameterType="com.team4.localer.vo.ItemReviewPageVO" resultType="com.team4.localer.vo.ItemReviewVO">	
+		select * from
+    		(select * from 
+       			(select re_num, userid, to_char(re_writedate,'YYYY-MM-DD') re_writedate, re_rate, re_content from item_review where num=#{i_num} order by re_num desc)
+            		where  <![CDATA[rownum <=  ]]> (${pageNum}*${onePageRecord}) order by re_num)
+                		where <![CDATA[rownum <=  ]]>
+                		<if test="pageNum==totalPage">
+                			${lastPageRecord}
+                		</if>
+                		<if test="pageNum!=totalPage">
+                			${onePageRecord}
+                		</if>
+                		 order by re_num desc
+		
+		
 	</select>
 <!-- QNA selectAllReDate WOWOW -->	
 	<select id="selectAllReDate" resultType="com.team4.localer.vo.ItemReviewVO">

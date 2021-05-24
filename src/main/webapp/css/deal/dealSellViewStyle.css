@@ -345,11 +345,36 @@
 }
 /* 페이징 */
 #pageNum {
-	padding-left: 42%;
-	margin-bottom: 40px;
 	width: 1300px;
-	height: 20px;
-	float: left;
+	overflow:auto;
+	margin-bottom:30px;
+	margin-top:30px;
+
+}
+#pageNum>ul{
+	text-align:center;
+}
+#pageNum li{
+	border:1px solid gray;
+	margin:1px;
+	width:30;
+	line-height:32px;
+	text-align:center;
+	display:inline-block;
+}
+#pageNum li:hover{
+	background-color:#f0f0f0;
+}
+#pageNum li:first-child{
+	width:40px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	
+}
+ #pageNum li:last-child{
+	width:40px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 #pageNum a {
@@ -362,8 +387,12 @@
 	font-weight: bold;
 }
 
-#qaBtn {
-	padding-right:
+.notBtn{
+	border:none;
+	background-color:#fff;
+}
+.notBtn:hover{
+	background-color:#f0f0f0;
 }
 
 /* 내용부분 */

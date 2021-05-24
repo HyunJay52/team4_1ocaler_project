@@ -47,8 +47,11 @@
     	var count = [];
     	var counts = 0;
     	//옵션 배열 및 옵션 내용추가
-    	var optionStrArray = []
+    	var optionStrArray = [];
     	var optionStr = '';
+    	
+    	var checkArray = [];
+    	var checkStr = '';
 		//변수명
     	var cnt = 1000;
 		var spans = 999
@@ -71,8 +74,7 @@
 		// 옵션 선택시 div추가	
    		$("#option_content").change(function(){	
    			optionCheck = 2;
-   			
-   			console.log($('#option_content').val());
+   				console.log($('#option_content').val(),"<--하지마하지마하지마");
    				//if 문서서 이미 있으면? 포함되어있으면 경고창 아니면 추가?	
    				var charge = parseInt(${itemVO.i_price})+parseInt($('#option_content').val());//원래가격 + 옵션가격
    	 			$("#sellItemList").append("<div class='itemElement' style='overflow:auto'><div><span class='OptionStyle' id="+spans+">"+$('#option_title>option:selected').text()+"/"+$('#option_content>option:selected').text()+"</span></div><div><input type='number' class='choice' min='1' max='5' value='1'/></div><div id="+cnt+">"+charge+"</div><div><img class='itemElementDel' src='img/deal/close.png'/></div></div>");
@@ -88,15 +90,21 @@
    	 			// 옵션 배열 및 문자열저장
    	 			optionStrArray.push(($("#"+spans).text()));
    	 			optionStr = optionStrArray.join();
+   	 			
+   	 			
+   	 			//중복체크
+   	 			checkArray.push($("#option_title").val()+$('#option_content').text().substring(13));
+   	 			checkStr = checkArray.join();
+
    	 			//로그찍어보기
    	 			console.log('============ 엘리먼트 추가시 =============');
    	 			console.log(counts+"<--수량 계산중");
    	 			console.log(count+"<-- 수량 배열");
    	 			console.log(total,'<-- 돈 계산중');
    	 			console.log(moneyCollect+"<--돈 배열");
-   	 			console.log(optionStr+"<--옵션 ")
-   	 			console.log(optionStrArray+"<--옵션 배열")
-
+   	 			console.log(optionStr+"<--옵션 ");
+   	 			console.log(optionStrArray+"<--옵션 배열");
+   	 			console.log(checkStr);
    	 			
    	 			//수량기, 금액 id
    	 			cnt++;
@@ -108,8 +116,7 @@
    	 			//선택 후 원상복귀
    	 			$("#option_title").focus();
    	 			$("#option_title>option:eq(0)").prop("selected",true);	
-   	 			$("#option_content").html("<option selected disabled hidden>-[필수]- 옵션2 - </option>");
-   		  			
+   	 			$("#option_content").html("<option selected disabled hidden>-[필수]- 옵션2 - </option>");  			
  		});  
 
 		//옵션 엘리먼트 삭제
@@ -362,6 +369,73 @@
      		$("#popup").css("display","none");
      	});
      	
+     	
+     	//QnA페이징
+		function setMyinfoQnAManagementPaging(pageVO){
+			console.log(pageVO);
+			$("#pageNum").html("");
+			var tag = '<ul>';
+			if(pageVO.pageNum <= 1){
+				tag += '<li>이전</li>';				
+			}else{
+				tag += '<li><button class="pagings notBtn" value="'+(pageVO.pageNum-1)+'">이전</button></li>';				
+			}
+			
+			for(var p = pageVO.startPageNum; p < pageVO.startPageNum + pageVO.onePageNum; p++){
+				tag += '<li><button class="pagings notBtn" value='+p+'>'+ p +'</button></li>';	
+			}
+			if(pageVO.pageNum == pageVO.totalPage){
+				tag += '<li>다음</li>';				
+			}else{
+				tag += '<li><button class="pagings notBtn" value='+(pageVO.pageNum+1)+'> 다음 </button></li>';				
+			}
+			tag += "</ul>";
+			$("#pageNum").append(tag);
+		}
+     	
+     	
+     	
+     	
+     	
+     	$(document).on('click','.pagings',function(){
+     		var url = "reviewPaging";
+     		var params = "pageNum="+$(this).val()+"&num=${itemVO.i_num }";
+     		console.log(params,"<--- page 넘버는?");
+     		
+     		$.ajax({
+     			url : url,
+     			data : params,
+     			success:function(result){
+     				$("#sellReview").html('');
+     				var tag='';    
+     				result.reviewList.forEach(function(data,index){
+     					tag += '<div id="oneReview">';
+     					tag += '<ul>';
+     					tag += '<li>';
+     					tag += '<div> 작성자 : '+data.userid+ '(' + data.re_writedate + ')'; 					
+     					if(data.re_rate==1){
+     						tag += '<img src="/1ocaler/img/groupImg/likeF.png">';
+     					}
+     					tag += '</div>';
+     					tag += '<hr style="width:630px; margin:0px auto;"/>';
+     					tag += '<div>'+data.re_content+'</div>';
+     					tag += '</li>';	
+     					tag += '</ul>';
+     					tag += '</div>';
+     				});   		
+     				$("#sellReview").html(tag); // 선택자의 .html  하면 자기 하위 자식으로 쭉들어가지네
+     				setMyinfoQnAManagementPaging(result.pageVO);
+     			},error:function(e){
+     				alert('실패');
+     			}
+     		})
+     	})
+     	
+     	
+     	
+     	
+     	
+     	
 	});
 
 	</script>	
@@ -540,14 +614,8 @@
 		</div>
 		<!-- 리뷰달기 페이징 -->			
 		<div id ="pageNum">
-				<ul class="pagination pagination-sm" >
-				 	<li class="page-item"><a href="#" class="page-link"> << </a></li>
-				 	<li class="page-item"><a href="#" class="page-link">1</a></li>
-				 	<li class="page-item"><a href="#" class="page-link">2</a></li>
-				 	<li class="page-item "><a href="#" class="page-link">3</a></li>
-				 	<li class="page-item"><a href="#" class="page-link">4</a></li>
-				 	<li class="page-item"><a href="#" class="page-link">5</a></li>
-				 	<li class="page-item "><a href="#" class="page-link"> >> </a></li>
+				<ul>
+					<c:if test="${pageVO.pageNum<=1}"><li>이전</li></c:if><c:if test="${pageVO.pageNum>1}"><li><button class="pagings notBtn" value="${pageVO.pageNum-1 }">이전</button></li></c:if><c:forEach var="p" begin="${pageVO.startPageNum }" end="${pageVO.startPageNum+pageVO.onePageNum-1 }"><li><button class="pagings notBtn" value="${p }">${p }</button></li></c:forEach><c:if test="${pageVO.pageNum<pageVO.totalPage}"><li><button class="pagings notBtn" value="${pageVO.pageNum+1 }">다음</button></li></c:if><c:if test="${pageVO.pageNum==pageVO.totalPage}"><li>다음</li></c:if>
 				</ul>
 		</div>
 		
@@ -568,10 +636,7 @@
 		
 		<!-- 여기 QNAAAAAAAAAAAAAAAAAAAAAAAAAAAAa -->
 		<div id="sellQnA">
-			<h3 class="sellShortDescription">Q&A<span> | 궁굼한 사항을 물어보세요</span></h3> 		
-			<!-- <ul id ="sellQnAList">
-							
-			</ul> -->
+			<h3 class="sellShortDescription">Q&A<span> | 궁굼한 사항을 물어보세요</span></h3>
 			<table id="tableFrm">
 				<thead>
 					<tr>
@@ -586,18 +651,22 @@
 					
 				</tbody>
 			</table>
+			<c:if test="${logId!=null }">
+				<button class="btn commBtn_sm" id ="qaBtn" style="margin-top:15px;">질문하기</button>
+			</c:if>	
 			<!-- Q&A 페이징 -->
-			<div id ="pageNum" style="margin-top: 20px;">
-				<ul class="pagination pagination-sm" >
-				 	<li class="page-item"><a href="#" class="page-link"> << </a></li>
-				 	<li class="page-item"><a href="#" class="page-link">1</a></li>
-				 	<li class="page-item"><a href="#" class="page-link">2</a></li>
-				 	<li class="page-item "><a href="#" class="page-link">3</a></li>
-				 	<li class="page-item"><a href="#" class="page-link">4</a></li>
-				 	<li class="page-item"><a href="#" class="page-link">5</a></li>
-				 	<li class="page-item "><a href="#" class="page-link"> >> </a></li>
-					<li><button class="btn commBtn_sm" id ="qaBtn">질문하기</button></li>
+			<div id ="pageNum">
+				<ul>
+				 	<li><a > 이전 </a></li>
+				 	<li><a > 1 </a></li>
+				 	<li><a > 2 </a></li>
+				 	<li><a > 3 </a></li>
+				 	<li><a > 4 </a></li>
+				 	<li><a > 5 </a></li>
+				 	<li><a > 다음 </a></li>
 				</ul>
+				
+				
 			</div>	
 		</div>
 		<!-- 여기 QNAAAAAAAAAAAAAAAAAAAAAAAAAAAAa -->

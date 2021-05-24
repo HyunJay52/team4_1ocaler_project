@@ -4,7 +4,9 @@ package com.team4.localer.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +37,8 @@ import com.team4.localer.service.SellerService;
 import com.team4.localer.service.ShipService;
 import com.team4.localer.vo.Cha_pVO;
 import com.team4.localer.vo.DealPageVO;
+import com.team4.localer.vo.ItemReviewPageVO;
+import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.Item_optionVO;
 import com.team4.localer.vo.MemberVO;
 import com.team4.localer.vo.OrderVO;
@@ -74,8 +78,8 @@ public class SellerController {
 		  
 //		System.out.println(sellerService.selectAllitem().size()+"<---- size 몇개니");
 //		mav.addObject("itemList",sellerService.selectAllitem());
-		
-		
+//		
+//		
 		
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
@@ -209,16 +213,29 @@ public class SellerController {
 	}
 
 	@RequestMapping("/sellView")
-	public ModelAndView selView(SellitemVO itemVO, Item_optionVO optionVO, HttpSession session) {
+	public ModelAndView selView(SellitemVO itemVO, Item_optionVO optionVO, ItemReviewPageVO reviewPageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 	
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
+		reviewPageVO.setTotalRecord(myinfoService.selectAllReDate(itemVO.getI_num()).get(0).getTotalCnt());
+
+		System.out.println(reviewPageVO.getPageNum()+"<------현재페이지넘버");
+		System.out.println(reviewPageVO.getOnePageRecord()+"<------1페이지에 보여줄 레코드수");
+		System.out.println(reviewPageVO.getOnePageNum()+"<------한페이지에 보여줄 페이지수");
+		System.out.println(reviewPageVO.getTotalRecord()+"<------총레코드의수");
+		System.out.println(reviewPageVO.getTotalPage()+"<------총 페이지수==마지막페이지번호");
+		System.out.println(reviewPageVO.getStartPageNum()+"<------시작 페이지 번호");
+		System.out.println(reviewPageVO.getLastPageRecord()+"<------마지막에 남은 레코드수");
 		
-		mav.addObject("reviewList",myinfoService.selectSellItemReview(itemVO.getI_num()));
+		
+		
+		mav.addObject("reviewList",myinfoService.selectSellItemReview(reviewPageVO));
 		mav.addObject("reviewAll",myinfoService.selectAllReDate(itemVO.getI_num()));
-		System.out.println(myinfoService.selectSellItemReview(itemVO.getI_num()).size()+"<--리뷰size는?");
+		mav.addObject("pageVO",reviewPageVO);
+		
+		System.out.println(myinfoService.selectSellItemReview(reviewPageVO).size()+"<--사이즈는???????");
 		System.out.println(myinfoService.selectAllReDate(itemVO.getI_num()).size()+"<--1개나오면맞을듯");
 		mav.addObject("itemVO",sellerService.selectOnePage(itemVO.getI_num()));	
 		mav.addObject("NOTitle",sellerService.notOverlapOptionTitleSel(itemVO.getI_num())); //옵션대가리
@@ -570,5 +587,27 @@ public class SellerController {
 		return myinfoService.selectAllQnA(num);
 	}
 	
+	@RequestMapping("/reviewPaging")
+	@ResponseBody
+	public Map<String,Object> reviewPaging(ItemReviewPageVO reviewPageVO, int num){
+		Map<String,Object> maps = new HashMap<String,Object>();
+		
+		reviewPageVO.setTotalRecord(myinfoService.selectAllReDate(num).get(0).getTotalCnt());		
+		reviewPageVO.setI_num(num);
+		
+		maps.put("reviewList", myinfoService.selectSellItemReview(reviewPageVO));
+		maps.put("pageVO", reviewPageVO);
+		
+		System.out.println(reviewPageVO.getPageNum()+"현재페이지넘버");
+		System.out.println(reviewPageVO.getOnePageRecord()+"1페이지에 보여줄 레코드수");
+		System.out.println(reviewPageVO.getOnePageNum()+"한페이지에 보여줄 페이지수");
+		System.out.println(reviewPageVO.getTotalRecord()+"총레코드의수");
+		System.out.println(reviewPageVO.getTotalPage()+"총 페이지수==마지막페이지번호");
+		System.out.println(reviewPageVO.getStartPageNum()+"시작 페이지 번호");
+		System.out.println(reviewPageVO.getLastPageRecord()+"마지막에 남은 레코드수");
+		
+		
+		return maps;
+	}
 	
 }

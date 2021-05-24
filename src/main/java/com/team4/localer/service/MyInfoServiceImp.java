@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.team4.localer.dao.MyInfoDAO;
 import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.ItemReviewPageVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
@@ -245,10 +246,9 @@ public class MyInfoServiceImp implements MyInfoService{
 	
 //	해당 게시글 리뷰 불러오기(2021-05-24 WOW)	
 	@Override
-	public List<ItemReviewVO> selectSellItemReview(int num) {
-		return dao.selectSellItemReview(num);
+	public List<ItemReviewVO> selectSellItemReview(ItemReviewPageVO reviewVO) {
+		return dao.selectSellItemReview(reviewVO);
 	}
-	
 //	해당 게시글 총리뷰수, re-date1갯수 불러오기(2021-05-24 WOW)	
 	@Override
 	public List<ItemReviewVO> selectAllReDate(int num) {
@@ -262,6 +262,12 @@ public class MyInfoServiceImp implements MyInfoService{
 		// seller 메인 정보
 		return dao.selectSelinfo(userid);
 	}
+
+	
+
+	
+
+	
 
 
 }
