@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/spend_mem.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -111,7 +112,7 @@
 						txt +="<tr class='selList'>";
 						txt +=	"<td>"+vo.sel_num+"</td>";
 						txt +=	"<td>"+vo.sel_userid +"</td>";
-						txt +=	"<td class='popup wordcut'>"+vo.sel_subject +"</td>";
+						txt +=	"<td class='popup wordcut' style='cursor:pointer'>"+vo.sel_subject +"</td>";
 						txt +=	"<td>"+vo.sel_cnt +"</td>";
 						txt +=	"<td>"+vo.sel_price +"</td>";
 						txt +=	"<td>"+vo.fee +"</td>";
@@ -123,7 +124,7 @@
 					var link="";
 					$(".clickpage").remove();//기존 페이징 부분 삭제
 					if(pagenum>1){
-						link +="<li  class='clickpage'>이전</li>";	
+						link +="<li  class='clickpage' style='cursor:pointer'>이전</li>";	
 					}
 					var lastPg=last;
 					if(lastPg>=start+4){//>11>2+4
@@ -133,14 +134,14 @@
 					}
 					for(var i=start;i<=start+lastPg-1;i++){
 						if(pagenum==i){
-							link +="<li  class='clickpage nowPg'>"+i+"</li>";
+							link +="<li  class='clickpage nowPg' style='cursor:pointer'>"+i+"</li>";
 						}else{
-							link +="<li  class='clickpage'>"+i+"</li>";	
+							link +="<li  class='clickpage' style='cursor:pointer'>"+i+"</li>";	
 						}
 						
 					}
 					if(last>pagenum){
-						link +="<li  class='clickpage'>다음</li>";
+						link +="<li  class='clickpage' style='cursor:pointer'>다음</li>";
 					}
 					$(".link").append(link);
   				},error:function(){
@@ -182,7 +183,7 @@
     	  }
     	  $(".exit").click(function(){
     		  //부모의 부모 ->모달 div 
-    		  $(this).parent().parent().css("display","none");
+    		  $(this).parent().css("display","none");
     	  });
     	  $(".prev").click(function(){
     		  //이전 버튼 클릭시
@@ -216,16 +217,16 @@
 					<td>누적 매출</td>
 				</tr>
 				<tr>
-					<td>${total.totalmoney  }</td>
-					<td>${total.totalsale }</td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${total.totalmoney}"/></td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${total.totalsale }"/></td>
 				</tr>
 				<tr>
 					<td>이번달 수익</td>
 					<td>이번달 매출</td>
 				</tr>
 				<tr>
-					<td>${month3.monthmoney }</td>
-					<td>${month3.monthsale }</td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${month3.monthmoney }"/></td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${month3.monthsale }"/></td>
 				</tr>
 			</table> 
 			<table class="t_spend" >
@@ -275,54 +276,56 @@
 			<tr class="selList">
 				<td>${vo.sel_num }</td>
 				<td>${vo.sel_userid }</td>
-				<td class="popup wordcut">${vo.sel_subject }</td>
+				<td class="popup wordcut" style="cursor:pointer">${vo.sel_subject }</td>
 				<td>${vo.sel_cnt }</td>
-				<td>${vo.sel_price }</td>
-				<td>${vo.fee }</td>
-				<td>${vo.remoney }</td>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.sel_price }"/></td>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.fee }"/></td>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.remoney }"/></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<ul class="link">
 		<!-- 이전버튼 -->
 		<c:if test="${pageVO.pageNum>1 }">
-			<li class="clickpage">이전</li>
+			<li class="clickpage" style="cursor:pointer">이전</li>
 		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
             	<c:if test="${p==pageVO.pageNum }">
-            		<li class="clickpage nowPg" >${p}</li> 
+            		<li class="clickpage nowPg" style="cursor:pointer">${p}</li> 
             	</c:if>
             	<c:if test="${p!=pageVO.pageNum }">
-            		<li class="clickpage" >${p}</li>  
+            		<li class="clickpage" style="cursor:pointer">${p}</li>  
             	</c:if>
             </c:if>
          </c:forEach>
          <c:if test="${pageVO.totalPage>pageVO.pageNum }">
-			<li class="clickpage">다음</li>
+			<li class="clickpage" style="cursor:pointer">다음</li>
 		</c:if>
 	</ul>
 	
 	<div id="moOne"class="modaldiv">
-		<div><b class="exit">X</b><div id="topsubject"></div></div>
-		<table class="tablea modal1" >
-			<colgroup>
-	        	<col width="15%" />
-	            <col />
-	            <col width="15%" />
-	            <col width="15%" />
-	            <col width="20%" />
-	        </colgroup>
-			<tr>
-				<td>번호</td>
-				<td>구매자</td>
-				<td>구매수량</td>
-				<td>구매금액</td>
-				<td>구매확정일</td>
-			</tr>
-			
-		</table>
+		<div id="topsubject"></div>
+		<div id="modalTbl">
+			<table class="tablea modal1" >
+				<colgroup>
+		        	<col width="15%" />
+		            <col />
+		            <col width="15%" />
+		            <col width="15%" />
+		            <col width="20%" />
+		        </colgroup>
+				<tr>
+					<td>번호</td>
+					<td>구매자</td>
+					<td>구매수량</td>
+					<td>구매금액</td>
+					<td>구매확정일</td>
+				</tr>
+			</table>
+		</div>
+		<div class="exit" style="cursor:pointer">닫기</div>
 	</div><!-- /모달div -->
 	
 </div><!--#main div-->
