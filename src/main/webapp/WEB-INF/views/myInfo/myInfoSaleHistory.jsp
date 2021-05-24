@@ -14,19 +14,21 @@
 				<div id="saleGrade" class="saleHistoryTop">
 					<ul>
 						<li>셀러등급</li>
-						<li><img src="img/myInfo/slider/heart50.png" /><span class="saleHistorySpan">50</span>%</li>
+						<li><img src="img/myInfo/slider/heart50.png" /><span class="saleHistorySpan">${selInfo[0].sel_lvl }</span>%</li>
 					</ul>
 				</div>
 				<div id="settlementAmount" class="saleHistoryTop">
 					<ul>
 						<li>정산금액</li>
-						<li><span class="saleHistorySpan" style="color: orange">980,100</span>원</li>
+						<li><span class="saleHistorySpan" style="color: orange">
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${selInfo[0].rec_m }" />
+						</span>원</li>
 					</ul>
 				</div>
 				<div id="newQ&A" class="saleHistoryTop">
 					<ul>
 						<li>신규 Q&A</li>
-						<li><span class="saleHistorySpan">12</span>개</li>
+						<li><span class="saleHistorySpan">${selInfo[0].qnacnt }</span>개</li>
 					</ul>
 				</div>
 			</div>
@@ -46,8 +48,8 @@
 						<tr>
 							<td>12 건</td>
 							<td>3 건</td>
-							<td>1 건</td>
-							<td>10 건</td>
+							<td>0 건</td>
+							<td>${selInfo[0].qnacnt } 건</td>
 						</tr>
 					</table>
 				</div>
@@ -84,7 +86,7 @@
 						<tr>
 							<td>3 건</td>
 							<td>2 건</td>
-							<td>1 건</td>
+							<td>0 건</td>
 							<td>2 건</td>
 						</tr>
 					</table>

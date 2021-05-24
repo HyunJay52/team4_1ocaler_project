@@ -20,6 +20,7 @@ import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellerVO;
 
 @Service
 public class MyInfoServiceImp implements MyInfoService{
@@ -227,6 +228,12 @@ public class MyInfoServiceImp implements MyInfoService{
 	public List<QnAVO> selectAllmyqna(String userid) {
 		// qna 가져오기
 		return dao.selectAllmyqna(userid);
+	}
+
+	@Override
+	public List<SellerVO> selectSelinfo(String userid) {
+		// seller 메인 정보
+		return dao.selectSelinfo(userid);
 	}
 
 

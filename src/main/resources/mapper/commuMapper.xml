@@ -165,6 +165,6 @@
 	
 <!-- index by hj 2021.05.23 -->
 	<select id="selectIndexRecipe" resultType="com.team4.localer.vo.BoardVO">
-		select * from board where up_cate=2 and <![CDATA[rownum<=12]]> order by b_hit desc 
+		SELECT * FROM (select * from board where up_cate=2 order by b_hit DESC) WHERE <![CDATA[ rownum<=12 ]]> 
 	</select>
 </mapper>
