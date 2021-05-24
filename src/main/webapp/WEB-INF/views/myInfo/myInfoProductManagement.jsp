@@ -8,13 +8,67 @@
 				data : $("#myinfoProductForm").serialize()+"&nowNum="+num,
 				success : function(result){
 					console.log(result);
+					var tag = "<tr><td>글번호</td><td>상품제목</td><td>가격</td><td>구매수(총판매액)</td><td>종료일</td><td>등록일</td><td>조회수</td></tr>";
+					var index = 0;
+					result.list.forEach(function(data, idx){
+						tag += "<tr><td>"+data.i_num+"</td>";
+						tag += "<td><a href='sellView?i_num="+data.i_num+"'>"+data.i_subject+"</a></td>";
+						tag += "<td>"+data.i_price+"원</td>";
+						tag += "<td>"+data.orderCount+"<br/>("+data.revenue+")</td>";
+						tag += "<td>"+data.i_period+"</td>";
+						tag += "<td>"+data.i_writedate+"</td>";
+						tag += "<td>"+data.i_hit+"</td>";
+						tag += "</tr>";
+						
+						index = idx;
+					});
 					
+					if(index < 10){
+						for(var i = index; i < 7; i++){
+							tag += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+						}							
+					}
+					setMyinfoProductPaging(result.pVO);
+					$(".myInfoProductManagementTable2").html(tag);
 				},error : function(e){
 					console.log("error");	
 				}
 			});
 		}
 		setProductList(1);
+		
+		//상품관리 페이징
+		function setMyinfoProductPaging(pVO){
+			console.log(pVO);
+			$(".myinfoProductManagementPaging").html("");
+			var tag = '<ul class="pagination justify-content-center">';
+			if(pVO.nowNum > 1){
+				tag += '<li class="page-item"><button value="'+(pVO.nowNum-1)+'" class="page-link">Prev</button></li>';					
+			}else{
+				tag += '<li class="page-item disabled"><button class="page-link">Prev</button></li>';				
+			}
+			for(var p = pVO.startPage; p < pVO.startPage + pVO.onePageSize; p++){
+				if(p <= pVO.totalPage){
+					if(p == pVO.nowNum){
+						tag += '<li class="page-item active"><button class="page-link" value="'+p+'">'+p+'</button></li>';						
+					}else{
+						tag += '<li class="page-item"><button class="page-link" value="'+p+'">'+p+'</button></li>';						
+					}
+				}	
+			}
+			if(pVO.nowNum == pVO.totalPage){
+				tag += '<li class="page-item disabled"><button class="page-link">Next</button></li>';				
+			}else{
+				tag += '<li class="page-item"><button value="'+(pVO.nowNum+1)+'" class="page-link">Next</button></li>';				
+			}
+			tag += "</ul>";
+			$(".myinfoProductManagementPaging").append(tag);
+		}
+		
+		//상품관리 검색
+		$(".productManagementBtn").click(function(){
+			setProductList(1);
+		});
 	});
 </script>
 
@@ -36,7 +90,7 @@
 				<ul class="productManagementLabel">
 					<li><label>판매상태</label></li>
 					<li><label>기간선택</label></li>
-					<li><label>검색</label></li>					
+					<li><label>제목검색</label></li>					
 				</ul>
 				<form method="post" id="myinfoProductForm" onsubmit="return false;">
 				<div class="productManagementLabelCenter">
@@ -70,77 +124,17 @@
 			<table class="myInfoProductManagementTable2">
 				<tr>
 					<td>글번호</td>
-					<td>상품명</td>
+					<td>상품제목</td>
 					<td>가격</td>
-					<td>종료일</td>
-					<td>조회수</td>
 					<td>구매수(총판매액)</td>
-					<td>등록일</td>							
-				</tr>
-				<tr>
-					<td>9</td>
-					<td>감자</td>
-					<td>10,000 원</td>
-					<td>2021.04.11</td>
-					<td>63 회</td>
-					<td>23 회<br/>(230,000 원)</td>
-					<td>2021.03.28</td>							
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+					<td>종료일</td>
+					<td>등록일</td>
+					<td>조회수</td>
+				</tr>	
 			</table>
+			<div class="myinfoProductManagementPaging">
+			
+			</div>
 		</div>
 	</div>
 </div>

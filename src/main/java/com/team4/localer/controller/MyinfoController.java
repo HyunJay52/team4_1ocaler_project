@@ -605,7 +605,7 @@ public class MyinfoController {
 	public Map<String, Object> selectProductList(HttpSession ses, MyinfoPageVO vo){
 		Map<String, Object> map = new HashMap<String, Object>();
 		vo.setUserid((String)ses.getAttribute("logId"));
-		vo.setOnePageRecord(7);
+		vo.setOnePageRecord(10);
 		vo.setOnePageSize(5);
 		
 		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");

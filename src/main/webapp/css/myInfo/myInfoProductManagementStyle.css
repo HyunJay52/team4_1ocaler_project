@@ -94,6 +94,12 @@
 	.myInfoProductManagementTable2 tr>td{/*전체적인 열 폭조정*/
 		width:14%;
 	}
+	.myInfoProductManagementTable2 tr>td:nth-child(1){
+		width:8%;
+	}
+	.myInfoProductManagementTable2 tr>td:nth-child(7){
+		width:8%;
+	}
 	#shipSelectbox{
 		float:right;
 		margin-top:5px;
@@ -103,6 +109,9 @@
 		height:30px;
 		text-align:center;	
 		margin:20px 0 0 50px;
+	}
+	.myinfoProductManagementPaging{
+		margin-top:10px;
 	}
 	
 	
