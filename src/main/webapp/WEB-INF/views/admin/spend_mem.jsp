@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/spend_mem.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminCmm.css"/>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -65,9 +66,9 @@
 					$.each($list ,function(idx,vo){
 						txt +="<tr class='memList'>";
 						txt +=	"<td>"+vo.userid+"</td>";
-						txt +=	"<td>"+vo.charge_point +"</td>";
-						txt +=	"<td class='spend'>"+vo.spend_point +"</td>";
-						txt +=	"<td class='add'>"+vo.add_point +"</td>";
+						txt +=	"<td>"+vo.charge_point+"</td>";
+						txt +=	"<td class='spend' style='cursor:pointer'>"+vo.spend_point+"</td>";
+						txt +=	"<td class='add' style='cursor:pointer'>"+vo.add_point+"</td>";
 						txt +="</tr>";
 					});
 					$(".memlisttbl").append(txt);
@@ -75,7 +76,7 @@
 					var link="";
 					$(".clickpage").remove();//기존 페이징 부분 삭제
 					if(pagenum>1){
-						link +="<li  class='clickpage'>이전</li>";	
+						link +="<li  class='clickpage' style='cursor:pointer'>이전</li>";	
 					}
 					var lastPg=last;
 					if(lastPg>=start+4){//>11>2+4
@@ -85,9 +86,9 @@
 					}
 					for(var i=start;i<=start+lastPg-1;i++){
 						if(pagenum==i){
-							link +="<li  class='clickpage nowPg'>"+i+"</li>";
+							link +="<li  class='clickpage nowPg' style='cursor:pointer'>"+i+"</li>";
 						}else{
-							link +="<li  class='clickpage'>"+i+"</li>";	
+							link +="<li  class='clickpage' style='cursor:pointer'>"+i+"</li>";	
 						}
 						
 					}
@@ -105,6 +106,7 @@
     	  //사용금액 클릭시 모달1 창 띄우기
     	  $(document).on('click','.spend',function(){
     		  var userid=$(this).prev().prev().text();
+    		  $("#moOne>#topsubject").text(userid+"님의 사용포인트");
      		 modalOne(userid);//모달창 띄우는 
     	  });
     	  
@@ -140,6 +142,7 @@
     	  //회원거래 클릭시 모달2 창 띄우기
     	  $(document).on('click','.add',function(){
     		  var userid=$(this).prev().prev().prev().text();
+    		 $("#moTwo>#topsubject").text(userid+"님의 획득포인트");
      		 modalTwo(userid);//모달창 띄우는
     	  });
     	  
@@ -172,7 +175,7 @@
     	  
     	  $(".exit").click(function(){
     		  //부모의 부모 ->모달 div 
-    		  $(this).parent().parent().css("display","none");
+    		  $(this).parent().css("display","none");
     	  });
       
     	  $("input[type='text']").keydown(function(){
@@ -213,16 +216,16 @@
 				<td>누적 사용액</td>
 			</tr>
 			<tr>
-				<td>${totalVO.totalcharge }</td>
-				<td>${totalVO.totalspend }</td>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${totalVO.totalcharge }"/></td>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${totalVO.totalspend }"/></td>
 			</tr>
 			<tr>
 				<td>이번달 충전액</td>
 				<td>이번달 사용액</td>
 			</tr>
 			<tr>
-				<td>${totalVO.chargemoney }</td>
-				<td>${totalVO.spendmoney }</td>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${totalVO.chargemoney }"/></td>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${totalVO.spendmoney }"/></td>
 			</tr>
 		</table> 
 		<table class="t_spend" >
@@ -263,78 +266,77 @@
 		<c:forEach var="vo" items="${list }">
 			<tr class="memList">
 				<td>${vo.userid }</td>
-				<td>${vo.charge_point }</td>
-				<td class="spend" >${vo.spend_point }</td>
-				<td class="add">${vo.add_point }</td>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.charge_point }"/></td>
+				<td class="spend" style="cursor:pointer"><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.spend_point }"/></td>
+				<td class="add" style="cursor:pointer"><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.add_point }"/></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<ul class="link">
 		<!-- 이전버튼 -->
 		<c:if test="${pageVO.pageNum>1 }">
-			<li class="clickpage">이전</li>
+			<li class="clickpage" style="cursor:pointer;">이전</li>
 		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
             	<c:if test="${p==pageVO.pageNum }">
-            		<li class="clickpage nowPg" >${p}</li> 
+            		<li class="clickpage nowPg" style="cursor:pointer;">${p}</li> 
             	</c:if>
             	<c:if test="${p!=pageVO.pageNum }">
-            		<li class="clickpage" >${p}</li>  
+            		<li class="clickpage" style="cursor:pointer;">${p}</li>  
             	</c:if>
             </c:if>
          </c:forEach>
          <c:if test="${pageVO.totalPage>pageVO.pageNum }">
-			<li class="clickpage">다음</li>
+			<li class="clickpage" style="cursor:pointer;">다음</li>
 		</c:if>
 	</ul>
 	
 	<div id="moOne"class="modaldiv">
-		<div>사용포인트<b class="exit">X</b></div>
-		<table class="tablea modal1" >
-			<colgroup>
-	        	<col width="15%" />
-	            <col />
-	            <col width="15%" />
-	            <col width="15%" />
-	            <col width="20%" />
-	        </colgroup>
-			<tr>
-				<td>번호</td>
-				<td class="wordcut">글제목</td>
-				<td>회원명</td>
-				<td>사용금액</td>
-				<td>거래일</td>
-			</tr>
-		</table>
+		<div id="topsubject"></div>
+		<div id="modalTbl">
+			<table class="tablea modal1" >
+				<colgroup>
+		        	<col width="15%" />
+		            <col />
+		            <col width="15%" />
+		            <col width="15%" />
+		            <col width="20%" />
+		        </colgroup>
+				<tr>
+					<td>번호</td>
+					<td class="wordcut">글제목</td>
+					<td>회원명</td>
+					<td>사용금액</td>
+					<td>거래일</td>
+				</tr>
+			</table>
+		</div>
+		<div class="exit" style="cursor:pointer;">닫기</div>
 	</div>
 	<div id="moTwo" class="modaldiv">
-		<div>받을 포인트 <b class="exit" >X</b></div>
-		<table class="tablea modal2" >
-			<colgroup>
-	        	<col width="15%" />
-	            <col />
-	            <col width="15%" />
-	            <col width="15%" />
-	            <col width="20%" />
-	        </colgroup>
-			<tr>
-				<td>번호</td>
-				<td class="wordcut">글제목</td>
-				<td>회원명</td>
-				<td>사용금액</td>
-				<td>거래일</td>
-			</tr>
-			
-		</table>
-	
+		<div id="topsubject"></div>
+		<div id="modalTbl">
+			<table class="tablea modal2" >
+				<colgroup>
+		        	<col width="15%" />
+		            <col />
+		            <col width="15%" />
+		            <col width="15%" />
+		            <col width="20%" />
+		        </colgroup>
+				<tr>
+					<td>번호</td>
+					<td class="wordcut">글제목</td>
+					<td>회원명</td>
+					<td>사용금액</td>
+					<td>거래일</td>
+				</tr>
+			</table>
+		</div>
+		<div class="exit" style="cursor:pointer;">닫기</div>
 	</div>
-	
-
-
-
-
 
 </div>
 
