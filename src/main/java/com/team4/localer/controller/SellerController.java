@@ -186,8 +186,14 @@ public class SellerController {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
 		
+		mav.addObject("reviewList",myinfoService.selectSellItemReview(itemVO.getI_num()));
+		mav.addObject("reviewAll",myinfoService.selectAllReDate(itemVO.getI_num()));
+		System.out.println(myinfoService.selectSellItemReview(itemVO.getI_num()).size()+"<--리뷰size는?");
+		System.out.println(myinfoService.selectAllReDate(itemVO.getI_num()).size()+"<--1개나오면맞을듯");
 		mav.addObject("itemVO",sellerService.selectOnePage(itemVO.getI_num()));	
 		mav.addObject("NOTitle",sellerService.notOverlapOptionTitleSel(itemVO.getI_num())); //옵션대가리
+		
+		
 		
 		mav.setViewName("deal/sellView");
 		return mav;
@@ -519,13 +525,20 @@ public class SellerController {
 	public Cha_pVO findChaSpPoint(String userid) {
 		return sellerService.findChaSpPoint(userid);
 	}
-	
-	
+		
 	@RequestMapping("/QNAInsert")
 	@ResponseBody
 	public String QnaQuestionInsert(QnAVO qnaVO, HttpSession session) {
 		qnaVO.setUserid((String)session.getAttribute("logId"));	
 		return myinfoService.QnaQuestionInsert(qnaVO)+"";
 	}
+	
+	@RequestMapping("/selectAllQnA")
+	@ResponseBody
+	public List<QnAVO> selectAllQnA(int num){
+		System.out.println(num+"<-- num 잘들어왔니");
+		return myinfoService.selectAllQnA(num);
+	}
+	
 	
 }

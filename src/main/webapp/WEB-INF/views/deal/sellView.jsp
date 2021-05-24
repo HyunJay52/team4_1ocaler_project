@@ -67,46 +67,48 @@
     	}); 
    
     	
-    	
+    	//페이징-------
 		// 옵션 선택시 div추가	
    		$("#option_content").change(function(){	
    			optionCheck = 2;
-   			var charge = parseInt(${itemVO.i_price})+parseInt($('#option_content').val());//원래가격 + 옵션가격
- 			$("#sellItemList").append("<div class='itemElement' style='overflow:auto'><div><span class='OptionStyle' id="+spans+">"+$('#option_title>option:selected').text()+"/"+$('#option_content>option:selected').text()+"</span></div><div><input type='number' class='choice' min='1' max='5' value='1'/></div><div id="+cnt+">"+charge+"</div><div><img class='itemElementDel' src='img/deal/close.png'/></div></div>");
- 			
- 			// 가격, 수량 배열추가
- 			moneyCollect.push($("#"+cnt).text());
- 			count.push(1);
- 			
- 			// 가격, 수량 계산 
- 			total += parseInt(($("#"+cnt).text()));
- 			counts++;
- 			
- 			// 옵션 배열 및 문자열저장
- 			optionStrArray.push(($("#"+spans).text()));
- 			optionStr = optionStrArray.join();
- 			//로그찍어보기
- 			console.log('============ 엘리먼트 추가시 =============');
- 			console.log(counts+"<--수량 계산중");
- 			console.log(count+"<-- 수량 배열");
- 			console.log(total,'<-- 돈 계산중');
- 			console.log(moneyCollect+"<--돈 배열");
- 			console.log(optionStr+"<--옵션 ")
- 			console.log(optionStrArray+"<--옵션 배열")
+   			//if 문서서 이미 있으면? 포함되어있으면 경고창 아니면 추가?
+   					
+   				var charge = parseInt(${itemVO.i_price})+parseInt($('#option_content').val());//원래가격 + 옵션가격
+   	 			$("#sellItemList").append("<div class='itemElement' style='overflow:auto'><div><span class='OptionStyle' id="+spans+">"+$('#option_title>option:selected').text()+"/"+$('#option_content>option:selected').text()+"</span></div><div><input type='number' class='choice' min='1' max='5' value='1'/></div><div id="+cnt+">"+charge+"</div><div><img class='itemElementDel' src='img/deal/close.png'/></div></div>");
+   	 			
+   	 			// 가격, 수량 배열추가
+   	 			moneyCollect.push($("#"+cnt).text());
+   	 			count.push(1);
+   	 			
+   	 			// 가격, 수량 계산 
+   	 			total += parseInt(($("#"+cnt).text()));
+   	 			counts++;
+   	 			
+   	 			// 옵션 배열 및 문자열저장
+   	 			optionStrArray.push(($("#"+spans).text()));
+   	 			optionStr = optionStrArray.join();
+   	 			//로그찍어보기
+   	 			console.log('============ 엘리먼트 추가시 =============');
+   	 			console.log(counts+"<--수량 계산중");
+   	 			console.log(count+"<-- 수량 배열");
+   	 			console.log(total,'<-- 돈 계산중');
+   	 			console.log(moneyCollect+"<--돈 배열");
+   	 			console.log(optionStr+"<--옵션 ")
+   	 			console.log(optionStrArray+"<--옵션 배열")
 
- 			
- 			//수량기, 금액 id
- 			cnt++;
-			spans--;
- 			//총가격수정 수량 수정
- 			$("#i_price").val(total);
- 			$("#i_cnt").val(counts);
- 			$("#opt_str").val(optionStr);
- 			//선택 후 원상복귀
- 			$("#option_title").focus();
- 			$("#option_title>option:eq(0)").prop("selected",true);	
- 			$("#option_content").html("<option selected disabled hidden>-[필수]- 옵션2 - </option>");
-	
+   	 			
+   	 			//수량기, 금액 id
+   	 			cnt++;
+   				spans--;
+   	 			//총가격수정 수량 수정
+   	 			$("#i_price").val(total);
+   	 			$("#i_cnt").val(counts);
+   	 			$("#opt_str").val(optionStr);
+   	 			//선택 후 원상복귀
+   	 			$("#option_title").focus();
+   	 			$("#option_title>option:eq(0)").prop("selected",true);	
+   	 			$("#option_content").html("<option selected disabled hidden>-[필수]- 옵션2 - </option>");
+   		  			
  		});  
 
 		//옵션 엘리먼트 삭제
@@ -151,8 +153,7 @@
  
     	//옵션 엘리먼트 수량변경
    		$(document).on('change','.choice',function(){   			
-   			
-		
+ 
        		var numbers = parseInt($(this).val());	// 현재 적혀있는 숫자[up 또는 down되어 있는 숫자]  
        		var price = parseInt($(this).parent().next().text());// 현재 적혀있는 가격 [ 클릭하기전에 기존에 적혀있는 가격]
        		var result = numbers*moneyCollect[$(".choice").index(this)];//수량변동 후 1개의 가격 * 수량 값
@@ -269,35 +270,91 @@
      	})
     	
      	
+     	$(document).on('click','.toggleBtn',function(){
+     		console.log($(this).prev().text(),"<----이건뭐");
+     		if($(this).prev().text()=='답변완료'){
+     			$(this).parent().next().toggle('fast');
+     		}
+     	
+     	});
      	
      	
      	
-     	
-     	
-     	
-     	
-     	
-     	//QNA관련   	
-     	$(document).on('click','#QNAFrmBtn',function(){
-     		if($("#q_content").val()==null || $("#q_content").val()==''){
-     			alert('질문내용 작성 후 질문하기 버튼을 눌러주세요');
-     		}else{
-     			var url = "QNAInsert";
-     			var params = $("#QNAFrm").serialize();	
+     	//QNA관련 댓글가져오기 부분
+     	$(function(){
+     		function replyList(){
+     			//서버에서 해당글의 QNA전체를 선택하여 가져옴
+     			var url = "selectAllQnA";
+     			var params = "num=${itemVO.i_num }";
      			
      			$.ajax({
-     				url:url,
-     				data:params,
+     				url : url,
+     				data : params,
      				success:function(result){
-     					alert('성공');
-     					$("#q_content").val("");
-     					$("#q_content").css("display","none");
+     					$result = $(result);
+     					console.log($result.length,"<<--뭐나오니");
+     					$(".QNACNT").text($result.length);
+     					var status;
+     					var tag = "";
+     					var start = 1;
+     					$result.each(function(idx, obj){
+     						if(obj.q_answer==null || obj.q_answer=='' ){status='미답변'}else{status='답변완료'}
+     						tag += '<tr>';
+     						tag += '<td class="mainFirstTd">'+ start++ +'</td>';
+     						tag += '<td class="mainSecondTd">'+status+'</td>';
+     						tag += '<td class="mainThirdTd toggleBtn">'+obj.q_content+'</td>';
+     						tag += '<td class="mainFourthtTd">'+obj.userid+'</td>';
+     						tag += '<td class="mainFivthTd">'+obj.q_writedate+'</td>';
+     						tag += '</tr>';
+     						
+     						if(status=='답변완료'){
+     							tag += '<tr style="display:none; background-color:#f0f0f0" >';
+     							tag += '<td style="color:blue">답변</td>';
+     							tag += '<td class="replySecondTd" colspan=2>'+obj.q_answer+'</td>';
+     							tag += '<td >'+obj.sellerid+'</td>';
+     							tag += '<td >'+obj.q_adate+'</td>';
+     							tag += "</tr>";
+     						}
+     						
+     					});//each end
+     					$("#QnAMain").html(tag);
      				},error:function(e){
      					alert('실패');
      				}
      			})
-     		}
-     	});
+     		} //replyList() 끝
+     	
+     	
+     	
+     	
+	     	//QNA관련 댓글쓰기부분 	
+	     	$(document).on('click','#QNAFrmBtn',function(){
+	     		if($("#q_content").val()==null || $("#q_content").val()==''){
+	     			alert('질문내용 작성 후 질문하기 버튼을 눌러주세요');
+	     		}else{
+	     			var url = "QNAInsert";
+	     			var params = $("#QNAFrm").serialize();	
+	     			
+	     			$.ajax({
+	     				url:url,
+	     				data:params,
+	     				success:function(result){
+	     					alert('성공');
+	     					$("#q_content").val("");
+	     					$("#popup").css("display","none");
+	     					replyList();
+	     				},error:function(e){
+	     					alert('실패');
+	     				}
+	     			})
+	     		}
+	     	});
+     		
+     		replyList();
+     	
+     	
+     	});//Qna
+     	
      	
      	
      	$("#btnClose").click(function(){
@@ -308,6 +365,7 @@
 
 	</script>	
 	<%@ include file="/inc/sideBar.jspf" %> <!-- 사이드 메뉴 include -->
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<div id="dealViewMain">
 		<div style="overflow:auto;">
 			<div id="sellImg">	
@@ -342,7 +400,9 @@
 					<div id="sellInfo">	
 						<div> 
 							<input type="text" id="i_subject" name="i_subject" value="${itemVO.i_subject }" readonly>
-							<input class="facker" type="checkbox" name="numLike" id="sellLike" value="${itemVO.i_num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==itemVO.i_num && logId==likes.userid }">checked</c:if></c:forEach>/><label for="sellLike"></label>
+							<c:if test="${logId!=null }">	
+								<input class="facker" type="checkbox" name="numLike" id="sellLike" value="${itemVO.i_num }" <c:forEach var="likes" items="${likeList}"><c:if test="${likes.numLike==itemVO.i_num && logId==likes.userid }">checked</c:if></c:forEach>/><label for="sellLike"></label>
+							</c:if>
 						</div>
 						
 						<div>
@@ -431,10 +491,10 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div>
-				<a href="#sellReviewChk">리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</a>
+				<a href="#sellReviewChk">리뷰수 : ${fn:length(reviewList) }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div>
-				<a href="#sellQusetion">Q&A (4)</a>	
+				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	
 			</div>
 		</div>
 		<br/>
@@ -451,30 +511,31 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div id="sellReviewChk" style="border-bottom: 3px solid navy;">
-				<a href="#sellReviewChk">리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</a>
+				<a href="#sellReviewChk">리뷰수 : ${fn:length(reviewList) }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div>
-				<a href="#sellQusetion">Q&A (4)</a>	
+				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	
 			</div>
 		</div>
 		<h3 class="sellShortDescription">구매후기<span> | 사용 후기를 남겨보아요 </span></h3> 
 			
 		<div id="sellReview">
-			<c:forEach var="i" begin="1" end="4">
 			<!-- ul안에 li한개에 안에 div를 for로 돌려야함 -->
+			<c:forEach var="reviewsVO" items="${reviewList}">
 				<div id="oneReview">
-					<ul>
-						<li>
-							<div> 작성자 : 거미 (2022.05.13) <img src="<%=request.getContextPath()%>/img/groupImg/likeF.png"></div>
-							<hr style=" width: 450px; margin:0px auto;"/>						
-							<div> 너무 재밋고 좋앗습니다 .아하핳하ㅏ하하	</div>
-						</li>
-						<li id="pic">
-							<img src="img/deal/or.jpg"/>
-						</li>
+					<ul>				
+						<li>								
+							<div> 작성자 : ${reviewsVO.userid } (${reviewsVO.re_writedate })
+								<c:if test="${reviewsVO.re_rate==1 }">	
+									<img src="<%=request.getContextPath()%>/img/groupImg/likeF.png">
+								</c:if>
+							</div>
+							<hr style=" width: 630px; margin:0px auto;"/>						
+							<div> ${reviewsVO.re_content }	</div>							
+						</li>						
 					</ul>
-				</div>		
-			</c:forEach>
+				</div>	
+			</c:forEach>	
 		</div>
 		<!-- 리뷰달기 페이징 -->			
 		<div id ="pageNum">
@@ -495,30 +556,35 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div>
-				<a href="#sellReviewChk">리뷰수 : 40 개 &nbsp;  &nbsp;  &nbsp; 재구매율 : 20 %</a>
+				<a href="#sellReviewChk">리뷰수 : ${fn:length(reviewList) }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div id="sellQusetion" style="border-bottom: 3px solid navy;">
-				<a href="#sellQusetion">Q&A (4)</a>	
+				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	
 			</div>
 		</div>
 		
+		
+		
+		<!-- 여기 QNAAAAAAAAAAAAAAAAAAAAAAAAAAAAa -->
 		<div id="sellQnA">
 			<h3 class="sellShortDescription">Q&A<span> | 궁굼한 사항을 물어보세요</span></h3> 		
-			<ul id ="sellQnAList">
-				<li>&nbsp;&nbsp; </li>
-				<li> 답변상태 </li>
-				<li id ="point"> 제목 </li>
-				<li> 작성자 </li>
-				<li> 작성일 </li>
-				
-				<c:forEach var="i" begin="1" end="5">
-					<li> ${i } </li>
-					<li> 미답변 </li>
-					<li> 볼만하겠네 </li>
-					<li> hqhq </li>
-					<li> 21-03-29 </li>
-				</c:forEach>						
-			</ul>
+			<!-- <ul id ="sellQnAList">
+							
+			</ul> -->
+			<table id="tableFrm">
+				<thead>
+					<tr>
+						<th >&nbsp;</th>
+						<th >답변상태</th>
+						<th >제목</th>
+						<th >작성자</th>
+						<th >작성일</th>
+					</tr>
+				</thead>
+				<tbody id="QnAMain">
+					
+				</tbody>
+			</table>
 			<!-- Q&A 페이징 -->
 			<div id ="pageNum" style="margin-top: 20px;">
 				<ul class="pagination pagination-sm" >
@@ -533,7 +599,7 @@
 				</ul>
 			</div>	
 		</div>
-		
+		<!-- 여기 QNAAAAAAAAAAAAAAAAAAAAAAAAAAAAa -->
 		
 		
 		<!-- Q&A 팝업 div -->	

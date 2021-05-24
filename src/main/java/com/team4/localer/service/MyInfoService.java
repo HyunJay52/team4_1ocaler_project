@@ -118,11 +118,19 @@ public interface MyInfoService {
 	public int QnaQuestionInsert(QnAVO vo);
 	
 	
+//  QNA 해당 게시글 전체 질문가져오기(21-05-24 WOW)
+	public List<QnAVO> selectAllQnA(int num);	
+	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	//참여정보 
 	public List<JoinUsVO> selectWaitingJoinList(String userid);
 	//qna 리스트 
 	public List<QnAVO> selectAllmyqna(String userid);
 	
+// 해당 게시글 리뷰 불러오기(2021-05-24 WOW)
+	public List<ItemReviewVO> selectSellItemReview(int num);
+	
+// 해당 게시글 총리뷰수/ re_date 1 갯수 구하기(2021-05-24 WOW)
+	public List<ItemReviewVO> selectAllReDate(int num);
 }
 

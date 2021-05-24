@@ -473,6 +473,22 @@
 		insert into QNA(q_num, num, userid, q_status, q_content)
 		values(qsq.nextval, #{num}, #{userid}, #{q_status}, #{q_content})
 	</insert>
-	
+<!-- QNA selectAllQna WOWWOW -->	
+	<select id="selectAllQnA" resultType="com.team4.localer.vo.QnAVO">
+		SELECT num, q2.userid, sel.userid AS sellerid, q_status, q_content, to_char(q_writedate, 'YYYY/MM/DD') AS q_writedate , q_answer, to_char(q_adate, 'YYYY/MM/DD') AS q_adate
+		FROM QNA q2, (SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel 
+		WHERE q2.num=sel.i_num AND sel.i_num=#{param1} ORDER BY Q_WRITEDATE desc
+	</select>
+<!-- QNA selectSellItemRiew WOWOW -->
+	<select id="selectSellItemReview" resultType="com.team4.localer.vo.ItemReviewVO">
+		select userid, to_date(re_writedate,'YYYY-MM-DD') re_writedate, re_rate, re_content from item_review where num=#{param1}
+	</select>
+<!-- QNA selectAllReDate WOWOW -->	
+	<select id="selectAllReDate" resultType="com.team4.localer.vo.ItemReviewVO">
+		SELECT totalCnt, reRate1 FROM 
+			(SELECT num, count(num) AS totalCnt FROM ITEM_REVIEW ir WHERE num=#{param1} GROUP BY num) tbl1 JOIN 
+			(SELECT num, count(num) AS reRate1 FROM ITEM_REVIEW ir WHERE num=#{param1} AND RE_RATE=1 GROUP BY num) tbl2 ON tbl1.num=tbl2.num
+	</select>
+
 
 </mapper>
