@@ -30,6 +30,13 @@ public class SellerVO {
 	private int mem_type;//1.일반, 2.셀러
 	private int reportCount;//쌓인신고
 	
+	//2021.05.24 hj
+	private int rec_m;
+	private int qnacnt;
+//	private String rec_m;
+//	private String qnacnt;
+	
+	
 	public String getCom_numStr() {
 		com_numStr=com_num.substring(0,3)+"-";
 		com_numStr+=com_num.substring(3,5)+"-";
@@ -181,6 +188,34 @@ public class SellerVO {
 	public void setReportCount(int reportCount) {
 		this.reportCount = reportCount;
 	}
-	
-	
+	public int getSel_status() {
+		return sel_status;
+	}
+	public void setSel_status(int sel_status) {
+		this.sel_status = sel_status;
+	}
+	public int getRec_m() {
+		return rec_m;
+	}
+	public void setRec_m(int rec_m) {
+		this.rec_m = rec_m;
+	}
+	public int getQnacnt() {
+		return qnacnt;
+	}
+	public void setQnacnt(int qnacnt) {
+		this.qnacnt = qnacnt;
+	}
+//	public String getRec_m() {
+//		return rec_m;
+//	}
+//	public void setRec_m(String rec_m) {
+//		this.rec_m = rec_m;
+//	}
+//	public String getQnacnt() {
+//		return qnacnt;
+//	}
+//	public void setQnacnt(String qnacnt) {
+//		this.qnacnt = qnacnt;
+//	}
 }

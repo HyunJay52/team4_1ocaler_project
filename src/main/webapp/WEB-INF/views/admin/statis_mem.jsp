@@ -148,10 +148,10 @@
 	 	<button class="setMonth">2021년 ${dataVO.month3}월</button>
 	 	<button class="dayBtn next">》</button>
 	 </div>
-	 
-	<div class="btitle">회원통계</div>
-    <div id="chart_div"></div>
-				
+	<div id="chartDiv">
+		<div class="btitle">회원통계</div>
+    	<div id="chart_div"></div>
+	</div>			
      <div class="btitle">월별 회원 통계 추이</div>
      
      <ul class="donutUl">

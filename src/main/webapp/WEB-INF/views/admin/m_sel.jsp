@@ -26,7 +26,7 @@
 		});
 		//==모달==
 		//아이디 클릭시 회원정보 테이블 띄워주는 곳 
-		$('.memid').click(function(){
+		$(document).on('click', '.memid', function(){
 			var userid = $(this).text();//회원아이디
 			var sel_num = $(this).prev().text();
 			meminfo(userid);
@@ -100,7 +100,7 @@
 					$.each($list ,function(idx,vo){//테이블 내용 넣기
 						txt += "<tr class='selList'>";
 						txt += 		"<td>"+vo.sel_num +"</td>";
-						txt += 		"<td class='memid'>"+vo.userid+"</td>";
+						txt += 		"<td class='memid' style='cursor:pointer;'>"+vo.userid+"</td>";
 						txt += 		"<td>"+vo.sel_name+"</td>";
 						txt += 		"<td class='wordcut'>"+vo.sel_addr+vo.sel_detail+"</td>";
 						txt += 		"<td>"+vo.sel_tel+"</td>";
@@ -125,7 +125,7 @@
 					var link="";
 					$(".clickpage").remove();//기존 페이징 부분 삭제
 					if(pagenum>1){
-						link +="<li  class='clickpage'>이전</li>";	
+						link +="<li  class='clickpage' style='cursor:pointer;'>이전</li>";	
 					}
 					var lastPg=last;
 					if(lastPg>=start+4){//>11>2+4
@@ -135,14 +135,14 @@
 					}
 					for(var i=start;i<=start+lastPg-1;i++){
 						if(pagenum==i){
-							link +="<li  class='clickpage nowPg'>"+i+"</li>";
+							link +="<li  class='clickpage nowPg' style='cursor:pointer;'>"+i+"</li>";
 						}else{
-							link +="<li  class='clickpage'>"+i+"</li>";	
+							link +="<li  class='clickpage' style='cursor:pointer;'>"+i+"</li>";	
 						}
 						
 					}
 					if(last>pagenum){
-						link +="<li  class='clickpage'>다음</li>";
+						link +="<li  class='clickpage' style='cursor:pointer;'>다음</li>";
 					}
 					$(".link").append(link);
 				},error : function(){
@@ -152,7 +152,7 @@
 		}
 	});
 	$(function(){
-		//블랙리스트 버튼 클릭시
+		
 		$(document).on('click', '.black', function(){
 			var status = $(this).val();//현재 버튼의 상태
 			var userid = $(this).parent().prev().prev().prev().prev().text();//누른 버튼의 아이디 
@@ -293,7 +293,7 @@
 		<c:forEach var="vo" items="${list}">
 			<tr class="selList">
 				<td>${vo.sel_num }</td>
-				<td class="memid">${vo.userid }</td>
+				<td class="memid" style="cursor:pointer">${vo.userid }</td>
 				<td>${vo.sel_name }</td>
 				<td class="wordcut">${vo.sel_addr } ${vo.sel_detail }</td>
 				<td>${vo.sel_tel }</td>
@@ -318,21 +318,21 @@
 	<ul class="link">
 		<!-- 이전버튼 -->
 		<c:if test="${pageVO.pageNum>1 }">
-			<li class="clickpage">이전</li>
+			<li class="clickpage" style="cursor:pointer">이전</li>
 		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
             	<c:if test="${p==pageVO.pageNum }">
-            		<li class="clickpage nowPg" >${p}</li> 
+            		<li class="clickpage nowPg" style="cursor:pointer" >${p}</li> 
             	</c:if>
             	<c:if test="${p!=pageVO.pageNum }">
-            		<li class="clickpage" >${p}</li>  
+            		<li class="clickpage" style="cursor:pointer" >${p}</li>  
             	</c:if>
             </c:if>
          </c:forEach>
          <c:if test="${pageVO.totalPage>pageVO.pageNum }">
-			<li class="clickpage">다음</li>
+			<li class="clickpage" style="cursor:pointer">다음</li>
 		</c:if>
 	</ul>
 	
@@ -381,6 +381,6 @@
 				</tr>
 			</table>
 		</div>
-		<div class="cbtn">닫기</div>
+		<div class="cbtn" style="cursor:pointer">닫기</div>
 	</div>
 </div>

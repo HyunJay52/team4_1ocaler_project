@@ -15,6 +15,7 @@ import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellerVO;
 
 public interface MyInfoService {
    //내 정보 조회
@@ -123,6 +124,7 @@ public interface MyInfoService {
 	public List<JoinUsVO> selectWaitingJoinList(String userid);
 	//qna 리스트 
 	public List<QnAVO> selectAllmyqna(String userid);
-	
+	//seller 메인 정보
+	public List<SellerVO> selectSelinfo(String userid);
 }
 

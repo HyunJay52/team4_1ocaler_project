@@ -41,8 +41,8 @@
 		// 		}
 
 		function myInfoMainDeal() {
-			$
-					.ajax({
+			
+					$.ajax({
 						url : "myInfoMainDeal",
 						data : {
 							"nowNum" : 1,
@@ -75,7 +75,7 @@
 									.forEach(function(data, idx) {
 										if (data.share_userid == '${logId}'
 												&& data.userid != '${logId}') {
-											tag += "<tr><td>내 모집글</td>";
+											tag += "<tr><td style='font-family:nsrb;'>내 모집글</td>";
 											tag += "<td>" + data.s_subject
 													+ "</td>";
 											tag += "<td>" + data.userid
@@ -85,7 +85,7 @@
 											tag += "<td><button class='btn btn-info btn-block'>승인대기</button></td>";
 
 										} else if (data.userid == '${logId}') {
-											tag += "<tr><td>참여신청</td>";
+											tag += "<tr><td style='color: gray; font-family:nsrb;'>참여신청</td>";
 											tag += "<td>" + data.s_subject
 													+ "</td>";
 											tag += "<td>" + data.userid
@@ -203,12 +203,10 @@
 		
 		//qna 답변 보기
 		$(document).on('click', '.qnaTitle', function(){
-			alert("adjfhklajsdfh?")
 			var q_con = $(this).text();
 			var adate = $(this).next().next().children('input').val();
 			var answer = $(this).next().next().next().children('input').val();
 			
-			console.log(q_con, '?', adate, '?', answer);
 			$('#viewQnaAnswer li:nth-child(1)').children('span').text(q_con);
 			$('#viewQnaAnswer li:nth-child(2)').children('span').text(adate);
 			$('#viewQnaAnswer li:last-child').children('div').text(answer);

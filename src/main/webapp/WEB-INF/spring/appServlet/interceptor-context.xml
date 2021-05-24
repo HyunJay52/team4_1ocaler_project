@@ -25,6 +25,7 @@
 			<mvc:mapping path="/cs_qnaOk"/>
 			<mvc:mapping path="/memberWrite"/>
 			<mvc:mapping path="/memWriteOk"/>
+			<mvc:mapping path="/sellBuy"/>
 			<bean class="com.team4.localer.controller.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
