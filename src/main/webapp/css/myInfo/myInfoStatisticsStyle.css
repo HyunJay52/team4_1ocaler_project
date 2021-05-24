@@ -17,7 +17,7 @@
 	}
 	.myinfoStatisticsLeft{
 		width:400px;
-		margin:20px 0px;
+		margin:20px 0px 0px 0px;
 		float:left;
 		overflow:auto;
 	}
@@ -36,12 +36,12 @@
     }
 	.myinfoStatisticsTable2 tr:first-child{/*첫번째 테이블 목차*/
 		text-align:center;
-		background-color:#3f1785;
+		background-color:#fd8939;
 		color:#fff; 
 		font-weight:bold;
 	}
 	.myinfoStatisticsTable2 tr:last-child{/*마지막 줄 tr 스타일*/
-		border-bottom:2px solid #3f1785;
+		border-bottom:2px solid #fd8939;
 	}
 	
 	
@@ -64,4 +64,8 @@
 */
 	.myinfoStatisticsBottomHeader{
 		position:relative;
+	}
+	#totalSale{
+		height:50px;
+		font-size:20px;
 	}

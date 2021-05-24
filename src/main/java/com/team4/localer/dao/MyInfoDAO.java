@@ -89,8 +89,9 @@ public interface MyInfoDAO {
 	//판매관리 리스트 
 	public List<OrderVO> manageList(AdminPageVO pageVO);
 	
+	//리뷰가능한 상품리스트 카운트
+	public int selectItemReviewListCount(MyinfoPageVO vo);
 	
-
 	//리뷰가능한 상품리스트 조회
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
 	
@@ -120,11 +121,27 @@ public interface MyInfoDAO {
 	
 	//상품관리 리스트 카운트
 	public int selectProductListCount(MyinfoPageVO vo);
+
+	//상품관리 상품 상태 변경
+	public int updateProductStatus(int i_num);
+	
+	//결제관리 리스트 불러오기
+	public List<OrderVO> selectSalesManagement(MyinfoPageVO vo);
+	
+	//결제관리 리스트 카운트
+	public int selectSaleManagementCounut(MyinfoPageVO vo);
 	
 	// QnA 글쓰기 (21-05-24 WOW)
 	public int QnaQuestionInsert(QnAVO vo);
 	
-
+	//상품관리 종료일 변경
+	public int updateProductPeriod(int i_num, String date);
+	
+	//상품관리 카운트 조회(총 게시물, 판매 중, 판매 종료 등)
+	public SellitemVO sellerCount(String userid);
+	
+	//결제관리 카운트 조회
+	public OrderVO orderCount(String userid);
 	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	//참여정보 

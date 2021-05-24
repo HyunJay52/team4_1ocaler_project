@@ -156,6 +156,12 @@ public class MyInfoServiceImp implements MyInfoService{
 	public List<OrderVO> statisList(String userid, String month) {
 		return dao.statisList(userid, month);
 	}
+
+	@Override
+	public int selectItemReviewListCount(MyinfoPageVO vo) {
+		
+		return dao.selectItemReviewListCount(vo);
+	}
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo) {
 
 		return dao.selectItemReviewList(vo);
@@ -224,6 +230,40 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.selectProductListCount(vo);
 	}
 
+	@Override
+	public int updateProductStatus(int i_num) {
+
+		return dao.updateProductStatus(i_num);
+	}
+	
+	@Override
+	public int updateProductPeriod(int i_num, String date) {
+
+		return dao.updateProductPeriod(i_num, date);
+	}
+	
+	@Override
+	public SellitemVO sellerCount(String userid) {
+		
+		return dao.sellerCount(userid);
+	}
+	
+	@Override
+	public List<OrderVO> selectSalesManagement(MyinfoPageVO vo) {
+		
+		return dao.selectSalesManagement(vo);
+	}
+
+	@Override
+	public int selectSaleManagementCounut(MyinfoPageVO vo) {
+		
+		return dao.selectSaleManagementCounut(vo);
+	}
+	@Override
+	public OrderVO orderCount(String userid) {
+
+		return dao.orderCount(userid);
+	}
 	// 내정보 메인용 서비스 (hj, 2021-05-21)
 
 //	QNA 글쓰기(WOW)
@@ -245,6 +285,16 @@ public class MyInfoServiceImp implements MyInfoService{
 		// qna 가져오기
 		return dao.selectAllmyqna(userid);
 	}
+
+
+
+
+
+
+
+
+
+
 
 
 

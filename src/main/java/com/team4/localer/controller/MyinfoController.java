@@ -402,14 +402,14 @@ public class MyinfoController {
 		System.out.println("itemkategorie="+vo.getKategorie());
 		vo.setUserid((String)ses.getAttribute("logId"));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
-		vo.setTotalRecord(service.myCount(vo));
+		vo.setTotalRecord(service.selectItemReviewListCount(vo));
 		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
 		
 		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
-		
-		
+		System.out.println("totalRecord="+vo.getTotalRecord()+"//////////total="+vo.getTotalPage());
+		System.out.println("rowNum1="+vo.getRowNum1()+"rowNum2="+vo.getRowNum2());
 		map.put("itemPVO", vo);
 		map.put("IList", service.selectItemReviewList(vo));
 		return map;
@@ -606,7 +606,7 @@ public class MyinfoController {
 		return result;
 	}
 
-	
+	//상품리스트 불러오기
 	@ResponseBody
 	@RequestMapping("/selectProductList")
 	public Map<String, Object> selectProductList(HttpSession ses, MyinfoPageVO vo){
@@ -615,9 +615,10 @@ public class MyinfoController {
 		vo.setOnePageRecord(10);
 		vo.setOnePageSize(5);
 		
+		System.out.println("key2="+vo.getSearchKey2());
 		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
 		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
-		vo.setDateContent("i_writedate");
+		vo.setDateContent("i_period");
 		vo.setSearchWord("%"+vo.getSearchWord()+"%");
 		
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
@@ -627,12 +628,36 @@ public class MyinfoController {
 		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
 		
+		map.put("count", service.sellerCount(vo.getUserid()));
 		map.put("list", service.selectProductList(vo));
 		map.put("pVO", vo);
 		
 		return map;
 	}
-
+	
+	//상품 판매상태 변경
+	@ResponseBody
+	@RequestMapping("/updateProductStatus")
+	public int updateProductStatus(HttpServletRequest req) {
+		int result = 0;
+		int i_num = Integer.parseInt(req.getParameter("i_num"));
+		result = service.updateProductStatus(i_num);
+		
+		return result;
+	}
+	
+	//판매 기간 변경
+	@ResponseBody
+	@RequestMapping("/updateProductPeriod")
+	//상품 종료일 변경
+	public int updateProductPeriod(HttpServletRequest req) {
+		int result = 0;
+		int i_num = Integer.parseInt(req.getParameter("i_num"));
+		String date = (String)req.getParameter("date");
+		result = service.updateProductPeriod(i_num, date);
+		
+		return result;
+	}
 //판매관리 메인 2021.05.23 hj
 
 	@RequestMapping("/myInfoSaleHistory")
@@ -702,6 +727,33 @@ public class MyinfoController {
 			monthStr = ""+(month-1);
 		}
 		return monthStr;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/selectSalesManagement")
+	public Map<String, Object> selectSalesManagement(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setOnePageRecord(10);
+		vo.setOnePageSize(5);
+		
+		System.out.println("key2="+vo.getSearchKey2());
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		vo.setSearchWord("%"+vo.getSearchWord()+"%");
+		
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		vo.setTotalRecord(service.selectSaleManagementCounut(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+		
+		map.put("list", service.selectSalesManagement(vo));
+		map.put("pVO", vo);
+		map.put("count", service.orderCount(vo.getUserid()));
+		return map;
+		
 	}
 	@RequestMapping("/myInfoReviewManagement")
 	public String myInfoReviewManagement() {

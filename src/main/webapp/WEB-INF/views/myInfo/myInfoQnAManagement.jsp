@@ -187,6 +187,7 @@
 			$(".productManagementLabelCenter>ul>li>input").prop('checked', false);
 			$(this).prop('checked', true)
 		});
+	
 	});
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
@@ -229,7 +230,7 @@
 			<table class="myInfoProductManagementTable2" id="myInfoQnAManagementTable">
 
 			</table>
-			<div id="myInfoQnAManagementTablePagingArea" style="margin-top:10px;">
+			<div id="myInfoQnAManagementTablePagingArea" style="margin-top:30px;">
 			
 			</div>
 		</div>

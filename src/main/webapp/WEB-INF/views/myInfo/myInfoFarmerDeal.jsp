@@ -15,15 +15,15 @@
 						tag += "<tr><td>"+data.o_date+"</td>";
 						console.log("reviewCount="+data.reviewCount);
 						if(data.reviewCount == 0){
-							tag += "<td><button data-target='#farmerDealMd' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>"+data.i_subject+"</button></td>";
+							tag += "<td><a href='sellView?i_num="+data.num+"'>"+data.i_subject+"</a></td>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.o_price+"</td>";
-							tag += "<td>리뷰없음</td>";
+							tag += "<td><button data-target='#farmerDealMd' data-toggle='modal' class='btn commBtn farmerMdOpen' value='"+data.num+"'>리뷰없음</td>";
 						}else{
-							tag += "<td><button data-target='' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>"+data.i_subject+"</button></td>";
+							tag += "<td><a href='sellView?i_num="+data.num+"'>"+data.i_subject+"</a></button></td>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.o_price+"</td>";
-							tag += "<td>리뷰작성함</td>";								
+							tag += "<td><button data-target='' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>리뷰작성됨</button></td>";								
 						}
 						if(data.o_conf == 1){
 							tag += "<td>주문대기</td>";
@@ -134,7 +134,7 @@
 				data : data+"&re_rate="+re_rate,
 				success : function(result){
 					alert("리뷰가 작성되었습니다.");
-					$("#farmerDealMd").hide();
+					$("#farmerDealMd").modal("hide");
 					$('.modal-backdrop').hide();
 					setFarmerDealList(1);
 				}, error : function(e){
@@ -191,6 +191,9 @@
 			<table class="myinfoTable2" id="farmerDealTbl">
 				
 			</table>
+			<div id="myinfoFarmerDealPaging">
+			
+			</div>
 			<div class="searchArea">
 				<select name="searchKey" style="height: 30px">
 					<option value="i_subject">제목</option>
@@ -198,9 +201,6 @@
 				</select>
 				<input type="text" name="searchWord"/>
 				<input type="button" value="검색" id="myFarmerDealSearch"/>
-			</div>
-			<div id="myinfoFarmerDealPaging">
-			
 			</div>
 		</div>
 		<input type="hidden" name="dateContent" value="o_date"/>

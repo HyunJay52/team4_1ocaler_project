@@ -569,6 +569,9 @@
 			<table class="myinfoTable2" id="myDealTbl">
 		
 			</table>
+			<div id="myinfoDealPaging">
+				
+			</div>
 			<div class="searchArea">
 				<select id="dealSearchKey" name="searchKey">
 					<option value="s_subject">제목</option>
@@ -578,9 +581,6 @@
 				</select>
 				<input type="text" name="searchWord"/>
 				<input type="button" value="검색" id="myDealSearch"/>
-			</div>
-			<div id="myinfoDealPaging">
-				
 			</div>
 		</div>
 		</form>
