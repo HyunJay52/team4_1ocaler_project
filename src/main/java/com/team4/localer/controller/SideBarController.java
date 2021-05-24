@@ -16,7 +16,7 @@ import com.team4.localer.service.SidebarService;
 import com.team4.localer.vo.ChatVO;
 
 @Controller
-public class SideBarController {
+public class sideBarController {
 	
 	@Inject
 	SidebarService service;
