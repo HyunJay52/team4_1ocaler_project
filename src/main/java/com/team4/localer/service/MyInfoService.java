@@ -15,6 +15,7 @@ import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellerVO;
 
 public interface MyInfoService {
    //내 정보 조회
@@ -132,5 +133,7 @@ public interface MyInfoService {
 	
 // 해당 게시글 총리뷰수/ re_date 1 갯수 구하기(2021-05-24 WOW)
 	public List<ItemReviewVO> selectAllReDate(int num);
+	//seller 메인 정보
+	public List<SellerVO> selectSelinfo(String userid);
 }
 

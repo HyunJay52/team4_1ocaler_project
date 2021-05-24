@@ -86,10 +86,10 @@
 		height: 37px ; 
 		border:1px solid black;
 		float:left; 
-		
+		margin-right: 15px;
 		width: 100;
-	   margin-right: 12;
 	    margin-top: 21;
+    	margin-left: 27px;
 	}
 		
 	#search{
@@ -97,7 +97,7 @@
 		border:1px solid black;  
 		border-right: none;
 		height: 37px;
-	    width: 500px;
+	    width: 471px;
 	    margin-top: 21;
 	  
 	}	

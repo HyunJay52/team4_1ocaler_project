@@ -18,8 +18,7 @@
 	</insert>
 	
 	<select id="joinPoint" resultType="String">
-		select sum(cha_point) from cha_p c join member m on c.userid=m.userid 
-		where m.userid = #{param1}
+		select nvl(((select nvl(sum(cha_point), 0) from cha_p where userid=#{param1})-(select nvl(sum(sp_point),0) from sp_p where userid=#{param1})), 0) AS cha_point from dual
 	</select>
 
 	<select id="allPointSelect" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.Cha_pVO">
@@ -466,7 +465,18 @@
 		FROM QNA q2, (SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel 
 		WHERE q2.num=sel.i_num and q2.userid=#{param1 } ORDER BY q_writedate desc
 	</select>
-
+	
+	<select id="selectSelinfo" resultType="com.team4.localer.vo.SellerVO">
+		<![CDATA[	
+			SELECT sel.sel_lvl,nvl(sel.rec_m, 0) as rec_m, nvl(qna.qnacnt, 0) AS qnacnt FROM 
+			(SELECT s.userid, s.sel_num, s.sel_lvl, rec_m FROM seller s join (SELECT sel_num, sum(rec_money) AS rec_m FROM RECEIPT WHERE to_date(conf_date, 'YYYY-MM-DD')>=to_date(sysdate, 'YYYY-MM-DD') GROUP BY sel_num ) recp 
+			ON s.sel_num = recp.sel_num(+) where userid=#{param1 }) sel join (SELECT count(q_num) qnacnt, q.sellerid 
+			FROM (SELECT q_num, num, sel.userid AS sellerid, to_char(q_writedate, 'YYYY/MM/DD') AS q_writedate FROM QNA q2 join 
+			(SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel ON q2.num=sel.i_num WHERE sel.userid=#{param1 } AND to_date(q_writedate, 'YYYY-MM-DD')>=to_date(sysdate, 'YYYY-MM-DD')) q 
+			GROUP BY q.sellerid) qna on sel.userid=qna.sellerid(+)
+ 		]]>
+	</select>
+	
 
 <!-- QNA QuestionInsert WOWWOW -->
 	<insert id="QnaQuestionInsert" parameterType="com.team4.localer.vo.QnAVO">

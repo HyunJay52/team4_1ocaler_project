@@ -71,8 +71,9 @@
 		// 옵션 선택시 div추가	
    		$("#option_content").change(function(){	
    			optionCheck = 2;
-   			//if 문서서 이미 있으면? 포함되어있으면 경고창 아니면 추가?
-   					
+   			
+   			console.log($('#option_content').val());
+   				//if 문서서 이미 있으면? 포함되어있으면 경고창 아니면 추가?	
    				var charge = parseInt(${itemVO.i_price})+parseInt($('#option_content').val());//원래가격 + 옵션가격
    	 			$("#sellItemList").append("<div class='itemElement' style='overflow:auto'><div><span class='OptionStyle' id="+spans+">"+$('#option_title>option:selected').text()+"/"+$('#option_content>option:selected').text()+"</span></div><div><input type='number' class='choice' min='1' max='5' value='1'/></div><div id="+cnt+">"+charge+"</div><div><img class='itemElementDel' src='img/deal/close.png'/></div></div>");
    	 			

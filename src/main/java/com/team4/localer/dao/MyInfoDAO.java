@@ -15,6 +15,7 @@ import com.team4.localer.vo.MyinfoJoinUsVO;
 import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellerVO;
 
 public interface MyInfoDAO {
 	//내 정보 조회
@@ -133,5 +134,9 @@ public interface MyInfoDAO {
 // 해당 게시글 리뷰 불러오기(2021-05-24 WOW)
 	public List<ItemReviewVO> selectSellItemReview(int num);
 
+	//seller 메인 정보
+	public List<SellerVO> selectSelinfo(String userid);
+	
+	
 	
 }

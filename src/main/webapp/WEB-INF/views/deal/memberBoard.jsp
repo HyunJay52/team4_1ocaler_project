@@ -128,7 +128,9 @@
        	
        		<c:if test="${logId !=null }">
        	 		<a href="memberWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
- 			</c:if>        
+ 			</c:if> 
+ 			
+ 			       
             <ul id="MBPaging">
                <c:if test="${pageVO.pageNum>1}">
 					<li>
