@@ -92,6 +92,12 @@ public class MemberServiceImp implements MemberService {
 	}
 	
 	@Override
+	public int updateDelseller(String userid) {
+		// 셀러회원 탈퇴
+		return dao.updateDelseller(userid);
+	}
+	
+	@Override
 	public String idDoubleCheck(String userid) {
 		//아이디 중복확인
 		return dao.idDoubleCheck(userid);

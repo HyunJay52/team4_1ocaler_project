@@ -34,7 +34,7 @@
 		INSERT INTO CHA_P(userid, CHA_POINT, CHA_MTH) VALUES (#{param1}, 3000, 0)
 	</insert>
 	<update id="updateMember" parameterType="com.team4.localer.vo.MemberVO">
-		UPDATE MEMBER SET MEM_NICK=#{mem_nick}, 
+		UPDATE MEMBER SET mem_nick=#{mem_nick}, 
 		<if test="mem_prof!=null and mem_prof!='' ">
 			mem_prof=#{mem_prof}, 
 		</if>
@@ -77,6 +77,10 @@
 	<insert id="insertDelMember" parameterType="com.team4.localer.vo.MemberVO">
 		INSERT INTO delmem_log(userid, del_why) VALUES (#{userid}, #{del_why})
 	</insert>
+	
+	<update id="updateDelseller">
+		UPDATE seller SET sel_status=3 WHERE userid=#{param1}
+	</update>
 	
 	<update id="memPostCount"><!-- 게시글올리면 카운트되는 함수 -->
 		update member set mem_post = mem_post+1 where userid=#{param1}
