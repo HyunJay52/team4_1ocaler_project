@@ -23,7 +23,18 @@ public class SellitemVO {
 	private String i_writedate;//등록일
 	private int i_hit;
 	private String i_tag;//판매글태그
+	
+	
+	private int selljoinCnt;
+	
+	
 
+	public int getSelljoinCnt() {
+		return selljoinCnt;
+	}
+	public void setSelljoinCnt(int selljoinCnt) {
+		this.selljoinCnt = selljoinCnt;
+	}
 	public String getI_priceStr() {
 		i_priceStr = NumberFormat.getInstance().format(i_price);
 		return i_priceStr;

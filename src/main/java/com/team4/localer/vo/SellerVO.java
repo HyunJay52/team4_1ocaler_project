@@ -36,7 +36,17 @@ public class SellerVO {
 //	private String rec_m;
 //	private String qnacnt;
 	
+	private int selljoinCnt;
 	
+	
+	
+	
+	public int getSelljoinCnt() {
+		return selljoinCnt;
+	}
+	public void setSelljoinCnt(int selljoinCnt) {
+		this.selljoinCnt = selljoinCnt;
+	}
 	public String getCom_numStr() {
 		com_numStr=com_num.substring(0,3)+"-";
 		com_numStr+=com_num.substring(3,5)+"-";
