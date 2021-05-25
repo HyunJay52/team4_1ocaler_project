@@ -38,7 +38,7 @@
 		
 		$('#withViewPageReportBtn').click(()=>{ 
 			if(${logId!=null}){
-				location.href="reportWrite?num=${vo.num}"
+				location.href="reportWrite?num=${vo.num}";
 			}else{
 				alert('로그인후 사용할 수 있습니다.');
 				location.href="login";
@@ -328,10 +328,10 @@
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.memberVO.mem_sub } </span></li>
 				<li><span>총 게시물 : ${vo.memberVO.mem_post }개</span></li>
-				<li><span>총 댓글수 : ${vo.memberVO.mem_rev }개</span></li>
+				<li><span>회원등급 : <span style="font-size:18px; color:red; font-weight:bold;">${vo.memberVO.mem_rev }</span> / 100 ❤︎</span></li>
 			</ul>
 		</div>
-		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
+		<div><button class="btn commBtn">1:1채팅</button><button id="withViewPageReportBtn" class="btn commBtn">신고하기</button></div>
 	</div>
 </body>
 </html>

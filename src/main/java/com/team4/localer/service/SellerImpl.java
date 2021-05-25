@@ -118,6 +118,10 @@ public class SellerImpl implements SellerService {
 		// 판매자 메인, 상품현황 카운트
 		return sellerDAO.myInfoCountSale(userid);
 	}
+	@Override
+	public int sellViewCount(int i_num) {
+		return sellerDAO.sellViewCount(i_num);
+	}
 	
 	
 }

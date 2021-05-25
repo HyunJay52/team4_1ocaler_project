@@ -446,6 +446,7 @@ h4 {
 .mainThirdTd{
 	width:550px;
 	text-align:left;
+	white-space:normal;
 }
 .mainFourthtTd{
 	width:225px;
