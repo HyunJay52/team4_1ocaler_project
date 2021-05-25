@@ -55,3 +55,21 @@
 		margin-bottom:10px; 
 		line-height:10px
 	}
+	#viewActivityQnA>li{
+		text-align:left;
+		height:30px;
+		line-height:30px;	
+	}
+	#viewActivityQnA>li:nth-child(4){
+		border: 1px solid #ddd;
+	    overflow: auto;
+	    height: 330px;
+	}
+	#viewActivityQnA>li:nth-child(6){
+		border: 1px solid #ddd;
+	    overflow: auto;
+	    height: 200px;
+	}
+	#myinfoBoardPagingArea{
+		margin-top:30px;
+	}

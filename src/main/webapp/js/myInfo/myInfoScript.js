@@ -39,7 +39,7 @@ $(function(){
 			toMonth--;
 			if(toMonth == 2){
 				toMonth = 3;
-				toYear--;
+				
 			}
 			setMonth(toYear, toMonth);
 		});
@@ -54,8 +54,4 @@ $(function(){
 			setMonth(toYear, toMonth);
 		});	
 			
-		
-	/////////
-	
-	
 });

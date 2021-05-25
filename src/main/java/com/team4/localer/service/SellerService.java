@@ -52,6 +52,8 @@ public interface SellerService {
 //판매관리 메인 2021.05.23 hj
 	public List<Integer> myInfoCountSale(String userid);
 	
+	//셀러 게시글 조회수카운트
+	public int sellViewCount(int i_num);
 
 
 }

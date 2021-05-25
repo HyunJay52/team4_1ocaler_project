@@ -283,10 +283,11 @@
 							<div><img class='sellItemShow' src="<%=request.getContextPath()%>/img/sellItemInsertPicture/${orderVO.i_img1}"></div>
 							<div>
 								<div style='height:238px; display:flex; flex-direction:column; justify-content: space-around;'>
-									<div class="sellItemShow">${orderVO.i_subject }
-									<span id='showSellerInfo'>판매자:${orderVO.i_userid }</span><br/>
-									<span> 기본가격 : ${orderVO.i_price }원</span><br/>
-									<span>옵션 : ${orderVO.opt_str }</span></div>
+									<div id="innerstyle">
+										<span class='sellItemShow'>${orderVO.i_subject }</span><span id='showSellerInfo'>판매자:${orderVO.i_userid }</span><br/>
+										<span> 기본가격 : ${orderVO.i_price }원</span><br/>
+										<span>옵션 : ${orderVO.opt_str }</span>
+									</div>
 								</div>	
 							</div>
 						</li>

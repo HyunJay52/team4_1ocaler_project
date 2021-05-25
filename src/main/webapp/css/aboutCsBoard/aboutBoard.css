@@ -28,11 +28,23 @@
 	height: 70px; line-height: 70px;
 	font-size: 28px; font-family: nsreb;
 }
-.aboutDiv>#introTbl tr td {
-	text-align: center;
-}
 
-.aboutDiv>#introTbl tr td>img {
+#introTbl {
+	width:1300px;
+	margin-bottom: 200px;
+	background-color: pink;
+}
+#introTbl>li:first-child {
+	width: 1300px; height: 50px; line-height: 50px;
+	font-size: 22px; font-family: nsreb; text-align: center;
+}
+#introTbl>li {
+	float: left;
+}
+#introTbl>li, #introTbl li {
+	list-style-type: none;	
+}
+#introTbl>li>.introInnerul>li:first-child>img {
 	text-align: center;
 	width: 200px; height: 200px;
 	padding: 5px;
@@ -40,23 +52,10 @@
 	border-radius: 70%;
 	margin: 20px;
 }
-#introTbl {
-	width:1300px; height: 400px;
-	margin-bottom: 200px;
+#introTbl>li>.introInnerul>li:nth-child(2) {
+	font-family: nsrb; font-size: 18px;
+	text-align: center;
 }
-#introTbl>tbody>tr:nth-child(4) {
-	height: 100px;
-}
-#introTbl>tbody>tr:last-child {
-	height: 200px;
-}
-#tblName {
-	height: 100px;
-}
-#tblName>td {
-	font-size: 22px; font-family: nsreb;
-}
-
 /* 오시는 길 */
 #followMe{
 	display:inline-block;
@@ -116,9 +115,6 @@
 	padding: 185px 50px;
 	margin-bottom: 200px;
 }
-.tblRole {
-	font-size: 22px;
-}
 .routeTitle {
 	font-size: 20px;
 	font-weight: bold;
@@ -126,8 +122,13 @@
 .aboutCenter {
  	float: left;
 }
+/* intro style*/
+.introInnerul {
+	
+}
+
 /* 공통 스타일 */
 .aboutDiv {
 	width: 1300px; height: auto;
-	margin: 0 auto;
+	margin: 0 auto; overflow: auto;
 }

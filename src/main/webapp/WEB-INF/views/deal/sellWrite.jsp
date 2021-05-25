@@ -105,8 +105,7 @@
 					<option selected>착한발견</option>
 				</select>
 				<select name="i_status" >		
-					<option value="1" selected>판매중</option>	
-					<option value="2">판매종료</option>			
+					<option value="1" selected>판매중</option>			
 				</select>				
 	 			<br/>
 	 			<input type="text" id="i_subject" name="i_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." />

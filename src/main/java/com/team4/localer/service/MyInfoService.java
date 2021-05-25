@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.ItemReviewPageVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
@@ -16,6 +17,7 @@ import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
 import com.team4.localer.vo.SellerVO;
+import com.team4.localer.vo.SellitemVO;
 
 public interface MyInfoService {
    //내 정보 조회
@@ -96,35 +98,79 @@ public interface MyInfoService {
 	
 	//카테고리별 내 모집글 리뷰 조회
 	public List<ItemReviewVO> selectMyReviewList(MyinfoPageVO vo);
-		
+	
+	//리뷰가능한 상품리스트 카운트
+	public int selectItemReviewListCount(MyinfoPageVO vo);	
+	
 	//카테고리별 내 모집글 리뷰 카운트
 	public int selectMyReviewListCount(MyinfoPageVO vo);
 	
 	//리뷰수정
 	public int reviewUpdate(ItemReviewVO vo);
 	
-	//내가 작서한 작성글, 댓글, QnA 불러오기
+	//내가 작성한 작성글, 댓글, QnA 불러오기
 	public List<MyinfoBoardVO> selectMyBoard(MyinfoPageVO vo);
 		
 	//내가 작성한 작성글, 댓글, QnA Count
 	public int selectMyBoardCount(MyinfoPageVO vo);
 
 	//특정 QnA 불러오기
-	public QnAVO setQnA(int q_num, String userid);
+	public QnAVO setQnA(int q_num, String userid, String searchKey);
 	
 	//QnA 답변 쓰기
 	public int QnAAnswerWrite(QnAVO vo);
 	
-// QnA 글쓰기 (21-05-24 WOW)
+	
+	//상품관리 리스트 조회
+	public List<SellitemVO> selectProductList(MyinfoPageVO vo);
+	
+	//상품관리 리스트 카운트
+	public int selectProductListCount(MyinfoPageVO vo);
+		
+	//상품관리 상품 상태 변경
+	public int updateProductStatus(int i_num);
+	
+	//결제관리 리스트 불러오기
+	public List<OrderVO> selectSalesManagement(MyinfoPageVO vo);
+	
+	//결제관리 리스트 카운트
+	public int selectSaleManagementCounut(MyinfoPageVO vo);
+		
+	// QnA 글쓰기 (21-05-24 WOW)
 	public int QnaQuestionInsert(QnAVO vo);
 	
+	//상품관리 종료일 변경
+	public int updateProductPeriod(int i_num, String date);
+	
+	//상품관리 카운트 조회(총 게시물, 판매 중, 판매 종료 등)
+	public SellitemVO sellerCount(String userid);
+	
+	//결제관리 카운트 조회
+	public OrderVO orderCount(String userid);
+	
+	//게시글 또는 댓글지우기
+	public int deleteBoard(String kategorie, int[] num, String userid);
+	
+//  QNA 해당 게시글 전체 질문가져오기(21-05-24 WOW)
+	public List<QnAVO> selectAllQnA(int num);	
 	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	//참여정보 
 	public List<JoinUsVO> selectWaitingJoinList(String userid);
 	//qna 리스트 
 	public List<QnAVO> selectAllmyqna(String userid);
+	
+// 해당 게시글 리뷰 불러오기(2021-05-24 WOW)
+	public List<ItemReviewVO> selectSellItemReview(ItemReviewPageVO reviewVO);
+	
+// 해당 게시글 총리뷰수/ re_date 1 갯수 구하기(2021-05-24 WOW)
+	public List<ItemReviewVO> selectAllReDate(int num);
 	//seller 메인 정보
 	public List<SellerVO> selectSelinfo(String userid);
+	//주문정보
+	public List<Integer> selectOrderInfo(String userid);
+		
+	// 게시글 리뷰 총수 불러오기(21-05-25)
+	public int totalReviewCnt(int num);	
 }
 

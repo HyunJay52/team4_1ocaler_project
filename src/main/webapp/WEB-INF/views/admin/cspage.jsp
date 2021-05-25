@@ -307,7 +307,7 @@ $(function(){
 	$(document).on('click', '.smallbtn', function(){
 		var cate = $(this).attr('title');//버튼 클릭종류 파악 
 		var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
-		alert("자주하는 질문 수정 클릭할때 글 번호" +num);
+		
 		if(cate=="oftenqBtn"){
 			//자주하는 질문 수정클릭시
 			location.href="oftenQWriteEdit?num="+num;

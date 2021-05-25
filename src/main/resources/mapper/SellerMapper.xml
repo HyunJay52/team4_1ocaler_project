@@ -170,6 +170,8 @@
 	]]>
 	</select>
 
-
+	<update id="sellViewCount" parameterType="int">
+		update sell_item set i_hit = i_hit +1 where i_num=#{param1}
+	</update>
 
 </mapper>

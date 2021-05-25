@@ -56,7 +56,6 @@
 	.myinfoSaleHistoryTable2 tr{/*테이블 목록*/
 		border-bottom:1px solid rgb(227,227,227); 
 		text-align:center;
-		height:40px;
     }
 	.myinfoSaleHistoryTable2 tr:first-child{/*첫번째 테이블 목차*/
 		text-align:center;
@@ -64,10 +63,14 @@
 		color: gray;
 		font-family: nsreb;
 	}
+	.myinfoSaleHistoryTable2 tr:first-child>td{/*첫번째 테이블 목차*/
+		height: 20px;
+    	font-size: 18px;
+	}
 	.myinfoSaleHistoryTable2 tr:last-child{/*마지막 줄 tr 스타일*/
 		border-bottom: 1px solid #ddd;
 	}
-	.myinfoSaleHistoryTable2 tr>td{/*전체적인 열 폭조정*/
-		width:25%;
-		font-size: 22px;
+	.myinfoSaleHistoryTable2 tr:last-child>td{
+		height: 40px;
+		font-size: 24px;
 	}

@@ -287,6 +287,7 @@ $(function(){
 			<td>88</td>
 		</tr>
 	</table>
+	아이디 클릭시 상세정보 확인
 	<table id="memlistTbl" class="tablea tablelage" >
 		 <colgroup>
                <col width="5%" />

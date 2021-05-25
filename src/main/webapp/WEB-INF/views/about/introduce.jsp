@@ -4,22 +4,8 @@
 
 <script>
 	document.title = "about us";
-	
-	window.onscroll=function(){bannerMove()};
-	   
-	function bannerMove(){
-	  	var scrollY = window.scrollY;
-	      
-// 		if(scrollY>=400 || scrollY<=500){ // 스크롤 높이가 400
-// 			console.log("??????")
-// 			$("#abtVideo").slideUp(1000, function(){
-// 				$("#abtVideo").css("display", "block");
-// 			})
-// 			//$("#abtVideo").slideUp(1000);
-// 		}
-	}
-      
 </script>
+
 <%@ include file="/inc/sideBar.jspf" %>
 <div class="aboutDiv">
 	<div id="introDetail">
@@ -55,37 +41,59 @@
 				</p>
 		</div>
 	</div>
-
-	<table id="introTbl">
-		<tbody>
-			<tr>
-				<td colspan="5">TEAM "PURBLIC"</td>
-			</tr>
-			<tr>
-				<td><img src="<%=request.getContextPath() %>/img/aboutImg/dragonw.png"/></td>
-				<td><img src="<%=request.getContextPath() %>/img/aboutImg/hj.png"/></td>
-				<td><img src="common/user.png"/></td>
-				<td><img src="<%=request.getContextPath() %>/img/aboutImg/jisu.png"/></td>
-				<td><img src="<%=request.getContextPath() %>/img/aboutImg/heey.png"/></td>
-			</tr>
-			<tr id="tblName">
-				<td>김용우</td>
-				<td>김현정</td>
-				<td>이용섭</td>
-				<td>이지수</td>
-				<td>신희연</td>
-			</tr>
-			<tr>
-				<td colspan="5" class="tblRole">ROLE</td>
-			</tr>
-			<tr id="tblRole">
-				<td>가치가장</td> <!-- 리스트로? -->
-				<td>메인</td>
-				<td>내정보</td>
-				<td>관리자</td>
-				<td>게시판</td>
-		</tbody>
-	</table>
+	
+	<ul id="introTbl">
+		<li>TEAM "PURBLIC"</li>
+		<li>
+			<ul class="introInnerul">
+				<li><img src="<%=request.getContextPath() %>/img/aboutImg/dragonw.png"/></li>			
+				<li>김용우</li>
+			
+			
+			</ul>
+		</li>	
+	
+		<li>
+			<ul class="introInnerul">
+				<li><img src="<%=request.getContextPath() %>/img/aboutImg/hj.png"/></li>			
+				<li>김현정</li>
+			
+			
+			</ul>
+		</li>	
+	
+	
+		<li>
+			<ul class="introInnerul">
+				<li><img src="<%=request.getContextPath() %>/img/aboutImg/sub.png"/></li>			
+				<li>이용섭</li>
+			
+			
+			</ul>
+		</li>	
+	
+	
+		<li>
+			<ul class="introInnerul">
+				<li><img src="<%=request.getContextPath() %>/img/aboutImg/jisu.png"/></li>			
+				<li>이지수</li>
+			
+			
+			</ul>
+		</li>	
+	
+	
+		<li>
+			<ul class="introInnerul">
+				<li><img src="<%=request.getContextPath() %>/img/aboutImg/heey.png"/></li>			
+				<li>신희연</li>
+			
+			
+			</ul>
+		</li>	
+	
+	
+	</ul>
 
 </div>
 

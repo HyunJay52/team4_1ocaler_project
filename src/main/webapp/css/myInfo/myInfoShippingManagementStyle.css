@@ -43,4 +43,9 @@
 	#myInfoQnAManagementTable tr>td:nth-child(6){
 		width:5%;
 	}
-	
+	#shipTable2, #shipTable3, #shipTableStay, #shipTableGoing{
+		display:none;
+	}
+	#shippingManagementPaging{
+		margin-top:30px;
+	}

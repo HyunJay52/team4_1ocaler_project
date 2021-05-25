@@ -298,7 +298,6 @@
 /* 리뷰 */
 #sellReview {
 	width: 1300px;
-	height: 370;
 	float: left;
 	margin: 22px 0px;
 }
@@ -319,7 +318,7 @@
 }
 
 #oneReview li>div:nth-of-type(1) {
-	width: 479px;
+	width: 640px;
 	height: 40px;
 	font-weight: bold;
 	margin: 0px;
@@ -328,7 +327,7 @@
 
 #oneReview li>div:nth-of-type(2) {
 	padding: 10px;
-	width: 479px;
+	width: 640px;
 	height: 130px;
 }
 
@@ -339,12 +338,6 @@
     margin-top: -2px;
 }
 
-#pic>img {
-	width: 159px;
-	height: 159px;
-	margin: 0;
-	padding: 0;
-}
 /* ------리뷰 */
 #i_ship::-webkit-outer-spin-button, #i_ship::-webkit-inner-spin-button {
    -webkit-appearance: none;
@@ -352,11 +345,36 @@
 }
 /* 페이징 */
 #pageNum {
-	padding-left: 42%;
-	margin-bottom: 40px;
 	width: 1300px;
-	height: 20px;
-	float: left;
+	overflow:auto;
+	margin-bottom:30px;
+	margin-top:30px;
+
+}
+#pageNum>ul{
+	text-align:center;
+}
+#pageNum li{
+	border:1px solid gray;
+	margin:1px;
+	width:30;
+	line-height:32px;
+	text-align:center;
+	display:inline-block;
+}
+#pageNum li:hover{
+	background-color:#f0f0f0;
+}
+#pageNum li:first-child{
+	width:40px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	
+}
+ #pageNum li:last-child{
+	width:40px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 #pageNum a {
@@ -369,8 +387,12 @@
 	font-weight: bold;
 }
 
-#qaBtn {
-	padding-right:
+.notBtn{
+	border:none;
+	background-color:#fff;
+}
+.notBtn:hover{
+	background-color:#f0f0f0;
 }
 
 /* 내용부분 */
@@ -398,57 +420,56 @@ h4 {
 	font-weight: bold;
 	display: inline;
 }
-
-#sellQnAList {
-	margin: 22 0;
-	width: 1300px;
-	list-style-type: none;
-	overflow: auto;
-	border-top: 1px solid #d9d9d9;
+#tableFrm{
+	width:1300px;
+	height:auto;
+	text-indent:initial;	
+}
+#tableFrm>thead>*{
+	height:40px;
+	text-align:center;
+	border-bottom:1px solid gray;
+}
+#QnAMain>*{
+	text-align:center;
+	border-bottom:1px solid gray;
+	height:40px;
+	line-height:40px;
 }
 
-#sellQnA li {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
+.mainFirstTd{
+	width:100px;
+}
+.mainSecondTd{
+	width:200px;
+}
+.mainThirdTd{
+	width:550px;
+	text-align:left;
+	white-space:normal;
+}
+.mainFourthtTd{
+	width:225px;
+}
+.mainFivthTd{
+	width:225px;
 }
 
-#sellQnAList>#point {
-	text-align: center;
+.replySecondTd{
+	width:750px;
+	text-align:left;
+	padding-left:20px;
+	height:auto;
+	white-space: normal;
+    word-break: break-all;
 }
 
-#sellQnAList>li {
-	float: left;
-	height: 40px;
-	line-height: 40px;
-	border-bottom: 1px solid #d9d9d9;
-	text-align: center;
+.QNACNT{
+	color: gray;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
 }
-
-#sellQnAList>li:nth-child(5n+1) {
-	width: 100;
-}
-
-#sellQnAList>li:nth-child(5n+2) {
-	width: 200;
-}
-
-#sellQnAList>li:nth-child(5n+3) {
-	width: 550;
-	text-overflow: ellipsis;
-	text-align: left;
-}
-
-#sellQnAList>li:nth-child(5n+4) {
-	width: 225;
-	text-overflow: ellipsis;
-}
-
-#sellQnAList>li:nth-child(5n+5) {
-	width: 225;
-	text-overflow: ellipsis;
-}
-
 .commBtn {
 	width: 120px;
 	color: #3f1785;
