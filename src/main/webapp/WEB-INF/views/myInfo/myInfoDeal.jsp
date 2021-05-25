@@ -154,7 +154,7 @@
 						}else if(kategorie == 'groupJoinus'){ //내가 참여한 모집글
 							tag += "<tr>";
 							tag += "<td>"+data.sellerid+"</td>";
-							tag += "<td>"+data.g_writedate+"</td>";
+							tag += "<td>"+data.j_writedate+"</td>";
 							tag += "<td>"+data.g_subject+"</td>";
 							tag += "<td>"+data.g_gu+"</td>";
 							

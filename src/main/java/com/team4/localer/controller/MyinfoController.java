@@ -234,7 +234,7 @@ public class MyinfoController {
 		String searchId = (String)ses.getAttribute("logId");
 		vo.setUserid(searchId);
 		vo.setOnePageRecord(10);
-		vo.setOnePageSize(10);
+		vo.setOnePageSize(5);
 		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		System.out.println("kategorie="+vo.getKategorie());
