@@ -37,6 +37,7 @@ import com.team4.localer.vo.MyinfoPageVO;
 
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.SellitemVO;
 
 
@@ -94,6 +95,7 @@ public class MyinfoController {
 			mav.setViewName("member/login");		
 		}else {
 			mav.addObject("myPoint", service.joinPoint(userid)); //충전잔액
+			
 			mav.addObject("myVO", service.setMyinfo(userid)); //내 정보
 			//참여현황
 			mav.addObject("myJoin", service.selectWaitingJoinList(userid));
@@ -689,9 +691,16 @@ public class MyinfoController {
 		
 		String userid = (String)ses.getAttribute("logId");
 		
-		List<Integer> saleCount = sellerService.myInfoCountSale(userid);
-		System.out.println(">>>> list >>>> "+saleCount.size());
+		List<SellerVO> sel_info = service.selectSelinfo(userid);//셀러정보, 정산금액
+		mav.addObject("selInfo", sel_info);
+		
+		List<Integer> saleCount = sellerService.myInfoCountSale(userid); //상품현황
 		mav.addObject("saleCount", saleCount);
+		
+		List<Integer> orderCnt = service.selectOrderInfo(userid);//주문정보
+		System.out.println("- - - - - - - - - - - - - > "+orderCnt.size());
+		mav.addObject("orderCnt", orderCnt);
+		
 		mav.setViewName("myInfo/myInfoSaleHistory");
 		return mav;
 	}

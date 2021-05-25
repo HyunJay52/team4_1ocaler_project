@@ -108,7 +108,7 @@
                            <li class="wordcut">${vo.s_subject }</li>
                            
                            <li style="text-align: center; font-size: 20px">
-                              <span class="cntJoin">${appNum}</span>
+                              <span class="cntJoin">${vo.dealjoinCnt}</span>
                               /${vo.s_cnt } 개
                            </li>
                            <li>${vo.s_price }원</li>
@@ -128,7 +128,9 @@
        	
        		<c:if test="${logId !=null }">
        	 		<a href="memberWrite"  class="btn commBtn"  style="float:right"> 글쓰기</a>
- 			</c:if>        
+ 			</c:if> 
+ 			
+ 			       
             <ul id="MBPaging">
                <c:if test="${pageVO.pageNum>1}">
 					<li>

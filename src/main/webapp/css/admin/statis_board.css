@@ -15,7 +15,14 @@
 	width:1200px;
 	height:400px;
 }
-
+#chartDiv{
+	width: 100%;
+    overflow: auto;
+    background-color: #ddd;
+    margin-top: 50px;
+    padding-bottom: 40px;
+    border: 1px solid rgb(169 162 162);
+}
 
 .statisUl{ /*ul style*/
 	margin:0 auto;

@@ -78,7 +78,7 @@
      #coummuBoardMaincenter>.table th{
 		border-bottom:1px solid #181b46; 
 	}
-	
+	#coummuBoardMaincenter>.table>tr>td{padding:30px 0px}
 	#coummuBoardMaincenter>.table tr:first-child{/*첫번째 테이블 목차*/
 		text-align:center;
 		background-color: #fff;

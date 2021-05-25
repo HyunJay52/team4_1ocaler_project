@@ -18,8 +18,7 @@
 	</insert>
 	
 	<select id="joinPoint" resultType="String">
-		select sum(cha_point) from cha_p c join member m on c.userid=m.userid 
-		where m.userid = #{param1}
+		select nvl(((select nvl(sum(cha_point), 0) from cha_p where userid=#{param1})-(select nvl(sum(sp_point),0) from sp_p where userid=#{param1})), 0) AS cha_point from dual
 	</select>
 
 	<select id="allPointSelect" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.Cha_pVO">
@@ -613,13 +612,76 @@
 		FROM QNA q2, (SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel 
 		WHERE q2.num=sel.i_num and q2.userid=#{param1 } ORDER BY q_writedate desc
 	</select>
-
+	
+	<select id="selectSelinfo" resultType="com.team4.localer.vo.SellerVO">
+		<![CDATA[	
+			SELECT sel.sel_lvl,nvl(sel.rec_m, 0) as rec_m, nvl(qna.qnacnt, 0) AS qnacnt FROM 
+			(SELECT s.userid, s.sel_num, s.sel_lvl, rec_m FROM seller s join (SELECT sel_num, sum(rec_money) AS rec_m FROM RECEIPT WHERE to_date(conf_date, 'YYYY-MM-DD')>=to_date(sysdate, 'YYYY-MM-DD') GROUP BY sel_num ) recp 
+			ON s.sel_num = recp.sel_num(+) where userid=#{param1 }) sel join (SELECT count(q_num) qnacnt, q.sellerid 
+			FROM (SELECT q_num, num, sel.userid AS sellerid, to_char(q_writedate, 'YYYY/MM/DD') AS q_writedate FROM QNA q2 join 
+			(SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel ON q2.num=sel.i_num WHERE sel.userid=#{param1 } AND to_date(q_writedate, 'YYYY-MM-DD')>=to_date(sysdate, 'YYYY-MM-DD')) q 
+			GROUP BY q.sellerid) qna on sel.userid=qna.sellerid(+)
+ 		]]>
+	</select>
+	
+	<select id="selectOrderInfo" resultType="int">
+		<![CDATA[
+			SELECT nvl(count(num),0) cnt FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD')
+			UNION ALL
+			SELECT nvl(count(num), 0) cnt FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_ship=1
+			UNION ALL
+			SELECT nvl(count(o.o_status), 0) FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_status=1
+			UNION ALL
+			SELECT nvl(count(o.o_status), 0) FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_status=2
+		]]>
+	</select>
+	
 
 <!-- QNA QuestionInsert WOWWOW -->
 	<insert id="QnaQuestionInsert" parameterType="com.team4.localer.vo.QnAVO">
 		insert into QNA(q_num, num, userid, q_status, q_content)
 		values(qsq.nextval, #{num}, #{userid}, #{q_status}, #{q_content})
 	</insert>
+<!-- QNA selectAllQna WOWWOW -->	
+	<select id="selectAllQnA" resultType="com.team4.localer.vo.QnAVO">
+		SELECT num, q2.userid, sel.userid AS sellerid, q_status, q_content, to_char(q_writedate, 'YYYY/MM/DD') AS q_writedate , q_answer, to_char(q_adate, 'YYYY/MM/DD') AS q_adate
+		FROM QNA q2, (SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel 
+		WHERE q2.num=sel.i_num AND sel.i_num=#{param1} ORDER BY Q_WRITEDATE desc
+	</select>
 	
+<!-- QNA selectSellItemRiew WOWOW -->
+	<select id="selectSellItemReview" parameterType="com.team4.localer.vo.ItemReviewPageVO" resultType="com.team4.localer.vo.ItemReviewVO">	
+		select * from
+    		(select * from 
+       			(select re_num, userid, to_char(re_writedate,'YYYY-MM-DD') re_writedate, re_rate, re_content from item_review where num=#{i_num} order by re_num desc)
+            		where  <![CDATA[rownum <=  ]]> (${pageNum}*${onePageRecord}) order by re_num)
+                		where <![CDATA[rownum <=  ]]>
+                		<if test="pageNum==totalPage">
+                			${lastPageRecord}
+                		</if>
+                		<if test="pageNum!=totalPage">
+                			${onePageRecord}
+                		</if>
+                		 order by re_num desc
+		
+		
+	</select>
+<!-- Review selectAllReDate WOWOW -->	
+	<select id="selectAllReDate" resultType="com.team4.localer.vo.ItemReviewVO">
+		SELECT totalCnt, reRate1 FROM 
+			(SELECT num, count(num) AS totalCnt FROM ITEM_REVIEW ir WHERE num=#{param1} GROUP BY num) tbl1 JOIN 
+			(SELECT num, count(num) AS reRate1 FROM ITEM_REVIEW ir WHERE num=#{param1} AND RE_RATE=1 GROUP BY num) tbl2 ON tbl1.num=tbl2.num
+	</select>
+
+
+<!-- Reiview totalReviewCnt WOWOW -->	
+	<select id="totalReviewCnt" resultType="int" parameterType="int">
+		select count(re_num) totalCnt from item_review where num=#{param1}
+	</select>
+
 
 </mapper>

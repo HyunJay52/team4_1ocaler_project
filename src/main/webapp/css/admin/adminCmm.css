@@ -150,10 +150,6 @@
 	background:rgb(183,15,23,0.9);
 }
 /*모달부분*/
-.modaldiv>div{
-	font-family:"nsreb";
-	font-size:32px;
-}
 .modaldiv{
 	padding:15px 5px 0 5px;
 	border:1px solid #ddd;
@@ -164,13 +160,17 @@
 	background-color:#fff;
 }
 .exit{
-	float:right;
-	font-size:16px;
-	border:none; background-color:#fff;
+	border: 1px solid red;
+    padding: 3px;
+    width: 150px;
+    text-align: center;
+    border-radius: 50px;
+    color: red;
+    font-size: 16px;
+    line-height: 25px;
+    margin: 0 auto;
 }
-.modaldiv>table{
-	margin-top:20px;
-}
+
 /*페이징 버튼*/
 .link{
 	width: 270px;

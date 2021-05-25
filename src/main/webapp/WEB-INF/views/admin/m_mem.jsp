@@ -90,7 +90,7 @@
 					$.each($list ,function(idx,vo){//테이블 내용 넣기
 						txt += "<tr class='memlist'>";
 						txt +=		"<td>"+vo.mem_no+"</td>";
-						txt +=		"<td class='memid'>"+vo.userid+"</td>";
+						txt +=		"<td class='memid' style='cursor:pointer;'>"+vo.userid+"</td>";
 						txt +=		"<td>"+vo.mem_name+"</td>";
 						txt +=		"<td  class='wordcut'>"+vo.mem_addr+"</td>";
 						txt +=		"<td>"+vo.mem_tel+"</td>";
@@ -121,7 +121,7 @@
 					var link="";
 					$(".clickpage").remove();//기존 페이징 부분 삭제
 					if(pagenum>1){
-						link +="<li  class='clickpage'>이전</li>";	
+						link +="<li  class='clickpage' style='cursor:pointer;'>이전</li>";	
 					}
 					var lastPg=last;
 					if(lastPg>=start+4){//>11>2+4
@@ -131,14 +131,14 @@
 					}
 					for(var i=start;i<=start+lastPg-1;i++){
 						if(pagenum==i){
-							link +="<li  class='clickpage nowPg'>"+i+"</li>";
+							link +="<li  class='clickpage nowPg' style='cursor:pointer;'>"+i+"</li>";
 						}else{
-							link +="<li  class='clickpage'>"+i+"</li>";	
+							link +="<li  class='clickpage' style='cursor:pointer;'>"+i+"</li>";	
 						}
 						
 					}
 					if(last>pagenum){
-						link +="<li  class='clickpage'>다음</li>";
+						link +="<li  class='clickpage' style='cursor:pointer;'>다음</li>";
 					}
 					$(".link").append(link);
 				},error : function(){
@@ -287,6 +287,7 @@ $(function(){
 			<td>88</td>
 		</tr>
 	</table>
+	아이디 클릭시 상세정보 확인
 	<table id="memlistTbl" class="tablea tablelage" >
 		 <colgroup>
                <col width="5%" />
@@ -311,7 +312,7 @@ $(function(){
 		<c:forEach var="vo" items="${list}">
 			<tr class="memlist">
 				<td>${vo.mem_no }</td>
-				<td class="memid">${vo.userid }</td>
+				<td class="memid" style="cursor:pointer;">${vo.userid }</td>
 				<td>${vo.mem_name }</td>
 				<td  class="wordcut">${vo.mem_addr }</td>
 				<td>${vo.mem_tel }</td>
@@ -340,21 +341,21 @@ $(function(){
 	<ul class="link">
 		<!-- 이전버튼 -->
 		<c:if test="${pageVO.pageNum>1 }">
-			<li class="clickpage">이전</li>
+			<li class="clickpage" style="cursor:pointer;">이전</li>
 		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
             	<c:if test="${p==pageVO.pageNum }">
-            		<li class="clickpage nowPg" >${p}</li> 
+            		<li class="clickpage nowPg" style="cursor:pointer;">${p}</li> 
             	</c:if>
             	<c:if test="${p!=pageVO.pageNum }">
-            		<li class="clickpage" >${p}</li>  
+            		<li class="clickpage" style="cursor:pointer;">${p}</li>  
             	</c:if>
             </c:if>
          </c:forEach>
          <c:if test="${pageVO.totalPage>pageVO.pageNum }">
-			<li class="clickpage">다음</li>
+			<li class="clickpage" style="cursor:pointer;">다음</li>
 		</c:if>
 	</ul>
 </div>

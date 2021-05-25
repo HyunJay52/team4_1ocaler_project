@@ -95,10 +95,41 @@
 		insert into sp_p(userid, sp_point, sp_item) values(#{param1}, #{param2}, #{param3})
 	</insert>
 	
+	<select id="sellTotalRecoedCount" resultType="int">
+  		select count(i_num) from
+	            (SELECT si.i_num, si.sel_num, si.i_subject,si.i_content, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof  
+				FROM SELL_ITEM si JOIN SELLER s ON si.sel_num = s.sel_num WHERE <![CDATA[ sysdate<=si.i_period ]]>  and i_status=1)
+		<if test="searchWord != null and searchWord != '' "> where ${searchKey} like '%${searchWord}%'</if>
+  	</select>
+  	
+  	<select id="sellPageSelect" resultType="com.team4.localer.vo.SellitemVO">
+		  select * from
+			    (select * from
+			    	(select * from    
+				                (SELECT si.i_num, si.sel_num, si.i_subject,si.i_content, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof ,
+				                (select count(num) from ordertbl where num=i_num) as selljoinCnt 
+								 FROM SELL_ITEM si JOIN SELLER s ON si.sel_num = s.sel_num WHERE <![CDATA[ sysdate<=si.i_period ]]>  and i_status=1 ORDER BY si.i_num DESC)
+				      <if test="searchWord != null and searchWord != '' "> where ${searchKey} like '%${searchWord}%'</if>) 
+			                             <!--      현재페이지 * 한페이지출력수 -->
+		        where <![CDATA[rownum<=]]>${pageNum * onePageRecord}  order by i_num asc)
+		    where <![CDATA[rownum<=]]>
+		                 <!-- 현재페이지가가 총페이지수랑 같으면(마지막페이지라는뜻) = ${마지막페이지레코드{ -->
+		    <if test="pageNum==totalPage">
+		    	${lastPageRecord}
+		    </if>
+		            <!-- 그게 아니고 현재페이지가 총페이지수랑 같지 않으면  ${한페이지출력수} -->
+		    <if test="pageNum!=totalPage">
+		    	${onePageRecord}
+		    </if>
+		    order by i_num desc
+	</select>	
+  	
 	
+
 	<select id="recentlyOrderNum" resultType="int">
 	select o_num from (select * from ordertbl where userid=#{param1} and <![CDATA[ o_date<=sysdate ]]> order by o_date desc) where <![CDATA[ rownum<=1 ]]>
 	</select>
+
 	
 	<select id="orderCompl" resultType="com.team4.localer.vo.ShipVO">
 		select s.o_num, s.getter, to_char(s.b_date,'YYYY-MM-DD HH24:MI') b_date, s.ship_tel, s.ship_zip, s.ship_addr, s.ship_detail, s.ship_msg,
