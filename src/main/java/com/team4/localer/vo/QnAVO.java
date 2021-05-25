@@ -17,6 +17,11 @@ public class QnAVO {
 	
 	private String sellerid;//판매자 아이디
 
+	
+	//21-05-24 WOW
+	private int qnaCnt;
+	
+	
 	public int getQ_num() {
 		return q_num;
 	}
@@ -112,6 +117,16 @@ public class QnAVO {
 	public void setSellerid(String sellerid) {
 		this.sellerid = sellerid;
 	}
+
+	public int getQnaCnt() {
+		return qnaCnt;
+	}
+
+	public void setQnaCnt(int qnaCnt) {
+		this.qnaCnt = qnaCnt;
+	}
+	
+	
 	
 	
 }

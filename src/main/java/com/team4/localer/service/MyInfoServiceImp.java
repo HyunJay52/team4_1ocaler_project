@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.team4.localer.dao.MyInfoDAO;
 import com.team4.localer.vo.AdminPageVO;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.ItemReviewPageVO;
 import com.team4.localer.vo.ItemReviewVO;
 import com.team4.localer.vo.JoinUsVO;
 import com.team4.localer.vo.MemShareVO;
@@ -217,6 +218,10 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.QnaQuestionInsert(vo);
 	}
 
+
+	
+	
+	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	@Override
 	public List<JoinUsVO> selectWaitingJoinList(String userid) {
@@ -230,11 +235,45 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.selectAllmyqna(userid);
 	}
 
+	
+//  QNA 해당 게시글 전체 질문가져오기(21-05-24 WOW)	
+	@Override
+	public List<QnAVO> selectAllQnA(int num) {
+		return dao.selectAllQnA(num);
+	}
+
+	
+	
+//	해당 게시글 리뷰 불러오기(2021-05-24 WOW)	
+	@Override
+	public List<ItemReviewVO> selectSellItemReview(ItemReviewPageVO reviewVO) {
+		return dao.selectSellItemReview(reviewVO);
+	}
+//	해당 게시글 총리뷰수, re-date1갯수 불러오기(2021-05-24 WOW)	
+	@Override
+	public List<ItemReviewVO> selectAllReDate(int num) {
+		return dao.selectAllReDate(num);
+	}
+	
+
+	
 	@Override
 	public List<SellerVO> selectSelinfo(String userid) {
 		// seller 메인 정보
 		return dao.selectSelinfo(userid);
 	}
+// 게시글 리뷰 총수 불러오기(21-05-25)
+
+	@Override
+	public int totalReviewCnt(int num) {
+		return dao.totalReviewCnt(num);
+	}
+
+	
+
+	
+
+	
 
 	@Override
 	public List<Integer> selectOrderInfo(String userid) {
