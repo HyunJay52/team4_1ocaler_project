@@ -58,7 +58,7 @@
 	 	font-size: 26px;
     	font-weight: bold;
     	color: #000;
-    	margin: 5 0 ;
+    	margin: 35 0 ;
 
 	 } 
 	 #commuViewboard>ul>li:nth-child(3){
@@ -123,6 +123,7 @@
 	 	width: 1300px;
 	 	float: left;
 	 	color: #181b46;
+	 	margin-bottom:35px;
 	 } 
 	 
 	 

@@ -146,7 +146,7 @@
 		<ul class="indexListNone">
 		<!-- commuView?num=1027&up_cate=2 -->
 			<c:forEach var="bVO" items="${bVO }" begin='0' end='12'>
-				<li><a href="commuView?num=${bVO.num }&up_cate=2"><img src="<%=request.getContextPath() %>/img/receipeImg/${bVO.b_img1 }"/></a></li>
+				<li><a href="commuView?num=${bVO.num }&up_cate=2"><img src="<%=request.getContextPath() %>/img/recipeImg/${bVO.b_img1 }"/></a></li>
 			</c:forEach>
 		</ul>
 	</div>
