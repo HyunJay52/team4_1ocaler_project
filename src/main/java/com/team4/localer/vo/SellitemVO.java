@@ -33,7 +33,7 @@ public class SellitemVO {
 	private int expected; // 종료 예정
 	private int itemStop;// 판매 중단
 	 
-	
+	private int selljoinCnt;
 	
 	public int getMyItem() {
 		return myItem;
@@ -76,6 +76,12 @@ public class SellitemVO {
 	}
 	public void setRevenue(int revenue) {
 		this.revenue = revenue;
+	}
+	public int getSelljoinCnt() {
+		return selljoinCnt;
+	}
+	public void setSelljoinCnt(int selljoinCnt) {
+		this.selljoinCnt = selljoinCnt;
 	}
 	public String getI_priceStr() {
 		i_priceStr = NumberFormat.getInstance().format(i_price);

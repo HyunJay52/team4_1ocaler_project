@@ -211,6 +211,8 @@ public class SellerController {
 	public ModelAndView selView(SellitemVO itemVO, Item_optionVO optionVO, ItemReviewPageVO reviewPageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 	
+		
+		sellerService.sellViewCount(itemVO.getI_num()); // 조회수카운트
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}

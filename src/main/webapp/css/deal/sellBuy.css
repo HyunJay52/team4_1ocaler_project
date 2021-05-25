@@ -12,6 +12,13 @@
 		margin:60 auto;	
 	}
 	
+	#innerstyle>span:first-child{
+		font-size: 18px;
+  	 	font-weight: bold;
+    	margin-right: 10px;
+	}
+	
+	
 	.sellBuyTitle{
 		height:50px;
 		line-height:50px;
@@ -89,7 +96,7 @@
 		
 	}
 	
-	#boardList li:nth-child(5)>div:nth-child(2) span:nth-of-type(2), #boardList li:nth-child(5)>div:nth-child(2) span:nth-of-type(3){
+	#boardList li:nth-child(5)>div:nth-child(2) span:nth-of-type(3), #boardList li:nth-child(5)>div:nth-child(2) span:nth-of-type(4){
 		padding:0 20px;
 		word-break:break-all;
 		float:left;
@@ -222,6 +229,12 @@
 		font-size:1.25em;
 		text-align:center;
 	}
+	
+	#innerstyle{
+		text-align:center;
+	}
+
+
 	
 	#showSellerInfo{
 		border:1px solid gray;

@@ -21,8 +21,6 @@
 		
 
 		var popup;
-	
-	
 		//검색창 팝업 이벤트
 		$("#qaBtn").click(function(){
 			$("#popup").css('display', 'block');
@@ -74,54 +72,67 @@
 		// 옵션 선택시 div추가	
    		$("#option_content").change(function(){	
    			optionCheck = 2;
-   				console.log($('#option_content').val(),"<--하지마하지마하지마");
-   				//if 문서서 이미 있으면? 포함되어있으면 경고창 아니면 추가?	
-   				var charge = parseInt(${itemVO.i_price})+parseInt($('#option_content').val());//원래가격 + 옵션가격
-   	 			$("#sellItemList").append("<div class='itemElement' style='overflow:auto'><div><span class='OptionStyle' id="+spans+">"+$('#option_title>option:selected').text()+"/"+$('#option_content>option:selected').text()+"</span></div><div><input type='number' class='choice' min='1' max='5' value='1'/></div><div id="+cnt+">"+charge+"</div><div><img class='itemElementDel' src='img/deal/close.png'/></div></div>");
-   	 			
-   	 			// 가격, 수량 배열추가
-   	 			moneyCollect.push($("#"+cnt).text());
-   	 			count.push(1);
-   	 			
-   	 			// 가격, 수량 계산 
-   	 			total += parseInt(($("#"+cnt).text()));
-   	 			counts++;
-   	 			
-   	 			// 옵션 배열 및 문자열저장
-   	 			optionStrArray.push(($("#"+spans).text()));
-   	 			optionStr = optionStrArray.join();
-   	 			
-   	 			
-   	 			//중복체크
-   	 			checkArray.push($("#option_title").val()+$('#option_content').text().substring(13));
-   	 			checkStr = checkArray.join();
-
-   	 			//로그찍어보기
-   	 			console.log('============ 엘리먼트 추가시 =============');
-   	 			console.log(counts+"<--수량 계산중");
-   	 			console.log(count+"<-- 수량 배열");
-   	 			console.log(total,'<-- 돈 계산중');
-   	 			console.log(moneyCollect+"<--돈 배열");
-   	 			console.log(optionStr+"<--옵션 ");
-   	 			console.log(optionStrArray+"<--옵션 배열");
-   	 			console.log(checkStr);
-   	 			
-   	 			//수량기, 금액 id
-   	 			cnt++;
-   				spans--;
-   	 			//총가격수정 수량 수정
-   	 			$("#i_price").val(total);
-   	 			$("#i_cnt").val(counts);
-   	 			$("#opt_str").val(optionStr);
-   	 			//선택 후 원상복귀
-   	 			$("#option_title").focus();
-   	 			$("#option_title>option:eq(0)").prop("selected",true);	
-   	 			$("#option_content").html("<option selected disabled hidden>-[필수]- 옵션2 - </option>");  			
+				var value= $("#option_title").val()+"/"+$('#option_content option:selected').text() //선택했을떄 옵션1/옵션2값	
+				
+				console.log(checkStr.indexOf(value),'<--뭐나올라나');
+				
+				if(checkStr.indexOf(value)<0){
+					//if 문서서 이미 있으면? 포함되어있으면 경고창 아니면 추가?	
+	   				var charge = parseInt(${itemVO.i_price})+parseInt($('#option_content').val());//원래가격 + 옵션가격
+	   	 			$("#sellItemList").append("<div class='itemElement' style='overflow:auto'><div><span class='OptionStyle' id="+spans+">"+$('#option_title>option:selected').text()+"/"+$('#option_content>option:selected').text()+"</span></div><div><input type='number' class='choice' min='1' max='5' value='1'/></div><div id="+cnt+">"+charge+"</div><div><img class='itemElementDel' src='img/deal/close.png'/></div></div>");
+	   	 			
+	   	 			// 가격, 수량 배열추가
+	   	 			moneyCollect.push($("#"+cnt).text());
+	   	 			count.push(1);
+	   	 			
+	   	 			// 가격, 수량 계산 
+	   	 			total += parseInt(($("#"+cnt).text()));
+	   	 			counts++;
+	   	 			
+	   	 			// 옵션 배열 및 문자열저장
+	   	 			optionStrArray.push(($("#"+spans).text()));
+	   	 			optionStr = optionStrArray.join();
+	   	 			
+	   	 			//중복체크
+	   	 			checkArray.push(value);
+	   	 			checkStr = checkArray.join();
+		
+	   	 			
+	   	 			
+	   	 			//로그찍어보기
+	   	 			/* console.log('============ 엘리먼트 추가시 =============');
+	   	 			console.log(counts+"<--수량 계산중");
+	   	 			console.log(count+"<-- 수량 배열");
+	   	 			console.log(total,'<-- 돈 계산중');
+	   	 			console.log(moneyCollect+"<--돈 배열"); */
+	   	 			console.log(value,"값아아아앙");
+	   	 			console.log(optionStr+"<--옵션 ");
+	   	 			console.log(optionStrArray+"<--옵션 배열");
+	   	 			console.log(checkStr);
+	   	 			
+	   	 			//수량기, 금액 id
+	   	 			cnt++;
+	   				spans--;
+	   	 			//총가격수정 수량 수정
+	   	 			$("#i_price").val(total);
+	   	 			$("#i_cnt").val(counts);
+	   	 			$("#opt_str").val(optionStr);
+	   	 			//선택 후 원상복귀
+	   	 			$("#option_title").focus();
+	   	 			$("#option_title>option:eq(0)").prop("selected",true);	
+	   	 			$("#option_content").html("<option selected disabled hidden>-[필수]- 옵션2 - </option>");  
+				}else{
+					alert('이미 추가된 옵션입니다.');
+					$("#option_title>option:eq(0)").prop("selected",true);	
+	   	 			$("#option_content").html("<option selected disabled hidden>-[필수]- 옵션2 - </option>");  
+				}
+   							
  		});  
-
+    	
+    	
 		//옵션 엘리먼트 삭제
     	$(document).on('click','.itemElementDel',function(){
-    		
+    		var strCheck = $(this).parent().prev().prev().prev().children('span').text();
     	   	//총가격 및 총수량 계산
 			total -= parseInt($(this).parent().prev().text());//삭제를 누르면 총가격에서 삭제된 가격을 뺴준다.
 			counts -= $(this).parent().prev().prev().children("input").val();	
@@ -130,23 +141,35 @@
 			moneyCollect.splice($('.itemElementDel').index(this),1);
 			count.splice($('.itemElementDel').index(this),1);
 			
-			
+			console.log(optionStrArray.length,"<---배열의길이1");
 			//옵션배열 및 옵션 문자열
-			optionStrArray.splice($('.itemElementDel').index(this),1);
+			for(var i = 0; i<optionStrArray.length; i++){
+				if(optionStrArray[i]==strCheck){
+					optionStrArray.splice(i,1);
+					i--;
+				}
+			}
+			console.log(optionStrArray.length,"<---배열의길이2");
  			optionStr = optionStrArray.join();
+			console.log(optionStr,"<---이거다");
+			/* optionStrArray.splice($('.itemElementDel').index(this),1); */
 			
-			
-			
-			
+ 			
+				
+ 			checkArray.splice($('.itemElementDel').index(this),1);
+	 		checkStr = checkArray.join();
+
 			//로그찍어보기
 			console.log('============ 엘리먼트 삭제시 =============');
-			console.log($(".itemElementDel").index(this),'<--삭제를 누른 버튼의 숫자');//삭제를 누른 인덱스
+			/* console.log($(".itemElementDel").index(this),'<--삭제를 누른 버튼의 숫자');//삭제를 누른 인덱스
 			console.log(counts,"<--총수량 계산중");
 			console.log(count,"<-- 수량 배열");
 			console.log(total,"<-- 총가격 계산중");
 			console.log(moneyCollect,"<--가격 배열");
 			console.log(optionStr+"<--옵션 ")
- 			console.log(optionStrArray+"<--옵션 배열")
+ 			console.log(optionStrArray+"<--옵션 배열") */
+ 			/* console.log(checkStr+"<-- 중복체크")
+ 			console.log(checkArray+"<--중복체크배열") */
 
 			
 			
@@ -169,9 +192,16 @@
        		//줄어들떈 [ 원래 적혀있던 가격보다 > 변동된 수량 * 1개 가격이 적으면 수량이 줄어들었단의미로 가격을 줄여줌]
        		if(price>result){
        			total = total - moneyCollect[$(".choice").index(this)];
+       			optionStrArray.splice(optionStrArray.indexOf($(this).parent().prev().children("span").text()),1);
+       			optionStr = optionStrArray.join();
+				console.log(optionStr,'수량 빠지면 옵션도 빠져라');
+				
        			
        		}else{//늘어날때 원래 적혀있던 가격보다 < 변동된 수량 * 1개의 가격이 크므로 가격을 증가시켜줘야함
-       			total = total + result - price;   			
+       			total = total + result - price;   		
+       			optionStrArray.push($(this).parent().prev().children("span").text());
+       			optionStr = optionStrArray.join();
+       			console.log(optionStr,'<----이거야이거 수량 추가시 옵션내용도추가되라');
        		}
        		
 			//수량 및 총수량 계산시 --> 누르고난 다음의 수량과 , 원래 저장되있던 수량을 비교하여 배열 및 총수량 계산  		
@@ -184,14 +214,17 @@
        		}
 			
 			//console 찍어보기
-       		console.log($(".choice").index(this),"<--수량조절기 선택했을떄 몇번째꺼를 수정했니?");//클릭했을때 그 클릭한 input number의 순서
+/*        	console.log($(".choice").index(this),"<--수량조절기 선택했을떄 몇번째꺼를 수정했니?");//클릭했을때 그 클릭한 input number의 순서
        		console.log(price,'<--원래 적혀있던 금액');
        		console.log(result,'변경된 수량 곱하기 값 얼마니');
        		console.log(counts,"<-- 총수량 계산중");
        		console.log(count,"<-- 수량 배열");
-       		console.log(total,"<--총가격 계산");
+       		console.log(total,"<--총가격 계산"); */
        		
        		//총 변경되는 값을 변경해줘야함
+       		optionStr = optionStrArray.join();
+       		
+       		$("#opt_str").val(optionStr);
        		$("#i_price").val(total);
        		$("#i_cnt").val(counts);
        		$(this).parent().next().text(result);//result값으로 적혀있는 가격 셋팅해줘야함 -> result 값은 변경된 수량 * 1개의 값이므로 가격란에 변경
@@ -310,7 +343,19 @@
      						tag += '<tr>';
      						tag += '<td class="mainFirstTd">'+ start++ +'</td>';
      						tag += '<td class="mainSecondTd">'+status+'</td>';
-     						tag += '<td class="mainThirdTd toggleBtn">'+obj.q_content+'</td>';
+	     					if(obj.userid=='${logId}'){
+	     						if(obj.q_status==2){
+	     							tag += '<td class="mainThirdTd toggleBtn">☝  '+obj.q_content+'</td>';	
+	     						}else{
+	     							tag += '<td class="mainThirdTd toggleBtn">'+obj.q_content+'</td>';	
+	     						}
+	     					}else{
+	     						if(obj.q_status==2){
+	     							tag += '<td class="mainThirdTd toggleBtn">☝ <span style="color:#2c75f0;">비밀글<span></td>';	
+	     						}else{
+	     							tag += '<td class="mainThirdTd toggleBtn">'+obj.q_content+'</td>';	
+	     						}
+	     					}
      						tag += '<td class="mainFourthtTd">'+obj.userid+'</td>';
      						tag += '<td class="mainFivthTd">'+obj.q_writedate+'</td>';
      						tag += '</tr>';
@@ -318,7 +363,19 @@
      						if(status=='답변완료'){
      							tag += '<tr style="display:none; background-color:#f0f0f0" >';
      							tag += '<td style="color:blue">답변</td>';
-     							tag += '<td class="replySecondTd" colspan=2>'+obj.q_answer+'</td>';
+     							if(obj.userid=='${logId}'){
+    	     						if(obj.q_status==2){
+    	     							tag += '<td class="mainThirdTd toggleBtn" colspan=2 >☝  '+obj.q_answer+'</td>';	
+    	     						}else{
+    	     							tag += '<td class="mainThirdTd toggleBtn" colspan=2 >'+obj.q_answer+'</td>';	
+    	     						}
+    	     					}else{
+    	     						if(obj.q_status==2){
+    	     							tag += '<td class="replySecondTd" colspan=2 > ☝ <span style="color:#2c75f0;">비밀글<span></td>';	
+    	     						}else{
+    	     							tag += '<td class="replySecondTd" colspan=2 >'+obj.q_answer+'</td>';
+    	     						}
+    	     					}
      							tag += '<td >'+obj.sellerid+'</td>';
      							tag += '<td >'+obj.q_adate+'</td>';
      							tag += "</tr>";
