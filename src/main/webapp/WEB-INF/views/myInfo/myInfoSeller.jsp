@@ -76,7 +76,7 @@
 					<ul class="myifoAddrInput">
 						<li><input type="text" class="inputDisabled" name="sel_zip" id="sel_zip" value="${myVO.sel_zip }" disabled="disabled"
 							tabindex="9" />
-						<button type="button" class="btn commBtn Mem_lgBtn inputDisabled" onclick="javascript:openKakaoPost()">재검색</button></li>
+						<button type="button" class="btn commBtn Mem_lgBtn inputDisabled" onclick="javascript:sellOpenKakaoPost()">재검색</button></li>
 						<li><input type="text" class="inputDisabled" name="sel_addr" id="sel_addr" value="${myVO.sel_addr }" disabled="disabled"
 							tabindex="10" /></li>
 						<li><input type="text" class="inputDisabled" name="sel_detail" id="sel_detail" value="${myVO.sel_detail }" disabled="disabled"
@@ -84,17 +84,13 @@
 						</li>
 						<li>
 							<div id="joinAddrWrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:absolute">
-							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="sellOpenKakaoPost()" alt="접기 버튼">
 							</div>
 						</li>
 					</ul>
 				</li>
 				<li>계좌정보</li>
-
-				<li style="height:120px">
-
 				<li style="height: auto">
-
 					<ul id="bankInput"  style="height: auto;">
 						<li><input type="text" name="acc_name" id="acc_name" class="inputDisabled" value="${myVO.acc_name }"/>
 							<br/><span id="checkSellAccName"></span>
@@ -124,16 +120,13 @@
 				style="width: 320px; height: 40px; display: block; margin: 0 auto;">수정하기</button>
 			<div class="editOn" id="sellerEditOn">
 
-				<button id="sellerEditBtn" type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정</button>
-				<button id="sellerEditCancelBtn" type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
-
 				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">수정</button>
 				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">취소</button>			
 
 			</div>
 			<div style="text-align:center; margin-bottom:20px">
-				<button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;">셀러활동 중단</button>
-				<br/><button type="button" class="btn cancelBtn" style="width:320px;  height:45px; margin: 5px auto;" data-target="#myinfoMd" data-toggle="modal">셀러 탈퇴</button>
+				<button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;" >셀러활동 중단</button>
+				<br/><button type="button" class="btn cancelBtn" style="width:320px;  height:45px; margin: 5px auto;" data-target="#myinfoMd" data-toggle="modal" onclick='location.href="sellerinfo/sellerDel"'>셀러 탈퇴</button>
 			</div>
 		</div>
 	</form>
