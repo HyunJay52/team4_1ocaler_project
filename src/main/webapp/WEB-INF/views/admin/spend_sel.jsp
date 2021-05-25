@@ -256,7 +256,7 @@
 				<option value="sel_subject">판매글 제목</option>
 				<option value="sel_userid">판매자명</option>
 			</select>
-			<input type="text" class="spendtext" name="searchWord" placeholder="회원명을 입력하세요"/>	
+			<input type="text" class="spendtext" name="searchWord"/>	
 			<input type="button" class="puplebtn" id="searchBtn" value="검색"/>
 			<input type="hidden" name="pageNum" id="pageNum" value="1"/>
 			<input type="hidden" name="month" value="${pageVO.month }"/>
