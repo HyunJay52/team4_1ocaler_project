@@ -576,7 +576,7 @@
 		<h3 class="sellShortDescription">상품 상세정보<span> | 상품의 상세한 내용을 확인하세요. </span></h3> 		
 		
 		<div id="sellDetail">
-			${itemVO.i_content }
+			${itemVO.i_content }`
 		</div>
 		
 		
@@ -657,13 +657,7 @@
 			<!-- Q&A 페이징 -->
 			<div id ="pageNum">
 				<ul>
-				 	<li><a > 이전 </a></li>
-				 	<li><a > 1 </a></li>
-				 	<li><a > 2 </a></li>
-				 	<li><a > 3 </a></li>
-				 	<li><a > 4 </a></li>
-				 	<li><a > 5 </a></li>
-				 	<li><a > 다음 </a></li>
+				 	<li>이전</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>다음</li>
 				</ul>
 				
 				

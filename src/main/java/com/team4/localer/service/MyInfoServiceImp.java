@@ -262,6 +262,12 @@ public class MyInfoServiceImp implements MyInfoService{
 		// seller 메인 정보
 		return dao.selectSelinfo(userid);
 	}
+// 게시글 리뷰 총수 불러오기(21-05-25)
+
+	@Override
+	public int totalReviewCnt(int num) {
+		return dao.totalReviewCnt(num);
+	}
 
 	
 

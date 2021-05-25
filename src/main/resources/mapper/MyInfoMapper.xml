@@ -507,11 +507,17 @@
 		
 		
 	</select>
-<!-- QNA selectAllReDate WOWOW -->	
+<!-- Review selectAllReDate WOWOW -->	
 	<select id="selectAllReDate" resultType="com.team4.localer.vo.ItemReviewVO">
 		SELECT totalCnt, reRate1 FROM 
 			(SELECT num, count(num) AS totalCnt FROM ITEM_REVIEW ir WHERE num=#{param1} GROUP BY num) tbl1 JOIN 
 			(SELECT num, count(num) AS reRate1 FROM ITEM_REVIEW ir WHERE num=#{param1} AND RE_RATE=1 GROUP BY num) tbl2 ON tbl1.num=tbl2.num
+	</select>
+
+
+<!-- Reiview totalReviewCnt WOWOW -->	
+	<select id="totalReviewCnt" resultType="int" parameterType="int">
+		select count(re_num) totalCnt from item_review where num=#{param1}
 	</select>
 
 

@@ -137,7 +137,9 @@ public interface MyInfoDAO {
 
 	//seller 메인 정보
 	public List<SellerVO> selectSelinfo(String userid);
-	
+
+// 게시글 리뷰 총수 불러오기(21-05-25)
+	public int totalReviewCnt(int num);
 	
 	
 }

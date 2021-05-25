@@ -75,11 +75,6 @@ public class SellerController {
 	@RequestMapping("/selBard")
 	public ModelAndView selBard(DealPageVO pageVO, HttpSession session ) {
 		ModelAndView mav = new ModelAndView();
-		  
-//		System.out.println(sellerService.selectAllitem().size()+"<---- size 몇개니");
-//		mav.addObject("itemList",sellerService.selectAllitem());
-//		
-//		
 		
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
@@ -219,7 +214,9 @@ public class SellerController {
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
-		reviewPageVO.setTotalRecord(myinfoService.selectAllReDate(itemVO.getI_num()).get(0).getTotalCnt());
+	
+		reviewPageVO.setTotalRecord(myinfoService.totalReviewCnt(itemVO.getI_num())); //리뷰총갯수		
+	
 
 		System.out.println(reviewPageVO.getPageNum()+"<------현재페이지넘버");
 		System.out.println(reviewPageVO.getOnePageRecord()+"<------1페이지에 보여줄 레코드수");
@@ -592,7 +589,7 @@ public class SellerController {
 	public Map<String,Object> reviewPaging(ItemReviewPageVO reviewPageVO, int num){
 		Map<String,Object> maps = new HashMap<String,Object>();
 		
-		reviewPageVO.setTotalRecord(myinfoService.selectAllReDate(num).get(0).getTotalCnt());		
+		reviewPageVO.setTotalRecord(myinfoService.totalReviewCnt(num));		
 		reviewPageVO.setI_num(num);
 		
 		maps.put("reviewList", myinfoService.selectSellItemReview(reviewPageVO));
