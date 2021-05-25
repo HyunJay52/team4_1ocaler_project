@@ -15,7 +15,9 @@
 		$("#moreInfo").click(function(){
 			$(this).css('display', 'none');
 			$(".editOn").css('display', 'block');
-			$(".inputDisabled").attr('disabled', false);
+			$(".inputDisabled").attr('readonly', false);
+			$("#myinfoLoc_gu>option").attr('disabled', null);
+			
 			$(".memEditBtn").attr('disabled', false);
 			//$("#mem_prof").attr('readyonly', false);
 			$(".memImgEditBtn").css('display', 'inline-block');
@@ -24,9 +26,10 @@
 		//수정취소버튼
 		$("#editOn").click(function(){
 			$(".editOn").css('display', 'none');	
-			$(".inputDisabled").attr('disabled', true);
+			$(".inputDisabled").attr('readonly', true);
 			$(".memEditBtn").attr('disabled', true);
 			$(".memImgEditBtn").css('display', 'none');
+			$("#myinfoLoc_gu>opction").attr('disabled', true);
 
 		});
 		//수정버튼 이벤트
@@ -109,16 +112,16 @@
 		var gu = ['강서구','양천구','구로구','영등포구','금천구','동작구','관악구','서초구', 
 				'강남구','송파구','강동구','마포구','용산구','서대문구','중구','성동구',
 				'광진구','종로구','동대문구','성북구','중랑구','은평구','강북구','노원구','도봉구'];
-		var tag = "<option value='0'> = = = = = = = = 지역선택 = = = = = = = = </option>";
+		var tag = "<option disabled='disabled' value='0'> = = = = = = = = 지역선택 = = = = = = = = </option>";
 		for(var i = 0; i < gu.length; i++){
 			if(gu[i] == '${myVO.loc_gu}'){
-				tag += "<option value="+gu[i]+" selected>"+gu[i]+"</option>";
+				tag += "<option disabled='disabled' value="+gu[i]+" selected>"+gu[i]+"</option>";
 			}else{
-				tag += "<option value="+gu[i]+">"+gu[i]+"</option>";
+				tag += "<option disabled='disabled' value="+gu[i]+">"+gu[i]+"</option>";
 			}
 		}
 		$("#myinfoLoc_gu").append(tag);
-
+		
 	});
 </script>
 <div class="myinfoBody">
@@ -142,11 +145,11 @@
 				</li>
 				
 				<li>아이디</li>
-				<li><input type="text" name="userid" id="userid" tabindex="1" value="${myVO.userid }" disabled/></li>
+				<li><input type="text" name="userid" id="userid" tabindex="1" value="${myVO.userid }" readonly/></li>
 				<li>이름</li>
-				<li><input type="text" name="mem_name" id="mem_name"tabindex="5" value="${myVO.mem_name }" disabled/></li>
+				<li><input type="text" name="mem_name" id="mem_name"tabindex="5" value="${myVO.mem_name } " readonly/></li>
 				<li>닉네임</li>
-				<li><input type="text" class="inputDisabled" name="mem_nick" id="mem_nick" value="${myVO.mem_nick }" disabled="disabled"
+				<li><input type="text" class="" name="mem_nick" id="mem_nick" value="${myVO.mem_nick }" readonly
 					placeholder="별명을 입력해주세요" />
 				<button type="button" class="btn commBtn Mem_lgBtn memEditBtn" id="nickOverlapBtn" disabled="disabled">중복검사</button>
 					<span id="nickOverlap">N</span><br/>
@@ -155,28 +158,28 @@
 
 				<li>인사말</li>
 				<li><textarea name="mem_content" id="mem_content" style="width:318px; height:62px; padding: 5px; resize:none"
-						maxlength="200" class="inputDisabled" placeholder="최대 200자" disabled="disabled">${myVO.mem_content }</textarea>
+						maxlength="200" class="inputDisabled" placeholder="최대 200자" readonly>${myVO.mem_content }</textarea>
 				</li>
 				<li>연락처</li>
-				<li><input type="text" class="inputDisabled" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11" value="${myVO.mem_tel }" disabled="disabled"/>
+				<li><input type="text" class="inputDisabled" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11" value="${myVO.mem_tel }" readonly/>
 				<button type="button" class="btn commBtn Mem_lgBtn memEditBtn" onclick="javascript:verifyPhoneNumber()" disabled="disabled">번호인증</button> <br />
 				<span id="checktel"></span></li>
 					
 				<li>이메일</li>
 				<li><input type="text" name="mem_email" id="mem_email" class="inputDisabled"
-					tabindex="7" value="${myVO.mem_email }" disabled="disabled" placeholder="예) 1ocaler@1ocaler.com" />
+					tabindex="7" value="${myVO.mem_email }" readonly placeholder="예) 1ocaler@1ocaler.com" />
 				<button type="button"  id="verifyEmail" class="btn commBtn Mem_lgBtn memEditBtn" disabled="disabled">이메일 인증</button> <br />
 				<span id="checkemail"></span></li>
 
 				<li>주소</li>
 				<li style="height:200px">
 					<ul class="myifoAddrInput">
-						<li><input type="text" class="inputDisabled" name="mem_zip" id="mem_zip" value="${myVO.mem_zip }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="mem_zip" id="mem_zip" value="${myVO.mem_zip }" readonly
 							tabindex="9" />
 						<button type="button" class="btn commBtn Mem_lgBtn memEditBtn" onclick="javascript:openKakaoPost()" disabled="disabled">재검색</button></li>
-						<li><input type="text" class="inputDisabled" name="mem_addr" id="mem_addr" value="${myVO.mem_addr }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="mem_addr" id="mem_addr" value="${myVO.mem_addr }" readonly
 							tabindex="10" /></li>
-						<li><input type="text" class="inputDisabled" name="mem_detail" id="mem_detail" value="${myVO.mem_detail }" disabled="disabled"
+						<li><input type="text" class="inputDisabled" name="mem_detail" id="mem_detail" value="${myVO.mem_detail }" readonly
 							tabindex="11" />
 						</li>
 						<li>
@@ -188,7 +191,7 @@
 				</li>
 				<li>활동지역</li>
 				<li>
-					<select id="myinfoLoc_gu" name="loc_gu" tabindex="12" class="inputDisabled" disabled="disabled">
+					<select id="myinfoLoc_gu" name="loc_gu" tabindex="12" class="inputDisabled">
 
 					</select>			
 				</li>

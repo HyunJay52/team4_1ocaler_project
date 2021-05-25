@@ -319,7 +319,7 @@ public class MemberController {
 		//String path = req.getSession().getServletContext().getRealPath("/img/mem_prof");
 		String path = ses.getServletContext().getRealPath("/img/mem_prof");
 		String delMemProf=req.getParameter("getMem_prof");
-		
+
 		//새로 업로드 할 파일 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		MultipartFile updateMemprof = mr.getFile("profFile");
