@@ -477,6 +477,22 @@
  		]]>
 	</select>
 	
+	<select id="selectOrderInfo" resultType="int">
+		<![CDATA[
+			SELECT nvl(count(num),0) cnt FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD')
+			UNION ALL
+			SELECT nvl(count(num), 0) cnt FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_ship=1
+			UNION ALL
+			SELECT nvl(count(o.o_status), 0) FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_status=1
+			UNION ALL
+			SELECT nvl(count(o.o_status), 0) FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_status=2
+		]]>
+	</select>
+	
 
 <!-- QNA QuestionInsert WOWWOW -->
 	<insert id="QnaQuestionInsert" parameterType="com.team4.localer.vo.QnAVO">

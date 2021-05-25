@@ -2,7 +2,171 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 
-
+<script>
+	$(document).ready(function(){
+		
+		var socket;
+		
+		var getterID;
+		var senderID;
+		
+		//채팅방 창 팝업
+		$(document).on('click', "#chat_box>div:first-child", function(){
+			
+			var logId = '${logId}';
+ 			if(logId=='') {
+				console.log('asdkfjlasdjfklajsdfkljas;dlfjklasdfjlaks;d');
+				alert('로그인시 이용가능합니다.');
+			}else {
+				$("#chatList").css({display: "block"});
+				$("#showMsg").css({display:"none"});
+				$(".chat_input").css({display:"none"});
+				$("#chat_box").css({display:"none"});
+				$("#chat_box>div:first-child").css({display:"none"});
+			}
+		});
+		
+		//채팅 할 상대 리스트에 추가 
+		$(document).on('click', '#eatViewPageChatBtn', function(){
+			alert("회원정보에서 채팅하기 클릭함");	
+			
+			getterID = $("#WVPProfilePopup>div").children('ul').children('li:first-child').text();
+			$("#chatDiv").css({display: "block"});
+			
+			$("#chatList").append(
+				'<li>'+getterID+'<input type="hidden" value="'+getterID+'"</li>'
+			);
+			
+			$("#WVPProfilePopup").css({display: "none"});
+			
+		});
+		
+		$(".chatting").click(function(){
+			//채팅창 열기
+			$("#chatDiv").css({display: "block"});
+			
+			//채팅방 목록 db에서 가져오기 
+			$.ajax({
+				url: 'chatting/chatroomList',	
+				data: 'userid=${logId}',
+				success: function(result) {
+					$list = $(result);
+					$list.each(function(idx, list){
+						var r_name = list.r_name
+						var rArr = r_name.split('+');
+						
+						if(rArr[0]!='${logId}'){
+							var listName1 = rArr[0]; 
+							console.log('1. ',listName1);
+							$("#chatList").append(
+									'<li>'+listName1+'<input type="hidden" value="'+r_name+'"</li>'
+							);
+						}
+						if(rArr[1]!='${logId}'){
+							var listName2 = rArr[1];
+							console.log('2. ',listName2);
+							$("#chatList").append(
+									'<li>'+listName2+'<input type="hidden" value="'+r_name+'"</li>'
+							);
+						}
+					})
+					
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			});
+			
+		});
+		
+		//전체 채팅창 닫기
+		$("#chatClose").click(function(){
+			$("#chatDiv").css({
+				display: "none"
+			})
+		});
+		
+		//대화상대 선택하기
+		$(document).on('click', "#chatList>li", function(){
+			var chatListName = $("#chatList>li").children('input').val();
+			
+			// 채팅용 function > 소켓 접속
+			socket = io.connect("http://localhost:82");
+			
+			//방생성용 if문 
+			if(chatListName.indexOf('+') != -1){
+				socket.emit('join', chatListName); //방생성
+			}else{
+				if('${logId }' != null) {
+					senderID = '${logId }';
+				}
+				chatListName = getterID+"+"+senderID;
+				socket.emit('join', chatListName); //방생성
+			}
+			console.log(chatListName.indexOf('+'));
+			
+			$("#chatList").css({display: "none"});
+			$("#showMsg").css({display:"block"});
+			$(".chat_input").css({display:"block"});
+			$("#chat_box").css({display:"block"});
+			$("#chat_box>div:first-child").css({display:"block"});
+			
+			//이전 대화 가져오기
+			$.ajax({
+				url: 'chatting/chatprevMsg',
+				data: 'userid=${logId}&chatRoomName='+encodeURIComponent(chatListName),
+				type: 'post',
+				success: function(result){
+					$msgList = $(result);
+					$msgList.each(function(idx, msgList){
+						if('${logId }'==msgList.sender){
+							$("#showMsg").append("<li class='chatList'><span class='chatMyspan'>"+msgList.msg+"</span></li>");
+						}else if('${logId }'!=msgList.sender){
+							$("#showMsg").append("<li class='chatList'><span class='chatOtherSpan'>"+msgList.sender+" > "+msgList.msg+"</span></li>");
+						}
+					});
+					$("#showMsg").scrollTop($('#showMsg')[0].scrollHeight);
+				},
+				error: function(error){
+					console.log(error);
+				}
+			});
+			console.log(chatListName,"< 최종 채팅방 ");
+			
+			//서버에서 보낸 메세지 처리 함수
+			socket.on('echo', function(msg){
+				var splitP = msg.indexOf('>');
+				var userid = msg.substr(0, splitP-1);
+				var usermsg = msg.substr(splitP+2);
+				
+				if('${logId}'==userid){
+					$("#showMsg").append("<li class='chatList'><span class='chatMyspan'>"+usermsg+"</span></li>");	
+				}else if('${logId}'!=userid){
+					$("#showMsg").append("<li class='chatList'><span class='chatOtherSpan'>"+msg+"</span></li>");
+				}else {
+					$("#showMsg").append(msg+'<br/>')
+				}
+				$("#showMsg").scrollTop($('#showMsg')[0].scrollHeight);
+			});
+		});
+		
+		//메세지 보내기 function
+		$("#msg_process").click(function(){
+			var sendM =  $("#msg").val();
+			if(sendM != ''){
+				socket.emit('sendMsg',  '${logId} > '+sendM);
+				$("#msg").val(""); //초기화
+				$("#msg").focus(); //초기화
+			}
+		});
+		$("#msg").keydown(function(key){
+			if(key.keyCode==13){
+				msg_process.click();
+			}	
+		});
+		
+	});
+</script>
 
 <ul id="sideBar">
 	<li>MENU</li>

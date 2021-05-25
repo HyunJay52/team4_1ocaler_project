@@ -613,6 +613,11 @@ public class MyinfoController {
 		
 		List<Integer> saleCount = sellerService.myInfoCountSale(userid); //상품현황
 		mav.addObject("saleCount", saleCount);
+		
+		List<Integer> orderCnt = service.selectOrderInfo(userid);//주문정보
+		System.out.println("- - - - - - - - - - - - - > "+orderCnt.size());
+		mav.addObject("orderCnt", orderCnt);
+		
 		mav.setViewName("myInfo/myInfoSaleHistory");
 		return mav;
 	}

@@ -14,7 +14,7 @@
 				<div id="saleGrade" class="saleHistoryTop">
 					<ul>
 						<li>셀러등급</li>
-						<li><img src="img/myInfo/slider/heart50.png" /><span class="saleHistorySpan">${selInfo[0].sel_lvl }</span>%</li>
+						<li><img src="img/myInfo/slider/heart${selInfo[0].sel_lvl }.png" style="margin-top: -10px;"/><span class="saleHistorySpan">${selInfo[0].sel_lvl }</span>%</li>
 					</ul>
 				</div>
 				<div id="settlementAmount" class="saleHistoryTop">
@@ -46,8 +46,8 @@
 							<td>Q & A</td>
 						</tr>
 						<tr>
-							<td>12 건</td>
-							<td>3 건</td>
+							<td>${orderCnt[0] } 건</td>
+							<td>${orderCnt[1] } 건</td>
 							<td>0 건</td>
 							<td>${selInfo[0].qnacnt } 건</td>
 						</tr>
@@ -84,10 +84,10 @@
 							<td>취소/환불예정</td>
 						</tr>
 						<tr>
-							<td>3 건</td>
-							<td>2 건</td>
+							<td>${orderCnt[2] } 건</td>
+							<td>${orderCnt[3] } 건</td>
 							<td>0 건</td>
-							<td>2 건</td>
+							<td>0 건</td>
 						</tr>
 					</table>
 				</div>

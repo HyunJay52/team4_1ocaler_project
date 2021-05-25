@@ -126,7 +126,8 @@ public interface MyInfoDAO {
 	public List<QnAVO> selectAllmyqna(String userid);
 	//seller 메인 정보
 	public List<SellerVO> selectSelinfo(String userid);
-	
+	//주문정보
+	public List<Integer> selectOrderInfo(String userid);
 	
 	
 }
