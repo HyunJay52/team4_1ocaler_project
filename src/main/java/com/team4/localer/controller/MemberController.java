@@ -619,7 +619,17 @@ public class MemberController {
 //셀러 활동 정지
 	
 //셀러 탈퇴
-	
+	@RequestMapping("/sellerinfo/sellerDel")
+	public ModelAndView sellerDel(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		String userid = (String)ses.getAttribute("logId");
+		
+		service.updateDelseller(userid);
+		
+		mav.setViewName("redirect:/");
+		
+		return mav;
+	}
 //이메일 인증
 	@RequestMapping(value="/sendVerifiedCode")
 	@ResponseBody
