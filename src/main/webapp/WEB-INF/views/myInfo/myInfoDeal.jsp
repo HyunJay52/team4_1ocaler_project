@@ -677,9 +677,9 @@
 				</div>
 				</form>
 				<div class="cancelJoinMember" style="display:none; height:300px">
-					<h2>참여신청을 거절하시겠습니까?</h2>
+					<h2>참여신청을 취소하시겠습니까?</h2>
 					<div class="cancelJoinBody">
-						<p class="mdFnt">참여신청을 거절할 시 재수락이 불가능합니다</p>
+						<p class="mdFnt">참여신청을 취소할 시 참여가 불가능합니다</p>
 						
 					</div>
 					<div class="joinBtnform">

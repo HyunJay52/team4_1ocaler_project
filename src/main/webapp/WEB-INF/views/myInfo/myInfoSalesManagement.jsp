@@ -84,6 +84,7 @@
 			setOrderList(1);
 		});
 		
+		//체크박스 이벤트
 		$(".productManagementLabelCenter>ul>li>input").change(function(){
 			$(".productManagementLabelCenter>ul>li>input").prop('checked', false);
 			$(this).prop('checked', true)
