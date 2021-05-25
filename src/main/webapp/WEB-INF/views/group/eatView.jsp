@@ -333,7 +333,7 @@
 					<c:if test="${p<=pageVO.totalPage }">
 						<c:if test="${p==pageVO.pageNum }">
 						<!-- 현재페이지일떄 -->
-							<li style="backgroNumund-color:#d9d9d9"><a href="eatPage?loc_gu=${pageVO.loc_gu}&pageNum=${p}&category=한끼미식회<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
+							<li style="background-color:#d9d9d9"><a href="eatPage?loc_gu=${pageVO.loc_gu}&pageNum=${p}&category=한끼미식회<c:if test="${pageVO.searchWord!=null && pageVO.searchWord!='' }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p }</a></li>
 						</c:if>
 						<c:if test="${p!=pageVO.pageNum }">
 						<!-- 현재페이지가 아닐때 -->
