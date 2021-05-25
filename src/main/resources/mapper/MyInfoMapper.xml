@@ -329,7 +329,7 @@
 			join grouplocal on joinus.numjoin = grouplocal.num
 		</if>
    		<if test="kategorie.equals('sell_item')">
-			select re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid sellerid , item_review.re_writedate, re_content
+			select re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid sellerid , item_review.re_writedate, to_char(re_content)
 			from item_review 
 			join ordertbl on item_review.num = ordertbl.num 
 			join sell_item on ordertbl.num = sell_item.i_num 
@@ -340,6 +340,9 @@
 		and ${searchKey} like #{searchWord}
 		<if test="kategorie.equals('mem_share')">
 			group by re_num, item_review.userid, item_review.num, re_rate, mem_share.userid, s_subject, to_char(re_content), item_review.re_writedate 
+		</if>
+		<if test="kategorie.equals('sell_item')">
+			group by re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid , item_review.re_writedate, to_char(re_content)
 		</if>
 		)
    </select>

@@ -524,7 +524,7 @@
 							<textarea class="dealTextarea mdFnt" maxlength="250" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
 							<div class="reviewTextCount">0 / 250</div>
 						</li>
-						<li><input type="file" name="re_img"/></li>
+						<!-- <li><input type="file" name="re_img"/></li> -->
 						<li style="display:none"><input type="hidden" id="WriteReviewNum" name="num" value=""/></li>
 						<li><button class="btn btn-outline-dark btn-lg" id="WriteReviewNumCancel" data-dismiss="modal">다음에 할게요</button>
 							<button class="btn btn-outline-dark btn-lg" id="WriteReview">작성완료</button>

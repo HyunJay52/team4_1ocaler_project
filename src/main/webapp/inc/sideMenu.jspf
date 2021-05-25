@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMainStyle.css?ver=3"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStyle.css?ver=24"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyActivityStyle.css?ver=6"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=18"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewStyle.css?ver=21"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoLoadStyle.css?ver=9"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoMyDealStyle.css?ver=14"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoFarmerDealStyle.css?ver=3"/>
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoSellerStyle.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoProductManagementStyle.css?ver=6"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoStatisticsStyle.css?ver=2"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewManagementStyle.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoReviewManagementStyle.css?ver=1"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoShippingManagementStyle.css?ver=5"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/myInfo/myInfoQnAManagementStyle.css?ver=7"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/plugin/jquery.bxslider.css" type="text/css">

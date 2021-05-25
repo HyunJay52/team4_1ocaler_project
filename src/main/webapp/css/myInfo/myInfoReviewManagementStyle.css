@@ -16,8 +16,9 @@
 		width:21.25%;
 		float:left;
 		text-align:center;
-		background-color:#3f1785;
-		color:#fff; 
+		border-top: 2px solid #283176;
+  		border-bottom: 1px solid #283176;
+		color:#283176; 
 		font-weight:bold;
 		line-height:40px;
 		height:40px;

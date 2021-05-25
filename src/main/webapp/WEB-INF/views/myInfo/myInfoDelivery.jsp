@@ -158,7 +158,7 @@
 		
 		<div id="deliveryBottom">
 			<div class="deliveryLine"></div>
-			<div class="myDeliveryDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button></div>
+			<div class="myDeliveryDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button></button><button class="dayBtn next">》</button></div>
 			<table class="myinfoTable2" id="myDeliveryTbl">
 				<tr>
 					<td>이미지</td>
