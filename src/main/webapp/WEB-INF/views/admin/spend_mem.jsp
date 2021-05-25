@@ -50,6 +50,7 @@
   			}
   			memListAjax();
   		});
+  		function setComma(num) {     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
     	  function memListAjax(){
     		  $.ajax({
   				type : "POST",
@@ -66,9 +67,9 @@
 					$.each($list ,function(idx,vo){
 						txt +="<tr class='memList'>";
 						txt +=	"<td>"+vo.userid+"</td>";
-						txt +=	"<td>"+vo.charge_point+"</td>";
-						txt +=	"<td class='spend' style='cursor:pointer'>"+vo.spend_point+"</td>";
-						txt +=	"<td class='add' style='cursor:pointer'>"+vo.add_point+"</td>";
+						txt +=	"<td>"+setComma(vo.charge_point)+"</td>";
+						txt +=	"<td class='spend' style='cursor:pointer'>"+setComma(vo.spend_point)+"</td>";
+						txt +=	"<td class='add' style='cursor:pointer'>"+setComma(vo.add_point)+"</td>";
 						txt +="</tr>";
 					});
 					$(".memlisttbl").append(txt);
@@ -109,7 +110,7 @@
     		  $("#moOne>#topsubject").text(userid+"님의 사용포인트");
      		 modalOne(userid);//모달창 띄우는 
     	  });
-    	  
+    	  function setComma(num) {     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
     	  function modalOne(userid){//모달 1 창 띄우는 함수 
     		  $("#moOne").css("display", "block");
     		  $("#moOne").draggable({'cancel':'.tbl', containment:'parent', scroll:false});
@@ -126,7 +127,7 @@
 	    						txt+="<td>"+vo.item_num+"</td>";
 	    						txt+="<td class='wordcut'>"+vo.sel_subject+"</td>";
 	    						txt+="<td>"+vo.sel_userid+"</td>";
-	    						txt+="<td>"+vo.spend_point+"</td>";
+	    						txt+="<td>"+setComma(vo.spend_point)+"</td>";
 	    						txt+="<td>"+vo.sp_date+"</td>";
     						txt+="</tr>";
     					});
@@ -162,7 +163,7 @@
 	    						txt+="<td>"+vo.item_num+"</td>";
 	    						txt+="<td class='wordcut'>"+vo.sel_subject+"</td>";
 	    						txt+="<td>"+vo.sel_userid+"</td>";
-	    						txt+="<td>"+vo.add_point+"</td>";
+	    						txt+="<td>"+setComma(vo.add_point)+"</td>";
 	    						txt+="<td>"+vo.sp_date+"</td>";
   						txt+="</tr>";
   					});
@@ -256,6 +257,7 @@
 			<input type="hidden" name="pageNum" id="pageNum" value="1"/>
 		</form>
 	</div>
+	금액 클릭시 상세내역 확인
 	<table class="tablea memlisttbl" >
 		<tr>
 			<td>아이디</td>

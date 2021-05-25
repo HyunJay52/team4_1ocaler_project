@@ -267,6 +267,7 @@
 			</form>
 		</div>
 	</div>
+	셀러 아이디 클릭시 상세정보 확인
 	<table id="sellerList"class="tablea" >
 		 <colgroup>
                <col width="5%" />
@@ -279,6 +280,7 @@
                <col width="9%" />
                <col width="9%" />
             </colgroup>
+        
 		<tr>
 			<td>번호</td>
 			<td>아이디</td>
