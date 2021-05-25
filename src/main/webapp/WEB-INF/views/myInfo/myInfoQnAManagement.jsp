@@ -75,7 +75,9 @@
 		function setQnAContent(q_num){
 			$.ajax({
 				url : "setQnA",
-				data : {"q_num": q_num},
+				data : {"q_num": q_num,
+						"searchKey":"none"
+						},
 				dataType : "json",
 				success : function(result){
 					console.log(result);
@@ -185,6 +187,7 @@
 			$(".productManagementLabelCenter>ul>li>input").prop('checked', false);
 			$(this).prop('checked', true)
 		});
+	
 	});
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
@@ -227,7 +230,7 @@
 			<table class="myInfoProductManagementTable2" id="myInfoQnAManagementTable">
 
 			</table>
-			<div id="myInfoQnAManagementTablePagingArea" style="margin-top:10px;">
+			<div id="myInfoQnAManagementTablePagingArea" style="margin-top:30px;">
 			
 			</div>
 		</div>

@@ -17,6 +17,7 @@ import com.team4.localer.vo.MyinfoPageVO;
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
 import com.team4.localer.vo.SellerVO;
+import com.team4.localer.vo.SellitemVO;
 
 public interface MyInfoDAO {
 	//내 정보 조회
@@ -90,8 +91,9 @@ public interface MyInfoDAO {
 	//판매관리 리스트 
 	public List<OrderVO> manageList(AdminPageVO pageVO);
 	
+	//리뷰가능한 상품리스트 카운트
+	public int selectItemReviewListCount(MyinfoPageVO vo);
 	
-
 	//리뷰가능한 상품리스트 조회
 	public List<OrderVO> selectItemReviewList(MyinfoPageVO vo);
 	
@@ -111,10 +113,25 @@ public interface MyInfoDAO {
 	public int selectMyBoardCount(MyinfoPageVO vo);
 	
 	//특정 QnA 불러오기
-	public QnAVO setQnA(int q_num, String userid);
+	public QnAVO setQnA(int q_num, String userid, String searchKey);
 	
 	//QnA 답변 쓰기
 	public int QnAAnswerWrite(QnAVO vo);
+	
+	//상품관리 리스트 조회
+	public List<SellitemVO> selectProductList(MyinfoPageVO vo);
+	
+	//상품관리 리스트 카운트
+	public int selectProductListCount(MyinfoPageVO vo);
+
+	//상품관리 상품 상태 변경
+	public int updateProductStatus(int i_num);
+	
+	//결제관리 리스트 불러오기
+	public List<OrderVO> selectSalesManagement(MyinfoPageVO vo);
+	
+	//결제관리 리스트 카운트
+	public int selectSaleManagementCounut(MyinfoPageVO vo);
 	
 	// QnA 글쓰기 (21-05-24 WOW)
 	public int QnaQuestionInsert(QnAVO vo);
@@ -122,6 +139,17 @@ public interface MyInfoDAO {
 //  QNA 해당 게시글 전체 질문가져오기(21-05-24 WOW)
 	public List<QnAVO> selectAllQnA(int num);
 	
+	//상품관리 종료일 변경
+	public int updateProductPeriod(int i_num, String date);
+	
+	//상품관리 카운트 조회(총 게시물, 판매 중, 판매 종료 등)
+	public SellitemVO sellerCount(String userid);
+	
+	//결제관리 카운트 조회
+	public OrderVO orderCount(String userid);
+	
+	//게시글 또는 댓글지우기
+	public int deleteBoard(String kategorie, int[] num, String userid);
 	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	//참여정보 

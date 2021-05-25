@@ -7,26 +7,30 @@
 	document.title = "내정보(판매자)";
 	
 	$(function(){
-		//moreSellerInfo 더보기 이벤트
-		var moreSellerInfo = false;
+		
+		//수정폼 오픈
 		$("#moreSellerInfo").click(function(){
-			if(moreSellerInfo == false){
-				$(this).css('display', 'none');
-				$(".editOn").css('display', 'block');
-				$(".inputDisabled").attr('disabled', false);
-				//$("#sel_prof").attr('readyonly', false);
-				moreSellerInfo = true;
-			}else{
-				if(confirm("수정을 취소하시겠습니까?")){
-						
-				}else{
-					return false;
-				}
-				$(".editOn").css('display', 'none');	
-				$(".inputDisabled").attr('disabled', true);
-				moreSellerInfo = false;								
+			$(this).css('display', 'none');
+			$(".editOn").css('display', 'block');
+			$(".inputDisabled").attr('disabled', false);
+			//$("#sel_prof").attr('readyonly', false);
+			
+		});
+		
+		//수정취소
+		$("#sellerEditCancelBtn").click(function(){
+			$("#moreSellerInfo").css('display', 'block');
+			$(".editOn").css('display', 'none');	
+			$(".inputDisabled").attr('disabled', true);
+		});
+		
+		//정보수정 버튼
+		$("#sellerEditBtn").click(function(){
+			if(confirm("판매자 정보를 수정하시겠습니까?")){
+				
 			}
 		});
+		
 	});	
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
@@ -38,9 +42,14 @@
 			<ul>
 				<li>대표 이미지</li>
 				<li class="memheightAuto">
-					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
+					<div style="border: none; width: 180px; height: 180px; margin-right: 10px; float: left;">
 						<img src="<%=request.getContextPath()%>/img/sel_prof/${myVO.sel_prof}"
+<<<<<<< HEAD
 							id="sel_previewImg" class="profImg form-control-file border" alt="upload image" />
+=======
+							id="previewImg" class="profImg form-control-file border"
+							alt="upload image" style="height:100%"/>
+>>>>>>> refs/remotes/origin/yongSub
 					</div> <label class="Mem_input-file-button" for="sel_prof"> 사진수정 </label> 
 					<input type="file" name="profFile" accept="image/*" id="sel_prof" style="display: none; margin-top: 70px; border: none;" />
 				</li>
@@ -85,7 +94,11 @@
 					</ul>
 				</li>
 				<li>계좌정보</li>
+
+				<li style="height:120px">
+
 				<li style="height: auto">
+
 					<ul id="bankInput"  style="height: auto;">
 						<li><input type="text" name="acc_name" id="acc_name" class="inputDisabled" value="${myVO.acc_name }"/>
 							<br/><span id="checkSellAccName"></span>
@@ -114,8 +127,13 @@
 			<button type="button" id="moreSellerInfo" class="btn commBtn Mem_lgBtn"
 				style="width: 320px; height: 40px; display: block; margin: 0 auto;">수정하기</button>
 			<div class="editOn" id="sellerEditOn">
+
+				<button id="sellerEditBtn" type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">수정</button>
+				<button id="sellerEditCancelBtn" type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 0 auto;">취소</button>			
+
 				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">수정</button>
 				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">취소</button>			
+
 			</div>
 			<div style="text-align:center; margin-bottom:20px">
 				<button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;">셀러활동 중단</button>
@@ -124,16 +142,6 @@
 		</div>
 	</form>
 </div>
-<script>
-	$(()=>{
-		$("#moreSellerInfo").click(function(){
-			$(this).css('display', 'none');
-			$("#sellerEditOn").css('display', 'block');
-		});
-	});
-</script>
-
-
 <div id="verifyEmailPop">
 	<div>이메일인증</div>
 	<ul>

@@ -42,8 +42,8 @@
 		overflow:auto; height:690px;
 	}
 	.deliveryImg{
-		width:90px;
-		height:70px;
+		width:130px;
+		height:100px;
 	}
 	#deliveryHeader{
 		height:300px; display:block; text-align:center;
@@ -83,6 +83,7 @@
 		height:60px;
 	}
 	.myinfoDeliveryTable tr>td:nth-child(1){/*첫번째 열 선택*/
+		width:20%;
 	}
 	.myinfoDeliveryTable tr>td:nth-child(2){/*세번째 열 선택 : 제목부분*/
 		/* text-align:left; */
