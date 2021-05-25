@@ -40,11 +40,9 @@
 				<li class="memheightAuto">
 					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
 						<img src="<%=request.getContextPath()%>/img/sel_prof/${myVO.sel_prof}"
-							id="previewImg" class="profImg form-control-file border"
-							alt="upload image" />
+							id="sel_previewImg" class="profImg form-control-file border" alt="upload image" />
 					</div> <label class="Mem_input-file-button" for="sel_prof"> 사진수정 </label> 
-					<input type="file" name="profFile" accept="image/*" id="sel_prof"
-					style="display: none; margin-top: 70px; border: none;" />
+					<input type="file" name="profFile" accept="image/*" id="sel_prof" style="display: none; margin-top: 70px; border: none;" />
 				</li>
 				
 				<li>아이디</li>

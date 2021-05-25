@@ -236,5 +236,11 @@ public class MyInfoServiceImp implements MyInfoService{
 		return dao.selectSelinfo(userid);
 	}
 
+	@Override
+	public List<Integer> selectOrderInfo(String userid) {
+		// 주문정보
+		return dao.selectOrderInfo(userid);
+	}
+
 
 }
