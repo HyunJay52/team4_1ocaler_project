@@ -304,3 +304,6 @@
 	.reviewTextCount{
 		float:right;
 	}
+	.memImgEditBtn{
+		display:none;
+	}
