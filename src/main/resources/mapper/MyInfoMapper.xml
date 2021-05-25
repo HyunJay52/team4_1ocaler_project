@@ -432,7 +432,7 @@
 			from ${kategorie}
 		</if>
 		<if test="kategorie.equals('reply')">
-			select reply.num, reply.userid, up_cate, b_subject, b_writedate, b_hit, rep_content, rep_date,
+			select reply.num, rep_num, reply.userid, up_cate, b_subject, b_writedate, b_hit, rep_content, rep_date,
 			(select count(rep_num) from reply where reply.num = board.num) as reply
 			from reply join board on reply.num = board.num
 		</if>
@@ -576,6 +576,24 @@
 		(select count(o_num) from ordertbl o join sell_item i on o.num = i.i_num join seller s on i.sel_num = s.sel_num where s.userid = #{param1}  and o_conf = 1) as stay
 		from dual
 	</select>
+	<delete id="deleteBoard">
+		delete from ${param1} where 
+		<if test="param1.equals('board')">
+			num in
+			
+			<foreach collection="param2" item="arr" open="(" close=")" separator=",">
+			 	 #{arr}
+			</foreach>
+			
+		</if>
+		<if test="param1.equals('reply')">
+			rep_num in 
+			<foreach collection="param2" item="arr2" open="(" close=")" separator=",">
+			 	#{arr2}
+			</foreach>
+		</if>
+		and userid = #{param3}
+	</delete>
 <!-- sql by hj 2021.05.21 -->
 	<select id="selectWaitingJoinList" resultType="com.team4.localer.vo.JoinUsVO">
 		SELECT userid, auth, j_status, up_cate, j_num, title, j_writedate FROM (

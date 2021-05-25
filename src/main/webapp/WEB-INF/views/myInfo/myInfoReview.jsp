@@ -420,7 +420,7 @@
 			}
 		});
 	});
-	
+	//모달 닫으면 폼 리셋
 	$("#reviewMd").on('hidden.bs.modal', function(){
 		$("#reviewWriteForm")[0].reset();
 	});

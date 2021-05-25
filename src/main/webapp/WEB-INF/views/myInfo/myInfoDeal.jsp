@@ -515,6 +515,19 @@
 				}
 			});
 		}
+		
+		//textarea 글자수 제한
+		$(document).ready(function(){
+			$("#writeReviewBody>ul>li>textarea").on('keyup', function(){
+				$(".reviewTextCount").html($(this).val().length+" / 250");
+				
+				if($(this).val().length > 250){
+					$(this).val($(this).val().substring(0, 250));
+					$(".reviewTextCount").html("250 / 250");
+		
+				}
+			});
+		});
 	});
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
@@ -614,7 +627,7 @@
 						<li>
 							<textarea class="dealTextarea mdFnt" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
 						</li>
-						<li><input type="file" name="re_img"/></li>
+						<!-- <li><input type="file" name="re_img"/></li> -->
 						<li style="display:none"><input type="hidden" id="myReviewNum" name="num" value=""/></li>
 						<li><button class="btn btn-outline-dark btn-lg" id="myReviewCancel" data-dismiss="modal">다음에 할게요</button>
 							<button class="btn btn-outline-dark btn-lg" id="myReviewWrite">작성완료</button>
@@ -667,8 +680,10 @@
 						<li><button class="btn lgFnt btn-lg imgBtn" value="2">음, 글쎄요</button></li>
 						<li>
 							<textarea class="dealTextarea mdFnt" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
+							<div class="reviewTextCount">0 / 250</div>
+							
 						</li>
-						<li><input type="file" name="re_img"/></li>
+						<!-- <li><input type="file" name="re_img"/></li> -->
 						<li style="display:none"><input type="hidden" id="reviewNum" name="num" value=""/></li>
 						<li><button class="btn btn-outline-dark btn-lg" id="canselReview">다음에 할게요</button>
 							<button class="btn btn-outline-dark btn-lg" id="reviewWrite">작성완료</button>

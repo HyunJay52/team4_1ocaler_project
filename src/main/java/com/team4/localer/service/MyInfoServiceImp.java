@@ -264,6 +264,11 @@ public class MyInfoServiceImp implements MyInfoService{
 
 		return dao.orderCount(userid);
 	}
+	@Override
+	public int deleteBoard(String kategorie, int[] num, String userid) {
+		
+		return dao.deleteBoard(kategorie, num, userid);
+	}
 	// 내정보 메인용 서비스 (hj, 2021-05-21)
 
 //	QNA 글쓰기(WOW)
@@ -285,6 +290,8 @@ public class MyInfoServiceImp implements MyInfoService{
 		// qna 가져오기
 		return dao.selectAllmyqna(userid);
 	}
+
+
 
 
 

@@ -146,6 +146,9 @@ public interface MyInfoService {
 	//결제관리 카운트 조회
 	public OrderVO orderCount(String userid);
 	
+	//게시글 또는 댓글지우기
+	public int deleteBoard(String kategorie, int[] num, String userid);
+	
 // 내정보 메인용 서비스 (hj, 2021-05-21)
 	//참여정보 
 	public List<JoinUsVO> selectWaitingJoinList(String userid);

@@ -224,7 +224,7 @@
 						<li>
 							<textarea class="dealTextarea mdFnt" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
 						</li>
-						<li><input type="file" name="re_img"/></li>
+						<!-- <li><input type="file" name="re_img"/></li> -->
 						<li style="display:none"><input type="hidden" id="FarmerReviewNum" name="num" value=""/></li>
 						<li><button class="btn btn-outline-dark btn-lg" id="canselFarmerReview" data-dismiss="modal">다음에 할게요</button>
 							<button class="btn btn-outline-dark btn-lg" id="farmerReviewWrite">작성완료</button>

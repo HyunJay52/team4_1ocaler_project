@@ -11,11 +11,11 @@
 					console.log(result);
 					var tag = "<tr>";
 						if(kategorie == 'board'){
-							tag += "<td><input type='checkbox' class='allCheckboxSelect'/></td>";
+							tag += "<td><input type='checkbox' value='' class='allCheckboxSelect'/></td>";
 							tag += "<td>날짜</td><td>분류</td><td>제목</td><td>조회수</td><td>댓글수</td></tr>";
 						}else if(kategorie == 'reply'){
-							tag += "<td><input type='checkbox' class='allCheckboxSelect'/></td>";
-							tag += "<td>날짜</td><td>분류</td><td>글제목</td><td>댓글내용</td><td>조회수</td><td>댓글수</td></tr>";
+							tag += "<td><input type='checkbox' value='' class='allCheckboxSelect'/></td>";
+							tag += "<td>날짜</td><td>분류</td><td>댓글내용</td><td>조회수</td><td>댓글수</td></tr>";
 						}else if(kategorie == 'qna'){
 							tag += "<td>문의날짜</td><td>판매자</td><td>상품제목</td><td>문의내용</td><td>공개여부</td><td>상태</td></tr>";
 						}
@@ -23,7 +23,7 @@
 						result.list.forEach(function(data, idx){
 							tag += "<tr>";
 							if(kategorie == 'board'){
-								tag += "<td><input type='checkbox'/></td>";
+								tag += "<td><input type='checkbox' value='"+data.num+"'/></td>";
 								tag += "<td>"+data.b_writedate+"</td>";
 								if(data.up_cate == 1){//동내정보
 									tag += "<td>동내정보</td>";
@@ -37,7 +37,7 @@
 								tag += "<td>"+data.reply+"</td>";
 								
 							}else if(kategorie == 'reply'){
-								tag += "<td><input type='checkbox'/></td>";
+								tag += "<td><input type='checkbox' value='"+data.rep_num+"'/></td>";
 								tag += "<td>"+data.rep_date+"</td>";
 								if(data.up_cate == 1){//동내정보
 									tag += "<td>동내정보</td>";
@@ -46,8 +46,7 @@
 								}else{//자유자게
 									tag += "<td>자유자게</td>";
 								}
-								tag += "<td><a href='commuView?num="+data.num+"'>"+data.b_subject+"</a></td>";
-								tag += "<td>"+data.rep_content+"</td>";
+								tag += "<td><a href='commuView?num="+data.num+"'>"+data.rep_content+"</a></td>";
 								tag += "<td>"+data.b_hit+"</td>";
 								tag += "<td>"+data.reply+"</td>";
 								
@@ -199,6 +198,47 @@
 				}
 			});
 		}
+		//삭제버튼
+		$("#myBoardDelete").click(function(){
+			if(confirm("선택한 글을 삭제하시겠습니까?")){
+				var numArr = [];
+				$("#activityTbl>tr>td>input[type='checkbox']:checked").each(function(){
+					var num = $(this).val();
+					if(num != '' && num != null){
+						numArr.push(num);					
+					}
+				});
+				if(numArr != null && numArr != ''){				
+					var kategorie = $("#activitySelectbox option:checked").val();
+					deleteBoard(numArr, kategorie);
+				}else{
+					alert("선택한 글이 없습니다.");
+				}
+				
+			}
+			
+		});
+		
+		//삭제
+		function deleteBoard(num, kategorie){
+			console.log(num+"/"+kategorie);			
+
+			$.ajax({
+				url : "deleteBoard",
+				data : "num="+num+"&kategorie="+kategorie,	
+				success : function(result){
+					console.log(result);
+					if(result > 0){
+						alert("삭제되었습니다.");
+						setBoardList(1, kategorie);
+					}
+				},error : function(e){
+					console.log("삭제실패");
+				}
+			
+			})
+		}
+		
 	});
 </script>
 <%@ include file="/inc/sideBar.jspf" %>

@@ -2,6 +2,7 @@ package com.team4.localer.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -580,6 +581,28 @@ public class MyinfoController {
 		
 		return map;
 	}
+	//게시글, 댓글 지우기
+	@ResponseBody
+	@RequestMapping("/deleteBoard")
+	public int deleteBoard(HttpSession ses, HttpServletRequest req) {
+		int result = 0;
+		String userid = (String)ses.getAttribute("logId");
+		String kategorie = (String)req.getParameter("kategorie");
+		String numList[] = req.getParameterValues("num");
+		System.out.println("kategorie="+kategorie);
+		System.out.println("list="+Arrays.toString(numList));
+	
+		String[] num = numList[0].split(",");
+		int[] numArr = new int[num.length];
+		for(int i = 0; i < num.length; i++) {
+			numArr[i] = Integer.parseInt(num[i]);
+		}
+		System.out.println("num=="+Arrays.toString(numArr));
+		result = service.deleteBoard(kategorie, numArr, userid);
+		System.out.println("result="+result);
+		return result;
+	}
+	
 	
 	//qna 데이터 하나 불러오기
 	@ResponseBody
