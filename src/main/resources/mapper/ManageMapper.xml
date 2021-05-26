@@ -66,7 +66,7 @@
 			(select *from
 				(select m.num , m.s_cate ,m.s_subject ,m.s_cnt ,m.userid , 
 				to_char(m.s_writedate,'YYYY/MM/DD') s_writedate, count(case when r.num=m.num then 1 end) reportCount
-				from mem_share m, report r 
+				from mem_share m join report r on m.num=r.num(+) 
 				<if test="!searchWord.equals('') and searchWord!=null">
 					where ${searchKey} like #{searchWord}
 				</if>
@@ -213,31 +213,31 @@
   	</select>
   	<select id="guLoginCount" resultType="com.team4.localer.vo.Mem_statisVO">
   		select 
-			    count(case when loc_gu='강서구' then 1 end) gu1 ,
-			    count(case when loc_gu='구로구' then 1 end) gu2 ,
-			    count(case when loc_gu='금천구' then 1 end) gu3 ,
-			    count(case when loc_gu='관악구' then 1 end) gu4 ,
-			    count(case when loc_gu='강남구' then 1 end) gu5 ,
-			    count(case when loc_gu='강동구' then 1 end) gu6 ,
-			    count(case when loc_gu='용산구' then 1 end) gu7 ,
-			    count(case when loc_gu='중구' then 1 end) gu8 ,
-			    count(case when loc_gu='광진구' then 1 end) gu9 ,
-			    count(case when loc_gu='동대문구' then 1 end) gu10 ,
-			    count(case when loc_gu='중랑구' then 1 end) gu11 ,
-			    count(case when loc_gu='은평구' then 1 end) gu12 ,
-			    count(case when loc_gu='강북구' then 1 end) gu13 ,
-			    count(case when loc_gu='노원구' then 1 end) gu14 ,
-			    count(case when loc_gu='도봉구' then 1 end) gu15 ,
-			    count(case when loc_gu='양천구' then 1 end) gu16 ,
-			    count(case when loc_gu='영등포구' then 1 end) gu17 ,
-			    count(case when loc_gu='동작구' then 1 end) gu18 ,
-			    count(case when loc_gu='서초구' then 1 end) gu19 ,
-			    count(case when loc_gu='송파구' then 1 end) gu20 ,
-			    count(case when loc_gu='마포구' then 1 end) gu21 ,
-			    count(case when loc_gu='서대문구' then 1 end) gu22 ,
-			    count(case when loc_gu='성동구' then 1 end) gu23 ,
-			    count(case when loc_gu='종로구' then 1 end) gu24 ,
-			    count(case when loc_gu='성북구' then 1 end) gu25
+			    count(case when log_gu='강서구' then 1 end) gu1 ,
+			    count(case when log_gu='구로구' then 1 end) gu2 ,
+			    count(case when log_gu='금천구' then 1 end) gu3 ,
+			    count(case when log_gu='관악구' then 1 end) gu4 ,
+			    count(case when log_gu='강남구' then 1 end) gu5 ,
+			    count(case when log_gu='강동구' then 1 end) gu6 ,
+			    count(case when log_gu='용산구' then 1 end) gu7 ,
+			    count(case when log_gu='중구' then 1 end) gu8 ,
+			    count(case when log_gu='광진구' then 1 end) gu9 ,
+			    count(case when log_gu='동대문구' then 1 end) gu10 ,
+			    count(case when log_gu='중랑구' then 1 end) gu11 ,
+			    count(case when log_gu='은평구' then 1 end) gu12 ,
+			    count(case when log_gu='강북구' then 1 end) gu13 ,
+			    count(case when log_gu='노원구' then 1 end) gu14 ,
+			    count(case when log_gu='도봉구' then 1 end) gu15 ,
+			    count(case when log_gu='양천구' then 1 end) gu16 ,
+			    count(case when log_gu='영등포구' then 1 end) gu17 ,
+			    count(case when log_gu='동작구' then 1 end) gu18 ,
+			    count(case when log_gu='서초구' then 1 end) gu19 ,
+			    count(case when log_gu='송파구' then 1 end) gu20 ,
+			    count(case when log_gu='마포구' then 1 end) gu21 ,
+			    count(case when log_gu='서대문구' then 1 end) gu22 ,
+			    count(case when log_gu='성동구' then 1 end) gu23 ,
+			    count(case when log_gu='종로구' then 1 end) gu24 ,
+			    count(case when log_gu='성북구' then 1 end) gu25
 			    from logcount where  logdate
 			    between to_date('21/${month3}/01','YY/MM/DD') and to_date('21/${month3}/${last3}','YY/MM/DD')
   	</select>
@@ -320,10 +320,10 @@
 							order by ${num} 
   	</select>
   	<select id="mempsendmodal1List" resultType="com.team4.localer.vo.AdminspendVO">
-  		select sp.sp_item as item_num, mem.s_subject as sel_subject, mem.userid as sel_userid, sp.sp_point as spend_point,sp.sp_date sp_date from sp_p sp
+  		select sp.sp_item as item_num, mem.s_subject as sel_subject, mem.userid as sel_userid, sp.sp_point as spend_point,to_char(sp.sp_date,'YY/MM/DD') sp_date from sp_p sp
 		join mem_share mem on mem.num=sp.sp_item where sp.userid=#{param1}
 		union all
-		select sp.sp_item as item_num, item.i_subject as sel_subject, item.sel_userid, sp.sp_point as spend_point, sp.sp_date sp_date from 
+		select sp.sp_item as item_num, item.i_subject as sel_subject, item.sel_userid, sp.sp_point as spend_point, to_char(sp.sp_date,'YY/MM/DD') sp_date from 
 		(select i.i_num, i.sel_num , i.i_subject, mem.userid as sel_userid from sell_item i join seller mem on mem.sel_num =i.sel_num) item join sp_p sp
 		on sp.sp_item = item.i_num where sp.userid=#{param1} order by sp_date desc
   	</select>
@@ -332,11 +332,11 @@
 		from mem_share mem join sp_p sp on sp.sp_item = mem.num where mem.userid=#{param1} order by sp_point
   	</select>
   	<select id="selspendtotal" resultType="com.team4.localer.vo.AdminspendVO">
-  		select sum(rec_money) totalsale,count(o_num)*2000  totalmoney from receipt
+  		select sum(r.rec_money) totalsale, sum(o.o_cnt )*2000  totalmoney from receipt r join ordertbl o on o.o_num= r.o_num
 			where conf_date <![CDATA[<=]]>to_date(last_day('21/${month3}/01'),'YY/MM/DD')
   	</select>
   	<select id="selspendmonth" resultType="com.team4.localer.vo.AdminspendVO">
-  		select sum(rec_money)  monthsale,count(o_num)*2000 monthmoney from receipt 
+  		select sum(r.rec_money)  monthsale,sum(o.o_cnt)*2000 monthmoney from receipt r join ordertbl o on o.o_num= r.o_num
 				where conf_date between to_date('21/${month3}/01','YY/MM/DD')
                 and to_date(last_day('21/${month3}/01'),'YY/MM/DD')
   	</select>

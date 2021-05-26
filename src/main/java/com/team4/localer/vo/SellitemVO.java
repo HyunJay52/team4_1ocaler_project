@@ -23,6 +23,11 @@ public class SellitemVO {
 	private String i_writedate;//등록일
 	private int i_hit;
 	private String i_tag;//판매글태그
+	
+	
+	private int selljoinCnt;
+	
+	
 
 	private int orderCount; //주문 수
 	private int revenue; // 총 판매액
@@ -33,7 +38,6 @@ public class SellitemVO {
 	private int expected; // 종료 예정
 	private int itemStop;// 판매 중단
 	 
-	private int selljoinCnt;
 	
 	public int getMyItem() {
 		return myItem;

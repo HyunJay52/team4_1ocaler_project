@@ -514,9 +514,9 @@ public class MyinfoController {
 		ItemReviewVO rVO = new ItemReviewVO();
 		vo.setUserid((String)ses.getAttribute("logId"));
 		System.out.println("num="+vo.getNum());
-		System.out.println("re_num="+vo.getRe_num());
-		
+		System.out.println("re_num="+vo.getRe_num());	
 		rVO = service.selectMyReview(vo);
+		System.err.println(rVO);
 		return rVO;
 	}
 	

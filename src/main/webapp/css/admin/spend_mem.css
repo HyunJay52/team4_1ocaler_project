@@ -1,5 +1,11 @@
 @charset "UTF-8";
-
+.wordcut{
+	display: inline-block; 
+	width: 150px; 
+	white-space: nowrap; 
+	line-height:40px;
+	overflow: hidden;
+}
 #doublediv{
 	overflow:auto;
 }

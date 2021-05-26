@@ -77,6 +77,8 @@ public class MemberController {
 				ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
 				ses.setAttribute("logProf", logVO.getMem_prof());
 				
+				System.out.println("???" + logVO.getUserid()+"..."+logVO.getLoc_gu());
+				
 				service.logCount(logVO.getUserid(), logVO.getLoc_gu());
 				
 				goPage = "home";
@@ -319,7 +321,7 @@ public class MemberController {
 		//String path = req.getSession().getServletContext().getRealPath("/img/mem_prof");
 		String path = ses.getServletContext().getRealPath("/img/mem_prof");
 		String delMemProf=req.getParameter("getMem_prof");
-		
+
 		//새로 업로드 할 파일 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		MultipartFile updateMemprof = mr.getFile("profFile");
@@ -619,7 +621,22 @@ public class MemberController {
 //셀러 활동 정지
 	
 //셀러 탈퇴
-	
+	@RequestMapping("/sellerinfo/sellerDel")
+	public ModelAndView sellerDel(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		String userid = (String)ses.getAttribute("logId");
+		
+		service.updateDelseller(userid);
+		service.updateDelsellerToMem(userid);
+		
+		ses.getAttribute("logType");
+		ses.setAttribute("logType", 1);
+		
+		mav.addObject("logId", userid);
+		mav.setViewName("redirect:/myInfoMain");
+		
+		return mav;
+	}
 //이메일 인증
 	@RequestMapping(value="/sendVerifiedCode")
 	@ResponseBody
