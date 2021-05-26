@@ -625,8 +625,13 @@ public class MemberController {
 		String userid = (String)ses.getAttribute("logId");
 		
 		service.updateDelseller(userid);
+		service.updateDelsellerToMem(userid);
 		
-		mav.setViewName("redirect:/");
+		ses.getAttribute("logType");
+		ses.setAttribute("logType", 1);
+		
+		mav.addObject("logId", userid);
+		mav.setViewName("redirect:/myInfoMain");
 		
 		return mav;
 	}

@@ -98,6 +98,12 @@ public class MemberServiceImp implements MemberService {
 	}
 	
 	@Override
+	public int updateDelsellerToMem(String userid) {
+		// 탈퇴한 셀러회원 일반회원으로 변경
+		return dao.updateDelsellerToMem(userid);
+	}
+
+	@Override
 	public String idDoubleCheck(String userid) {
 		//아이디 중복확인
 		return dao.idDoubleCheck(userid);
