@@ -46,7 +46,7 @@
 		<li>TEAM "PURBLIC"</li>
 		<li>
 			<ul class="introInnerul">
-				<li><img src="<%=request.getContextPath() %>/img/aboutImg/dragonw.png"/></li>			
+				<li><img src="<%=request.getContextPath() %>/img/aboutImg/wow.png"/></li>			
 				<li>김용우</li>
 			
 			
