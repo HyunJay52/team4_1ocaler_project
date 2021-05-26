@@ -157,7 +157,6 @@ public class AdminManageController {
 		pageVO.setSearchWord("");
 		//총레코드 구하기
 		pageVO.setTotalRecord(csService.totalRecord(pageVO));
-		System.out.println("totalRecord"+pageVO.getTotalRecord());
 		//판매게시글목록가져오기 
 		List<MemShareVO> list = manaService.memShareAllSelect(pageVO);
 		mav.addObject("list",list);
