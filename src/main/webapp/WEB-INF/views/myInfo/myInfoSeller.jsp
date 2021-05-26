@@ -31,9 +31,15 @@
 			}
 		});
 		
-		
-		
+
+		$('#delSeller').click(function(){
+			if(confirm("셀러회원을 탈퇴하시겠습니까?")){
+				location.href="sellerinfo/sellerDel";			
+			}
+		});
+
 	});	
+	
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody">
@@ -127,8 +133,9 @@
 
 			</div>
 			<div style="text-align:center; margin-bottom:20px">
-				<!-- <button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;" >셀러활동 중단</button> -->
-				<br/><button type="button" class="btn cancelBtn" style="width:320px;  height:45px; margin: 5px auto;" data-target="#myinfoMd" data-toggle="modal" onclick='location.href="sellerinfo/sellerDel"'>셀러 탈퇴</button>
+				<!-- <button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;" >셀러활동 중단</button> -->   
+				<br/><button type="button" id="delSeller" class="btn cancelBtn" style="width:320px;  height:45px; margin: 5px auto;" data-target="#myinfoMd" data-toggle="modal">셀러 탈퇴</button>
+
 			</div>
 		</div>
 	</form>

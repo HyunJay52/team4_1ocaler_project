@@ -21,6 +21,7 @@
 		
 
 		var popup;
+
 		//검색창 팝업 이벤트
 		$("#qaBtn").click(function(){
 			$("#popup").css('display', 'block');

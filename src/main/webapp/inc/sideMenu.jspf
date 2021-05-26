@@ -113,6 +113,8 @@
 		
 		//메뉴 세팅
 		setMenu();
+		
+		console.log(${logType})
 	});
 </script>
 	<div id="sideMenu"></div>

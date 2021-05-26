@@ -36,6 +36,8 @@ public interface MemberDAO {
 	public int updateSeller(SellerVO vo);
 	//셀러탈퇴
 	public int updateDelseller(String userid);
+	//탈퇴한 셀러회원 일반회원으로 바꿔주기
+	public int updateDelsellerToMem(String userid);
 	//아이디 중복확인
 	public String idDoubleCheck(String userid);
 	//별명 중복확인
