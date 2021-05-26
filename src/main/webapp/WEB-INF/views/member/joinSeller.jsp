@@ -19,7 +19,7 @@
 				</li>
 			
 				<li>비밀번호</li><!-- 현재 로그인한 회원의 비밀번호와 동일 -->
-				<li><input type="password" name="userpwd" id="sellerPwd" tabindex="3" placeholder="비밀번호를 재입력해주세요"/><button type="button" class="btn commBtn lgBtn" id="sellPwdBtn">비밀번호확인</button><span id="pwdDoubleCheck">N</span>
+				<li><input type="password" name="userpwd" id="sellerPwd" tabindex="3" placeholder="비밀번호를 재입력해주세요"/><button type="button" class="btn commBtn lgBtn" id="sellPwdBtn">비밀번호확인</button><span id="pwdDoubleCheck" style="display: none">N</span>
 					<br/><span id="sellPwdCheck"></span>
 				</li>
 				
