@@ -304,11 +304,13 @@
 					<li>
 						<ul>
 							<li>좋아요 </li>
-							<li id ="likeBtnInput" style="line-height:0px;">
 								<c:if test="${logId==null }">
+									<li id ="likeBtnInput" style="line-height:29px;">
 									로그인 후 이용해주세요.
 								</c:if>
 								 <c:if test="${logId!=null }">
+								 <li id ="likeBtnInput" style="line-height:0px;">
+								 
 		                           <input class="aaaa" type="checkbox" name="numLike" id="like${vo.num}" value="${vo.num}" 
 			                           <c:forEach var="likes" items="${likeList}">
 		                           			<c:if test="${likes.numLike==vo.num && logId==likes.userid }">
