@@ -107,7 +107,9 @@
 				        });
 				       
 				        alert("결제가 완료되었습니다.");
-				        
+				        var searchDate = $(".loadDate").val();
+						console.log(searchDate);
+						setPointRecord(1, searchDate, 'all', "");
 				       
 			    } else {
 			        msg = '결제에 실패하였습니다.';
