@@ -53,7 +53,7 @@
 
 
 	<select id="selectAllitem" resultType="com.team4.localer.vo.SellitemVO">
-		SELECT si.i_num, si.sel_num, si.i_subject, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof  
+		SELECT si.i_num, si.sel_num, si.i_subject, si.i_cnt, si.i_img1, si.i_price, to_char(si.i_period, 'YYYY/MM/DD') as i_period, si.i_tag, s.userid, s.sel_prof  
 		FROM SELL_ITEM si JOIN SELLER s ON si.sel_num = s.sel_num WHERE <![CDATA[ sysdate<=si.i_period ]]> ORDER BY si.i_num DESC
 	</select>
 	
