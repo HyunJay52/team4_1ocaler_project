@@ -32,7 +32,6 @@
 		});
 		
 		$('#delSeller').click(function(){
-			alert('????');
 			if(confirm("셀러회원을 탈퇴하시겠습니까?")){
 				location.href="sellerinfo/sellerDel";			
 			}
