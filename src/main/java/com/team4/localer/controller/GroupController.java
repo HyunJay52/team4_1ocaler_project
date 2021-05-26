@@ -46,22 +46,13 @@ public class GroupController{
 	public ModelAndView eatPage(GroupPageVO pageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
-		//페이징=================
+
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
 		pageVO.setSearchWord(pageVO.getSearchWord());
-		//총레코드구하기
+		
 		pageVO.setTotalRecord(groupService.groupTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
-		//현재 페이지 검색어에 해당하는 레코드를 선택
-		System.out.println(pageVO.getLoc_gu());//들어가는 지역마다 찍혀야합니다.
-		System.out.println(pageVO.getCategory());
-		System.out.println(pageVO.getSearchKey()+"<====key"+pageVO.getSearchWord()+"<====word");
-		System.out.println(groupService.groupTotalRecoedCount(pageVO)+"<==총레코드수");
-		System.out.println(pageVO.getPageNum()+"<==현재 페이지번호");
-		System.out.println(pageVO.getTotalPage()+"마지막페이지");//마지막페이지
-		System.out.println(pageVO.getOnePageRecord()+"한페이지에 보이는수");
-		System.out.println(pageVO.getLastPageRecord()+"마지막 레코드수");
-		//end======================
+		
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
@@ -76,21 +67,12 @@ public class GroupController{
 	@RequestMapping("/withPage")
 	public ModelAndView withPage(GroupPageVO pageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		//페이징 
+		
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
 		pageVO.setSearchWord(pageVO.getSearchWord());
 		pageVO.setTotalRecord(groupService.groupTotalRecoedCount(pageVO));
-		//현재 페이지 검색어에 해당하는 레코드를 선택
-		System.out.println(pageVO.getLoc_gu());//들어가는 지역마다 찍혀야합니다.
-		System.out.println(pageVO.getCategory());
-		System.out.println(pageVO.getSearchKey()+"<====key"+pageVO.getSearchWord()+"<====word");
-		System.out.println(groupService.groupTotalRecoedCount(pageVO)+"<==총레코드수");
-		System.out.println(pageVO.getPageNum()+"<==현재 페이지번호");
-		System.out.println(pageVO.getTotalPage()+"마지막페이지");//마지막페이지
-		System.out.println(pageVO.getOnePageRecord()+"한페이지에 보이는수");
-		System.out.println(pageVO.getLastPageRecord()+"마지막 레코드수");
-		//end======================
+		
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 		mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
@@ -104,7 +86,7 @@ public class GroupController{
 	@RequestMapping("/groupEditForm")
 	public ModelAndView groupEditFrm(GroupVO vo, GroupPageVO pageVO, HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		System.out.println(vo.getNum());//게시글번호
+		System.out.println(vo.getNum());
 		if(vo.getUserid().equals(session.getAttribute("logId"))) {
 			if(pageVO.getCategory().equals("한끼미식회")) {
 				GroupVO eatVO = groupService.eatViewPageResult(vo.getNum());
@@ -126,13 +108,6 @@ public class GroupController{
 	public ModelAndView groupEditOk(GroupVO vo, GroupPageVO pageVO, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(vo.getUserid().equals(session.getAttribute("logId"))){
-			System.out.println(vo.getUserid()+"@@@@ userid @@@@");
-			System.out.println(vo.getNum()+"@@@@ num @@@@");
-			System.out.println(vo.getG_loc2()+"@@@@ loc2 @@@");
-			System.out.println(vo.getUp_cate());
-			System.out.println(vo.getG_date()+"이게 안되네이거");
-			System.out.println(vo.getG_time()+"이게 안되네이거");
-			System.out.println(groupService.groupRecordUpdate(vo));
 			if(groupService.groupRecordUpdate(vo)>0) {
 				if(vo.getUp_cate().equals("한끼미식회")) {
 					mav.addObject("num",vo.getNum());
@@ -189,7 +164,6 @@ public class GroupController{
 		try {
 			if(vo.getG_loc2()==null || vo.getG_loc2().equals("")) {
 				if(groupService.groupInsert(vo)>0) {
-					System.out.println("성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					if(vo.getUp_cate().equals("한끼미식회")) {
 						mav.addObject("category",pageVO.getCategory());
 						mav.addObject("loc_gu",pageVO.getLoc_gu());
@@ -200,17 +174,14 @@ public class GroupController{
 						mav.setViewName("redirect:withPage");
 					}
 				}else {
-					System.out.println("실패했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 						mav.setViewName("group/historyBack");
 				}
 			}else {
 				if(groupService.groupBigMartInsert(vo)>0) {
-					System.out.println("창고형마트 인설트 성공했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					mav.addObject("category",pageVO.getCategory());
 					mav.addObject("loc_gu",pageVO.getLoc_gu());
 					mav.setViewName("redirect:withPage");
 				}else {
-					System.out.println("창고형마트 인설트 실패했다@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					mav.setViewName("group/historyBack");
 				}
 			}
@@ -226,18 +197,7 @@ public class GroupController{
 			mav.setViewName("group/historyBack");
 			
 		}
-		System.out.println("userid-==>"+vo.getUserid());
-		System.out.println("up_cate==>"+vo.getUp_cate());
-		System.out.println("down_cate==>"+vo.getDown_cate());
-		System.out.println("g_gu=======>"+vo.getG_gu());
-		System.out.println("g_subject===>"+vo.getG_subject());
-		System.out.println("g_content====>"+vo.getG_content());
-		System.out.println("g_cnt===>"+vo.getG_cnt());
-		System.out.println("g_date===>"+vo.getG_date());
-		System.out.println("g_time==>"+vo.getG_time());
-		System.out.println("g_loc1===>"+vo.getG_loc1());
-		System.out.println("g_loc2-===>"+vo.getG_loc2());
-		System.out.println("g_tag=====>"+vo.getG_tag());		
+				
 		return mav;
 	}
 	
