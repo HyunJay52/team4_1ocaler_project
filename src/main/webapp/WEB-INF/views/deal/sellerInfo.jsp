@@ -16,7 +16,7 @@
 			<ul>
 				<li>
 					<div>
-						<img src="<%=request.getContextPath()%>/img/mem_prof/${sellerVO.sel_prof}">
+						<img src="<%=request.getContextPath()%>/img/sel_prof/${sellerVO.sel_prof}">
 					</div>
 					<div>
 						<h4>${sellerVO.userid}</h4>

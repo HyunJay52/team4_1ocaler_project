@@ -23,7 +23,7 @@
 								"<li class='gachiPostTitle'><span class='gachiPoastTitle'>"+list.up_cate+"</span><input type='hidden' value='"+list.g_gu+"'/></li>"+
 								"<li class='wordCut'>"+list.g_subject+"<input type='hidden' value='"+list.num+"'/></li>"+
 								"<li>"+list.g_date+", "+list.g_time+"</li>"+
-								"<li class='smlFnt'><img src='img/indexImg/bo_pin.png' class='gachiPostLoc'>"+list.g_loc1+"</li>"+
+								"<li class='smlFnt' style='overflow:auto'><img src='img/indexImg/bo_pin.png' class='gachiPostLoc'>"+list.g_loc1+"</li>"+
 								"<li><span class='cntJoin'>"+list.g_joinCnt+"</span>/"+list.g_cnt+"명 </li>"+
 								"<li><img src='common/user.png' class='gachiPostImg'/>&nbsp;&nbsp;<span>"+list.userid+"</span></li>"+
 							"</ul></li>"
@@ -122,8 +122,8 @@
 						<ul>
 							<li class="wordcut">${sel.i_subject }</li>
 							<li><span class="priceSpan"><fmt:formatNumber type="number" maxFractionDigits="3" value="${sel.i_price }" /> 원</span></li>
-							<li><span class="locationSpan wordCut">???</span></li>
-							<li>${sel.i_period }</li>
+							<li style='margin-bottom:10px;'><span class="locationSpan wordCut"></span></li>
+							<li style='color:orange;'>${sel.i_period }</li>
 <%-- 							<li><fmt:formatDate value="${sel.i_period }" type="date" /></li> --%>
 							<li>${sel.userid } &nbsp; <img src="<%=request.getContextPath() %>/img/sel_prof/${sel.sel_prof }">&nbsp;&nbsp;</li>
 						</ul>

@@ -53,14 +53,14 @@
 
 
 	<select id="selectAllitem" resultType="com.team4.localer.vo.SellitemVO">
-		SELECT si.i_num, si.sel_num, si.i_subject, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof  
+		SELECT si.i_num, si.sel_num, si.i_subject, si.i_cnt, si.i_img1, si.i_price, to_char(si.i_period, 'YYYY/MM/DD') as i_period, si.i_tag, s.userid, s.sel_prof  
 		FROM SELL_ITEM si JOIN SELLER s ON si.sel_num = s.sel_num WHERE <![CDATA[ sysdate<=si.i_period ]]> ORDER BY si.i_num DESC
 	</select>
 	
 	
 	<select id="selectOnePage" resultType="com.team4.localer.vo.SellitemVO">
 		select i_num, i_subject, i_content, i_cnt, i_price, to_char(i_writedate,'YYYY-MM-DD') i_writedate, to_char(i_period,'YYYY-MM-DD') i_period, i_status, i_ship, s.userid, s.sel_prof 
-		,i_img1, i_img2, i_img3 from sell_item i join seller s on i.sel_num = s.sel_num where i_num=#{param1}
+		,i_img1, i_img2, i_img3, (select count(num) from ordertbl where num=i_num) as selljoinCnt  from sell_item i join seller s on i.sel_num = s.sel_num where i_num=#{param1}
 	</select>
 	
 	

@@ -460,7 +460,7 @@ public class MemberController {
 		String returnAddr = "";
 		
 		if((Integer)ses.getAttribute("logType")==2) {
-			returnAddr = "home";
+			returnAddr = "member/historyBack";
 		}else {
 			returnAddr = "member/joinSeller";
 		}

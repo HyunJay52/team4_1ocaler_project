@@ -283,7 +283,7 @@
 			</c:if>
 		</ul>
 		<hr style="width:380px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
-		<div> 서울틀별시 > <a href="groupPage">${pageVO.loc_gu }</a> > 한끼미식회  </div>
+		<div> 서울특별시 > <a href="groupPage">${pageVO.loc_gu }</a> > 한끼미식회  </div>
 		<form class="groupInnerSearchFrm" id="eatViewGroupSearchFrm" method="get" action="eatPage">
 			<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/>
 			<select name="searchKey">

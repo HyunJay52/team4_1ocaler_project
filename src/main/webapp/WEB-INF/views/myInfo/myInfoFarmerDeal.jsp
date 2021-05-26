@@ -151,7 +151,7 @@
 <div class="myinfoBody">
 	<%@ include file="/inc/sideMenu.jspf" %> <!-- 사이드 메뉴 include -->
 	<div class="myinfoContainer">
-		<h3>파머 직거래</h3>
+		<h3>착한발견 거래</h3>
 		<div class="dealTop">
 			<div class="dealInfo">
 				<img src="<%=request.getContextPath()%>/img/mem_prof/${logProf }"/>
