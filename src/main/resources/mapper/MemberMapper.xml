@@ -8,7 +8,7 @@
 		select userid, mem_name, mem_nick, loc_gu, mem_type, mem_prof from member where userid=#{param1} and userpwd=#{param2}
 	</select>
 	<insert id="logCount" parameterType="String">
-		INSERT INTO LOGCOUNT(userid, loc_gu) VALUES (#{param1}, #{param2})
+		INSERT INTO logCount(userid, log_gu) VALUES (#{param1}, #{param2})
 	</insert>
 	
 	<select id="searchId" parameterType="com.team4.localer.vo.MemberVO" resultType="String">

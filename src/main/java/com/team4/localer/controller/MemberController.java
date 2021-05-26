@@ -77,6 +77,8 @@ public class MemberController {
 				ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
 				ses.setAttribute("logProf", logVO.getMem_prof());
 				
+				System.out.println("???" + logVO.getUserid()+"..."+logVO.getLoc_gu());
+				
 				service.logCount(logVO.getUserid(), logVO.getLoc_gu());
 				
 				goPage = "home";
