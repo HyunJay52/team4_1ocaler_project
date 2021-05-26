@@ -30,14 +30,15 @@
 		</div>
 		
 		<div class="abtVideo">
-			<video src="<%=request.getContextPath() %>/img/aboutImg/dining.mp4" width="800px" height="600px" class="abtVideo" preload="none" autoplay muted loop></video>
+			<img src="<%=request.getContextPath() %>/img/aboutImg/nei.jpg" style="width: 800px; height: 600px; margin-top: 100px;">
 		</div>
 		<div class="exHow">
 			<span>HOW?</span> 
-				<p style="padding-left:15px;font-size: 22px ;padding-top:20px ; line-height: 2;">
-					지역을 기반으로 하며 거래, 구매, 게시판 등 <br/> 
-					지역구 안에서 1인 가구의 소비와 <br/> 
-					이웃 간의 소통 공간을 제공한다.   
+				<p style="padding-left:15px;font-size: 18px ;padding-top:20px ; line-height: 2;">
+					회원이 선택한 지역을 기반으로<br/> 사이트를 사용 할 수 있습니다. <br/> 
+					활동하시는 지역 안에서 <br/>자신의 소비패턴을 개선 할 수 있고,<br/> 
+					같은 지역에서 활동하시는 새로운 이웃을 발견하고<br/>
+					소통 할 수 있는 장소를 제공합니다.
 				</p>
 		</div>
 	</div>
@@ -46,9 +47,15 @@
 		<li>TEAM "PURBLIC"</li>
 		<li>
 			<ul class="introInnerul">
-				<li><img src="<%=request.getContextPath() %>/img/aboutImg/dragonw.png"/></li>			
-				<li>김용우</li>
-			
+				<li><img src="<%=request.getContextPath() %>/img/aboutImg/wow.png"/></li>			
+				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">김용우</li>
+				<li class="whatpage">
+					<br/>
+					착한발견<br/>
+					같이가장<br/>
+					한끼미식회<br/>
+					어디페이지?<br/>
+				</li>
 			
 			</ul>
 		</li>	
@@ -56,8 +63,14 @@
 		<li>
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/hj.png"/></li>			
-				<li>김현정</li>
-			
+				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">김현정</li>
+				<li class="whatpage">
+					<br/>
+					착한발견<br/>
+					같이가장<br/>
+					한끼미식회<br/>
+					어디페이지?<br/>
+				</li>
 			
 			</ul>
 		</li>	
@@ -66,9 +79,14 @@
 		<li>
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/sub.png"/></li>			
-				<li>이용섭</li>
-			
-			
+				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">이용섭</li>
+				<li class="whatpage">
+					<br/>
+					착한발견<br/>
+					같이가장<br/>
+					한끼미식회<br/>
+					어디페이지?<br/>
+				</li>
 			</ul>
 		</li>	
 	
@@ -76,23 +94,30 @@
 		<li>
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/jisu.png"/></li>			
-				<li>이지수</li>
-			
-			
+				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">이지수</li>
+				<li class="whatpage">
+					<br/>
+					착한발견<br/>
+					같이가장<br/>
+					한끼미식회<br/>
+					어디페이지?<br/>
+				</li>
 			</ul>
 		</li>	
-	
 	
 		<li>
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/heey.png"/></li>			
-				<li>신희연</li>
-			
-			
+				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">신희연</li>
+				<li class="whatpage">
+					<br/>
+					착한발견<br/>
+					같이가장<br/>
+					한끼미식회<br/>
+					어디페이지?<br/>
+				</li>
 			</ul>
 		</li>	
-	
-	
 	</ul>
 
 </div>

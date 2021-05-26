@@ -24,38 +24,40 @@
 	width: 1200px; height: 300px;
 	font-size: 22px; margin: 50px;
 }
-#introTbl tr:first-child>td{
-	height: 70px; line-height: 70px;
-	font-size: 28px; font-family: nsreb;
-}
-
 #introTbl {
-	width:1300px;
+	width:1300px; height: auto;
 	margin-bottom: 200px;
 	background-color: pink;
 }
 #introTbl>li:first-child {
 	width: 1300px; height: 50px; line-height: 50px;
 	font-size: 22px; font-family: nsreb; text-align: center;
+	border: none;
 }
 #introTbl>li {
 	float: left;
+	margin: 10px;
+	list-style-type: none;
+	width: 240px; height: auto;
+	border: 1px solid #fec803;
 }
-#introTbl>li, #introTbl li {
-	list-style-type: none;	
-}
+
 #introTbl>li>.introInnerul>li:first-child>img {
 	text-align: center;
-	width: 200px; height: 200px;
+	width: 210px; height: 210px;
 	padding: 5px;
 	box-shadow: 5px 5px 5px #fec804;
 	border-radius: 70%;
-	margin: 20px;
+	margin: 5px;
+}
+#introTbl>li>.introInnerul>li {
+	margin-top: 10px; margin-bottom: 10px;
 }
 #introTbl>li>.introInnerul>li:nth-child(2) {
 	font-family: nsrb; font-size: 18px;
 	text-align: center;
 }
+
 /* 오시는 길 */
 #followMe{
 	display:inline-block;
@@ -124,7 +126,19 @@
 }
 /* intro style*/
 .introInnerul {
-	
+	list-style-type: none;
+	width: 240px;
+	height: auto;
+	margin: 0px; padding: 0px;
+}
+#introTbl .aboutpageName {
+	border-bottom: 2px solid green;
+}
+.whatpage {
+	width: 240px;
+	height: auto;
+	font-size: 18px;
+	text-align: center;
 }
 
 /* 공통 스타일 */
