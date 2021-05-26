@@ -77,6 +77,8 @@ public class MemberController {
 				ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
 				ses.setAttribute("logProf", logVO.getMem_prof());
 				
+				System.out.println("???" + logVO.getUserid()+"..."+logVO.getLoc_gu());
+				
 				service.logCount(logVO.getUserid(), logVO.getLoc_gu());
 				
 				goPage = "home";
@@ -625,8 +627,13 @@ public class MemberController {
 		String userid = (String)ses.getAttribute("logId");
 		
 		service.updateDelseller(userid);
+		service.updateDelsellerToMem(userid);
 		
-		mav.setViewName("redirect:/");
+		ses.getAttribute("logType");
+		ses.setAttribute("logType", 1);
+		
+		mav.addObject("logId", userid);
+		mav.setViewName("redirect:/myInfoMain");
 		
 		return mav;
 	}

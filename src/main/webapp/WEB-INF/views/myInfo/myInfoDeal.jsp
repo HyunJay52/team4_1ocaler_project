@@ -84,13 +84,13 @@
 								tag += "<td></td>";
 							}else if(data.j_status == '참여승인'){
 								tag += "<td><button class='btn btn-block btn-outline-primary'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>참여취소</button></td>";
 							}else if(data.j_status == '참여완료'){
 								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
 							}else{//참여신청
 								tag += "<td><button class='btn btn-block btn-light btn-outline-dark'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
 							}
 							tag += "</tr>";
 							
@@ -166,13 +166,13 @@
 								tag += "<td></td>";
 							}else if(data.j_status == '참여승인'){
 								tag += "<td><button class='btn btn-block btn-outline-primary'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>참여취소</button></td>";
 							}else if(data.j_status == '참여완료'){
 								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
 							}else{//참여신청
 								tag += "<td><button class='btn btn-block btn-light btn-outline-dark'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
 							}
 							tag += "</tr>";
 						}
@@ -275,10 +275,13 @@
 			$("#myjoinDealCancel").attr('value', $(this).val());
 			$(".cancelJoinMember").css('display', 'block');
 			$("#myjoinContent").css('background-color', 'rgba(255,255,255,0)');
+			$("#myjoinContent").css('border', 'none');
+			
 		});
 		//내가 참여한 목록 취소처리
 		$(document).on('click', '#myjoinDealCancel', function(){
 			joinCancel($(this).val(), 0)
+			
 		});
 		//내가 참여한 리뷰쓰기
 		$(document).on('click', '.myReviewBtn', function(){
@@ -307,6 +310,7 @@
 					console.log("참여신청 승인 성공");
 					$(".checkJoinMember").css('display', 'none');
 					setJoinList(num);
+					
 				}, error : function(e){
 					console.log("참여신청 승인 실패");
 				}
@@ -330,7 +334,7 @@
 						setJoinList(num);	
 					}
 					$('.modal-backdrop').hide();
-					$("#myJoinDealMd").hide();
+					$("#myJoinDealMd").modal("hide");
 					setDealList(1);
 					
 				}, error : function(e){
@@ -343,6 +347,8 @@
 		//내 참여신청 취소창 닫기
 		$(".myjoinCancel").click(function(){
 			$(".modal-content").css('background-color', 'rgba(255,255,255,1)');
+			$("#myjoinContent").css('border', '1px solid #ddd');
+			
 			$(".cancelJoinMember").css('display', 'none');
 		});
 		
@@ -350,6 +356,7 @@
 		$("#joinMemberCancel").click(function(){
 			var j_num = $("#joinMemberCancel").val();
 			var num = $("#joinMemberCancel").attr('title');
+			$("#myjoinContent").css('border', '1px solid #ddd');
 			joinCancel(j_num, num);
 		});
 		
@@ -461,7 +468,7 @@
 						$("#reviewForm")[0].reset();
 						$("#myReviewForm")[0].reset();
 						$('.modal-backdrop').remove();
-						$("#myJoinDealMd").hide();
+						$("#myJoinDealMd").modal("hide");
 						$(".imgBtn").attr('name', null);
 					}else{
 						alert("리뷰작성에 실패했습니다.");
@@ -487,9 +494,12 @@
 		});
 		//한 게시글의 내 리뷰 가져오기
 		function selectMyReview(num){
+			console.log("num="+num)
 			$.ajax({
 				url : "selectMyReview",
-				data : {"num": num},
+				data : {"num": num,
+						"re_num": 0
+						},
 				dataType : "json",
 				success: function(result){
 					console.log(result);

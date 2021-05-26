@@ -22,6 +22,7 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public void logCount(String userid, String loc_gu) {
 		// 로그인 카운트
+		System.out.println("dao >> > > > " +userid+"//////"+loc_gu);
 		dao.logCount(userid, loc_gu);
 	}
 	
@@ -97,6 +98,12 @@ public class MemberServiceImp implements MemberService {
 		return dao.updateDelseller(userid);
 	}
 	
+	@Override
+	public int updateDelsellerToMem(String userid) {
+		// 탈퇴한 셀러회원 일반회원으로 변경
+		return dao.updateDelsellerToMem(userid);
+	}
+
 	@Override
 	public String idDoubleCheck(String userid) {
 		//아이디 중복확인
