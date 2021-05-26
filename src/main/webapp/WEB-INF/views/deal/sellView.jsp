@@ -353,13 +353,13 @@
      						tag += '<td class="mainSecondTd">'+status+'</td>';
 	     					if(obj.userid=='${logId}'){
 	     						if(obj.q_status==2){
-	     							tag += '<td class="mainThirdTd toggleBtn">☝  '+obj.q_content+'</td>';	
+	     							tag += '<td class="mainThirdTd toggleBtn">🔓  '+obj.q_content+'</td>';	
 	     						}else{
 	     							tag += '<td class="mainThirdTd toggleBtn">'+obj.q_content+'</td>';	
 	     						}
 	     					}else{
 	     						if(obj.q_status==2){
-	     							tag += '<td class="mainThirdTd toggleBtn">☝ <span style="color:#2c75f0;">비밀글<span></td>';	
+	     							tag += '<td class="mainThirdTd toggleBtn">🔓 <span style="color:#2c75f0;">비밀글<span></td>';	
 	     						}else{
 	     							tag += '<td class="mainThirdTd toggleBtn">'+obj.q_content+'</td>';	
 	     						}
@@ -373,13 +373,13 @@
      							tag += '<td style="color:blue">답변</td>';
      							if(obj.userid=='${logId}'){
     	     						if(obj.q_status==2){
-    	     							tag += '<td class="mainThirdTd toggleBtn" colspan=2 >☝  '+obj.q_answer+'</td>';	
+    	     							tag += '<td class="mainThirdTd toggleBtn" colspan=2 >🔓  '+obj.q_answer+'</td>';	
     	     						}else{
     	     							tag += '<td class="mainThirdTd toggleBtn" colspan=2 >'+obj.q_answer+'</td>';	
     	     						}
     	     					}else{
     	     						if(obj.q_status==2){
-    	     							tag += '<td class="replySecondTd" colspan=2 > ☝ <span style="color:#2c75f0;">비밀글<span></td>';	
+    	     							tag += '<td class="replySecondTd" colspan=2 > 🔓 <span style="color:#2c75f0;">비밀글<span></td>';	
     	     						}else{
     	     							tag += '<td class="replySecondTd" colspan=2 >'+obj.q_answer+'</td>';
     	     						}
