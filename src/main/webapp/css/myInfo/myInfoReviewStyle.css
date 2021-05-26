@@ -89,14 +89,16 @@
     }
     .myinfoReviewTable tr:first-child {
     	text-align: center;
-    	background-color: #3f1785;
-    	color: #fff;
+    	border-top: 2px solid #283176;
+  		border-bottom: 1px solid #283176;
+    	color: #3f1785;
     	font-weight: bold;
     }
 	#myinfoMyReviewTable tr:first-child{/*첫번째 테이블 목차*/
 		text-align:center;
-		background-color:#3f1785;
-		color:#fff; 
+		border-top: 2px solid #283176;
+  		border-bottom: 1px solid #283176;
+		color:#3f1785; 
 		font-weight:bold;
 	}
 	#myinfoMyReviewTable tr:last-child{/*마지막 줄 tr 스타일*/
@@ -106,7 +108,7 @@
 		
 	}
 	#myinfoMyReviewTable tr>td:nth-child(1){
-		
+		width:10%;
 	}
 	#myinfoMyReviewTable tr>td:nth-child(2){/*세번째 열 선택 : 제목부분*/
 		
