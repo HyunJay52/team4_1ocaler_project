@@ -14,12 +14,15 @@
 
 	<script>
 	$(function(){
+		
+		
+		
 		$(".slider").bxSlider({
 			auto:true,
 			pagerCustom:"#bx-pager"
 		});
 		
-
+	
 		var popup;
 
 		//검색창 팝업 이벤트
@@ -288,13 +291,17 @@
     	
     	
     	
-    	
+
     	 
     	$("#sellBuyFrm").submit(function(){
     		if($("#o_price").val()==0 || $("#i_cnt").val()==0){
     			alert('제품을 선택하고 구매하기를 눌러주세요');
     			return false;
     		}
+    		if(${itemVO.selljoinCnt } >= ${itemVO.i_cnt }){
+    			alert('판매가 종료되었습니다.');
+    			return false;
+			}
     	});
     	
      	$("#selvBackBtn").click(function(){
@@ -542,7 +549,7 @@
 						
 							<ul>
 								<li> 판매수량</li>
-								<li><span style="color:blue; font-weight: bold; font-size:18px;">${itemVO.i_cnt } EA</span></li>
+								<li><span style="color:blue; font-weight: bold; font-size:20px;">${itemVO.selljoinCnt } </span> / <span style="font-size:16px;"> ${itemVO.i_cnt } EA </span> </li>
 								<li> 판매가</li>
 								<li><span style="color:red; font-size:18px; font-weight:bold">${itemVO.i_price }원</span></li>
 								<li> 판매기간</li>
@@ -598,7 +605,7 @@
 						<div id="submitCancleBtn">
 							<c:if test="${logId!=itemVO.userid }">
 								<input id="selvBackBtn" type="button" value="취소" class="btn commBtnSell"/>
-								<input type="submit" value="구매하기" class="btn confBtn"/>
+								<input type="submit" id="buyingBtn" value="구매하기" class="btn confBtn"/>
 							</c:if>
 							<c:if test="${logId==itemVO.userid }">
 								<input type="button" id="deleteBtn"  value="삭제하기" class="btn commBtnSell"/>

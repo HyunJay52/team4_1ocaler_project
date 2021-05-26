@@ -60,7 +60,7 @@
 	
 	<select id="selectOnePage" resultType="com.team4.localer.vo.SellitemVO">
 		select i_num, i_subject, i_content, i_cnt, i_price, to_char(i_writedate,'YYYY-MM-DD') i_writedate, to_char(i_period,'YYYY-MM-DD') i_period, i_status, i_ship, s.userid, s.sel_prof 
-		,i_img1, i_img2, i_img3 from sell_item i join seller s on i.sel_num = s.sel_num where i_num=#{param1}
+		,i_img1, i_img2, i_img3, (select count(num) from ordertbl where num=i_num) as selljoinCnt  from sell_item i join seller s on i.sel_num = s.sel_num where i_num=#{param1}
 	</select>
 	
 	
