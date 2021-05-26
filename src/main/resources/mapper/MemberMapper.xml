@@ -82,6 +82,10 @@
 		UPDATE seller SET sel_status=3 WHERE userid=#{param1}
 	</update>
 	
+	<update id="updateDelsellerToMem">
+		update member set mem_type=1 where userid=#{param1}
+	</update>
+	
 	<update id="memPostCount"><!-- 게시글올리면 카운트되는 함수 -->
 		update member set mem_post = mem_post+1 where userid=#{param1}
 	</update>
