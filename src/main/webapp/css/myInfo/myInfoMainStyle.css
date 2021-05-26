@@ -72,7 +72,7 @@
 }
 #myPointShip .shipUpdate {
 	background: gray; line-height: 50px; border-radius: 5px;
-	color: #fff; margin: 3px 0px;
+	color: #fff; margin: 3px 0px; cursor: pointer;
 }
 .top{
 	width:700px; height:370px; border-top:1px solid black; border-bottom:1px solid black; margin:0 50px; float:right; padding:90px 30px;
