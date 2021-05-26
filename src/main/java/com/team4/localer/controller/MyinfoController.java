@@ -643,7 +643,7 @@ public class MyinfoController {
 		System.out.println("key2="+vo.getSearchKey2());
 		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
 		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
-		vo.setDateContent("i_period");
+		vo.setDateContent("i_writedate");
 		vo.setSearchWord("%"+vo.getSearchWord()+"%");
 		
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
@@ -652,7 +652,7 @@ public class MyinfoController {
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
-		
+		System.out.println(vo.getSearchKey());
 		map.put("count", service.sellerCount(vo.getUserid()));
 		map.put("list", service.selectProductList(vo));
 		map.put("pVO", vo);

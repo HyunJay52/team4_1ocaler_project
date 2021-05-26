@@ -64,16 +64,16 @@
 				        (select * from
 				            (select * from
 				                (select s.num, s.userid, s_cate, s_status, s_subject, s_cnt, s_content,s_img1,s_loc,s_gu, to_char(s_price,'999,999,999,999') s_price 
-				                        ,to_char(s_date, 'MM/YY HH:MI') as s_date, s_tag,
+				                        ,to_char(s_date, 'MM/YY HH:MI') as s_date, s_tag, s_writedate,
 				                            to_char(mem_sub, 'YYYY-MM-DD' ) mem_sub, mem_post, mem_rev, mem_prof, mem_nick,
 				                            (select count(numjoin) from joinus where numjoin=num and j_status='참여승인' ) AS dealjoinCnt 
-				                        from mem_share s join member m on s.userid=m.userid where <![CDATA[ sysdate<=s_date ]]>  and s_status=1 order by num desc)
+				                        from mem_share s join member m on s.userid=m.userid where <![CDATA[ sysdate<=s_date ]]>  and s_status=1 order by s_writedate desc)
 				            <if test="s_gu !=null and s_gu != '' "> where s_gu = #{s_gu} </if>)
 				        <if test="s_cate !=null and  s_cate !='' ">where s_cate=${s_cate} </if>)
 				         
 				      <if test="searchWord != null and searchWord != '' "> where ${searchKey} like '%${searchWord}%'</if>) 
 			                             <!--      현재페이지 * 한페이지출력수 -->
-		        where <![CDATA[rownum<=]]>${pageNum * onePageRecord}  order by num asc)
+		        where <![CDATA[rownum<=]]>${pageNum * onePageRecord}  order by s_writedate asc)
 		    where <![CDATA[rownum<=]]>
 		                 <!-- 현재페이지가가 총페이지수랑 같으면(마지막페이지라는뜻) = ${마지막페이지레코드{ -->
 		    <if test="pageNum==totalPage">
@@ -83,6 +83,6 @@
 		    <if test="pageNum!=totalPage">
 		    	${onePageRecord}
 		    </if>
-		    order by num desc
+		    order by s_writedate desc
 	</select>	
  </mapper>

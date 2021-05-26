@@ -3,7 +3,11 @@
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/aboutCsBoard/csBoard.css"/>
 <%@ include file="/inc/sideBar.jspf" %>
-
+<style>
+	#repFrm>#num {
+		display: none;
+	}
+</style>
 <div class="cs_main">
 	<%@ include file="/inc/csSide.jspf" %>
 	<div class="cs_wrap">
@@ -12,7 +16,7 @@
 		<p class="p_repWrite">고객님의 소중한 의견을 들려주세요.</p>
 		<br/>
 		<form method="post" action="cs_repOk" id="repFrm">
-			<input type="text" id="num" name="num" maxlength="100" value=${num } /> <!-- 나중에 hidden으로 변경 -->
+			<input type="text" id="num" name="num" maxlength="100" value="${num }" /> <!-- 나중에 hidden으로 변경 -->
 			<input type="text" id="rep_subject" name="rep_subject" maxlength="100" placeholder="제목을 입력해주세요"/>
 			<textarea id="rep_content" name="rep_content" placeholder="신고사유를 입력해주세요"></textarea>
 			<button class="commBtn">신고하기</button>

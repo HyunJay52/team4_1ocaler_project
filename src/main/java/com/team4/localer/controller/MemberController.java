@@ -460,7 +460,7 @@ public class MemberController {
 		String returnAddr = "";
 		
 		if((Integer)ses.getAttribute("logType")==2) {
-			returnAddr = "home";
+			returnAddr = "member/historyBack";
 		}else {
 			returnAddr = "member/joinSeller";
 		}
@@ -533,6 +533,7 @@ public class MemberController {
 			transactionManager.commit(status);
 			
 			if(insertCnt>0) {
+				req.getSession().setAttribute("logType", 2);
 				mav.setViewName("home"); //추후에 셀러페이지로 이동으로 바꾸기
 			}else {
 				//업로드 파일 삭제하기

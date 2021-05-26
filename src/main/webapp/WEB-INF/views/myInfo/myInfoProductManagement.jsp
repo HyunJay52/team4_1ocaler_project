@@ -5,6 +5,7 @@
 	$(function(){
 		//리스트 불러오기
 		function setProductList(num){
+			console.log($("#myinfoProductForm").serialize());
 			$.ajax({
 				url : "selectProductList",
 				data : $("#myinfoProductForm").serialize()+"&nowNum="+num,
@@ -207,7 +208,7 @@
 						<li><input type="checkbox" name="searchKey2" value="0" checked/>전체</li>
 						<li><input type="checkbox" name="searchKey2" value="1"/>판매중</li>
 						<li><input type="checkbox" name="searchKey2" value="2"/>판매완료</li>
-						<li><input type="checkbox" name="searchKey2" value="3"/>종료예정</li>
+					<!-- <li><input type="checkbox" name="searchKey2" value="3"/>종료예정</li>-->
 						<li><input type="checkbox" name="searchKey2" value="4"/>판매중단</li>
 					</ul>
 					<div class="productManagementLabelCenterDiv">

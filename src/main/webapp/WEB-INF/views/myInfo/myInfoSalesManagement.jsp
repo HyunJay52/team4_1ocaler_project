@@ -24,7 +24,7 @@
 						}
 						if(data.o_mtd == 1){
 							tag += "<td>카드결제</td>";						
-						}else if(data.o_mth == 2){
+						}else if(data.o_mtd == 2){
 							tag += "<td>포인트결제</td>";
 						}else{
 							tag += "<td>미결제</td>";
@@ -37,7 +37,7 @@
 						head += "<li>당일주문 : "+result.count.today+"</li>";
 						head += "<li>결제완료 : "+result.count.confirmation+"</li>";
 						head += "<li>결제대기 : "+result.count.stay+"</li>";
-						head += "<li>취소/환불 : 0개</li>";
+					
 					
 					$("#saleManagementHead").html(head);
 					$("#myinfoSaleManagementTable").html(tag);
@@ -99,11 +99,11 @@
 		<div class="myInfoProductManagementTop">
 			<div class="shippingManagementHeaderForm">
 				<ul class="managementHeader" id="saleManagementHead"> 
-					<li>판매중 : 3개</li>
-					<li>당일주문 : 20개</li>
-					<li>결제완료 : 14개</li>
-					<li>결제대기 : 6개</li>
-					<li>취소/환불 : 0개</li>
+					<li>판매중 : 0개</li>
+					<li>당일주문 : 0개</li>
+					<li>결제완료 : 0개</li>
+					<li>결제대기 : 0개</li>
+					<!-- <li>취소/환불 : 0개</li>-->
 				</ul>
 			</div>
 			<form method="post" id="saleManagementForm" onsubmit="return false;">
@@ -118,7 +118,7 @@
 						<li><input type="checkbox" value="all" name="searchKey2" checked/>전체</li>
 						<li><input type="checkbox" value="2" name="searchKey2"/>결제완료</li>
 						<li><input type="checkbox" value="1" name="searchKey2"/>결제대기</li>
-						<li><input type="checkbox" value="" name="searchKey2"/>취소/환불</li>
+						<!-- <li><input type="checkbox" value="" name="searchKey2"/>취소/환불</li> -->
 					</ul>
 					<div class="productManagementLabelCenterDiv">
 						<input type="date" name="searchDate" value="2021-03-01" min="2021-03-01" max="2021-05-31"/>~
