@@ -49,14 +49,6 @@
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/wow.png"/></li>			
 				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">김용우</li>
-				<li class="whatpage">
-					<br/>
-					착한발견<br/>
-					같이가장<br/>
-					한끼미식회<br/>
-					어디페이지?<br/>
-				</li>
-			
 			</ul>
 		</li>	
 	
@@ -64,14 +56,6 @@
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/hj.png"/></li>			
 				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">김현정</li>
-				<li class="whatpage">
-					<br/>
-					착한발견<br/>
-					같이가장<br/>
-					한끼미식회<br/>
-					어디페이지?<br/>
-				</li>
-			
 			</ul>
 		</li>	
 	
@@ -80,13 +64,6 @@
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/sub.png"/></li>			
 				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">이용섭</li>
-				<li class="whatpage">
-					<br/>
-					착한발견<br/>
-					같이가장<br/>
-					한끼미식회<br/>
-					어디페이지?<br/>
-				</li>
 			</ul>
 		</li>	
 	
@@ -95,13 +72,6 @@
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/jisu.png"/></li>			
 				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">이지수</li>
-				<li class="whatpage">
-					<br/>
-					착한발견<br/>
-					같이가장<br/>
-					한끼미식회<br/>
-					어디페이지?<br/>
-				</li>
 			</ul>
 		</li>	
 	
@@ -109,13 +79,6 @@
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/heey.png"/></li>			
 				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">신희연</li>
-				<li class="whatpage">
-					<br/>
-					착한발견<br/>
-					같이가장<br/>
-					한끼미식회<br/>
-					어디페이지?<br/>
-				</li>
 			</ul>
 		</li>	
 	</ul>
