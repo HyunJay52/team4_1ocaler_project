@@ -184,26 +184,6 @@ public class SellerController {
 			mav.setViewName("group/historyBack");
 		}
 		 
-
-		System.out.println(uploadFilename.size()+"파일올린것만큼의 갯수를 잘구하나요?");		
-		System.out.println("============================");
-		System.out.println(itemVO.getI_subject()+"제목");
-		System.out.println(itemVO.getI_cnt()+"판매갯수");
-		System.out.println(itemVO.getI_content()+"내용");
-		System.out.println(itemVO.getI_img1()+"이미지1");
-		System.out.println(itemVO.getI_img2()+"이미지2");
-		System.out.println(itemVO.getI_img3()+"이미지3");
-		System.out.println(itemVO.getI_price()+"가격");
-		System.out.println(itemVO.getI_period()+"기간");
-		System.out.println(itemVO.getI_status()+"상태");
-		System.out.println(itemVO.getI_tag()+"태그");
-		System.out.println(itemVO.getI_ship()+"배송비");
-		System.out.println("============================");
-		System.out.println(optionVO.getOption_title()+"옵션의 타이틀");
-		System.out.println(optionVO.getOption_titles().length);
-		System.out.println(optionVO.getOption_content()+"옵션의 내용");	
-		System.out.println(optionVO.getOption_contents().length);
-		System.out.println(optionVO.getO_price());
 		return mav;
 	}
 
@@ -220,16 +200,6 @@ public class SellerController {
 		reviewPageVO.setTotalRecord(myinfoService.totalReviewCnt(itemVO.getI_num())); //리뷰총갯수		
 	
 
-		System.out.println(reviewPageVO.getPageNum()+"<------현재페이지넘버");
-		System.out.println(reviewPageVO.getOnePageRecord()+"<------1페이지에 보여줄 레코드수");
-		System.out.println(reviewPageVO.getOnePageNum()+"<------한페이지에 보여줄 페이지수");
-		System.out.println(reviewPageVO.getTotalRecord()+"<------총레코드의수");
-		System.out.println(reviewPageVO.getTotalPage()+"<------총 페이지수==마지막페이지번호");
-		System.out.println(reviewPageVO.getStartPageNum()+"<------시작 페이지 번호");
-		System.out.println(reviewPageVO.getLastPageRecord()+"<------마지막에 남은 레코드수");
-		
-		
-		
 		mav.addObject("reviewList",myinfoService.selectSellItemReview(reviewPageVO));
 		mav.addObject("reviewAll",myinfoService.selectAllReDate(itemVO.getI_num()));
 		mav.addObject("pageVO",reviewPageVO);
@@ -252,23 +222,10 @@ public class SellerController {
 		System.out.println(i_num+"<--ㅁ ㅝ나오긴하니");
 		//1개 게시글 내용 불러오기 
 		mav.addObject("modifyVO",sellerService.selectOnePage(i_num));
-		System.out.println(i_num+"<--글번호");
-		System.out.println(sellerService.selectOnePage(i_num).getI_status()+"<--1");
-		System.out.println(sellerService.selectOnePage(i_num).getI_subject()+"<--2");
-		System.out.println(sellerService.selectOnePage(i_num).getI_cnt()+"<--3");
-		System.out.println(sellerService.selectOnePage(i_num).getI_content()+"<--4");
-		System.out.println(sellerService.selectOnePage(i_num).getI_period()+"<--5");
-		System.out.println(sellerService.selectOnePage(i_num).getI_price()+"<--6");
-		System.out.println(sellerService.selectOnePage(i_num).getI_tag()+"<--7");
 		
-		System.out.println(sellerService.selectOnePage(i_num).getI_img1()+"<--8");
-		System.out.println(sellerService.selectOnePage(i_num).getI_img2()+"<--9");
-		System.out.println(sellerService.selectOnePage(i_num).getI_img3()+"<--10");
-		
-		System.out.println(sellerService.selectOnePage(i_num).getI_ship()+"<--11");
 		//해당 게시글번호에 해당하는 옵션 다 불러오기
 		mav.addObject("optionList",sellerService.optionSelectAll(i_num));
-		System.out.println(sellerService.optionSelectAll(i_num).size());
+		
 		
 		mav.setViewName("deal/modifySellView");
 		return mav;	
@@ -351,17 +308,6 @@ public class SellerController {
 		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);//트랜잭션호출
 		TransactionStatus status  = transactionManager.getTransaction(def);
 		
-		System.out.println(itemVO.getI_subject()+"제목");
-		System.out.println(itemVO.getI_cnt()+"판매갯수");
-		System.out.println(itemVO.getI_content()+"내용");
-		System.out.println(itemVO.getI_img1()+"이미지1");
-		System.out.println(itemVO.getI_img2()+"이미지2");
-		System.out.println(itemVO.getI_img3()+"이미지3");
-		System.out.println(itemVO.getI_price()+"가격");
-		System.out.println(itemVO.getI_period()+"기간");
-		System.out.println(itemVO.getI_status()+"상태");
-		System.out.println(itemVO.getI_tag()+"태그");
-		System.out.println(itemVO.getI_ship()+"배송비");
 		
 		try {
 			int result = sellerService.sellViewUpdate(itemVO);
@@ -447,16 +393,7 @@ public class SellerController {
 		ModelAndView mav = new ModelAndView();
 		orderVO.setUserid((String)session.getAttribute("logId"));
 		
-		System.out.println(orderVO.getUserid()+"<--구매자의 userid");
-		System.out.println(orderVO.getO_price()+"<--총가격");
-		System.out.println(orderVO.getO_ship()+"<--배송비");
-		System.out.println(orderVO.getO_cnt()+"<--수량");
-		System.out.println(orderVO.getNum()+"<--현재 게시글번호");
-		System.out.println(orderVO.getOpt_str()+"<--옵션내용들");
-		System.out.println(orderVO.getI_subject()+"<--게시글제목");
-		System.out.println(orderVO.getI_userid()+"<--판매자의 userid");
-		System.out.println(orderVO.getI_price()+"<--원래상품 1개 판매가격");
-		System.out.println(orderVO.getI_img1()+"<--상품 이미지1");
+		
 		mav.addObject("memberVO",memberService.userDetailFind(orderVO.getUserid()));
 		mav.addObject("orderVO",orderVO);
 		mav.setViewName("deal/sellBuy");
@@ -597,13 +534,6 @@ public class SellerController {
 		maps.put("reviewList", myinfoService.selectSellItemReview(reviewPageVO));
 		maps.put("pageVO", reviewPageVO);
 		
-		System.out.println(reviewPageVO.getPageNum()+"현재페이지넘버");
-		System.out.println(reviewPageVO.getOnePageRecord()+"1페이지에 보여줄 레코드수");
-		System.out.println(reviewPageVO.getOnePageNum()+"한페이지에 보여줄 페이지수");
-		System.out.println(reviewPageVO.getTotalRecord()+"총레코드의수");
-		System.out.println(reviewPageVO.getTotalPage()+"총 페이지수==마지막페이지번호");
-		System.out.println(reviewPageVO.getStartPageNum()+"시작 페이지 번호");
-		System.out.println(reviewPageVO.getLastPageRecord()+"마지막에 남은 레코드수");
 		
 		
 		return maps;

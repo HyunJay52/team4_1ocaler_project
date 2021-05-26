@@ -100,20 +100,7 @@
 	   	 			//중복체크
 	   	 			checkArray.push(value);
 	   	 			checkStr = checkArray.join();
-		
-	   	 			
-	   	 			
-	   	 			//로그찍어보기
-	   	 			/* console.log('============ 엘리먼트 추가시 =============');
-	   	 			console.log(counts+"<--수량 계산중");
-	   	 			console.log(count+"<-- 수량 배열");
-	   	 			console.log(total,'<-- 돈 계산중');
-	   	 			console.log(moneyCollect+"<--돈 배열"); */
-	   	 			console.log(value,"값아아아앙");
-	   	 			console.log(optionStr+"<--옵션 ");
-	   	 			console.log(optionStrArray+"<--옵션 배열");
-	   	 			console.log(checkStr);
-	   	 			
+			 			
 	   	 			//수량기, 금액 id
 	   	 			cnt++;
 	   				spans--;
@@ -252,7 +239,7 @@
     				});
     				$("#option_content").html(tag);
     			},error:function(e){
-    				alert('실패')
+    				
     			}
     		})//ajax end   		
     	})  	
@@ -269,7 +256,7 @@
 						success : function(result){
 							console.log(result,"좋아요 추가 성공");
 						},error :function(request,status,error){
-							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							 
 						}
 					})
 				}else{
@@ -281,7 +268,7 @@
 						success : function(result){
 							console.log(result,"좋아요 삭제 성공");
 						},error :function(request,status,error){
-							 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							
 						}
 					})
 					
@@ -392,7 +379,7 @@
      					});//each end
      					$("#QnAMain").html(tag);
      				},error:function(e){
-     					alert('실패');
+     				
      				}
      			})
      		} //replyList() 끝
@@ -412,12 +399,12 @@
 	     				url:url,
 	     				data:params,
 	     				success:function(result){
-	     					alert('성공');
+	     					
 	     					$("#q_content").val("");
 	     					$("#popup").css("display","none");
 	     					replyList();
 	     				},error:function(e){
-	     					alert('실패');
+	     					
 	     				}
 	     			})
 	     		}
@@ -491,7 +478,7 @@
      				$("#sellReview").html(tag); // 선택자의 .html  하면 자기 하위 자식으로 쭉들어가지네
      				setMyinfoQnAManagementPaging(result.pageVO);
      			},error:function(e){
-     				alert('실패');
+     				
      			}
      		})
      	})
