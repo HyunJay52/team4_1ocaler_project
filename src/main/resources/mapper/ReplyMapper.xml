@@ -10,6 +10,19 @@
  		select rep_num,rep_content, r.userid, rep_date,  mem_prof , m.userid
 		from reply r join member m on r.userid= m.userid  where num=#{param1} order by rep_num 
  	</select>
+ 	
+<!--  	<select id="replyList" resultType="com.team4.localer.vo.ReplyVO">
+ 		    select rep_num,rep_content, r.userid, mem_prof , m.userid, to_date(sysdate,'YYYY.MM.DD') - to_date(rep_date,'YYYY.MM.DD') newDate, 
+ 		  <if test="newDate == 0">
+ 		  	to_char(rep_date, 'yyyy/mm/dd hh:mm') rep_date
+ 		  </if>	
+ 		  <if test ="newDate != 0">
+ 		  	to_char(rep_date, 'YYYY/MM/DD') rep_date  
+ 		  </if>
+		from reply r join member m on r.userid= m.userid  where num=#{param1} order by rep_num 
+ 	</select> -->
+ 	
+ 	
  	<delete id="replyDel">
  		delete from reply where rep_num=#{rep_num} and userid=#{userid} 
  	</delete>

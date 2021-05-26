@@ -43,7 +43,7 @@
 			<ul id="boardText">
 				<c:forEach var="vo" items="${list}">
 					<li id="selList">
-						<div  OnClick="location.href ='sellView'">
+						<div  OnClick="location.href ='sellView?i_num=${vo.i_num}'">
 							<div id="sellImgDiv">
 								<img src="<%=request.getContextPath()%>/img/sellItemInsertPicture/${vo.i_img1}"/>
 							</div>

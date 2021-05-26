@@ -27,8 +27,7 @@ public class ReplyController {
 	@RequestMapping("/replyList")
 	@ResponseBody
 	public List<ReplyVO> replyList(int num) {
-		
-		System.out.println("안나오냐"+num);
+	
 		
 		return replyservice.replyList(num);
 		

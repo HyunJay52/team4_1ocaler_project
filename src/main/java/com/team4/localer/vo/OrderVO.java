@@ -48,6 +48,45 @@ public class OrderVO {
 	//리뷰가 있는지 확인
 	private int reviewCount;
 
+	private int count; //판매 중
+	private int today; //당일주문
+	private int confirmation;// 결제완료
+	private int stay; // 결제대기
+	
+	
+	
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public int getToday() {
+		return today;
+	}
+
+	public void setToday(int today) {
+		this.today = today;
+	}
+
+	public int getConfirmation() {
+		return confirmation;
+	}
+
+	public void setConfirmation(int confirmation) {
+		this.confirmation = confirmation;
+	}
+
+	public int getStay() {
+		return stay;
+	}
+
+	public void setStay(int stay) {
+		this.stay = stay;
+	}
+
 	public int getO_num() {
 		return o_num;
 	}

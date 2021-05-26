@@ -369,7 +369,7 @@
 			<ul>
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.mem_sub } </span></li>
-				<li><span>총 게시물 : ${vo.mem_post }개</span></li>
+				<li><span>총 게시물 : ${vo.mem_post } / 100</span></li>
 				<li><span>회원등급 : ${vo.mem_rev }개</span></li>
 			</ul>
 		</div>

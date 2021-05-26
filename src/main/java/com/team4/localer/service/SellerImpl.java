@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team4.localer.dao.SellerDAO;
 import com.team4.localer.vo.Cha_pVO;
+import com.team4.localer.vo.DealPageVO;
 import com.team4.localer.vo.Item_optionVO;
 import com.team4.localer.vo.SellerVO;
 import com.team4.localer.vo.OrderVO;
@@ -73,6 +74,15 @@ public class SellerImpl implements SellerService {
 		return sellerDAO.sp_pointInsert(userid, sp_point, sp_item);
 	}
 	@Override
+	public List<SellitemVO> sellPageSelect(DealPageVO vo) {
+		// TODO Auto-generated method stub
+		return sellerDAO.sellPageSelect(vo);
+	}
+	@Override
+	public int sellTotalRecoedCount (DealPageVO vo) {
+		// TODO Auto-generated method stub
+		return sellerDAO.sellTotalRecoedCount(vo);
+	}
 	public ShipVO orderCompl(int o_num) {
 		return sellerDAO.orderCompl(o_num);
 	}
@@ -107,6 +117,10 @@ public class SellerImpl implements SellerService {
 	public List<Integer> myInfoCountSale(String userid) {
 		// 판매자 메인, 상품현황 카운트
 		return sellerDAO.myInfoCountSale(userid);
+	}
+	@Override
+	public int sellViewCount(int i_num) {
+		return sellerDAO.sellViewCount(i_num);
 	}
 	
 	

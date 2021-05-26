@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- 전화인증 api -->
 <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
@@ -11,27 +11,24 @@
 
 	$(function(){
 		//myinfo 더보기 이벤트
-		var moreInfoOn = false;
+
 		$("#moreInfo").click(function(){
-			if(moreInfoOn == false){
-				$(this).css('display', 'none');
-				$(".editOn").css('display', 'block');
-				$(".inputDisabled").attr('disabled', false);
-				//$("#mem_prof").attr('readyonly', false);
-				moreInfoOn = true;
-			}else{
-				if(confirm("수정을 취소하시겠습니까?")){
-						
-				}else{
-					return false;
-				}
-				
-				$(".editOn").css('display', 'none');	
-				$(".inputDisabled").attr('disabled', true);
-				moreInfoOn = false;								
-			}
+			$(this).css('display', 'none');
+			$(".editOn").css('display', 'block');
+			$(".inputDisabled").attr('disabled', false);
+			$(".memEditBtn").attr('disabled', false);
+			//$("#mem_prof").attr('readyonly', false);
+			$(".memImgEditBtn").css('display', 'inline-block');
 		});
 		
+		//수정취소버튼
+		$("#editOn").click(function(){
+			$(".editOn").css('display', 'none');	
+			$(".inputDisabled").attr('disabled', true);
+			$(".memEditBtn").attr('disabled', true);
+			$(".memImgEditBtn").css('display', 'none');
+
+		});
 		//수정버튼 이벤트
 		var editOn = false;
 		$("#myinfoEditBtn").click(function(){
@@ -41,7 +38,7 @@
 				$(".inputDisabled").attr('disabled', false);
 				editOn = true;
 			}else{	
-				$(".editOn").css('display', 'none');			
+				$(".editOn").css('display', 'none');
 				editOn = false;	
 			}
 		});
@@ -133,11 +130,11 @@
 			<ul>
 				<li>프로필 사진</li>
 				<li class="memheightAuto">
-					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
+					<div style="border: none; width: 180px; height: 180px; margin-right: 10px; float: left;">
 						<img src="<%=request.getContextPath()%>/img/mem_prof/${myVO.mem_prof}"
 							id="previewImg" class="profImg form-control-file border"
-							alt="upload image" />
-					</div> <label class="Mem_input-file-button" for="mem_prof"> 사진수정 </label> 
+							alt="upload image" style="height:100%" />
+					</div> <label class="Mem_input-file-button memImgEditBtn" for="mem_prof"> 사진수정 </label> 
 					<input type="file" name="profFile" accept="image/*" id="mem_prof" 
 					style="display: none; margin-top: 70px; border: none;" />
 					<!-- 수정 전의 프로필 사진 저장 -->
@@ -151,7 +148,7 @@
 				<li>닉네임</li>
 				<li><input type="text" class="inputDisabled" name="mem_nick" id="mem_nick" value="${myVO.mem_nick }" disabled="disabled"
 					placeholder="별명을 입력해주세요" />
-				<button type="button" class="btn commBtn Mem_lgBtn" id="nickOverlapBtn">중복검사</button>
+				<button type="button" class="btn commBtn Mem_lgBtn memEditBtn" id="nickOverlapBtn" disabled="disabled">중복검사</button>
 					<span id="nickOverlap">N</span><br/>
 					<span id="checkNickname"></span>	
 				</li>
@@ -162,13 +159,13 @@
 				</li>
 				<li>연락처</li>
 				<li><input type="text" class="inputDisabled" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11" value="${myVO.mem_tel }" disabled="disabled"/>
-				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
+				<button type="button" class="btn commBtn Mem_lgBtn memEditBtn" onclick="javascript:verifyPhoneNumber()" disabled="disabled">번호인증</button> <br />
 				<span id="checktel"></span></li>
 					
 				<li>이메일</li>
 				<li><input type="text" name="mem_email" id="mem_email" class="inputDisabled"
 					tabindex="7" value="${myVO.mem_email }" disabled="disabled" placeholder="예) 1ocaler@1ocaler.com" />
-				<button type="button"  id="verifyEmail" class="btn commBtn Mem_lgBtn">이메일 인증</button> <br />
+				<button type="button"  id="verifyEmail" class="btn commBtn Mem_lgBtn memEditBtn" disabled="disabled">이메일 인증</button> <br />
 				<span id="checkemail"></span></li>
 
 				<li>주소</li>
@@ -176,7 +173,7 @@
 					<ul class="myifoAddrInput">
 						<li><input type="text" class="inputDisabled" name="mem_zip" id="mem_zip" value="${myVO.mem_zip }" disabled="disabled"
 							tabindex="9" />
-						<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:openKakaoPost()">재검색</button></li>
+						<button type="button" class="btn commBtn Mem_lgBtn memEditBtn" onclick="javascript:openKakaoPost()" disabled="disabled">재검색</button></li>
 						<li><input type="text" class="inputDisabled" name="mem_addr" id="mem_addr" value="${myVO.mem_addr }" disabled="disabled"
 							tabindex="10" /></li>
 						<li><input type="text" class="inputDisabled" name="mem_detail" id="mem_detail" value="${myVO.mem_detail }" disabled="disabled"

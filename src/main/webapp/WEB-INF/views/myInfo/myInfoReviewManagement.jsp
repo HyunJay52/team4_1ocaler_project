@@ -31,11 +31,8 @@
 				</ul>
 				<div class="productManagementLabelCenter" style="height:0">
 					<div class="productManagementLabelCenterDiv">
-						<input type="date"/>~
-						<input type="date"/>
-						<input type="button" value="7일" class="btn commBtn productManagementBtn"/>
-						<input type="button" value="1개월" class="btn commBtn productManagementBtn"/>
-						<input type="button" value="3개월" class="btn commBtn productManagementBtn"/>
+						<input type="date" value="2021-03-01"/>~
+						<input type="date" value="2021-05-31"/>
 					</div>
 					<div class="productManagementLabelCenterDiv">
 						<input type="text" name="search"/>

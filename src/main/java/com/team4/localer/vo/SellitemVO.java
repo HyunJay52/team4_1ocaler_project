@@ -24,6 +24,65 @@ public class SellitemVO {
 	private int i_hit;
 	private String i_tag;//판매글태그
 
+	private int orderCount; //주문 수
+	private int revenue; // 총 판매액
+	
+	private int myItem; // 내 아이템 수
+	private int sale; // 판매 중
+	private int completed; // 판매 완료
+	private int expected; // 종료 예정
+	private int itemStop;// 판매 중단
+	 
+	private int selljoinCnt;
+	
+	public int getMyItem() {
+		return myItem;
+	}
+	public void setMyItem(int myItem) {
+		this.myItem = myItem;
+	}
+	public int getSale() {
+		return sale;
+	}
+	public void setSale(int sale) {
+		this.sale = sale;
+	}
+	public int getCompleted() {
+		return completed;
+	}
+	public void setCompleted(int completed) {
+		this.completed = completed;
+	}
+	public int getExpected() {
+		return expected;
+	}
+	public void setExpected(int expected) {
+		this.expected = expected;
+	}
+	public int getItemStop() {
+		return itemStop;
+	}
+	public void setItemStop(int itemStop) {
+		this.itemStop = itemStop;
+	}
+	public int getOrderCount() {
+		return orderCount;
+	}
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}
+	public int getRevenue() {
+		return revenue;
+	}
+	public void setRevenue(int revenue) {
+		this.revenue = revenue;
+	}
+	public int getSelljoinCnt() {
+		return selljoinCnt;
+	}
+	public void setSelljoinCnt(int selljoinCnt) {
+		this.selljoinCnt = selljoinCnt;
+	}
 	public String getI_priceStr() {
 		i_priceStr = NumberFormat.getInstance().format(i_price);
 		return i_priceStr;

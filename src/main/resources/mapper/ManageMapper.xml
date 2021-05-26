@@ -108,15 +108,14 @@
   	<select id="boardManageAllSelect" resultType="com.team4.localer.vo.GroupVO">
   		select * from
 			(select *from
-				(select g.num,g.up_cate,g.down_cate,g.g_subject,g.g_cnt,g.userid, 
-			  		to_char(g.g_writedate,'YY/MM/DD') g_writedate, 
-			  		count(case when r.num=g.num then 1 end) reportCount
-				from grouplocal g, report r 
-				<if test="!searchWord.equals('') and searchWord!=null">
+				(select g.num, g.up_cate,g.down_cate, g.g_subject, g.g_cnt, g.userid, to_char(g.g_writedate,'YY/MM/DD') g_writedate,
+					count(r.num) reportCount
+			from grouplocal g join report r on g.num=r.num(+) 
+			<if test="!searchWord.equals('') and searchWord!=null">
 					where ${searchKey} like #{searchWord}
-				</if>
-				group by g.num,g.up_cate,g.down_cate,g.g_subject,g.g_cnt,g.userid, g.g_writedate
-				order by g.num desc
+			</if>
+			group by g.num, g.up_cate, g.down_cate, g.g_subject, g.g_cnt, g.userid, to_char(g.g_writedate,'YY/MM/DD')
+			order by g.num desc
 			)
 			where rownum <![CDATA[<=]]> ${pageNum}*${onePageRecord} order by ${num} )
 			where rownum <![CDATA[<=]]>
@@ -133,7 +132,7 @@
 			(select *from
 				(select b.num, b.up_cate, b.b_gu,b.b_subject,b.userid,b.b_hit,
   					to_char(b.b_writedate,'YYYY/MM/DD') b_writedate, count(case when r.num=b.num then 1 end) reportCount
-					from board b, report r 
+					from board b join report r on  b.num=r.num(+)
 					<if test="!searchWord.equals('') and searchWord!=null">
 						where ${searchKey} like #{searchWord}
 					</if>

@@ -13,7 +13,7 @@
 		
 
 		<div id="coummuBoardMaincenter">
-		
+		 
 				<table cellpadding="0" cellspacing="0" style="width:1300px ;" class="table">
 					<tbody>
 						<tr height="41px">
@@ -46,17 +46,19 @@
 									&nbsp;
 									
 								<c:if test="${vo.newDate==0 }">	
-									<div id="newImg">N</div>
+									<div id="newImg" >N</div>
 								</c:if>
+							
+								<div style="clear:left; color:orange;font-size: 12px;"><br/>${vo.b_tag }</div>
 							</td>
 							<td>${vo.userid}</td>
 							<td>${vo.b_writedate}</td>
 							<td>${vo.b_hit}</td>
 							<td>${vo.numlike }</td>
 						</tr>
-						<tr style="text-align: left; padding-right: 20px;font-size: 12px;color:gray;">
+						<%-- <tr style="text-align: left; padding-right: 20px;color:gray;">
 							<td id ="tag" colspan="6">${vo.b_tag }</td>
-						</tr>
+						</tr> --%>
 						</c:forEach>
 					</tbody>
 				</table>

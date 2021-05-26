@@ -107,7 +107,9 @@
 				</select>
 				<select name="i_status" >		
 					<option value="1" <c:if test="${modifyVO.i_status==1 }">selected</c:if>      >판매중</option>	
-					<option value="2" <c:if test="${modifyVO.i_status==2 }">selected</c:if>      >판매종료</option>			
+					<option value="2" <c:if test="${modifyVO.i_status==2 }">selected</c:if>      >판매종료</option>
+					<option value="3" <c:if test="${modifyVO.i_status==3 }">selected</c:if>      >종료예정</option>
+					<option value="4" <c:if test="${modifyVO.i_status==4 }">selected</c:if>      >판매중단</option>			
 				</select>				
 	 			<br/>
 	 			<input type="text" id="i_subject" name="i_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." value="${modifyVO.i_subject }"/>

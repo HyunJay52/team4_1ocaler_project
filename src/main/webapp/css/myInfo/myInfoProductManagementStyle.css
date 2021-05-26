@@ -1,24 +1,27 @@
 @charset "UTF-8";
 	.myInfoProductManagementTop, .myInfoProductManagementBottom{
-		width:900px;
+		width:100%;
 		overflow:auto;
 	}
 	.productManagementHeaderForm{
-		height:30px;
+		height:100px;
 		text-align:center;	
-		margin:20px 0 0 50px;
+		margin:0px 0 0 160px;
+		padding-top:50px;
 	}
 	.productManagementHeader>li{
 		float:left;
 		width:150px;
 		font-weight:bold;
+		font-size:18px;
+
 	}
 	.productManagementHeader>li:nth-child(2n){
 		border-left:2px solid black;
 		border-right:2px solid black;
 	}
 	.productManagementLabelForm{
-		width:900px;
+		width:100%;
 		height:170px;
 		padding:20px;
 		border:1px solid #ddd;
@@ -64,6 +67,7 @@
 	.myInfoProductManagementBottom>ul>li{
 		float:left;
 		margin:0 10px 20px 0;
+		
 	}
 	.myInfoProductManagementBottomBtn{
 		width:100px;
@@ -92,7 +96,22 @@
 		border-bottom:2px solid #3f1785;
 	}
 	.myInfoProductManagementTable2 tr>td{/*전체적인 열 폭조정*/
-		width:14%;
+		width:15%;
+	}
+	.myInfoProductManagementTable2 tr>td:nth-child(1){
+		width:8%;
+	}
+	.myInfoProductManagementTable2 tr>td:nth-child(3){
+		width:10%;
+	}
+	.myInfoProductManagementTable2 tr>td:nth-child(5){
+		width:8%;
+	}
+	.myInfoProductManagementTable2 tr>td:nth-child(6){
+		width:10%;
+	}
+	.myInfoProductManagementTable2 tr>td:nth-child(7){
+		width:8%;
 	}
 	#shipSelectbox{
 		float:right;
@@ -100,9 +119,17 @@
 		height:30px;
 	}
 	.shippingManagementHeaderForm{
-		height:30px;
+		height:100px;
 		text-align:center;	
-		margin:20px 0 0 50px;
+		margin:20px 0 0 150px;
+		padding-top:40px;
 	}
-	
-	
+	.myinfoProductManagementPaging{
+		margin-top:30px;
+	}
+	.productMdBody>ul>li:nth-child(1){
+		height:82px;
+	}
+	#SaleManagementPagingArea{
+		margin-top:30px;
+	}

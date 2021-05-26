@@ -15,15 +15,15 @@
 						tag += "<tr><td>"+data.o_date+"</td>";
 						console.log("reviewCount="+data.reviewCount);
 						if(data.reviewCount == 0){
-							tag += "<td><button data-target='#farmerDealMd' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>"+data.i_subject+"</button></td>";
+							tag += "<td><a href='sellView?i_num="+data.num+"'>"+data.i_subject+"</a></td>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.o_price+"</td>";
-							tag += "<td>리뷰없음</td>";
+							tag += "<td><button data-target='#farmerDealMd' data-toggle='modal' class='btn commBtn farmerMdOpen' value='"+data.num+"'>리뷰없음</td>";
 						}else{
-							tag += "<td><button data-target='' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>"+data.i_subject+"</button></td>";
+							tag += "<td><a href='sellView?i_num="+data.num+"'>"+data.i_subject+"</a></button></td>";
 							tag += "<td>"+data.userid+"</td>";
 							tag += "<td>"+data.o_price+"</td>";
-							tag += "<td>리뷰작성함</td>";								
+							tag += "<td><button data-target='' data-toggle='modal' class='farmerMdOpen' value='"+data.num+"'>리뷰작성됨</button></td>";								
 						}
 						if(data.o_conf == 1){
 							tag += "<td>주문대기</td>";
@@ -134,7 +134,7 @@
 				data : data+"&re_rate="+re_rate,
 				success : function(result){
 					alert("리뷰가 작성되었습니다.");
-					$("#farmerDealMd").hide();
+					$("#farmerDealMd").modal("hide");
 					$('.modal-backdrop').hide();
 					setFarmerDealList(1);
 				}, error : function(e){
@@ -154,7 +154,7 @@
 		<h3>파머 직거래</h3>
 		<div class="dealTop">
 			<div class="dealInfo">
-				<img src="img/myInfo/saver.gif"/>
+				<img src="<%=request.getContextPath()%>/img/mem_prof/${logProf }"/>
 				<div class="infoList">
 					<div class="infoListHeader">
 						<h3>${vo.mem_name}</h3>
@@ -191,6 +191,9 @@
 			<table class="myinfoTable2" id="farmerDealTbl">
 				
 			</table>
+			<div id="myinfoFarmerDealPaging">
+			
+			</div>
 			<div class="searchArea">
 				<select name="searchKey" style="height: 30px">
 					<option value="i_subject">제목</option>
@@ -198,9 +201,6 @@
 				</select>
 				<input type="text" name="searchWord"/>
 				<input type="button" value="검색" id="myFarmerDealSearch"/>
-			</div>
-			<div id="myinfoFarmerDealPaging">
-			
 			</div>
 		</div>
 		<input type="hidden" name="dateContent" value="o_date"/>
@@ -224,7 +224,7 @@
 						<li>
 							<textarea class="dealTextarea mdFnt" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
 						</li>
-						<li><input type="file" name="re_img"/></li>
+						<!-- <li><input type="file" name="re_img"/></li> -->
 						<li style="display:none"><input type="hidden" id="FarmerReviewNum" name="num" value=""/></li>
 						<li><button class="btn btn-outline-dark btn-lg" id="canselFarmerReview" data-dismiss="modal">다음에 할게요</button>
 							<button class="btn btn-outline-dark btn-lg" id="farmerReviewWrite">작성완료</button>

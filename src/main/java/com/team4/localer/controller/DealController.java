@@ -2,6 +2,7 @@ package com.team4.localer.controller;
 
 import java.io.File;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,42 +53,23 @@ public class DealController {
 		pageVO.setUserid((String)req.getSession().getAttribute("logId"));
 		vo.setS_gu(req.getParameter("s_gu"));
 		
-		System.out.println(pageVO.getS_gu());
-		System.out.println(pageVO.getUserid());
-		
 		pageVO.setPageNum(pageVO.getPageNum());
 		pageVO.setSearchKey(pageVO.getSearchKey());
 		pageVO.setSearchWord(pageVO.getSearchWord());
 		
+		pageVO.setTotalRecord(dealshareService.dealTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함
 		
+
 		
-		pageVO.setTotalRecord(dealshareService.dealTotalRecoedCount(pageVO)); // pageVO 안에 totalPageRecordNum 대입함		
-		
-		
-		//mav.addObject("dealSellList",dealshareService.dealListSelect(vo)); // 이거를 수정해야하는데
 		
 		mav.addObject("appNum", joinUsService.getJCount(pageVO.getNum()));
 		mav.addObject("dealSellList",dealshareService.dealPageSelect(pageVO));
 		
 		
-		System.out.println("페이징테스트 카테 " + pageVO.getS_cate());
-		System.out.println("페이징테스트 구'" +pageVO.getS_gu());
-		
-		System.out.println("조인웅앵웅할 번호" +pageVO.getNum());
-	
-		
-		
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
-		
-		System.out.println("오늘안에" + pageVO.getPageNum());
-		System.out.println(pageVO.getPageNum()+"<==현재 페이지번호");
-		System.out.println(pageVO.getTotalPage()+"마지막페이지");//마지막페이지
-		System.out.println(pageVO.getOnePageRecord()+"한페이지에 보이는수");
-		System.out.println(pageVO.getLastPageRecord()+"마지막 레코드수");
-		
-		
+			
 		mav.addObject("pageVO",pageVO);
 		mav.setViewName("deal/memberBoard");
 		return mav;

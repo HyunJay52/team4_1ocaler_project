@@ -31,6 +31,25 @@
 			
 		}); */
 		
+		$(document).on('submit','#commuWrite',function(){
+			if($("#subject").val()==null || $("#subject").val()=='' ){
+				alert('제목을 입력해주세요')
+				return false;
+			}
+			if($("#summernote").val()==null || $("#summernote").val()=='' ){
+				alert('내용을 입력주세요')
+				return false;
+			}
+			if($("#tag").val()==null || $("#tag").val()=='' ){
+				alert('태그를 선택해주세요')
+				return false;
+			}
+			
+		
+		});
+		
+		
+		
 		$("#cancelBtn").on('click',()=>{
 			history.back();
 		});
@@ -56,7 +75,7 @@
 
 	<div id="commueWnEmain">
 		<div>
-			<form method="post" action="commuWriteOk"enctype="multipart/form-data" >
+			<form method="post" action="commuWriteOk"enctype="multipart/form-data" id="commuWrite" >
 				
 				<c:if test="${vo.up_cate==1}">		
 					<h5>우리동네 이야기 글쓰기</h5>
@@ -95,10 +114,10 @@
 								
 	 			<br/>
 	 			<c:if test="${vo.up_cate==1 }">
-	 			<input type="text" id ="subject" name="b_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." style="width: 1000px;  "/>
+	 				<input type="text" id ="subject" name="b_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." style="width: 1000px;  "/>
 	 			</c:if>
 	 			<c:if test="${vo.up_cate!=1 }">
-	 			<input type="text" id ="subject" name="b_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." style="width: 100%;  "/>
+	 				<input type="text" id ="subject" name="b_subject" placeholder=" &nbsp; &nbsp;제목을 입력해주세요." style="width: 100%;  "/>
 	 			</c:if>
 	 			
 	 			
@@ -119,7 +138,7 @@
 				
 				
 				<c:if test="${vo.up_cate==2}">
-				<span style="font:bold;display: inline-block;margin-top: 25px;"> 메인에 등록될 사진파일을 선택해주세요.
+				<span style="font:bold;display: inline-block;margin-top: 25px;"> 메인에 등록될 대표이미지를 선택해주세요.
 					<label class="deal_input-file-button" for="b_img1"> 사진 선택 </label> 
 				</span><br/>
 				 
