@@ -22,6 +22,7 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public void logCount(String userid, String loc_gu) {
 		// 로그인 카운트
+		System.out.println("dao >> > > > " +userid+"//////"+loc_gu);
 		dao.logCount(userid, loc_gu);
 	}
 	
