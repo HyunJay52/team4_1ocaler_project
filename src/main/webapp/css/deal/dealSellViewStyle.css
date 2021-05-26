@@ -507,8 +507,8 @@ h4 {
 }
 
 #popup {
-	position: absolute;
-	top: 1500px;
+	position: relative;
+	top: -700px;
 	left: 30%;
 	display: none;
 	width: 800px;

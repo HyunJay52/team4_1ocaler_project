@@ -31,7 +31,7 @@
 					
 			//옵션 추가	
 			tag = '';
-			$(document).on("click",'#optionDiv>div>img[class=optionPlus]', ()=>{
+			$(document).on("click",'.optionPlus', ()=>{
 				tag += '<div><input type="text" class="option_title" name="option_title" placeholder="옵션명을 입력해 주세요" required/>';
 				tag += '<input type="text" class="option_content" name="option_content" placeholder="옵션 내용을 입력해 주세요" required/>';
 				tag += '<input type="text" class="option_price" name="o_price" placeholder="추가 옵션 가격을 입력해 주세요" required/>';

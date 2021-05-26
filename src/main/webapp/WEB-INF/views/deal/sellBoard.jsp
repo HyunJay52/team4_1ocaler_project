@@ -106,7 +106,7 @@ $(function(){
                           <li class="wordcut">${itemVO.i_tag }</li>
                           <li>
                              ${itemVO.userid } &nbsp;
-                             <img src="<%=request.getContextPath()%>/img/mem_prof/${itemVO.sel_prof}">&nbsp;&nbsp;
+                             <img src="<%=request.getContextPath()%>/img/sel_prof/${itemVO.sel_prof}">&nbsp;&nbsp;
                           </li>
                        </ul>
                     </div>
