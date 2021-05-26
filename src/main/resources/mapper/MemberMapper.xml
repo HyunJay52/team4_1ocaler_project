@@ -75,7 +75,7 @@
 		UPDATE seller SET sell_status=0 WHERE userid=#{param1}
 	</update>
 	<insert id="insertDelMember" parameterType="com.team4.localer.vo.MemberVO">
-		INSERT INTO delmem_log(userid, del_why) VALUES (#{userid}, #{del_why})
+		INSERT INTO delmem_log(userid, del_why, del_writedate) VALUES (#{userid}, #{del_why}, sysdate)
 	</insert>
 	
 	<update id="updateDelseller">
