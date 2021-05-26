@@ -31,6 +31,8 @@
 			}
 		});
 		
+		
+		
 	});	
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
@@ -121,11 +123,11 @@
 			<div class="editOn" id="sellerEditOn">
 
 				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">수정</button>
-				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">취소</button>			
+				<button type="reset" id="sellerEditCancelBtn" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">취소</button>			
 
 			</div>
 			<div style="text-align:center; margin-bottom:20px">
-				<button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;" >셀러활동 중단</button>
+				<!-- <button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;" >셀러활동 중단</button> -->
 				<br/><button type="button" class="btn cancelBtn" style="width:320px;  height:45px; margin: 5px auto;" data-target="#myinfoMd" data-toggle="modal" onclick='location.href="sellerinfo/sellerDel"'>셀러 탈퇴</button>
 			</div>
 		</div>
