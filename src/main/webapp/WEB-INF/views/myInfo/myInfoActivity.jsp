@@ -248,7 +248,7 @@
 		<h3>나의 활동</h3>
 		<div class="dealTop">
 			<div class="dealInfo">
-				<img src="img/myInfo/saver.gif"/>
+				<img src="<%=request.getContextPath()%>/img/mem_prof/${logProf }"/>
 				<div class="infoList">
 					<div class="infoListHeader">
 						<h3>${vo.mem_name}</h3>

@@ -5,6 +5,7 @@
 	$(function(){
 		//리스트 불러오기
 		function setProductList(num){
+			console.log($("#myinfoProductForm").serialize());
 			$.ajax({
 				url : "selectProductList",
 				data : $("#myinfoProductForm").serialize()+"&nowNum="+num,
