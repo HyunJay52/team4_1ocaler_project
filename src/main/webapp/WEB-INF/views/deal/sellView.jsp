@@ -729,28 +729,24 @@
 			</div>	
 		</div>
 		<!-- 여기 QNAAAAAAAAAAAAAAAAAAAAAAAAAAAAa -->
-		
-		
-		<!-- Q&A 팝업 div -->	
-		<div id="popup" style="z-index: 99;">
-			<form id="QNAFrm" method="post">
-				<div class="checks etrans">
-					<h4 style="color:#000">질문을 등록해주세요.</h4> &emsp;
-					<input type="checkbox" name="q_status" value="1" id="ex_chk3" class="cbBtn" checked><label for="ex_chk3" > 공개 </label> &emsp;
-	     			<input type="checkbox" name="q_status" value="2" id="ex_chk4" class="cbBtn"><label for="ex_chk4"> 비공개 </label>
-	     		</div>
-				<div>
-					<textarea name="q_content" id="q_content" placeholder="질문을 등록해주세요."></textarea>
-				</div>
-				<div>	
-					<input type="button" class="btn cancelBtn" id="btnClose" value="취소">
-					<input id="QNAFrmBtn" type="button" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
-				</div>
-				<input type="hidden" name="num" value="${itemVO.i_num }">
-			</form>
-		</div>
-		
-		
+	</div>
+	<!-- Q&A 팝업 div -->	
+	<div id="popup" style="z-index: 99;">
+		<form id="QNAFrm" method="post">
+			<div class="checks etrans">
+				<h4 style="color:#000">질문을 등록해주세요.</h4> &emsp;
+				<input type="checkbox" name="q_status" value="1" id="ex_chk3" class="cbBtn" checked><label for="ex_chk3" > 공개 </label> &emsp;
+     			<input type="checkbox" name="q_status" value="2" id="ex_chk4" class="cbBtn"><label for="ex_chk4"> 비공개 </label>
+     		</div>
+			<div>
+				<textarea name="q_content" id="q_content" placeholder="질문을 등록해주세요."></textarea>
+			</div>
+			<div>	
+				<input type="button" class="btn cancelBtn" id="btnClose" value="취소">
+				<input id="QNAFrmBtn" type="button" value="질문등록 " class="btn confBtn" style="margin-right:40px" >
+			</div>
+			<input type="hidden" name="num" value="${itemVO.i_num }">
+		</form>
 	</div>
 </body>
 </html>
