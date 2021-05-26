@@ -24,7 +24,7 @@
 						}
 						if(data.o_mtd == 1){
 							tag += "<td>카드결제</td>";						
-						}else if(data.o_mth == 2){
+						}else if(data.o_mtd == 2){
 							tag += "<td>포인트결제</td>";
 						}else{
 							tag += "<td>미결제</td>";
