@@ -312,7 +312,7 @@ $(function(){
 			location.href="oftenQWriteEdit?num="+num;
 		}else if(cate=="csBtn"){
 			//1:1질문 처리요청 클릭시 
-			location.href="persnal?num="+num;
+			location.href="persnal?cs_num="+num;
 		}else if(cate=="reportBtn"){
 			//신고 처리요청 클릭시
 			location.href = "reportEdit?num="+num;
