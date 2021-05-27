@@ -122,7 +122,7 @@
 	  					$.each($list ,function(idx,vo){
 	  						txt+="<tr class='modal1List'>";
 		    						txt+="<td>"+vo.num+"</td>";
-		    						txt+="<td class='wordcut'>"+vo.userid+"</td>";
+		    						txt+="<td class='wordcut cut'>"+vo.userid+"</td>";
 		    						txt+="<td>"+vo.o_cnt+"</td>";
 		    						txt+="<td>"+setComma(vo.o_price)+"</td>";
 		    						txt+="<td>"+vo.o_date+"</td>";
