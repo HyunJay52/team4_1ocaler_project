@@ -102,9 +102,7 @@ $(function(){
                              <span class="cntJoin">&nbsp;&nbsp;${itemVO.selljoinCnt }</span>
                              /${itemVO.i_cnt }개
                           </li>
-                          
                           <li><fmt:formatNumber type="number" maxFractionDigits="3" value="${itemVO.i_price}" />원</li>
-                          
                           <li class="wordcut">${itemVO.i_tag }</li>
                           <li>
                              ${itemVO.userid } &nbsp;
