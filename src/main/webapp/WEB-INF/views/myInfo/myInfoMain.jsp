@@ -328,7 +328,7 @@
 					
 					<c:forEach var="qvo" items="${qnaVO }">
 						<tr>
-							<c:if test="${qvo.q_status==1 }">
+							<c:if test="${qvo.q_answer!=null }">
 								<td class="qnaTitle" style="cursor: pointer; font-family: nsrb; width: 55%;" >${qvo.q_content }</td>
 								<td>${qvo.sellerid }</td>
 								<td>${qvo.q_adate }<input type="hidden" value="${qvo.q_adate }"/></td>
@@ -336,7 +336,7 @@
 									<input type="hidden" value="${qvo.q_answer }"/>
 								</td>
 							</c:if>
-							<c:if test="${qvo.q_status==2 }">
+							<c:if test="${qvo.q_answer==null }">
 								<td style="cursor: pointer; font-family: nsrb; width: 55%;" onclick="alert('답변을 기다리고 있습니다. 잠시만 더 기다려주세요!')">${qvo.q_content }</td>
 								<td>${qvo.sellerid }</td>
 								<td>${qvo.q_writedate }</td>

@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	
-	<ul id="introTbl">
+	<ul id="introTbl" style="overflow: hidden;">
 		<li>TEAM "PURBLIC"</li>
 		<li>
 			<ul class="introInnerul">

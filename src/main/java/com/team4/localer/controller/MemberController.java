@@ -51,8 +51,10 @@ public class MemberController {
 // 로그인	
 	@RequestMapping(value="/loginConfrim", method=RequestMethod.POST)
 	@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
-	public String loginConfirm(String userid, String userpwd, String stay, HttpSession ses, HttpServletResponse res) {
+	public ModelAndView loginConfirm(String userid, String userpwd, String stay, HttpSession ses, HttpServletResponse res) {
 		String goPage = "";
+		ModelAndView mav = new ModelAndView();
+		
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
 		
@@ -81,17 +83,20 @@ public class MemberController {
 				
 				service.logCount(logVO.getUserid(), logVO.getLoc_gu());
 				
-				goPage = "home";
+				mav.setViewName("redirect:/");
 			}else {
-				goPage = "member/login";
+				mav.setViewName("member/login");
+				//goPage = "member/login";
 			}
 			
 			transactionManager.commit(status);
 			
-			return goPage;
+			return mav;
 		}catch (NullPointerException nullpoint) {
 			nullpoint.printStackTrace();
-			return "member/login";
+			mav.setViewName("member/login");
+			return mav;
+			//return "member/login";
 		}
 	}	
 // 로그아웃
@@ -135,7 +140,7 @@ public class MemberController {
 			if(returnUserid!=null) {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setFrom("localertest8282@naver.com"); //보내는 사람
 				msgHelper.setTo(vo.getMem_email()); //받는 사람
 				msgHelper.setSubject(subject); //제목
 				
@@ -175,7 +180,7 @@ public class MemberController {
 			if(returnPwd!=null) {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setFrom("localertest8282@naver.com"); //보내는 사람
 				msgHelper.setTo(vo.getMem_email()); //받는 사람
 				msgHelper.setSubject(subject); //제목
 				
@@ -214,7 +219,7 @@ public class MemberController {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
 				
-				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setFrom("localertest8282@naver.com"); //보내는 사람
 				msgHelper.setTo(vo.getMem_email()); //받는 사람
 				
 				msgHelper.setSubject("1ocaler - 찾으신 비밀번호 입니다."); //제목
@@ -664,7 +669,7 @@ public class MemberController {
 			if(checkEmail<=0) {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setFrom("localertest8282@naver.com"); //보내는 사람
 				msgHelper.setTo(mem_email); //받는 사람
 				msgHelper.setSubject(subject); //제목
 				
