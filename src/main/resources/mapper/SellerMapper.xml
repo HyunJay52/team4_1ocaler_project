@@ -106,7 +106,7 @@
 		  select * from
 			    (select * from
 			    	(select * from    
-				                (SELECT si.i_num, si.sel_num, si.i_subject,si.i_content, si.i_cnt, si.i_img1, si.i_price, si.i_period, si.i_tag, s.userid, s.sel_prof ,
+				                (SELECT si.i_num, si.sel_num, si.i_subject,si.i_content, si.i_cnt, si.i_img1, to_char(si.i_price, '999,999,999,999') com_price, si.i_period, si.i_tag, s.userid, s.sel_prof ,
 				               		(select count(num) from ordertbl where num=i_num) as selljoinCnt 
 								FROM SELL_ITEM si JOIN SELLER s ON si.sel_num = s.sel_num WHERE <![CDATA[ sysdate<=si.i_period ]]>  and i_status=1 ORDER BY si.i_num DESC)
 				      <if test="searchWord != null and searchWord != '' "> where ${searchKey} like '%${searchWord}%'</if>) 
