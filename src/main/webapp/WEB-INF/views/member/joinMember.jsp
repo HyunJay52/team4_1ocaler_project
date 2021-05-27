@@ -41,7 +41,7 @@
 				<li>연락처</li>
 				<li><input type="number" name="mem_tel" id="mem_tel" tabindex="6" maxlength="11"
 					placeholder="예) 01012341234" />
-				<button type="button" class="btn commBtn Mem_lgBtn" onclick="javascript:verifyPhoneNumber()">번호인증</button> <br />
+				<br />
 				<span id="checktel"></span></li>
 
 				<li>이메일</li>

@@ -38,7 +38,7 @@
 				</li>
 				
 				<li>대표번호</li>
-				<li><input type="number" name="sel_tel" id="sel_tel" tabindex="6" placeholder="예) 01012341234"/><button type="button" class="btn commBtn lgBtn">번호인증</button>
+				<li><input type="number" name="sel_tel" id="sel_tel" tabindex="6" placeholder="예) 01012341234"/>
 					<br/><span id="checkSellTel"></span>
 				</li>
 				
