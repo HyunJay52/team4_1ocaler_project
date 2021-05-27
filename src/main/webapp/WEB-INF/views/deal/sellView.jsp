@@ -226,13 +226,14 @@
      	$(document).on('change','#option_title',function(){
      		optionCheck = 1;
      		var url = "changeOptions";
-    		var params ='option_title='+$("#option_title").val()+'&i_num=${itemVO.i_num}';
+    		var params ='option_title='+encodeURIComponent($("#option_title").val())+'&i_num=${itemVO.i_num}';
     		console.log(params);
     		$.ajax({
     			url : url,
     			data : params,
     			success:function(result){
     				var $result = $(result);
+    				console.log($result.size,"<--- 사이즈");
     				var tag = "<option selected disabled hidden>-[필수]- 옵션2 - </option>"
     				$result.each(function(idx,obj){
     					tag += '<option value='+obj.o_price+'>'+obj.option_content+'(+'+obj.o_price+'원)</option>';
@@ -433,8 +434,11 @@
 				tag += '<li><button class="pagings notBtn" value="'+(pageVO.pageNum-1)+'">이전</button></li>';				
 			}
 			
+			
 			for(var p = pageVO.startPageNum; p < pageVO.startPageNum + pageVO.onePageNum; p++){
-				tag += '<li><button class="pagings notBtn" value='+p+'>'+ p +'</button></li>';	
+				if(p<=pageVO.totalPage ){
+					tag += '<li><button class="pagings notBtn" value='+p+'>'+ p +'</button></li>';
+				}
 			}
 			if(pageVO.pageNum == pageVO.totalPage){
 				tag += '<li>다음</li>';				
@@ -460,7 +464,7 @@
      			success:function(result){
      				$("#sellReview").html('');
      				var tag='';    
-     				result.reviewList.forEach(function(data,index){
+     				result.reviewLists.forEach(function(data,index){
      					tag += '<div id="oneReview">';
      					tag += '<ul>';
      					tag += '<li>';
@@ -618,7 +622,7 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div>
-				<a href="#sellReviewChk">리뷰수 : ${fn:length(reviewList) }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
+				<a href="#sellReviewChk">리뷰수 : ${showTotalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div>
 				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	
@@ -638,17 +642,18 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div id="sellReviewChk" style="border-bottom: 3px solid navy;">
-				<a href="#sellReviewChk">리뷰수 : ${fn:length(reviewList) }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
+				<a href="#sellReviewChk">리뷰수 : ${showTotalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div>
 				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	
 			</div>
-		</div>
+		</div>	
 		<h3 class="sellShortDescription">구매후기<span> | 사용 후기를 남겨보아요 </span></h3> 
 			
 		<div id="sellReview">
 			<!-- ul안에 li한개에 안에 div를 for로 돌려야함 -->
-			<c:forEach var="reviewsVO" items="${reviewList}">
+			
+			<c:forEach var="reviewsVO" items="${reviewLists}">
 				<div id="oneReview">
 					<ul>				
 						<li>								
@@ -666,8 +671,35 @@
 		</div>
 		<!-- 리뷰달기 페이징 -->			
 		<div id ="pageNum">
+				<script>
+					console.log(${pageVO.pageNum}, "<-현페",${pageVO.startPageNum },"<-시페" , ${pageVO.totalPage},"<-마페", ${pageVO.onePageNum}, "<--한페이지 보여줄 갯수" );
+				</script>
 				<ul>
-					<c:if test="${pageVO.pageNum<=1}"><li>이전</li></c:if><c:if test="${pageVO.pageNum>1}"><li><button class="pagings notBtn" value="${pageVO.pageNum-1 }">이전</button></li></c:if><c:forEach var="p" begin="${pageVO.startPageNum }" end="${pageVO.startPageNum+pageVO.onePageNum-1 }"><li><button class="pagings notBtn" value="${p }">${p }</button></li></c:forEach><c:if test="${pageVO.pageNum<pageVO.totalPage}"><li><button class="pagings notBtn" value="${pageVO.pageNum+1 }">다음</button></li></c:if><c:if test="${pageVO.pageNum==pageVO.totalPage}"><li>다음</li></c:if>
+					<c:if test="${pageVO.pageNum<=1}">
+						<li>이전</li>
+					</c:if>
+					
+					<c:if test="${pageVO.pageNum>1}">
+						<li><button class="pagings notBtn" value="${pageVO.pageNum-1 }">이전</button></li>
+					</c:if>
+					
+					
+					<c:forEach var="p" begin="${pageVO.startPageNum }" end="${pageVO.startPageNum+pageVO.onePageNum-1 }">
+						<c:if test="${p<=pageVO.totalPage }">
+							<li><button class="pagings notBtn" value="${p }">${p }</button></li>
+						</c:if>
+					</c:forEach>
+					
+					
+					<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+						<li>
+							<button class="pagings notBtn" value="${pageVO.pageNum+1 }">다음</button>
+						</li>
+					</c:if>
+					
+					<c:if test="${pageVO.pageNum==pageVO.totalPage}">
+						<li>다음</li>
+					</c:if>
 				</ul>
 		</div>
 		
@@ -677,7 +709,7 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div>
-				<a href="#sellReviewChk">리뷰수 : ${fn:length(reviewList) }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
+				<a href="#sellReviewChk">리뷰수 : ${showTotalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div id="sellQusetion" style="border-bottom: 3px solid navy;">
 				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	

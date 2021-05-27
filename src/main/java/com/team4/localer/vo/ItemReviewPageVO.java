@@ -59,7 +59,7 @@ public class ItemReviewPageVO {
 		totalPage = (int)Math.ceil(totalRecord/(double)onePageRecord);
 		//마지막 페이지 레코드수
 		if(totalRecord%onePageRecord==0) {
-			lastPageRecord = onePageRecord; // 5개의 게시물
+			lastPageRecord = onePageRecord; // 4개의 게시물
 		}else {
 			lastPageRecord = totalRecord%onePageRecord; // 남은 레코드수
 		}
