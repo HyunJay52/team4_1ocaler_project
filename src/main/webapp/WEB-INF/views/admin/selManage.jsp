@@ -179,8 +179,10 @@
 						txt += 		"<td>"+vo.num+"</td>";
 						if(vo.s_cate==1){
 							txt += 		"<td>식료품</td>";
-						}else{
+						}else if(vo.s_cate==2)){
 							txt += 		"<td>생필품</td>";
+						}else{
+							txt += 		"<td>기타</td>";
 						}
 						txt += 		"<td class='wordcut'><a href='memberView?num="+vo.num+"'>"+vo.s_subject+"</a></td>";
 						txt += 		"<td>"+vo.s_cnt+"</td>";
@@ -280,11 +282,14 @@
 			<tr class="selboardList">
 				<td>${ vo.num}</td>
 				<td>
-					<c:if test="${vo.s_cate==1 }">
+					<c:if test="${vo.s_cate==1}">
 						식료품
 					</c:if>
-					<c:if test="${vo.s_cate==2 }">
+					<c:if test="${vo.s_cate==2  }">
 						생필품
+					</c:if>
+					<c:if test="${vo.s_cate==3  }">
+						기타
 					</c:if>
 				</td>
 				<td class="wordcut"><a href="memberView?num=${ vo.num}">${vo.s_subject}</a></td>
