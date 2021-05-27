@@ -226,13 +226,14 @@
      	$(document).on('change','#option_title',function(){
      		optionCheck = 1;
      		var url = "changeOptions";
-    		var params ='option_title='+$("#option_title").val()+'&i_num=${itemVO.i_num}';
+    		var params ='option_title='+encodeURIComponent($("#option_title").val())+'&i_num=${itemVO.i_num}';
     		console.log(params);
     		$.ajax({
     			url : url,
     			data : params,
     			success:function(result){
     				var $result = $(result);
+    				console.log($result.size,"<--- 사이즈");
     				var tag = "<option selected disabled hidden>-[필수]- 옵션2 - </option>"
     				$result.each(function(idx,obj){
     					tag += '<option value='+obj.o_price+'>'+obj.option_content+'(+'+obj.o_price+'원)</option>';
