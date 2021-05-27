@@ -16,6 +16,7 @@ public class SellitemVO {
 	private String i_img2;
 	private String i_img3;
 	private int i_price;//가격
+	private String com_price;
 	private String i_priceStr;
 	private int i_ship;//배송비
 	private String i_period;//판매기간
@@ -39,6 +40,14 @@ public class SellitemVO {
 	private int itemStop;// 판매 중단
 	 
 	
+	
+	
+	public String getCom_price() {
+		return com_price;
+	}
+	public void setCom_price(String com_price) {
+		this.com_price = com_price;
+	}
 	public int getMyItem() {
 		return myItem;
 	}

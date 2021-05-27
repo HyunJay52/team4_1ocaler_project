@@ -372,7 +372,7 @@
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.mem_sub } </span></li>
 				<li><span>총 게시물 : ${vo.mem_post } 개</span></li>
-				<li><span>회원등급 : ${vo.mem_rev } / 100</span></li>
+				<li><span>마음지수 : ${vo.mem_rev } / 100</span></li>
 			</ul>
 		</div>
 		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>

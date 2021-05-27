@@ -336,7 +336,7 @@
 			where conf_date <![CDATA[<=]]>to_date(last_day('21/${month3}/01'),'YY/MM/DD')
   	</select>
   	<select id="selspendmonth" resultType="com.team4.localer.vo.AdminspendVO">
-  		select sum(r.rec_money)  monthsale,sum(o.o_cnt)*2000 monthmoney from receipt r join ordertbl o on o.o_num= r.o_num
+  		select nvl(sum(r.rec_money),0)  monthsale,nvl(sum(o.o_cnt)*2000,0) monthmoney from receipt r join ordertbl o on o.o_num= r.o_num
 				where conf_date between to_date('21/${month3}/01','YY/MM/DD')
                 and to_date(last_day('21/${month3}/01'),'YY/MM/DD')
   	</select>
@@ -379,7 +379,7 @@
 							order by sel_num
   	</select>
   	<select id="selpsendmodalList" resultType="com.team4.localer.vo.AdminspendVO">
-  		select num ,userid,o_cnt,o_price,o_date from ordertbl where o_conf=2 and num=${parma1}
+  		select num ,userid,o_cnt,o_price,to_char(o_date,'YY/MM/DD') o_date from ordertbl where o_conf=2 and num=${parma1}
   	</select>
   	<select id="statismem" resultType="com.team4.localer.vo.AdminstatisVO">
   		select count(mem_no) as total, 
