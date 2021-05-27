@@ -196,16 +196,16 @@ public class SellerController {
 		if(session.getAttribute("logId")!=null && !session.getAttribute("logId").equals("")) {
 			mav.addObject("likeList",likeItService.LikeItSelectAll((String)session.getAttribute("logId")));
 		}
-	
+		System.out.println(itemVO.getI_num()+"<--item");
 		reviewPageVO.setTotalRecord(myinfoService.totalReviewCnt(itemVO.getI_num())); //리뷰총갯수		
-	
+		System.out.println(reviewPageVO.getTotalRecord()+"<--토탈레코드수 셋팅값");
 
-		mav.addObject("reviewList",myinfoService.selectSellItemReview(reviewPageVO));
+		mav.addObject("reviewLists",myinfoService.selectSellItemReview(reviewPageVO));
 		mav.addObject("reviewAll",myinfoService.selectAllReDate(itemVO.getI_num()));
 		mav.addObject("pageVO",reviewPageVO);
+		System.out.println(myinfoService.selectSellItemReview(reviewPageVO).size()+"<-- 총리뷰갯");
 		
-		System.out.println(myinfoService.selectSellItemReview(reviewPageVO).size()+"<--사이즈는???????");
-		System.out.println(myinfoService.selectAllReDate(itemVO.getI_num()).size()+"<--1개나오면맞을듯");
+		
 		mav.addObject("itemVO",sellerService.selectOnePage(itemVO.getI_num()));	
 		mav.addObject("NOTitle",sellerService.notOverlapOptionTitleSel(itemVO.getI_num())); //옵션대가리
 		
@@ -531,7 +531,7 @@ public class SellerController {
 		reviewPageVO.setTotalRecord(myinfoService.totalReviewCnt(num));		
 		reviewPageVO.setI_num(num);
 		
-		maps.put("reviewList", myinfoService.selectSellItemReview(reviewPageVO));
+		maps.put("reviewLists", myinfoService.selectSellItemReview(reviewPageVO));
 		maps.put("pageVO", reviewPageVO);
 		
 		
