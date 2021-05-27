@@ -59,10 +59,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/persnal")//판매관리
-	public ModelAndView persnal(int num) {
+	public ModelAndView persnal(int cs_num) {
 		//csTbl에서 문의글 1개 가져오기 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", csService.boardSelect(num));
+		mav.addObject("vo", csService.boardSelect(cs_num));
 		mav.setViewName("admin/persnal");
 		return mav;
 	}
