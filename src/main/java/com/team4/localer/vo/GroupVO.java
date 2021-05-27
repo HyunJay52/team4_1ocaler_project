@@ -20,6 +20,8 @@ public class GroupVO {
 	private String g_tag;
 	private int reportCount;
 	
+	private String mem_prof; //프로필 사진 받는거 지우지마
+	
 	public int getReportCount() {
 		return reportCount;
 	}
@@ -133,6 +135,12 @@ public class GroupVO {
 	}
 	public void setG_gu(String g_gu) {
 		this.g_gu = g_gu;
+	}
+	public String getMem_prof() {
+		return mem_prof;
+	}
+	public void setMem_prof(String mem_prof) {
+		this.mem_prof = mem_prof;
 	}
 	
 	

@@ -89,13 +89,19 @@ public class csBoardController {
 	public String reportWrite(int num, Model model, HttpServletRequest req) {
 		String returnView = "";
 		
-		if(num>0) {
-			model.addAttribute("num", num);
-			returnView = "csBoard/reportWrite";
-		}else {
+		try {
+			if(num>0) {
+				model.addAttribute("num", num);
+				returnView = "csBoard/reportWrite";
+			}else {
+				returnView = "member/historyBack";
+			}
+			return returnView;
+		
+		}catch (IllegalStateException e) { //에러페이지 처리 방법 생각해보기...
 			returnView = "member/historyBack";
+			return returnView;
 		}
-		return returnView;
 	}
 	
 	@RequestMapping("/cs_repOk")

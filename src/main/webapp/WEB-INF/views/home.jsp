@@ -25,7 +25,7 @@
 								"<li>"+list.g_date+", "+list.g_time+"</li>"+
 								"<li class='smlFnt' style='overflow:auto'><img src='img/indexImg/bo_pin.png' class='gachiPostLoc'>"+list.g_loc1+"</li>"+
 								"<li><span class='cntJoin'>"+list.g_joinCnt+"</span>/"+list.g_cnt+"명 </li>"+
-								"<li><img src='common/user.png' class='gachiPostImg'/>&nbsp;&nbsp;<span>"+list.userid+"</span></li>"+
+								"<li><img src='/1ocaler/img/mem_prof/"+list.mem_prof+"' class='gachiPostImg'/>&nbsp;&nbsp;<span>"+list.userid+"</span></li>"+
 							"</ul></li>"
 						);	
 				})
