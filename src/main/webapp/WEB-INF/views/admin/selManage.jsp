@@ -179,7 +179,7 @@
 						txt += 		"<td>"+vo.num+"</td>";
 						if(vo.s_cate==1){
 							txt += 		"<td>식료품</td>";
-						}else if(vo.s_cate==2)){
+						}else if(vo.s_cate==2){
 							txt += 		"<td>생필품</td>";
 						}else{
 							txt += 		"<td>기타</td>";
