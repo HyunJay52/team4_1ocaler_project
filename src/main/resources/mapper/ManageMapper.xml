@@ -328,7 +328,7 @@
 		on sp.sp_item = item.i_num where sp.userid=#{param1} order by sp_date desc
   	</select>
   	<select id="mempsendmodal2List" resultType="com.team4.localer.vo.AdminspendVO">
-  		select mem.num as item_num, mem.s_subject as sel_subject , sp.userid as sel_userid, sp.sp_point as add_point, sp.sp_date 
+  		select mem.num as item_num, mem.s_subject as sel_subject , sp.userid as sel_userid, sp.sp_point as add_point, to_char(sp.sp_date,'YY/MM/DD') sp_date 
 		from mem_share mem join sp_p sp on sp.sp_item = mem.num where mem.userid=#{param1} order by sp_point
   	</select>
   	<select id="selspendtotal" resultType="com.team4.localer.vo.AdminspendVO">

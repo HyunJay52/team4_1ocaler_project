@@ -125,7 +125,7 @@
     					$.each($list ,function(idx,vo){
     						txt+="<tr class='modal1List'>";
 	    						txt+="<td>"+vo.item_num+"</td>";
-	    						txt+="<td class='wordcut'>"+vo.sel_subject+"</td>";
+	    						txt+="<td class='wordcut cut'>"+vo.sel_subject+"</td>";
 	    						txt+="<td>"+vo.sel_userid+"</td>";
 	    						txt+="<td>"+setComma(vo.spend_point)+"</td>";
 	    						txt+="<td>"+vo.sp_date+"</td>";
@@ -161,7 +161,7 @@
   					$.each($list ,function(idx,vo){
   						txt+="<tr class='modal2List'>";
 	    						txt+="<td>"+vo.item_num+"</td>";
-	    						txt+="<td class='wordcut'>"+vo.sel_subject+"</td>";
+	    						txt+="<td class='wordcut cut'>"+vo.sel_subject+"</td>";
 	    						txt+="<td>"+vo.sel_userid+"</td>";
 	    						txt+="<td>"+setComma(vo.add_point)+"</td>";
 	    						txt+="<td>"+vo.sp_date+"</td>";
