@@ -214,6 +214,10 @@
 			$('#viewQnaAnswer').css('display', 'block');
 		});
 		
+		$(document).on('click', '.shipUpdate', function(){
+			location.href='myInfoDelivery';
+		})
+		
 	});
 	//리뷰확인창 닫기 
 	function closeQnaAnswer(){
@@ -285,17 +289,17 @@
 						<td>상태</td>
 					</tr>
 
-					<c:forEach var="join" items="${myJoin }" begin='1' end='10'>
+					<c:forEach var="join" items="${myJoin }" begin='0' end='10'>
 						<tr>
 							<c:if test="${join.auth==logId }">
-								<td>나의 참여</td>
+								<td>나의 모집</td>
 								<td><!-- (${join.up_cate }) -->${join.title }<input type='hidden' value='${join.j_num }' /></td>
 								<td>${join.userid }</td>
 								<td>${join.j_writedate }</td>
 								<td><button class='joincnfbtn btn btn-info btn-block '>${join.j_status }</button></td>
 							</c:if>
 							<c:if test="${join.auth!=logId }">
-								<td>나의 모집</td>
+								<td>나의 참여</td>
 								<td><input type='hidden' value='${join.j_num }' /><!-- (${join.up_cate }) -->${join.title }</td>
 								<td>${join.auth }</td>
 								<td>${join.j_writedate }</td>
@@ -358,7 +362,7 @@
 <div class="myinfoApprPopup" id="myinfoCancelApp">
 	<div>참여신청 취소 시, 재수락이 불가능합니다.</div>
 	<ul>
-		<li><button type="button" class="myinfoMainAppr">취소</button></li>
+		<li><button type="button" class="myinfoMainAppr">확인</button></li>
 		<li><button type="button" class="myinfoMaindec">뒤로가기</button></li>
 	</ul>
 </div>

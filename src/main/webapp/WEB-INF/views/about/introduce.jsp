@@ -48,7 +48,6 @@
 		<li>
 			<ul class="introInnerul">
 				<li><img src="<%=request.getContextPath() %>/img/aboutImg/wow.png"/></li>			
-				<li>김용우</li>
 				<li class="aboutpageName" style="margin:10px auto; width: 70px; font-family: nsreb; font-size: 22px;">김용우</li>
 			</ul>
 		</li>	

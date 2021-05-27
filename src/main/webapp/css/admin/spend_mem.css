@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.wordcut{
+.cut{
 	display: inline-block; 
 	width: 150px; 
 	white-space: nowrap; 
