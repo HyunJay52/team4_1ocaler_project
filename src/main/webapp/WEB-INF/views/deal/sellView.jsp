@@ -622,7 +622,7 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div>
-				<a href="#sellReviewChk">리뷰수 : ${reviewAll[0].totalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
+				<a href="#sellReviewChk">리뷰수 : ${showTotalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div>
 				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	
@@ -642,12 +642,12 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div id="sellReviewChk" style="border-bottom: 3px solid navy;">
-				<a href="#sellReviewChk">리뷰수 : ${reviewAll[0].totalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
+				<a href="#sellReviewChk">리뷰수 : ${showTotalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div>
 				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	
 			</div>
-		</div>
+		</div>	
 		<h3 class="sellShortDescription">구매후기<span> | 사용 후기를 남겨보아요 </span></h3> 
 			
 		<div id="sellReview">
@@ -709,7 +709,7 @@
 				<a href="#sellDetailShow">상세정보</a>	
 			</div>
 			<div>
-				<a href="#sellReviewChk">리뷰수 : ${reviewAll[0].totalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
+				<a href="#sellReviewChk">리뷰수 : ${showTotalCnt }개 &nbsp;  &nbsp;  &nbsp; 재구매율 : ${fn:substring((reviewAll[0].reRate1/reviewAll[0].totalCnt)*100,0,5) }%</a>
 			</div>
 			<div id="sellQusetion" style="border-bottom: 3px solid navy;">
 				<a href="#sellQusetion">Q&A (<span class="QNACNT">4</span>)</a>	

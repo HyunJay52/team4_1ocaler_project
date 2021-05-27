@@ -203,6 +203,7 @@ public class SellerController {
 		mav.addObject("reviewLists",myinfoService.selectSellItemReview(reviewPageVO));
 		mav.addObject("reviewAll",myinfoService.selectAllReDate(itemVO.getI_num()));
 		mav.addObject("pageVO",reviewPageVO);
+		mav.addObject("showTotalCnt", myinfoService.totalReviewCnt(itemVO.getI_num()));
 		System.out.println(myinfoService.selectSellItemReview(reviewPageVO).size()+"<-- 총리뷰갯");
 		
 		
