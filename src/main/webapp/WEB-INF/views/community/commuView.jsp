@@ -145,8 +145,6 @@
 		                  }else {
 		                	
 						}
-						   
-
 						  tag+= "</li>";
 						  
 					})//$result.each 
@@ -236,11 +234,7 @@
             $(this).parent().next().next().css("display", "block"); //수정내용..
      
          });
-	})
-	
-
-
-	
+	})	
 </script>
 
 
