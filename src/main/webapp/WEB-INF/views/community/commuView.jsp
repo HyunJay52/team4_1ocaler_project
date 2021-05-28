@@ -116,11 +116,11 @@
 					
 					//여기서부터 
 					var $result = $(result);
-					var tag ="<ul>";
+					var tag ="<h4>댓글목록</h4><hr/><ul>";
 					
 					$result.each(function(idx,obj){
 						/* 아이디 댓글 날짜 */
-						tag+= "<li><div><h5>"+obj.userid+"</h5>&emsp;("+obj.rep_date+")</div>";
+						tag+= "<li><div><h5 style='font-weight:bold;'>"+obj.userid+"</h5>&emsp;("+obj.rep_date+")</div>";
 					
 						/* 로그인되어있을때, 수정이랑 삭제 버튼보이기 */
 						if(obj.userid =="${logId}"){
@@ -145,8 +145,6 @@
 		                  }else {
 		                	
 						}
-						   
-
 						  tag+= "</li>";
 						  
 					})//$result.each 
@@ -236,11 +234,7 @@
             $(this).parent().next().next().css("display", "block"); //수정내용..
      
          });
-	})
-	
-
-
-	
+	})	
 </script>
 
 
@@ -365,7 +359,7 @@
 			<c:if test="${logId != null}">
 				<form method="post" id="commuViewreplyFrm">
 					<div>
-						<h4>COMMENT</h4>
+						<h4>COMMENT</h4>	
 						<input type="hidden" name="num" value="${vo.num }"/>
 			        	<textarea placeholder="자신의 의견을 간단히 적어주세요." name="rep_content" id="rep_content"></textarea>
 			        </div>
@@ -376,7 +370,7 @@
 			</c:if>	
 		</div>
 		<div id="commuViewreplyList">
-		
+			
 		</div>
 		
 		<div id="WVPProfilePopup">
@@ -387,8 +381,8 @@
 			<ul>
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.mem_sub } </span></li>
-				<li><span>총 게시물 : ${vo.mem_post }개</span></li>
-				<li><span>회원등급 : ${vo.mem_rev }개</span></li>
+				<li><span>총 게시물 : ${vo.mem_post } 개</span></li>
+				<li><span>마음지수 : ${vo.mem_rev }/ 100</span></li>
 			</ul>
 		</div>
 		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>

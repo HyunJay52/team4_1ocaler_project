@@ -32,10 +32,32 @@ public class DealShareVO {
 
 
 
+	private int dealjoinCnt;
 	
 	
 	
-	
+
+
+
+
+
+	public int getDealjoinCnt() {
+		return dealjoinCnt;
+	}
+
+
+
+
+
+
+
+
+	public void setDealjoinCnt(int dealjoinCnt) {
+		this.dealjoinCnt = dealjoinCnt;
+	}
+
+
+
 
 
 

@@ -306,14 +306,13 @@ $(function(){
 	//자주하는 질문 수정버튼 클릭시,1:1질문 처리요청
 	$(document).on('click', '.smallbtn', function(){
 		var cate = $(this).attr('title');//버튼 클릭종류 파악 
-		var num =  $(this).attr('name');//버튼 클릭한 글번호 가져오기 
-		alert("자주하는 질문 수정 클릭할때 글 번호" +num);
+		var num =  parseInt($(this).attr('name'));//버튼 클릭한 글번호 가져오기 
 		if(cate=="oftenqBtn"){
 			//자주하는 질문 수정클릭시
 			location.href="oftenQWriteEdit?num="+num;
 		}else if(cate=="csBtn"){
 			//1:1질문 처리요청 클릭시 
-			location.href="persnal?num="+num;
+			location.href="persnal?cs_num="+num;
 		}else if(cate=="reportBtn"){
 			//신고 처리요청 클릭시
 			location.href = "reportEdit?num="+num;

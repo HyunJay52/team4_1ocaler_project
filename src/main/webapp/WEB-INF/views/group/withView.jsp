@@ -285,7 +285,7 @@
 			</c:if>
 		</ul>
 		<hr style="width:380px; margin-bottom:20px; margin-top:0px; background:#a9a9a9; margin:0 auto;">
-		<div> 서울틀별시 > <a href="groupPage">${pageVO.loc_gu }</a> > 가치가장  </div>
+		<div> 서울특별시 > <a href="groupPage">${pageVO.loc_gu }</a> > 가치가장  </div>
 		<form class="groupInnerSearchFrm" id="withViewGroupSearchFrm" method="get" action="withPage">
 			<input type="hidden" name="loc_gu" value="${pageVO.loc_gu }"/><!-- 나중에 로그인하면 세션값을 받아와서 띄워줘야 한다........................... -->
 			<select name="searchKey">	
@@ -312,7 +312,7 @@
 					<span>${vo.g_subject }</span>
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/clock.png" title="약속시간"/>${vo.g_date } ${vo.g_time }</div><!-- g_date, g_time 값을 가지고 온다. -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/markerB.png" title="약속장소"/>${vo.g_loc1 }</div><!-- g_loc1 값을 가져온다. -->
-					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>1 / ${vo.g_cnt }명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
+					<div><img src="<%=request.getContextPath()%>/img/groupImg/human.png" title="모집인원"/>${vo.g_joinCnt } / ${vo.g_cnt }명</div><!-- 1=> join테이블에서 게시글번호로 이어서 신청완료 상태를 count로 세어온다 -->
 					<div><img src="<%=request.getContextPath()%>/img/groupImg/writer.png" title="모집인원"/>${vo.userid }</div>
 					<div>${vo.g_tag }</div><!-- 태그값을 가지고온다. -->
 					<input type="hidden" name="num" value="${vo.num }" id="WVnum"/>

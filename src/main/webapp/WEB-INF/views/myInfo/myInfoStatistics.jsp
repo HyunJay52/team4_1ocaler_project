@@ -42,9 +42,9 @@
 				<h3>판매관리 - 통계</h3>
 			</div>
 			<div class="myinfoStatisticsLeft">
-				<table class="myinfoStatisticsTable2 info-font-weight mdFnt">
+				<table class="myinfoStatisticsTable2 info-font-weight mdFnt" style="margin-bottom:40px;">
 					<tr>
-						<td style="height:70px;">${monthArr[2]}월 총매출 현황</td>
+						<td style="height:40px;">${monthArr[2]}월 총매출 현황</td>
 					</tr>
 					<tr>	
 						<td id="totalSale"></td>				

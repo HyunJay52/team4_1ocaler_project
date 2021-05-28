@@ -41,8 +41,8 @@
 		// 		}
 
 		function myInfoMainDeal() {
-			$
-					.ajax({
+			
+					$.ajax({
 						url : "myInfoMainDeal",
 						data : {
 							"nowNum" : 1,
@@ -75,7 +75,7 @@
 									.forEach(function(data, idx) {
 										if (data.share_userid == '${logId}'
 												&& data.userid != '${logId}') {
-											tag += "<tr><td>내 모집글</td>";
+											tag += "<tr><td style='font-family:nsrb;'>내 모집글</td>";
 											tag += "<td>" + data.s_subject
 													+ "</td>";
 											tag += "<td>" + data.userid
@@ -85,7 +85,7 @@
 											tag += "<td><button class='btn btn-info btn-block'>승인대기</button></td>";
 
 										} else if (data.userid == '${logId}') {
-											tag += "<tr><td>참여신청</td>";
+											tag += "<tr><td style='color: gray; font-family:nsrb;'>참여신청</td>";
 											tag += "<td>" + data.s_subject
 													+ "</td>";
 											tag += "<td>" + data.userid
@@ -203,18 +203,20 @@
 		
 		//qna 답변 보기
 		$(document).on('click', '.qnaTitle', function(){
-			alert("adjfhklajsdfh?")
 			var q_con = $(this).text();
 			var adate = $(this).next().next().children('input').val();
 			var answer = $(this).next().next().next().children('input').val();
 			
-			console.log(q_con, '?', adate, '?', answer);
 			$('#viewQnaAnswer li:nth-child(1)').children('span').text(q_con);
 			$('#viewQnaAnswer li:nth-child(2)').children('span').text(adate);
 			$('#viewQnaAnswer li:last-child').children('div').text(answer);
 			
 			$('#viewQnaAnswer').css('display', 'block');
 		});
+		
+		$(document).on('click', '.shipUpdate', function(){
+			location.href='myInfoDelivery';
+		})
 		
 	});
 	//리뷰확인창 닫기 
@@ -287,17 +289,17 @@
 						<td>상태</td>
 					</tr>
 
-					<c:forEach var="join" items="${myJoin }" begin='1' end='10'>
+					<c:forEach var="join" items="${myJoin }" begin='0' end='10'>
 						<tr>
 							<c:if test="${join.auth==logId }">
-								<td>나의 참여</td>
+								<td>나의 모집</td>
 								<td><!-- (${join.up_cate }) -->${join.title }<input type='hidden' value='${join.j_num }' /></td>
 								<td>${join.userid }</td>
 								<td>${join.j_writedate }</td>
 								<td><button class='joincnfbtn btn btn-info btn-block '>${join.j_status }</button></td>
 							</c:if>
 							<c:if test="${join.auth!=logId }">
-								<td>나의 모집</td>
+								<td>나의 참여</td>
 								<td><input type='hidden' value='${join.j_num }' /><!-- (${join.up_cate }) -->${join.title }</td>
 								<td>${join.auth }</td>
 								<td>${join.j_writedate }</td>
@@ -326,7 +328,7 @@
 					
 					<c:forEach var="qvo" items="${qnaVO }">
 						<tr>
-							<c:if test="${qvo.q_status==1 }">
+							<c:if test="${qvo.q_answer!=null }">
 								<td class="qnaTitle" style="cursor: pointer; font-family: nsrb; width: 55%;" >${qvo.q_content }</td>
 								<td>${qvo.sellerid }</td>
 								<td>${qvo.q_adate }<input type="hidden" value="${qvo.q_adate }"/></td>
@@ -334,7 +336,7 @@
 									<input type="hidden" value="${qvo.q_answer }"/>
 								</td>
 							</c:if>
-							<c:if test="${qvo.q_status==2 }">
+							<c:if test="${qvo.q_answer==null }">
 								<td style="cursor: pointer; font-family: nsrb; width: 55%;" onclick="alert('답변을 기다리고 있습니다. 잠시만 더 기다려주세요!')">${qvo.q_content }</td>
 								<td>${qvo.sellerid }</td>
 								<td>${qvo.q_writedate }</td>
@@ -360,7 +362,7 @@
 <div class="myinfoApprPopup" id="myinfoCancelApp">
 	<div>참여신청 취소 시, 재수락이 불가능합니다.</div>
 	<ul>
-		<li><button type="button" class="myinfoMainAppr">취소</button></li>
+		<li><button type="button" class="myinfoMainAppr">확인</button></li>
 		<li><button type="button" class="myinfoMaindec">뒤로가기</button></li>
 	</ul>
 </div>

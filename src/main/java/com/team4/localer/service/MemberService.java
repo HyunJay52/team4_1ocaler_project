@@ -34,6 +34,10 @@ public interface MemberService {
 	public SellerVO selectSeller(String userid);
 	//셀러 정보 수정 확인
 	public int updateSeller(SellerVO vo);
+	//셀러탈퇴
+	public int updateDelseller(String userid);
+	//탈퇴 셀러회원 일반회원으로 변경 
+	public int updateDelsellerToMem(String userid);
 	//아이디 중복확인
 	public String idDoubleCheck(String userid);
 	//별명 중복확인

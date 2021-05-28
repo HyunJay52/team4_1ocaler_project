@@ -2,9 +2,9 @@ package com.team4.localer.vo;
 
 public class DealPageVO {
 
-	private int pageNum=1;// 현재 페이지
-	private int onePageNum=16;// 한페이지당 페이지 번호 수 
-	private int onePageRecord=16;// 한페이지당 레코드수	
+   private int pageNum=1;// 현재 페이지
+   private int onePageNum=16;// 한페이지당 페이지 번호 수 
+   private int onePageRecord=16;// 한페이지당 레코드수   
 
 	private int totalRecord;// 총레코드수
 	private int totalPage;// 마지막 페이지, 총페이지수
@@ -22,9 +22,17 @@ public class DealPageVO {
 	
 	private int num;
 	
+	private int selljoinCnt;
 	
 	
 	
+	
+	public int getSelljoinCnt() {
+		return selljoinCnt;
+	}
+	public void setSelljoinCnt(int selljoinCnt) {
+		this.selljoinCnt = selljoinCnt;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -117,7 +125,5 @@ public class DealPageVO {
 	public void setS_gu(String s_gu) {
 		this.s_gu = s_gu;
 	}
-	
-	
 	
 }

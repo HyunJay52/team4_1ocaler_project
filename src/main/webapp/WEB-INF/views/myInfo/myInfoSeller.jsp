@@ -7,27 +7,39 @@
 	document.title = "내정보(판매자)";
 	
 	$(function(){
-		//moreSellerInfo 더보기 이벤트
-		var moreSellerInfo = false;
+		
+		//수정폼 오픈
 		$("#moreSellerInfo").click(function(){
-			if(moreSellerInfo == false){
-				$(this).css('display', 'none');
-				$(".editOn").css('display', 'block');
-				$(".inputDisabled").attr('disabled', false);
-				//$("#sel_prof").attr('readyonly', false);
-				moreSellerInfo = true;
-			}else{
-				if(confirm("수정을 취소하시겠습니까?")){
-						
-				}else{
-					return false;
-				}
-				$(".editOn").css('display', 'none');	
-				$(".inputDisabled").attr('disabled', true);
-				moreSellerInfo = false;								
+			$(this).css('display', 'none');
+			$(".editOn").css('display', 'block');
+			$(".inputDisabled").attr('disabled', false);
+			//$("#sel_prof").attr('readyonly', false);
+			
+		});
+		
+		//수정취소
+		$("#sellerEditCancelBtn").click(function(){
+			$("#moreSellerInfo").css('display', 'block');
+			$(".editOn").css('display', 'none');	
+			$(".inputDisabled").attr('disabled', true);
+		});
+		
+		//정보수정 버튼
+		$("#sellerEditBtn").click(function(){
+			if(confirm("판매자 정보를 수정하시겠습니까?")){
+				
 			}
 		});
+		
+
+		$('#delSeller').click(function(){
+			if(confirm("셀러회원을 탈퇴하시겠습니까?")){
+				location.href="sellerinfo/sellerDel";			
+			}
+		});
+
 	});	
+	
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
 <div class="myinfoBody">
@@ -38,13 +50,12 @@
 			<ul>
 				<li>대표 이미지</li>
 				<li class="memheightAuto">
-					<div style="border: none; width: 110px; height: 110px; margin-right: 10px; float: left;">
+					<div style="border: none; width: 180px; height: 180px; margin-right: 10px; float: left;">
 						<img src="<%=request.getContextPath()%>/img/sel_prof/${myVO.sel_prof}"
-							id="previewImg" class="profImg form-control-file border"
-							alt="upload image" />
+						id="sel_previewImg" class="profImg form-control-file border" alt="upload image"style="height:100%"/>
+
 					</div> <label class="Mem_input-file-button" for="sel_prof"> 사진수정 </label> 
-					<input type="file" name="profFile" accept="image/*" id="sel_prof"
-					style="display: none; margin-top: 70px; border: none;" />
+					<input type="file" name="profFile" accept="image/*" id="sel_prof" style="display: none; margin-top: 70px; border: none;" />
 				</li>
 				
 				<li>아이디</li>
@@ -73,7 +84,7 @@
 					<ul class="myifoAddrInput">
 						<li><input type="text" class="inputDisabled" name="sel_zip" id="sel_zip" value="${myVO.sel_zip }" disabled="disabled"
 							tabindex="9" />
-						<button type="button" class="btn commBtn Mem_lgBtn inputDisabled" onclick="javascript:openKakaoPost()">재검색</button></li>
+						<button type="button" class="btn commBtn Mem_lgBtn inputDisabled" onclick="javascript:sellOpenKakaoPost()">재검색</button></li>
 						<li><input type="text" class="inputDisabled" name="sel_addr" id="sel_addr" value="${myVO.sel_addr }" disabled="disabled"
 							tabindex="10" /></li>
 						<li><input type="text" class="inputDisabled" name="sel_detail" id="sel_detail" value="${myVO.sel_detail }" disabled="disabled"
@@ -81,7 +92,7 @@
 						</li>
 						<li>
 							<div id="joinAddrWrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:absolute">
-							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="sellOpenKakaoPost()" alt="접기 버튼">
 							</div>
 						</li>
 					</ul>
@@ -116,26 +127,19 @@
 			<button type="button" id="moreSellerInfo" class="btn commBtn Mem_lgBtn"
 				style="width: 320px; height: 40px; display: block; margin: 0 auto;">수정하기</button>
 			<div class="editOn" id="sellerEditOn">
+
 				<button type="submit" class="btn commBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">수정</button>
-				<button type="reset" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">취소</button>			
+				<button type="reset" id="sellerEditCancelBtn" class="btn cancelBtn Mem_lgBtn" style="width: 320px; display: block; margin: 5px auto;">취소</button>			
+
 			</div>
 			<div style="text-align:center; margin-bottom:20px">
-				<button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;">셀러활동 중단</button>
-				<br/><button type="button" class="btn cancelBtn" style="width:320px;  height:45px; margin: 5px auto;" data-target="#myinfoMd" data-toggle="modal">셀러 탈퇴</button>
+				<!-- <button type="button" class="btn commBtn" style="width:320px; height:45px; margin: 5px auto;" >셀러활동 중단</button> -->   
+				<br/><button type="button" id="delSeller" class="btn cancelBtn" style="width:320px;  height:45px; margin: 5px auto;" data-target="#myinfoMd" data-toggle="modal">셀러 탈퇴</button>
+
 			</div>
 		</div>
 	</form>
 </div>
-<script>
-	$(()=>{
-		$("#moreSellerInfo").click(function(){
-			$(this).css('display', 'none');
-			$("#sellerEditOn").css('display', 'block');
-		});
-	});
-</script>
-
-
 <div id="verifyEmailPop">
 	<div>이메일인증</div>
 	<ul>

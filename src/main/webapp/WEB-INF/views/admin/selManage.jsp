@@ -179,8 +179,10 @@
 						txt += 		"<td>"+vo.num+"</td>";
 						if(vo.s_cate==1){
 							txt += 		"<td>식료품</td>";
-						}else{
+						}else if(vo.s_cate==2){
 							txt += 		"<td>생필품</td>";
+						}else{
+							txt += 		"<td>기타</td>";
 						}
 						txt += 		"<td class='wordcut'><a href='memberView?num="+vo.num+"'>"+vo.s_subject+"</a></td>";
 						txt += 		"<td>"+vo.s_cnt+"</td>";
@@ -280,11 +282,14 @@
 			<tr class="selboardList">
 				<td>${ vo.num}</td>
 				<td>
-					<c:if test="${vo.s_cate==1 }">
+					<c:if test="${vo.s_cate==1}">
 						식료품
 					</c:if>
-					<c:if test="${vo.s_cate==2 }">
+					<c:if test="${vo.s_cate==2  }">
 						생필품
+					</c:if>
+					<c:if test="${vo.s_cate==3  }">
+						기타
 					</c:if>
 				</td>
 				<td class="wordcut"><a href="memberView?num=${ vo.num}">${vo.s_subject}</a></td>
@@ -301,21 +306,21 @@
 	<ul class="link">
 	<!-- 이전버튼 -->
 		<c:if test="${pageVO.pageNum>1 }">
-			<li class="clickpage">이전</li>
+			<li class="clickpage" style="cursor:pointer;">이전</li>
 		</c:if>
 		<!-- 페이지 번호              1부터                            5까지   -->
          <c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
             <c:if test="${p<=pageVO.totalPage}">              
             	<c:if test="${p==pageVO.pageNum }">
-            		<li class="clickpage nowPg" >${p}</li> 
+            		<li class="clickpage nowPg" style="cursor:pointer;">${p}</li> 
             	</c:if>
             	<c:if test="${p!=pageVO.pageNum }">
-            		<li class="clickpage" >${p}</li>  
+            		<li class="clickpage" style="cursor:pointer;">${p}</li>  
             	</c:if>
             </c:if>
          </c:forEach>
          <c:if test="${pageVO.totalPage>pageVO.pageNum }">
-			<li class="clickpage">다음</li>
+			<li class="clickpage" style="cursor:pointer;">다음</li>
 		</c:if>
 	</ul>
 </div>

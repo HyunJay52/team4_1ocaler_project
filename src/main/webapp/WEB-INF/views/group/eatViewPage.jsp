@@ -66,6 +66,7 @@
 				}
 			});	
 			//참여하기================================================================================
+
 				if(${logId!=null}){
 					$("#eatViewPageJoinBtn").click(()=>{
 						var url = "joinInsert";
@@ -92,12 +93,19 @@
 				}
 				
 			//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
-			var joinCheck = $("#eatViewPageJoinBtn").attr("disabled");
-			console.log(joinCheck);
-			if(joinCheck=='disabled'){
+			var joinCheck = $("#eatViewPageJoinBtn").prop("disabled");
+			console.log(joinCheck,"<-- 상태");
+			console.log(${appNum==vo.g_cnt },"<-- 같나");
+			if((${appNum==vo.g_cnt } && joinCheck==false) || (${appNum==vo.g_cnt } && joinCheck==true) ){
+				$("#eatViewPageJoinBtn").children("span").text('모집종료');
+				$("#eatViewPageJoinBtn").css('background',"#B8B2F4");
+				$("#eatViewPageJoinBtn").css('opacity',1);
+				$("#eatViewPageJoinBtn").attr("disabled",true);
+			}else if(${appNum!=vo.g_cnt } && joinCheck==true){
 				$("#eatViewPageJoinBtn").children("span").text('신청완료');
-				$("#withViewPageJoinBtn").css('background',"#B8B2F4");
-				$("#withViewPageJoinBtn").css('opacity',1);
+				$("#eatViewPageJoinBtn").css('background',"#B8B2F4");
+				$("#eatViewPageJoinBtn").css('opacity',1);
+				$("#eatViewPageJoinBtn").attr("disabled",true);
 			}
 			
 		//지도============================================================================================
@@ -304,7 +312,7 @@
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.memberVO.mem_sub } </span></li>
 				<li><span>총 게시물 : ${vo.memberVO.mem_post }개</span></li>
-				<li><span>회원등급 : ${vo.memberVO.mem_rev }/100</span></li>
+				<li><span>회원등급 : <span style="font-size:18px; color:red; font-weight:bold;">${vo.memberVO.mem_rev }</span> / 100 ❤︎</span></li>
 			</ul>
 		</div>
 		<div><button id="eatViewPageChatBtn"  class="btn commBtn">1:1채팅</button><button id="eatViewPageReportBtn" class="btn commBtn">신고하기</button></div>

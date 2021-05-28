@@ -48,7 +48,7 @@
 			</div>
 			<div>
 				<ul id="itemMemo">
-					<li> 상품내용</li>
+					<li style="font-size:19px"> 상품내용</li>
 					<li>상품명</li>
 					<li>${complVO.i_subject }</li>
 					<li>옵션명</li>
@@ -56,7 +56,7 @@
 				</ul>
 				<hr style="width: 430px; margin: 9 auto;"/>
 				<ul id="cashMemo">
-					<li>결제 정보</li>
+					<li style="font-size:19px">결제 정보</li>
 					<li>주문금액</li>
 					<li style="color:red; font-weight:bold">${complVO.o_price }원</li>
 					<li style="padding-left:30px; font-size:14px; color:gray">ㄴ 상품금액</li>

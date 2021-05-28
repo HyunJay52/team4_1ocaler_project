@@ -38,7 +38,7 @@
 		
 		$('#withViewPageReportBtn').click(()=>{ 
 			if(${logId!=null}){
-				location.href="reportWrite?num=${vo.num}"
+				location.href="reportWrite?num=${vo.num}";
 			}else{
 				alert('로그인후 사용할 수 있습니다.');
 				location.href="login";
@@ -66,7 +66,7 @@
 			
 			
 		//참여하기=================================================================	
-		if(${logId!=null}){
+			if(${logId!=null}){
 			$("#withViewPageJoinBtn").click(()=>{
 				var url = "joinInsert";
 				var params = "num="+$("#withViewPageJoinBtn").val();
@@ -91,14 +91,18 @@
 		}
 		
 		//참여하기 버튼이 disabled 일때 신청완료로 바꿔주기 다시접속했을 떄도 신청완료로 뜨게하려고 함
-		var joinCheck = $("#withViewPageJoinBtn").attr("disabled");
+		var joinCheck = $("#withViewPageJoinBtn").prop("disabled");
 		console.log(joinCheck);
-		if(joinCheck=='disabled'){
+		if((${appNum==vo.g_cnt } && joinCheck==false) || (${appNum==vo.g_cnt } && joinCheck==true) ){
+			$("#withViewPageJoinBtn").children("span").text('모집종료');
+			$("#withViewPageJoinBtn").css('background',"#B8B2F4");
+			$("#withViewPageJoinBtn").css('opacity',1);
+			$("#eatViewPageJoinBtn").attr("disabled",true);
+		}else if(${appNum!=vo.g_cnt } && joinCheck==true){
 			$("#withViewPageJoinBtn").children("span").text('신청완료');
 			$("#withViewPageJoinBtn").css('background',"#B8B2F4");
 			$("#withViewPageJoinBtn").css('opacity',1);
-			
-			
+			$("#withViewPageJoinBtn").attr("disabled",true);
 		}				
 		//지도============================================================================================
 		var markers = [];	
@@ -324,10 +328,10 @@
 				<li><span>${vo.userid }</span></li>
 				<li><span>가입일 : ${vo.memberVO.mem_sub } </span></li>
 				<li><span>총 게시물 : ${vo.memberVO.mem_post }개</span></li>
-				<li><span>총 댓글수 : ${vo.memberVO.mem_rev }개</span></li>
+				<li><span>회원등급 : <span style="font-size:18px; color:red; font-weight:bold;">${vo.memberVO.mem_rev }</span> / 100 ❤︎</span></li>
 			</ul>
 		</div>
-		<div><button class="btn commBtn">1:1채팅</button><button class="btn commBtn">신고하기</button></div>
+		<div><button class="btn commBtn">1:1채팅</button><button id="withViewPageReportBtn" class="btn commBtn">신고하기</button></div>
 	</div>
 </body>
 </html>

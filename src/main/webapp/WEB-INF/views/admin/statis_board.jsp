@@ -165,8 +165,10 @@
 			<div id="newTotal"></div>
 		</li>
 	</ul>
-	<div class="btitle">게시글 통계</div>
-	<div id="chart_div"></div>
+	<div id="chartDiv">
+		<div class="btitle">게시글 통계</div>
+		<div id="chart_div"></div>
+	</div>
 	<ul class="donutUl">
      	<li id="donut_single"></li>
      	<li id="donut_two"></li>

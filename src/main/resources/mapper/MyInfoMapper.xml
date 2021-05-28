@@ -18,8 +18,7 @@
 	</insert>
 	
 	<select id="joinPoint" resultType="String">
-		select sum(cha_point) from cha_p c join member m on c.userid=m.userid 
-		where m.userid = #{param1}
+		select nvl(((select nvl(sum(cha_point), 0) from cha_p where userid=#{param1})-(select nvl(sum(sp_point),0) from sp_p where userid=#{param1})), 0) AS cha_point from dual
 	</select>
 
 	<select id="allPointSelect" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.Cha_pVO">
@@ -144,6 +143,7 @@
 		select * from(
 		select * from(
 		select o_num, seller.userid, s.i_subject, num, o_mtd, o_cnt, o_price, o_date, o_conf, o_status 
+		,(select count(re_num) from item_review i where o.num = i.num) reviewCount
 		from ordertbl o join sell_item s on o.num = s.i_num 
 		                join seller on s.sel_num = seller.sel_num 
 		                where o.userid=#{userid} and o_date between to_date(#{searchDate},'YYYY-MM-DD HH24:MI:SS')
@@ -260,15 +260,20 @@
 			order by o_date
    </select>
     
-
+	<select id="selectItemReviewListCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="int">
+		select count(o_num) from(
+        select * from ordertbl join sell_item on ordertbl.num = sell_item.i_num
+        left outer join item_review on item_review.num = sell_item.i_num
+        where ordertbl.userid= #{userid} and o_conf = 2 and item_review.num is null)
+	</select>
    <select id="selectItemReviewList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.OrderVO">
    select * from(
    		select * from(
 		select o_num, o.userid, o.num, o_conf, o_date, o_status, s.sel_num, s.i_subject, seller.userid sellerid  
-		,(select count(re_num) from item_review i where i.num = o.num) as reviewCount
 		from ordertbl o join sell_item s on o.num = s.i_num 
+		left outer join item_review i on i.num = s.i_num 
 		join seller on s.sel_num = seller.sel_num
-		where o.userid= #{userid} and o_conf = 2 order by o_date desc)
+		where o.userid= #{userid} and o_conf = 2 and i.num is null order by o_date desc)
         where rownum  <![CDATA[ <= ]]> #{rowNum1} order by o_date asc)
 		where rownum  <![CDATA[ <= ]]> #{rowNum2} order by o_date desc
    </select>
@@ -288,7 +293,7 @@
 			join grouplocal on joinus.numjoin = grouplocal.num
 		</if>
 		<if test="kategorie.equals('sell_item')">
-			select re_num, item_review.userid, item_review.num, re_rate, i_subject re_subject, seller.userid sellerid , item_review.re_writedate, re_content
+			select re_num, item_review.userid, item_review.num, re_rate, i_subject re_subject, seller.userid sellerid , item_review.re_writedate, to_char(re_content)
 			from item_review 
 			join ordertbl on item_review.num = ordertbl.num 
 			join sell_item on ordertbl.num = sell_item.i_num 
@@ -299,6 +304,9 @@
 		and ${searchKey} like #{searchWord}
 		<if test="kategorie.equals('mem_share')">
 			group by re_num, item_review.userid, item_review.num, re_rate, mem_share.userid, s_subject, to_char(re_content), item_review.re_writedate 
+		</if>
+		<if test="kategorie.equals('sell_item')">
+			group by re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid , item_review.re_writedate, to_char(re_content)
 		</if>
 		order by re_writedate desc)
 		where rownum <![CDATA[ <= ]]> #{rowNum1} order by re_writedate asc)
@@ -321,7 +329,7 @@
 			join grouplocal on joinus.numjoin = grouplocal.num
 		</if>
    		<if test="kategorie.equals('sell_item')">
-			select re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid sellerid , item_review.re_writedate, re_content
+			select re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid sellerid , item_review.re_writedate, to_char(re_content)
 			from item_review 
 			join ordertbl on item_review.num = ordertbl.num 
 			join sell_item on ordertbl.num = sell_item.i_num 
@@ -333,9 +341,48 @@
 		<if test="kategorie.equals('mem_share')">
 			group by re_num, item_review.userid, item_review.num, re_rate, mem_share.userid, s_subject, to_char(re_content), item_review.re_writedate 
 		</if>
+		<if test="kategorie.equals('sell_item')">
+			group by re_num, item_review.userid, item_review.num, re_rate, i_subject, seller.userid , item_review.re_writedate, to_char(re_content)
+		</if>
 		)
    </select>
+   <select id="selectSaleManagementCounut" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="int">
+   		select count(o_num) from (
+		select o_num, o.userid, o.num, o_mtd, o_cnt, o_price, o_ship, o_date, o_conf, o_status, opt_str, i_subject, s.userid sellerid, i_content from ordertbl o 
+		join sell_item i on o.num = i.i_num 
+		join seller s on i.sel_num = s.sel_num
+		where s.userid = #{userid}
+		and ${searchKey} like #{searchWord}
+		and o_date between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') 
+		<if test="searchKey2 != null">
+			<if test="!searchKey2.equals('all')">
+				and o_conf = #{searchKey2}
+			</if>
+		</if>
+		
+		)
+   </select>
+   <select id="selectSalesManagement" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.OrderVO">
+		select * from (
+		select * from (
+		select o_num, o.userid, o.num, o_mtd, o_cnt, o_price, o_ship, o_date, o_conf, o_status, opt_str, i_subject, s.userid sellerid, i_content from ordertbl o 
+		join sell_item i on o.num = i.i_num 
+		join seller s on i.sel_num = s. sel_num
+		where s.userid = #{userid}
+		and ${searchKey} like #{searchWord}
+		and o_date between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS') 
+		<if test="searchKey2 != null">
+			<if test="!searchKey2.equals('all')">
+				and o_conf = #{searchKey2}
+			</if>
+		</if>
+		order by o_date desc)
+		where rownum <![CDATA[ <= ]]> #{rowNum1} order by o_date asc)
+		where rownum <![CDATA[ <= ]]> #{rowNum2} order by o_date desc   
    
+   </select>
    <update id="reviewUpdate" parameterType="com.team4.localer.vo.ItemReviewVO">
 		update item_review set re_rate = #{re_rate}, re_content = #{re_content} , re_writedate = sysdate where re_num =  #{re_num} and userid=#{userid}
    </update>
@@ -387,7 +434,7 @@
 			from ${kategorie}
 		</if>
 		<if test="kategorie.equals('reply')">
-			select reply.num, reply.userid, up_cate, b_subject, b_writedate, b_hit, rep_content, rep_date,
+			select reply.num, rep_num, reply.userid, up_cate, b_subject, b_writedate, b_hit, rep_content, rep_date,
 			(select count(rep_num) from reply where reply.num = board.num) as reply
 			from reply join board on reply.num = board.num
 		</if>
@@ -403,8 +450,9 @@
 		</if>
 		where ${kategorie}.userid=#{userid} and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
-		
-		and ${searchKey} like #{searchWord} 
+		<if test="searchKey != null">
+			and ${searchKey} like #{searchWord} 
+		</if>
 		<if test="searchKey2 != null">
 			<if test="!searchKey2.equals('all')">
 				and q_answer ${searchKey2}			
@@ -427,8 +475,10 @@
 		</if>
 		where ${kategorie}.userid= #{userid} and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
 		and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+		<if test="searchKey != null">
+			and ${searchKey} like #{searchWord}		
+		</if>
 		
-		and ${searchKey} like #{searchWord}
 		<if test="searchKey2 != null">
 			<if test="!searchKey2.equals('all')">
 				and q_answer ${searchKey2}			
@@ -440,13 +490,112 @@
 		select * from qna 
 		join sell_item on qna.num = sell_item.i_num 
 		join seller on sell_item.sel_num = seller.sel_num 
-		where q_num = #{param1} and seller.userid = #{param2}
+		where q_num = #{param1} 
+		<if test="param3.equals('qna')">
+			and ${param3}.userid = #{param2}
+		</if>
+		<if test="!param3.equals('qna')">
+			and seller.userid = #{param2}		
+		</if>
 	</select>
 	
 	<update id="QnAAnswerWrite" parameterType="com.team4.localer.vo.QnAVO">
 		update qna set q_answer = #{q_answer}, q_adate = sysdate where q_num = #{q_num}
 	</update>
 	
+	<select id="selectProductList" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="com.team4.localer.vo.SellitemVO">
+		select * from (
+		select * from ( 
+		select i_num, i_subject, i_cnt, i_content, i_img1, i_img2, i_img3, i_price, i_ship, i_period, i_status, i_writedate, i_hit, i_tag, 
+		(select count(o_num) from ordertbl o where i.i_num = o.num and o.o_conf = 2) orderCount,
+		(select sum(o_price) from ordertbl o where i.i_num = o.num and o.o_conf = 2) revenue
+		from sell_item i join seller s on i.sel_num = s.sel_num where s.userid= #{userid} 
+		and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+		    and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+		    and ${searchKey} like #{searchWord}
+		    <if test="searchKey2 != null">
+		    	<if test="searchKey2 == 1">
+		    		and i_status = 1
+		    	</if>
+		    	<if test="searchKey2 == 2">
+		    		and i_status = 2
+		    	</if>
+		    	<if test="searchKey2 == 3">
+		    		and i_status = 3
+		    	</if>
+		    	<if test="searchKey2 == 4">
+		    		and i_status = 4
+		    	</if>
+		    </if>
+		    order by ${dateContent} desc)
+		    where rownum <![CDATA[ <= ]]> #{rowNum1} order by ${dateContent} asc)
+		    where rownum <![CDATA[ <= ]]> #{rowNum2} order by ${dateContent} desc
+	</select>
+	<select id="selectProductListCount" parameterType="com.team4.localer.vo.MyinfoPageVO" resultType="int">
+		select count(i_num)
+	    from sell_item i join seller s on i.sel_num = s.sel_num where s.userid=#{userid} 
+	    and ${dateContent} between to_date(#{searchDate}, 'YYYY-MM-DD HH24:MI:SS')
+	    and to_date(#{searchDate2},'YYYY-MM-DD HH24:MI:SS')
+	    and ${searchKey} like #{searchWord}
+	    <if test="searchKey2 != null">
+		    	<if test="searchKey2 == 1 ">
+		    		and i_status = 1
+		    	</if>
+		    	<if test="searchKey2 == 2 ">
+		    		and i_status = 2
+		    	</if>
+		    	<if test="searchKey2 == 3 ">
+		    		and i_status = 3
+		    	</if>
+		    	<if test="searchKey2 == 4 ">
+		    		and i_status = 4
+		    	</if>
+		    </if>
+	</select> 
+	<update id="updateProductStatus">
+		update sell_item set i_status = 4 where i_num = #{param1}
+	</update>
+	
+	<update id="updateProductPeriod">
+		update sell_item set i_period = to_date(#{param2}, 'YYYY-MM-DD') where i_num = #{param1}
+	</update>
+	
+	<select id="sellerCount" resultType="com.team4.localer.vo.SellitemVO">
+		select (
+		select count(i_num) from sell_item i join seller s on i.sel_num = s.sel_num where userid = #{param1}) as myItem,
+		(select count(i_num) from sell_item i join seller s on i.sel_num = s.sel_num where userid = #{param1} and i_status = 1) as sale,
+		(select count(i_num) from sell_item i join seller s on i.sel_num = s.sel_num where userid = #{param1} and i_status = 2) as completed,
+		(select count(i_num) from sell_item i join seller s on i.sel_num = s.sel_num where userid = #{param1} and i_status = 3) as expected,
+		(select count(i_num) from sell_item i join seller s on i.sel_num = s.sel_num where userid = #{param1} and i_status = 4) as itemStop
+		from dual
+	</select>
+	<select id="orderCount" resultType="com.team4.localer.vo.OrderVO"> 
+		select (
+		select count(o_num) from ordertbl o join sell_item i on o.num = i.i_num join seller s on i.sel_num = s.sel_num where s.userid = #{param1} and i_status = 1) as count,
+		(select count(o_num) from ordertbl o join sell_item i on o.num = i.i_num join seller s on i.sel_num = s.sel_num where s.userid = #{param1}  and o_date between to_date(sysdate, 'YYYY-MM-DD')
+		and to_date(sysdate, 'YYYY-MM-DD')) as toDay,
+		(select count(o_num) from ordertbl o join sell_item i on o.num = i.i_num join seller s on i.sel_num = s.sel_num where s.userid = #{param1}  and o_conf = 2) as confirmation,
+		(select count(o_num) from ordertbl o join sell_item i on o.num = i.i_num join seller s on i.sel_num = s.sel_num where s.userid = #{param1}  and o_conf = 1) as stay
+		from dual
+	</select>
+	<delete id="deleteBoard">
+		delete from ${param1} where 
+		<if test="param1.equals('board')">
+			num in
+			
+			<foreach collection="param2" item="arr" open="(" close=")" separator=",">
+			 	 #{arr}
+			</foreach>
+			
+		</if>
+		<if test="param1.equals('reply')">
+			rep_num in 
+			<foreach collection="param2" item="arr2" open="(" close=")" separator=",">
+			 	#{arr2}
+			</foreach>
+		</if>
+		and userid = #{param3}
+	</delete>
 <!-- sql by hj 2021.05.21 -->
 	<select id="selectWaitingJoinList" resultType="com.team4.localer.vo.JoinUsVO">
 		SELECT userid, auth, j_status, up_cate, j_num, title, j_writedate FROM (
@@ -466,5 +615,76 @@
 		FROM QNA q2, (SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel 
 		WHERE q2.num=sel.i_num and q2.userid=#{param1 } ORDER BY q_writedate desc
 	</select>
+	
+	<select id="selectSelinfo" resultType="com.team4.localer.vo.SellerVO">
+		<![CDATA[	
+			SELECT sel.sel_lvl,nvl(sel.rec_m, 0) as rec_m, nvl(qna.qnacnt, 0) AS qnacnt FROM 
+			(SELECT s.userid, s.sel_num, s.sel_lvl, rec_m FROM seller s join (SELECT sel_num, sum(rec_money) AS rec_m FROM RECEIPT WHERE to_date(conf_date, 'YYYY-MM-DD')>=to_date(sysdate, 'YYYY-MM-DD') GROUP BY sel_num ) recp 
+			ON s.sel_num = recp.sel_num(+) where userid=#{param1 }) sel join (SELECT count(q_num) qnacnt, q.sellerid 
+			FROM (SELECT q_num, num, sel.userid AS sellerid, to_char(q_writedate, 'YYYY/MM/DD') AS q_writedate FROM QNA q2 join 
+			(SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel ON q2.num=sel.i_num WHERE sel.userid=#{param1 } AND to_date(q_writedate, 'YYYY-MM-DD')>=to_date(sysdate, 'YYYY-MM-DD')) q 
+			GROUP BY q.sellerid) qna on sel.userid=qna.sellerid(+)
+ 		]]>
+	</select>
+	
+	<select id="selectOrderInfo" resultType="int">
+		<![CDATA[
+			SELECT nvl(count(num),0) cnt FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD')
+			UNION ALL
+			SELECT nvl(count(num), 0) cnt FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_ship=1
+			UNION ALL
+			SELECT nvl(count(o.o_status), 0) FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_status=1
+			UNION ALL
+			SELECT nvl(count(o.o_status), 0) FROM ORDERTBL o join (SELECT i_num, s.userid FROM SELL_ITEM si, SELLER s WHERE si.SEL_NUM = s.SEL_NUM AND userid=#{parma1}) s
+			ON o.NUM = s.i_num WHERE to_date(o.o_date, 'YYYY-MM-DD')=to_date(sysdate, 'YYYY-MM-DD') AND o.o_status=2
+		]]>
+	</select>
+	
+
+<!-- QNA QuestionInsert WOWWOW -->
+	<insert id="QnaQuestionInsert" parameterType="com.team4.localer.vo.QnAVO">
+		insert into QNA(q_num, num, userid, q_status, q_content)
+		values(qsq.nextval, #{num}, #{userid}, #{q_status}, #{q_content})
+	</insert>
+<!-- QNA selectAllQna WOWWOW -->	
+	<select id="selectAllQnA" resultType="com.team4.localer.vo.QnAVO">
+		SELECT num, q2.userid, sel.userid AS sellerid, q_status, q_content, to_char(q_writedate, 'YYYY/MM/DD') AS q_writedate , q_answer, to_char(q_adate, 'YYYY/MM/DD') AS q_adate
+		FROM QNA q2, (SELECT si.i_num, s.userid FROM SELL_ITEM si, seller s WHERE si.sel_num=s.sel_num) sel 
+		WHERE q2.num=sel.i_num AND sel.i_num=#{param1} ORDER BY Q_WRITEDATE desc
+	</select>
+	
+<!-- QNA selectSellItemRiew WOWOW -->
+	<select id="selectSellItemReview" parameterType="com.team4.localer.vo.ItemReviewPageVO" resultType="com.team4.localer.vo.ItemReviewVO">	
+		select * from
+    		(select * from 
+       			(select re_num, userid, to_char(re_writedate,'YYYY-MM-DD') re_writedate, re_rate, re_content from item_review where num=#{i_num} order by re_num desc)
+            		where  <![CDATA[rownum <=  ]]> (${pageNum}*${onePageRecord}) order by re_num)
+                		where <![CDATA[rownum <=  ]]>
+                		<if test="pageNum==totalPage">
+                			${lastPageRecord}
+                		</if>
+                		<if test="pageNum!=totalPage">
+                			${onePageRecord}
+                		</if>
+                		 order by re_num desc
+		
+		
+	</select>
+<!-- Review selectAllReDate WOWOW -->	
+	<select id="selectAllReDate" resultType="com.team4.localer.vo.ItemReviewVO">
+		SELECT totalCnt, reRate1 FROM 
+			(SELECT num, count(num) AS totalCnt FROM ITEM_REVIEW ir WHERE num=#{param1} GROUP BY num) tbl1 JOIN 
+			(SELECT num, count(num) AS reRate1 FROM ITEM_REVIEW ir WHERE num=#{param1} AND RE_RATE=1 GROUP BY num) tbl2 ON tbl1.num=tbl2.num
+	</select>
+
+
+<!-- Reiview totalReviewCnt WOWOW -->	
+	<select id="totalReviewCnt" resultType="int" parameterType="int">
+		select count(re_num) totalCnt from item_review where num=#{param1}
+	</select>
+
 
 </mapper>

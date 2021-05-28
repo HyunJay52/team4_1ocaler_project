@@ -12,6 +12,11 @@ public class ItemReviewVO {
 	private String re_subject; //각 상품들의 제목을 re_subject로 담는다
 	private String sellerid;
 
+	
+	//21-05-24 //총갯수가져올 변수만듬
+	private int totalCnt;
+	private int reRate1;
+	
 	public String getRe_subject() {
 		return re_subject;
 	}
@@ -66,6 +71,18 @@ public class ItemReviewVO {
 	}
 	public void setRe_writedate(String re_writedate) {
 		this.re_writedate = re_writedate;
+	}
+	public int getTotalCnt() {
+		return totalCnt;
+	}
+	public void setTotalCnt(int totalCnt) {
+		this.totalCnt = totalCnt;
+	}
+	public int getReRate1() {
+		return reRate1;
+	}
+	public void setReRate1(int reRate1) {
+		this.reRate1 = reRate1;
 	}
 	
 	

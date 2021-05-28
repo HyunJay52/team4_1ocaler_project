@@ -43,7 +43,7 @@
 	                      and b_gu=#{b_gu}
 	                    </if>
 	                    
-	                </if> order by num desc)
+	                </if> order by b_writedate desc)
 	                
 	           <if test="up_cate != null and up_cate != '' ">
 	         	   where up_cate=${up_cate} 
@@ -53,7 +53,7 @@
 	                </if>
 	           </if>)
 	                                <!--      현재페이지 * 한페이지출력수 -->
-	        where <![CDATA[rownum<=]]>${pageNum * onePageRecord}  order by num asc)
+	        where <![CDATA[rownum<=]]>${pageNum * onePageRecord}  order by b_writedate asc)
 	    where <![CDATA[rownum<=]]>
 	                 <!-- 현재페이지가가 총페이지수랑 같으면(마지막페이지라는뜻) = ${마지막페이지레코드{ -->
 	    <if test="pageNum==totalPage">
@@ -63,7 +63,7 @@
 	    <if test="pageNum!=totalPage">
 	    	${onePageRecord}
 	    </if>
-	    order by num desc
+	    order by b_writedate desc
 	</select>
 	
   	<select id ="commuViewSelect" resultType="com.team4.localer.vo.BoardVO">
@@ -165,6 +165,8 @@
 	
 <!-- index by hj 2021.05.23 -->
 	<select id="selectIndexRecipe" resultType="com.team4.localer.vo.BoardVO">
-		select * from board where up_cate=2 and <![CDATA[rownum<=12]]> order by b_hit desc 
+		 select * from
+        (select * from board order by b_hit desc)
+        where up_cate=2 and  <![CDATA[ rownum<=12]]> order by b_hit desc
 	</select>
 </mapper>

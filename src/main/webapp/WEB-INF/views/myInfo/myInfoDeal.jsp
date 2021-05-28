@@ -84,13 +84,13 @@
 								tag += "<td></td>";
 							}else if(data.j_status == '참여승인'){
 								tag += "<td><button class='btn btn-block btn-outline-primary'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>참여취소</button></td>";
 							}else if(data.j_status == '참여완료'){
 								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
 							}else{//참여신청
 								tag += "<td><button class='btn btn-block btn-light btn-outline-dark'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
 							}
 							tag += "</tr>";
 							
@@ -154,7 +154,7 @@
 						}else if(kategorie == 'groupJoinus'){ //내가 참여한 모집글
 							tag += "<tr>";
 							tag += "<td>"+data.sellerid+"</td>";
-							tag += "<td>"+data.g_writedate+"</td>";
+							tag += "<td>"+data.j_writedate+"</td>";
 							tag += "<td>"+data.g_subject+"</td>";
 							tag += "<td>"+data.g_gu+"</td>";
 							
@@ -166,13 +166,13 @@
 								tag += "<td></td>";
 							}else if(data.j_status == '참여승인'){
 								tag += "<td><button class='btn btn-block btn-outline-primary'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>참여취소</button></td>";
 							}else if(data.j_status == '참여완료'){
 								tag += "<td><button class='btn btn-block btn-outline-success'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
+								tag += "<td><button class='btn btn-block btn-outline-dark btn-light myReviewBtn' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>리뷰쓰기</button></td>";
 							}else{//참여신청
 								tag += "<td><button class='btn btn-block btn-light btn-outline-dark'>"+data.j_status+"</button></td>";
-								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numJoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
+								tag += "<td><button class='btn btn-block btn-outline-danger cancelMyJoin' data-target='#myJoinDealMd' data-toggle='modal' title='"+data.numjoin+"' value='"+data.j_num+"'>참여취소</button></td>";								
 							}
 							tag += "</tr>";
 						}
@@ -275,10 +275,13 @@
 			$("#myjoinDealCancel").attr('value', $(this).val());
 			$(".cancelJoinMember").css('display', 'block');
 			$("#myjoinContent").css('background-color', 'rgba(255,255,255,0)');
+			$("#myjoinContent").css('border', 'none');
+			
 		});
 		//내가 참여한 목록 취소처리
 		$(document).on('click', '#myjoinDealCancel', function(){
 			joinCancel($(this).val(), 0)
+			
 		});
 		//내가 참여한 리뷰쓰기
 		$(document).on('click', '.myReviewBtn', function(){
@@ -307,6 +310,7 @@
 					console.log("참여신청 승인 성공");
 					$(".checkJoinMember").css('display', 'none');
 					setJoinList(num);
+					
 				}, error : function(e){
 					console.log("참여신청 승인 실패");
 				}
@@ -330,7 +334,7 @@
 						setJoinList(num);	
 					}
 					$('.modal-backdrop').hide();
-					$("#myJoinDealMd").hide();
+					$("#myJoinDealMd").modal("hide");
 					setDealList(1);
 					
 				}, error : function(e){
@@ -343,6 +347,8 @@
 		//내 참여신청 취소창 닫기
 		$(".myjoinCancel").click(function(){
 			$(".modal-content").css('background-color', 'rgba(255,255,255,1)');
+			$("#myjoinContent").css('border', '1px solid #ddd');
+			
 			$(".cancelJoinMember").css('display', 'none');
 		});
 		
@@ -350,6 +356,7 @@
 		$("#joinMemberCancel").click(function(){
 			var j_num = $("#joinMemberCancel").val();
 			var num = $("#joinMemberCancel").attr('title');
+			$("#myjoinContent").css('border', '1px solid #ddd');
 			joinCancel(j_num, num);
 		});
 		
@@ -461,7 +468,7 @@
 						$("#reviewForm")[0].reset();
 						$("#myReviewForm")[0].reset();
 						$('.modal-backdrop').remove();
-						$("#myJoinDealMd").hide();
+						$("#myJoinDealMd").modal("hide");
 						$(".imgBtn").attr('name', null);
 					}else{
 						alert("리뷰작성에 실패했습니다.");
@@ -487,9 +494,12 @@
 		});
 		//한 게시글의 내 리뷰 가져오기
 		function selectMyReview(num){
+			console.log("num="+num)
 			$.ajax({
 				url : "selectMyReview",
-				data : {"num": num},
+				data : {"num": num,
+						"re_num": 0
+						},
 				dataType : "json",
 				success: function(result){
 					console.log(result);
@@ -515,6 +525,19 @@
 				}
 			});
 		}
+		
+		//textarea 글자수 제한
+		$(document).ready(function(){
+			$("#writeReviewBody>ul>li>textarea").on('keyup', function(){
+				$(".reviewTextCount").html($(this).val().length+" / 250");
+				
+				if($(this).val().length > 250){
+					$(this).val($(this).val().substring(0, 250));
+					$(".reviewTextCount").html("250 / 250");
+		
+				}
+			});
+		});
 	});
 </script>
 <%@ include file="/inc/sideBar.jspf" %>
@@ -524,7 +547,7 @@
 		<h3>회원간거래</h3>
 		<div class="dealTop">
 			<div class="dealInfo">
-				<img src="img/myInfo/saver.gif"/>
+				<img src="<%=request.getContextPath()%>/img/mem_prof/${logProf }"/>
 				<div class="infoList">
 					<div class="infoListHeader">
 						<h3>${vo.mem_name }</h3>
@@ -569,6 +592,9 @@
 			<table class="myinfoTable2" id="myDealTbl">
 		
 			</table>
+			<div id="myinfoDealPaging">
+				
+			</div>
 			<div class="searchArea">
 				<select id="dealSearchKey" name="searchKey">
 					<option value="s_subject">제목</option>
@@ -578,9 +604,6 @@
 				</select>
 				<input type="text" name="searchWord"/>
 				<input type="button" value="검색" id="myDealSearch"/>
-			</div>
-			<div id="myinfoDealPaging">
-				
 			</div>
 		</div>
 		</form>
@@ -614,7 +637,7 @@
 						<li>
 							<textarea class="dealTextarea mdFnt" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
 						</li>
-						<li><input type="file" name="re_img"/></li>
+						<!-- <li><input type="file" name="re_img"/></li> -->
 						<li style="display:none"><input type="hidden" id="myReviewNum" name="num" value=""/></li>
 						<li><button class="btn btn-outline-dark btn-lg" id="myReviewCancel" data-dismiss="modal">다음에 할게요</button>
 							<button class="btn btn-outline-dark btn-lg" id="myReviewWrite">작성완료</button>
@@ -667,8 +690,10 @@
 						<li><button class="btn lgFnt btn-lg imgBtn" value="2">음, 글쎄요</button></li>
 						<li>
 							<textarea class="dealTextarea mdFnt" name="re_content" placeholder="당신의 후기가 다른 사람에게 큰 도움이 됩니다"></textarea>
+							<div class="reviewTextCount">0 / 250</div>
+							
 						</li>
-						<li><input type="file" name="re_img"/></li>
+						<!-- <li><input type="file" name="re_img"/></li> -->
 						<li style="display:none"><input type="hidden" id="reviewNum" name="num" value=""/></li>
 						<li><button class="btn btn-outline-dark btn-lg" id="canselReview">다음에 할게요</button>
 							<button class="btn btn-outline-dark btn-lg" id="reviewWrite">작성완료</button>
@@ -677,9 +702,9 @@
 				</div>
 				</form>
 				<div class="cancelJoinMember" style="display:none; height:300px">
-					<h2>참여신청을 거절하시겠습니까?</h2>
+					<h2>참여신청을 취소하시겠습니까?</h2>
 					<div class="cancelJoinBody">
-						<p class="mdFnt">참여신청을 거절할 시 재수락이 불가능합니다</p>
+						<p class="mdFnt">참여신청을 취소할 시 참여가 불가능합니다</p>
 						
 					</div>
 					<div class="joinBtnform">

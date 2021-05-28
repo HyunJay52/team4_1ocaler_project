@@ -60,21 +60,47 @@
 				
 			});
 		}
-
+		test(1111111111111);
 		//데이터 세팅
 		function setList(){
-			for(var i = 0; i < 3; i++){
+			var subject = ['여름나기 차렵이불','수공예 매듭팔찌','욕실을 더 모던하게','옻칠 수저세트 4인용','신선한 꿀배10kg','감자농장 특산','함박고구마5kg','뜨거운양파']
+			var name = ['차렵사','매듭맺음','모던','옻','꿀먹은배','감자농장','함박','양파천국']
+			var money = ['32,000원','8,000원','10,000원','20,000원','37,000원','41,000원','32,000원','17,000원']
+			for(var i = 0; i < 8; i++){
 				var tag = "<tr>";
-				tag += "<td><img src='img/myInfo/saver.gif' class='deliveryImg'/></td>";
-				tag += "<td><a href='' data-target='#deliveryMd' data-toggle='modal'>나주 배 팝니다</a>";
-				tag += "<input type='hidden' value='1111111111111'/></td>";
-				tag += "<td>김농부</td>";
-				tag += "<td>24,000원</td>";
-				tag += "<td>배송준비</td>";
-				tag += "</tr>";
+				if(i > 3){
+					if(i == 7){
+						tag += "<td><img src='img/myInfo/delivery/shipImg"+8+".jpg' class='deliveryImg'/></td>";
+							
+					}else{
+						tag += "<td><img src='img/myInfo/delivery/shipImg"+(i-3)+".jpg' class='deliveryImg'/></td>";
+
+					}
+					tag += "<td><a href='' data-target='#deliveryMd' data-toggle='modal'>"+subject[i]+"</a>";
+					tag += "<input type='hidden' value='1111111111111'/></td>";
+					tag += "<td>"+name[i]+"</td>";
+					tag += "<td>"+money[i]+"</td>";
+					if(i == 4){
+						tag += "<td>배송준비</td>";
+					}else if(i == 7){
+						tag += "<td>반품처리</td>"
+					}else{
+						tag += "<td>배송완료</td>";
+					}	
+					tag += "</tr>";
+				}else{		
+					tag += "<td><img src='img/myInfo/delivery/shipImg"+(i+4)+".jpg' class='deliveryImg'/></td>";
+					tag += "<td><a href='' data-target='#deliveryMd' data-toggle='modal'>"+subject[i]+"</a>";
+					tag += "<input type='hidden' value='1111111111111'/></td>";
+					tag += "<td>"+name[i]+"</td>";
+					tag += "<td>"+money[i]+"</td>";
+					tag += "<td>배송중</td>";					
+					tag += "</tr>";
+				}				
 				
 				$("#myDeliveryTbl").append(tag);		
-			}			
+			}
+			
 		}
 		setList();
 		
@@ -122,9 +148,9 @@
 				<li><img src="img/myInfo/delivery/box.png"/></li>
 				<li><p class="mdFnt">배송준비</p><span class="lgFnt">1</span></li>
 				<li><img src="img/myInfo/delivery/delivery.png"/></li>
-				<li><p class="mdFnt">배송 중</p><span class="lgFnt">1</span></li>
+				<li><p class="mdFnt">배송 중</p><span class="lgFnt">4</span></li>
 				<li><img src="img/myInfo/delivery/home.png"/></li>
-				<li><p class="mdFnt">배송완료</p><span class="lgFnt">0</span></li>						
+				<li><p class="mdFnt">배송완료</p><span class="lgFnt">2</span></li>						
 				<li><img src="img/myInfo/delivery/return.png"/></li>
 				<li><p class="mdFnt">반품</p><span class="lgFnt">1</span></li>
 			</ul>			 
@@ -132,7 +158,7 @@
 		
 		<div id="deliveryBottom">
 			<div class="deliveryLine"></div>
-			<div class="myDeliveryDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button><button class="dayBtn next">》</button></div>
+			<div class="myDeliveryDateFrm"><button class="dayBtn prev">《</button><button class="dayBtn mdFnt setMonth"></button></button><button class="dayBtn next">》</button></div>
 			<table class="myinfoTable2" id="myDeliveryTbl">
 				<tr>
 					<td>이미지</td>

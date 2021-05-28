@@ -13,7 +13,7 @@
 	<div id="innerContent">
 		<ul>		
 			<li>주소</li>
-			<li>서울특별시 서초구 강남대로 459 백암빌딩 1층</li>			
+			<li>서울특별시 마포구 백범로 23 구프라자 3층</li>			
 			<li>대표번호</li>
 			<li>02-3486-9600</li>
 			<li>지하철</li>
@@ -23,7 +23,6 @@
 			<li>버스 : 6712, 5714, 7016, 7613, 604, 740, 6716 등 서강대 정류장 또는 신촌로터리 정류장 하차</li>
 	</ul>
 	</div>
-	
 </div>
 
 <script>
@@ -39,7 +38,7 @@
 	var marker = new kakao.maps.Marker({
 		position: markerPosition
 	});
-	var content = '<div id="infoWindow">서울특별시 서초구 강남대로 459<div>';
+	var content = '<div id="infoWindow">서울특별시 마포구 백범로 23 구프라자 3층<div>';
 	var customOverlay = new kakao.maps.CustomOverlay({
 		map:map,
 	    position: markerPosition,

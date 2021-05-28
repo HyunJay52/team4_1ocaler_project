@@ -51,8 +51,10 @@ public class MemberController {
 // 로그인	
 	@RequestMapping(value="/loginConfrim", method=RequestMethod.POST)
 	@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
-	public String loginConfirm(String userid, String userpwd, String stay, HttpSession ses, HttpServletResponse res) {
+	public ModelAndView loginConfirm(String userid, String userpwd, String stay, HttpSession ses, HttpServletResponse res) {
 		String goPage = "";
+		ModelAndView mav = new ModelAndView();
+		
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
 		
@@ -77,19 +79,24 @@ public class MemberController {
 				ses.setAttribute("logLoc_gu", logVO.getLoc_gu());
 				ses.setAttribute("logProf", logVO.getMem_prof());
 				
+				System.out.println("???" + logVO.getUserid()+"..."+logVO.getLoc_gu());
+				
 				service.logCount(logVO.getUserid(), logVO.getLoc_gu());
 				
-				goPage = "home";
+				mav.setViewName("redirect:/");
 			}else {
-				goPage = "member/login";
+				mav.setViewName("member/login");
+				//goPage = "member/login";
 			}
 			
 			transactionManager.commit(status);
 			
-			return goPage;
+			return mav;
 		}catch (NullPointerException nullpoint) {
 			nullpoint.printStackTrace();
-			return "member/login";
+			mav.setViewName("member/login");
+			return mav;
+			//return "member/login";
 		}
 	}	
 // 로그아웃
@@ -133,7 +140,7 @@ public class MemberController {
 			if(returnUserid!=null) {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setFrom("localertest8282@naver.com"); //보내는 사람
 				msgHelper.setTo(vo.getMem_email()); //받는 사람
 				msgHelper.setSubject(subject); //제목
 				
@@ -173,7 +180,7 @@ public class MemberController {
 			if(returnPwd!=null) {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setFrom("localertest8282@naver.com"); //보내는 사람
 				msgHelper.setTo(vo.getMem_email()); //받는 사람
 				msgHelper.setSubject(subject); //제목
 				
@@ -212,7 +219,7 @@ public class MemberController {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
 				
-				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setFrom("localertest8282@naver.com"); //보내는 사람
 				msgHelper.setTo(vo.getMem_email()); //받는 사람
 				
 				msgHelper.setSubject("1ocaler - 찾으신 비밀번호 입니다."); //제목
@@ -319,7 +326,7 @@ public class MemberController {
 		//String path = req.getSession().getServletContext().getRealPath("/img/mem_prof");
 		String path = ses.getServletContext().getRealPath("/img/mem_prof");
 		String delMemProf=req.getParameter("getMem_prof");
-		
+
 		//새로 업로드 할 파일 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		MultipartFile updateMemprof = mr.getFile("profFile");
@@ -458,7 +465,7 @@ public class MemberController {
 		String returnAddr = "";
 		
 		if((Integer)ses.getAttribute("logType")==2) {
-			returnAddr = "home";
+			returnAddr = "member/historyBack";
 		}else {
 			returnAddr = "member/joinSeller";
 		}
@@ -531,6 +538,7 @@ public class MemberController {
 			transactionManager.commit(status);
 			
 			if(insertCnt>0) {
+				req.getSession().setAttribute("logType", 2);
 				mav.setViewName("home"); //추후에 셀러페이지로 이동으로 바꾸기
 			}else {
 				//업로드 파일 삭제하기
@@ -619,7 +627,22 @@ public class MemberController {
 //셀러 활동 정지
 	
 //셀러 탈퇴
-	
+	@RequestMapping("/sellerinfo/sellerDel")
+	public ModelAndView sellerDel(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		String userid = (String)ses.getAttribute("logId");
+		
+		service.updateDelseller(userid);
+		service.updateDelsellerToMem(userid);
+		
+		ses.getAttribute("logType");
+		ses.setAttribute("logType", 1);
+		
+		mav.addObject("logId", userid);
+		mav.setViewName("redirect:/myInfoMain");
+		
+		return mav;
+	}
 //이메일 인증
 	@RequestMapping(value="/sendVerifiedCode")
 	@ResponseBody
@@ -646,7 +669,7 @@ public class MemberController {
 			if(checkEmail<=0) {
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-				msgHelper.setFrom("blueangel728@naver.com"); //보내는 사람
+				msgHelper.setFrom("localertest8282@naver.com"); //보내는 사람
 				msgHelper.setTo(mem_email); //받는 사람
 				msgHelper.setSubject(subject); //제목
 				

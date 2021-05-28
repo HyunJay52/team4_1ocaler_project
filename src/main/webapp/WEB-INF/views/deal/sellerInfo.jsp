@@ -16,7 +16,7 @@
 			<ul>
 				<li>
 					<div>
-						<img src="<%=request.getContextPath()%>/img/mem_prof/${sellerVO.sel_prof}">
+						<img src="<%=request.getContextPath()%>/img/sel_prof/${sellerVO.sel_prof}">
 					</div>
 					<div>
 						<h4>${sellerVO.userid}</h4>
@@ -43,7 +43,7 @@
 			<ul id="boardText">
 				<c:forEach var="vo" items="${list}">
 					<li id="selList">
-						<div  OnClick="location.href ='sellView'">
+						<div  OnClick="location.href ='sellView?i_num=${vo.i_num}'">
 							<div id="sellImgDiv">
 								<img src="<%=request.getContextPath()%>/img/sellItemInsertPicture/${vo.i_img1}"/>
 							</div>

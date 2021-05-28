@@ -2,6 +2,7 @@ package com.team4.localer.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,8 @@ import com.team4.localer.vo.MyinfoPageVO;
 
 import com.team4.localer.vo.OrderVO;
 import com.team4.localer.vo.QnAVO;
+import com.team4.localer.vo.SellerVO;
+import com.team4.localer.vo.SellitemVO;
 
 
 
@@ -92,6 +95,7 @@ public class MyinfoController {
 			mav.setViewName("member/login");		
 		}else {
 			mav.addObject("myPoint", service.joinPoint(userid)); //충전잔액
+			
 			mav.addObject("myVO", service.setMyinfo(userid)); //내 정보
 			//참여현황
 			mav.addObject("myJoin", service.selectWaitingJoinList(userid));
@@ -233,7 +237,7 @@ public class MyinfoController {
 		String searchId = (String)ses.getAttribute("logId");
 		vo.setUserid(searchId);
 		vo.setOnePageRecord(10);
-		vo.setOnePageSize(10);
+		vo.setOnePageSize(5);
 		vo.setNowNum(Integer.parseInt(req.getParameter("nowNum")));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
 		System.out.println("kategorie="+vo.getKategorie());
@@ -401,14 +405,14 @@ public class MyinfoController {
 		System.out.println("itemkategorie="+vo.getKategorie());
 		vo.setUserid((String)ses.getAttribute("logId"));
 		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
-		vo.setTotalRecord(service.myCount(vo));
+		vo.setTotalRecord(service.selectItemReviewListCount(vo));
 		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
 		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
 		
 		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
 		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
-		
-		
+		System.out.println("totalRecord="+vo.getTotalRecord()+"//////////total="+vo.getTotalPage());
+		System.out.println("rowNum1="+vo.getRowNum1()+"rowNum2="+vo.getRowNum2());
 		map.put("itemPVO", vo);
 		map.put("IList", service.selectItemReviewList(vo));
 		return map;
@@ -510,9 +514,9 @@ public class MyinfoController {
 		ItemReviewVO rVO = new ItemReviewVO();
 		vo.setUserid((String)ses.getAttribute("logId"));
 		System.out.println("num="+vo.getNum());
-		System.out.println("re_num="+vo.getRe_num());
-		
+		System.out.println("re_num="+vo.getRe_num());	
 		rVO = service.selectMyReview(vo);
+		System.err.println(rVO);
 		return rVO;
 	}
 	
@@ -579,17 +583,44 @@ public class MyinfoController {
 		
 		return map;
 	}
-	
+	//게시글, 댓글 지우기
 	@ResponseBody
-	@RequestMapping("/setQnA")
+	@RequestMapping("/deleteBoard")
+	public int deleteBoard(HttpSession ses, HttpServletRequest req) {
+		int result = 0;
+		String userid = (String)ses.getAttribute("logId");
+		String kategorie = (String)req.getParameter("kategorie");
+		String numList[] = req.getParameterValues("num");
+		System.out.println("kategorie="+kategorie);
+		System.out.println("list="+Arrays.toString(numList));
+	
+		String[] num = numList[0].split(",");
+		int[] numArr = new int[num.length];
+		for(int i = 0; i < num.length; i++) {
+			numArr[i] = Integer.parseInt(num[i]);
+		}
+		System.out.println("num=="+Arrays.toString(numArr));
+		result = service.deleteBoard(kategorie, numArr, userid);
+		System.out.println("result="+result);
+		return result;
+	}
+	
+	
+	//qna 데이터 하나 불러오기
+	@ResponseBody
+	@RequestMapping("/setQnA")	
 	public QnAVO setQnA(HttpSession ses, HttpServletRequest req) {
 		QnAVO vo =  new QnAVO();
 		String userid = (String)ses.getAttribute("logId");
 		int q_num = Integer.parseInt(req.getParameter("q_num"));
-		vo = service.setQnA(q_num, userid);
+		String searchKey = (String)req.getParameter("searchKey");
+		vo = service.setQnA(q_num, userid, searchKey);
+		System.out.println("q_num="+q_num+"id="+userid);
+		System.out.println("vo="+vo);
 		return vo;
 	}
 	
+	//qna 답변쓰기
 	@ResponseBody
 	@RequestMapping("/QnAAnswerWrite")
 	public int QnAAnswerWrite(HttpSession ses, QnAVO vo) {
@@ -599,16 +630,77 @@ public class MyinfoController {
 		
 		return result;
 	}
+
+	//상품리스트 불러오기
+	@ResponseBody
+	@RequestMapping("/selectProductList")
+	public Map<String, Object> selectProductList(HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setOnePageRecord(10);
+		vo.setOnePageSize(5);
+		
+		System.out.println("key2="+vo.getSearchKey2());
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		vo.setDateContent("i_writedate");
+		vo.setSearchWord("%"+vo.getSearchWord()+"%");
+		
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		vo.setTotalRecord(service.selectProductListCount(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+		System.out.println(vo.getSearchKey());
+		map.put("count", service.sellerCount(vo.getUserid()));
+		map.put("list", service.selectProductList(vo));
+		map.put("pVO", vo);
+		
+		return map;
+	}
+	
+	//상품 판매상태 변경
+	@ResponseBody
+	@RequestMapping("/updateProductStatus")
+	public int updateProductStatus(HttpServletRequest req) {
+		int result = 0;
+		int i_num = Integer.parseInt(req.getParameter("i_num"));
+		result = service.updateProductStatus(i_num);
+		
+		return result;
+	}
+	
+	//판매 기간 변경
+	@ResponseBody
+	@RequestMapping("/updateProductPeriod")
+	//상품 종료일 변경
+	public int updateProductPeriod(HttpServletRequest req) {
+		int result = 0;
+		int i_num = Integer.parseInt(req.getParameter("i_num"));
+		String date = (String)req.getParameter("date");
+		result = service.updateProductPeriod(i_num, date);
+		
+		return result;
+	}
 //판매관리 메인 2021.05.23 hj
+
 	@RequestMapping("/myInfoSaleHistory")
 	public ModelAndView myInfoSaleHistory(HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
 		
 		String userid = (String)ses.getAttribute("logId");
 		
-		List<Integer> saleCount = sellerService.myInfoCountSale(userid);
-		System.out.println(">>>> list >>>> "+saleCount.size());
+		List<SellerVO> sel_info = service.selectSelinfo(userid);//셀러정보, 정산금액
+		mav.addObject("selInfo", sel_info);
+		
+		List<Integer> saleCount = sellerService.myInfoCountSale(userid); //상품현황
 		mav.addObject("saleCount", saleCount);
+		
+		List<Integer> orderCnt = service.selectOrderInfo(userid);//주문정보
+		System.out.println("- - - - - - - - - - - - - > "+orderCnt.size());
+		mav.addObject("orderCnt", orderCnt);
+		
 		mav.setViewName("myInfo/myInfoSaleHistory");
 		return mav;
 	}
@@ -667,6 +759,33 @@ public class MyinfoController {
 			monthStr = ""+(month-1);
 		}
 		return monthStr;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/selectSalesManagement")
+	public Map<String, Object> selectSalesManagement(HttpServletRequest req, HttpSession ses, MyinfoPageVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setOnePageRecord(10);
+		vo.setOnePageSize(5);
+		
+		System.out.println("key2="+vo.getSearchKey2());
+		vo.setSearchDate(vo.getSearchDate()+" 00:00:00");
+		vo.setSearchDate2(vo.getSearchDate2()+" 23:59:59");
+		vo.setSearchWord("%"+vo.getSearchWord()+"%");
+		
+		vo.setStartPage(vo.getNowNum(), vo.getOnePageSize());
+		vo.setTotalRecord(service.selectSaleManagementCounut(vo));
+		vo.setTotalPage(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setLastPageRecord(vo.getTotalRecord(), vo.getOnePageRecord());
+		vo.setRowNum1(vo.getNowNum(), vo.getOnePageRecord());
+		vo.setRowNum2(vo.getNowNum(), vo.getTotalPage(), vo.getLastPageRecord(), vo.getOnePageRecord());
+		
+		map.put("list", service.selectSalesManagement(vo));
+		map.put("pVO", vo);
+		map.put("count", service.orderCount(vo.getUserid()));
+		return map;
+		
 	}
 	@RequestMapping("/myInfoReviewManagement")
 	public String myInfoReviewManagement() {

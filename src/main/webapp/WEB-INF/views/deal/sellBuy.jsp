@@ -283,10 +283,11 @@
 							<div><img class='sellItemShow' src="<%=request.getContextPath()%>/img/sellItemInsertPicture/${orderVO.i_img1}"></div>
 							<div>
 								<div style='height:238px; display:flex; flex-direction:column; justify-content: space-around;'>
-									<div class="sellItemShow">${orderVO.i_subject }
-									<span id='showSellerInfo'>판매자:${orderVO.i_userid }</span><br/>
-									<span> 기본가격 : ${orderVO.i_price }원</span><br/>
-									<span>옵션 : ${orderVO.opt_str }</span></div>
+									<div id="innerstyle">
+										<span class='sellItemShow'>${orderVO.i_subject }</span><span id='showSellerInfo'>판매자:${orderVO.i_userid }</span><br/>
+										<span> 기본가격 : ${orderVO.i_price }원</span><br/>
+										<span>옵션 : ${orderVO.opt_str }</span>
+									</div>
 								</div>	
 							</div>
 						</li>
@@ -310,12 +311,12 @@
 
 					<div id="pointPay">
 						<span class="spanSubtitle"> 현재 포인트 &emsp; &nbsp;:&ensp; &nbsp;</span>
-						<input type="text" class="point" id ="now_point"  /><span style="font-size:16px; font-weight:bold">원</span><input type="button" id="pointCharge" class="btn ChargeBtn" style="margin-left:12px;" value="충전하기" ><br/>
+						<input type="text" class="point" id ="now_point" readonly /><span style="font-size:16px; font-weight:bold">원</span><input type="button" id="pointCharge" class="btn ChargeBtn" style="margin-left:12px;" value="충전하기" ><br/>
 						
 						<span class="spanSubtitle"> 차감 포인트 &emsp; &nbsp;:&ensp; &nbsp;</span>
-						<input type="text" class="point" id ="sp_point" name="sp_point"  /><span style="font-size:16px; font-weight:bold">원</span>		<br/>
+						<input type="text" class="point" id ="sp_point" name="sp_point" readonly /><span style="font-size:16px; font-weight:bold">원</span>		<br/>
 						<span class="spanSubtitle"> 잔여 포인트 &emsp; &nbsp;:&ensp; &nbsp;</span>
-						<input type="text" class="point" id ="remaining_point"  /><span style="font-size:16px; font-weight:bold">원</span><span id="EmptyMoney" style="color:red; margin-left:10px;"></span>	<br/>
+						<input type="text" class="point" id ="remaining_point" readonly /><span style="font-size:16px; font-weight:bold">원</span><span id="EmptyMoney" style="color:red; margin-left:10px;"></span>	<br/>
 					</div>
 				</div>
 				<hr/>
