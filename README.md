@@ -1,6 +1,6 @@
 # team Purplic : 1ocal+er project 
 
-About 1ocal+er? 
+About 1ocal+er? <br/>
 This is a website for one person household to share information and other things.
 
 Team Member
