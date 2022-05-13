@@ -1,7 +1,11 @@
 # team Purplic : 1ocal+er project 
 
+``` The period of project : 2021.04.15 ~ 2021.05.28 ```
+
+<br/>
+
 > About 1ocal+er? <br/>
-- This is a website for one person household to share information and other things baseed on a regional-based web site.
+- This is a website for a one-person household to share information, create a community, and do other things based on a regional-based website.
 - Java - Spring framework Project
 
 > Member
